@@ -9,10 +9,6 @@ class Board
     @cells = Array.new(9, " ")
   end
 
-  def valid_move?(input)
-    input.to_i.between?(1,9) && !taken?(input)
-  end
-
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
@@ -27,6 +23,10 @@ class Board
 
   def turn_count
     cells.count{|token| token == "X" || token == "O"}
+  end
+
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
   def update(input, player)
