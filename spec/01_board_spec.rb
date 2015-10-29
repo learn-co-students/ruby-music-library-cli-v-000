@@ -59,6 +59,16 @@ describe "Board" do
     end
   end
 
+  describe '#position' do
+    it 'takes in user input and returns the value of the board cell' do
+      board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
+
+      expect(board.position("1")).to eq("O")
+      expect(board.position("2")).to eq(" ")
+      expect(board.position("5")).to eq("X")
+    end
+  end
+
   describe '#full?' do
     it 'returns true for a full board' do
       board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
@@ -78,16 +88,6 @@ describe "Board" do
       board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
 
       expect(board.turn_count).to eq(3)
-    end
-  end
-
-  describe '#position' do
-    it 'takes in user input and returns the value of the board cell' do
-      board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
-
-      expect(board.position("1")).to eq("O")
-      expect(board.position("2")).to eq(" ")
-      expect(board.position("5")).to eq("X")
     end
   end
 
@@ -120,7 +120,7 @@ describe "Board" do
   describe '#update' do
     it 'updates the cells in the board with the player token according to the input' do
       player = double("player", :token => "X")
-      
+
       board.update("1", player)
       expect(board.position("1")).to eq("X")
     end

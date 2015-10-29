@@ -17,12 +17,6 @@ class Game
     @player_2 = player_2
   end
 
-  def start
-    puts "Welcome to Tic Tac Toe!"
-    play
-    @board.display
-  end
-
   def over?
     won? || draw?
   end
