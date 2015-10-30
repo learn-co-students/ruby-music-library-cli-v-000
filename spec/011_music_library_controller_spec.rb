@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'MusicLibraryController' do
   describe '#initialize' do
     it 'accepts a path to import music from' do
-      expect{MusicLibraryController.new('./spec/fixtures/mp3s')}.to_not raise_error(ArgumentError)
+      expect{MusicLibraryController.new('./spec/fixtures/mp3s')}.to_not raise_error
     end
 
     it 'the path argument defaults to ./db/mp3s' do
