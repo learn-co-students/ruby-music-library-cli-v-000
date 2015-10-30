@@ -24,6 +24,10 @@ class Genre
     self.songs.collect{|s| s.artist}.uniq
   end
 
+  def to_s
+    self.name
+  end
+  
   def save
     @@all << self
   end
