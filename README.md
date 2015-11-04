@@ -43,10 +43,10 @@ Switch around, start with pairing, then do pass, then try parallel.
 
 ## Requirements
 
-[] Passing domain model tests.
-[] 0, 1 or 2 player Tic Tac Toe.
-[] Command Line Interface
-[] Computer AI
+- Passing domain model tests.
+- 0, 1 or 2 player Tic Tac Toe.
+- Command Line Interface
+- Computer AI
 
 ## Instructions
 
