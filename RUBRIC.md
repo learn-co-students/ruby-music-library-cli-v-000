@@ -1,1 +1,1 @@
-  - [ ] Has working CLI
+  - [x] Has working CLI
