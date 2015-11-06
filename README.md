@@ -2,7 +2,7 @@
 
 ## Objectives
 
-1. Build an CLI
+1. Build a CLI
 2. Create a domain model with multiple relating and collaborating objects.
 
 ## Overview
@@ -43,10 +43,10 @@ Switch around, start with pairing, then do pass, then try parallel.
 
 ## Requirements
 
-[] Passing domain model tests.
-[] 0, 1 or 2 player Tic Tac Toe.
-[] Command Line Interface
-[] Computer AI
+- Passing domain model tests.
+- 0, 1 or 2 player Tic Tac Toe.
+- Command Line Interface
+- Computer AI
 
 ## Instructions
 
@@ -136,8 +136,6 @@ end
 
 Returns a valid move for the first move but after that your program will go into an infinite loop because the computer will constantly try to occupy the `"1"` position in the board even though it is already occupied. So don't do that.
 
-Think about the levels of intelligence you can build into this method. On one level, you can have the computer just pick random numbers from 1-9. You can teach it some basic strategy like moving into the middle cell if it is unoccupied in the board. Or always going for open corners. Or trying to look at the board and figure out if the opponent is about to win and block them. Or looking at the board and determinging that the computer can win and returning the position that will complete a triplet. Use whatever logic you want.
-
 Remember, Tic Tac Toe when played perfectly is unwinnable. You should strive to build computer logic that when the computer plays, the game is unwinnable. There's even an algorithm called Min/Max that ensures this logic.
 
 #### `bin/tictactoe`
@@ -154,4 +152,4 @@ You can implement this logic within the `bin/tictactoe` directly or encapsulate 
 
 If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the amount of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should be unable to win ever, like in the case of thermonuclear war.
 
-The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code. 
+The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
