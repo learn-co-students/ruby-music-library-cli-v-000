@@ -1,0 +1,1 @@
+  - [ ] Has working CLI
