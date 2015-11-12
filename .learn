@@ -1,5 +1,8 @@
 tags:
-  - tag1
+  - full lab
+  - playlister
+  - modules
+  - complex
 languages:
-  - language1
-resources: 0
+  - ruby
+resources:
