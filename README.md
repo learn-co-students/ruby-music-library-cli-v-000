@@ -102,6 +102,6 @@ Create a Music Importer class that's job is to work with your `Song`, `Genre` an
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so that users can actually interact with our code.
 
   * Initializes with an optional path to the music, but defaults to `./db/mp3s`. It create a `MusicImporter` and imports the music.
-  * Had a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
+  * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
 
 
