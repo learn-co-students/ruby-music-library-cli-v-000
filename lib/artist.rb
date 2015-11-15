@@ -19,11 +19,11 @@ class Artist
   end
 
   def save
-    @@all << self unless @@all.include?(self)
+    @@all << self unless @@all.include?(self) 
   end
 
-  def self.create(arist)
-    artist = Artist.new(artist)
+  def self.create(artist)
+    artist = Artist.new(artist) 
     artist.save
     artist
   end
@@ -36,5 +36,4 @@ class Artist
   def genres
     self.songs.map {|song| song.genre}.uniq
   end  
- 
 end
