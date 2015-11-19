@@ -16,8 +16,8 @@ class MusicLibraryController
       puts "Artist - Search by artist to view a list of thier songs"
       puts "Genre - Seach songs by genre"
       puts "Songs - View a list of songs"
-      puts "List Artists - View a list of Artists"
-      puts "List Genres - View of a list of genres\n\n"
+      puts "List Artists - View a list of artists"
+      puts "List Genres - View a list of genres\n\n"
 
       answer = gets.strip.downcase
       puts
