@@ -77,10 +77,9 @@ class MusicLibraryController
   def songs_by_genre
     list_genres
     puts "\nEnter a genre to list all of their songs:"
-
     genre_name = gets.strip.downcase
+    
     puts "\n#{genre_name.capitalize} Songs:\n\n"
-
     Song.all.each do |song|
       if song.genre.name.downcase == genre_name 
         puts "  #{song.artist.name} - #{song.name}"
