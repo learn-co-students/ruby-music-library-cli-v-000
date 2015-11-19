@@ -13,9 +13,9 @@ class MusicLibraryController
     while answer != "exit"
       puts "\nEnter one of the following actions or 'q' to exit\n\n"
       puts "Play - Play a song"
-      puts "Artist - Search by artist to view a list of thier songs"
-      puts "Genre - Seach songs by genre"
-      puts "Songs - View a list of songs"
+      puts "Artist - View songs by artist"
+      puts "Genre - View songs by genre"
+      puts "Songs - View all songs"
       puts "List Artists - View a list of artists"
       puts "List Genres - View a list of genres\n\n"
 
@@ -58,32 +58,51 @@ class MusicLibraryController
     list_songs 
     puts "\nEnter the song number you would like to play:"
     answer = gets.strip.to_i-1
-    puts "\nPlaying: #{Song.all[answer].artist.name} - #{Song.all[answer].name} - #{Song.all[answer].genre.name}"
+
+    if answer < 100
+      puts "\nPlaying: #{Song.all[answer].artist.name} - #{Song.all[answer].name} - #{Song.all[answer].genre.name}"
+    else
+      puts "\nInvalid song number"
+    end
   end
 
   def songs_by_artist
     list_artists
-    puts "\nEnter the artists name to see a list of their songs:"
+    puts "\nEnter an artists name to view a list of their songs:"
     artist_name = gets.strip.downcase
 
-    puts "\n#{artist_name.split.map(&:capitalize).join(' ')}'s Songs:\n\n"
-    Song.all.each do |song|
-      if song.artist.name.downcase == artist_name
-        puts "  #{song.name}" 
-      end
+    artist_songs = [] 
+    Song.all.each do |song| 
+      artist_songs << song if song.artist.name.downcase == artist_name
+    end
+
+    if artist_songs == []
+      puts "\nArtist not found"
+    else
+      puts "\n#{artist_name.split.map(&:capitalize).join(' ')}'s Songs:\n\n"
+      print_songs(artist_songs)
     end
   end
 
   def songs_by_genre
     list_genres
-    puts "\nEnter a genre to list all of their songs:"
+    puts "\nEnter a genre:"
     genre_name = gets.strip.downcase
     
-    puts "\n#{genre_name.capitalize} Songs:\n\n"
+    genre_songs = [] 
     Song.all.each do |song|
-      if song.genre.name.downcase == genre_name 
-        puts "  #{song.artist.name} - #{song.name}"
-      end
+      genre_songs << song if song.genre.name.downcase == genre_name 
     end
+
+    if genre_songs == []
+      puts "\nArtist not found"
+    else
+      puts "\n#{genre_name.capitalize} Songs:\n\n"
+      print_songs(genre_songs)
+    end
+  end
+
+  def print_songs(songs)
+    songs.each { |song| puts "  #{song.artist.name} - #{song.name}"}
   end
 end
