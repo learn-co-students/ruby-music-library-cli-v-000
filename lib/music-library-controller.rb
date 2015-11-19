@@ -11,7 +11,7 @@ class MusicLibraryController
     answer = ""
 
     while answer != "exit"
-      puts "\nChoose one of the following actions or enter 'q' to exit\n\n"
+      puts "\nEnter one of the following actions or 'q' to exit\n\n"
       puts "Play - Play a song"
       puts "Artist - Search by artist to view a list of thier songs"
       puts "Genre - Seach songs by genre"
