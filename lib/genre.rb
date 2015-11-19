@@ -35,8 +35,3 @@ class Genre
   end
 
 end
-
-
-
-
-
