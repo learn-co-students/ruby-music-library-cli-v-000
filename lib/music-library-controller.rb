@@ -95,7 +95,7 @@ class MusicLibraryController
     end
 
     if genre_songs == []
-      puts "\nArtist not found"
+      puts "\nGenre not found"
     else
       puts "\n#{genre_name.capitalize} Songs:\n\n"
       print_songs(genre_songs)
