@@ -1,7 +1,6 @@
 module Concerns::Findable
   def find_by_name(name)
-    all.each { |s| return s if s.name == name }
-    nil
+    self.all.detect { |song| song.name == name }
   end
 
   def find_or_create_by_name(name)
