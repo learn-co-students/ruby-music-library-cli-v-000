@@ -24,15 +24,17 @@ class Artist
   end
 
   def save
-    @@all << self
+    if @@all.include?(self) == false
+      @@all << self
+    end
   end
 
   def add_song(tune)
     if self.songs.include?(tune) == false
       self.songs << tune
     end
-    if song.artist != self
-      song.artist = self
+    if tune.artist != self
+      tune.artist = self
     end
   end
 

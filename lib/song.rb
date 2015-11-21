@@ -34,7 +34,9 @@ class Song
   end
 
   def save
-    @@all << self
+    if @@all.include?(self) == false
+      @@all << self
+    end
   end
 
   def genre=(genre)
@@ -44,13 +46,27 @@ class Song
     end
   end
 
-  def new_from_filename(filename)
+  def self.new_from_filename(filename)
+    file_data = filename.split(/(\s-)/)
+    #binding.pry
+    song_title = file_data[2].strip
+    new_song = Song.find_or_create_by_name(song_title)
 
+    art_name = file_data[0].strip
+    new_art = Artist.find_or_create_by_name(art_name)
+
+    genre_name = file_data[4][/^[^.]+/].strip
+    new_genre = Genre.find_or_create_by_name(genre_name)
+    
+    new_art.add_song(new_song)
+    new_song.genre=(new_genre)
+    new_song
   end
 
-  def create_from_filename(filename)
-    new_from_filename(filename)
-    save #need to maintain uniqueness
+  def self.create_from_filename(filename)
+    newbie = new_from_filename(filename)
+    newbie.save
+    newbie
   end
 
 end
