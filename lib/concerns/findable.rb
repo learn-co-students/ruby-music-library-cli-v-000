@@ -1,13 +1,9 @@
-require_relative "../lib/artist.rb"
-require_relative "../lib/song.rb"
-require_relative "../lib/genre.rb"
-
 module Concerns
 
   module Findable
 
     def find_by_name(name)
-      @@all.each do |a|
+      all.each do |a|
         if a.name == name
           return a
         end
@@ -15,11 +11,12 @@ module Concerns
     end
 
     def find_or_create_by_name(name)
-      exist = self.find_by_name(name)
+      exist = find_by_name(name)
       if exist == nil
-        self.create
+        self.create(name)
       end
     end
   end
 
 end
+

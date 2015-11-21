@@ -1,7 +1,5 @@
-#require_relative "../concerns/findable.rb"
-
 class Artist
-  #extend Concerns::Findable
+  extend Concerns::Findable
 
   attr_accessor :name, :songs
   @@all = []
@@ -20,7 +18,7 @@ class Artist
   end
 
   def self.create(name)
-    artist = self.new(name)
+    artist = Artist.new(name)
     artist.save
     artist
   end
@@ -29,9 +27,9 @@ class Artist
     @@all << self
   end
 
-  def add_song(song)
-    if @songs.include?(song) == false
-      @songs << song
+  def add_song(tune)
+    if self.songs.include?(tune) == false
+      self.songs << tune
     end
     if song.artist != self
       song.artist = self
