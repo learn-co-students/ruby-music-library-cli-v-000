@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'MusicLibraryController' do
   describe '#initialize' do
-    it 'accepts a path to import music from' do
+    it 'accepts a path to import music' do
       expect{MusicLibraryController.new('./spec/fixtures/mp3s')}.to_not raise_error
     end
 
