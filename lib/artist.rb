@@ -9,6 +9,7 @@ class Artist
     @name = name
     @@all << self
     @songs = []
+  
   end
 
   def self.all
@@ -32,6 +33,12 @@ class Artist
      song.artist = self if song.artist.nil?
   end
 
+  def genres
+    genres = self.songs.collect do |song|
+      song.genre
+    end
+    genres.uniq
+  end
 
 
 
