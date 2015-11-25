@@ -9,7 +9,8 @@ class MusicLibraryController
   def call
     input = ""
     until input == "exit"
-      input = gets
+      puts "Please enter action"
+      input = gets.chomp
       case input
       when "list songs"
         list_songs
@@ -25,6 +26,8 @@ class MusicLibraryController
         list_genre
       when "exit"
         puts "Goodbye" 
+      else
+        puts "invalid action"
       end
     end
   end
@@ -47,13 +50,23 @@ class MusicLibraryController
   end
 
   def list_artist
-    specific_artist = gets
-    puts Artist.find_by_name(specific_artist).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    puts "Enter artist"
+    specific_artist = gets.chomp
+    if Artist.find_by_name(specific_artist) != nil
+      Artist.find_by_name(specific_artist).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    else
+      puts "Artist does not exist"
+    end
   end
 
   def list_genre
-    specific_genre = gets
-    puts Genre.find_by_name(specific_genre).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    puts "Enter genre"
+    specific_genre = gets.chomp
+    if Genre.find_by_name(specific_genre) != nil
+      Genre.find_by_name(specific_genre).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    else
+      puts "Genre does not exist"
+    end
   end
 
 end
