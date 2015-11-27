@@ -45,6 +45,7 @@ class MusicLibraryController
   end
 
   def play_song
+    puts "Please enter song number"
     song = Song.all[gets.to_i - 1]
     puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
