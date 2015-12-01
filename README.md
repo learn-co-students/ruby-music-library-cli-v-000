@@ -59,7 +59,7 @@ Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make s
         └── human.rb
     ├── board.rb
     ├── game.rb
-    └── palyer.rb
+    └── player.rb
 └── spec
     ├── 01_board_spec.rb
     ├── 02_player_spec.rb
@@ -109,7 +109,7 @@ Define a class `Player::Human` that inherits from `Player`. The human player mus
 
 The `Game` class is the main model of the application and represents a singular instance of a Tic Tac Toe session.
 
-  * A game has one `Board` through it's `board` property.
+  * A game has one `Board` through its `board` property.
   * A game has two `Player`s stored in a `player_1` and `player_2` property.
 
 `Board` and `Player` do not directly relate to the `Game` but do collaborate with each other through arguments.
