@@ -52,7 +52,7 @@ describe 'Music Library CLI' do
     expect(output).to include("Playing Action Bronson - Larry Csonka - indie")
   end
 
-  it 'allows a user to list an artists songs' do
+  it 'allows a user to list an artist\'s songs' do
     music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
@@ -64,7 +64,7 @@ describe 'Music Library CLI' do
     expect(output).to include("Real Estate - It's Real - hip-hop")
   end
 
-  it 'allows a user to list an genres songs' do
+  it 'allows a user to list a genre\'s songs' do
     music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
