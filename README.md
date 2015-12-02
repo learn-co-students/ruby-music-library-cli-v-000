@@ -147,3 +147,5 @@ You can implement this logic within the `bin/tictactoe` directly or encapsulate 
 If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the amount of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should be unable to win ever, like in the case of thermonuclear war.
 
 The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
+
+<a href='https://learn.co/lessons/ttt-with-ai-project' data-visibility='hidden'>View this lesson on Learn.co</a>
