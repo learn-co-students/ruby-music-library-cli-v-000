@@ -105,3 +105,5 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
   * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
 
 
+
+<a href='https://learn.co/lessons/ruby-music-library-cli' data-visibility='hidden'>View this lesson on Learn.co</a>
