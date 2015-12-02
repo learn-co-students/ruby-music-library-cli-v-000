@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Songs and Artists" do
   context 'Artists have many songs' do
-    it 'initializes with a songs propety set to an empty array' do
+    it 'initializes with a songs property set to an empty array' do
       artist = Artist.new("Neutral Milk Hotel")
 
       expect(artist.songs).to eq([])
@@ -29,7 +29,7 @@ describe "Songs and Artists" do
 
       # it 'enforces the type of object assigned to Artist'
 
-      it 'adds the song to the artist songs' do
+      it 'adds the song to the artist\'s songs' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
@@ -41,7 +41,7 @@ describe "Songs and Artists" do
 
   context 'adding a song to an artist' do
     describe '#add_song' do
-      it 'adds the song to the artist song collection' do
+      it 'adds the song to the artist\'s song collection' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         artist.add_song(song)
@@ -66,7 +66,7 @@ describe "Songs and Artists" do
         artist.add_song(song)
       end
 
-      it 'does not add the song to the songs collection of the artist if the artist already has the song' do
+      it 'does not add the song to the artist\'s song collection if the artist already has the song' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
 
@@ -79,7 +79,7 @@ describe "Songs and Artists" do
     end
 
     describe 'Song#artist=' do
-      it 'uses add_song to add the song to the artist collection' do
+      it 'uses add_song to add the song to the artist\'s collection' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
 
@@ -91,7 +91,7 @@ describe "Songs and Artists" do
   end
 
   context 'initializing a song with an artist' do
-    it 'songs accept an optional argument for the artist' do
+    it 'new songs accept an optional argument for the artist' do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In an Aeroplane Over the Sea", artist)
 

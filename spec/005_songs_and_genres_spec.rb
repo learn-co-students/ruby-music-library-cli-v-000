@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe "Songs and Genres" do
   context 'Genres have many songs' do
-    it 'initializes with a songs propety set to an empty array' do
+    it 'initializes with a songs property set to an empty array' do
       genre = Genre.new("indie rock")
 
       expect(genre.songs).to eq([])
     end
 
-    it 'can push a song into the songs collection' do
+    it 'can push a song into the genre\'s song collection' do
       genre = Genre.new("indie rock")
       song = Song.new("In an Aeroplane Over the Sea")
 
@@ -27,9 +27,7 @@ describe "Songs and Genres" do
         expect(song.genre).to eq(genre)
       end
 
-      # it 'enforces the type of object assigned to Genre'
-
-      it 'adds the song to the genre songs' do
+      it 'adds the song to the genre\'s songs' do
         song = Song.new("In an Aeroplane Over the Sea")
         genre = Genre.new("indie rock")
         song.genre = genre
@@ -37,7 +35,7 @@ describe "Songs and Genres" do
         expect(genre.songs).to include(song)
       end
 
-      it 'does not add the song to the genre of songs if it already exists' do
+      it 'does not add the song to the genre\'s songs if it already exists' do
         song = Song.new("In an Aeroplane Over the Sea")
         genre = Genre.new("indie rock")
 
