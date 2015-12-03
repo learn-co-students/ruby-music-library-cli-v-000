@@ -10,7 +10,7 @@ class MusicLibraryController
     command = " "
 
     until command == "exit"
-      "Type in one of the following commands:"
+      puts "Type in one of the following commands:"
       puts "List Songs"
       puts "List Artists"
       puts "List Genres"
