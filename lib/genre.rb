@@ -1,4 +1,7 @@
+require_relative '../lib/findable.rb'
+
 class Genre
+  extend Concerns::Findable
 
   attr_accessor :name
 
