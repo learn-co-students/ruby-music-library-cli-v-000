@@ -96,7 +96,7 @@ Create a Music Importer class that's job is to work with your `Song`, `Genre` an
   * A `#files` method that will return all of the filenames
   * Add a new method to the `Song` class called `.new_from_filename` that creates a `Song` based on a filename
   * Add a new method to the `Song` class called `.create_from_filename` that creates a `Song` based on a filename and saves it to the `@@all` class variable
-  * In your `MusicImporter` class, add an `.import` method that imports all the files form the library and creates the `Song` objects.
+  * In your `MusicImporter` class, add an `.import` method that imports all the files from the library and creates the `Song` objects.
 
 ## CLI and Music Importer Controller
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so that users can actually interact with our code.
