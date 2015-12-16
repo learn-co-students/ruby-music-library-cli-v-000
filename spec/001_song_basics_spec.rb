@@ -1,4 +1,7 @@
 require 'spec_helper'
+# require 'lib/song.rb'
+# require 'lib/artist.rb'
+# require 'lib/genre.rb'
 
 describe "Song Basics" do
   describe '#initialize with #name' do
