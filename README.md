@@ -90,7 +90,7 @@ Now that you've done that, let's generalize those methods by putting them into a
 
 ## Music Importer
 
-Create a Music Importer class that's job is to work with your `Song`, `Genre` and `Artist` objects to import a directory of mp3s. This class will have the following methods:
+Create a Music Importer class to work with your `Song`, `Genre` and `Artist` objects to import a directory of mp3s. This class will have the following methods:
 
   * Initialize accepts a file path of mp3 files
   * A `#files` method that will return all of the filenames
@@ -105,3 +105,5 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
   * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
 
 
+
+<a href='https://learn.co/lessons/ruby-music-library-cli' data-visibility='hidden'>View this lesson on Learn.co</a>
