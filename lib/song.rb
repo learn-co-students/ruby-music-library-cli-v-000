@@ -4,9 +4,14 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist="")
+  def initialize(name, artist=" ")
+    # binding.pry
     @name = name
-    
+    # binding.pry
+    if artist.is_a?(Artist)
+      self.artist=(artist)
+    end
+   
   end
 
   def self.create(name)
@@ -17,7 +22,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.songs << self
+    artist.add_song(self)
   end
 
   def save

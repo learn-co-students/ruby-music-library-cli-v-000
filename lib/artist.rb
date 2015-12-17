@@ -17,14 +17,14 @@ class Artist
   end
 
   def add_song(song)
-    # binding.pry
-    @songs << song if self.songs.include?(song) == false
-    # binding.pry
-    song.artist = self if song.artist == nil
-  # binding.pry
+    song.artist ||= self
+    @songs << song if songs.include?(song) == false
+ 
   end
 
   def find_or_create_by_name(name)
+    @@all.detect{|artist| artist.name == name} || Artist.new(name)
+
   end
 
   def save

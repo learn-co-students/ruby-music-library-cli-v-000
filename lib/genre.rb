@@ -1,13 +1,13 @@
 require 'pry'
 
 class Genre
-    attr_accessor :name, :song, :artist
+    attr_accessor :name, :song, :songs, :artist
 
   @@all = []
 
   def initialize(name)
     @name = name
-    songs = []
+    @songs = []
   end
 
   def self.create(name)
