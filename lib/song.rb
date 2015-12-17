@@ -6,12 +6,22 @@ class Song
   attr_reader :artist
   
   extend Concerns::Findable
+  extend Concerns::Creatable
   include Concerns::Savable
   
   def initialize(name, artist=nil, genre=nil)
     @name = name
     self.artist = artist unless artist.nil?
     self.genre = genre unless genre.nil?
+  end
+  
+  @@all = []
+  def self.all
+    @@all
+  end
+  
+  def self.create(name)
+    self.new(name).save
   end
   
   def artist=(artist)
@@ -28,12 +38,19 @@ class Song
     song_data = file_name.split(".")[0].split("-").map(&:strip)
     
     new_song = self.new(song_data[1])
-    new_song.artist = Artist.find_or_create_by_name(song_data[0])
-    new_song.genre = Genre.find_or_create_by_name(song_data[2])
-    # new_song.artist.add_song(new_song)
+    # binding.pry
+    song_artist = Artist.find_or_create_by_name(song_data[0])
+    song_genre = Genre.find_or_create_by_name(song_data[2])
+    new_song.artist = song_artist
+    new_song.genre = song_genre
+    # new_song.genre.add_song(new_song)
+    # binding.pry
     
     new_song
   end
-
+  
+  def self.create_from_filename(file_name)
+    self.new_from_filename(file_name).save
+  end
   
 end

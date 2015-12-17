@@ -4,11 +4,21 @@ class Genre
   attr_accessor :name, :songs
   
   extend Concerns::Findable
+  extend Concerns::Creatable
   include Concerns::Savable
   
   def initialize(name)
     @name = name
     @songs = []
+  end
+  
+  @@all = []
+  def self.all
+    @@all
+  end
+  
+  def self.create(name)
+    self.new(name).save
   end
   
   def add_song(song)
