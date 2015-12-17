@@ -2,9 +2,9 @@ class Genre
   extend Concerns::Create_Destroy
   extend Concerns::Findable
 
-  @@all = []  # stores genre instances
   attr_accessor :name
   attr_reader :songs
+  @@all = []  # stores genre instances
 
   def initialize(name)
     @name = name

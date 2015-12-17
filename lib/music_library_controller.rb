@@ -54,11 +54,31 @@ class MusicLibraryController
     puts "Playing #{Song.all[song_number-1].fullname}"
   end
 
+  # def list_artist
+  #   puts "Whose songs would you like to see?"
+  #   artist_choice = gets.downcase.chomp
+  #   if Artist.all.any? {|artist| artist.name.downcase == artist_choice}
+  #     Artist.all.detect {|artist| artist.name.downcase == artist_choice}.songs.each {|song| puts song.fullname}
+  #   else
+  #     puts "You don't have any songs by #{artist_choice.upcase} in your library. Select list artists to see your choices, then try again."
+  #   end
+  # end
+
+  # def list_genre
+  #   puts "Which genre would you like to see songs for?"
+  #   genre_choice = gets.downcase.chomp
+  #   if Genre.all.any? {|genre| genre.name.downcase == genre_choice}
+  #     Genre.all.detect {|genre| genre.name.downcase == genre_choice}.songs.each {|song| puts song.fullname}
+  #   else
+  #     puts "You don't have any #{genre_choice.upcase} songs in your library. Select list genres to see your choices, then try again."
+  #   end
+  # end
+
   def list_artist
     puts "Whose songs would you like to see?"
     artist_choice = gets.downcase.chomp
-    if Artist.all.any? {|artist| artist.name.downcase == artist_choice}
-      Artist.all.detect {|artist| artist.name.downcase == artist_choice}.songs.each {|song| puts song.fullname}
+    if artist = Artist.find_by_name(artist_choice)
+      artist.songs.each {|song| puts song.fullname}
     else
       puts "You don't have any songs by #{artist_choice.upcase} in your library. Select list artists to see your choices, then try again."
     end
@@ -67,8 +87,8 @@ class MusicLibraryController
   def list_genre
     puts "Which genre would you like to see songs for?"
     genre_choice = gets.downcase.chomp
-    if Genre.all.any? {|genre| genre.name.downcase == genre_choice}
-      Genre.all.detect {|genre| genre.name.downcase == genre_choice}.songs.each {|song| puts song.fullname}
+    if genre = Genre.find_by_name(genre_choice)
+      genre.songs.each {|song| puts song.fullname}
     else
       puts "You don't have any #{genre_choice.upcase} songs in your library. Select list genres to see your choices, then try again."
     end
