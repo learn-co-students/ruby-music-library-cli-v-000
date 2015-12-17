@@ -1,3 +1,4 @@
+require 'pry'
 module Concerns::Findable
   
   def destroy_all
@@ -6,7 +7,7 @@ module Concerns::Findable
   
   def find_by_name(name)
     if self.all.any? {|e| e.name == name }
-      self.all.detect {|e| e.name}
+      self.all.detect {|e| e.name == name }
     else
       nil
     end
