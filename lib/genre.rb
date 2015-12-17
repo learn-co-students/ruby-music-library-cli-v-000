@@ -8,7 +8,17 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
+    self.save
   end
+
+  def artists
+    @@all.collect{|genre|
+      genre.songs.collect{|song| song.artist
+      }
+    }.flatten.uniq
+
+  end
+  
 
   def self.create(name)
     genre = self.new(name)

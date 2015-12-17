@@ -4,14 +4,10 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist=" ")
-    # binding.pry
+  def initialize(name, artist=" ", genre=" ")
     @name = name
-    # binding.pry
-    if artist.is_a?(Artist)
-      self.artist=(artist)
-    end
-   
+    self.artist=(artist) if artist.is_a?(Artist)
+    self.genre=(genre) if genre.is_a?(Genre)
   end
 
   def self.create(name)
@@ -23,6 +19,11 @@ class Song
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    genre.songs.include?(self) || genre.songs << self
   end
 
   def save
