@@ -17,8 +17,11 @@ class Artist
   end
 
   def add_song(song)
-    @songs << song
-    # song.artist = self
+    # binding.pry
+    @songs << song if self.songs.include?(song) == false
+    # binding.pry
+    song.artist = self if song.artist == nil
+  # binding.pry
   end
 
   def find_or_create_by_name(name)
