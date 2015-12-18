@@ -20,12 +20,15 @@ class Song
     song
   end
 
-  def self.new_by_filename(filename)
-    # binding.pry
+  def self.new_from_filename(filename)
+    info = filename.chomp(".mp3").split(" - ")
+    song = self.new(info[1], info[0], info[2])
+binding.pry
+    song.save
    
   end
 
-  def self.create_by_filename
+  def self.create_from_filename
 
   end
 
@@ -52,4 +55,4 @@ class Song
   end
 end
 
-Song.new_by_filename("Thundercat - For Love I Come - dance.mp3")
+
