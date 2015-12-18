@@ -10,7 +10,7 @@ module Concerns
 
     def find_or_create_by_name(name)
       # binding.pry
-      all.detect{|x| x.name == name} == nil || self.create(name)
+      all.detect{|x| x.name == name} || self.create(name)
     end
   end
 

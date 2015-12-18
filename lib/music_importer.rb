@@ -16,10 +16,10 @@ class MusicImporter
 
   def import
     self.files.each {|file|
-      Song.new_by_filename(file)
+      Song.new_from_filename(file)
     }
-
   end
+
 
 
 end
