@@ -20,6 +20,15 @@ class Song
     song
   end
 
+  def self.new_by_filename(filename)
+    # binding.pry
+   
+  end
+
+  def self.create_by_filename
+
+  end
+
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
@@ -42,3 +51,5 @@ class Song
     @@all.clear
   end
 end
+
+Song.new_by_filename("Thundercat - For Love I Come - dance.mp3")
