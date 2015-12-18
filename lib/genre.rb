@@ -1,7 +1,8 @@
 require 'pry'
 
 class Genre
-    attr_accessor :name, :song, :songs, :artist
+  extend Concerns::Findable  
+  attr_accessor :name, :song, :songs, :artist
 
   @@all = []
 
@@ -14,8 +15,7 @@ class Genre
   def artists
     @@all.collect{|genre|
       genre.songs.collect{|song| song.artist
-      }
-    }.flatten.uniq
+      }}.flatten.uniq
 
   end
   

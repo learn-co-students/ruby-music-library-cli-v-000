@@ -1,9 +1,14 @@
+require_relative "../config/environment.rb"
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
+  
+  
   attr_accessor :name, :song, :genres, :songs
 
   @@all = []
+
 
   def initialize(name)
     @name = name
@@ -20,26 +25,16 @@ class Artist
   def add_song(song)
     song.artist ||= self
     @songs << song if songs.include?(song) == false
- 
-  end
-
-  def find_or_create_by_name(name)
-    @@all.detect{|artist| artist.name == name} || Artist.new(name)
   end
 
   def genres
-    # binding.pry
-   
     genres = @@all.collect{|artist| 
       artist.songs.collect{|song| 
         song.genre
       }
     }.flatten.uniq
-    
-    
-    # binding.pry
   end
-
+  
   def save
     @@all << self
   end
