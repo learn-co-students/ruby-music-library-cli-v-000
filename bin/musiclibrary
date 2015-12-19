@@ -5,33 +5,3 @@ require_relative '../lib/artist.rb'
 require_relative '../lib/song.rb'
 
 # MusicLibraryController.new.call
-
-genre = Genre.new("indie rock")
-artist = Artist.new("Neutral Milk Hotel")
-song = Song.new("In an Aeroplane Over the Sea", artist, genre)
-
-puts song
-puts genre.songs
-puts genre
-puts song.genre
-
-# song.artist = artist
-# # puts song.artist
-# print artist.songs
-
-# artist.add_song(song)
-# print artist.songs
-
-# print song.artist
-# print artist
-
-# song = Song.new("In an Aeroplane Over the Sea")
-# print song.artist
-# print song.name
-
-# artist = Artist.new("Neutral Milk Hotel")
-
-# song.artist = artist
-
-# artist.add_song(song)
-# puts song.artist == artist

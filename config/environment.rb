@@ -1,3 +1,4 @@
+require_relative '../lib/concerns/findable.rb'
 require 'bundler/setup'
 Bundler.require
 
