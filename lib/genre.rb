@@ -1,4 +1,7 @@
+require_relative "../concerns/findable.rb"
+
 class Genre
+  extend Concerns::Findable #extends rather than includes module to treat as class methods
   attr_accessor :name #attribute accessor (getter and setter)
   attr_reader :songs
   @@all = [] #Class variable array that keeps track of all instances
