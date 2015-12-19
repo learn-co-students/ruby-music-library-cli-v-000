@@ -18,6 +18,7 @@ class MusicImporter
     self.files.each {|file|
       Song.new_from_filename(file)
     }
+    # binding.pry
   end
 
 
