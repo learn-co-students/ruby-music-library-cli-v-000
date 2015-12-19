@@ -1,5 +1,17 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/artist.rb'
+require_relative '../lib/song.rb'
 
-MusicLibraryController.new.call
+# MusicLibraryController.new.call
+
+song = Song.new("In an Aeroplane Over the Sea")
+artist = Artist.new("Neutral Milk Hotel")
+
+binding.pry
+artist.add_song(song)
+binding.pry
+artist.add_song(song)
+
+print artist.songs
