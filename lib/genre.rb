@@ -16,7 +16,6 @@ class Genre
     @@all.collect{|genre|
       genre.songs.collect{|song| song.artist
       }}.flatten.uniq
-
   end
   
 
@@ -27,7 +26,7 @@ class Genre
   end
 
   def save
-    @@all << self
+    @@all << self if @@all.include?(self) == false
   end
  
   def self.all 

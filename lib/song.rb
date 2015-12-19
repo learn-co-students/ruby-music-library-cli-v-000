@@ -8,10 +8,27 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist="", genre=" ")
+  def initialize(name, artist=nil, genre=nil)
     @name = name
-    artist.is_a?(Artist) ? self.artist=artist : artist = Artist.new(artist)
-    genre.is_a?(Genre) ? self.genre=genre : Genre.find_or_create_by_name(genre)
+
+    if artist
+      if artist.is_a?(Artist)
+        self.artist = artist
+      else
+        self.artist = Artist.find_or_create_by_name(artist)
+      end
+    end
+
+    if genre
+      if genre.is_a?(Genre)
+        self.genre = genre
+      else
+        self.genre = Genre.find_or_create_by_name(genre)
+      end
+    end
+      
+    # artist.is_a?(Artist) ? self.artist=artist : artist = Artist.new(artist)
+    # genre.is_a?(Genre) ? self.genre=genre : Genre.find_or_create_by_name(genre)
   end
 
   def self.create(name)
@@ -23,10 +40,14 @@ class Song
   def self.new_from_filename(filename)
     info = filename.chomp(".mp3").split(" - ")
     # binding.pry
-    song = self.new(info[1])
-    song.artist = Artist.create(info[0])
+    song = self.find_or_create_by_name(info[1])
+    # binding.pry
+    song.artist = Artist.find_or_create_by_name(info[0])
+    # binding.pry
     song.genre=Genre.find_or_create_by_name(info[2])
+    # binding.pry
     song
+    
   end
 
   def self.create_from_filename(filename)
