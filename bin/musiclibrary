@@ -6,12 +6,8 @@ require_relative '../lib/song.rb'
 
 # MusicLibraryController.new.call
 
-song = Song.new("In an Aeroplane Over the Sea")
 artist = Artist.new("Neutral Milk Hotel")
-
-binding.pry
-artist.add_song(song)
-binding.pry
-artist.add_song(song)
+song = Song.new("In an Aeroplane Over the Sea", artist)
 
 print artist.songs
+print song.artist

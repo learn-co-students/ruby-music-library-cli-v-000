@@ -4,11 +4,12 @@ require_relative 'artist.rb'
 class Song
   # extend Concerns::Findable
   attr_accessor :name, :artist
+  # attr_reader :artist
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = nil)
     @name = name
-    # @artist = artist
+    # artist.add_song(self)
   end
 
   def self.all
@@ -30,9 +31,7 @@ class Song
   end
 
   def artist=(artist)
-    # Artist.new(artist).add_song(self) if 
-    artist.songs << self if !artist.songs.include?(self)
-    # artist.add_song(self)
-    @artist = artist
+    @artist = artist 
+    @artist.add_song(self) if !artist.songs.include?(self)
   end
 end
