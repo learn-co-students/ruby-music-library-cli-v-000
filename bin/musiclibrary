@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
-
-MusicLibraryController.new.call
+puts "Welcome to the Music Library"
+puts "----------------------------"
+user_input = MusicLibraryController.new
+user_input.call
