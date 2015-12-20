@@ -13,8 +13,6 @@ module Concerns
       all.detect{|x| x.name == name} || self.create(name)
     end
   end
-
-
 end
 
 require_all 'lib'
