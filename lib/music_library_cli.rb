@@ -1,35 +1,43 @@
+require 'pry'
+
 class MusicLibraryCLI
 
   def initialize
-    puts "Welcome to your music library. Press any key to continue, or q to quit."
+    #puts "Welcome to your music library."
     menu
   end
 
 
 
   def menu
+    # binding.pry
     puts "1. list songs\n2. list artists\n3. list genres\n4.play song\n5.List songs by artist\n6.List songs by genre"
     puts "So whatcha wanna do?"
-    action = gets.strip
-    if action == "exit"
-      puts "So long, sucker."
-    else 
-      menu_actions(action)
-    end
+      input = gets.strip
+      # binding.pry
+      menu_actions(input)
+      # binding.pry
+    
+
+    # if action == "exit"
+    #   puts "So long, sucker."
+    # else 
+    #   menu_actions(action)
+    # end
   end
 
-  def menu_actions(action)
-    if action == 1
+  def menu_actions(input)
+    if input == 1
       list_songs
-    elsif action == 2
+    elsif input == 2
       list_artists
-    elsif action == 3
+    elsif input == 3
       list_genres
-    elsif action == 4
+    elsif input == 4
       play_song
-    elsif action == 5
+    elsif input == 5
       artist_songs
-    elsif action == 6
+    elsif input == 6
       genre_songs
     else
     end
@@ -41,11 +49,19 @@ class MusicLibraryCLI
     #This should just iterate and return names, not the objects
     # puts Artist.all
 
+    puts @library.Artist.all.collect{|a| a.name}
+
   end
 
   def list_songs
     #see note for method above
     # puts Song.all
+    counter = 0
+    puts @library.Song.all.each{|s| 
+      counter += 1
+      puts "#{counter}. #{s.artist} - #{s.name} - #{s.genre}"
+
+    }
 
   end
 
