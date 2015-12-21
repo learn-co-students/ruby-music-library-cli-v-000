@@ -35,7 +35,6 @@ class Artist
   end
 
   def genres
-    # binding.pry
     @@all.collect{|artist| 
       artist.songs.collect{|song| 
         song.genre
