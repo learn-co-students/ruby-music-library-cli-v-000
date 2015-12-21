@@ -12,6 +12,7 @@ class MusicLibraryController
     puts "4. Play Song"
     puts "5. List Artist"
     puts "6. List Genre"
+    puts "Exit"
     exit = false
     while !exit 
       input = gets.strip.upcase
