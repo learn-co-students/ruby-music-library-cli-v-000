@@ -11,7 +11,7 @@ class MusicLibraryController
   end
 
   def call
-    puts "Hi there. You can list songs, list artists, list genres, play a song, see an artist's songs or see songs by genre"
+    puts "Hi there. You can:\nlist songs\nlist artists\nlist genres\nplay a song(enter a number)\nlist artist songs\nlist genre songs\nType 'exit' at any time to quit."
     input = gets.strip.downcase
       if input == "exit"
         puts "So long."

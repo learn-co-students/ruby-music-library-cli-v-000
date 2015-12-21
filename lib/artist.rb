@@ -13,7 +13,14 @@ class Artist
   def initialize(name)
     @name = name
     @songs =[]
-    self.save
+    # self.save
+    # had to add save here to pass spec 006; calling #Artist.new does not 
+    # add artist to @@all at any other point (#Song in this case initializes with 
+    # Artist object, so doesn't call "create" method)
+    # as a knock-on effect, had to update #save to avoid duplicaiton, but I 
+    # think this is actually a useful bit of functionality to have. 
+    # Eventually added #artist.save to Song.initialize to handle
+    # cases like this (when Song is initailized and given an Artist object)
   end
 
   def self.create(name)
@@ -28,7 +35,8 @@ class Artist
   end
 
   def genres
-    genres = @@all.collect{|artist| 
+    # binding.pry
+    @@all.collect{|artist| 
       artist.songs.collect{|song| 
         song.genre
       }
@@ -36,7 +44,8 @@ class Artist
   end
   
   def save
-    @@all << self if @@all.include?(self) == false
+    @@all << self 
+    #if @@all.include?(self) == false
   end
  
   def self.all 

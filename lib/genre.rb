@@ -27,6 +27,7 @@ class Genre
 
   def save
     @@all << self if @@all.include?(self) == false
+    #see note for Artist.initialize
   end
  
   def self.all 
