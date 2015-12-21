@@ -61,7 +61,7 @@ class MusicLibraryController
     elsif input == "N" 
       exit
     else 
-      puts 'That s not a valid choice!!'
+      puts "That's not a valid choice!!"
       again?
     end
   end
