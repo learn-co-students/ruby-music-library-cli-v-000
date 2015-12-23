@@ -7,11 +7,8 @@ class MusicLibraryController
   end
 
 def call
-  answer = ""
-
-  while answer != "exit"
     puts "\n\n"
-    list = ["List Songs- View all Songs", "List Artists - View all artists", "List Genres- View all genres", "Play Song - select a song to play", "Artist - View songs by an artist", "Genre - view songs by genre"]
+    list = ["List Songs- View all Songs", "List Artists - View all artists", "List Genres- View all genres", "Play Song - select a song to play", "LIST Artist - View songs by an artist", "LIST Genre - view songs by genre"]
     puts "Welcome to your music library"
     puts "Enter one of the actions or enter 'exit'"
     puts "---------Choose one of the options below by name or number-------"
@@ -22,12 +19,14 @@ def call
   puts "\n\n"
   puts "Enter name here: "
 
+   answer = gets.strip.upcase
+  if answer == "EXIT"
+    puts "GoodBYE!!!!"
+  else
 
-    answer = gets.strip.upcase
     puts "\n\n"
     puts "----------------Choose from below--------------"
 
-    exit if answer == "EXIT"
 
     case answer
     when "LIST SONGS"
@@ -41,27 +40,27 @@ def call
     when "PLAY SONG"
       play
     # when "LIST ARTIST"
-    when "GENRE"
+    when "LIST GENRE"
       genre
 
-    when "ARTIST"
+    when "LIST ARTIST"
       artist
   end 
   end
-end 
-end 
+end  
+
 
 def again?
     puts "Would you like to go back to the main menu? Enter (Y/N)"
     answer = gets.strip.upcase
     if answer == "Y"
       call
-    elsif answer == "N"
+    elsif answer == "N" || answer == 'EXIT'
       puts "Come back whenever to look at your Jams!"
-      exit
     else
       puts "Please enter (Y/N)"
-     again?    end
+     again?    
+   end
   end 
 
    def format_song(song)
@@ -93,7 +92,7 @@ def play
     Song.all.each_with_index do |song, index|
       if index+1 == input.to_i 
         puts "-------"
-        puts "Playing: " + format_song(song)
+        puts "Playing " + format_song(song)
         puts " ------"
       end
     end 
@@ -119,7 +118,7 @@ def artist
     Artist.all.each do |artist|
       if artist_input == artist.name.downcase
         artist.songs.each do |song|
-        puts "#{song.name}"
+        puts format_song(song)
         end
       end  
     end 
@@ -136,15 +135,12 @@ def genre
     puts "\n\n\n"
     puts "*************SONGS*****************"
     if genre = Genre.find_by_name(genre_input.downcase)
-      # binding.pry
-      genre.songs.each {|s| puts "#{s.name}"} 
+      #   .pry
+      genre.songs.each {|s| puts format_song(s)} 
     puts "\n\n"
     again?
-end
-
-
-
- 
+  end
+end 
 end 
   
 

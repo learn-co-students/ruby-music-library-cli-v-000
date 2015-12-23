@@ -1,4 +1,4 @@
-
+require 'pry'
 class Artist
   extend Concerns::Findable
   attr_accessor :name, :songs
@@ -30,9 +30,9 @@ class Artist
   end
 
   def add_song(song)
+    # binding.pry
     song.artist = self unless song.artist == self
     @songs << song unless @songs.include?(song)
-
   end
 
   def genres
