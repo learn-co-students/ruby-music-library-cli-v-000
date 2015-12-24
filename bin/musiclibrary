@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+def list_songs
+  files.each_with_index do |song|
+    binding.pry
+    puts "#{index + 1}. #{song}"
+  end
+end
