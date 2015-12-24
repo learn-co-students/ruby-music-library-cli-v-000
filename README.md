@@ -63,7 +63,7 @@ Song.all #=> [#<Song: @name="Blank Space">]
 ### Songs and Genres
 
   * Genres have many songs and are initialized with an empty list of songs
-  * Songs have on genre
+  * Songs have one genre
   * Songs can be initialized with an optional genre
 
 ### Artists and Genres
