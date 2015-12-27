@@ -1,7 +1,7 @@
 require_relative '../concerns/findable.rb'
 
 class Artist
-  extend Findable
+  extend Concerns::Findable
 
   attr_accessor :name 
   attr_accessor :songs
@@ -51,7 +51,7 @@ class Artist
       artists_genres << song.genre
     end
 
-   artists_genres.uniq
+    artists_genres.uniq
   end
 
 

@@ -8,11 +8,11 @@ class Song
     @name = name
 
     if artist != nil
-      self.artist = artist 
+      self.artist = Artist.find_or_create_by_name(artist)
     end
 
     if genre != nil
-      self.genre = genre
+      self.genre = Genre.find_or_create_by_name(genre)
     end
 
   end
@@ -26,7 +26,10 @@ class Song
   end
 
   def save
+    if @@all.include?(self) == false
     @@all << self
+    end
+    self
   end
 
   def self.create(name)
@@ -62,7 +65,22 @@ class Song
     else
       Song.create(name)
     end
-    
+
+  end
+
+  def self.new_from_filename(filename)
+    file = filename.chomp(".mp3")
+    file_arr = file.split(" - ")
+
+    Song.new(file_arr[1], file_arr[0], file_arr[2])
+
+  end
+
+  def self.create_from_filename(filename)
+
+    song = new_from_filename(filename)
+    song.save
+
   end
 
 
