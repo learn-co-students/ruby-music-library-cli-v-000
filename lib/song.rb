@@ -5,14 +5,19 @@ class Song
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
+    
     @name = name
 
     if artist != nil
-      self.artist = Artist.find_or_create_by_name(artist)
+      this_artist = Artist.find_or_create_by_name(artist)
+      @artist = this_artist
+      @artist.songs << self
     end
 
     if genre != nil
-      self.genre = Genre.find_or_create_by_name(genre)
+      this_genre = Genre.find_or_create_by_name(genre)
+      @genre = this_genre
+      @genre.songs << self
     end
 
   end
