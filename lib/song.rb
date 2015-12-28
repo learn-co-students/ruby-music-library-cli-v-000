@@ -9,15 +9,13 @@ class Song
     @name = name
 
     if artist != nil
-      this_artist = Artist.find_or_create_by_name(artist)
-      @artist = this_artist
-      @artist.songs << self
+      @artist = artist
+      artist.songs << self
     end
 
     if genre != nil
-      this_genre = Genre.find_or_create_by_name(genre)
-      @genre = this_genre
-      @genre.songs << self
+      @genre = genre
+      genre.songs << self
     end
 
   end
@@ -58,9 +56,7 @@ class Song
   end
 
   def self.find_by_name(name)
-
-    @@all.detect{|song| song.name = name}
-
+    @@all.detect{|song| song.name == name}
   end
 
   def self.find_or_create_by_name(name)
@@ -77,15 +73,15 @@ class Song
     file = filename.chomp(".mp3")
     file_arr = file.split(" - ")
 
-    Song.new(file_arr[1], file_arr[0], file_arr[2])
+    artist = Artist.find_or_create_by_name(file_arr[0])
+    genre = Genre.find_or_create_by_name(file_arr[2])
 
+    Song.new(file_arr[1], artist, genre)
   end
 
   def self.create_from_filename(filename)
-
     song = new_from_filename(filename)
     song.save
-
   end
 
 

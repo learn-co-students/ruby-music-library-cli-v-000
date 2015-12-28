@@ -8,7 +8,6 @@ class Artist
 
   @@all = []
 
-
   def initialize(name)
     @name = name
     @songs = []
@@ -53,8 +52,6 @@ class Artist
 
     artists_genres.uniq
   end
-
-
 
 
 end
