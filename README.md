@@ -101,7 +101,7 @@ Create a Music Importer class to work with your `Song`, `Genre` and `Artist` obj
 ## CLI and Music Importer Controller
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so that users can actually interact with our code.
 
-  * Initializes with an optional path to the music, but defaults to `./db/mp3s`. It create a `MusicImporter` and imports the music.
+  * Initializes with an optional path to the music, but defaults to `./db/mp3s`. It creates a `MusicImporter` and imports the music.
   * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
 
 
