@@ -2,7 +2,7 @@
 
 ## Overview
 
-You're going to be implementing a Music Library domain composed of 3 main models, `Song`, `Artist`, and `Genre` that will relate to eachother and collaborate heavily. Additionally, you're going to be extracting some common functionality of those models into a module, `Concerns::Findable` and mixing that module into those classes. You'll then build a collaborating object, `MusicImporter`, that can parse a directory of MP3 files and use the filenames to create instances of `Song`, `Artist`, and `Genre`. Finally, you'll build a CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that let's a user browse the library of MP3s imported by song, artist, and genre.
+You're going to be implementing a Music Library domain composed of 3 main models, `Song`, `Artist`, and `Genre` that will relate to each other and collaborate heavily. Additionally, you're going to be extracting some common functionality of those models into a module, `Concerns::Findable` and mixing that module into those classes. You'll then build a collaborating object, `MusicImporter`, that can parse a directory of MP3 files and use the filenames to create instances of `Song`, `Artist`, and `Genre`. Finally, you'll build a CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that let's a user browse the library of MP3s imported by song, artist, and genre.
 
 This is a complex lab with many parts, go slow, try to understand what you're trying to build holistically before starting. Read this entire README before jumping in. As you go from spec to spec, we recommend doing them in numbered order. 
 
@@ -63,7 +63,7 @@ Song.all #=> [#<Song: @name="Blank Space">]
 ### Songs and Genres
 
   * Genres have many songs and are initialized with an empty list of songs
-  * Songs have on genre
+  * Songs have one genre
   * Songs can be initialized with an optional genre
 
 ### Artists and Genres
@@ -90,7 +90,7 @@ Now that you've done that, let's generalize those methods by putting them into a
 
 ## Music Importer
 
-Create a Music Importer class that's job is to work with your `Song`, `Genre` and `Artist` objects to import a directory of mp3s. This class will have the following methods:
+Create a Music Importer class to work with your `Song`, `Genre` and `Artist` objects to import a directory of mp3s. This class will have the following methods:
 
   * Initialize accepts a file path of mp3 files
   * A `#files` method that will return all of the filenames
@@ -101,7 +101,9 @@ Create a Music Importer class that's job is to work with your `Song`, `Genre` an
 ## CLI and Music Importer Controller
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so that users can actually interact with our code.
 
-  * Initializes with an optional path to the music, but defaults to `./db/mp3s`. It create a `MusicImporter` and imports the music.
+  * Initializes with an optional path to the music, but defaults to `./db/mp3s`. It creates a `MusicImporter` and imports the music.
   * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
 
 
+
+<a href='https://learn.co/lessons/ruby-music-library-cli' data-visibility='hidden'>View this lesson on Learn.co</a>
