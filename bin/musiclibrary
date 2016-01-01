@@ -1,5 +1,27 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment'
+require_relative '../lib/music_library_controller.rb'
 
-MusicLibraryController.new.call
+
+
+new_controller = MusicLibraryController.new
+input = new_controller.call
+
+
+if input == "list songs"
+  new_controller.list_songs
+elsif input == "list artists"
+  new_controller.list_artists
+elsif input == "list genres"
+  new_controller.list_genres
+elsif input == "play song"
+  new_controller.play_song
+elsif input == "list artist"
+  new_controller.list_artist
+elsif input == "list genre"
+  new_controller.list_genre
+end 
+
+
+
+
