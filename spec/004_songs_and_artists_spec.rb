@@ -72,7 +72,7 @@ describe "Songs and Artists" do
 
         artist.add_song(song)
         artist.add_song(song)
-
+		
         expect(artist.songs).to include(song)
         expect(artist.songs.size).to eq(1)
       end
