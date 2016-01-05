@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 describe 'Concerns::Findable' do
   it 'defines a module Concerns::Findable' do
     expect(defined?(Concerns::Findable)).to be_truthy

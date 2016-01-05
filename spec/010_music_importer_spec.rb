@@ -60,6 +60,7 @@ describe 'Making Songs from filenames' do
     end
 
     it 'maintains unique objects' do
+      # binding.pry
       artist = Artist.create("Thundercat")
       genre = Genre.create("dance")
 
