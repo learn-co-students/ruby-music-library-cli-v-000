@@ -58,4 +58,8 @@ class Song
     new_song.save
     new_song
   end
+
+  def information
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
 end
