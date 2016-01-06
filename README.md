@@ -1,4 +1,4 @@
-# Ruby Music Library
+## Ruby Music Library
 
 ## Overview
 
