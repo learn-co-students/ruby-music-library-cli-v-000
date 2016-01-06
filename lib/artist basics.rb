@@ -6,6 +6,11 @@ class Artist
 		@songs = []
 	end
 	
+	def genres
+		genres_array = self.songs.collect { |x| x.genre }.uniq
+		genres_array
+	end
+	
 	def save
 		@@all << self
 	end
@@ -18,7 +23,7 @@ class Artist
 		if !@songs.include?(song)
 			@songs << song
 		end
-		if !song.artist.include?(self)
+		if song.artist.nil?
 			song.artist = self
 		end
 	end
