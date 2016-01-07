@@ -1,5 +1,5 @@
 require 'pry'
-require_relative '../concerns/findable.rb'
+require_relative './concerns/findable.rb'
 
 class Song
   extend Concerns::Findable
