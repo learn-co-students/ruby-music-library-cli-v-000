@@ -94,7 +94,6 @@ describe "Songs and Artists" do
     it 'new songs accept an optional argument for the artist' do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In an Aeroplane Over the Sea", artist)
-
       expect(artist.songs).to include(song)
       expect(song.artist).to eq(artist)
     end
