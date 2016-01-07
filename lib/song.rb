@@ -22,6 +22,20 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
+  def self.new_from_filename(filename)
+    attrs = filename.chomp(File.extname(filename)).split(' - ')
+    song = self.new(attrs[1])
+    song.artist = Artist.find_or_create_by_name(attrs[0])
+    song.genre = Genre.find_or_create_by_name(attrs[2])
+    song
+  end
+
+  def self.create_from_filename(filename)
+    song = new_from_filename(filename)
+    song.save
+    song
+  end
+
   def self.all
     @@all
   end
