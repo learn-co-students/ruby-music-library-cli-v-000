@@ -1,4 +1,8 @@
+require_relative '../concerns/findable.rb'
+
 class Artist
+	extend CONCERNS::FINDABLE
+	
 	attr_accessor :name
 	@@all = []
 	def initialize(name)

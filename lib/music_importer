@@ -1,0 +1,15 @@
+
+
+class MusicImporter
+	def initialize(path)
+		@path = path
+	end
+	def files
+		files = Dir.entries(@path)
+		files
+	end
+	def import
+		self.files.each { |x| Song.new_from_filename(x) }
+	end
+	
+end

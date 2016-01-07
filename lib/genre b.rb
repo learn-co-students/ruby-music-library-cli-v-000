@@ -1,4 +1,9 @@
+require_relative '../concerns/findable.rb'
+
+
 class Genre
+	extend CONCERNS::FINDABLE
+	
 	attr_accessor :name
 	@@all = []
 	def initialize(name)
@@ -11,7 +16,7 @@ class Genre
 	end
 	
 	def artists
-		artists = @songs.collect { |x| x.genre }.uniq
+		artists = self.songs.collect { |x| x.artist }.uniq
 		artists
 	end
 	
