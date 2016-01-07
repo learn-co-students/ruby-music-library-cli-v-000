@@ -7,6 +7,10 @@ class Genre
     @songs = []
   end
 
+  def artists
+    songs.map { |song| song.artist }.uniq
+  end
+
   def self.all
     @@all
   end
