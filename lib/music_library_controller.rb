@@ -9,6 +9,7 @@ class MusicLibraryController
   end
 
   def call
+    commands
     input = read
     
     until input == 'exit' do
@@ -26,6 +27,7 @@ class MusicLibraryController
       when 'list genre'
         choose_from_list(:genre)
       end
+      commands
       input = read
     end
   end
@@ -36,6 +38,7 @@ class MusicLibraryController
 
   def choose_from_list(method)
     song_list
+    puts "\nPlease enter #{method} to list:"
     input = read
     Song.all.detect do |a|
       puts "#{a.artist.name} - #{a.name} - #{a.genre.name}" if a.send(method).name == input
@@ -44,6 +47,7 @@ class MusicLibraryController
 
   def choose_with_number
     song_list
+    puts "\nPlease enter song number to play:"
     input = read.to_i
     music_importer.files.each_with_index do |song, index|
       puts "Playing #{song}" if index + 1 == input
@@ -54,5 +58,9 @@ class MusicLibraryController
     music_importer.files.each_with_index do |x, index|
       puts "#{index + 1}. #{x}"
     end
+  end
+
+  def commands
+    puts "\nCommands:\nlist songs\nlist artists\nlist genres\nplay song\nlist artist\nlist genre\nexit"
   end
 end
