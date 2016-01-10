@@ -2,7 +2,7 @@ require_relative '../concerns/findable.rb'
 
 
 class Genre
-	extend CONCERNS::FINDABLE
+	extend Concerns::Findable
 	
 	attr_accessor :name
 	@@all = []
@@ -25,9 +25,13 @@ class Genre
 	end
 	
 	def self.create(name)
-		new_genre = self.new(name)
-		new_genre.save
-		new_genre
+		if self.all.detect { |x| x.name == name}.nil?
+			new_genre = self.new(name)
+			new_genre.save
+			new_genre
+		else
+			self.all.detect { |x| x.name == name}
+		end
 	end
 	
 	def self.all

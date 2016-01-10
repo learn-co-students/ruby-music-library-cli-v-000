@@ -1,11 +1,12 @@
 require_relative '../concerns/findable.rb'
 
 class Artist
-	extend CONCERNS::FINDABLE
+	extend Concerns::Findable
 	
 	attr_accessor :name
 	@@all = []
 	def initialize(name)
+		
 		@name =name
 		@songs = []
 	end
@@ -33,9 +34,13 @@ class Artist
 	end
 	
 	def self.create(name)
-		new_artist = self.new(name)
-		new_artist.save
-		new_artist
+		if self.all.detect {|x| x.name == name}.nil?
+			new_artist = self.new(name)
+			new_artist.save
+			new_artist
+		else
+			self.all.detect { |x| x.name == name}
+		end
 	end
 	
 	def self.all
