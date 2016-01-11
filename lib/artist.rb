@@ -50,5 +50,4 @@ class Artist
     end
     genres
   end
-  
 end

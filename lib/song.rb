@@ -54,5 +54,4 @@ class Song
     @genre = genre
     genre.add_song(self) unless genre.songs.include?(self)
   end
-
 end
