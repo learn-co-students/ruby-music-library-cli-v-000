@@ -1,4 +1,11 @@
+require_relative '../concerns/findable.rb'
+# require_relative '../concerns/class_actionable.rb'
+# require_relative '../concerns/instance_actionable.rb'
+
 class Song
+  extend Concerns::Findable
+  # extend Concerns::ClassActionable
+
   attr_accessor :name, :genre, :artist
 
   @@all = []
@@ -12,15 +19,26 @@ class Song
   end
 
   def self.create(name, artist=nil, genre=nil)
-    new_entry = self.new(name, artist)
-    new_entry.save
-    new_entry
+    song = self.new(name, artist)
+    song.save
+    song
+  end
+
+  def self.new_from_filename(filename)
+    data = filename.split(" - ")
+    song = Song.new(data[1]), Artist.find_or_create_by_name(data[0]), Genre.find_or_create_by_name(data[2].gsub('.mp3',''))
+  end
+
+  def self.create_from_filename(filename)
+    song = Song.new_from_filename(filename)
+    song.save unless @@all.include?(song)
+    song
   end
 
   def initialize(name, artist=nil, genre=nil)
-    @name = name
-    @artist = artist if artist
-    @genre = genre if genre
+    self.name = name
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def save
