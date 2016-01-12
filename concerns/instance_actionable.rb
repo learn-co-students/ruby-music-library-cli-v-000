@@ -8,4 +8,7 @@ module Concerns::InstanceActionable
     @songs
   end
 
+  def print
+    puts self.name
+  end
 end

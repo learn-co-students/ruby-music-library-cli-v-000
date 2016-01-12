@@ -1,10 +1,9 @@
 require_relative '../concerns/findable.rb'
-# require_relative '../concerns/class_actionable.rb'
-# require_relative '../concerns/instance_actionable.rb'
+require_relative '../concerns/class_actionable.rb'
 
 class Song
   extend Concerns::Findable
-  # extend Concerns::ClassActionable
+  extend Concerns::ClassActionable
 
   attr_accessor :name, :genre, :artist
 
@@ -12,10 +11,6 @@ class Song
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
   end
 
   def self.create(name, artist=nil, genre=nil)
@@ -36,9 +31,12 @@ class Song
   end
 
   def self.print_all
-    self.all.each_with_index {|e, i| puts "#{i+1}. e"}
+    self.all.each_with_index do |info, i| 
+      print "#{i+1}. " 
+      info.print
+    end
   end
-
+  
   def initialize(name, artist=nil, genre=nil)
     self.name = name
     self.artist = artist if artist
@@ -52,7 +50,7 @@ class Song
   def print
     puts self.artist.name + ' - ' + self.name + ' - ' + self.genre.name
   end
-  
+
   def artist=(artist)
     @artist = artist
     artist.add_song(self) unless artist.songs.include?(self)
