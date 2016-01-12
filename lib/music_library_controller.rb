@@ -20,36 +20,38 @@ class MusicLibraryController
     while !exit
       input = gets.strip.upcase
       case input
-        when 'LIST SONGS'
+        when '1' || 'LIST SONGS'
           Song.print_all
           again?
-        when 'LIST ARTISTS'
+        when '2' || 'LIST ARTISTS'
           Artist.print_all
           again?
-        when 'LIST GENRES'
+        when '3' || 'LIST GENRES'
           Genre.print_all
           again?
-        when 'PLAY SONG'
+        when '4' || 'PLAY SONG'
           Song.print_all
-          puts "Please select a # for the song you want to play."
+          puts "Please enter the # for the song you want to play."
           selection = gets.strip.to_i-1
-          print "Playing: "
+          puts "+----------------------------------------------------------------------------+"
+          print "| Now Playing:  "
           Song.all[selection].print
+          puts "+----------------------------------------------------------------------------+"
           again?
-        when 'LIST ARTIST'
+        when '5' || 'LIST ARTIST'
           Artist.print_all
           puts "Please select an artist."
           selection = gets.strip.split(" ").each {|word| word.capitalize!}
           selection = selection.join(" ")
           Artist.find_by_name(selection).songs.each {|song| song.print}
           again?
-        when "LIST GENRE"
+        when '6' || 'LIST GENRE'
           Genre.print_all
           puts "Please select a genre."
           selection = gets.strip
           Genre.find_by_name(selection).songs.each {|song| song.print}
           again?
-        when 'EXIT'
+        when '7' || 'EXIT'
           exit = true
         else
       end
@@ -68,5 +70,4 @@ class MusicLibraryController
       again?
     end
   end
-
 end
