@@ -31,9 +31,9 @@ class Song
   end
 
   def self.print_all
-    self.all.each_with_index do |info, i| 
+    self.all.each_with_index do |e, i| 
       print "#{i+1}. " 
-      info.print
+      e.print
     end
   end
   
