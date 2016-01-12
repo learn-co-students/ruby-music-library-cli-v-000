@@ -35,6 +35,10 @@ class Song
     song
   end
 
+  def self.print_all
+    self.all.each_with_index {|e, i| puts "#{i+1}. e"}
+  end
+
   def initialize(name, artist=nil, genre=nil)
     self.name = name
     self.artist = artist if artist
@@ -45,6 +49,10 @@ class Song
     @@all << self
   end
 
+  def print
+    puts self.artist.name + ' - ' + self.name + ' - ' + self.genre.name
+  end
+  
   def artist=(artist)
     @artist = artist
     artist.add_song(self) unless artist.songs.include?(self)

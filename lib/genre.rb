@@ -25,6 +25,10 @@ class Genre
     new_entry
   end
 
+  def self.print_all
+    self.all.each_with_index {|e, i| puts "#{i+1}. e"}
+  end
+  
   def initialize(name)
     self.name = name
     @songs = []
