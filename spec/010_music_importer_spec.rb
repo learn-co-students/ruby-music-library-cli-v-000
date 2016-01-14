@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe "MusicImporter" do
   describe '#intialize' do
     it 'accepts a file path to parse mp3 files from' do
@@ -64,6 +65,7 @@ describe 'Making Songs from filenames' do
       genre = Genre.create("dance")
 
       song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
+
       expect(song.artist).to eq(artist)
       expect(song.genre).to eq(genre)
     end
@@ -74,8 +76,9 @@ describe "MusicImporter#import" do
   it 'imports the files into the library by creating songs from a filename' do
     test_music_path = "./spec/fixtures/mp3s"
     music_importer = MusicImporter.new(test_music_path)
+    
     music_importer.import
-
+    
     expect(Song.all.size).to eq(4)
     expect(Artist.all.size).to eq(3)
     expect(Genre.all.size).to eq(4)
