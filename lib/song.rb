@@ -10,7 +10,7 @@ class Song
   extend Concerns::Findable
 
   @@all=[]
-  
+
   DEFAULT_ARTIST = Artist.new("default artist")
   DEFAULT_GENRE = Genre.new("default genre")
 
@@ -50,19 +50,6 @@ class Song
     genre.add_song(self)
   end
 
-#   def self.find_by_name(name)
-#     self.all.detect do |song|
-#       song.name == name
-#       end
-#   end
-
-#   def self.find_or_create_by_name(name)
-#     if self.find_by_name(name) == nil
-#       self.create(name)
-#     else
-#       self.find_by_name(name)
-#     end
-#   end
   def self.new_from_filename(file_name)
     data = file_name.split(' - ')
     artist = Artist.find_or_create_by_name(data[0].strip)
@@ -76,6 +63,5 @@ class Song
     song.save
     song
   end
-
 
 end
