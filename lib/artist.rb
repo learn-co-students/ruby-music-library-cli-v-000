@@ -5,6 +5,15 @@ class Artist < Basics
   extend Concerns::Findable
   attr_accessor :name, :songs
 
+ @@all = []
+
+  def self.all
+    @@all
+  end
+
+  def save
+    @@all << self
+  end
 
   def initialize(name)
     @name = name

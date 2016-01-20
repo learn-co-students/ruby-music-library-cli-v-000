@@ -1,5 +1,6 @@
 require 'pry'
 class MusicImporter
+  extend Concerns::Findable
   attr_reader :path
 
 
@@ -15,7 +16,7 @@ class MusicImporter
 
   def import
     files.each do |file| 
-      Song.new_from_filename(file)
+      Song.create_from_filename(file)
     end
   end
   

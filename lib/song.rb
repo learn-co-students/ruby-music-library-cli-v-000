@@ -1,11 +1,20 @@
 require_relative '../concerns/findable.rb'
 require 'pry'
 
-
 class Song < Basics
   extend Concerns::Findable
   attr_accessor :name, :artist, :genre
   attr_reader :artist, :genre
+
+@@all = []
+
+  def self.all
+    @@all
+  end
+
+  def save
+    @@all << self
+  end
 
   def initialize(name, artist = nil,  genre = nil)
     @name = name
@@ -43,5 +52,8 @@ class Song < Basics
     self.create(new_input[1], artist, genre)
   end
 
+def information
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
   
 end
