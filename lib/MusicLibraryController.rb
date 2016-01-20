@@ -62,16 +62,15 @@ class MusicLibraryController
   def play
     songs
     puts "Please pick a song!"
-    song_num = gets.chomp.to_i - 1
-    song = Song.all[song_num]
+    song_number = gets.chomp.to_i - 1
+    song = Song.all[song_number]
     puts "Playing #{song.information}"
   end
 
   def artist_songs
     artists
-    artist_name = gets.chomp
     puts "Which artist's songs would you like to see?"
-    
+    artist_name = gets.chomp
     Artist.find_by_name(artist_name).songs.map do |song|
       puts song.information
     end
