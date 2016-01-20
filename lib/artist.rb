@@ -1,6 +1,6 @@
 class Artist
-
   extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -22,7 +22,7 @@ class Artist
     self.class.all << self
   end
 
-  def self.create(name)
+  def self.create(name) # tap method?
     artist = Artist.new(name)
     artist.save
     artist
@@ -34,7 +34,7 @@ class Artist
   end
 
   def genres
-    self.songs.map{|song| song.genre}.uniq
+    self.songs.map{ |song| song.genre }.uniq
   end
 
 end

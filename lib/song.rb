@@ -1,13 +1,14 @@
-
 class Song
+  extend Concerns::Findable
 
-  attr_accessor :name, :genre #creates setter and getter methods
+  attr_accessor :name
+  attr_reader :artist, :genre
 
-  @@all ||= [] #class variable @@all
+  @@all = []
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name, artist=nil, genre=nil)
     @name = name
-    self.artist = artist if artist
+    self.artist = artist if artist # why "self.artist as opposed to @artist or simply, artist"
     self.genre = genre if genre
   end
 
@@ -24,7 +25,7 @@ class Song
   end
 
   def self.create(name)
-    song = self.new(name)
+    song = Song.new(name)
     song.save
     song
   end
@@ -34,38 +35,24 @@ class Song
     artist.add_song(self)
   end
 
-  def artist
-    @artist
-  end
-
   def genre=(genre)
     @genre = genre
-    genre.songs << self unless genre.songs.include?(self)
+    genre.add_song(self)
   end
 
-  def genre
-    @genre
-  end
-
-  def self.find_by_name(name)
-    self.all.find{|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) ? find_by_name(name) : create(name)
-  end
-
-  def self.new_from_filename(filename)
-    song = Song.find_or_create_by_name(filename.split(" - ")[1])
-    song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
-    song.genre = Genre.find_or_create_by_name(filename.split(" - ")[2].chomp(".mp3"))
+  def self.new_from_filename(song_file)
+    artist, name, genre = song_file.gsub(".mp3", "").split(" - ")
+    song = Song.new(name)
+    song.artist = Artist.find_or_create_by_name(artist)
+    song.genre = Genre.find_or_create_by_name(genre)
     song
   end
 
-  def self.create_from_filename(filename)
-    song = Song.find_or_create_by_name(filename.split(" - ")[1])
-    song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
-    song.genre = Genre.find_or_create_by_name(filename.split(" - ")[2].chomp(".mp3"))
+  def self.create_from_filename(song_file)
+    artist, name, genre = song_file.gsub(".mp3", "").split(" - ")
+    song = Song.create(name)
+    song.artist = Artist.find_or_create_by_name(artist)
+    song.genre = Genre.find_or_create_by_name(genre)
     song
   end
 

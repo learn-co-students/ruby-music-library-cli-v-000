@@ -1,69 +1,100 @@
-require 'pry'
 class MusicLibraryController
 
   attr_accessor :path
+  attr_reader :controller
 
-  def initialize(path = "./db/mp3s")
+  def initialize(path="./db/mp3s")
     @path = path
-    MusicImporter.new(path).import
+    @controller = MusicImporter.new(@path).import
+  end
+
+  OPTIONS = ["list songs", "list artists", "list genres", "list artist", "list genre", "play song"]
+
+  def execute_action(op)
+    case op
+    when "list songs"
+      list_songs
+    when "list artists"
+      list_artists
+    when "play song"
+      play_song
+    when "list genres"
+      list_genres
+    when "list artist"
+      list_artist
+    when "list genre"
+      list_genre
+    end
   end
 
   def call
-    song_array ||= []
-    artist_array ||= []
-    genre_array ||= []
-    puts "Hi, Welcome to Flytunes!"
-    puts "What would you like to do?"
-    action = gets.chomp
-    if action == "list songs"
-      Dir.entries(path).each_with_index do |entry, index|
-        if entry.include?("mp3")
-          song_array << entry
-          puts "#{index - 1}. #{entry}"
-        end    
-      end
-    elsif action == "list artists"
-      Dir.entries(path).each_with_index do |entry|
-        if entry.include?("mp3")
-          artist_array << entry.split(" - ")[0] unless artist_array.include?(entry.split(" - ")[0])
-        end
-      end
-      puts artist_array
-    elsif action == "list genres"
-      Dir.entries(path).each do |entry|
-        if entry.include?("mp3")
-          genre_array << entry.split(" - ")[2].chomp(".mp3") unless genre_array.include?(entry.split(" - ")[2].chomp(".mp3"))
-        end
-      end
-      puts genre_array
-    elsif action == "play song"
-      puts "Playing Action Bronson - Larry Csonka - indie"
-      Dir.entries(path).each_with_index do |entry, index|
-        song_array << entry if entry.include?("mp3")
-        if song_array.count == 99
-          puts "What song number?"
-          song_number = gets.chomp
-          puts "Playing #{song_array[song_number.to_i - 1].chomp(".mp3")}"
-        end
-      end
-    elsif action == "list artist"
-      puts "Which artist?"
-      selection = gets.chomp
-      Dir.entries(path).each do |entry|
-        if entry.include?(selection)
-          puts entry.chomp(".mp3")
-        end
-      end
-    elsif action == "list genre"
-      puts "What genre?"
-      selection = gets.chomp
-      Dir.entries(path).each do |entry|
-        if entry.include?(selection)
-          puts entry.chomp(".mp3")
-        end
+    puts "Hi! Welcome to Music CLI!"
+    loop do
+      puts " "
+      puts "What would you like to do?"
+      puts <<-MSG
+      _________________________
+      I accept
+        > list songs
+        > list artists
+        > play song
+        > list genres
+        > list artist
+        > list genre
+      _________________________
+      MSG
+      option = gets.chomp.downcase.strip
+      if OPTIONS.include?(option)
+        execute_action(option)
+      else
+        break
       end
     end
-    call unless action == "exit"
   end
-   
+
+  def list_songs
+    self.controller.each.with_index(1) do |file, index|
+      puts "#{index}. #{file.chomp(".mp3")}"
+    end
+  end
+
+  def list_artists
+    Artist.all.uniq.each do |artist|
+      puts artist.name
+    end
+  end
+
+  def list_genres
+    Genre.all.uniq.each do |genre|
+      puts genre.name
+    end
+  end
+
+  def play_song
+    puts "What song number?"
+    song_number = gets.chomp.strip
+    self.controller.each.with_index(1) do |file, index|
+      if song_number.to_i == index
+        puts "Playing #{file.chomp(".mp3")}"
+      end
+    end
+  end
+
+  def list_artist
+    puts "What artist?"
+    artist = gets.chomp
+    Artist.find_by_name(artist).songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_genre
+    puts "What genre?"
+    genre = gets.chomp.downcase.strip
+    Genre.find_by_name(genre).songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+
 end
