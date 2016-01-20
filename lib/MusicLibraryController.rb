@@ -68,6 +68,7 @@ class MusicLibraryController
   end
 
   def artist_songs
+    artists
     artist_name = gets.chomp
     puts "Which artist's songs would you like to see?"
     
@@ -77,6 +78,7 @@ class MusicLibraryController
   end
 
   def genre_songs 
+    genres
     puts "Which genre's songs would you like to sample?"
     genre_name = gets.chomp
     Genre.find_by_name(genre_name).songs.map do |song|
