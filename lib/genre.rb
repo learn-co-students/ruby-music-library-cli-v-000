@@ -3,7 +3,7 @@ require_relative '../concerns/findable.rb'
 
 class Genre
 
-  attr_accessor :name
+  attr_accessor :name, :genre
 
   extend Concerns::Findable
 
@@ -51,7 +51,7 @@ class Genre
   end
 
   def artists
-    x = self.songs.collect do |song|
+    x = songs.collect do |song|
       song.artist
     end
     return x.uniq
