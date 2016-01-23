@@ -67,11 +67,11 @@ end
   
     string = filename.split(".").delete_if{|q| q=="mp3"}.join.split(" - ")
    
-    song = self.find_or_create_by_name(string[1])
+    #song = self.find_or_create_by_name(string[1])
     genre = Genre.find_or_create_by_name(string[2])
     artist = Artist.find_or_create_by_name(string[0])
 
-    self.new(song, artist, genre)
+    self.new(string[1], artist, genre)
     
   end
 
@@ -82,7 +82,9 @@ end
 #filename and saves it to the @@all class variable
 
   def self.create_from_filename(filename)
-    new_from_filename(filename)
+    x = new_from_filename(filename)
+    x.save
+    x
 
   end
 

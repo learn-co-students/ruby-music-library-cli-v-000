@@ -1,6 +1,6 @@
 class MusicImporter
 
-  attr_accessor :path
+  attr_accessor :path, :songs
 
   def initialize(path)
     @path = path
@@ -8,7 +8,7 @@ class MusicImporter
 
   # A files method that will return all of the filenames
   def files
-    Dir["#{path}/*.mp3"].collect do |x|
+   @files = Dir["#{path}/*.mp3"].collect do |x|
       File.basename(x)
     end
 
@@ -18,7 +18,9 @@ class MusicImporter
 #In your MusicImporter class, add an .import method that imports all the files from the 
 #library and creates the Song objects.
 
-  def self.import 
+  def import 
+    files.each {|x| Song.create_from_filename(x) }
+
 
   end
 
