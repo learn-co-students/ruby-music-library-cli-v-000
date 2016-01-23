@@ -3,7 +3,7 @@ module Concerns::Findable
   def create_by_name(name)
     x = self.new(name)
     x.name = name
-    
+    x
   end
 
   def find_by_name(name)
