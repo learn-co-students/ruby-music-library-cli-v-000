@@ -76,6 +76,10 @@ class Song
     x.save
     x
   end
+
+  def information
+     "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
   
 
 end
