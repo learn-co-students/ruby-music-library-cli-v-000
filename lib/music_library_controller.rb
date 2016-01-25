@@ -11,6 +11,7 @@ class MusicLibraryController
     input = ""
 
     while input != "exit"
+      puts "What would you like to do?"
       input = gets.chomp
 
       case input
