@@ -1,4 +1,8 @@
+require_relative 'concerns/findable.rb'
+
 class Genre
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
   @@all = []
 
@@ -28,5 +32,9 @@ class Genre
   def add_song(song)
     @songs << song unless @songs.include?(song)
     song.genre = self unless song.genre == self
+  end
+
+  def artists
+    artists = @songs.collect { |song| song.artist }.uniq
   end
 end
