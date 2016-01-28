@@ -1,5 +1,4 @@
 require 'pry'
-require_relative 'artist'
 class Song
   extend Concerns::Findable
   attr_accessor :name, :artist, :genre
