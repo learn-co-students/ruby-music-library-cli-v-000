@@ -106,4 +106,4 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
 
 
 
-<a href='https://learn.co/lessons/ruby-music-library-cli' data-visibility='hidden'>View this lesson on Learn.co</a>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/ruby-music-library-cli' title='Ruby Music Library'>Ruby Music Library</a> on Learn.co and start learning to code for free.</p>
