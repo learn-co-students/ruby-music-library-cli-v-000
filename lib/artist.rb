@@ -1,5 +1,6 @@
 require_relative '../lib/concerns/findable.rb'
 
+# lib/artist.rb
 class Artist
   extend Concerns::Findable
   attr_accessor :name, :songs
@@ -21,22 +22,19 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
     Artist.new(name).save
-    Artist.all.last
   end
 
   def add_song(song)
     @songs << song unless @songs.include?(song)
     song.artist ||= self
-    song.artist.name = @name
   end
 
   def genres
-    @songs.map{|song| song.genre}.uniq
+    @songs.map(&:genre).uniq
   end
-
 end
-

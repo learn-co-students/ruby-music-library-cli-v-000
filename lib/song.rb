@@ -20,11 +20,11 @@ class Song
 
   def save
     @@all << self
+    self
   end
 
-  def self.create(name)
-    Song.new(name).save
-    Song.all.last
+  def self.create(name, artist = nil, genre = nil)
+    Song.new(name, artist, genre).save
   end
 
   def self.destroy_all
@@ -43,11 +43,13 @@ class Song
 
   def self.new_from_filename(filename)
     filename = self.parse_filename(filename)
-    binding.pry
     artist = Artist.find_or_create_by_name(filename[0]) 
     genre = Genre.find_or_create_by_name(filename[2]) 
-    Song.new(filename[1], artist, genre).save
+    Song.new(filename[1], artist, genre)
+  end
 
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).save
   end
 
   def self.parse_filename(filename)

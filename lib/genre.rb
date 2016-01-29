@@ -21,11 +21,11 @@ class Genre
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
     Genre.new(name).save
-    Genre.all.last
   end
 
   def artists
