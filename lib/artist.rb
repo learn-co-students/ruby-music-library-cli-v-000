@@ -1,9 +1,11 @@
 require 'pry'
+require_relative '../lib/concerns/findable.rb'
 
 class Artist
+  extend Concerns::Findable
   attr_accessor :name, :songs, :genres
 
-  @@all = Array.new
+  @@all = []
 
   def initialize(name)
     @name = name
@@ -20,11 +22,11 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
     Artist.new(name).save
-    self
   end
 
   def songs=(song)
