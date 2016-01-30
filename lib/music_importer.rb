@@ -5,7 +5,7 @@ class MusicImporter
     @path = path
     @files = Dir.glob(path + "/*.mp3")
     @files = @files.map do |file|
-      file.gsub("./spec/fixtures/mp3s/", "")
+      file.split("/").last
     end
   end
 

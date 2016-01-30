@@ -5,7 +5,7 @@ class MusicLibraryController
   end
 
   def call
-    puts "Enter a command: "
+    puts "Enter a command(input help to see a list of commands): "
     x = gets.chomp
     while x != "exit"
       if x == "list songs"
@@ -20,7 +20,16 @@ class MusicLibraryController
         list_artists_songs
       elsif x == "list genre"
         list_genres_songs
+      elsif x == "help"
+        puts "Here are the available commands: "
+        puts "list songs"
+        puts "list genres"
+        puts "play song"
+        puts "list artist"
+        puts "list genre"
+        puts "exit"
       end
+      puts "Enter another command(input help to see a list of commands): "
       x = gets.chomp
     end
   end
