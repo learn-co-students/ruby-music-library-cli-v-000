@@ -29,7 +29,6 @@ class Song
 
   def self.create(name)
     Song.new(name).save
-    self
   end
 
   def artist=(artist)
@@ -44,10 +43,10 @@ class Song
 
   def self.new_from_filename(file)
     name = file.split(' - ')[1]
-    artist = Artist.create(file.split(' - ')[0])
-    genre = Genre.create(file.split(' - ')[2].split('.mp3')[0])
+    artist = Artist.find_or_create_by_name(file.split(' - ')[0])
+    genre = Genre.find_or_create_by_name(file.split(' - ')[2].split('.mp3')[0])
 
-    Song.new(name, Artist.find_or_create_by_name(artist), Genre.find_or_create_by_name(genre))
+    Song.new(name, artist, genre)
   end
 
   def self.create_from_filename(file)

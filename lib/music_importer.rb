@@ -2,6 +2,7 @@ require 'pry'
 require_relative '../lib/concerns/findable.rb'
 
 class MusicImporter
+  extend Concerns::Findable
   attr_accessor :path
 
   def initialize(path)
@@ -22,6 +23,5 @@ class MusicImporter
 
   def import
     self.files.each {|i| Song.create_from_filename(i)}
-    binding.pry
   end
 end
