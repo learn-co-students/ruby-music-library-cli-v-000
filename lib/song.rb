@@ -52,8 +52,4 @@ class Song
     song
   end
 
-  def self.sort_by_artist
-
-  end
-
 end
