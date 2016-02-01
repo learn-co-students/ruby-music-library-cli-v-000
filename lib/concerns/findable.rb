@@ -1,10 +1,10 @@
 module Concerns::Findable
 
   def find_by_name(name)
+
     if !self.all.empty?
-      # binding.pry
-      self.all.each do |i|
-        return i if i.name == name
+      self.all.detect do |i|
+        i if i.name == name
       end
     else
       return false

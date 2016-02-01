@@ -31,19 +31,41 @@ class Song
     Song.new(name).save
   end
 
+  # def artist=(artist)
+  #   # binding.pry
+  #     @artist = artist
+  #     artist.add_song(self)
+  # end
+
   def artist=(artist)
-      @artist = artist
-      artist.add_song(self)
-  end
+        @artist = artist
+        # Here's where you try calling add_song on a variable called artist
+        # we know that somehow it is now an array, what array?
+        # raise artist.inspect
+        begin
+          artist.add_song(self)
+        rescue NoMethodError
+          raise artist.inspect
+        end
+    end
 
   def genre=(genre)
     @genre = genre
     genre.songs << self unless genre.songs.include?(self)
   end
 
+  # def self.new_from_filename(file)
+  #   name = file.split(' - ')[1]
+  #   artist = Artist.find_or_create_by_name(file.split(' - ')[0])
+  #   genre = Genre.find_or_create_by_name(file.split(' - ')[2].split('.mp3')[0])
+  #
+  #   Song.new(name, artist, genre)
+  # end
+
   def self.new_from_filename(file)
     name = file.split(' - ')[1]
     artist = Artist.find_or_create_by_name(file.split(' - ')[0])
+    raise artist.inspect if artist.is_a?(Array)
     genre = Genre.find_or_create_by_name(file.split(' - ')[2].split('.mp3')[0])
 
     Song.new(name, artist, genre)
