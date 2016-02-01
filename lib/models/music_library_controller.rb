@@ -59,14 +59,14 @@ class MusicLibraryController
     puts "What artist's songs would you like to see?"
     artist_input = gets.to_s.strip
     song_array = Song.all.find_all { |a| a.artist.name == artist_input }
-    song_array.each { |song| puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"}    
+    song_array.each { |song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}    
   end
      # list genre
   def list_genre
     puts "What genre's songs would you like to see?"
     genre_input = gets.to_s.strip
     genre_array = Song.all.find_all { |g| g.genre.name == genre_input }
-    genre_array.each { |song| puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"}    
+    genre_array.each { |song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}    
   end
 
 end
