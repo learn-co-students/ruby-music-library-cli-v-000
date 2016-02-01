@@ -58,15 +58,8 @@ class MusicLibraryController
             genre.songs.each do |song|
                 puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
             end
-
     end
-
-
-
-
-
     input = gets.strip.downcase # ask again to keep loop going.
     end
   end
-
 end
