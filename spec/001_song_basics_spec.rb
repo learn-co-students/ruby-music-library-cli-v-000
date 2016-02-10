@@ -47,7 +47,7 @@ describe "Song Basics" do
   describe '.create' do
     it 'initializes and saves the song' do
       song = Song.create("In an Aeroplane Over the Sea")
-
+      #binding.pry
       expect(Song.all).to include(song)
     end
   end
