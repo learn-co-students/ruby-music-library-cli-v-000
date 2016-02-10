@@ -6997,9 +6997,11 @@ list	/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/gems/coderay-1
 list	/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/gems/pry-0.10.3/lib/pry/commands/watch_expression.rb	/^    def list$/;"	f	class:Pry.Command
 list	/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/gems/pry-0.10.3/lib/pry/rubygem.rb	/^      def list(pattern = \/.*\/)$/;"	f	class:Pry
 list	/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/gems/rspec-expectations-3.3.1/lib/rspec/matchers/english_phrasing.rb	/^      def self.list(obj)$/;"	F	class:RSpec.Matchers.EnglishPhrasing
+list_artist_songs	lib/music_library_controller.rb	/^  def list_artist_songs$/;"	f
 list_artists	lib/music_library_controller.rb	/^  def list_artists$/;"	f
 list_commands	.bundle/gems/pry-0.10.3/lib/pry/command_set.rb	/^    def list_commands$/;"	f	class:Pry.CommandSet
 list_commands	/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/gems/pry-0.10.3/lib/pry/command_set.rb	/^    def list_commands$/;"	f	class:Pry.CommandSet
+list_genre_songs	lib/music_library_controller.rb	/^   def list_genre_songs$/;"	f
 list_genres	lib/music_library_controller.rb	/^  def list_genres$/;"	f
 list_of_exactly_one_string?	.bundle/gems/rspec-mocks-3.3.2/lib/rspec/mocks/error_generator.rb	/^      def list_of_exactly_one_string?(args)$/;"	f	class:RSpec.Mocks
 list_of_exactly_one_string?	/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/gems/rspec-mocks-3.3.2/lib/rspec/mocks/error_generator.rb	/^      def list_of_exactly_one_string?(args)$/;"	f	class:RSpec.Mocks

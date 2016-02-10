@@ -14,6 +14,7 @@ class MusicImporter
         only_mp3s << file
       end
     end
+    only_mp3s = only_mp3s.sort
     only_mp3s
   end
 

@@ -20,7 +20,11 @@ class MusicLibraryController
       when "list genres"
         list_genres
       when "play song"
-        play_song  
+        play_song
+      when "list artist"
+        list_artist_songs
+      when "list genre"
+        list_genre_songs
       end
     end
   end
@@ -50,5 +54,21 @@ class MusicLibraryController
     current_song =  Song.all[player_input-1]
     puts "Playing #{current_song.artist.name} - #{current_song.name} - #{current_song.genre.name}"
   end
+
+  def list_artist_songs
+     input = gets.strip
+     artist = Artist.find_by_name(input)
+     artist.songs.each do |song|
+       puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+     end
+   end
+
+   def list_genre_songs
+     input = gets.strip
+     genre = Genre.find_by_name(input)
+     genre.songs.each do |song|
+       puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+     end
+   end
 
 end
