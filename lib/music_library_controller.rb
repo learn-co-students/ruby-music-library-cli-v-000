@@ -1,64 +1,87 @@
 require_relative "../concerns/findable_module.rb"
 
 class MusicLibraryController
-  attr_accessor :path, :imported
+  attr_accessor :path
 
   def initialize(path = "./db/mp3s")
     @path = path 
-    @imported = MusicImporter.new(path).import
+    MusicImporter.new(path).import
   end
 
-  def file_names(array)
+  def list_songs
     counter = 1
-    array.each do |i|
-      puts "#{counter}" +". " + i
-      counter += 1
-    end
+    Song.all.each do |p|
+      puts "#{counter}. #{p.artist.name} - #{p.name} - #{p.genre.name}"
+      counter +=1
+      end
   end
 
-  
-    #name = file_name.split(" - ")[1]
-   # artist_name = file_name.split(" - ")[0]
-   # artist = Artist.find_or_create_by_name(artist_name)
-   # genre_name = file_name[/.*\s(.*?).mp3/,1]
-  #end
-
-
-
-=begin
-
-  def call
-    puts "HEY USER! PUT IN SOME EFFING TEXT!!"
-
-    input = gets.chomp
-
-    case input
-    when "list songs"
-      puts "1. Action Bronson - Larry Csonka - indie"
-    when "list artists"
-      puts "no biggie"
-    when "list genres"
-      puts "okay"
-    else 
-    puts "done"
-    end
+  def list_artists
+    Artist.all.each {|i| puts i.name}
   end
-=end
+
+  def list_genres
+    Genre.all.each {|i| puts i.name}
+  end
 
 def call
-    puts "HEY USER!"
 
+    puts "Okay you dingus, what you going to do?\n
+    ***> list songs\n
+    ***> list artists\n
+    ***> list genres\n
+    ***> play song\n
+    ***> list artist\n
+    ***> list genre\n
+    ***> exit
+      
+    end"
     input = gets.chomp
-
     case input
     when "list songs"
-      self.file_names(imported)
+      list_songs
+      self.call
     when "list artists"
-      puts Artist.all
+      list_artists
+      self.call
     when "list genres"
-      puts Genre.all
-    else 
-    puts "done"
+      list_genres
+      self.call
+    when "play song"
+      selection = 0
+      puts "Make a selection:"
+      list_songs
+      selection = gets.to_i
+      j = Song.all[selection - 1]
+      puts "Playing #{j.artist.name} - #{j.name} - #{j.genre.name}"
+      self.call
+    when "list artist"
+      selection = ""
+      puts "Make a selection:"
+      list_artists
+      selection = gets.chomp
+      Song.all.each do |s|
+        if s.artist.name = selection
+          puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"
+        end
+      end
+      self.call
+    when "list genre"
+      selection = ""
+      puts "Make a selection:"
+      list_genres
+      selection = gets.chomp
+      Song.all.each do |s|
+        if s.genre.name = selection
+          puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"
+        end
+      end
+      self.call
+    when "exit"
+      return
+    else
+      puts "that's not a cool thing, brother.  Try that again."
+      self.call
     end
   end
 end

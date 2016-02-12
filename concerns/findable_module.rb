@@ -21,10 +21,14 @@ module Findable
       counter = 1
       stuff = []
       self.all.each do |i| 
-        stuff << "#{counter} - #{i.name} "
+        stuff << i
+      end
+      stuff.each do |p|
+        artist = p.artist.name
+        genre = p.genre.name
+        puts "#{counter}. #{p.artist} - #{p.name} - #{p.genre}"
         counter += 1
         end 
-        stuff
     end
     
 
