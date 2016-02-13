@@ -28,10 +28,10 @@ class Artist
   end
 
   def add_song(song)
-    @songs.collect{|o| o.artist}.uniq
-    if  song.artist != self
-      @songs << song
+    if song.artist != self
+      song.artist = self
     end
+    songs << song unless songs.include?(song)
   end
 
 end
