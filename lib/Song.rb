@@ -1,6 +1,6 @@
 require 'pry'
 class Song
-  attr_accessor :name, :add_song, :song
+  attr_accessor :name
   attr_reader :artist
 
   @@all = []
@@ -16,7 +16,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.add_song(song)
+    artist.add_song(self)
   end
 
   def self.destroy_all
