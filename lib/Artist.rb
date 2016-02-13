@@ -1,10 +1,12 @@
+require 'pry'
 class Artist
-   attr_accessor :name
+   attr_accessor :name, :songs, :artist, :song
 
   @@all = []
   
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -17,10 +19,19 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
     #binding.pry
     Artist.new(name).save
   end
+
+  def add_song(song)
+    @songs.collect{|o| o.artist}.uniq
+    if  song.artist != self
+      @songs << song
+    end
+  end
+
 end

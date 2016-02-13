@@ -17,6 +17,7 @@ class Genre
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
