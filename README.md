@@ -144,8 +144,10 @@ The requirements of your CLI are as follows, free for you to implement however y
 
 You can implement this logic within the `bin/tictactoe` directly or encapsulate it within `Game` via a method like `#start` and simply evoke that method in the CLI. There is no wrong way to implement code that works.
 
-If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the amount of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should be unable to win ever, like in the case of thermonuclear war.
+If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the number of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should never be able to win, like in the case of thermonuclear war.
 
 The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/ttt-with-ai-project' title='Tic Tac Toe with AI'>Tic Tac Toe with AI</a> on Learn.co and start learning to code for free.</p>
+<a href='https://learn.co/lessons/ttt-with-ai-project' data-visibility='hidden'>View this lesson on Learn.co</a>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/ttt-with-ai-project'>Tic-Tac-Toe with AI</a> on Learn.co and start learning to code for free.</p>
