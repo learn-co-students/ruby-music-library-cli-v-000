@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicImporter
   attr_accessor :path
 
@@ -6,7 +8,7 @@ class MusicImporter
   end
 
   def files
-    Dir.entries(path).find_all {|file| file.include?(".mp3")}
+    files = Dir.entries(path).find_all {|file| file.include?(".mp3")}
   end
 
   def import
