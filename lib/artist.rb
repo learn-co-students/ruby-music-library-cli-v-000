@@ -1,5 +1,3 @@
-require_relative '../lib/concerns/findable.rb'
-
 class Artist
   extend Concerns::Findable
   attr_accessor :name, :songs
@@ -30,10 +28,11 @@ class Artist
   def self.create(name)
     artist = Artist.new(name)
     @@all << artist.save
+    artist
   end
 
   def add_song(song)
-   if song.artist != self
+     if song.artist != self
       @songs << song
       song.artist = self
     end
@@ -43,7 +42,7 @@ class Artist
   end
 
   def genres
-    genre_array = []
+     genre_array = []
     self.songs.collect do |song|
       song.genre
       genre_array << song.genre

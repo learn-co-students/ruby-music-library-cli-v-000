@@ -1,5 +1,3 @@
-require_relative '../lib/concerns/findable.rb'
-
 class Song
   extend Concerns::Findable
   attr_accessor :name, :artist, :genre
@@ -16,9 +14,10 @@ class Song
     @@all
   end
 
-  def self.create(name)
-    song = Song.new(name)
-    @@all << song.save
+  def self.create(name, artist = nil, genre = nil)
+    song = Song.new(name, artist, genre)
+    song.save
+    song
   end
 
   def save
@@ -40,15 +39,17 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    filename = filename.split(" - ")
-    name = filename[1]
-    artist = Artist.find_or_create_by_name(filename[0])
-    genre = Genre.find_or_create_by_name(filename[2].split(".")[0])
-    Song.new(name, artist, genre)
+    new_filename = filename.split(" - ")
+    name = new_filename[1]
+    artist = Artist.find_or_create_by_name(new_filename[0])
+    genre = Genre.find_or_create_by_name(new_filename[2].split(".")[0])
+    self.create(name, artist, genre)
   end
 
   def self.create_from_filename(filename)
-    self.new_from_filename(filename).save
+    song = Song.new_from_filename(filename)
+    song.save
+    song
   end
 end
 
