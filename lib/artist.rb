@@ -29,8 +29,8 @@ class Artist
   end
 
   def add_song(song)
-    self.songs << song unless self.songs.include?(song)
-    song.artist = self if song.artist == nil
+    self.songs << song unless self.songs.include?(song) # add the song being passed in to @songs [] unless it exist on the [] already
+    song.artist = self if song.artist == nil # set the value of song.artist to the argument being passed in, if value if == nil
   end
 
   def songs
@@ -38,7 +38,8 @@ class Artist
   end
 
   def genres
-    self.songs.collect {|song| song.genre}.uniq
+    # iterates through all the elements in the @songs [] and returns a new [] with the results for every element
+    self.songs.collect {|song| song.genre}.uniq # returns a new [] by removing duplicate values
   end
 
 end

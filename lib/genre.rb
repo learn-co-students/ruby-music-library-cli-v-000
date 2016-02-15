@@ -30,8 +30,8 @@ class Genre
   end
 
   def add_song(song)
-    self.songs << song unless self.songs.include?(song)
-    song.genre = self if song.genre == nil
+    self.songs << song unless self.songs.include?(song) # add the song being passed in to @songs [] unless it exist on the [] already
+    song.genre = self if song.genre == nil # set the value of song.genre to the argument being passed in, if value if == nil
   end
 
   def artists
