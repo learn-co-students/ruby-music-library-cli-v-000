@@ -1,3 +1,5 @@
+require "pry"
+
 class Song
   extend Concerns::Findable
 
@@ -47,10 +49,12 @@ class Song
   end
 
   def self.new_from_filename(file_name)
-    file_elements = file_name.split(/[\-\.]/).map(&:strip)
+    file_elements = file_name.gsub(".mp3","").split(" - ")
+
     song_artist = file_elements[0]
     song_name = file_elements[1]
     song_genre = file_elements[2]
+
     artist = Artist.find_or_create_by_name(song_artist)
     genre = Genre.find_or_create_by_name(song_genre)
     song = self.new(song_name, artist, genre)
