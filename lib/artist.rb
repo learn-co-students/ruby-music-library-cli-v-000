@@ -1,54 +1,52 @@
-require_relative 'song.rb'
-require_relative '../concerns/findable_module.rb'
 class Artist
-  attr_accessor :name, :songs
   extend Concerns::Findable
-  @@all=[]
-  
-  def initialize(name)
-    @name=name
-    @songs=[]
-    @@all<<self
+  attr_accessor :name, :songs
 
+  @@all = []
+
+  def initialize(name)
+    @name = name
+    @songs = []
+  end
+
+  def songs
+    @songs
   end
 
   def self.all
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
+  def save
+    @@all << self
   end
 
-  def save
-    @@all<<self
+  def self.destroy_all
+    all.clear
   end
 
   def self.create(name)
-    self.new(name).save
-    self
+    artist = Artist.new(name)
+    artist.save
+    artist
   end
 
   def add_song(song)
-   if !@songs.include?(song)
-    @songs<<song
-    song.artist=self
+     if song.artist != self
+      @songs << song
+      song.artist = self
+    end
+    if @songs.include?(song) == false
+      @songs << song
     end
   end
 
   def genres
-    g=@songs.collect do |song|
+     genre_array = []
+    self.songs.collect do |song|
       song.genre
+      genre_array << song.genre
     end
-    g.uniq
+    genre_array.uniq
   end
-
-end #end class
-
-
-
-
-
-
-
-
+end

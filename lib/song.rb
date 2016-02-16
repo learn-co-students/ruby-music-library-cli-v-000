@@ -1,82 +1,58 @@
-
+require 'pry'
 
 class Song
   extend Concerns::Findable
   attr_accessor :name, :artist, :genre
-  @@all=[]
-  def initialize(name, artist=nil, genre=nil)
-    @name=name
-   
-    if !artist.nil?
-        @artist=artist
-        artist.add_song(self)
-    end
-    if !genre.nil?
-        @genre=genre
-        genre.add_song(self)
-      end
-       @@all=self
-  end
-  
-  def self.create(name)
-    self.new(name).save
-    self
+
+  @@all =[]
+
+  def initialize(name, artist = nil, genre = nil)
+    @name = name
+    self.artist=(artist) if artist
+    self.genre=(genre) if genre
   end
 
   def self.all
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
+  def self.create(name, artist = nil, genre = nil)
+    song = Song.new(name, artist, genre)
+    song.save
+    song
   end
 
   def save
-    @@all<<self
+    self.class.all << self
+  end
+
+  def self.destroy_all
+    all.clear
   end
 
   def artist=(artist)
-    @artist=artist
+    @artist = artist
     artist.add_song(self)
   end
 
   def genre=(genre)
-    @genre=genre
-    if !genre.songs.include?(self)
-      genre.add_song(self)
-    end
+    @genre = genre
+    genre.songs << self unless genre.songs.include?(self)
   end
 
-  def self.new_from_filename(file_name)
-      arr=file_name.split(' - ')
-      song=Song.new(arr[1])
-      
-      artist=Artist.new(arr[0])
-     
-      genre_arr=arr[2].split('.')
-      genre=genre_arr[0]
-      genre=Genre.new(genre)
+  def self.new_from_filename(filename)
+    new_filename = filename.split(" - ")
+    name = new_filename[1]
+    artist = Artist.find_or_create_by_name(new_filename[0])
+    genre = Genre.find_or_create_by_name(new_filename[2].split(".")[0])
+    self.new(name, artist, genre)
+  end
 
-      
-      song.artist=artist
-      song.genre=genre
-      
-      song
-       
-   end
-
+  def self.create_from_filename(filename)
+    new_filename = filename.split(" - ")
+    name = new_filename[1]
+    artist = Artist.find_or_create_by_name(new_filename[0])
+    genre = Genre.find_or_create_by_name(new_filename[2].split(".")[0])
+    self.create(name, artist, genre)
+  end
 end
-
-
-
-# song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-#      puts song.artist
-#      puts song.genre
-
-
-
-
-
-
-
-

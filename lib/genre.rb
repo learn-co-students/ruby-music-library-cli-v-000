@@ -1,5 +1,4 @@
-require_relative '../concerns/findable_module.rb'
-require_relative 'song.rb'
+
 class Genre
   extend Concerns::Findable
   attr_accessor :name, :songs
@@ -24,9 +23,7 @@ class Genre
     @@all<<self
   end
 
-  def add_song(song)
-    @songs<<song
-  end
+  
 
   def artists
     a=@songs.collect do |song|
