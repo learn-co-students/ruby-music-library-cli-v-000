@@ -8,7 +8,8 @@ class MusicImporter
   end
 
   def files
-    files = Dir.entries(path).find_all {|file| file.include?(".mp3")}
+    files = Dir.entries(@path).find_all {|file| file.include?(".mp3")}
+files
   end
 
   def import
