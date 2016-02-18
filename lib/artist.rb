@@ -41,5 +41,15 @@ class Artist
     genres.uniq
   end
 
+  def self.list_artists
+    self.all.each do |artist|
+      puts "#{artist.name}"
+    end
+  end
 
+  def self.list_songs(artist_name)
+    self.find_by_name(artist_name).songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
 end

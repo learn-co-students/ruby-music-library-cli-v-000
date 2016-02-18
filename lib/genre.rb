@@ -39,4 +39,16 @@ class Genre
     artists = @songs.collect { |song| song.artist }
     artists.uniq
   end
+
+  def self.list_genres
+    self.all.each do |genre|
+      puts "#{genre.name}"
+    end
+  end
+
+  def self.list_songs(genre_name)
+    self.find_by_name(genre_name).songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
 end

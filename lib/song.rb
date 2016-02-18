@@ -64,6 +64,18 @@ class Song
     self.new_from_filename(filename).save
   end
 
+  def self.list_songs
+    song_number = 0
+    self.all.each do |song|
+      song_number += 1
+      puts "#{song_number}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def self.play_song(number)
+    song = self.all[number.to_i - 1]
+    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+  end
 end
 
 
