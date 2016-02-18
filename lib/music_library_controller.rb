@@ -22,10 +22,8 @@ class MusicLibraryController
         files.each_with_index do |file, index|
           puts "#{index + 1}. #{file}"
         end
-      when 'list artists'
-        puts artists
-      when 'list genres'
-        puts genres
+      when 'list artists' then puts artists
+      when 'list genres' then puts genres
         end
       user_input = gets.strip
       end
