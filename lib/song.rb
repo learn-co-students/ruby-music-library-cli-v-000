@@ -41,16 +41,30 @@ class Song
 
   def self.find_by_name(name)
     self.all.find do |song|
-      song.name
+      song.name == name
     end
   end
 
-  def self.find_or_create_by_name(name)
+  def self.find_or_create_by_name(name, artist = nil, genre = nil)
     if self.find_by_name(name)
       self.find_by_name(name)
     else
-      self.create(name)
+      self.create(name, artist, genre)
     end
   end
 
+  def self.new_from_filename(filename)
+    file_parts = filename.split(" - ")
+    artist = Artist.find_or_create_by_name(file_parts[0])
+    genre = Genre.find_or_create_by_name(file_parts[2].gsub(/\.mp3/, ""))
+    self.new(file_parts[1], artist, genre)
+  end
+
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).save
+  end
+
 end
+
+
+

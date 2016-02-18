@@ -3,7 +3,7 @@ module Concerns::Findable
 
   def find_by_name(name)
     self.all.find do |thing|
-      thing.name
+      thing.name == name
     end
   end
 
