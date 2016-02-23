@@ -11,14 +11,7 @@ class MusicLibraryController
 
   def call
     song_counter = 1
-    puts 'WELCOME TO THE MUSIC LIBRARY. PLEASE CHOOSE FROM THE FOLLOWING:'
-    # puts '1. list songs'
-    # puts '2. list artists'
-    # puts '3. list genres'
-    # puts '4. play song'
-    # puts '5. list artist'
-    # puts '6. list genre'
-    # puts '7. exit'
+    puts 'WELCOME TO THE MUSIC LIBRARY'
     answer = gets.chomp
 
     if answer == 'list songs'
@@ -26,50 +19,52 @@ class MusicLibraryController
         puts "#{song_counter}. #{i.artist.name} - #{i.name} - #{i.genre.name}"
         song_counter += 1
       end
+      call
 
-      answer = gets.chomp
     elsif answer == 'list artists'
       Song.all.each do |i|
         puts "#{song_counter}. #{i.artist.name}"
         song_counter += 1
       end
-
-      answer = gets.chomp
+      call
     elsif answer == 'list genres'
       Song.all.each do |i|
         puts "#{song_counter}. #{i.genre.name}"
         song_counter += 1
       end
+      call
 
-      answer = gets.chomp
-      #regardless of what you type in after play song, this will always print out every artist in the library.
     elsif answer == 'play song'
+      puts 'which song?'
+      Song.all.each do |i|
+        puts "#{song_counter}. #{i.artist.name} - #{i.name} - #{i.genre.name}"
+        song_counter += 1
+      end
       answer = gets.chomp
-        Song.all.each do |i|
-          puts "Playing #{i.artist.name} - #{i.name} - #{i.genre.name}"
-        end
+        picked_song = Song.all[answer.to_i-1]
+        puts "Playing #{picked_song.artist.name} - #{picked_song.name} - #{picked_song.genre.name}"
+      call
 
-      answer = gets.chomp
     elsif answer == 'list artist'
-      answer = gets.chomp #gets artist name here
+      answer = gets.chomp
         Song.all.each do |i|
           if i.artist.name == answer
-            puts "Playing #{i.artist.name} - #{i.name} - #{i.genre.name}"
+            puts "#{i.artist.name} - #{i.name} - #{i.genre.name}"
           end
         end
+      call
 
-      answer = gets.chomp
     elsif answer == 'list genre'
-      answer = gets.chomp #gets genre name here
+      answer = gets.chomp
         Song.all.each do |i|
           if i.genre.name == answer
-            puts "Playing #{i.artist.name} - #{i.name} - #{i.genre.name}"
+            puts "#{i.artist.name} - #{i.name} - #{i.genre.name}"
           end
         end
+      call
 
-      answer = gets.chomp
     else
-      puts 'exit'
+      puts 'THANK YOU FOR USING THE MUSIC LIBRARY'
     end
   end
 end
