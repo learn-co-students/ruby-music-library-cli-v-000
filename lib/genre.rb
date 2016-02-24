@@ -18,6 +18,15 @@ class Genre
     genre # if I don't either return genre here, or don't return self in self.create, one test doesn't pass
   end
 
+  def add_song(song_instance)
+    puts "<===== genre #{__callee__} =====>"
+    if !songs.include?(song_instance) #we may need to check for the genre to be assigned instead of for the song instance itself
+      @songs << song_instance
+      song_instance.genre = self
+    end
+  end
+
+
   def self.all
     @@all
   end
@@ -27,7 +36,7 @@ class Genre
   end
 
   def save
-    @@all << self
+    self.class.all << self
     #self # if I don't either return self here, or return genre in self.create, one test doesn't pass. because otherwise returns entire array?
   end
 

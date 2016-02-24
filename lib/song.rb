@@ -7,8 +7,8 @@ require 'pry'
 
 class Song
   @@all = []
-  attr_accessor :name, :genre
-  attr_reader :artist
+  attr_accessor :name
+  attr_reader :artist, :genre
 
   def initialize(name, artist=nil, genre=nil)
     @name = name
@@ -16,9 +16,12 @@ class Song
     @genre = genre
     #binding.pry
     if artist
-      puts "#{artist} called the if artist statement in init"
+      puts "#{artist} called if artist statement in init"
       self.artist=(artist)
-      #binding.pry
+    end
+    if genre
+      puts "#{genre} called if genre statement in init"
+      self.genre=(genre)
     end
   end
 
@@ -26,7 +29,12 @@ class Song
     puts "the if artist statement in init just sent #{artist} to the artist= method"
     artist.add_song(self) unless artist.songs.include?(self)
     @artist = artist
-    #binding.pry
+  end
+
+  def genre=(genre)
+    puts "the if genre statement in init just sent #{genre} to the genre= method"
+    genre.add_song(self) unless genre.songs.include?(self)
+    @genre = genre
   end
 
   def self.create(name)
