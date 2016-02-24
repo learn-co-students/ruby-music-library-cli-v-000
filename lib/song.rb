@@ -16,29 +16,24 @@ class Song
     @genre = genre
     #binding.pry
     if artist
-      puts "#{artist} called if artist statement in init"
       self.artist=(artist)
     end
     if genre
-      puts "#{genre} called if genre statement in init"
       self.genre=(genre)
     end
   end
 
   def artist=(artist)
-    puts "the if artist statement in init just sent #{artist} to the artist= method"
     artist.add_song(self) unless artist.songs.include?(self)
     @artist = artist
   end
 
   def genre=(genre)
-    puts "the if genre statement in init just sent #{genre} to the genre= method"
     genre.add_song(self) unless genre.songs.include?(self)
     @genre = genre
   end
 
   def self.create(name)
-    puts "<===== Song  #{__callee__} =====>"
     new_song = self.new(name)
     new_song.save
   end
@@ -52,7 +47,6 @@ class Song
   end
 
   def save
-    puts "<===== song  #{__callee__} =====>"
     self.class.all << self # this returns the entire array of @@all
     self # so this is needed to get last test in 001 to pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. or we may be able to only send the single instance from create to save, which would make more sense, i think.
   end

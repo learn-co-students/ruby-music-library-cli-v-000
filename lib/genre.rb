@@ -1,10 +1,11 @@
 require_relative '../concerns/findable'
 require 'pry'
+#extend Concerns::Findable
+#extend Concerns::MaintainableClass
+#include Concerns::MaintainableInstance
 
 class Genre
-
   @@all = []
-
   attr_accessor :name, :songs
 
   def initialize(name)
@@ -19,13 +20,11 @@ class Genre
   end
 
   def add_song(song_instance)
-    puts "<===== genre #{__callee__} =====>"
     if !songs.include?(song_instance) #we may need to check for the genre to be assigned instead of for the song instance itself
       @songs << song_instance
       song_instance.genre = self
     end
   end
-
 
   def self.all
     @@all
@@ -33,6 +32,10 @@ class Genre
 
   def self.destroy_all
     self.all.clear
+  end
+
+  def artists
+    self.songs.collect {|song| song.artist}.uniq
   end
 
   def save
