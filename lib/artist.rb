@@ -46,9 +46,7 @@ class Artist
 
   def add_song(song_instance)
     puts "<===== artist #{__callee__} =====>"
-    #self.all.detect
-    if !songs_include?(song_instance)
-      #song_instance.artist = self
+    if !songs.include?(song_instance) #we may need to check for the artist to be assigned instead of for the song instance itself
       @songs << song_instance
       song_instance.artist = self
     end

@@ -1,4 +1,5 @@
 require_relative '../concerns/findable'
+require_relative 'artist'
 require 'pry'
 #extend Concerns::Findable
 #extend Concerns::MaintainableClass
@@ -13,11 +14,19 @@ class Song
     @name = name
     @artist = artist
     @genre = genre
+    #binding.pry
+    if artist
+      puts "#{artist} called the if artist statement in init"
+      self.artist=(artist)
+      #binding.pry
+    end
   end
 
   def artist=(artist)
-    artist.songs << self unless artist.songs.include?(self)
+    puts "the if artist statement in init just sent #{artist} to the artist= method"
+    artist.add_song(self) unless artist.songs.include?(self)
     @artist = artist
+    #binding.pry
   end
 
   def self.create(name)
@@ -57,3 +66,12 @@ end
 # p "Song.all after saving song3: #{Song.all}"
 #
 ###### end test data for song spec 001 #######
+
+###### start test data for spec 004 #######
+# p Song.all
+# emartist = Artist.new('eminem')
+# song4 = Song.new('Lose Yourself', emartist)
+# puts  "emartist.songs = #{emartist.songs}\n\n"
+# puts "song4.artist = #{song4.artist.name}\n\n"
+# puts "Song.all includes: #{Song.all}\n\n"
+###### end test data for spec 004 #######
