@@ -1,6 +1,7 @@
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
 attr_accessor :name, :songs, :genre
 
 @@all=[]
@@ -38,13 +39,11 @@ artist.save
 artist
 end
 
-def self.find_or_create_by_name(name)
-  if Artist.find_by_name(name)!=nil
-    Artist.find_by_name(name)
-  else
-    Artist.create_by_name(name)
-  end
+def genres
+@songs.collect {|song| song.genre}.uniq
 end
+
+
 
 
 end
