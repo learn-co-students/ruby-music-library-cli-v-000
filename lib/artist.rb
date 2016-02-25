@@ -1,10 +1,11 @@
 require_relative '../concerns/findable'
 require 'pry'
-extend Concerns::Findable
+
 #extend Concerns::MaintainableClass
 #include Concerns::MaintainableInstance
 
 class Artist
+  extend Concerns::Findable
   @@all = []
   attr_accessor :name, :songs
 
