@@ -19,4 +19,10 @@ class Genre
     genre.save
     genre
   end
+  def artists
+    artist_collect = @songs.collect do |song|
+      song.artist
+    end
+    artist_collect.uniq
+  end
 end
