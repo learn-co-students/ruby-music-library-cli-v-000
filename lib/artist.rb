@@ -19,24 +19,6 @@ class Artist
     artist # if I don't return artist here, or if I don't return self in self.create, one test doesn't pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. we may be able to only send the single instance from create to save, which would make more sense, i think.
   end
 
- # def self.find_by_name(artist_instance)
- #   self.all.find {|artist| artist.name == artist_instance}
- # end
-#
- # def self.create_by_name(artist_instance)
- #   Artist.new(artist_instance)
- # end
-#
- # def self.find_or_create_by_name(artist_name)
- #   find_by_name(artist_name).nil? ? create_by_name(artist_name) : find_by_name(artist_name)
-#
- #   #the_artist = find_by_name(artist_instance)
- #   #if the_artist == nil?
- #   #  the_artist = Artist.new(artist_instance)
- #   #end
- #   # the_artist
- # end
-
   def self.all
     @@all
   end
