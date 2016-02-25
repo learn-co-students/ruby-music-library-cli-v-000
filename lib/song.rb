@@ -14,7 +14,6 @@ class Song
     @name = name
     @artist = artist
     @genre = genre
-    #binding.pry
     if artist
       self.artist=(artist)
     end
@@ -33,9 +32,15 @@ class Song
     @genre = genre
   end
 
+  def save
+    self.class.all << self # this returns the entire array of @@all
+     # so this is needed to get last test in 001 to pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. or we may be able to only send the single instance from create to save, which would make more sense, i think.
+  end
+
   def self.create(name)
     new_song = self.new(name)
     new_song.save
+    new_song
   end
 
   def self.all
@@ -46,9 +51,15 @@ class Song
     self.all.clear
   end
 
-  def save
-    self.class.all << self # this returns the entire array of @@all
-    self # so this is needed to get last test in 001 to pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. or we may be able to only send the single instance from create to save, which would make more sense, i think.
+  def self.find_by_name(name)
+    self.all.find { |obj| obj.name == name }
+  end
+
+  def self.find_or_create_by_name(name)
+    found = self.find_by_name(name)
+    found ? found : self.new(name)
+
+    #find_by_name(name) ?  self.new(name) : find_by_name(name)
   end
 
 end
@@ -77,3 +88,13 @@ end
 # puts "song4.artist = #{song4.artist.name}\n\n"
 # puts "Song.all includes: #{Song.all}\n\n"
 ###### end test data for spec 004 #######
+
+###### start test data for spec 007 #######
+# song = Song.new("In an Aeroplane Over the Sea")
+# song.save
+# binding.pry
+# Song.find_by_name("In an Aeroplane Over the Sea")
+# song_1 = Song.find_or_create_by_name("In an Aeroplane Over the Sea")
+# song_2 = Song.find_or_create_by_name("In an Aeroplane Over the Sea")
+
+###### end test data for spec 007 #######

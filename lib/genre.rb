@@ -1,6 +1,6 @@
 require_relative '../concerns/findable'
 require 'pry'
-#extend Concerns::Findable
+extend Concerns::Findable
 #extend Concerns::MaintainableClass
 #include Concerns::MaintainableInstance
 
