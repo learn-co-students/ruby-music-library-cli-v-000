@@ -10,6 +10,9 @@ class Artist
     @songs = []
   end
 
+  def self.create(name)
+    self.new(name).tap {|artist| artist.save}
+  end
 
   def self.all
     @@all
@@ -17,19 +20,14 @@ class Artist
 
 
   def add_song(song)
-    song.artist = self unless song.artist == self
     @songs << song unless @songs.include?(song)
+    song.artist = self unless song.artist == self
   end
 
   def self.destroy_all
     @@all.clear
   end
 
-  def self.create(name)
-    artist = self.new(name)
-    artist.save
-    artist
-  end
 
   def save
     @@all << self
