@@ -34,4 +34,15 @@ class Song
     @genre = genre
     genre.songs << self if genre != "" && !genre.songs.include?(self)
   end
+  def self.find_by_name(name)
+    self.all.find { |song| song.name == name}
+  end
+  def self.find_or_create_by_name(name)
+    found = self.find_by_name(name)
+    if found == nil
+      self.create(name)
+    else
+      found
+    end
+  end
 end
