@@ -1,13 +1,13 @@
 require_relative '../concerns/findable'
-require_relative 'artist'
 require 'pry'
-#extend Concerns::Findable
-#extend Concerns::MaintainableClass
-
 
 class Song
+  extend Concerns::Findable
+  extend Concerns::MaintainableClass
   include Concerns::MaintainableInstance
+
   @@all = []
+
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -31,36 +31,10 @@ class Song
     @genre = genre
   end
 
- # def save
- #   #@@all << self
- #   self.class.all << self # this returns the entire array of @@all
- #    # so this is needed to get last test in 001 to pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. or we may be able to only send the single instance from create to save, which would make more sense, i think.
- #   self
- # end
-
-  def self.create(name)
-    new_song = self.new(name)
-    new_song.save
-    #new_song
-  end
-
   def self.all
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def self.find_by_name(name)
-    self.all.find { |obj| obj.name == name }
-  end
-
-  def self.find_or_create_by_name(name)
-    found = self.find_by_name(name)
-    found ? found : self.create(name)
-    #find_by_name(name) ?  self.new(name) : find_by_name(name)
-  end
 
   def self.new_from_filename(filename)
     filename_parts = parse(filename) # artist=0, song=1, genre=2
