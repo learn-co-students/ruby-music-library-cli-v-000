@@ -2,10 +2,11 @@ require_relative '../concerns/findable'
 require 'pry'
 
 #extend Concerns::MaintainableClass
-#include Concerns::MaintainableInstance
+
 
 class Artist
   extend Concerns::Findable
+  include Concerns::MaintainableInstance
   @@all = []
   attr_accessor :name, :songs
 
@@ -39,10 +40,10 @@ class Artist
     self.songs.collect {|song| song.genre}.uniq
   end
 
-  def save
-    self.class.all << self
-    #self # if I don't either return self here, or return artist in self.create, one test doesn't pass. because this would return teh entire array. instead of the one instance we're saving.
-  end
+ # def save
+ #   self.class.all << self
+ #   #self # if I don't either return self here, or return artist in self.create, one test doesn't pass. because this would return teh entire array. instead of the one instance we're saving.
+ # end
 
 
 end

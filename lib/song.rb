@@ -3,17 +3,16 @@ require_relative 'artist'
 require 'pry'
 #extend Concerns::Findable
 #extend Concerns::MaintainableClass
-#include Concerns::MaintainableInstance
+
 
 class Song
+  include Concerns::MaintainableInstance
   @@all = []
   attr_accessor :name
-  attr_reader :artist, :genre, :parse
+  attr_reader :artist, :genre
 
   def initialize(name, artist=nil, genre=nil)
     @name = name
-    @artist = artist
-    @genre = genre
     if artist
       self.artist=(artist)
     end
@@ -32,10 +31,12 @@ class Song
     @genre = genre
   end
 
-  def save
-    self.class.all << self # this returns the entire array of @@all
-     # so this is needed to get last test in 001 to pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. or we may be able to only send the single instance from create to save, which would make more sense, i think.
-  end
+ # def save
+ #   #@@all << self
+ #   self.class.all << self # this returns the entire array of @@all
+ #    # so this is needed to get last test in 001 to pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. or we may be able to only send the single instance from create to save, which would make more sense, i think.
+ #   self
+ # end
 
   def self.create(name)
     new_song = self.new(name)
@@ -62,16 +63,18 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    filename_parts = parse(filename)
-    find_or_create_by_name(filename_parts[1])
-    artist=filename_parts[0]
-    #filename_parts.each do |part|
-    #  puts part
-    end
+    filename_parts = parse(filename) # artist=0, song=1, genre=2
 
+    if find_by_name(filename_parts[1]).nil?
+      the_song = filename_parts[1]
+      the_artist = Artist.find_or_create_by_name(filename_parts[0])
+      the_genre = Genre.find_or_create_by_name(filename_parts[2])
+      self.new(the_song, the_artist, the_genre)
+    end
+  end
 
   def self.create_from_filename(filename)
-    self.all << new_from_filename(filename)
+    new_from_filename(filename).save
   end
 
   def self.parse(filename)

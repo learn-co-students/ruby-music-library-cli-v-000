@@ -13,4 +13,10 @@ module Concerns
 
   end
 
+  module MaintainableInstance
+    def save
+      self.class.all << self
+    end
+  end
+
 end
