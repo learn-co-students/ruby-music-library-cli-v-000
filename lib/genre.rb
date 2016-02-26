@@ -1,8 +1,6 @@
 require_relative '../concerns/findable'
 require 'pry'
 
-#
-
 class Genre
   extend Concerns::Findable
   extend Concerns::MaintainableClass
