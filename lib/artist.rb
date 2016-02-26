@@ -18,7 +18,7 @@ class Artist
   def self.create(name)
     artist = self.new(name)
     artist.save
-    artist # if I don't return artist here, or if I don't return self in self.create, one test doesn't pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. we may be able to only send the single instance from create to save, which would make more sense, i think.
+    #artist # if I don't return artist here, or if I don't return self in self.create, one test doesn't pass. this is because it return the entire array, which may include dups. May be able to remove this after we're checking for dups later in testing. we may be able to only send the single instance from create to save, which would make more sense, i think.
   end
 
   def self.all

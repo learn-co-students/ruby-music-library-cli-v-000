@@ -16,6 +16,7 @@ module Concerns
   module MaintainableInstance
     def save
       self.class.all << self
+      self
     end
   end
 

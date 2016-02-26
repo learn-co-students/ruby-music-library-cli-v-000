@@ -18,7 +18,7 @@ class Genre
   def self.create(name)
     genre = self.new(name)
     genre.save
-    genre # if I don't either return genre here, or don't return self in self.create, one test doesn't pass
+    #genre # if I don't either return genre here, or don't return self in self.create, one test doesn't pass
   end
 
   def add_song(song_instance)
