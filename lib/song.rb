@@ -8,7 +8,7 @@ require 'pry'
 class Song
   @@all = []
   attr_accessor :name
-  attr_reader :artist, :genre
+  attr_reader :artist, :genre, :parse
 
   def initialize(name, artist=nil, genre=nil)
     @name = name
@@ -57,13 +57,28 @@ class Song
 
   def self.find_or_create_by_name(name)
     found = self.find_by_name(name)
-    found ? found : self.new(name)
-
+    found ? found : self.create(name)
     #find_by_name(name) ?  self.new(name) : find_by_name(name)
   end
 
-end
+  def self.new_from_filename(filename)
+    filename_parts = parse(filename)
+    find_or_create_by_name(filename_parts[1])
+    artist=filename_parts[0]
+    #filename_parts.each do |part|
+    #  puts part
+    end
 
+
+  def self.create_from_filename(filename)
+    self.all << new_from_filename(filename)
+  end
+
+  def self.parse(filename)
+    filename.gsub(/(\s-\s|\.mp3)/,'#').split(/#/)
+  end
+
+end
 ###### start test data for song spec 001 #######
 #
 # song = Song.new("In an Aeroplane Over the Sea")
