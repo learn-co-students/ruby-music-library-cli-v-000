@@ -1,45 +1,77 @@
-require 'artist.rb'
-require_all './lib'
 require 'pry'
 class MusicLibraryController
 
-  attr_accessor :path
 
   def initialize(path='./db/mp3s')
-    @path = path
     cli_import = MusicImporter.new(path)
     cli_import = cli_import.import
   end
 
   def call
-    puts 'What would you like to do?'
-    puts "Enter 1 to list songs\nEnter 2 to list artists\nEnter 3 to to list genres\nEnter 4 to play a song\nEnter 5 to list an artist's songs\nEnter 6 to list a genre's songs\nEnter 7 to exit"
-    user_input = gets.strip.to_i
+    user_input = 'keep_going'
+    while user_input != 'exit'
+    puts "\nType the command you'd like to run (list songs, list artists, list genres, play song, list artist, list genre, or exit"
+    user_input = gets.strip.downcase
+
     case user_input
-      when 1
-        puts Songs.all
-      when 2
-        puts Artists.all
-      when 3
-        puts Genres.all
-      when 4
-        puts "pick a song"
-        puts Songs.all
-        user_song = gets.strip
-        puts user_song
-      when 5
-        puts 'pick an artist to list their songs'
-        puts Artists.all
-        user_artist = gets.strip
-        puts user_artist
-      when 6
-        puts 'pick a genre to list their songs'
-        puts Genre.all
-        user_genre = gets.strip
-        puts user_genre
-      when 7
-        puts 'hope to see you soon!'
-        exit
+      when 'list songs'
+        list_songs
+      when 'list artists'
+        list_artists
+      when 'list genres'
+        list_genres
+      when 'play song'
+        play_song
+      when 'list artist'
+        list_artist
+      when 'list genre'
+        list_genre
+    end
+    end
+  end
+
+
+  def list_songs
+    Song.all.each.with_index(1) { |song, idx|
+      puts "#{idx}. #{song.artist.name} - #{song.name} - #{song.genre.name}" }
+  end
+
+  def list_artists
+    Artist.all.each { |artist| puts "#{artist.name}" }
+  end
+
+  def list_genres
+    Genre.all.each { |genre| puts "#{genre.name}" }
+  end
+
+  def play_song
+    puts 'pick a song to play'
+    user_song = gets.strip.to_i
+    Song.all.each.with_index(1) do |song, idx|
+      if idx == user_song
+        puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
+  def list_artist
+    puts 'pick an artist to list their songs'
+    user_artist = gets.strip
+    Song.all.each do |song|
+        if song.artist.name == user_artist
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
+    end
+  end
+
+  def list_genre
+    puts 'pick a genre to list their songs'
+    user_genre = gets.strip
+    Song.all.each do |song|
+      if song.genre.name == user_genre
+        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
     end
   end
 end
+
