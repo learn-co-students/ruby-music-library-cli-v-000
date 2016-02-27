@@ -74,7 +74,7 @@ def list_genre
         puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
       end
      else
-      puts "Artist not found"
+      puts "Genre not found"
     end
   end
 
