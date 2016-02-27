@@ -46,9 +46,10 @@ def genres
 end
 
 def play_song
-  Song.all.each do |song|
-    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
-  end
+  puts "choose a song to play by number mate!"
+  number= gets.chomp.to_i-1
+  play = Song.all[number]
+    puts "Playing #{play.artist.name} - #{play.name} - #{play.genre.name}"
 end
 
  def list_artist
