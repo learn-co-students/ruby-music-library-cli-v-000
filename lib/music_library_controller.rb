@@ -56,16 +56,16 @@ class MusicLibraryController
   def play_song
     puts "What song number would you like to play?"
     song_input = gets.strip
-    puts "Now playing: #{Song.all[song_input.to_i-1].name}
+    puts "Playing #{Song.all[song_input.to_i-1].artist.name}, #{Song.all[song_input.to_i-1].name}, #{Song.all[song_input.to_i-1].genre.name}
     "
   end
 
   def artist_songs
     puts "What artist would you like to list songs for?"
     artist_input = gets.strip
-    puts "You don't have that artist in your library.
-      " 
-      artists unless
+    # puts "You don't have that artist in your library.
+    #   " 
+    #   artists unless
     if artist = Artist.find_by_name(artist_input)
       artist.songs.each_with_index do |song, index|
         puts "#{index + 1}. #{song.name}
@@ -77,8 +77,8 @@ class MusicLibraryController
   def genre_songs
     puts "What genre would you like a list of songs for?"
     input = gets.strip
-    puts "You don't have any songs with that genre in your library.
-    " unless
+    # puts "You don't have any songs with that genre in your library.
+    # " unless
     if genre = Genre.find_by_name(input)
       genre.songs.each_with_index do |genre, index|
         puts "#{index + 1}. #{genre.name}"
