@@ -20,14 +20,14 @@ rspec spec/004_songs_and_artists_spec.rb
 
 #################################
 
-+  def add_song(song)
- +    if song.artist != self
- +      song.artist = self
- +    end
- +    if !@songs.include?(song)
- +      self.songs.push(song)
- +    end
- +  end
+  def add_song(song)
+     if song.artist != self
+       song.artist = self
+     end
+     if !@songs.include?(song)
+       self.songs.push(song)
+     end
+   end
 
 
 
