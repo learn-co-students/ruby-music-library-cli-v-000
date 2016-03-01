@@ -1,0 +1,28 @@
+
+
+
+[#<Artist:0x007fc001292b38 @name="The Magnetic Fields", 
+    @songs=[#<Song:0x007fc001292ac0 
+        @name="The Book of Love", 
+          @artist=#<Artist:0x007fc001292b38 ...>, 
+            @genre=#<Genre:0x007fc001292c28 
+              @name="indie rock", 
+    @songs=[
+      #<Song:0x007fc001292ac0 ...>, 
+      #<Song:0x007fc001292a48 
+        @name="Papa was a Rodeo", 
+          @artist=#<Artist:0x007fc001292b38 ...>, 
+            @genre=#<Genre:0x007fc001292c28 ...>>
+        ]>>, 
+
+      #<Song:0x007fc001292a48 
+        @name="Papa was a Rodeo", 
+          @artist=#<Artist:0x007fc001292b38 ...>, 
+            @genre=#<Genre:0x007fc001292c28 
+              @name="indie rock", 
+    @songs=[#<Song:0x007fc001292ac0 
+      @name="The Book of Love", 
+        @artist=#<Artist:0x007fc001292b38 ...>, 
+          @genre=#<Genre:0x007fc001292c28 ...>>, 
+
+          #<Song:0x007fc001292a48 ...>]>>]>]

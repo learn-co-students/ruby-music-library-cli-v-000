@@ -1,11 +1,13 @@
 require 'pry'
 
-class Genre
-  attr_accessor :name
+class Genre 
+  extend Findable
+  attr_accessor :name, :songs, :artist
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
     save
   end
 
@@ -21,7 +23,25 @@ class Genre
     @@all << self
   end
 
+  def self.count
+    @@all.size
+  end
+
   def self.create(name)
     genre = Genre.new(name)
   end
+
+  def add_song(song)
+    if song.genre != self
+      song.genre = self
+    end
+    if !@songs.include?(song)
+      @songs << (song)
+    end
+  end
+
+  def artists
+    self.songs.collect {|song| song.artist }.uniq
+  end
+  
 end 
