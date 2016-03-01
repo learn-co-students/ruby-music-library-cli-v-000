@@ -1,7 +1,8 @@
 require 'pry'
+require_relative '../concerns/findable.rb'
 
 class Artist 
-  extend Findable
+  extend Concerns::Findable
   attr_accessor :name, :songs, :genre
   @@all = []
 
@@ -44,11 +45,11 @@ class Artist
     self.songs.collect {|song| song.genre }.uniq
   end
 
-  def self.find_or_create_by_name(name)
-    if !self.find_by_name(name) == name;
-      create(name)
-      else
-    end
-  end
+  # def self.find_or_create_by_name(name)
+  #   if !self.find_by_name(name) == name;
+  #     create(name)
+  #     else
+  #   end
+  # end
 
 end

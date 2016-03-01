@@ -1,7 +1,8 @@
 require 'pry'
+require_relative '../concerns/findable.rb'
 
 class Song
-  extend Findable
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -46,15 +47,15 @@ class Song
     song = Song.new(name)
   end
 
-  def self.find_by_name(name)
-    @@all.detect{|s| s.name==name}
-  end
+  # def self.find_by_name(name)
+  #   @@all.detect{|s| s.name==name}
+  # end
 
-  def self.find_or_create_by_name(name)
-    if !self.find_by_name(name) == name;
-      create(name)
-      else
-    end
-  end
+  # def self.find_or_create_by_name(name)
+  #   if !self.find_by_name(name) == name;
+  #     create(name)
+  #     else
+  #   end
+  # end
 
 end
