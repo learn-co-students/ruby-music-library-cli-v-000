@@ -18,18 +18,27 @@ rspec spec/009_findable_artists_and_genres_spec.rb
 
 rspec spec/010_music_importer_spec.rb
 
+rspec spec/011_music_library_controller_spec.rb
+
+rspec spec/012_musiclibrary_cli_spec.rb
 
 #################################
 
-
-def self.give_it_a_rest(brad)
-  if music-library-cli(errors) > (brads_capacity_for_pain)
-    break
-      self.play_some_music
-      self.relax_chill_the_f_out
-    puts "Put down the Ruby sword for now. Come back tonight."
+  def self.new_from_filename(file)
+    artist_name, song_name = file.split(" - ")
+    genre_name = (file.split.last).gsub!(".mp3","")
+    artist_name = find_or_create_name(artist_name)
+    genre_name = find_or_create_name(genre_name)
+    
+    self.create(song_name)
   end
-end
-
-
+#################################
+  def self.create_from_filename(filename)
+    artist, name, genre = file.split(" - ").gsub!(".mp3","")
+    artist = Artist.find_or_create_name(artist_name)
+    genre = Genre.find_or_create_name(genre_name)
+    name = Song.new(name, artist, genre)
+    binding.pry
+  end
+  
 #################################

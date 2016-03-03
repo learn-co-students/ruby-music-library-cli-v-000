@@ -2,7 +2,7 @@ require 'pry'
 require_relative '../concerns/findable.rb'
 
 class Song
-  # extend Concerns::Findable
+
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -57,22 +57,24 @@ class Song
     end
   end
 
-  def self.create(name)
-    song = Song.new(name)
+  def self.create(song, artist=nil, genre=nil)
+    song = Song.new(song, artist=nil, genre=nil)
   end
 
   def self.new_from_filename(file)
     artist_name, song_name = file.split(" - ")
     genre_name = (file.split.last).gsub!(".mp3","")
-    
-    artist = Artist.find_or_create_name(artist_name)
-    genre = Genre.find_or_create_name(genre_name)
-    
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
     self.new(song_name, artist, genre)
   end
 
-  def self.create_from_filename(filename)
-      create(filename)
+  def self.create_from_filename(file)
+    artist_name, song_name = file.split(" - ")
+    genre_name = (file.split.last).gsub!(".mp3","")
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name, artist, genre)
   end
 
 end
