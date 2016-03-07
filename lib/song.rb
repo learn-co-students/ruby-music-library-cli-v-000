@@ -1,18 +1,25 @@
+require "pry"
+
 class Song
   extend Concerns::Findable
   attr_accessor :name, :artist, :songs, :genre
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist if artist != nil
-   # artist != nil ? @artist = artist : nil
+    self.artist = artist if artist != nil
+    self.genre = genre if genre != nil
+    binding.pry
   end
 
   def artist=(artist)
-    @artist = artist if artist != nil
-   # @artist = artist
+    @artist = artist
     artist.add_song(self)     
+  end
+
+  def genre=(genre)
+    @genre = genre
+    genre.songs.include?(self) ? nil : genre.add_song(self)
   end
 
   def self.all
@@ -33,25 +40,16 @@ class Song
     song
   end
 
-  #def find_by_name(name)
-   # self.all.detect(name)
-  #end
-
-  #def find_or_create_by_name
-   # value = self.all.find {|song| song.name == name}
-   # value != nil ? value : self.new(name)
-  #end
-
   def self.new_from_filename(filename)
 
   end
 
   def genres
-
+    self.all.collect {|song| song.genre} 
   end
 
   def artists
-
+    
   end
 
   def self.create_from_filename(filename)

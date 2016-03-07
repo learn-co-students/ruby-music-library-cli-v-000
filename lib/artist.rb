@@ -30,10 +30,13 @@ class Artist
     @@all << self
   end
 
+  def genres
+    self.songs.collect {|song| song.genre}
+  end
+
   def add_song(song)
     song.artist = self if song.artist == nil
-    @songs.include?(song) ? nil : @songs << song
-    
+    @songs.include?(song) ? nil : @songs << song 
   end
 
   def self.create(name)
