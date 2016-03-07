@@ -1,20 +1,19 @@
 require 'pry'
 class Song
 
-  attr_accessor :name, :artist, :genre
-  @@all=[]
+  attr_accessor :name, :artist
+  @@all = []
 
   def initialize(name)
     @name = name
-    @songs =[]
-   end
+  end
 
   def self.all
     @@all
   end
 
   def self.destroy_all
-    self.all.clear
+    @@all.clear
   end
 
   def save
@@ -22,13 +21,16 @@ class Song
   end
 
   def self.create(song)
-    song = Song.new(song)
+    song = self.new(song)
     song.save
     song
   end
 
-
+  def artist_name
+    self.artist.name
+  end
 
   
+
 
 end

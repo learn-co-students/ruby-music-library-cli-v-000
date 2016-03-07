@@ -1,14 +1,15 @@
 require 'pry'
 class Artist
+  extend Concerns::Findable
 
-  attr_accessor :name, :genre
-  @@all=[]
+  attr_accessor :name
+  @@all = []
+
 
 
   def initialize(name)
     @name = name
-   # @genre = genre
-     @songs=[]
+     @songs =[]
   end
 
   def self.all
@@ -29,21 +30,16 @@ class Artist
     artist
   end
 
-  #def add_song_by_name(song, genre)
-  #  song = Song.new(name,genre)
-   # @songs << song
-   # song.artist = self
- # end
+
 
   def add_song(song)
+    binding.pry
+
     song.artist = self
     @songs << song
-    
 
   end
-
-  def songs
+   def songs
     @songs
   end
-
 end
