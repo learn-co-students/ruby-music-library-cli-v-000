@@ -12,25 +12,23 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
-  end
 
   def save
     @@all << self
+    #binding.pry
   end
 
   def self.create(song)
+
     song = self.new(song)
     song.save
     song
   end
 
-  def artist_name
-    self.artist.name
+  def self.destroy_all
+    @@all.clear
   end
 
-  
 
 
 end
