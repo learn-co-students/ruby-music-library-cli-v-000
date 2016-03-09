@@ -1,3 +1,4 @@
+#require_relative '../lib/concerns/findable.rb'
 require "pry"
 
 class Song
@@ -9,7 +10,7 @@ class Song
     @name = name
     self.artist = artist if artist != nil
     self.genre = genre if genre != nil
-    binding.pry
+    #binding.pry
   end
 
   def artist=(artist)
@@ -41,15 +42,13 @@ class Song
   end
 
   def self.new_from_filename(filename)
-
-  end
-
-  def genres
-    self.all.collect {|song| song.genre} 
-  end
-
-  def artists
-    
+    files = filename.split(/ - |\./)
+    files.pop
+    song_name = files[1]
+    genre = files[2]
+    song = Song.new(song_name,genre)
+    song.artist.name = files[0]
+    song  
   end
 
   def self.create_from_filename(filename)

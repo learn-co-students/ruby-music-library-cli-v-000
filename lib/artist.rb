@@ -1,11 +1,8 @@
-require_relative '../lib/concerns/findable.rb'
+#require_relative '../lib/concerns/findable.rb'
 
 class Artist
-  #extend - takes methods from module into class as class methods
   extend Concerns::Findable
   attr_accessor :name, :songs, :artist
-  #@@genres = []
-  #@@artists = []
   @@all = []
 
   def initialize(name)
@@ -31,7 +28,7 @@ class Artist
   end
 
   def genres
-    self.songs.collect {|song| song.genre}
+    self.songs.collect {|song| song.genre}.uniq
   end
 
   def add_song(song)
