@@ -43,11 +43,9 @@ class Song
 
   def self.new_from_filename(filename)
     files = filename.split(/ - |\./)
-    files.pop
-    song_name = files[1]
-    genre = files[2]
-    song = Song.new(song_name,genre)
-    song.artist.name = files[0]
+    song = Song.find_or_create_by_name(files[0])
+    song.artist.name = Artist.find_or_create_by_name(files[1])
+    song.genre = Genre.find_or_create_by_name(files[2])
     song  
   end
 
