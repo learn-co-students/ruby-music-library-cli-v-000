@@ -31,13 +31,20 @@ class Artist
   end
 
    def add_song(song)
-   song.artist = self
-    @songs << song
-end
+    if song.artist != self
+      song.artist = self
+    end
 
-  #def artist=(artist)
-  #  artist.add_song
-  #end
+    @songs << song unless @songs.include?(song)
+
+   end
+
+    def genres
+      @songs.collect do |song|
+        song.genre
+      end.uniq
+    end
+
 
 
 end
