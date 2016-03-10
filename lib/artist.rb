@@ -1,14 +1,11 @@
-#require_relative '../lib/concerns/findable.rb'
-
 class Artist
   extend Concerns::Findable
-  attr_accessor :name, :songs, :artist
+  attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
     @name = name
     @songs=[]
-    #@@artists << self
   end
 
   def self.all

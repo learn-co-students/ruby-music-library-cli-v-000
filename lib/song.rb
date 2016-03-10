@@ -3,14 +3,13 @@ require "pry"
 
 class Song
   extend Concerns::Findable
-  attr_accessor :name, :artist, :songs, :genre
+  attr_accessor :name, :artist, :genre
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist if artist != nil
     self.genre = genre if genre != nil
-    #binding.pry
   end
 
   def artist=(artist)
@@ -43,13 +42,15 @@ class Song
 
   def self.new_from_filename(filename)
     files = filename.split(/ - |\./)
-    song = Song.find_or_create_by_name(files[0])
-    song.artist.name = Artist.find_or_create_by_name(files[1])
-    song.genre = Genre.find_or_create_by_name(files[2])
-    song  
+    song_name = files[1]
+    artist = Artist.find_or_create_by_name(files[0])
+    genre = Genre.find_or_create_by_name(files[2])
+    Song.new(song_name,artist,genre)
   end
 
   def self.create_from_filename(filename)
-    @@all << self.new_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+    song
   end
 end
