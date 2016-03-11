@@ -2,6 +2,7 @@ require_relative "../config/environment.rb"
 
 RSpec.configure do |config|
   config.order = :default
+<<<<<<< HEAD
   config.before(:each) do
     ["Song", "Genre", "Artist"].each do |class_name|
       if Kernel.const_defined?(class_name)
@@ -14,6 +15,8 @@ RSpec.configure do |config|
       end
     end
   end
+=======
+>>>>>>> 7d857eab89be25cace416fda944031753dce8f3d
 end
 
 RSpec::Matchers.define :include_array do |expected|

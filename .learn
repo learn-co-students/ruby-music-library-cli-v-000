@@ -1,4 +1,5 @@
 tags:
+<<<<<<< HEAD
   - full lab
   - playlister
   - modules
@@ -6,3 +7,20 @@ tags:
 languages:
   - ruby
 resources:
+=======
+  - project
+  - OO
+  - AI
+  - TTT
+languages:
+  - ruby
+resources:
+project:
+  review_criteria:
+    - All tests pass
+    - 0 player mode works
+    - 1 player mode works
+    - 2 player mode works
+    - Game is playable via CLI
+    - AI is able to play with some strategy
+>>>>>>> 7d857eab89be25cace416fda944031753dce8f3d

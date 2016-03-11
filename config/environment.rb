@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 
+<<<<<<< HEAD
 module Concerns
   module Findable
     def find_by_name(name)
@@ -18,3 +19,6 @@ module Concerns
 end
 
 require_all 'lib'
+=======
+require_all 'lib'
+>>>>>>> 7d857eab89be25cace416fda944031753dce8f3d
