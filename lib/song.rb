@@ -47,6 +47,7 @@ class Song
   #///INSTANCE METHODS///#
   def save
     @@all << self if !@@all.include?(self)
+    @@all.sort!{|a,b| a.artist.name <=> b.artist.name}
   end
 
   def artist=(artist)

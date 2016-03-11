@@ -15,6 +15,7 @@ class MusicLibraryController
       puts "list artists"
       puts "list genres"
       puts "play song"
+      puts "list artist"
       puts "exit"
 
       input = gets.chomp
