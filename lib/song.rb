@@ -1,4 +1,6 @@
 require 'pry'
+require_relative 'genre.rb'
+require_relative 'artist.rb'
 
 class Song
   attr_accessor :name, :artist, :genre
@@ -76,7 +78,7 @@ class Song
       #binding.pry
       song = self.new(file_a[1])
       song.artist = Artist.find_or_create_by_name(file_a[0])
-      song.genre = Genre.find_or_create_by_name(file_a[2].delete(".mp3"))
+      song.genre = Genre.find_or_create_by_name(file_a[2].chomp(".mp3"))
       #binding.pry
       song
     end
@@ -89,8 +91,9 @@ class Song
         file_a = file.split(" - ")
         song = self.create(file_a[1])
         song.artist = Artist.find_or_create_by_name(file_a[0])
-        song.genre = Genre.find_or_create_by_name(file_a[2].delete(".mp3"))
+        song.genre = Genre.find_or_create_by_name(file_a[2][0...-4])
         song
+        #binding.pry
       end
     else
       file_a = list.split(" - ")
