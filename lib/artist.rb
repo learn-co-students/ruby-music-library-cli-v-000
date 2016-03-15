@@ -1,6 +1,7 @@
 class Artist
-  extend Concerns::CommonUtil
-  extend Concerns::Findable
+  #extend Concerns::CommonUtil
+  #extend Concerns::Findable
+  include Concerns
 
   attr_accessor :name, :songs
 
@@ -13,9 +14,7 @@ class Artist
 
   def add_song(song)
     song.artist ||= self
-    unless @songs.include? song 
-      @songs << song
-    end
+    @songs << song unless @songs.include? song
   end
 
   def genres
@@ -35,8 +34,4 @@ class Artist
   def self.all
     @@all
   end
-
-  #def self.destroy_all
-  #  self.all.clear
-  #end
 end

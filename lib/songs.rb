@@ -1,7 +1,7 @@
 class Song
-  extend Concerns::CommonUtil
-  extend Concerns::Findable
-  #include Concerns
+  #extend Concerns::CommonUtil
+  #extend Concerns::Findable
+  include Concerns
 
   attr_accessor :name, :artist, :genre
 

@@ -5,4 +5,3 @@ Bundler.require
 #end
 
 require_all 'lib'
-require_all 'concerns'
