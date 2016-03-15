@@ -19,8 +19,8 @@ module Concerns
 
   # Why doesn't this work all the time? RESEARCH
   #
-  def self.included(base)
-    base.extend Findable
-    base.extend CommonUtil
-  end
+  #def self.included(base)
+  #  base.extend Findable
+  #  base.extend CommonUtil
+  #end
 end

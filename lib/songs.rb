@@ -1,9 +1,7 @@
-require_relative '../concerns/findable_module.rb'
-
 class Song
-  #extend Concerns::CommonUtil
-  #extend Concerns::Findable
-  include Concerns
+  extend Concerns::CommonUtil
+  extend Concerns::Findable
+  #include Concerns
 
   attr_accessor :name, :artist, :genre
 
