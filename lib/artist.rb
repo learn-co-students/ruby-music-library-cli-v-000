@@ -11,6 +11,14 @@ class Artist
     @songs = []
   end
 
+  def self.create(name)
+    new(name).tap(&:save)
+  end
+
+  def save
+    Artist.all << self
+  end
+
   def add_song(song)
     song.artist ||= self
     @songs << song unless @songs.include? song
@@ -18,15 +26,6 @@ class Artist
 
   def genres
     @songs.map {|song| song.genre}.uniq
-  end
-
-  def save
-    Artist.all << self
-    #self
-  end
-
-  def self.create(name)
-    new(name).tap(&:save)
   end
 
   def self.all
