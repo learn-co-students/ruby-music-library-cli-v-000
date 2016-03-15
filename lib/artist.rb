@@ -22,7 +22,7 @@ class Artist
 
   def save
     Artist.all << self
-    self
+    #self
   end
 
   def self.create(name)
