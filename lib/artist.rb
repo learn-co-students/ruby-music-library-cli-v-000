@@ -1,7 +1,6 @@
 class Artist
-  #extend Concerns::CommonUtil
-  #extend Concerns::Findable
-  include Concerns
+  extend Concerns::CommonUtil
+  extend Concerns::Findable
 
   attr_accessor :name, :songs
 
@@ -27,8 +26,7 @@ class Artist
   end
 
   def self.create(name)
-    artist = Artist.new(name)
-    artist.save
+    new(name).tap(&:save)
   end
 
   def self.all
