@@ -6,12 +6,10 @@ class MusicImporter
   end
 
   def files
-    Dir.glob("#{@path}/*.mp3").collect {|file| file.split('/').last}
+    Dir.glob("#{@path}/*.mp3").collect {|file| file.split('/').last}.uniq
   end
 
   def import
-    files.uniq.each do |fname|
-      Song.create_from_filename(fname)
-    end
+    files.each {|fname| Song.create_from_filename(fname)}
   end
 end
