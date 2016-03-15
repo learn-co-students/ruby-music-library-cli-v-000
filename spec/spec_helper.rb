@@ -2,6 +2,7 @@ require_relative "../config/environment.rb"
 
 RSpec.configure do |config|
   config.order = :default
+  # config.fail_fast = true #comment out if desired to see all
   config.before(:each) do
     ["Song", "Genre", "Artist"].each do |class_name|
       if Kernel.const_defined?(class_name)
