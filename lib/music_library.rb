@@ -7,7 +7,6 @@ class MusicLibraryController
   def initialize(path = './db/mp3s')
     music = MusicImporter.new(path)
     music.import
-
   end
 
   def call()
@@ -23,7 +22,7 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.each_with_index {|song, i| puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    Song.all.each_with_index {|song, i| puts "#{i+1}. #{song.to_string}"}
     call
   end
 
@@ -42,7 +41,7 @@ class MusicLibraryController
     song_request = gets.chomp
     song = Song.all[song_request.to_i - 1]
 
-    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    puts "Playing #{song.to_string}"
     call
   end
 
@@ -51,7 +50,7 @@ class MusicLibraryController
     artist_request = gets.chomp
 
     artist = Artist.find_by_name(artist_request)
-    artist.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    artist.songs.each {|song| puts "#{song.to_string}"}
     call
   end
 
@@ -60,7 +59,7 @@ class MusicLibraryController
     genre_request = gets.chomp
 
     genre = Genre.find_by_name(genre_request)
-    genre.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    genre.songs.each {|song| puts "#{song.to_string}"}
     call
   end
 

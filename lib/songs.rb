@@ -43,6 +43,10 @@ class Song
     Song.all << self
   end
 
+  def to_string
+    "#{artist.name} - #{name} - #{genre.name}"
+  end
+
   def self.all
     @@all
   end
