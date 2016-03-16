@@ -74,4 +74,10 @@ describe 'Music Library CLI' do
 
     expect(output).to include("Thundercat - For Love I Come - dance")
   end
+
+  it '#as_method converts spaces to underscores and makes it lowercase' do
+    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+
+    expect(music_libray_controller.as_method("Make a method")).to eq("make_a_method")
+  end
 end

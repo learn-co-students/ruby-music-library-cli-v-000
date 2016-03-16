@@ -1,6 +1,9 @@
 class MusicLibraryController
   attr_accessor :path
 
+  COMMANDS  =  ['list songs', 'list artists', 'list genres', 'play song', 
+                'list artist', 'list genre']
+
   def initialize(path = './db/mp3s')
     music = MusicImporter.new(path)
     music.import
@@ -9,37 +12,29 @@ class MusicLibraryController
 
   def call()
     puts "What would you like to do?"
-    option=gets.chomp
+    method = as_method(gets.chomp)
 
-    case option.downcase
-    when "list songs"
-      list_songs
-    when "list artists"
-      list_artists
-    when "list genres"
-      list_genres
-    when "play song"
-      play_song
-    when "list artist"
-      list_artist
-    when "list genre"
-      list_genre
+    if respond_to? method
+      send(method)
+    else
+      puts "Sorry, I can only respond to the following commands:"
+      list_commands
     end
   end
 
   def list_songs
     Song.all.each_with_index {|song, i| puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
-    self.call
+    call
   end
 
   def list_artists
     Artist.all.each {|artist| puts "#{artist.name}"}
-    self.call
+    call
   end
 
   def list_genres
     Genre.all.each {|genre| puts "#{genre.name}"}
-    self.call
+    call
   end
 
   def play_song
@@ -48,7 +43,7 @@ class MusicLibraryController
     song = Song.all[song_request.to_i - 1]
 
     puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    self.call
+    call
   end
 
   def list_artist
@@ -57,7 +52,7 @@ class MusicLibraryController
 
     artist = Artist.find_by_name(artist_request)
     artist.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-    self.call
+    call
   end
 
   def list_genre
@@ -66,7 +61,19 @@ class MusicLibraryController
 
     genre = Genre.find_by_name(genre_request)
     genre.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-    self.call
+    call
   end
 
+  def list_commands
+    COMMANDS.each {|com| puts "> #{com}"}
+    call
+  end
+
+  def exit
+    puts "Goodbye!"
+  end
+
+  def as_method(str)
+    str.gsub(/\s/, '_').downcase
+  end
 end
