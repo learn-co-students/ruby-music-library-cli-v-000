@@ -39,10 +39,15 @@ class MusicLibraryController
   def play_song
     puts "Which song? (enter a number)"
     song_request = gets.chomp
-    song = Song.all[song_request.to_i - 1]
 
-    puts "Playing #{song.to_string}"
-    call
+    if request_in_range?(song_request)
+      song = Song.all[song_request.to_i - 1]
+      puts "Playing #{song.to_string}"
+      call
+    else
+      puts "Sorry, I don't recognize your choice. Try agian."
+      call
+    end
   end
 
   def list_artist
@@ -74,5 +79,9 @@ class MusicLibraryController
 
   def as_method(str)
     str.gsub(/\s/, '_').downcase
+  end
+
+  def request_in_range?(str)
+    (1..Song.all.count).include? str.to_i
   end
 end
