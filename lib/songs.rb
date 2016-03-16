@@ -2,7 +2,8 @@ require "pry"
 
 class Song
 
-  attr_accessor :name, :genre, :artist
+  attr_accessor :name, :artist
+  attr_reader :genre
   @@all = []
 
   def initialize(name, artist=nil, genre=nil)
@@ -66,7 +67,5 @@ class Song
     song = self.new_from_filename(file)
     song.save
   end
-  # def self.new_by_filename(file)
-  #   self.create_from_filename(file)
-  # end
+
 end
