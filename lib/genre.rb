@@ -7,6 +7,7 @@ extend Concerns::Findable
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -25,6 +26,15 @@ extend Concerns::Findable
     genre = self.new(name)
     genre.save
     genre
+  end
+
+  def songs
+    @songs
+  end
+
+
+  def artists
+    self.songs.collect{|song| song.artist}.uniq
   end
 
 end

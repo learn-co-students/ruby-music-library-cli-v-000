@@ -20,15 +20,15 @@ describe 'Music Library CLI' do
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return("list artists", "exit")
 
-    output = capture_puts {run_file("./bin/musiclibrary")}
+        output = capture_puts {run_file("./bin/musiclibrary")}
 
-    expect(output).to include("Action Bronson")
-    expect(output).to include("Real Estate")
-    expect(output).to include("Thundercat")
-  end
+        expect(output).to include("Action Bronson")
+        expect(output).to include("Real Estate")
+        expect(output).to include("Thundercat")
+      end
 
-  it 'allows a user to list genres' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+      it 'allows a user to list genres' do
+        music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
     expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
     expect(music_libray_controller).to receive(:gets).and_return("list genres", "exit")
