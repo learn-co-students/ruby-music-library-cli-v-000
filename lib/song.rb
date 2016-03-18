@@ -5,10 +5,10 @@
 # #require_relative './ .rb'
 
 class Song
-#   extend Concerns::Findable
+  extend Concerns::Findable
 
-attr_accessor :name, :artist
-@@all = []
+  attr_accessor :name, :artist
+  @@all = []
 
     def initialize(name)
         @name = name
@@ -27,11 +27,11 @@ attr_accessor :name, :artist
         @@all << self
     end
 
-    def destroy_all
+    def self.destroy_all
         @@all = []
     end
 
-    def self.create
+    def self.create(name)
         self.new
         self.save
     end

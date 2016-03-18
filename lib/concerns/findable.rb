@@ -1,5 +1,4 @@
-module Findable
-# module Concerns::Findable
+module Concerns::Findable
 
 class Person
 
@@ -14,5 +13,5 @@ class Person
     @@all.detect{|person| person.name == name} || Artist.new(name)
 
   end
-
+end
 end

@@ -1,5 +1,5 @@
 class Artist
-#   extend Concerns::Findable
+   extend Concerns::Findable
 
 
 attr_accessor :name
@@ -18,7 +18,7 @@ attr_accessor :name
         @@all << self
     end
 
-    def destroy_all
+    def self.destroy_all
         @@all = []
     end
 
