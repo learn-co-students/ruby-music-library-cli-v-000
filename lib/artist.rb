@@ -4,25 +4,32 @@ class Artist
 
   attr_accessor :name, :song, :genre, :songs, :genres
   @@all = []
-  #@@genres = []
+
     def initialize(name, song=nil, genre=nil)
         @name = name
         @songs = []
+        @genres = []
 
         #@song.artist = self
         #@@all << self
     end
 
-    def genres    #artist and genres
-      self.songs.collect do |song|
-        song.genre
-      end
-    end
-#     def genres=(genre)
-     # song.genre = self unless song.genre == self
-     # @songs << song unless @songs.include?(song)
-     # @genres << genre unless @genres.include?(genre)
+#     def genres
+#       self.songs.collect do |song|
+#       #  binding.pry
+#         song.genre
+#       end
 #     end
+#binding.pry
+    def genres
+     self.songs.collect do |song|
+      #  binding.pry
+#          song.genre.uniq
+       song.genre = self unless song.genre == self
+       @songs << song unless @songs.include?(song)
+       @genres << genre unless @genres.include?(genre)
+     end
+    end
 
     def self.all
         @@all
