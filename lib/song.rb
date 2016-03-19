@@ -25,8 +25,11 @@ class Song
   end
 
   def genre=(genre)
+    #this next line tells the genre that it has a new song, me!
+    #genre.songs << self (if we didnt have an add_song method)
+    #this next line assigns the genre to myself
     @genre = genre
-    genre.add_song(self)
+    genre.add_song(self) #if line 29 exists, this doesnt
   end
 
   def artist=(artist)
