@@ -4,7 +4,7 @@ class Person
 
   @@all = []
 
-  def find_by_name
+  def find_by_name(name)
     @@all.detect{|person| person.name == name}
   end
 
