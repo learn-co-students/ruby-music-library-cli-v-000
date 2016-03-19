@@ -24,10 +24,10 @@ class Artist
     def genres
      self.songs.collect do |song|
       #  binding.pry
-#          song.genre.uniq
-       song.genre = self unless song.genre == self
-       @songs << song unless @songs.include?(song)
-       @genres << genre unless @genres.include?(genre)
+          song.genre.uniq  #comment out uniq
+#        song.genre = self unless song.genre == self
+#        @songs << song unless @songs.include?(song)
+#        @genres << genre unless @genres.include?(genre)
      end
     end
 
