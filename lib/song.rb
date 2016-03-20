@@ -1,58 +1,30 @@
-# require 'nokogiri'
-# require 'open-uri'
-# require 'pry'
-
-# #require_relative './ .rb'
-
 class Song
   extend Concerns::Findable
 
-  attr_accessor :name, :artist, :genre, :genres
+  attr_accessor :name, :artist, :genre #, :genres
   @@all = []
 
     def initialize(name, artist = nil, genre = nil)
        @name = name
        self.artist = artist if artist  #Songs and Artists initializing a song with an artist new songs accept an optional argument for the artist
        self.genre = genre if genre #This line makes no impact
-        #artist.song = self
-        #@@all << self
+
     end
 
-    def artist=(artist)  #assigns songs to artist
-#       artist=(artist=nil)
+    def artist=(artist)
         @artist = artist
         artist.add_song(self)
     end
 
-#     def genre=(genre)  #No impact
-#       @genre = genre
-#       genre.songs = self unless genre.songs.include?(self)  #should be <<
-#     end
     def genre=(genre)
         @genre = genre
-        genre.songs << self unless genre.songs.include?(self)
-      #binding.pry
+        genre.songs << self unless genre.songs.include?(self) #This line a must.
     end
 
-    def genres
-      self.songs.collect do |song|
-        song.genre
-      end
+    def add_song(song)
+      song.genre = self unless song.genre == self
+      @songs << song unless @songs.include?(song)
     end
-
-#     def genre
-#       @genre
-#     end
-#     def genre=(genre)
-#        @genre = genre
-#     end
-
-#     def genre=(genre)
-#       @genre = genre
-#       #self.genre = genre if genre
-#      # genre.add_genre(song)
-#      # @@all << self unless @all.include?(self)
-#     end
 
 
     def self.all
@@ -69,10 +41,6 @@ class Song
 
     def self.create(name, artist = nil, genre = nil)
         new(name, artist = nil, genre = nil).tap {|song| song.save}
-       # @name =name
-#         song.name = name
-# self.all << song
-#         return song
     end
 
     def self.destroy_all
