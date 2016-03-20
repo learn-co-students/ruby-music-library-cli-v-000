@@ -28,6 +28,7 @@ class Genre
 
     def artists
        @songs.collect do |artist|
+         binding.pry
          @artists << song.artist unless @artists.include?(self)
        end
     end
