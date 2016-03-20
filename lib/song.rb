@@ -1,13 +1,15 @@
 class Song
   extend Concerns::Findable
 
-  attr_accessor :name, :artist, :genre #, :genres
+  attr_accessor :name, :artist, :genres, :genre #, 
   @@all = []
 
     def initialize(name, artist = nil, genre = nil)
        @name = name
+       @genres = []
        self.artist = artist if artist  #Songs and Artists initializing a song with an artist new songs accept an optional argument for the artist
        self.genre = genre if genre #This line makes no impact
+
 
     end
 
@@ -22,6 +24,7 @@ class Song
     end
 
     def add_song(song)
+    #  genre.song = self
       song.genre = self unless song.genre == self
       @songs << song unless @songs.include?(song)
     end

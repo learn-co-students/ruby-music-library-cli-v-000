@@ -1,31 +1,38 @@
 class Artist
    extend Concerns::Findable
 
-  attr_accessor :name, :genre, :genres, :songs #, :song,
+  attr_accessor :name, :songs #, :song,:genre, :genres,
   @@all = []
 
     def initialize(name, song=nil, genre=nil)
         @name = name
         @songs = []
-        @genres = []
+      #  @genres = []
     end
 
-    def genre
-       self.songs.collect do |song|
-         song.genre #.artist #= self
-       end
-    end
-     #       song.genre
+#     def genre
+#       @genre = genre
+#        self.songs.collect do |song|
+#          song.genre #.artist #= self
+#        end
+#     end
+#      #       song.genre
     def genres
-       self.songs.collect do |song|
+      self.songs.collect{ |song| song.genre}.uniq
+       #self.songs.collect do |song|   #something is wrong w this block. Artist-genre issues gone w line above
+         # song.genre
+      #end
+
      #       song.genre.uniq #.uniq  #comment out uniq
 #             @genres << song.genre #.uniq
-            @songs << song.genre.uniq
-       end
+           # @songs << song.genre
+
+        #
+
     end
 
 #     def genres
-#         @genres
+#        @genres
 #     end
 
     def self.all
