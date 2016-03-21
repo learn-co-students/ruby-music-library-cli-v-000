@@ -14,6 +14,7 @@ describe 'Findable Songs' do
       song_2 = Song.find_or_create_by_name("In an Aeroplane Over the Sea")
 
       expect(song_1).to eq(song_2)
+      expect(song_1).not_to eq(nil)
     end
   end
 end
