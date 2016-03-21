@@ -46,8 +46,8 @@ extend Concerns::Findable
     end
 
 
-    def self.create(name, artist = nil, genre = nil)
-        new(name, artist = nil, genre = nil).tap {|song| song.save}
+    def self.create(name) #, artist = nil, genre = nil
+        new(name).tap {|song| song.save}  unless self.all.include?(name) #
     end
 
 #     def self.find_by_name(name)

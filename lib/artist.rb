@@ -30,8 +30,8 @@ extend Concerns::Findable
        @songs << song unless @songs.include?(song)
     end
 
-    def self.create(name, song=nil, genre=nil)
-      new(name, song=nil, genre=nil).tap {|artist| artist.save}
+    def self.create(name) #, song=nil, genre=nil
+      new(name).tap {|artist| artist.save}   #, song=nil, genre=nil
     end
 
     def self.destroy_all

@@ -47,8 +47,7 @@ extend Concerns::Findable
         self.all.clear # @@all = []
     end
 
-    def self.create(name, song=nil, artist=nil)
-      new(name, song=nil, artist=nil).tap {|genre| genre.save}
-
+    def self.create(name) #, song=nil, artist=nil
+      new(name).tap {|genre| genre.save} #, song=nil, artist=nil
     end
 end
