@@ -58,7 +58,7 @@ class Song
     if  self.find_by_name(info[1]) == nil
       new_song = Song.create(info[1])
       new_song.artist = Artist.find_or_create_by_name(info[0])
-      new_song.genre = Genre.find_or_create_by_name(info[2].slice!(0..4))
+      new_song.genre = Genre.find_or_create_by_name(info[2].gsub(".mp3", ""))
       new_song
     else
       self.find_by_name(info[1])
@@ -69,7 +69,7 @@ class Song
     info = file_name.split(" - ")
     new_song = Song.find_or_create_by_name(info[1])
     new_song.artist = Artist.find_or_create_by_name(info[0])
-    new_song.genre = Genre.find_or_create_by_name(info[2].slice!(0..4))
+    new_song.genre = Genre.find_or_create_by_name(info[2].gsub(".mp3", ""))
     new_song
   end
 
