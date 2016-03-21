@@ -1,5 +1,5 @@
-class Artist
-   extend Concerns::Findable
+class Artist #artist keeps a list of songs
+extend Concerns::Findable
 
   attr_accessor :name, :songs #, :song,:genre, :genres,
   @@all = []
@@ -7,46 +7,26 @@ class Artist
     def initialize(name, song=nil, genre=nil)
         @name = name
         @songs = []
-      #  @genres = []
     end
 
-#     def genre
-#       @genre = genre
-#        self.songs.collect do |song|
-#          song.genre #.artist #= self
-#        end
-#     end
-#      #       song.genre
+    def self.all
+      @@all
+    end
+
     def genres
       self.songs.collect{ |song| song.genre}.uniq
        #self.songs.collect do |song|   #something is wrong w this block. Artist-genre issues gone w line above
          # song.genre
-      #end
-
-     #       song.genre.uniq #.uniq  #comment out uniq
-#             @genres << song.genre #.uniq
-           # @songs << song.genre
-
-        #
-
     end
 
-#     def genres
-#        @genres
-#     end
-
-    def self.all
-        @@all
-    end
 
     def save
-        @@all << self
+        @@all << self   #can't be 'self.all' because 'self' is an instance
     end
 
     def add_song(song)
        @song = song
        song.artist = self unless song.artist == self
-      # song.artist = self unless song.artist == self
        @songs << song unless @songs.include?(song)
     end
 
@@ -55,6 +35,7 @@ class Artist
     end
 
     def self.destroy_all
-        @@all = []
+        #@@all = []
+       self.all.clear # @@all.clear
     end
 end
