@@ -20,13 +20,6 @@ extend Concerns::Findable
         @@all << self
     end
 
-#     def artist
-#       self.songs.collect do |song|
-#         song.artist
-#         @song << song.artist unless @song.include?(self)
-#       end
-#     end
-
     def artists
       self.songs.collect{ |song| song.artist}.uniq
 #        self.songs.collect do |artist|
