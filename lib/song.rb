@@ -1,7 +1,5 @@
-
-require 'pry'
 class Song
-  attr_accessor :name, :artist, :genre
+  attr_accessor :name
   @@all = []
 
   def initialize(name)
@@ -13,7 +11,7 @@ class Song
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.destroy_all
@@ -21,8 +19,8 @@ class Song
   end
 
   def self.create(name)
-    song = Song.new(name)
+    song = self.new(name)
     song.save
+    song
   end
-
 end
