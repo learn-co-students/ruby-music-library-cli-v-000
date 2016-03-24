@@ -13,21 +13,21 @@ class MusicLibraryController
     input = gets.chomp
     case input
     when "list songs"
-      self.list_songs
+      list_songs
     when "list artists"
-      self.list_artists
+      list_artists
     when "list genres"
-      self.list_genres
+      list_genres
     when "play song"
-      self.play_song
+      play_song
     when "list artist"
-      self.artist_list
+      artist_list
     when "list genre"
-      self.genre_list
+      genre_list
     when "exit"
       "Exiting..."
     else
-      self.call
+      call
     end
   end
 
@@ -36,10 +36,10 @@ class MusicLibraryController
     artist = gets.chomp
     if Artist.all.any? {|a| a.name == artist}
       self.songs.each { |f| puts f if f.split(" - ")[0] == artist }
-      self.call
+      call
     else
       puts "Not a valid choice."
-      self.call
+      call
     end
   end
 
@@ -48,10 +48,10 @@ class MusicLibraryController
     genre = gets.chomp
     if Genre.all.any? {|g| g.name == genre}
       self.songs.each {|f| puts f if f.split(" - ")[2] == genre}
-      self.call
+      call
     else
       puts "Not a valid choice."
-      self.call
+      call
     end
   end
 
@@ -65,23 +65,23 @@ class MusicLibraryController
     else
       song = self.songs[choice-1]
       puts "Playing #{song}"
-      self.call
+      call
     end
   end
 
   def list_songs
     self.songs.each_with_index {|f, i| puts "#{i+1}. #{f}" }
-    self.call
+    call
   end
 
   def list_artists
     Artist.all.each {|artist| puts artist.name}
-    self.call
+    call
   end
 
   def list_genres
     Genre.all.each {|genre| puts genre.name}
-    self.call
+    call
   end
 
 
