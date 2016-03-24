@@ -1,10 +1,10 @@
 describe 'Music Library CLI' do
 
   it 'allows a user to list songs' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
-    expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
-    expect(music_libray_controller).to receive(:gets).and_return("list songs", "exit")
+    expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
+    expect(music_library_controller).to receive(:gets).and_return("list songs", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
@@ -15,10 +15,10 @@ describe 'Music Library CLI' do
   end
 
   it 'allows a user to list artists' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
-    expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
-    expect(music_libray_controller).to receive(:gets).and_return("list artists", "exit")
+    expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
+    expect(music_library_controller).to receive(:gets).and_return("list artists", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
@@ -28,10 +28,10 @@ describe 'Music Library CLI' do
   end
 
   it 'allows a user to list genres' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
-    expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
-    expect(music_libray_controller).to receive(:gets).and_return("list genres", "exit")
+    expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
+    expect(music_library_controller).to receive(:gets).and_return("list genres", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
@@ -42,10 +42,10 @@ describe 'Music Library CLI' do
   end
 
   it 'allows a user to play a song' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
-    expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
-    expect(music_libray_controller).to receive(:gets).and_return("play song", "1", "exit")
+    expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
+    expect(music_library_controller).to receive(:gets).and_return("play song", "1", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
@@ -53,10 +53,10 @@ describe 'Music Library CLI' do
   end
 
   it 'allows a user to list an artist\'s songs' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
-    expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
-    expect(music_libray_controller).to receive(:gets).and_return("list artist", "Real Estate", "exit")
+    expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
+    expect(music_library_controller).to receive(:gets).and_return("list artist", "Real Estate", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
@@ -65,10 +65,10 @@ describe 'Music Library CLI' do
   end
 
   it 'allows a user to list a genre\'s songs' do
-    music_libray_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
-    expect(MusicLibraryController).to receive(:new).and_return(music_libray_controller)
-    expect(music_libray_controller).to receive(:gets).and_return("list genre", "dance", "exit")
+    expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
+    expect(music_library_controller).to receive(:gets).and_return("list genre", "dance", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
