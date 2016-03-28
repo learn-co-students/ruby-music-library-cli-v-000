@@ -49,10 +49,10 @@ extend Concerns::Findable
     def self.new_from_filename(filename)
    # binding.pry
       data =  filename.gsub('.mp3','').split(" - ")  #gsub must be before split
-      aartist = Artist.find_or_create_by_name(data[0])
-      ggenre = Genre.find_or_create_by_name(data[2])
+      @artist = Artist.find_or_create_by_name(data[0])
+      @genre = Genre.find_or_create_by_name(data[2])
 #       name = ()
-      self.new(data[1], aartist, ggenre)
+      self.new(data[1], @artist, @genre)
     end
    #binding.pry
 #     def self.new_from_filename(filename)
@@ -63,6 +63,14 @@ extend Concerns::Findable
 #       self.find_or_create_by_name(data[1], @artist, @genre)
 #     end
 
+#   def self.create_from_filename(filename)
+#    # binding.pry
+#       data =  filename.gsub('.mp3','').split(" - ")  #gsub must be before split
+#       @artist = Artist.find_or_create_by_name(data[0])
+#       @genre = Genre.find_or_create_by_name(data[2])
+# #       name = ()
+#       self.new(data[1], @artist, @genre)
+#     end
       def self.create_from_filename(filename)
         Song.new_from_filename(filename).tap{|song| song.save}
       end
@@ -87,7 +95,9 @@ extend Concerns::Findable
     #end
 #¸binding.pry
 
-
+  def to_s   #WHAT IS THIS? AND WHY IS THIS NECESSARY?
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
 
     def self.destroy_all
         self.all.clear #@@all = []

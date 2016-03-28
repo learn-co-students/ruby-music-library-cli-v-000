@@ -1,7 +1,7 @@
 require 'pry'
 class MusicLibraryController
 
-  attr_accessor :path
+ # attr_accessor :path
 
   def initialize(path='./db/mp3s')
     @path = path
@@ -9,9 +9,9 @@ class MusicLibraryController
     music_importer.import
   end
 
-#   def musicimporter(path)
-#     Musicimporter.new(path)
-#   end
+  def musicimporter(path)
+    Musicimporter.new(path)
+  end
   def call
     input = ""
     while input != "exit"
@@ -20,8 +20,12 @@ class MusicLibraryController
       input = gets.strip
       case input
       when "list songs"
-#         songs
-        Song.all
+         songs
+#          Song.all
+#          Song.all.each_with_index  {|song, index| puts "#{index + 1}. #{song.artist} - #{song.name} - #{song.genre}"}
+
+
+    #    binding.pry
       when "list artists"
         artists
       when "list genres"
@@ -37,31 +41,34 @@ class MusicLibraryController
   end
 
   def artists
-   # puts Artist.all
+#     list_artists
+#        puts Artist.all
     Artist.all.each.with_index(1) do |a, i|
+#       binding.pry
       puts "#{i}. #{a}"
     end
   end
 
-#   def genres
+  def genres
+#     list_genre
 #     puts Genre.all
-# #     Genre.all.each.with_index(1) do |g, i|
-# #       puts "#{i}. #{g}"
-# #     end
-#   end
+    Genre.all.each.with_index(1) do |g, i|
+      puts "#{i}. #{g}"
+    end
+  end
 
   def list_artist
     puts "What artist by name you like to list songs for?"
     artist_input = gets.strip
-    Song.all.select {|song| song.artist.name == input_artist}.each {|song| puts "#{song.artist} - #{song.name} - #{song.genre}"}
+#     Song.all.select {|song| song.artist.name == input_artist}.each {|song| puts "#{song.artist} - #{song.name} - #{song.genre}"}
 
-    binding.pry
+#    binding.pry
 
-#     if artist = Artist.find_by_name(artist_input)
-#       artist.songs.each do |s,i|
-#         puts "#{i}. #{s}"
-#       end
-#     end
+    if artist = Artist.find_by_name(artist_input)
+      artist.songs.each do |s,i|
+        puts "#{i}. #{s}"
+      end
+    end
   end
 
   def list_genre
@@ -81,9 +88,12 @@ class MusicLibraryController
   end
 
   def songs
-    Song.all.each.with_index(1) do |s, i|
-      puts "#{i}. #{s}"
-    end
+    Song.all.sort_by {|s, i| puts "#{i}. #{s}" }
+binding.pry
+#   def songs
+#     Song.all.each.with_index(1) do |s, i|
+#       puts "#{i}. #{s}"
+#     end
   end
 end
 #   def call

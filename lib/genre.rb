@@ -44,4 +44,7 @@ extend Concerns::Findable
       new(name).tap {|genre| genre.save} #, song=nil, artist=nil
     end
  #  binding.pry
+    def to_s
+      self.name
+    end
 end
