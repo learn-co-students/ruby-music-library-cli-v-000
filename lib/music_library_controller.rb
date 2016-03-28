@@ -36,12 +36,12 @@ class MusicLibraryController
     end
   end
 
-#   def artists
-#     puts Artist.all
-# #     Artist.all.each.with_index(1) do |a, i|
-# #       puts "#{i}. #{a}"
-# #     end
-#   end
+  def artists
+   # puts Artist.all
+    Artist.all.each.with_index(1) do |a, i|
+      puts "#{i}. #{a}"
+    end
+  end
 
 #   def genres
 #     puts Genre.all
