@@ -17,7 +17,7 @@ class MusicImporter
   def import
       self.files.each do |song|
 #binding.pry
-        song = Song.new_from_filename(filename)
+      Song.create_from_filename(song)
 
      end
    end

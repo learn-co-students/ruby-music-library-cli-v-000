@@ -2,7 +2,7 @@ require 'pry'
 class Song
 extend Concerns::Findable
 
-  attr_accessor :name, :artist, :genre #,:genres, :artists,
+  attr_accessor :name, :artist, :all, :genre #,:genres, :artists,
   @@all = []
 
     def initialize(name, artist = nil, genre = nil)
@@ -11,7 +11,7 @@ extend Concerns::Findable
 #       @genre = genre
        self.artist = artist if artist  #Songs and Artists initializing a song with an artist new songs accept an optional argument for the artist
        self.genre = genre if genre #This line makes no impact
-
+      #save
     end
 
     def self.all
@@ -45,12 +45,28 @@ extend Concerns::Findable
     #  binding.pry #
     end
 
+
     def self.new_from_filename(filename)
-    #binding.pry
-      data =  filename.split(" - ")
-      @artist = Artist.find_or_create_by_name(data[0])
-      @genre = Genre.find_or_create_by_name(data[2].gsub('.mp3',''))
-      self.find_or_create_by_name(data[1], @artist, @genre)
+   # binding.pry
+      data =  filename.gsub('.mp3','').split(" - ")  #gsub must be before split
+      aartist = Artist.find_or_create_by_name(data[0])
+      ggenre = Genre.find_or_create_by_name(data[2])
+#       name = ()
+      self.new(data[1], aartist, ggenre)
+    end
+   #binding.pry
+#     def self.new_from_filename(filename)
+#     #binding.pry
+#       data =  filename.split(" - ")
+#       @artist = Artist.find_or_create_by_name(data[0])
+#       @genre = Genre.find_or_create_by_name(data[2].gsub('.mp3',''))
+#       self.find_or_create_by_name(data[1], @artist, @genre)
+#     end
+
+      def self.create_from_filename(filename)
+        Song.new_from_filename(filename).tap{|song| song.save}
+      end
+
 #       @artist = Artist.create(data[0])
 #       @genre =Genre.create(data[2].gsub('.mp3',''))
 #      self.create(data[1], @artist, @genre)
@@ -68,7 +84,7 @@ extend Concerns::Findable
 #       #song
 
 #binding.pry
-    end
+    #end
 #¸binding.pry
 
 
@@ -78,8 +94,9 @@ extend Concerns::Findable
     end
 
 end
+#binding.pry
 #     def self.find_by_name(name)
-#    #binding.pry
+#    binding.pry
 #        @@all.find{|song| song.name == name}
 
 #     end

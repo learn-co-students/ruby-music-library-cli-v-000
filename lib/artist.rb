@@ -34,6 +34,12 @@ extend Concerns::Findable
       new(name).tap {|artist| artist.save}   #, song=nil, genre=nil
     end
 
+#     def self.find_by_name(name)
+
+#     end
+
+
+
     def self.destroy_all
         #@@all = []
        self.all.clear # @@all.clear

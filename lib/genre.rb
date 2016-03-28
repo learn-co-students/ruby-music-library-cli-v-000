@@ -43,4 +43,5 @@ extend Concerns::Findable
     def self.create(name) #, song=nil, artist=nil
       new(name).tap {|genre| genre.save} #, song=nil, artist=nil
     end
+ #  binding.pry
 end
