@@ -88,7 +88,7 @@ class MusicLibraryController
 
   def songs
 
-    Song.all.each_with_index(1) do |s, i|
+    Song.all.each.with_index(1) do |s, i|
       puts "#{i}. #{s}"
     end
 #     Song.all.sort_by {|name| name}
