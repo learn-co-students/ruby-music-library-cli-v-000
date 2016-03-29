@@ -3,7 +3,7 @@ class MusicLibraryController
 attr_accessor :path, :library
 extend Concerns::Findable
 
-  def initialize(path = "./spec/fixtures/mp3s")
+  def initialize(path = "./db/mp3s")
     @path = path
     @library = MusicImporter.new(@path)
     @library.import
@@ -31,10 +31,21 @@ extend Concerns::Findable
           Artist.all.each {|artist| puts artist.name}
           puts "Type Artist to show their songs"
           artist_input = gets.strip
-          lib_copy = @library.files.dup.keep_if{|index| index.split(" - ").include?("artist_input")}
-          lib_copy.each {|index| puts "#{index}" }
+          lib_copy = @library.files.collect {|file|file.split(".").first.split(" - ")}
+          lib_copy.keep_if {|file| file[0] == artist_input}
+          lib_copy.each {|file| puts"#{file.join(" - ")}"}
+            #file[0] == artist_input
+
+
+          #{|index| puts "#{index}" }
         elsif input == "list genres"
           Genre.all.each {|genre| puts genre.name}
+          puts "Type Genre to show its songs"
+          genre_input = gets.strip
+          lib_copy = @library.files.collect {|file|file.split(".").first.split(" - ")}
+          #lib_copy.each {|x| puts "#{x}"}
+          lib_copy.keep_if {|file| file.last == genre_input}
+          lib_copy.each {|file| puts"#{file.join(" - ")}"}
 
         elsif input == "play song"
           puts"Select Number"
@@ -50,7 +61,7 @@ extend Concerns::Findable
         end
         puts "Make another selection or 'exit'"
         input = gets.strip
-    end####END OF UNTIL
+    end####END OF UNTIL   .include?("artist_input")
   end####END OF CALL METHOD
-binding.pry
+#binding.pry
 end
