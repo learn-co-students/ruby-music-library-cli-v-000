@@ -1,6 +1,6 @@
 class MusicLibraryController
 
-attr_accessor :path, :library
+attr_accessor :path, :library, :input
 extend Concerns::Findable
 
   def initialize(path = "./db/mp3s")
@@ -20,51 +20,54 @@ extend Concerns::Findable
     puts "  Type 'list genres'"
     puts "Play music now"
     puts "  Type 'play song'"
-    input = gets.strip
+    @input = gets.strip
   end
 
   def call
     main_menu
-    until input == "exit"
-                  if input == "list songs"
-                    @library.files.each.with_index(1) do |file, index|
-                      puts "#{index}. #{file.split(".").first}"
-                    end####END DO IN LIST SONGS
 
-                  elsif input == "list artists"
-                    Artist.all.each {|artist| puts artist.name}
-                    puts "Type Artist to show their songs"
-                    artist_input = gets.strip
-                    lib_copy = @library.files.collect {|file|file.split(".").first.split(" - ")}
-                    lib_copy.keep_if {|file| file[0] == artist_input}
-                    lib_copy.each {|file| puts"#{file.join(" - ")}"}
-                      #file[0] == artist_input
+    until @input == "exit"
+            if @input == "list songs"
+              @library.files.each.with_index(1) do |file, index|
+                puts "#{index}. #{file.split(".").first}"
+              end
+
+            elsif @input == "play song"
+              puts"Select Number"
+              @library.files.each.with_index(1) do |file, index|
+                puts "#{index}. #{file.split(".").first}"
+              end
+              song_num = gets.strip.to_i
+              puts"Playing #{@library.files[(song_num - 1)]}"
+
+            elsif @input == "list artists"
+              Artist.all.each {|artist| puts artist.name}
+              puts "Type Artist to show their songs"
+
+              elsif
+
+              lib_copy = @library.files.dup.keep_if{|index| index.split(" - ").first.split(" - ")}#include?(@input)}
+              lib_copy.each {|index| puts "#{index}" }
+
+            elsif @input == "list genres"
+                Genre.all.each {|genre| puts genre.name}
+               puts "Type Genre to show its songs"
+
+             elsif lib_copy = @library.files.collect {|file|file.split(".").first.split(" - ")}
+               #lib_copy.each {|x| puts "#{x}"}
+               lib_copy.keep_if {|file| file.last == @input}
+               lib_copy.each {|file| puts"#{file.join(" - ")}"}
+
+            elsif @input == "play song"
+              puts"Select Number"
 
 
-                    #{|index| puts "#{index}" }
-                  elsif input == "list genres"
-                    Genre.all.each {|genre| puts genre.name}
-                    puts "Type Genre to show its songs"
-                    genre_input = gets.strip
-                    lib_copy = @library.files.collect {|file|file.split(".").first.split(" - ")}
-                    #lib_copy.each {|x| puts "#{x}"}
-                    lib_copy.keep_if {|file| file.last == genre_input}
-                    lib_copy.each {|file| puts"#{file.join(" - ")}"}
-
-                  elsif input == "play song"
-                    puts"Select Number"
-                    @library.files.each.with_index(1) do |file, index|
-                      puts "#{index}. #{file.split(".").first}"
-                    end####END DO IN PLAY SONG
-                    song_num = gets.strip.to_i
-                    puts"Playing #{@library.files[(song_num - 1)]}"
-
-                  else
-                    puts "Invalid choice"
-                    puts "Make another selection or 'exit'"
-                    input = gets.strip
-                  end####END GIANT IF STATEMENT
-        
+            else
+              puts "Invalid choice"
+              @input = gets.strip
+            end
+            puts "Make another selection or 'exit'"
+            @input = gets.strip
     end####END OF UNTIL   .include?("artist_input")
   end####END OF CALL METHOD
 #binding.pry

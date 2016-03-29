@@ -1,7 +1,7 @@
 require 'pry'
 
 class MusicImporter
-
+extend Concerns::Findable
   attr_reader :path
 
   def initialize(path)

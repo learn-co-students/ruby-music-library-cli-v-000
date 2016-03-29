@@ -2,7 +2,7 @@ require 'pry'
 class Genre
 
   extend Concerns::Findable
-  
+
   attr_writer :name
   attr_reader :name, :songs, :artists
 
