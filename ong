@@ -1,0 +1,16 @@
+
+[1mFrom:[0m /home/nitrous/code/labs/ruby-music-library-cli-v-000/lib/song.rb @ line 61 Song.new_from_filename:
+
+    [1;34m52[0m: [32mdef[0m [1;36mself[0m.[1;34mnew_from_filename[0m(filename)
+    [1;34m53[0m:   song_info = filename.scan([35m[1;35m/[0m[35m([1;35m\b[0m[35m[[1;35m\w[0m[35m[1;35m\s[0m[35m]+[[1;35m\w[0m[35m[1;35m\s[0m[35m]+[[1;35m\w[0m[35m[1;35m\s[0m[35m]+[1;35m\b[0m[35m)[1;35m/[0m[35m[0m).flatten
+    [1;34m54[0m:   song_artist = song_info[[1;34m0[0m]
+    [1;34m55[0m:   song_name = song_info[[1;34m1[0m]
+    [1;34m56[0m:   song_genre = song_info[[1;34m2[0m]
+    [1;34m57[0m: 
+    [1;34m58[0m:   artist = [1;34;4mArtist[0m.find_or_create_by_name(song_artist)
+    [1;34m59[0m:   genre = [1;34;4mGenre[0m.find_or_create_by_name(song_genre)
+    [1;34m60[0m:   song = [1;34;4mSong[0m.new(song_name, artist, genre)
+ => [1;34m61[0m:   binding.pry
+    [1;34m62[0m:   song
+    [1;34m63[0m: [32mend[0m
+
