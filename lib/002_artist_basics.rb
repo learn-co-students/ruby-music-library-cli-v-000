@@ -6,7 +6,6 @@ extend Concerns::Findable
 @@all = []
 def initialize(name)
 @name = name
-self.class.all << self
 @songs = []
 
 end

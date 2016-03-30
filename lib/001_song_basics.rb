@@ -7,7 +7,6 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
   @name = name
-  @@all = []
   self.artist = artist if artist
   self.genre = genre if genre
   end
@@ -65,7 +64,9 @@ song
 
 end
 
-
+def to_string
+   "#{artist.name} - #{name} - #{genre.name}"
+ end
 
 
 end
