@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Artist Basics" do
   describe '#initialize with #name' do
-    it 'accepts a name for the song' do
+    it 'accepts a name for the artist' do
       artist = Artist.new("Neutral Milk Hotel")
       expect(artist.name).to eq("Neutral Milk Hotel")
     end
