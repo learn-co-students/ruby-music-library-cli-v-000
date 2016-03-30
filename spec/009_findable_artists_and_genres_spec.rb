@@ -20,6 +20,12 @@ describe 'Artists and Genres being extended by Concerns::Findable' do
         artist_2 = Artist.find_or_create_by_name("Neutral Milk Hotel")
 
         expect(artist_1).to eq(artist_2)
+
+        # Added to the test suite here to ensure the artist.name was getting set in init.
+        # At one point I had my Concerns::Findable module with an empty .find_or_create_by_name
+        # and the original test aboved passed because nil = nil.
+        expect(artist_1.name).to eq("Neutral Milk Hotel")
+        expect(artist_2.name).to eq("Neutral Milk Hotel")  
       end
     end
   end
