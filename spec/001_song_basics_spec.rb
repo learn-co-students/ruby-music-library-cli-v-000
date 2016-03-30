@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper.rb'
 
 describe "Song Basics" do
   describe '#initialize with #name' do
