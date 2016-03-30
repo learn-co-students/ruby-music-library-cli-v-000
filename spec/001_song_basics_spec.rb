@@ -1,3 +1,4 @@
+require 'pry'
 require 'spec_helper'
 
 describe "Song Basics" do
@@ -37,9 +38,7 @@ describe "Song Basics" do
   describe '#save' do
     it 'adds the song instance to the @@all class variable' do
       song = Song.new("In an Aeroplane Over the Sea")
-
       song.save
-
       expect(Song.all).to include(song)
     end
   end

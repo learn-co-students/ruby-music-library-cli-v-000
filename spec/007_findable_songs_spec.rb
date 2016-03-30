@@ -1,3 +1,4 @@
+require 'pry'
 describe 'Findable Songs' do
   describe ".find_by_name" do
     it 'finds a song instance in @@all by the name property of the song' do
