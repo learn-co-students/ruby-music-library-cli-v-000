@@ -5,16 +5,12 @@ class Song
   extend Concerns::Findable
 
   attr_accessor :name, :artist
-  # attr_reader :artist
 
   @@songs = []
-
-  @array_of_songs_and_artists = []
 
   def initialize(name, artist = nil)
     @name = name
     @artist = artist
-    @array_of_songs_and_artists << self
   end
 
   def self.all
