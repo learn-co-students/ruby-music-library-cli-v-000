@@ -1,3 +1,5 @@
+
+
 describe 'Artists and Genres being extended by Concerns::Findable' do
   context 'Artist' do
     it 'is extended by the Concerns::Findable module' do
@@ -9,7 +11,7 @@ describe 'Artists and Genres being extended by Concerns::Findable' do
       it 'finds an artist instance in @@all by the name property of the artist' do
         artist = Artist.new("Neutral Milk Hotel")
         artist.save
-
+       
         expect(Artist.find_by_name("Neutral Milk Hotel")).to eq(artist)
       end
     end
