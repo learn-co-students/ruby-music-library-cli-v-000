@@ -1,5 +1,5 @@
 require_relative '../concerns/findable.rb'
-
+require 'pry'
 class Artist
 
   extend Concerns::Findable
@@ -35,6 +35,10 @@ class Artist
   def add_song(song)
     song.artist = self if song.artist.nil?
     @songs.detect { |name| @songs << song if name != song }
+  end
+
+  def genres
+    @songs.collect { |song| song.genre }.uniq
   end
 
 end
