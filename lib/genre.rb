@@ -32,8 +32,7 @@ class Genre
   end
 
   # def add_song(song)
-  #   song.genre = self if song.genre.nil?
-  #   @songs.detect { |name| @songs << song if name != song }
+  #   self.songs << song unless self.songs.include?(song)
   # end
 
   def artists

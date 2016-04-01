@@ -12,6 +12,7 @@ class Song
     @name = name
     self.artist = artist unless artist.nil?
     self.genre = genre unless genre.nil?
+    @@songs << self
   end
 
   def self.all
@@ -50,15 +51,25 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    # song = self.create(filename)
     song = filename.chomp!(".mp3")
-    # song = filename.split(" - ")
     name = song.split(" - ")[1]
     artist = song.split(" - ")[0]
     genre = song.split(" - ")[2]
     new_song = Song.new(name)
-    new_song.artist=(artist)
-    new_song.genre = genre
+    new_song.artist = Artist.find_or_create_by_name(artist)
+    new_song.genre = Genre.find_or_create_by_name(genre)
+    new_song
+  end
+
+  def self.create_from_filename(filename)
+    song = filename.chomp!(".mp3")
+    name = song.split(" - ")[1]
+    artist = song.split(" - ")[0]
+    genre = song.split(" - ")[2]
+    new_song = Song.new(name)
+    new_song = Song.find_or_create_by_name(name)
+    new_song.artist = Artist.find_or_create_by_name(artist)
+    new_song.genre = Genre.find_or_create_by_name(genre)
     new_song
   end
 

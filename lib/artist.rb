@@ -23,7 +23,7 @@ class Artist
   end
 
   def save
-    @@artists << self
+    @@artists << self if @@artist.self.nil?
   end
 
   def self.create(artist)
