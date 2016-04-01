@@ -22,7 +22,7 @@ class Genre
   end
 
   def save
-    @@genres << self
+    @@genres << self unless @@genres.find { |genre| genre == self }
   end
 
   def self.create(genre)

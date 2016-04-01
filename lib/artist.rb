@@ -23,17 +23,17 @@ class Artist
   end
 
   def save
-    @@artists << self if @@artist.self.nil?
+    @@artists << self unless @@artists.detect { |artist| artist == self }
   end
 
-  def self.create(artist)
-    new_artist = Artist.new(artist)
-    @@artists << new_artist
-    new_artist
+  def self.create(name)
+    artist = self.new(name)
+    artist.save
+    artist
   end
 
   def add_song(song)
-    song.artist = self if song.artist.nil?
+    song.artist = self unless song.artist == self
     @songs.detect { |name| @songs << song if name != song }
   end
 
