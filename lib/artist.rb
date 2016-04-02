@@ -4,7 +4,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
+    @genres1 = []
   end
 
   def songs
@@ -38,8 +38,8 @@ class Artist
 
   def genres
     @songs.each do |song|
-      @genres << song.genre
+      @genres1 << song.genre
     end
-    @genres.uniq!
+    @genres1.uniq!
     end
 end
