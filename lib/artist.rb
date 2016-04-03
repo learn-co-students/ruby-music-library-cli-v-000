@@ -6,7 +6,7 @@ class Artist
     @songs = []
     @genres1 = []
   end
-
+extend Concerns::Findable
   def songs
     @songs
   end

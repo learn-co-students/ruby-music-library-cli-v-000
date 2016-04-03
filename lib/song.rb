@@ -49,10 +49,16 @@ class Song
     end
   end
 
-  def self.find_or_create_by_name
+  def self.find_or_create_by_name(name)
     if !(self.find_by_name(name))
       self.create(name)
     else self.find_by_name(name)
     end
+  end
+
+  def self.new_from_filename(file)
+    a = file.chomp("mp3")
+    a.split("-")
+    song = self.new(a[1], a[0], a[2])
   end
 end
