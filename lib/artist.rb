@@ -40,6 +40,6 @@ class Artist
     @songs.each do |song|
       @genres1 << song.genre
     end
-    @genres1.uniq!
+    @genres1.uniq
     end
 end
