@@ -15,7 +15,7 @@ extend Concerns::Findable
     if !(@songs.include?(song))
     @songs << song
     song.artist= self
-    end
+   end
   end
 
   def self.all
@@ -37,7 +37,7 @@ extend Concerns::Findable
   end
 
   def genres
-    @songs.each do |song|
+    songs.collect do |song|
       @genres1 << song.genre
     end
     @genres1.uniq

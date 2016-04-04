@@ -37,8 +37,9 @@ extend Concerns::Findable
   end
 
   def artists
-    @songs.each do |song|
+    @songs.collect do |song|
      @artists << song.artist
+
     end
     @artists.uniq
     end
