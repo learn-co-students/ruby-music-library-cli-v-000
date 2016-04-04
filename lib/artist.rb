@@ -34,7 +34,7 @@ class Artist
         @songs.collect do |song|
             song.artist.uniq
         end
-    end
+    end 
 
 
 end
