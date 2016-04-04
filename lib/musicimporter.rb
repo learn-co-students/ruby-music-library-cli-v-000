@@ -1,7 +1,4 @@
-require_relative '../concerns/findable.rb'
-
 class MusicImporter
-  extend Concerns::Findable
 
   attr_accessor :path
 

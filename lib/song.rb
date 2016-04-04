@@ -27,10 +27,10 @@ class Song
     @@songs << self
   end
 
-  def self.create(song)
-    new_song = Song.new(song)
-    new_song.save
-    new_song
+  def self.create(name)
+    song = self.new(name)
+    song.save
+    song
   end
 
   def artist=(artist)
@@ -44,33 +44,24 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
-  def add_artist(artist)
-    new_artist = artist
-    new_song = artist.add_song(self)
-    new_song.artist = new_artist
-  end
 
   def self.new_from_filename(filename)
     song = filename.chomp!(".mp3")
+
     name = song.split(" - ")[1]
     artist = song.split(" - ")[0]
     genre = song.split(" - ")[2]
-    new_song = Song.new(name)
-    new_song.artist = Artist.find_or_create_by_name(artist)
-    new_song.genre = Genre.find_or_create_by_name(genre)
-    new_song
+
+    song_artist = Artist.find_or_create_by_name(artist)
+    song_genre = Genre.find_or_create_by_name(genre)
+
+    self.new(name, song_artist, song_genre)
   end
 
   def self.create_from_filename(filename)
-    song = filename.chomp!(".mp3")
-    name = song.split(" - ")[1]
-    artist = song.split(" - ")[0]
-    genre = song.split(" - ")[2]
-    # new_song = Song.new(name)
-    new_song = Song.find_or_create_by_name(name)
-    new_song.artist = Artist.find_or_create_by_name(artist)
-    new_song.genre = Genre.find_or_create_by_name(genre)
-    new_song
+    song = self.new_from_filename(filename)
+    song.save
+    song
   end
 
 end
