@@ -1,12 +1,11 @@
 require_relative '../concerns/findable.rb'
 require 'pry'
-class Artist
 
+class Artist
   extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :songs
-
 
   @@artists = []
 
@@ -34,12 +33,11 @@ class Artist
   end
 
   def add_song(song)
-    song.artist = self unless song.artist == self
-    @songs.detect { |name| self.songs << song if name != song }
+    song.artist = self if song.artist.nil?
+    self.songs << song unless self.songs.include?(song)
   end
 
   def genres
     @songs.collect { |song| song.genre }.uniq
   end
-
 end

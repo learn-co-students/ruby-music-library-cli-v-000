@@ -12,7 +12,6 @@ class Song
     @name = name
     self.artist = artist unless artist.nil?
     self.genre = genre unless genre.nil?
-    @@songs << self
   end
 
   def self.all
@@ -35,7 +34,6 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.songs << self
     artist.add_song(self)
   end
 

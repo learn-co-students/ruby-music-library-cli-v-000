@@ -1,10 +1,10 @@
 require_relative '../concerns/findable.rb'
 
 class Genre
-
   extend Concerns::Findable
 
-  attr_accessor :name, :songs
+  attr_accessor :name
+  attr_reader :songs
 
   @@genres = []
 
@@ -30,10 +30,6 @@ class Genre
     new_genre.save
     new_genre
   end
-
-  # def add_song(song)
-  #   self.songs << song unless self.songs.include?(song)
-  # end
 
   def artists
     @songs.collect { |name| name.artist}.uniq
