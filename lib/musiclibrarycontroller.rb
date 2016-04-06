@@ -7,23 +7,22 @@ class MusicLibraryController
     @library
   end
   def call
-    "Hello and Welcome to the Music Library CLI! Your options are to 'list songs', 'list artists', 'list genres', or 'exit'."
+    puts "Hello and Welcome to the Music Library CLI! Your options are to 'list songs', 'list artists', 'list genres', 'play song', or 'exit'."
     input = gets.strip
     if input == "list songs"
       list_songs
-      puts "Would you like to play a song?"
+      puts "Please enter 'play song' if you would like to play one of these songs."
       input = gets.strip
-      if input == "Y"
+      if input == "play song"
         play_song
-      else
-        nil
       end
+    elsif input == "play song"
+      play_song
     elsif input == "list artists"
       list_artists
-      list_artist_songs
-      puts "Would you like to play a song?"
+      puts "Please enter 'play song' if you would like to play one of these songs."
       input = gets.strip
-      if input == "Y"
+      if input == "play song"
         play_song
       end
     elsif input == "list genres"
