@@ -1,5 +1,6 @@
 class Artist
     attr_accessor :name, :songs
+    extend Concerns::Findable
     @@all = []
 
     def initialize(name)
@@ -34,7 +35,11 @@ class Artist
         @songs.collect do |song|
             song.artist.uniq
         end
-    end 
+    end
+
+    def genres
+        @songs.collect {|song| song.genre}.uniq
+    end
 
 
 end
