@@ -41,5 +41,11 @@ describe 'MusicLibraryController' do
       expect(music_library_controller).to receive(:gets).and_return("exit")
       music_library_controller.call
     end
+
+    it 'loops and asks for user input until they type in exit' do
+      music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+      expect(music_library_controller).to receive(:gets).and_return("a", "b", "exit")
+      music_library_controller.call
+    end
   end
 end
