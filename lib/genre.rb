@@ -13,7 +13,14 @@ class Genre
     @@all.clear
   end
   def save
-    @@all << self
+    if
+      @@all.collect do |genre|
+        genre.name
+      end.include?(self.name)
+      @@all
+    else
+      @@all << self
+    end
   end
   def self.create(name)
     genre = Genre.new(name)

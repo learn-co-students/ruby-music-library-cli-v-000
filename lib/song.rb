@@ -45,11 +45,20 @@ class Song
     song
   end
   def self.new_from_filename(filename)
-    new_song = Song.new(filename.split(" - ")[1])
-    new_song.name = filename.split(" - ")[1]
+    songname = filename.split(" - ")[1]
     artistname = filename.split(" - ")[0]
     genrename = filename.split(" - ")[2]
+    genrename = genrename.split(".")[0]
     new_artist = Artist.find_or_create_by_name(artistname)
-    new_song.artist = new_artist
+    new_genre = Genre.find_or_create_by_name(genrename)
+    new_song = Song.new(songname, new_artist, new_genre)
+    new_song
+  end
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+    song.artist.save
+    song.genre.save
+    song
   end
 end
