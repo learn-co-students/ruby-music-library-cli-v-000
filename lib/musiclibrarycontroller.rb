@@ -7,6 +7,7 @@ class MusicLibraryController
     @library
   end
   def call
+    collect_songs
     puts "Hello and Welcome to the Music Library CLI! Your options are to 'list songs', 'list artists', 'list genres', 'play song', or 'exit'."
     input = gets.strip
     if input == "list songs"
@@ -35,15 +36,17 @@ class MusicLibraryController
     end
   end
 
-  def list_songs
-    array = []
+  def collect_songs
+    @array = []
     @filename_array = []
     @importer.files.each_with_index do |file, index|
       filename = file.split(".mp3")[0]
       @filename_array << filename
-      array << "#{index + 1}. #{filename}"
+      @array << "#{index + 1}. #{filename}"
     end
-    array.each do |item|
+  end
+  def list_songs
+    @array.each do |item|
       puts item
     end
   end
