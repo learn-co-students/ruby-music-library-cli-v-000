@@ -66,13 +66,11 @@ class MusicLibraryController
     input = gets.strip
     artist = Artist.find_or_create_by_name(input)
     artist.songs.collect do |song|
-      puts song.name
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
-    puts "Would you like to play one of these songs? Enter 'play song'."
-      input = gets.strip
-      if input == "play song"
-        play_song
-      end
+    if input != "exit"
+      input= gets.strip
+    end
   end
   def list_genres
     @library.collect do |song|
@@ -83,12 +81,10 @@ class MusicLibraryController
     input = gets.strip
     genre = Genre.find_or_create_by_name(input)
     genre.songs.collect do |song|
-      puts song.name
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
-    puts "Would you like to play one of these songs? Enter 'play song'."
-      input = gets.strip
-      if input == "play song"
-        play_song
-      end
+    if input != "exit"
+      input= gets.strip
+    end
   end
 end

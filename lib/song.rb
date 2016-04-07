@@ -45,6 +45,7 @@ class Song
     song
   end
   def self.new_from_filename(filename)
+    @filename=filename
     songname = filename.split(" - ")[1]
     artistname = filename.split(" - ")[0]
     genrename = filename.split(" - ")[2]
