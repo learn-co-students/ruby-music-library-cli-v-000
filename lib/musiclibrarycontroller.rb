@@ -21,18 +21,12 @@ class MusicLibraryController
       play_song
     elsif input == "list artists"
       list_artists
-      puts "Please enter 'play song' if you would like to play one of these songs."
-      input = gets.strip
-      if input == "play song"
-        play_song
-      end
+      puts "Please enter an artist's name if you'd like to see a list of his/her songs."
+      list_artist_songs
     elsif input == "list genres"
       list_genres
-      puts "Would you like to play a song?"
-      input = gets.strip
-      if input == "Y"
-        play_song
-      end
+      puts "Please enter a genre name if you'd like to see a list of songs within the genre."
+      list_genre_songs
     end
   end
 
@@ -56,6 +50,11 @@ class MusicLibraryController
       index = input - 1
       song = @filename_array[index]
       puts "Playing #{song}"
+      puts "Would you like to play another song ['play song'] or 'exit'?"
+      input = gets.strip
+      if input == "play song"
+        play_song
+      end
   end
 
   def list_artists
@@ -69,10 +68,27 @@ class MusicLibraryController
     artist.songs.collect do |song|
       puts song.name
     end
+    puts "Would you like to play one of these songs? Enter 'play song'."
+      input = gets.strip
+      if input == "play song"
+        play_song
+      end
   end
   def list_genres
     @library.collect do |song|
       puts song.genre.name
     end
+  end
+  def list_genre_songs
+    input = gets.strip
+    genre = Genre.find_or_create_by_name(input)
+    genre.songs.collect do |song|
+      puts song.name
+    end
+    puts "Would you like to play one of these songs? Enter 'play song'."
+      input = gets.strip
+      if input == "play song"
+        play_song
+      end
   end
 end
