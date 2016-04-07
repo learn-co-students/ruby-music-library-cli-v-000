@@ -5,7 +5,7 @@ class Genre
   extend Concerns::Findable
   attr_accessor :name, :songs
 
-  @@all = []# class variable
+  @@all = []
   def initialize(name)
     @name = name
     @songs = []
@@ -15,7 +15,7 @@ class Genre
     @@all
   end
 
-  def self.destroy_all #can be put in a module
+  def self.destroy_all
     self.all.clear
   end
 
@@ -42,5 +42,4 @@ class Genre
     end
     artists.uniq
   end
-
 end

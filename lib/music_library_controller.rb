@@ -1,4 +1,3 @@
-
 class MusicLibraryController
 
   attr_accessor :path, :importer, :all_files
@@ -31,7 +30,7 @@ class MusicLibraryController
 
       case input
       when 'list songs'
-        list_songs  # is this better than self.list_songs?
+        self.list_songs
       when 'list artists'
         self.list_artists
       when 'list genres'
