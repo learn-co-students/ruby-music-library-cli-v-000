@@ -31,4 +31,3 @@ if music_library_controller.include?("list genre")
 	puts genre.songs.collect {|i| puts "#{i.artist.name} - #{i.name} - #{i.genre.name}"}
 end
 
-
