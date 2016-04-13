@@ -61,9 +61,9 @@ class MusicLibraryController
   def play_a_song
     puts "What song number would you like to play?"
     song_input = gets.strip
-    puts "Playing #{Song.all[song_input.to_i-1]}"
+    puts "Playing #{Song.all[song_input.to_s-1]}"
   end
-  
+
   def songs
     Song.all.each.with_index(1) do |song,i|
       puts "#{i}. #{song}"
