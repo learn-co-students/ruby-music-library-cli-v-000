@@ -1,10 +1,12 @@
+require 'pry'
 class Artist
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -24,6 +26,17 @@ class Artist
     artist.save
     artist
   end
+
+  def add_song(song)
+    if song.artist != self
+      song.artist = self
+    end
+    @songs << song unless  @songs.include?(song)
+  end
+
+
+
+
 
 
 
