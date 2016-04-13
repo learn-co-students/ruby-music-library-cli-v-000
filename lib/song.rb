@@ -1,5 +1,6 @@
 require 'pry'
 class Song
+  extend Findable
 
   attr_accessor :name, :artist, :genre
 
@@ -10,7 +11,7 @@ class Song
     @name = name
     self.artist = artist if artist
     self.genre = genre if genre
-    self.artist.genres << genre
+    self.artist.genres << genre if genre
   end
 
   def  self.all
@@ -40,5 +41,9 @@ class Song
     @genre = genre
     genre.add_song(self)
   end
+
+  
+
+
 
 end
