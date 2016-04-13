@@ -11,7 +11,7 @@ class MusicLibraryController
 		self
 		a = []
 		loop do
-		b = gets
+		b = gets.strip
 		a << b
 		break if b == "exit"
 		end
