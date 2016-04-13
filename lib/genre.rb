@@ -1,6 +1,6 @@
 class Genre
 
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :artists
 
   @@all = []
 
@@ -26,5 +26,19 @@ class Genre
     genre.save
     genre
   end
+
+  def add_song(song)
+    @songs << song unless @songs.include?(song)
+  end
+
+  def artists
+    artists = []
+    self.songs.collect do |i|
+      artists << i.artist
+    end
+    artists.uniq
+  end
+
+
 
 end
