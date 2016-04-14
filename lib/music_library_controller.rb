@@ -1,8 +1,9 @@
-require_relative '../lib/music_importer.rb'
-
 require 'pry'
 
 class MusicLibraryController
+
+  extend Concerns::Findable
+  include 
 
   attr_accessor :mpath
 
@@ -14,6 +15,7 @@ class MusicLibraryController
   def call
     user_input = nil
     while user_input != "exit"
+      puts "\nPlease enter a selection or exit:"
       user_input = gets.chomp
       case user_input
       when "list songs"
@@ -33,31 +35,40 @@ class MusicLibraryController
   end # call
 
   def songs
-    Songs.all.each do |song|
-      binding.pry
-      songs.name
-    end
+    Song.all.each_with_index {|song, idx| puts "#{idx+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
   def artists
-    puts "hello"
+    Artist.all.each {|artist| puts artist.name}
   end
 
   def genres
-    puts "yoyoyo"
+    Genre.all.each {|genre| puts genre.name}
   end
 
   def list_artist
-    "prince"
+    puts "Please enter the artist name for a list of their songs."
+    artist_input = gets.chomp
+    if artist = Artist.find_by_name(artist_input)
+      artist.songs.each {|song| puts "#{artist.name} - #{song.name} - #{song.genre.name}"}
+    else
+      puts "Artist was not found. Please check the spelling and enter again."
+    end
   end
 
   def list_genre
-    "rap"
+    puts "Please enter a genre for a list of songs."
+    genre_input = gets.chomp
+    if genre = Genre.find_by_name(genre_input)
+      genre.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    end
   end
 
   def play_song
-    "gogogo"
+    puts "Please enter the song number to play."
+    song_input = gets.chomp
+    song_num = song_input.to_i - 1
+    song_choice = Song.all[song_num]
+    puts "Playing #{song_choice.artist.name} - #{song_choice.name} - #{song_choice.genre.name}"
   end
 end
-
-MusicLibraryController.new.call

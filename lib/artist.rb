@@ -14,7 +14,7 @@ class Artist
     @songs = []
   end
 
-  def add_song(song)
+  def add_song(song) # song arg is the variable name of that Song class instance; it's a Song class object
     song.artist ||= self
     self.songs << song unless self.songs.include?(song)
   end

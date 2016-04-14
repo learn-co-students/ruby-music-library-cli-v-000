@@ -44,14 +44,14 @@ class Song
   end
 
   def self.new_from_filename(file)
-    artist_str, song_str, genre_str = file.split(/\s-\s|\./) # parses file into artist, song, and genre strings with multiple assignment
+    artist_str, song_str, genre_str = file.split(/\s-\s|\.mp3/) # parses file into artist, song, and genre strings with multiple assignment
     artist = Artist.find_or_create_by_name(artist_str)
     genre = Genre.find_or_create_by_name(genre_str)
     self.new(song_str, artist, genre)
   end
 
   def self.create_from_filename(file)
-    artist_str, song_str, genre_str = file.split(/\s-\s|\./)
+    artist_str, song_str, genre_str = file.split(/\s-\s|\.mp3/)
     artist = Artist.find_or_create_by_name(artist_str)
     genre = Genre.find_or_create_by_name(genre_str)
     self.create(song_str, artist, genre)
