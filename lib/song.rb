@@ -56,6 +56,4 @@ class Song
     genre = Genre.find_or_create_by_name(genre_str)
     self.create(song_str, artist, genre)
   end
-
-
 end
