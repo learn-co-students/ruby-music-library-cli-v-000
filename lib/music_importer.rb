@@ -1,15 +1,22 @@
 class MusicImporter
+
   attr_reader :path
 
   def initialize(path)
     @path = path
   end
+
   def files
-    Dir[path + "/*.mp3"].map do |filename|
-      File.basename(filename)
+    Dir.entries(path).select do |file|
+       file.end_with?(".mp3")
     end
   end
+
   def import
-    files.each { |filename| Song.create_from_filename(filename) }
+    files.each do |filename|
+      Song.create_from_filename(filename)
+    end
   end
+
+
 end
