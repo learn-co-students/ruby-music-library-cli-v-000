@@ -19,23 +19,34 @@ class MusicLibraryController
 
         when "list genres" then Genre.all.collect { |a| puts "#{a.name}"}
 
-        when "play song"
-          when "1"
-            Song.all[0].tap {|a| puts "Playing #{a.artist.name} - #{a.name} - #{a.genre.name}" }
+        when "play song" then play_song
 
-        when "list artist"
-          when "Real Estate"
-            Artist.find_by_name("Real Estate").songs.collect {|a| puts "#{a.artist.name} - #{a.name} - #{a.genre.name}"}
+        when "list artist" then list_artist
 
-        when "list genre"
-          when "dance"
-            Genre.find_by_name("dance").songs.collect {|a| puts "#{a.artist.name} - #{a.name} - #{a.genre.name}"}
+        when "list genre" then list_genre
+
         when "exit"
           break
-        else
-          puts "continue.."
       end
     end
+  end
+
+   def list_genre
+     #puts "Choose song by genre "
+     genre = gets.chomp
+     Genre.find_by_name(genre).songs.collect {|a| puts "#{a.artist.name} - #{a.name} - #{a.genre.name}"}
+   end
+
+  def list_artist
+    #puts "Choose song by artist"
+    artist = gets.chomp
+    Artist.find_by_name(artist).songs.collect {|a| puts "#{a.artist.name} - #{a.name} - #{a.genre.name}"}
+  end
+
+  def play_song
+    #puts "choose the song number?"
+    choose = gets.chomp
+    Song.all[choose.to_i - 1].tap {|a| puts "Playing #{a.artist.name} - #{a.name} - #{a.genre.name}" }
   end
 
 
