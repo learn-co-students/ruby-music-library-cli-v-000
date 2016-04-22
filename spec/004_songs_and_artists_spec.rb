@@ -23,7 +23,7 @@ describe "Songs and Artists" do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
-
+        #binding.pry
         expect(song.artist).to eq(artist)
       end
 
@@ -52,7 +52,7 @@ describe "Songs and Artists" do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         artist.add_song(song)
-
+        #binding.pry
         expect(song.artist).to eq(artist)
       end
       it 'does not assign the artist to the song if the song already has the artist' do
@@ -60,7 +60,7 @@ describe "Songs and Artists" do
         artist = Artist.new("Neutral Milk Hotel")
 
         song.artist = artist
-
+       # binding.pry
         expect(song).to_not receive(:artist=)
 
         artist.add_song(song)
@@ -72,7 +72,7 @@ describe "Songs and Artists" do
 
         artist.add_song(song)
         artist.add_song(song)
-
+        # binding.pry
         expect(artist.songs).to include(song)
         expect(artist.songs.size).to eq(1)
       end
@@ -94,7 +94,7 @@ describe "Songs and Artists" do
     it 'new songs accept an optional argument for the artist' do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In an Aeroplane Over the Sea", artist)
-
+      #binding.pry
       expect(artist.songs).to include(song)
       expect(song.artist).to eq(artist)
     end
