@@ -10,7 +10,6 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @@all << self
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
   end
@@ -39,6 +38,24 @@ class Song
 
   def self.create(name)
     song = self.new(name)
+    song.save
+    song
+  end
+
+  def self.new_from_filename(file)
+    # @files.collect {|file| file.gsub(/\.mp3/, "")}
+    artist_name, song_name, genre_name = file.gsub(/\.mp3/, "").split(" - ")
+    song = self.new(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(genre_name)
+    song
+  end
+
+  def self.create_from_filename(file)
+    artist_name, song_name, genre_name = file.gsub(/\.mp3/, "").split(" - ")
+    song = self.new(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(genre_name)
     song.save
     song
   end
