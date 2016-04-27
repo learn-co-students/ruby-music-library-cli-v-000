@@ -4,7 +4,7 @@ require_relative "../config/environment.rb"
 
 class Song
   extend Concerns::Findable
-  
+
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -41,14 +41,6 @@ class Song
     song = self.new(name)
     song.save
     song
-  end
-
-  def self.find_by_name(name)
-    self.all.detect {|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || create(name)
   end
 
 end
