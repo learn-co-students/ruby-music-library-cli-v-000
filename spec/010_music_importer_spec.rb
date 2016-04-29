@@ -43,7 +43,7 @@ describe 'Making Songs from filenames' do
     it 'maintains unique objects' do
       artist = Artist.create("Thundercat")
       genre = Genre.create("dance")
-
+      # binding.pry
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
       expect(song.artist).to eq(artist)
       expect(song.genre).to eq(genre)
