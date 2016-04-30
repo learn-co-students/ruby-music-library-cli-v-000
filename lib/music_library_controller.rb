@@ -28,7 +28,7 @@ class MusicLibraryController
     end
   end
 
-  def songs
+  def songs # Had to get help. Wasn't sure what was wanted.
     Song.all.each.with_index(1) do |s, i|
       puts "#{i}. #{s}"
     end
