@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Songs and Artists" do
-  context 'Artists have many songs' do
+  context ' - Artists have many songs - ' do
     it 'initializes with a songs property set to an empty array' do
       artist = Artist.new("Neutral Milk Hotel")
 
@@ -17,7 +17,7 @@ describe "Songs and Artists" do
     end
   end
 
-  context 'Songs belong to an artist' do
+  context ' - Songs belong to an artist - ' do
     describe '#artist=' do
       it 'accepts an artist for the song' do
         song = Song.new("In an Aeroplane Over the Sea")
@@ -39,7 +39,7 @@ describe "Songs and Artists" do
     end
   end
 
-  context 'adding a song to an artist' do
+  context ' - adding a song to an artist - ' do
     describe '#add_song' do
       it 'adds the song to the artist\'s song collection' do
         song = Song.new("In an Aeroplane Over the Sea")
@@ -90,7 +90,7 @@ describe "Songs and Artists" do
     end
   end
 
-  context 'initializing a song with an artist' do
+  context ' - initializing a song with an artist - ' do
     it 'new songs accept an optional argument for the artist' do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In an Aeroplane Over the Sea", artist)
