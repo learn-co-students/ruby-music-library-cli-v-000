@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
   attr_accessor :path
 
@@ -27,14 +29,15 @@ def call
     when
       "list genre"
       list_genre
-    when "play song"
+    when
+      "play song"
     play_song
   end
 end
 end
 
 def songs
-  Song.all.each_with_index do |song,index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+  Song.all.sort {|a,b| b.name <=> a.name }.each_with_index do |song,index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 end
 
