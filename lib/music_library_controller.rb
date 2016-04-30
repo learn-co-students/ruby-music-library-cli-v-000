@@ -12,7 +12,6 @@ end
 def call
   input= " "
   while input != "exit"
-    puts "What would you like to do?"
     input = gets.chomp
     case input
   when "list songs"
@@ -37,7 +36,7 @@ end
 end
 
 def songs
-  Song.all.sort {|a,b| b.name <=> a.name }.each_with_index do |song,index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+  Song.all.sort {|a,b| a.artist.name <=> b.artist.name }.each_with_index do |song,index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 end
 
@@ -52,9 +51,8 @@ def genres
 end
 
 def play_song
-  puts "Please select a song number:"
   input=gets.chomp.to_i
-  Song.all.each_with_index do |song,index|
+  Song.all.sort {|a,b| a.artist.name <=> b.artist.name }.each_with_index do |song,index|
     if input == index + 1
       puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
@@ -62,7 +60,6 @@ def play_song
 end
 
 def list_artist
- puts "Please select an artist"
  artist=gets.chomp
  artist = Artist.find_by_name(artist)
    artist.songs.each do |song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
@@ -70,7 +67,6 @@ end
 end
 
 def list_genre
-  puts "Please select a genre"
   genre=gets.chomp
   genre=Genre.find_by_name(genre)
   genre.songs.each do |song|  puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
