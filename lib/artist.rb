@@ -1,7 +1,7 @@
 require 'pry'
-
+binding.pry
 class Artist
-  include Concerns::Findable
+  extend Concerns::Findable
   attr_accessor :name, :songs
   @@all = []
 
@@ -50,3 +50,4 @@ class Artist
     artist
   end
 end
+# this is uplsdating
