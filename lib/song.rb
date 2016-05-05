@@ -34,8 +34,10 @@ class Song
     @@all << self
   end
 
-  def self.create(name)
+  def self.create(name, artist = nil, genre = nil)
     song = Song.new(name)
+    self.artist = artist unless artist == nil
+    self.genre = genre unless genre == nil
     song.save
     song
   end
