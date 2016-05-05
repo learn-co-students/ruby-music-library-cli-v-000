@@ -31,7 +31,7 @@ class Artist
   def songs
     @songs
   end
-  
+
   def all_songs
     @songs
   end
