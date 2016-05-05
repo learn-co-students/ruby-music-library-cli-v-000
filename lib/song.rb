@@ -29,7 +29,9 @@ class Song
     #artist.songs << self    #ask question, why need both VVV
     artist.add_song(self)
   end
+  def add_song
 
+  end
   def genre=(genre)
     @genre = genre
 
