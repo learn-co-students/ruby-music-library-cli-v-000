@@ -38,8 +38,10 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.songs << self    #ask question, why need both VVV
+
+      #ask question, why need both VVV
     artist.add_song(self)
+
   end
 
   def genre=(genre)

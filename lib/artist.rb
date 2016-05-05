@@ -11,13 +11,15 @@ class Artist
   end
 
   def add_song(song)
-    all_songs.each do |song_obj|
-      if !(song_obj.name == song.name)
-        all_songs << song
-      end
-    end
+    #all_songs.each do |song_obj|
+    #  if !(song_obj.name == song.name)
+    #    all_songs << song
+    #  end
+    #end
 
-    song.artist = self unless song.artist != nil
+    #song.artist = self unless song.artist != nil
+    song.artist = self unless song.artist == self
+    @songs << song unless @songs.include?(song)    
   end
 
   def genres
