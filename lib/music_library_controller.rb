@@ -1,9 +1,11 @@
 require 'pry'
 
 class MusicLibraryController
+
   def initialize(path = './db/mp3s')
     importer = MusicImporter.new(path)
     importer.import
+
   end
 
   def call
@@ -34,6 +36,36 @@ class MusicLibraryController
       puts "#{number+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
+
+  def artists
+    Artist.all.each_with_index do |artist, number|
+      puts "#{number+1}. #{artist.name}"
+    end
+  end
+
+  def genres
+    Genre.all.each_with_index do |genre, number|
+      puts "#{number+1}. #{genre.name}"
+    end
+  end
+
+  def list_artist
+    binding.pry
+    puts "What artist by name you like to list songs for?"
+    artist_input = gets.strip
+
+    if artist = Artist.find_by_name(artist_input)
+      artist
+    end
+
+
+
+
+
+
+  end
+
+
 
 
 
