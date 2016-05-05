@@ -1,10 +1,13 @@
 require 'bundler'
 Bundler.require
 
+require_relative '../lib/concerns/findable'
 require_relative '../lib/artist'
 require_relative '../lib/genre'
-require_relative '../config/environment/concerns'
+require_relative '../lib/importer'
 
+
+=begin
 module Concerns
   module Findable
     def self.find_by_name(name)
@@ -21,6 +24,7 @@ module Concerns
     end
   end
 end
+=end
 
 require_all 'config'
 require_all 'lib'

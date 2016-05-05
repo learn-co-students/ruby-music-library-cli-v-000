@@ -14,6 +14,18 @@ class Song
       self.genre=(genre)
     end
   end
+
+  def self.new_from_filename(file)
+    filearr = file.split(" - ")
+    filearr.each {|x| x.include?(".mp3").slice(".mp3")}
+
+    artist = filearr[0]
+    song = filearr[1]
+
+    song = Song.new(song, artist)
+    song
+
+  end
 =begin
   def self.find_by_name(name)
     self.all.detect {|song| song.name == name}
@@ -30,7 +42,7 @@ class Song
 =end
   def artist=(artist)
     @artist = artist
-    artist.songs << self #ask question, why need both VVV
+    #artist.songs << self #ask question, why need both VVV
     artist.add_song(self)
   end
 
