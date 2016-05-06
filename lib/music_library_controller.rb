@@ -33,7 +33,9 @@ class MusicLibraryController
 
   def songs
     Song.all.each_with_index do |song, number|
+
       puts "#{number+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+
     end
   end
 
@@ -49,20 +51,24 @@ class MusicLibraryController
     end
   end
 
+  def play_song
+    puts "What song would you like to play?"
+    input = gets.strip.to_i
+    Song.all.each_with_index do |song, number|
+      if number+1 == input
+        puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
   def list_artist
-    
+    binding.pry
     puts "What artist by name you like to list songs for?"
     artist_input = gets.strip
 
     if artist = Artist.find_by_name(artist_input)
-      artist
+
     end
-
-
-
-
-
-
   end
 
 
