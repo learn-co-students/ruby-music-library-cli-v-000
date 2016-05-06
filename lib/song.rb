@@ -24,8 +24,8 @@ class Song
     self.class.all << self
   end
 
-  def self.create(name, artist = nil)
-    self.new(name, artist).tap {|x| x.save}
+  def self.create(name, artist = nil, genre = nil)
+    self.new(name, artist, genre).tap {|x| x.save}
   end
 
   def artist=(artist)
@@ -35,7 +35,39 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    genre.add_song(self)
+    #genre.add_song(self)
+    genre.songs << self unless genre.songs.include?(self)
   end
 
+  def self.find_by_name(name)
+    self.all.detect{|song| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
+
+  def self.new_from_filename(filename)
+    data = filename.split(" - ")
+    artist_name = data[0]
+    song_name = data[1]
+    genre_name = data[2].gsub(".mp3", "")
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name, artist, genre)
+  end
+
+  def self.create_from_filename(filename)
+    data = filename.split(" - ")
+    artist_name = data[0]
+    song_name = data[1]
+    genre_name = data[2].gsub(".mp3", "")
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.create(song_name, artist, genre)
+  end
+
+  def to_s
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
 end
