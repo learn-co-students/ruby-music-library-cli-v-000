@@ -62,7 +62,7 @@ class MusicLibraryController
   end
 
   def list_artist
-    binding.pry
+
     puts "What artist by name you like to list songs for?"
     artist_input = gets.strip
 
@@ -70,6 +70,9 @@ class MusicLibraryController
 
     end
   end
+  #binding.pry
+
+
 
 
 
