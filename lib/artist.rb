@@ -1,6 +1,6 @@
 class Artist
   extend Concerns::Findable
-  attr_accessor :name
+  attr_accessor :name, :songs # I forgot to include :songs
 
   @@all = []
 
@@ -10,7 +10,7 @@ class Artist
   end
 
   def add_song(song) # has_many songs interface
-    songs << song unless songs.include?(song)
+    @songs << song unless @songs.include?(song)
     song.artist = self unless song.artist == self
   end
 
@@ -19,17 +19,18 @@ class Artist
   end
 
   def save
-    self.class.all << self
+    @@all << self
   end
 
   def genres
-    songs.map { |s| s.genre }.uniq
+    self.songs.map { |s| s.genre }.uniq
   end
 
   def self.create(name)
-    artist = self.new(name)
-    artist.save
-    artist
+    # artist = self.new(name)
+    # artist.save
+    # artist
+    new(name).tap { |a| a.save }
   end
 
   def self.all
@@ -37,6 +38,6 @@ class Artist
   end
 
   def self.destroy_all
-    all.clear
+    @@all.clear
   end
 end
