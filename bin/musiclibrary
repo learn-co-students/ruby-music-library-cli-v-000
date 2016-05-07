@@ -2,4 +2,9 @@
 
 require_relative '../config/environment'
 
+
 MusicLibraryController.new.call
+input = gets.strip
+
+
+#list songs, list artists, list genres, play a song ( "playing song name"), list artist songs, list genres songs
