@@ -23,8 +23,6 @@ song.artist = artist
 genre = Genre.find_or_create_by_name(songs[2].delete(".mp3"))
 song.genre = genre
 song.save
-
-
 }
 
 end
