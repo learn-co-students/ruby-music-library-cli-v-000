@@ -1,10 +1,9 @@
 require 'pry'
 class Song
 
-  extend 
-  Concerns::Findable
+  extend Concerns::Findable
 
-    attr_accessor :name, :genre
+    attr_accessor :name
 
     @@all = []
 
@@ -29,6 +28,14 @@ def artist
   @artist
 end
 
+def genre=(genre)
+  @genre = genre
+  genre.add_song(self)
+end
+
+def genre
+  @genre
+end
 
 def self.all
   @@all

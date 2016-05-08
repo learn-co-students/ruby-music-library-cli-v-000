@@ -1,6 +1,5 @@
 class Genre
-  extend 
-    Concerns::Findable
+  extend Concerns::Findable
 
     attr_accessor :name
 
@@ -13,6 +12,15 @@ end
 
 def songs
   @songs
+end
+
+def add_song(song)
+  if !@songs.detect {|x| x == song}
+   @songs << song
+ end
+  if song.genre != self
+    song.genre = self
+  end
 end
 
 

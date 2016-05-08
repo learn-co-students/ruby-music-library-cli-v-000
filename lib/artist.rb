@@ -1,6 +1,6 @@
 class Artist
-  extend 
-    Concerns::Findable
+
+extend Concerns::Findable
 
     attr_accessor :name, :artist
     
@@ -44,7 +44,7 @@ end
 
 def genres
   collection_genres = @songs.collect do |song|
-  song.genre
+    song.genre
   end
   collection_genres.uniq
 end
