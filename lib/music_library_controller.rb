@@ -25,7 +25,7 @@ end
 
 def list_songs
 
-  binding.pry
+  Song.all.each {|x| x.name}
 
 end
 
