@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class MusicLibraryController
 
@@ -13,21 +13,26 @@ def initialize(path = './db/mp3s' )
 
 
 def call
-input = gets.strip
+input = gets
 until input == "exit"
 if input == "list songs"
 list_songs
 end
-input = gets.strip
+input = gets
 end
 end
 
 
 def list_songs
+  Song.all.each_with_index {|x,index|
+    print index + 1,". ",x.artist.name," - ",x.name," - ",x.genre.name
+ 
 
-  Song.all.each {|x| x.name}
 
+}
 end
+
+
 
 
 end
