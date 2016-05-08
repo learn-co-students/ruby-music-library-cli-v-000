@@ -13,23 +13,20 @@ def initialize(path = './db/mp3s' )
 
 
 def call
-
 input = gets.strip
 until input == "exit"
-
+if input == "list songs"
+list_songs
+end
 input = gets.strip
 end
-
-if input == "list songs"
-  list_songs
-else
 end
 
-end
 
 def list_songs
 
-binding.pry
+  binding.pry
+
 end
 
 
