@@ -6,18 +6,22 @@ class MusicImporter
   def initialize(path)
     @path = path
     @files = []
-    files
+    file_prep
   end
 
-  def files
+  def file_prep
     temp_files = []
     Dir[path + '/*'].each { |file| temp_files << file }
     @files = temp_files.map { |file| file.split(path + '/').last }
   end
 
+  def files
+    @files
+  end
+
   def import
     # binding.pry
-    @files.each { |file| Song.create_from_filename(file) }
+    files.each { |file| Song.new_from_filename(file) }
     # binding.pry
   end
 end

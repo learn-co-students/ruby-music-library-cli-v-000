@@ -2,8 +2,8 @@ require 'pry'
 
 class Genre
   extend Concerns::Findable
-  attr_accessor :name, :artist, :song
-  attr_reader :songs
+  attr_accessor :name, :song, :artist
+  attr_reader :songs, :artists
 
   @@all = []
 
@@ -21,7 +21,7 @@ class Genre
   end
 
   def save
-    self.class.all << self
+    @@all << self
   end
 
   def self.create(name)
