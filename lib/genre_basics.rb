@@ -25,11 +25,11 @@ class Genre
   end
 
   def self.create(name)
-    if self.all.detect {|n| n.name }
-      self.all.detect {|n| n.name }
-    else
+    # if self.all.detect {|n| n.name }
+    #   self.all.detect {|n| n.name }
+    # else
       self.new(name).tap(&:save)
-    end
+    # end
   end
 
   def add_song(name)
