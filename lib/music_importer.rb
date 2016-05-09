@@ -21,7 +21,7 @@ class MusicImporter
 
   def import
     # binding.pry
-    files.each { |file| Song.new_from_filename(file) }
+    files.each { |file| Song.create_from_filename(file) }
     # binding.pry
   end
 end
