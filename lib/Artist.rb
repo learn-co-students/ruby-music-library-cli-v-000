@@ -2,6 +2,8 @@ require 'pry'
 
 class Artist
 
+  extend Concerns::Findable
+  
   attr_accessor :name, :songs, :genres
   @@all = []
 
@@ -20,6 +22,7 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.create(input)
