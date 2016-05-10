@@ -1,11 +1,11 @@
 module  Concerns::Findable
   def find_by_name(name)
-    all.detect{|a| a.name}
+    all.detect{|a| a.name == name}
   end
 
   def find_or_create_by_name(name)
-    if all.detect { |a| a.name }
-      all.detect { |a| a.name}
+    if all.detect { |a| a.name == name}
+      all.detect { |a| a.name == name}
     else
       create(name)
     end

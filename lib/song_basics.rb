@@ -36,25 +36,22 @@ class Song
 
   def self.create(name, artist = nil, genre = nil)
     if @@all.detect {|n| n.name == name}
-    # if self.all.include?(name)
       @@all.detect {|n| n.name == name}
-      # name
     else
-      self.new(name, artist, genre).tap(&:save)
+      new(name, artist, genre).tap(&:save)
     end
   end
 
   def self.new_from_filename(file)
     temp_song_file = file.split(' - ')
-
     artist = Artist.find_or_create_by_name(temp_song_file[0])
-    genre = Genre.find_or_create_by_name(temp_song_file[2].split(".mp3").join)
+    genre = Genre.find_or_create_by_name(temp_song_file[2].gsub(".mp3", ""))
     song = temp_song_file[1]
 
-    self.create(song, artist, genre)
+    create(song, artist, genre)
   end
 
   def self.create_from_filename(file)
-    self.new_from_filename(file)
+    new_from_filename(file)
   end
 end
