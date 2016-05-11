@@ -8,7 +8,6 @@ class MusicLibraryController
   def call
     input = ""
     while input != "exit"
-      puts "Welcome to the game"
       input = gets.strip
 
       case input
@@ -22,6 +21,8 @@ class MusicLibraryController
         play_songs
        when "list artist"
         list_artist
+      when "list genre"
+         list_genre
       end
     end
 
@@ -54,10 +55,36 @@ class MusicLibraryController
 
   def list_artist
 
-    Artist.all.collect do |artist_list|
-      puts "#{artist_list.name} - #{artist_list.name} - #{artist_list.genre.name}"
+    Artist.all.collect do |artist|
+     artist.name
+
+    Genre.all.collect do |genre|
+      genre.name
+
+    Song.all.collect do |song|
+      song.name
+
+    puts "#{artist.name} - #{song.name} - #{genre.name}"
+      end
     end
+   end
+ end
+
+ def list_genre
+  Artist.all.collect do |artist|
+     artist.name
+
+    Genre.all.collect do |genre|
+      genre.name
+
+    Song.all.collect do |song|
+      song.name
+
+    puts "#{artist.name} - #{song.name} - #{genre.name}"
+    end
+   end
   end
+ end
 end
 
 
