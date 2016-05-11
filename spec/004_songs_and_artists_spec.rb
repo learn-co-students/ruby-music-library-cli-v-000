@@ -69,6 +69,7 @@ describe "Songs and Artists" do
       it 'does not add the song to the artist\'s song collection if the artist already has the song' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
+        # require 'pry' ; binding.pry
 
         artist.add_song(song)
         artist.add_song(song)
