@@ -2,12 +2,14 @@ require 'pry'
 class Artist
 
   attr_accessor :name, :songs
+  extend Concerns::Findable
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
   end
+
 
   def self.all
     @@all
@@ -22,14 +24,14 @@ class Artist
   end
 
   def add_song(song)
-    if song.artist = self && @songs.include?(song)
-      nil
-    else
-     song.artist = self
-     @songs << song
+   if song.artist != self
+      song.artist = self
+   end
+   if @songs.include?(song) == false
+       @songs << song
     end
-
   end
+
 
   def self.create(name)
     artist = Artist.new(name)
@@ -38,7 +40,27 @@ class Artist
   end
 
   def genres
-    self.genre
+    @songs.map { |song| song.genre }.uniq
   end
+
+end
+
+class MusicImporter
+  attr_accessor :path
+
+  def initialize(path)
+    @path = path
+  end
+
+  def files
+    @files ||= Dir.entries(@path).select {|x| !File.directory? x}
+  end
+
+  def import
+    self.files.collect do |file|
+      song = Song.new_by_filename(file)
+      song
+    end
+ end
 
 end

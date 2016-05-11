@@ -12,6 +12,7 @@ describe "Artists have many genres through songs" do
       expect(artist.genres.size).to eq(1)
     end
 
+
     it 'returns only unique genres for an artist if more than one song has the same genre' do
       indie_rock = Genre.new("indie rock")
       electro_pop = Genre.new("electro pop")
