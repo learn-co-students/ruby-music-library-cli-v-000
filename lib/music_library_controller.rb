@@ -32,7 +32,8 @@ class MusicLibraryController
       artist_songs
     end
 
-    if user_input == "genre\'s songs"
+    if user_input == "list genre"
+      genre_songs
     end
   end
 
@@ -77,16 +78,45 @@ end
   end
 
   def artist_songs
-    #puts "which artist?"
-    #user_input = gets.strip
-    #Artist.find_by_name("Larry Csonka").songs.collect{|x| puts x.name}
     puts "What artist by name you like to list songs for?"
-    artist_input = gets.strip
-    if artist = Artist.find_by_name(artist_input)
-      artist.songs.each do |s,i|
-        puts "#{i}. #{s}"
+    artist_name = gets.strip
+    songs = []
+    Song.all.each do |x|
+      songs << "#{x.artist.name} - #{x.name} - #{x.genre.name}"
+    end
+    songs.each do |x|
+      if x.include?(artist_name)
+        puts x
       end
     end
   end
+
+  def genre_songs
+    puts "What genre by name you like to list songs for?"
+    genre_name = gets.strip
+    songs = []
+    Song.all.each do |x|
+      songs << "#{x.artist.name} - #{x.name} - #{x.genre.name}"
+    end
+    songs.each do |x|
+      if x.include?(genre_name)
+        puts x
+      end
+    end
+  end
+    #puts "which artist?"
+    #user_input = gets.strip
+    ##Artist.find_by_name("Larry Csonka").songs.collect{|x| puts x.name}
+    #puts "What artist by name you like to list songs for?"
+    #artist_name = gets.strip
+    ##binding.pry
+    #artist = Artist.find_by_name(artist_name)
+    #artist_songs_array = []
+    #puts artist.songs.each do |x|
+    #  artist_songs_array << artist_name + " - " + x.name + " - " + x.genre
+    #end
+    #binding.pry
+    #puts artist_songs_array
+  #end
 
 end
