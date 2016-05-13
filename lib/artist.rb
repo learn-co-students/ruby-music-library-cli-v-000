@@ -19,21 +19,21 @@ class Artist
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def add_song(song)
     @songs << song unless self.songs.include?(song)
-    song.artist=self unless song.artist == self
+    song.artist = self unless song.artist == self
   end
 
   def genres
     comprehensive_genre_list =[]
-    self.songs.collect do |song|
+    songs.collect do |song|
       comprehensive_genre_list << song.genre
     end
     comprehensive_genre_list.uniq

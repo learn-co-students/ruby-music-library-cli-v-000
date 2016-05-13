@@ -7,26 +7,25 @@ class MusicLibraryController
 
   def call
     puts "Welcome to your music library!"
-    puts "type in one of the following commands: "
+    puts "Type in one of the following commands: \n1. list songs\n2. list artists\n3. list genres\nWhen you are done, type 'exit'"
     user_input = nil
     until user_input == "exit"
-
-      user_input = gets.strip
-
+    user_input = gets.strip
     if user_input == "list songs"
       list_songs
+      puts "\n"
     end
-
     if user_input == "list artists"
       all_artists
+      puts "\n"
     end
-
     if user_input == "list genres"
       all_genres
+      puts "\n"
     end
 
-    if user_input == "play a song"
-      play_song
+    if user_input == "play song"
+      play_song 
     end
 
     if user_input == "list artist"
@@ -37,7 +36,7 @@ class MusicLibraryController
     end
   end
 
-  end
+end
 
   def list_songs
     number = 1
@@ -68,13 +67,13 @@ class MusicLibraryController
   def play_song
     puts "which one?"
     selection = gets.strip
-    if selection == "1"
-      puts "Playing Action Bronson - Larry Csonka - indie"
-    elsif selection == "2"
-      puts "Playing "
-    else
-      "Playing Action Bronson - Larry Csonka - indie"
+    number = 1
+    songs = []
+    all_songs = Song.all.each do |x|
+        songs << "#{number}. #{x.artist.name} - #{x.name} - #{x.genre.name}"
+        number += 1
     end
+    puts "Playing #{songs[selection.to_i - 1].gsub("#{selection}. ", "")}"  
   end
 
   def artist_songs
@@ -89,4 +88,5 @@ class MusicLibraryController
       end
     end
   end
+
 end

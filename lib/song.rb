@@ -7,14 +7,13 @@ class Song
   def initialize(name, artist = nil, genre=nil)
     @name = name
     @artist = artist if artist
-    self.artist.add_song(self) if artist && Artist.find_by_name(name) == nil
+    self.artist.add_song(self) if artist
     @genre = genre if genre
-    self.genre.add_song(self) if genre && Genre.find_by_name(name) == nil
-    #@@all << self
+    self.genre.add_song(self) if genre
   end
 
   def self.create(name, artist = nil, genre=nil)
-      new_song = new(name, artist, genre).tap{|s| s.save}
+    new_song = new(name, artist, genre).tap{|s| s.save}
   end
 
   def self.all
@@ -22,11 +21,11 @@ class Song
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def artist=(artist)
@@ -44,7 +43,6 @@ class Song
 
     artist = Artist.find_or_create_by_name(file_section[0])
     genre = Genre.find_or_create_by_name(file_section[2].gsub(".mp3", ""))
-
     self.new(file_section[1], artist, genre)
   end
 
@@ -53,12 +51,7 @@ class Song
 
     artist = Artist.find_or_create_by_name(file_section[0])
     genre = Genre.find_or_create_by_name(file_section[2].gsub(".mp3", ""))
-
-    if Song.find_by_name(file_section[1]) == nil
-      self.create(file_section[1], artist, genre)
-    end
-
-    #song = self.new(file_section[1]) unless Song.all.include?(song)
+    self.create(file_section[1], artist, genre)
   end
 
   def enumerated_file_list
