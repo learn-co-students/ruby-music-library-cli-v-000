@@ -43,11 +43,11 @@ class MusicLibraryController
         puts "Choose a track to play."
         song_input = gets.strip
         puts "Playing #{Song.all[song_input.to_i-1]}"
-      
-      when "list an artist's songs"
+        
+      when "list artist"
         list_artist
       
-      when "list songs by genre"
+      when "list genre"
         list_genre
       end
     end
@@ -63,8 +63,8 @@ class MusicLibraryController
     puts "Enter the artist's name."
     artist_input = gets.strip
     if artist = Artist.find_by_name(artist_input)
-    artist.songs.each_with_index do |song, index| 
-    puts "#{index}. #{song}"
+    artist.songs.each do |song| 
+    puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
       end
   end
