@@ -22,7 +22,6 @@ class MusicImporter
     #   new_song.genre = Genre.find_or_create_by_name(genre.gsub(/\.mp3/, ""))
 
     files.each{|f| Song.create_from_filename(f)}
-    end
   end
 
 end

@@ -1,6 +1,6 @@
 class Artist
   extend Concerns::Findable
-  attr_accessor :name, :songs # I forgot to include :songs
+  attr_accessor :name, :songs # I forgot to include :songs, which no makes the #songs method I wrote unnecessary.
 
   @@all = []
 
@@ -14,9 +14,9 @@ class Artist
     song.artist = self unless song.artist == self
   end
 
-  def songs # has_many songs interface
-    @songs
-  end
+  # def songs # has_many songs interface
+  #   @songs
+  # end
 
   def save
     @@all << self
