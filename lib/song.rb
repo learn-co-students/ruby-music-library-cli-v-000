@@ -1,43 +1,44 @@
 class Song
-  include Concerns::Findable
   extend Concerns::Findable
-
-  attr_accessor :name, :songs
-  attr_reader :artist, :genre
+  
+  attr_accessor :name
+  attr_reader :songs, :artist, :genre
 
   def initialize(name, artist="", genre="")
     @name = name
     @songs = []
-    @artist = artist unless artist == ""
-    @genre = genre unless artist == ""
-    artist.class.songs << self unless artist = ""
-    genre.class.songs << self unless genre = ""
+    @@all = []
+    @artist = artist
+    artist.songs << self unless artist == ""
+    @genre = genre
+    genre.songs << self unless genre == ""
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    @@all = []
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    new_song = self.new(name)
+    @@all << new_song
+    new_song
   end
 
   def artist=(art)
     @artist = art
-    art.add_song(self) unless art.songs.include?(self)
+    art.add_song(self)
   end
 
-  def genre=(gen)
-    @genre = gen
-    gen.songs << self unless gen.songs.include?(self)
+  def genre=(new_genre)
+    @genre = new_genre
+    new_genre.songs << self unless new_genre.songs.include?(self) == true
   end
-
-  def self.new_from_filename(filename)
-    array = filename.split(" - ")
-    art = find_or_create_by_name(array[0])
-    gen = find_or_create_by_name(array[2][0..-5])
-    new_song = self.find_or_create_by_name(array[1])
-    new_song.artist = art
-    new_song.genre = gen
-    new_song
-
-=begin
-    #song= array[1]
-    #artist= array[0]
-    #genre= array[2][0..-5]
-=end
-  end
-
 end
