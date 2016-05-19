@@ -1,4 +1,5 @@
 class Song
+  include Concerns::Findable
   extend Concerns::Findable
 
   attr_accessor :name, :songs
@@ -9,8 +10,8 @@ class Song
     @songs = []
     @artist = artist unless artist == ""
     @genre = genre unless artist == ""
-    artist.songs << self unless artist = ""
-    genre.songs << self unless genre = ""
+    artist.class.songs << self unless artist = ""
+    genre.class.songs << self unless genre = ""
   end
 
   def artist=(art)
