@@ -1,13 +1,15 @@
 require 'pry'
 
 class Artist
-  attr_accessor :name, :songs, :genres
+  attr_accessor :name, :songs
+
+  extend Concerns::Findable
+
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
     self.save
   end
 
@@ -37,10 +39,11 @@ class Artist
   end
 
   def genres
+    array =[]
     self.songs.each do |song|
-      @genres << song.genre unless @genres.detect{|genre_object| genre_object.name == song.genre.name} 
+      array << song.genre unless array.detect{|genre_object| genre_object == song.genre} 
     end
-    @genres
+    array
   end
 
 end
