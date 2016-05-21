@@ -47,10 +47,21 @@ class Song
     file_array = filename.split(" - ")
     song = Song.new(file_array[1])
     song.artist_name=(file_array[0])
-    song.genre=Genre.create(file_array[2].chomp('.mp3'))
+    song.genre=Genre.find_or_create_by_name(file_array[2].chomp('.mp3'))
     song
+  end
 
-    #song.genre=Genre.create(file_array[2].chomp('.mp3')) => passed one test, needs to return a genre
+  def Song.create_from_filename(filename)
+    data = filename.chomp(".mp3").split(" - ")
+    name = data[1]
+    artist_name = data[0]
+    genre = data[2]
+
+    song_object = self.create(name)
+    song_object.name = name
+    song_object.artist_name= artist_name
+    song_object.genre= Genre.find_or_create_by_name(genre)
+    song_object
   end
 
 end
