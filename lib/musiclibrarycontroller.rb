@@ -4,13 +4,6 @@ class MusicLibraryController
       @path = path
       MusicImporter.new(path).import
     end
-    
-#     def call
-#       puts "Welcome to Music Library CLI \nPlease select an option:\nList Songs - My Songs \nList Artists - My Artists
-# List Genres - My Genres \nPlay Song - Play Song \nList Artist - List Songs by Artist \nList Genre - List Songs by Genre
-# \nExit - Exit the Program"
-#       execute_options
-#     end
 
     def call
       input = nil

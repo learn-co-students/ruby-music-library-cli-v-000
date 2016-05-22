@@ -28,8 +28,8 @@
       <file leaf-file-name="musiclibrarycontroller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/musiclibrarycontroller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
+            <state relative-caret-position="75">
+              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -68,8 +68,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-136" />
-    <option name="y" value="23" />
+    <option name="x" value="-378" />
+    <option name="y" value="59" />
     <option name="width" value="1260" />
     <option name="height" value="663" />
   </component>
@@ -284,15 +284,15 @@
       <updated>1460745554071</updated>
       <workItem from="1460745558168" duration="924000" />
       <workItem from="1463775231961" duration="60000" />
-      <workItem from="1463937222529" duration="7679000" />
+      <workItem from="1463937222529" duration="7705000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8663000" />
+    <option name="totallyTimeSpent" value="8689000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-136" y="23" width="1260" height="663" extended-state="0" />
+    <frame x="-378" y="59" width="1260" height="663" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26683086" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -462,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/musiclibrarycontroller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
+        <state relative-caret-position="75">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
           <folding />
         </state>
       </provider>
