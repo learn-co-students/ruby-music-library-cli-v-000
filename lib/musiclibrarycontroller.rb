@@ -5,66 +5,96 @@ class MusicLibraryController
       MusicImporter.new(path).import
     end
     
+#     def call
+#       puts "Welcome to Music Library CLI \nPlease select an option:\nList Songs - My Songs \nList Artists - My Artists
+# List Genres - My Genres \nPlay Song - Play Song \nList Artist - List Songs by Artist \nList Genre - List Songs by Genre
+# \nExit - Exit the Program"
+#       execute_options
+#     end
+
     def call
-      puts "Welcome to Music Library CLI \nPlease select an option:"
-      show_options
+      input = nil
+
+     until input == "exit"
+       input = gets.strip.downcase.chomp
+        case input
+          when "list songs"
+            list_songs
+          when "list artists"
+            list_artists
+          when "list genres"
+            list_genres
+          when "play song"
+            play_song
+          when "list artist"
+            list_artist
+          when "list genre"
+            list_genre
+          else
+            puts "Invalid entry - please try again"
+        end
+      end
     end
 
-    def show_options
-      puts "List Songs - My Songs \nList Artists - My Artists \nList Genres - My Genres \nPlay Song - Play Song
-List Artist - List Songs by Artist \nList Genre - List Songs by Genre \nExit - Exit the Program"
-      execute_options
+    def list_songs
+      Song.all.each do |song|
+        puts "#{Song.all.index(song) + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
     end
 
-    def execute_options
-      input = gets.strip.downcase
+    def list_artists
+      Artist.all.each do |artist|
+        puts "#{artist.name}"
+      end
+    end
 
-      case input
-        when "list songs"
-          Song.all
-          show_options
-        when "list artists"
-          Artist.all
-          show_options
-        when "list genres"
-          Genre.all
-          show_options
-        when "play song"
-          puts "Please select a song:"
-          Song.all.each do |song|
-            puts "#{Song.all.index(song)} - #{song.name}"
-          end
-          song_input = get.strip
-          if song_input <= Song.all.size
-            song = Song.all[song_input]
-            puts "Now Playing #{song.artist} - #{song.name} - #{song.genre}"
-            show_options
-          end
-          show_options
-        when "list artist"
-          artist_input = get.strip
-          puts "Please select an artist:"
-          if Artist.all.index(artist_input).nil?
-            puts "Artist not found, please try again"
-          else
-            Artist[Artist.all.index(artist_input)].songs
-          end
-          show_options
-        when "list genre"
-          genre_input = get.strip
-          puts "Please select a genre:"
-          if Genre.all.index(genre_input).nil?
-            puts "Genre not found, please try again"
-          else
-            Genre[Genre.all.index(genre_input)].songs
-          end
-          show_options
-        when "exit"
-          "Thank you for using Music Library CLI"
-        else
-          puts "Invalid entry - please try again"
-          show_options
+    def list_genres
+      Genre.all.each do |genre|
+        puts "#{genre.name}"
+      end
+    end
+
+    def play_song
+      puts "Please select a song:"
+      Song.all.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       end
 
+      song_input = gets.chomp.to_i
+
+      if song_input <= (Song.all.size + 1)
+        song = Song.all[song_input - 1]
+        puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
+    end
+
+    def list_artist
+      puts "Please select an artist:"
+
+      artist_input = gets.strip.chomp
+
+      if Artist.find_by_name(artist_input).nil?
+        puts "Artist not found, please try again"
+      else
+        artist = Artist.find_by_name(artist_input)
+        artist.songs.each do |song|
+          puts "#{artist.name} - #{song.name} - #{song.genre.name}"
+        end
+      end
+    end
+
+    def list_genre
+      puts "Please select a genre:"
+
+      genre_input = gets.strip.chomp
+
+      if Genre.find_by_name(genre_input).nil?
+        puts "Genre not found, please try again"
+      else
+        genre = Genre.find_by_name(genre_input)
+        genre.songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{genre.name}"
+        end
+      end
     end
 end
