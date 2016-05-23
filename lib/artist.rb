@@ -36,6 +36,10 @@ class Artist
     @songs << song unless @songs.include?(song)
   end
 
+   def to_s
+    self.name
+  end
+
  def self.find_by_name(name)
    self.all.detect{|s| s.name == name}
   end
@@ -49,9 +53,7 @@ class Artist
     self.songs.collect{|s| s.genre}.uniq
     end
 
-  def to_s
-    self.name
-  end
+
 
   def save
     @@all << self
