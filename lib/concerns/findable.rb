@@ -2,7 +2,7 @@ module Concerns
   module Findable
 
     def find_by_name(name)
-      all.each do |song|
+      all.map do |song|
         if song.name == name
           return song
         end
