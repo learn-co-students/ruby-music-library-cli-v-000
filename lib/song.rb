@@ -2,6 +2,7 @@ require'pry'
 class Song
 
   attr_accessor :song, :artist, :name, :genre
+  extend Concerns::Findable
 
   @@all = []
 
@@ -25,9 +26,9 @@ class Song
   end
 
   def self.create(name)
-    Song.new(name)
-    @@all << self
-    self
+    song = Song.new(name)
+    self.all << song
+    song
   end
 
   def artist=(artist)
@@ -54,6 +55,16 @@ class Song
     else
       self.find_by_name(name)
     end
+  end
+
+  def self.new_from_filename(song)
+    array = song.split(" - ")
+    artist_name = array[0]
+    artist = Artist.find_or_create_by_name(artist_name)
+    title = array[1]
+    genre_name = (array[2].chomp(".mp3"))
+    genre = Genre.find_or_create_by_name(genre_name)
+    new_song = Song.new(title, artist, genre)
   end
 
 

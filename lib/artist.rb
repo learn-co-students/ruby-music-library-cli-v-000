@@ -24,9 +24,9 @@ class Artist
   end
 
   def self.create(name)
-    self.new(name)
-    self.all << self
-    self
+    song = self.new(name)
+    self.all << song
+    song
   end
 
   def add_song(song)
