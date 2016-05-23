@@ -30,8 +30,8 @@ class Artist
   end
 
   def add_song(song)
-    if @songs.include?(song) == false
-      @songs << song
+    if songs.include?(song) == false
+      songs << song
       if song.artist == nil
         song.artist = self
       end
