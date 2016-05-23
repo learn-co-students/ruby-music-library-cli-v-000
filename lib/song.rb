@@ -3,7 +3,7 @@ require_relative '../config/environment.rb'
 class Song
   extend Concerns::Findable
 
-  attr_accessor :name, :genre, :artist
+  attr_accessor :name, :genre, :artist, :something_else
 
 
   @@all = []
@@ -56,4 +56,4 @@ class Song
     @genre = genre
     genre.add_song(self) unless genre.songs.include?(self)
   end
-end 
+end
