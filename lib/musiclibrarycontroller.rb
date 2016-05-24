@@ -13,7 +13,6 @@ class MusicLibraryController
     until input == "exit"
       puts "Please enter input:"
       input = gets
-      Song.find_by_name(input) || Artist.find_by_name(input) || Genre.find_by_name(input)
     end
   end
 
