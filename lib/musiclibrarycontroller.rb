@@ -21,7 +21,7 @@ class MusicLibraryController
   end
 
   def songs
-    binding.pry
+    #binding.pry
     Song.all.each
   end
 
