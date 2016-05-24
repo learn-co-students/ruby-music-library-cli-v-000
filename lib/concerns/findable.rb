@@ -2,10 +2,8 @@ module Concerns
   module Findable
 
     def find_by_name(name)
-      all.map do |song|
-        if song.name == name
-          return song
-        end
+      all.detect do |song|
+        song.name == name
       end
     end
 

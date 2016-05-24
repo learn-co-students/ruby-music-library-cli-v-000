@@ -42,10 +42,8 @@ class Song
   end
 
   def self.find_by_name(name)
-    all.map do |song|
-      if song.name == name
-        return song
-      end
+    all.detect do |song|
+      song.name == name
     end
   end
 
@@ -57,6 +55,7 @@ class Song
     end
   end
 
+
   def self.new_from_filename(file_name)
     array = file_name.split(" - ")
     artist_name = array[0]
@@ -67,6 +66,11 @@ class Song
     new_song = Song.new(title, artist, genre)
   end
 
+  def self.create_from_filename(file_name)
+    new_song = self.new_from_filename(file_name)
+    all << new_song
+    new_song
+  end
 
 
 
