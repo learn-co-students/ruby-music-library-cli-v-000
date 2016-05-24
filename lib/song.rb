@@ -31,19 +31,19 @@ attr_accessor :name, :artist, :genre, :artists
 
   def self.new_from_filename(filename)
     local = filename.split(" - ")
-    new_song = Song.new(local[1])
-    new_song.artist = Artist.find_or_create_by_name(local[0])
-    new_song.genre = Genre.find_or_create_by_name(local[2][0..-5])
-    new_song
+    artist = Artist.find_or_create_by_name(local[0])
+    genre = Genre.find_or_create_by_name(local[2][0..-5])
+    new_song = Song.new(local[1],artist,genre)
+    #new_song
   end
 
   def self.create_from_filename(filename)
   local = filename.split(" - ")
-  new_song = Song.new(local[1])
-  new_song.artist = Artist.find_or_create_by_name(local[0])
-  new_song.genre = Genre.find_or_create_by_name(local[2][0..-5])
+  artist = Artist.find_or_create_by_name(local[0])
+  genre = Genre.find_or_create_by_name(local[2][0..-5])
+  new_song = Song.new(local[1],artist,genre)
   new_song.save
-  new_song
+  #new_song
 end
 
 
