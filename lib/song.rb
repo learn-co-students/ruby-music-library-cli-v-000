@@ -43,7 +43,7 @@ attr_accessor :name, :artist, :genre, :artists
   genre = Genre.find_or_create_by_name(local[2][0..-5])
   new_song = Song.new(local[1],artist,genre)
   new_song.save
-  #new_song
+  new_song
 end
 
 
