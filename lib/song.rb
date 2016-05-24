@@ -52,8 +52,8 @@ end
 
   end
 
-  def self.create(name,artist,genre)
-    new_song = self.new(name,artist,genre)
+  def self.create(name, artist = nil, genre = nil)
+    new_song = self.new(name, artist, genre)
     new_song.save
     new_song
   end
