@@ -33,12 +33,12 @@ class Song
 
   def artist=(artist)
     @artist = artist
-     artist.add_song(self)
+    #artist.add_song(self)
   end
 
   def genre=(genre)
     @genre = genre
-    genre.add_song(self)
+    #genre.add_song(self)
   end
 
   def self.find_by_name(name)
@@ -57,8 +57,8 @@ class Song
     end
   end
 
-  def self.new_from_filename(song)
-    array = song.split(" - ")
+  def self.new_from_filename(file_name)
+    array = file_name.split(" - ")
     artist_name = array[0]
     artist = Artist.find_or_create_by_name(artist_name)
     title = array[1]
