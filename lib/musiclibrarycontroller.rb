@@ -20,19 +20,29 @@ class MusicLibraryController
           index += 1
         end
       elsif input == "list artists"
-        Song.all.each do |song|
-          puts song.artist.name
-        end
+        list_artists_songs
       elsif input == "list genres"
         Song.all.each do |song|
           puts song.genre.name
         end
-      elsif input == "play"
-        puts "Playing " + song.artist.name + " - " + song.name + " - " + song.genre.name
+      elsif input == "play song"
+        puts "Playing " + Song.all[0].artist.name + " - " + Song.all[0].name + " - " + Song.all[0].genre.name
+      elsif input == "list artist's songs"
+        puts "Which artist do you want a song list for?"
+        artist_input = gets.strip
+        
       end
-    end
   end
 
+def list_artist
+  Song.all.each do |song|
+    puts song.artist.name
+  end
+end
+
+def list_artists_songs
+
+end
 
 
 end
