@@ -5,9 +5,6 @@ class Song
 
   @@all = []
 
-  include Memorable::InstanceMethods
-  extend Memorable::ClassMethods
-
   def initialize(name, artist = nil, genre = nil)
     @name = name
     if artist
@@ -20,8 +17,8 @@ class Song
     end
   end
 
-  def self.create(name, artist = nil)
-    new_instance = self.new(name, artist = nil)
+  def self.create(name, artist = nil, genre = nil)
+    new_instance = self.new(name, artist = nil, genre = nil)
     new_instance.save
     new_instance
   end
@@ -30,10 +27,17 @@ class Song
     @@all
   end
 
+  def save
+    self.class.all << self
+  end
+
+  def self.destroy_all
+    self.all.clear
+  end
+
   def artist=(artist_name)
     @artist = artist_name
     @artist.add_song(self)
-    @artist.songs << self
   end
 
   def genre= (genre)
@@ -53,7 +57,7 @@ class Song
     song_parts = filename.split(" - ")
     song_name = song_parts[1]
     song_artist = song_parts[0]
-    song_genre = song_parts[2].scan(/[^(.mp3)]/).join("")
+    song_genre = song_parts[2].chomp(".mp3")
     song_artist = Artist.find_or_create_by_name(song_artist)
     song_genre = Genre.find_or_create_by_name(song_genre)
     new_song = self.new(song_name, song_artist, song_genre)
@@ -64,7 +68,7 @@ class Song
     song_parts = filename.split(" - ")
     song_name = song_parts[1]
     song_artist = song_parts[0]
-    song_genre = song_parts[2].scan(/[^(.mp3)]/).join("")
+    song_genre = song_parts[2].chomp(".mp3")
     song_artist = Artist.find_or_create_by_name(song_artist)
     song_genre = Genre.find_or_create_by_name(song_genre)
     new_song = self.create(song_name, song_artist)

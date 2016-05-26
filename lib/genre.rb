@@ -1,16 +1,21 @@
 require 'pry'
 
 class Genre
+  extend Concerns::Findable
   attr_accessor :name, :songs
 
   @@all = []
 
-  include Memorable::InstanceMethods
-  extend Memorable::ClassMethods
-  extend Concerns::Findable
-
   def self.all
     @@all
+  end
+
+  def save
+    self.class.all << self
+  end
+
+  def self.destroy_all
+    self.all.clear
   end
 
   def initialize(name)

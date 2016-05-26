@@ -1,13 +1,10 @@
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
   attr_accessor :name, :songs
 
   @@all = []
-
-  include Memorable::InstanceMethods
-  extend Memorable::ClassMethods
-  extend Concerns::Findable
 
   def self.all
     @@all
@@ -16,6 +13,14 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
+  end
+
+  def save
+    self.class.all << self
+  end
+
+  def self.destroy_all
+    self.all.clear
   end
 
   def self.create(name)
@@ -28,6 +33,7 @@ class Artist
     if song_name.artist.nil?
       song_name.artist = self
     end
+    self.songs << song_name unless self.songs.include?(song_name)
   end
 
   def genres
