@@ -10,8 +10,8 @@ class MusicLibraryController
 
   def call
     input = nil
+    puts "Welcome to your music library!"
     while input != "exit"
-      puts "Welcome to your music library!"
       puts "What would you like to do?"
       input = gets.strip
       case input
@@ -44,14 +44,14 @@ class MusicLibraryController
 
 
   def artists
-    Song.all.each do |song|
-      puts song.artist.name
+    Artist.all.each do |artist|
+      puts artist.name
     end
   end
 
   def genres
-    Song.all.each do |song|
-      puts song.genre.name
+    Genre.all.each do |genre|
+      puts genre.name
     end
   end
 
@@ -71,10 +71,13 @@ class MusicLibraryController
 
   def help
     puts ["Please choose from the following commands: ",
-      "Input \"list songs\" to ",
-      "This is the second line.",
-      "1 + 1 is #{1 + 1}."
-    ].join("\n") + "\n"
+      "-  Input \"list songs\" to view all songs in your library.",
+      "-  Input \"list artists\" to view all artists in your library.",
+      "-  Input \"list genres\" to view all genres in your library.",
+      "-  Input \"play song\" to play a song from your library. You will be prompted for the song name after typing \"play song\" and pressing the return key.",
+      "-  Input \"list artist\" to view all songs in your library by a particular artist. You will be prompted for the artist's name after typing \"list artist\" and pressing the return key.",
+      "-  Input \"list genre\" to view all songs in your library from a particular genre. You will be prompted for the genre's title after typing \"list genre\" and pressing the return key.",
+    ].join("\n \n") + "\n \n"
     call
   end
 
