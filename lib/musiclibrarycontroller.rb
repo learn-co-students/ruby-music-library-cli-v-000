@@ -56,6 +56,13 @@ class MusicLibraryController
     puts artists.join(", ")
   end
 
+  def genres_linear
+    genres = Genre.all.collect do |genre|
+      genre.name
+    end
+    puts genres.join(", ")
+  end
+
   def genres
     Genre.all.each do |genre|
       puts genre.name
@@ -96,7 +103,7 @@ class MusicLibraryController
       genres_linear
       list_genre_songs
     else
-      puts "Song(s) in your music libray by #{genre.name} include:"
+      puts "#{genre.name.capitalize} songs in your music libray include:"
       genre.songs.each do |song|
         puts song.artist.name + " - " + song.name + " - " + song.genre.name
       end
