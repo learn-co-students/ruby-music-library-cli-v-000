@@ -119,7 +119,6 @@ class MusicLibraryController
       "-  Input \"list artist\" to view all songs in your library by a particular artist. You will be prompted for the artist's name after typing \"list artist\" and pressing the return key.",
       "-  Input \"list genre\" to view all songs in your library from a particular genre. You will be prompted for the genre's title after typing \"list genre\" and pressing the return key.",
     ].join("\n \n") + "\n \n"
-    call
   end
 
 end
