@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'irb'
 require_relative '../config/environment'
 
+puts "... loading CLI"
 
-MusicLibraryController.new.call
+IRB.start
