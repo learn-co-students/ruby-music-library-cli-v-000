@@ -82,14 +82,25 @@ class MusicLibraryController
     else
       puts "Song(s) in your music libray by #{artist.name} include:"
       artist.songs.each do |song|
-        puts song.name
+        puts song.artist.name + " - " + song.name + " - " + song.genre.name
       end
     end
   end
 
   def list_genre_songs
-    puts "Which genre do you want a song list for?"
+    puts "Enter a genre to receive a list of songs within that genre."
     genre_input = gets.strip
+    genre = Genre.find_by_name(genre_input)
+    if genre == nil
+      puts "Sorry, genre, \"#{genre_input}\", not found in your library. Please enter one of the genres listed below."
+      genres_linear
+      list_genre_songs
+    else
+      puts "Song(s) in your music libray by #{genre.name} include:"
+      genre.songs.each do |song|
+        puts song.artist.name + " - " + song.name + " - " + song.genre.name
+      end
+    end
   end
 
   def help
