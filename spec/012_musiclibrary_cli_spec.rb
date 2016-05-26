@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe 'Music Library CLI' do
 
   it 'allows a user to list songs' do
