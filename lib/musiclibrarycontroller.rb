@@ -49,6 +49,13 @@ class MusicLibraryController
     end
   end
 
+  def artists_linear
+    artists = Artist.all.collect do |artist|
+      artist.name
+    end
+    puts artists.join(", ")
+  end
+
   def genres
     Genre.all.each do |genre|
       puts genre.name
@@ -56,12 +63,28 @@ class MusicLibraryController
   end
 
   def play_song
-    puts "Playing " + Song.all[0].artist.name + " - " + Song.all[0].name + " - " + Song.all[0].genre.name
+    puts "You can play any of the following songs:"
+    songs
+    puts "From the list of songs above, please enter the number of the song you would like to play."
+    song_input = gets.strip.to_i
+    song = Song.all[song_input -1]
+    puts "Playing " + song.artist.name + " - " + song.name + " - " + song.genre.name
   end
 
   def list_artist_songs
-    puts "Which artist do you want a song list for?"
+    puts "Enter an artist's name to receive a list of songs by that artist."
     artist_input = gets.strip
+    artist = Artist.find_by_name(artist_input)
+    if artist == nil
+      puts "Sorry, artist, \"#{artist_input}\", not found in your library. Please enter one of the artists listed below."
+      artists_linear
+      list_artist_songs
+    else
+      puts "Song(s) in your music libray by #{artist.name} include:"
+      artist.songs.each do |song|
+        puts song.name
+      end
+    end
   end
 
   def list_genre_songs
