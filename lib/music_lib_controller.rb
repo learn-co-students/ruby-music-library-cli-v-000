@@ -8,37 +8,31 @@ class MusicLibraryController
   end
 
   def call
-    # puts "What's up Man? What do you want to do?"
+
     # puts "list songs"
     # puts "exit"
-    input = gets.strip
-    case input
-    when "list songs"
-      list_songs
-    when "list artists"
-      list_artists
-    when "list genres"
-      list_genres
-    when "play song"
-      number = gets.strip.to_i
-      if number.class == Fixnum
+    input = ""
+    while input != "exit"
+      puts "What's up Dude? What do you want to do?"
+      input = gets.strip
+      case input
+      when "list songs"
+        list_songs
+      when "list artists"
+        list_artists
+      when "list genres"
+        list_genres
+      when "play song"
+        number = gets.strip.to_i
         play_song(number)
-      else
-        self.call
+      when "list artist"
+        name = gets.strip
+        list_artist(name)
+      when "list genre"
+        name = gets.strip
+        list_genre(name)
       end
-    when "list artist"
-      name = gets.strip
-      list_artist(name)
-    when "list genre"
-      name = gets.strip
-      list_genre(name)
-    when "exit"
-      exit
-    else
-      self.call
     end
-
-    self.call
   end
 
   def sort_songs_by_artist
