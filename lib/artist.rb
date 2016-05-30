@@ -1,4 +1,3 @@
-require "pry"
 require "./concerns/concerns.rb"
 
 class Artist
