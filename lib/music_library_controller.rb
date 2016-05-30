@@ -18,9 +18,9 @@ class MusicLibraryController
         artists
       when "list genres"
         genres
-      when "list artist's songs"
+      when "list artist"
         list_artist
-      when "list genre's songs"
+      when "list genre"
         list_genre
       when "play song"
         play_song
@@ -34,6 +34,11 @@ class MusicLibraryController
     end
   end
 
+  def genres
+    Genre.all.each.with_index(1) do |g, i|
+      puts "#{i}. #{g}"
+    end
+  end
 
   def list_artist
     puts "What artist by name you like to list songs for?"
@@ -44,14 +49,9 @@ class MusicLibraryController
       end
     end
   end
-  def genres
-    Genre.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
-    end
-  end
 
   def list_genre
-    puts "What genre by name would you like to list songs for?"
+    puts "What genre by name you like to list songs for?"
     genre_input = gets.strip
     if genre = Genre.find_by_name(genre_input)
       genre.songs.each do |s,i|
@@ -67,8 +67,8 @@ class MusicLibraryController
   end
 
   def songs
-    Song.all.each.with_index(0) do |s, i|
-      puts "#{i+1}. #{s}"
+    Song.all.each.with_index(1) do |s, i|
+      puts "#{i}. #{s}"
     end
   end
 end
