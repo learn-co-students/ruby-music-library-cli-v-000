@@ -54,7 +54,14 @@ class Artist
   end
 
   
-#----------------------------------------
+#--------------Genre methods-------------   
+  def genres
+    genre_array = self.songs.collect do |song|
+      song.genre
+    end
+    genre_array.uniq
+  end
+
 
 #--------------Song methods--------------
   # @@song_count = 0
@@ -98,4 +105,3 @@ end #of Artist class
   
   # end
 
-  

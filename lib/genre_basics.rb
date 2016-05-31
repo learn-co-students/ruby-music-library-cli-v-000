@@ -30,6 +30,13 @@ class Genre
     self.all.clear
   end
 
+  def artists
+    artist_array = self.songs.collect do |song|
+      song.artist
+    end
+    artist_array.uniq
+  end
+
   # def self.create_by_name (name)
   #   genre = Genre.new(name)
   #   genre.save
