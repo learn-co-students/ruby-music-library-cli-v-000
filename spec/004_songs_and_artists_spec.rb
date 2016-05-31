@@ -22,6 +22,7 @@ describe "Songs and Artists" do
       it 'accepts an artist for the song' do
         song = Song.new("In an Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
+        
         song.artist = artist
 
         expect(song.artist).to eq(artist)
@@ -71,7 +72,9 @@ describe "Songs and Artists" do
         artist = Artist.new("Neutral Milk Hotel")
 
         artist.add_song(song)
+
         artist.add_song(song)
+        
 
         expect(artist.songs).to include(song)
         expect(artist.songs.size).to eq(1)
