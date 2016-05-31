@@ -12,9 +12,11 @@ class Song
 
   @@all = []
 
-  def initialize(name)#, artist = "")
+  def initialize(name, artist = nil)
     @name = name
-    @artist = artist
+    @artist = artist if artist
+    artist.songs << self if artist
+    
   end
 
   def self.all
