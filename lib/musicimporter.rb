@@ -17,14 +17,12 @@ class MusicImporter
     @@file_array
   end
 
-    def import#(list_of_filenames)
-    #list_of_filenames.each{|file_name| songs << Song.new_by_filename(file_name)}
-    @@file_array.each do |file_name| 
-      new_song = Song.new_by_filename(file_name)
-      new_song.artist.songs << new_song
+  def import
+    array_of_filenames = files.uniq
+    array_of_filenames.each do |file_name| 
+      Song.new_from_filename(file_name)
     end
   end
-
 end #of MusicImporter class
 
 

@@ -31,28 +31,7 @@ class Artist
     self.all.clear
   end
 
-  def self.create_by_name (name)
-    artist = Artist.new(name)
-    artist.save
-    return artist
-  end
-
-  def self.find_by_name(name)
-    Artist.all.each do |artist|
-      if artist.name == name 
-          return artist
-        end
-    end
-    return false
-  end
-
-  def self.find_or_create_by_name(name)
-     if self.find_by_name(name)
-        self.find_by_name(name)
-      else
-        self.create_by_name(name)
-      end
-  end
+  
 
   
 #--------------Genre methods-------------   
@@ -65,7 +44,7 @@ class Artist
 
 
 #--------------Song methods--------------
-  # @@song_count = 0
+
 
   def add_song(song)
     song.artist == nil ? song.artist = self : nil
@@ -79,13 +58,10 @@ class Artist
     @songs
   end
 
-  
-
-  
-#----------------------------------
-  
 end #of Artist class
 
+
+  # @@song_count = 0
 
 # def print_songs
   #   songs.each do |song|
@@ -104,5 +80,28 @@ end #of Artist class
   #   @songs << song
   #   @@song_count += 1
   
+  # end
+
+  # def self.create_by_name (name)
+  #   artist = Artist.new(name)
+  #   artist.save
+  #   return artist
+  # end
+
+  # def self.find_by_name(name)
+  #   Artist.all.each do |artist|
+  #     if artist.name == name 
+  #         return artist
+  #       end
+  #   end
+  #   return false
+  # end
+
+  # def self.find_or_create_by_name(name)
+  #    if self.find_by_name(name)
+  #       self.find_by_name(name)
+  #     else
+  #       self.create_by_name(name)
+  #     end
   # end
 

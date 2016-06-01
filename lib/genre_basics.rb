@@ -37,6 +37,13 @@ class Genre
     artist_array.uniq
   end
 
+  def add_song(song)
+    song.genre == nil ? song.genre = self : nil
+    if !(self.songs.include?(song)) 
+      @songs << song
+    end
+  end
+
   # def self.create_by_name (name)
   #   genre = Genre.new(name)
   #   genre.save
@@ -71,12 +78,7 @@ class Genre
 #--------------Song methods--------------
   
 
-  def add_song(song)
-    song.genre == nil ? song.genre = self : nil
-    if !(self.songs.include?(song)) 
-      @songs << song
-    end
-  end
+  
 
   # def songs
   #   @songs
