@@ -40,8 +40,10 @@ class Song
     @@all << self
   end
 
-  def self.new_from_filename(filename)
+  
+  def new_from_filename(filename)
     new_name = filename.split(" - ")[1]
+    binding.pry
     new_song = Song.new(new_name)
     new_song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])    
     new_song
