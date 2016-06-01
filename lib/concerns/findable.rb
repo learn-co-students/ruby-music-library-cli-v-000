@@ -4,9 +4,6 @@ def find_by_name(name)
     self.all.detect{|a| a.name}
   end
 
-
-
-
   def create_by_name (name)
     a = self.new(name)
     a.save
@@ -21,21 +18,5 @@ def find_by_name(name)
       end
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 end #of Findable module

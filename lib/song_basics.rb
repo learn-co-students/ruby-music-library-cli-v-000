@@ -3,6 +3,7 @@ require 'pry'
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
+
   extend Concerns::Findable
   
 
@@ -39,6 +40,13 @@ class Song
     @@all << self
   end
 
+  def new_by_filename(filename)
+    new_name = filename.split(" - ")[1]
+    new_song = Song.new(new_name)
+    new_song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])    
+    new_song
+  end
+
 
 #----------class methods------------------
   def self.create(name)#, artist = "")
@@ -71,13 +79,9 @@ class Song
       end
   end
   
+
+
     
 end #of class Song
 
 
-# def Song.new_by_filename(filename)
-  #   new_name = filename.split(" - ")[1]
-  #   new_song = Song.new(new_name)
-  #   new_song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])    
-  #   new_song
-  # end
