@@ -19,12 +19,11 @@ class MusicImporter
 
   def import
     array_of_filenames = files.uniq
-    #binding.pry
     array_of_filenames.each do |file_name| 
-      new_song = Song.new_from_filename(file_name)
-      new_song.save #if !Song.all.include?(new_song)
+      new_song = Song.create_from_filename(file_name)
+      
     end
-    binding.pry
+
   end
 end #of MusicImporter class
 

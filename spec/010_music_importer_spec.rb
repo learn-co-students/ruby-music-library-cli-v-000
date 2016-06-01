@@ -76,7 +76,7 @@ describe "MusicImporter#import" do
     test_music_path = "./spec/fixtures/mp3s"
     music_importer = MusicImporter.new(test_music_path)
     music_importer.import
-#binding.pry
+
     expect(Song.all.size).to eq(4)
     expect(Artist.all.size).to eq(3)
     expect(Genre.all.size).to eq(4)
