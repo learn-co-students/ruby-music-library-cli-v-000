@@ -41,12 +41,21 @@ class Song
   end
 
   
-  def new_from_filename(filename)
-    new_name = filename.split(" - ")[1]
-    binding.pry
-    new_song = Song.new(new_name)
-    new_song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])    
-    new_song
+  def self.new_from_filename(filename)
+    song_name = filename.split(" - ")[1]
+    
+    song_artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
+
+    genre_holder = (filename.split(" - ")[2])
+    genre_holder = genre_holder.slice(0,genre_holder.length - 4)
+    song_genre = Genre.find_or_create_by_name(genre_holder)
+
+    new_song = Song.new(song_name)
+    new_song.artist = song_artist
+    new_song.genre = song_genre
+
+binding.pry
+ #   new_song
   end
 
 
@@ -58,32 +67,28 @@ class Song
     return new_song
   end
 
-  def self.find_by_name(name)
-    Song.all.each do |song|
-      if song.name == name 
-          return song
-        end
-    end
-    return false
-  end
+  # def self.find_by_name(name)
+  #   Song.all.each do |song|
+  #     if song.name == name 
+  #         return song
+  #       end
+  #   end
+  #   return false
+  # end
 
-  def self.create_by_name (name)
-    song = Song.new(name)
-    song.save
-    return song
-  end
+  # def self.create_by_name (name)
+  #   song = Song.new(name)
+  #   song.save
+  #   return song
+  # end
 
-  def self.find_or_create_by_name(name)
-     if self.find_by_name(name)
-        self.find_by_name(name)
-      else
-        self.create_by_name(name)
-      end
-  end
-  
-
-
-    
+  # def self.find_or_create_by_name(name)
+  #    if self.find_by_name(name)
+  #       self.find_by_name(name)
+  #     else
+  #       self.create_by_name(name)
+  #     end
+  # end
 end #of class Song
 
 
