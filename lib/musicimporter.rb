@@ -18,9 +18,10 @@ class MusicImporter
   end
 
   def import
-    array_of_filenames = files.uniq
+    array_of_filenames = files #.uniq
     array_of_filenames.each do |file_name| 
       Song.new_from_filename(file_name)
+      #binding.pry
     end
   end
 end #of MusicImporter class
