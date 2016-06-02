@@ -57,10 +57,8 @@ class MusicLibraryController
     puts "Enter an artist's name to see all their songs."
     artist_input = gets.strip
     artist = Artist.find_by_name(artist_input)
-    if Artist.find_by_name(artist_input) then
-      artist.songs.each do |song|
-        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-      end
+    artist.songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
   
