@@ -4,7 +4,7 @@ class MusicImporter
   @@file_array = []
 
   def initialize (file_path)
-    binding.pry
+    #binding.pry
     self.path = file_path
     
   end
@@ -26,7 +26,7 @@ class MusicImporter
     end
 
   end
-  
+
 end #of MusicImporter class
 
 
