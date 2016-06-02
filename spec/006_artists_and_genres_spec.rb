@@ -31,7 +31,7 @@ describe "Artists have many genres through songs" do
       artist = Artist.new("The Magnetic Fields")
 
       song = Song.new("Long-forgotten Fairytale", artist, electro_pop)
-
+      binding.pry
       expect(artist.genres).to match_array([electro_pop])
       expect(artist.instance_variable_defined?(:@genres)).to be_falsey
 
