@@ -3,13 +3,8 @@ class Genre
   attr_accessor :name, :songs
   extend Concerns::Findable
   
-
-#----------Genre methods-----------------
+#----------Instance methods-----------------
   @@all = []
-
-  def self.all
-    @@all
-  end
 
   def save
     @@all << self
@@ -18,16 +13,6 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-  end
-
-  def self.create(name)
-    new_genre = Genre.new(name)
-    new_genre.save
-    return new_genre
-  end
-
-  def self.destroy_all
-    self.all.clear
   end
 
   def artists
@@ -42,5 +27,20 @@ class Genre
     if !(self.songs.include?(song)) 
       @songs << song
     end
+  end
+
+#----------Class methods-----------------
+  def self.all
+      @@all
+    end
+
+  def self.create(name)
+      new_genre = Genre.new(name)
+      new_genre.save
+      return new_genre
+  end
+
+  def self.destroy_all
+    self.all.clear
   end
 end #of genre class

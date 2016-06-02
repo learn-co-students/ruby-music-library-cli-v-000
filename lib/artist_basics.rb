@@ -3,23 +3,35 @@ class Artist
   attr_accessor :name, :songs
   extend Concerns::Findable
   
-  
-
-#----------Artist methods-----------------
-  @@all = []
-
-  def self.all
-    @@all
-  end
-
+#----------Instance methods-----------------
   def save
-    
     @@all << self
   end
   
   def initialize(name)
     @name = name
     @songs = []
+  end
+
+  def genres
+    genre_array = self.songs.collect do |song|
+      song.genre
+    end
+    genre_array.uniq
+  end
+
+  def add_song(song)
+    song.artist == nil ? song.artist = self : nil
+    if !self.songs.include?(song) 
+      @songs << song
+    end
+  end
+
+#----------class methods------------------ 
+  @@all = []
+
+  def self.all
+    @@all
   end
 
   def self.create(name)
@@ -32,31 +44,5 @@ class Artist
     self.all.clear
   end
 
-  
-
-  
-#--------------Genre methods-------------   
-  def genres
-    genre_array = self.songs.collect do |song|
-      song.genre
-    end
-    genre_array.uniq
-  end
-
-
-#--------------Song methods--------------
-
-
-  def add_song(song)
-    song.artist == nil ? song.artist = self : nil
-    if !self.songs.include?(song) 
-      @songs << song
-    end
-    
-  end
-
-  def songs
-    @songs
-  end
 
 end #of Artist class

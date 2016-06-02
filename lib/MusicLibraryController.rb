@@ -47,12 +47,12 @@ class MusicLibraryController
 
       elsif input.include?("list artist")
         Song.all.each do |song|
-          puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
 
       elsif input.include?("list genre")
         Song.all.each do |song|
-          puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         end  
 
       end # of IF
@@ -60,5 +60,4 @@ class MusicLibraryController
       input = gets.chomp
     end #of DO loop
   end # of method
-
 end #of CLASS
