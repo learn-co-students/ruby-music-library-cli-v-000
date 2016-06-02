@@ -1,7 +1,6 @@
 class Song
   attr_accessor :name, :artist, :genre
   @@all = []
-  extend CONCERNS::FINDABLE
 
   #class methods
   def initialize(name, artist = nil, genre = nil)
