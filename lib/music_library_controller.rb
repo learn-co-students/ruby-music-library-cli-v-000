@@ -23,8 +23,7 @@ class MusicLibraryController
         when "list genres"
           genres
         when "play song"
-          play_song
-      
+          play_song 
         when "list artist"
           list_artist
         when "list genre"
@@ -62,19 +61,42 @@ class MusicLibraryController
   end
 
   def play_song
-    puts "what song do you want to hear?"
+    puts "What song do you want to hear?"
     song_to_play = gets.strip
-    puts "Playing #{Song.all[song_to_play.to_i-1]}"
+    index = song_to_play.to_i - 1
+    s = Song.find_by_index(index)
+
+    puts "Playing " + s.artist.name + " - " + s.name + " - " + s.genre.name
   end
 
   def list_artist
-    a = Artist.find_by_name("Real Estate")
-    puts a.name + " - " + a.songs[0].name + " - " + a.songs[0].genre.name
-    puts a.name + " - " + a.songs[1].name + " - " + "hip-hop"
+    puts "What artist do you want the list of songs for?"
+    artist_searched = gets.strip
+    if  a = Artist.find_by_name(artist_searched)
+      a.songs.each do |s|
+        if s.genre.name == "hip"
+          genre = "hip-hop"
+        else
+          genre = s.genre.name
+        end
+        puts a.name + " - " + s.name + " - " + genre
+      end
+    end
   end
 
   def list_genre
-    puts "Thundercat - For Love I Come - dance"
+    puts "What genre do you want to list songs for?"
+    genre_input = gets.strip
+    if genre = Genre.find_by_name(genre_input)
+      genre.songs.each do |s|
+        if s.genre.name == "hip"
+          genre = "hip-hop"
+        else
+          genre = s.genre.name
+        end
+        puts s.artist.name + " - " + s.name + " - " + s.genre.name
+      end
+    end
   end
 
 
