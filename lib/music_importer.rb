@@ -10,7 +10,7 @@ class MusicImporter
   end
 
   def import
-    self.files.each do |each_file|
+    self.files.sort.each do |each_file|
       Song.new_from_filename(each_file)
     end
   end

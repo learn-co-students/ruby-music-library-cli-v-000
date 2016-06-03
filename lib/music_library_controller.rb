@@ -21,20 +21,15 @@ class MusicLibraryController
           artists
         when "list genres"
           genres
-        when "list artists"
-          list_artists
+        when "list artist"
+          list_artist
         when "list genre"
+          list_genre
         when "play song"
           play_song
       end
     end
   end
-
-  #def songs
-   # Song.all.each.with_index(1) do |song, index|
-    #  puts "#{index}. #{song}"
-    #end
-  #end
 
     def songs
       Song.all.each.with_index(1) do |s, i|
@@ -54,7 +49,7 @@ class MusicLibraryController
       end
     end
 
-    def list_artists
+    def list_artist
       puts "What artist by name would you like to list songs for?"
       artist_input = gets.strip
         if artist = Artist.find_by_name(artist_input)
@@ -62,14 +57,21 @@ class MusicLibraryController
             puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
           end
         end 
-        binding.pry
+    end
+
+    def list_genre
+      puts "What genre by name would you like to list songs for?"
+      genre_input = gets.strip
+        if genre = Genre.find_by_name(genre_input)
+          genre.songs.each.with_index(1) do |s, i|
+            puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+          end
+        end 
     end
 
     def play_song
       puts "What song number would you like to play?"
       song_input = gets.strip
-      #binding.pry
-      puts "Playing #{Song.all[song_input.to_i-1].name}"
+      puts "Playing #{Song.all[song_input.to_i-1].artist.name} - #{Song.all[song_input.to_i-1].name} - #{Song.all[song_input.to_i-1].genre.name}"
     end
-    #.artist.name} - #{selection.name} - #{selection.genre.name}"
 end
