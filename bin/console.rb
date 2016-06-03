@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 
 
-MusicLibraryController.new.list_artists
+MusicLibraryController.new.play_song
 
-Pry.start
+#Pry.start
