@@ -53,8 +53,9 @@ class Song
     song_name = f[1].strip
     artist_name = f[0].strip
     genre = f[2].strip.chomp('.mp3')
-    artist = Artist.create(artist_name)
-    genre_obj = Genre.create(genre)
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre_obj = Genre.find_or_create_by_name(genre)
+    # binding.pry
     s = Song.new(song_name, artist, genre_obj)
     s
   end
@@ -62,6 +63,7 @@ class Song
   def self.create_from_filename(filename)
     s = self.new_from_filename(filename)
     s.save
+    s
   end
 
 
