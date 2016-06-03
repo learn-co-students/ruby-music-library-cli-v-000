@@ -73,10 +73,10 @@ class Song
     name = filename.split(" - ")[1]
     genre = filename.split(" - ")[2].delete(".mp3")
     @artist = Artist.find_or_create_by_name(artist)
-    new_song = Song.new(name)
-    new_song.artist = @artist
-    @genre = Genre.find_or_create_by_name(genre)
-    new_song.genre = @genre
+    new_song = Song.new(name, artist, genre)
+    #new_song.artist = @artist
+   # @genre = Genre.find_or_create_by_name(genre)
+    #new_song.genre = @genre
     new_song
   #binding.pry
   end
