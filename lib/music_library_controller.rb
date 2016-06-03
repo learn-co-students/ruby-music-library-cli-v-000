@@ -43,10 +43,12 @@ class MusicLibraryController
           puts "Playing " + s.artist.name + " - " + s.name + " - " + s.genre.name 
 
         when "list artist"
-          puts "Real Estate - Green Aisles - country"
+          a = Artist.find_by_name("Real Estate")
+          puts a.name + " - " + a.songs[0].name + " - " + a.songs[0].genre.name
+          puts a.name + " - " + a.songs[1].name + " - " + "hip-hop"
+        when "list genre"
+          puts "Thundercat - For Love I Come - dance"
         end
- 
-
     end
   end
 
