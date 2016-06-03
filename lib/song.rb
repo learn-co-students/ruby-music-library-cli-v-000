@@ -21,9 +21,7 @@ class Song
   end
 
   def self.find_or_create_by_name(name)
-        Song.create(name) unless Song.find_by_name(name) == nil
-      #end
-     # binding.pry
+     Song.find_by_name(name) || Song.create(name)    
   end
 
 
@@ -68,6 +66,25 @@ class Song
     new_song = Song.new(name)
     new_song.save 
     new_song
+  end
+
+  def self.new_from_filename(filename)
+    artist = filename.split(" - ")[0]
+    name = filename.split(" - ")[1]
+    genre = filename.split(" - ")[2].delete(".mp3")
+    @artist = Artist.find_or_create_by_name(artist)
+    new_song = Song.new(name)
+    new_song.artist = @artist
+    @genre = Genre.find_or_create_by_name(genre)
+    new_song.genre = @genre
+    new_song
+  #binding.pry
+  end
+
+  def self.create_from_filename(filename) 
+    song = Song.new_from_filename(filename)
+    song.save
+    song
   end
 
 
