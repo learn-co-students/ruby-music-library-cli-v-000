@@ -4,15 +4,6 @@ class Song
 
   @@all = []
 
-  #def initialize(name, artist = nil)
- #   @name = name
- #   if artist != nil 
-  #    @artist = artist
- #   end
- #   @genre = genre
-    #artist.add_song(self)
-#binding.pry
-  #end
   def self.find_by_name(name)
     @@all.detect {|song| 
       if song.name == name
@@ -24,21 +15,11 @@ class Song
      Song.find_by_name(name) || Song.create(name)    
   end
 
-
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
   end
-
-  #def name=(name)
-  #  @name = name
- # end
-
-  #def name
-  #  @name
-  #end
-
 
   def artist=(artist)
     @artist = artist
@@ -72,13 +53,10 @@ class Song
     artist = filename.split(" - ")[0]
     name = filename.split(" - ")[1]
     genre = filename.split(" - ")[2].delete(".mp3")
-    @artist = Artist.find_or_create_by_name(artist)
+    artist = Artist.find_or_create_by_name(artist)
+    genre = Genre.find_or_create_by_name(genre)
     new_song = Song.new(name, artist, genre)
-    #new_song.artist = @artist
-   # @genre = Genre.find_or_create_by_name(genre)
-    #new_song.genre = @genre
     new_song
-  #binding.pry
   end
 
   def self.create_from_filename(filename) 
@@ -86,7 +64,5 @@ class Song
     song.save
     song
   end
-
-
 
 end
