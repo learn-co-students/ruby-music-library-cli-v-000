@@ -7,13 +7,13 @@ class MusicImporter
   end
 
   def files
-    Dir.entries(@path).select do |file|
-      file.end_with?(".mp3")
-    end
+    Dir.entries(@path).grep(/.mp3/)
   end
 
     def import
-      files.each {|file| Song.create_from_filename(file)}
+      self.files.sort.each do |each_file|
+        Song.create_from_filename(each_file)
+      end
     end
 
 
