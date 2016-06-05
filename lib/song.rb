@@ -58,25 +58,22 @@ end
 
 
   def self.new_from_filename(filename)
-    filename_chomp = filename.chomp(".mp3")
-    filename_parse = filename_chomp.split(" - ")
+    filename_parse = filename.split(" - ")
     artist_name = filename_parse[0]
     song_name = filename_parse[1]
-    genre_name = filename_parse[2]
+    genre_name = filename_parse[2].gsub(".mp3", "")
     artist_create = Artist.find_or_create_by_name(artist_name)
     genre_create = Genre.find_or_create_by_name(genre_name)
-    Song.new(song_name, artist_name, genre_name)
+    new_song = Song.new(song_name, artist_create, genre_create)
+    new_song
   end
 
-=begin
+
   def self.create_from_filename(filename)
-    song = self.new
-    filename_chomp = filename.chomp(".mp3")
-    filename_parse = filename_chomp.split(" - ")
-    song.artist_name = filename_parse[0]
-    song.name = filename_parse[1]
-    @@all << song
+    song = Song.new_from_filename(filename)
+    song.save
+    song
   end
-=end
+
 
 end
