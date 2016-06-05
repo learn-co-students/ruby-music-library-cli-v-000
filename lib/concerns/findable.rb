@@ -10,7 +10,7 @@ module Concerns::Findable
     else
       new_item = self.create(name)
     end
-    new_item
+    #new_item
   end
 
 end

@@ -1,6 +1,6 @@
 class Artist
 
-  #extend Concerns::Findable
+  extend Concerns::Findable
   attr_accessor :name, :songs
 
   @@all = []
@@ -25,8 +25,12 @@ class Artist
   end
 
   def self.create(name)
-    self.new(name)
+    new_artist = Artist.new(name)
+    new_artist.save
+    new_artist
+
   end
+
 
   def add_song(song)
     @songs << song unless @songs.include?(song)

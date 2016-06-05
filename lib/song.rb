@@ -1,6 +1,6 @@
 class Song
 
-  #attr_accessor :name, :artist, :genre
+  attr_accessor :name, :artist, :genre
 
   @@all = []
 
@@ -54,5 +54,29 @@ def self.find_or_create_by_name(name)
   end
   song
 end
+
+
+
+  def self.new_from_filename(filename)
+    filename_chomp = filename.chomp(".mp3")
+    filename_parse = filename_chomp.split(" - ")
+    artist_name = filename_parse[0]
+    song_name = filename_parse[1]
+    genre_name = filename_parse[2]
+    artist_create = Artist.find_or_create_by_name(artist_name)
+    genre_create = Genre.find_or_create_by_name(genre_name)
+    Song.new(song_name, artist_name, genre_name)
+  end
+
+=begin
+  def self.create_from_filename(filename)
+    song = self.new
+    filename_chomp = filename.chomp(".mp3")
+    filename_parse = filename_chomp.split(" - ")
+    song.artist_name = filename_parse[0]
+    song.name = filename_parse[1]
+    @@all << song
+  end
+=end
 
 end
