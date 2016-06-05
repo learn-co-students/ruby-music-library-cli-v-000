@@ -63,9 +63,9 @@ end
     artist_name = filename_parse[0]
     song_name = filename_parse[1]
     genre_name = filename_parse[2]
-    artist_create = Artist.find_or_create_by_name(artist_name)
-    genre_create = Genre.find_or_create_by_name(genre_name)
-    Song.new(song_name, artist_name, genre_name)
+    #artist_create = Artist.find_or_create_by_name(artist_name)
+    #genre_create = Genre.find_or_create_by_name(genre_name)
+    #Song.new(song_name, artist_name, genre_name)
   end
 
 =begin
