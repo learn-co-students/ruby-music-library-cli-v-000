@@ -15,12 +15,12 @@ class Artist
 		@songs
 	end
 	
+	def genres
+		self.songs.map {|song| song.genre}.uniq
+	end
+	
 	def add_song(song)
-		if self.songs.include?(song)
-			nil
-		else 
-			self.songs << song
-		end
+		(self.songs << song && song.artist = self) unless (self.songs.include?(song) && song.artist == self)	
 	end
 	
 	def save
