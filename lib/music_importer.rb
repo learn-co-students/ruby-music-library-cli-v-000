@@ -7,7 +7,8 @@ class MusicImporter
 	end
 	
 	def files
-		@files = Dir.entries(@path).select {|x| x.include?(".mp3")}
+		@files = Dir.entries(self.path).select {|x| x.include?(".mp3")}
+		@files.sort_by{|word| word.downcase} #Took hours to figure out why this was happening
 	end
 	
 	def import
