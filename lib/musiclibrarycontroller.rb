@@ -91,6 +91,9 @@ class MusicLibraryController
 			Genre.find_by_name(input).songs.each do |song|
 				puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
 			end
+		else
+			puts "Improper selection"
+			list_genre
 		end
 	end
 
