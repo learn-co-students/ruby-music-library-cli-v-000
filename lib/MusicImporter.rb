@@ -10,7 +10,7 @@ class MusicImporter
 
   def files
     @all_files = Dir[@path+"/*.mp3"]
-
+    #binding.pry
     @all_files.collect do |file|
       file.split("/").last
     end
