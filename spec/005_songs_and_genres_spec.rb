@@ -19,7 +19,7 @@ describe "Songs and Genres" do
 
   context 'Songs belong to a genre' do
     describe '#genre=' do
-      it 'accepts an genre for the song' do
+      it 'accepts a genre for the song' do
         song = Song.new("In an Aeroplane Over the Sea")
         genre = Genre.new("indie rock")
         song.genre = genre
