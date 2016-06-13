@@ -1,12 +1,17 @@
-
-
-class Song
-  attr_accessor :name, :artist, :genre
+class Artist
+  attr_accessor :songs, :genres
+  attr_reader :name
+  @@all = []
   extend Concerns::Findable
   
-  @@all = []
   def initialize(name)
     @name = name
+    @song = []
+    @genres = []
+  end
+  
+  def name=(name)
+     @name=name
   end
   
   def self.all
@@ -18,7 +23,7 @@ class Song
   end
   
   def self.create(name)
-    self.new(name).tap {|song| song.save}
+    self.new(name).tap{|artist| artist.save}
   end
   
   def self.destroy_all
