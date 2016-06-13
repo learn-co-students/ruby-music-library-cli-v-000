@@ -18,6 +18,11 @@ class Genre
     @name = name
   end
   
+  def add_song(song)
+    @songs << song unless @songs.include?(song)
+    song.genre = self unless song.genre == self
+  end
+  
   def save
     @@all << self
   end
