@@ -2,18 +2,20 @@ class Song
 
   @@all = []
 
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
 
-  def initialize(name)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def save
-    self.class.all << self
+    @@all << self
   end
 
-  def self.create(name)
-    song = Song.new(name)
+  def self.create(name, artist = nil, genre = nil)
+    song = Song.new(name, artist = nil, genre = nil)
     song.save
     song
   end
