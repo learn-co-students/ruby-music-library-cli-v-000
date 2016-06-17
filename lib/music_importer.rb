@@ -8,7 +8,7 @@ class MusicImporter
 
 
   def files
-      Dir.entries(path).select { |x| x[/\.mp3$/] }
-    end
+    Dir.entries(path).select {|file|file.gsub(/\a\s|\.\w+/, "")}
+  end
 
 end
