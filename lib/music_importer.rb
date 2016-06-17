@@ -1,3 +1,4 @@
+
 class MusicImporter
 
   attr_accessor :path
@@ -9,5 +10,11 @@ class MusicImporter
 
   def files
     @file = Dir.entries(path).select {|file|file[/(.mp3)/]}
+  end
+
+  def import
+    self.files.each do |filename|
+      Song.create_from_filename(filename)
+    end
   end
 end
