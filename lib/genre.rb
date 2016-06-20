@@ -24,13 +24,14 @@ extend Concerns::Findable
       self.songs.collect{ |song| song.artist}.uniq
 #        self.songs.collect do |artist|
 #          song.artist unless @songs.include?(artist)
-#        #  @artists << song.artist unless @artists.include?(self)
+        # @artists << song.artist unless @artists.include?(self)
 #        end
     end
 
-#     def add_song(song)
-#       @songs << song
-#     end
+    def add_song(song)
+      @songs << song unless @songs.include?(song)
+      song.genre = self unless song.genre == self
+    end
 
     def songs
       @songs
@@ -41,7 +42,10 @@ extend Concerns::Findable
     end
 
     def self.create(name) #, song=nil, artist=nil
-      new(name).tap {|genre| genre.save} #, song=nil, artist=nil
+      # new(name).tap {|genre| genre.save} #, song=nil, artist=nil
+      genre = self.new(name)
+      @@all << genre
+      genre
     end
  #  binding.pry
     def to_s

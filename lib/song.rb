@@ -20,6 +20,7 @@ extend Concerns::Findable
 
     def artist=(artist)
         @artist = artist
+        artist.songs << self unless artist.songs.include?(self)
         artist.add_song(self)
     end
 
@@ -27,11 +28,13 @@ extend Concerns::Findable
         @genre = genre # necessary
         #genre.song = self Not necessary
         genre.songs << self unless genre.songs.include?(self) #This line a must.
+        genre.add_song(self)
     end
 
     def add_song(song)
       @song = song
       genre.songs << self unless genre.songs.include?(self)
+      artist.songs << self unless artist.songs.include?(self)
       @songs << song unless @songs.include?(song)
     end
 
@@ -40,28 +43,23 @@ extend Concerns::Findable
         @@all << self
     end
 
-    def self.create(name, artist = nil, genre = nil)
-        new(name, artist = nil, genre = nil).tap {|song| song.save} unless self.all.include?(name)
+    def Song.create(name, artist = nil, genre = nil)
+        # new(name, artist = nil, genre = nil).tap {|song| song.save} unless self.all.include?(name)
     #  binding.pry #
+      song = self.new(name)
+      @@all << song
+      song
     end
 
 
     def self.new_from_filename(filename)
    # binding.pry
       data =  filename.gsub('.mp3','').split(" - ")  #gsub must be before split
-      @artist = Artist.find_or_create_by_name(data[0])
-      @genre = Genre.find_or_create_by_name(data[2])
-#       name = ()
-      self.new(data[1], @artist, @genre)
+      song = self.new(data[1])
+      song.artist = Artist.find_or_create_by_name(data[0])
+      song.genre = Genre.find_or_create_by_name(data[2])
+      song
     end
-   #binding.pry
-#     def self.new_from_filename(filename)
-#     #binding.pry
-#       data =  filename.split(" - ")
-#       @artist = Artist.find_or_create_by_name(data[0])
-#       @genre = Genre.find_or_create_by_name(data[2].gsub('.mp3',''))
-#       self.find_or_create_by_name(data[1], @artist, @genre)
-#     end
 
 #   def self.create_from_filename(filename)
 #    # binding.pry
@@ -72,49 +70,23 @@ extend Concerns::Findable
 #       self.new(data[1], @artist, @genre)
 #     end
       def self.create_from_filename(filename)
-        Song.new_from_filename(filename).tap{|song| song.save}
+        # Song.new_from_filename(filename).tap{|song| song.save}
+        array = filename.chomp(".mp3").split(/\s[-]\s/)
+        song = self.new(array[1])
+        song.artist = Artist.find_or_create_by_name(array[0])
+        song.genre = Genre.find_or_create_by_name(array[2])
+        song.save
+        song
       end
 
-#       @artist = Artist.create(data[0])
-#       @genre =Genre.create(data[2].gsub('.mp3',''))
-#      self.create(data[1], @artist, @genre)
 
-#       filename.split(" - ")[0] = artist
-#       filename.split(" - ")[1] = name
-#       filename.split(" - ")[2] = genre
-#       data = filename.split(" - ")
-#       artist = (data[0])
-#       name = (data[1])
-#       song = Song.new(name)
-#       song.artist = artist
-#       #song.artist = Artist.find_or_create_by_name(artist)
-#       song.Artist.add_song(song)
-#       #song
-
-#binding.pry
-    #end
-#¸binding.pry
 
   def to_s   #WHAT IS THIS? AND WHY IS THIS NECESSARY?
     "#{self.artist.name} - #{self.name} - #{self.genre.name}"
   end
 
     def self.destroy_all
-        self.all.clear #@@all = []
+        @@all.clear #@@all = []
     end
 
 end
-#binding.pry
-#     def self.find_by_name(name)
-#    binding.pry
-#        @@all.find{|song| song.name == name}
-
-#     end
-
-
-#      def self.find_or_create_by_name(name, artist = nil, genre = nil)
-# #     #  binding.pry
-# #       self.find_by_name(name) || self.create(name)
-#         self.create(name, artist = nil, genre = nil) unless self.find_by_name(name)
-# # #       @@all.find{|song| song.name == name} || Song.new(name)
-#      end
