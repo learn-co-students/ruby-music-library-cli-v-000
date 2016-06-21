@@ -19,7 +19,7 @@ class Song
     @@all << self 
   end
 
-  def self.artist=(artist)
+  def artist=(artist)
    @artist = artist
    artist.songs << self
   end
