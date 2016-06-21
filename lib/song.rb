@@ -3,9 +3,12 @@ class Song
   
   @@all = [] 
 
-  def initialize(name)
+  def initialize(name, artist=nil)
     @name = name  
     @@all << self 
+    if artist.is_a?(Artist)
+      self.artist = artist 
+    end
   end
 
   def artist=(artist)
