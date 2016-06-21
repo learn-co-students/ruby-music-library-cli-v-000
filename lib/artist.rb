@@ -11,8 +11,6 @@ class Artist
     @songs = []
   end
 
-
-
   def Artist.all 
     @@all 
   end
@@ -29,7 +27,7 @@ class Artist
     item = Artist.new(artist)
   end
 
-  def add_song(song)
+  def self.add_song(song)
     self.songs << song if Artist.all.include?(song) 
     song.artist = self if song.artist.nil?
   end
