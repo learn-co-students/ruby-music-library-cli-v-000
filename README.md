@@ -2,7 +2,7 @@
 
 ## Overview
 
-You're going to be implementing a Music Library domain composed of 3 main models, `Song`, `Artist`, and `Genre` that will relate to each other and collaborate heavily. Additionally, you're going to be extracting some common functionality of those models into a module, `Concerns::Findable` and mixing that module into those classes. You'll then build a collaborating object, `MusicImporter`, that can parse a directory of MP3 files and use the filenames to create instances of `Song`, `Artist`, and `Genre`. Finally, you'll build a CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that let's a user browse the library of MP3s imported by song, artist, and genre.
+You're going to be implementing a Music Library domain composed of 3 main models, `Song`, `Artist`, and `Genre` that will relate to each other and collaborate heavily. Additionally, you're going to be extracting some common functionality of those models into a module, `Concerns::Findable` and mixing that module into those classes. You'll then build a collaborating object, `MusicImporter`, that can parse a directory of MP3 files and use the filenames to create instances of `Song`, `Artist`, and `Genre`. Finally, you'll build a CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that lets a user browse the library of MP3s imported by song, artist, and genre.
 
 This is a complex lab with many parts, go slow, try to understand what you're trying to build holistically before starting. Read this entire README before jumping in. As you go from spec to spec, we recommend doing them in numbered order. 
 
@@ -16,7 +16,7 @@ A quick note on the placement of Modules. It's Ruby convention to put all Module
 
 The first thing to do is get the basics of the main models working. Each model has almost the exact same basic requirements, so once you make `001_song_basics_spec.rb` pass by building the `Song` class, the `Artist` and `Genre` basic specs will go fast.
 
-The requirements of each model is that they can accept a name upon initialization and set that property correctly. The `name` property should be readable and writeable by the object.
+The requirements of each model are that they can accept a name upon initialization and set that property correctly. The `name` property should be readable and writeable by the object.
 
 ```ruby
 Song.new("Blank Space").name #=> "Blank Space"`
@@ -35,7 +35,7 @@ Song.new("Blank Space").save
 Song.all #=> [#<Song: @name="Blank Space">]
 ```
 
-The class should be able to empty it's `@@all` array via a class method `.destroy_all`.
+The class should be able to empty its `@@all` array via a class method `.destroy_all`.
 
 ```ruby
 Song.new("Blank Space").save
@@ -101,9 +101,11 @@ Create a Music Importer class to work with your `Song`, `Genre` and `Artist` obj
 ## CLI and Music Importer Controller
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so that users can actually interact with our code.
 
-  * Initializes with an optional path to the music, but defaults to `./db/mp3s`. It creates a `MusicImporter` and imports the music.
-  * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics
+  * It initializes with an optional path to the music, but defaults to `./db/mp3s`. It creates a `MusicImporter` and imports the music.
+  * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics.
 
 
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/ruby-music-library-cli' title='Ruby Music Library'>Ruby Music Library</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/ruby-music-library-cli'>Music Library CLI</a> on Learn.co and start learning to code for free.</p>
