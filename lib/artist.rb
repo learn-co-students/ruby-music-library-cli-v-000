@@ -1,7 +1,8 @@
 
 class Artist
-  attr_accessor :name
-  attr_reader :songs 
+  attr_accessor :name, :songs, :genres 
+
+  extend Concerns::Findable
 
   @@all = [] 
 
@@ -9,11 +10,17 @@ class Artist
     @name = name 
     @@all << self 
     @songs = []
+    @all_genres = []
   end
 
   def Artist.all 
     @@all 
   end
+
+  def genres
+    @all_genres 
+  end
+
 
   def Artist.destroy_all 
     Artist.all.clear 
@@ -27,8 +34,8 @@ class Artist
     item = Artist.new(artist)
   end
 
-  def self.add_song(song)
-    self.songs << song if Artist.all.include?(song) 
+  def add_song(song)
+    self.songs << song unless self.songs.include?(song) 
     song.artist = self if song.artist.nil?
   end
 
