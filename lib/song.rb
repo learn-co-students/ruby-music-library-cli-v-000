@@ -10,6 +10,7 @@ class Song
     if artist.is_a?(Artist) 
       self.artist = artist 
     end
+  
 
     if genre.is_a?(Genre)
       genre.songs << self 
@@ -17,6 +18,7 @@ class Song
       artist.genres << genre unless artist.genres.include?(genre)
       self.genre = genre 
     end
+  
   end
 
   def artist=(artist)
@@ -60,6 +62,10 @@ class Song
 
   def self.new_from_filename(name)
     parsed_song = name.split(/\-|\./).map { |el| el.strip || el}.select { |el| el.length > 3 }
+    song_name = Song.new(parsed_song[1])
+    song_artist = Artist.new(parsed_song.first)
+    song_genre = Song.new(parsed_song.last)
+    item = self.new(song_name.name, song_artist.name, song_genre.name)
   end
 
 end
