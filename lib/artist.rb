@@ -1,6 +1,7 @@
 class Artist
   @@all = []
 
+  extend Concerns::Findable
   attr_accessor :name, :songs
 
   def initialize(name)
@@ -31,6 +32,14 @@ class Artist
     if !song.artist
       song.artist = self
     end
+  end
+
+  def genres
+    collection = []
+    @songs.each do |song|
+      collection << song.genre
+    end
+    collection.uniq
   end
 
 
