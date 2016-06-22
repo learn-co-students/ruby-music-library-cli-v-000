@@ -58,5 +58,8 @@ class Song
   end
 
 
+  def self.new_from_filename(name)
+    parsed_song = name.split(/\-|\./).map { |el| el.strip || el}.select { |el| el.length > 3 }
+  end
 
 end
