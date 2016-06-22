@@ -65,8 +65,12 @@ class Song
     artist = parsed_song.first
     song_name = parsed_song[1]
     genre = parsed_song.last 
-    new_song = Song.new(song_name)
-    new_song.artist = artist 
+    new_song = Song.create(song_name)
+    new_artist = Artist.create(artist)
+    new_genre = Genre.create(genre)
+    new_song.artist = new_artist 
+    new_song.genre = new_genre
+    new_song
   end
 
 end
