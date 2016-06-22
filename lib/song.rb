@@ -62,10 +62,11 @@ class Song
 
   def self.new_from_filename(name)
     parsed_song = name.split(/\-|\./).map { |el| el.strip || el}.select { |el| el.length > 3 }
-    song_name = Song.new(parsed_song[1])
-    song_artist = Artist.new(parsed_song.first)
-    song_genre = Song.new(parsed_song.last)
-    item = self.new(song_name.name, song_artist.name, song_genre.name)
+    artist = parsed_song.first
+    song_name = parsed_song[1]
+    genre = parsed_song.last 
+    new_song = Song.new(song_name)
+    new_song.artist = artist 
   end
 
 end
