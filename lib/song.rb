@@ -1,5 +1,3 @@
-require 'pry'
-
 class Song
   @@all = []
   attr_accessor :name
