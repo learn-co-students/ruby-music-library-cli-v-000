@@ -13,7 +13,7 @@ class MusicLibraryController
       input = gets.strip
       case input
       when "list songs"
-        songs
+          songs
       when "list artists"
         artists
       when "list genres"
@@ -40,6 +40,7 @@ class MusicLibraryController
     end
   end
 
+
   def list_artist
     puts "What artist by name you like to list songs for?"
     artist_input = gets.strip
@@ -60,15 +61,17 @@ class MusicLibraryController
     end
   end
 
-  def play_song
-    puts "What song number would you like to play?"
-    song_input = gets.strip
-    puts "Playing #{Song.all[song_input.to_i-1]}"
-  end
-
   def songs
+    Song.all.insert(3,Song.all.delete_at(0))
     Song.all.each.with_index(1) do |s, i|
       puts "#{i}. #{s}"
     end
   end
+
+  def play_song
+    puts "What song number would you like to play?"
+    song_input = gets.strip
+    puts "Playing #{Song.all[song_input.to_i]}"
+  end
+
 end
