@@ -44,14 +44,16 @@ class Song
   end
 
   def Song.find_by_name(name)
-    Song.all.last if Song.all.any? { |song| song.name = name }
+    Song.all.each do |song|
+      return song if song.name = name 
+    end
   end
 
   def Song.find_or_create_by_name(name)
     if Song.all.all? { |song| song.name != name }
       Song.create(name)
     else
-      Song.all.last
+      Song.find_by_name(name)
     end
   end
 
@@ -62,15 +64,11 @@ class Song
 
   def self.new_from_filename(name)
     parsed_song = name.split(/\-|\./).map { |el| el.strip || el}.select { |el| el.length > 3 }
-    artist = parsed_song.first
-    song_name = parsed_song[1]
-    genre = parsed_song.last 
-    new_song = Song.create(song_name)
-    new_artist = Artist.create(artist)
-    new_genre = Genre.create(genre)
-    new_song.artist = new_artist 
-    new_song.genre = new_genre
-    new_song
+    Song.new(parsed_song[1], Artist.find_or_create_by_name(parsed_song[0]), Genre.find_or_create_by_name(parsed_song[2]))
+  end
+
+  def self.create_from_filename(song_name)
+     self.new_from_filename(song_name)
   end
 
 end
