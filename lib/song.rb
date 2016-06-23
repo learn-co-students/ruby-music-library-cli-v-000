@@ -16,6 +16,10 @@ class Song
     @@all
   end
 
+  def self.sort
+    @@all.sort
+  end
+
   def self.destroy_all
     @@all.clear
   end
