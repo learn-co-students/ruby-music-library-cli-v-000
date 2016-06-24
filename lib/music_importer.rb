@@ -1,0 +1,16 @@
+class MusicImporter
+  extend Concerns::Findable
+  attr_accessor :path
+
+  def initialize(path)
+    @path = path
+  end
+
+  def files
+    Dir.entries(@path).grep(/.mp3/)
+  end
+
+  def import
+    self.files.each {|file| Song.create_from_filename(file)}
+  end
+end
