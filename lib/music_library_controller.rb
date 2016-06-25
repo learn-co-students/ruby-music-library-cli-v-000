@@ -30,7 +30,7 @@ class MusicLibraryController
       when "list artist"
         puts "Which artist's songs would you like to list?"
         list_artist
-      when"list genre"
+      when "list genre"
         puts "Which genre would you like to list?"
         puts "Your choices are:"
         puts "rock, pop, indie, hip-hop, electro, house, country, folk, dance"
