@@ -28,7 +28,8 @@ describe "Artist Basics" do
   describe '.destroy_all' do
     it 'resets the @@all class variable to an empty array' do
       Artist.class_variable_set(:@@all, ["Artist"])
-
+      pp Artist.included_modules.inspect
+      #pp Artist.public_methods.sort
       Artist.destroy_all
       expect(Artist.all).to match_array([])
     end
