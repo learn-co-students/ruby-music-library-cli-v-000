@@ -1,6 +1,8 @@
 require_relative "../config/environment.rb"
 
 class Genre
+  extend Concerns::Findable
+
   attr_accessor :name
   attr_reader :songs
 

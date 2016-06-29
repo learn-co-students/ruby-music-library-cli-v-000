@@ -1,4 +1,5 @@
 require_relative "../config/environment.rb"
+require_relative "../concerns/findable.rb"
 
 class Song
   attr_accessor :name
@@ -59,6 +60,23 @@ class Song
     else
       self.find_by_name(name)
     end
+  end
+
+  def self.new_from_filename(filename)
+    filename_pieces = filename.split(" - ")
+    artist_name = filename_pieces[0]
+    song_name = filename_pieces[1]
+    genre_name = filename_pieces[2].split(".")[0]
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name, artist, genre)
+  end
+
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+    song
   end
 
 end
