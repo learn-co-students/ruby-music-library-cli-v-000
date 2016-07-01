@@ -57,7 +57,7 @@ class Song
     genre_to_split = filename.split(" - ")[2]
     genre = genre_to_split.split(".")[0]
     song = @@all.detect{|a| a.artist == artist}
-    if song.nil? == true
+    if song.nil?
       song = Song.new(name)
       @artist = Artist.new(artist)
 
@@ -71,7 +71,7 @@ class Song
     song
 
   end
-  
+
 
   def self.create_from_filename(filename)
     name = filename.split(" - ")[1]
@@ -80,7 +80,7 @@ class Song
     genre = genre_to_split.split(".")[0]
 
     found = self.all.detect{|a| a.artist == artist}
-    if found.nil? == true
+    if found.nil?
       found = Song.create(name)
 
       @artist = Artist.create(artist)
