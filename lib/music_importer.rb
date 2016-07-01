@@ -31,7 +31,7 @@ class MusicImporter
         else
 
           not_nil = Song.all.detect{|is_song| is_song.name == new_song.name}
-          binding.pry
+          
           if not_nil.nil?
             Song.all << new_song
           end
