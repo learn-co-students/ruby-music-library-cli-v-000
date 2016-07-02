@@ -1,6 +1,6 @@
 require 'pry'
 class MusicImporter
-  attr_accessor :path
+  attr_reader :path
 
   def initialize(path)
     @path = path
@@ -8,38 +8,17 @@ class MusicImporter
   end
 
   def files
-    new_file = []
-
-    x = Dir["#{@path}/*.mp3"]
-
-    x.each do |file|
-      y = file.split(/(\/mp3s\/)/)
-
-      new_file << y[2]
-
-    end
-    new_file
-
+     Dir.entries(path).select {|file| file.end_with?(".mp3")}.sort
   end
 
   def import
 
-      files.each do |file_name|
-        new_song = Song.new_from_filename(file_name)
-        if Song.all == []
-          Song.all << new_song
-        else
-
-          not_nil = Song.all.detect{|is_song| is_song.name == new_song.name}
-          
-          if not_nil.nil?
-            Song.all << new_song
-          end
-        end
-
-      end
-      Song.all
-
+    files.each do |filename|
+      Song.create_from_filename(filename)
     end
+
+  end
+
+
 
 end

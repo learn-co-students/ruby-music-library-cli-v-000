@@ -7,13 +7,10 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    if artist != nil
-    artist.add_song(self)
-    end
-    if genre != nil
-      self.genre=(genre)
-    end
 
+      self.artist = artist if !artist.nil?
+
+      self.genre = genre if !genre.nil?
   end
 
   def self.all
@@ -30,8 +27,8 @@ class Song
     @@all << self
   end
 
-  def self.create(song_name)
-    song = Song.new(song_name)
+  def self.create(song_name, artist = nil, genre = nil)
+    song = Song.new(song_name, artist, genre)
     song.save
     song
   end
@@ -52,51 +49,24 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    name = filename.split(" - ")[1]
-    artist = filename.split(" - ")[0]
-    genre_to_split = filename.split(" - ")[2]
-    genre = genre_to_split.split(".")[0]
-    song = @@all.detect{|a| a.artist == artist}
-    if song.nil?
-      song = Song.new(name)
-      @artist = Artist.new(artist)
+      name = filename.split(" - ")[1]
+      artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
+      genre_to_split = filename.split(" - ")[2]
+      genre = Genre.find_or_create_by_name(genre_to_split.split(".")[0])
 
-      song.artist = @artist
-
-      @genre = Genre.new(genre)
-      song.genre = @genre
-#"Thundercat - For Love I Come - dance.mp3"    
-
-   end
-    song
+      song = Song.new(name, artist, genre)
 
   end
 
 
   def self.create_from_filename(filename)
     name = filename.split(" - ")[1]
-    artist = filename.split(" - ")[0]
+    artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
     genre_to_split = filename.split(" - ")[2]
-    genre = genre_to_split.split(".")[0]
+    genre = Genre.find_or_create_by_name(genre_to_split.split(".")[0])
 
-    found = self.all.detect{|a| a.artist == artist}
-    if found.nil?
-      found = Song.create(name)
-
-      @artist = Artist.create(artist)
-
-      found.artist = @artist
-      @genre = Genre.create(genre)
-      found.genre = @genre
-
-      # found
-
-
-   end
-    found
-
-
-
+    song = Song.create(name, artist, genre)
+  
 
   end
 
