@@ -15,10 +15,7 @@ class MusicLibraryController
 
       case user_input
       when "songs"
-        Song.all.each do |each_song|
-          puts each_song.name
-
-        end
+      
 
       when "artist"
 
