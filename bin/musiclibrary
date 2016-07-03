@@ -3,7 +3,3 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
-
-def initialize(path)
-  @path = path
-end
