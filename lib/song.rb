@@ -1,14 +1,20 @@
 require 'pry'
 
 class Song
-  extend Memorable::ClassMethods
-  include Memorable::InstanceMethods
+  extend Concerns::ClassMethods
+  include Concerns::InstanceMethods
   attr_accessor :name
+  attr_reader :artist
 
   @@all = []
 
   def initialize name
     @name = name
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.songs << self
   end
 
   def self.all
@@ -17,6 +23,7 @@ class Song
 
   def save
     self.class.all << self
+    self
   end
 
   def self.create name

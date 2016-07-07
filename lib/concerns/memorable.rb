@@ -1,4 +1,4 @@
-module Memorable
+module Concerns
   
   module ClassMethods
     def find_by_name(name)
@@ -19,5 +19,5 @@ module Memorable
       self.class.all << self
     end
   end
-  
+
 end
