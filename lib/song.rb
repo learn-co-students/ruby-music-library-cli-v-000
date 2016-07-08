@@ -45,10 +45,21 @@ class Song
 # binding.pry 
   end
 
-  def new_from_file_name
+  def self.new_from_filename(file_name)
+    data = file_name.chomp!('.mp3').split(' - ')
+    new_song = Song.new(data[1])
+    new_song.artist = Artist.find_or_create_by_name(data[0])
+    new_song.genre = Genre.find_or_create_by_name(data[2])
+    new_song
   end
 
-  def create_from_file_name
+  def self.create_from_filename(file_name)
+    data = file_name.chomp!('.mp3').split(' - ')
+    new_song = Song.new(data[1])
+    new_song.artist = Artist.find_or_create_by_name(data[0])
+    new_song.genre = Genre.find_or_create_by_name(data[2])
+    new_song.save
+    new_song
   end
 
 end
