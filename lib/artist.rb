@@ -27,8 +27,8 @@ class Artist
   end
 
   def add_song (song)
+    song.name_artist = self if !(song.artist == self)
     @songs << song if !@songs.include?(song)
-    song.artist = self if song.artist == nil
   end
 
   def self.create name

@@ -8,13 +8,19 @@ class Song
 
   @@all = []
 
-  def initialize (name, artist = nil)
+  def initialize (name, artist_name = nil)
     @name = name
-    self.artist
+
+    self.artist = artist_name if !(artist_name == nil)
   end
 
   def artist=(artist)
     artist.add_song(self)
+    @artist = artist
+  end
+
+  def name_artist=(artist)
+    @artist = artist
   end
 
   def self.all
