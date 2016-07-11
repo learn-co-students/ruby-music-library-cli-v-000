@@ -6,7 +6,7 @@ module Concerns
     end
 
     def find_or_create_by_name(name)
-      if self.all.detect{|a| a.name} == nil
+      if !self.all.any?{|a| a.name}
         self.new(name) 
       else
         self.all.detect{|a| a.name}

@@ -8,7 +8,7 @@ class Artist
   include Paramable
 
   attr_accessor :name
-  attr_reader :songs
+  attr_reader :songs, :genres
 
   @@all = []
 
@@ -28,7 +28,7 @@ class Artist
   end
 
   def save
-    self.class.all << self
+    self.class.all << self if !@@all.include?(self)
     self
   end
 
@@ -38,7 +38,7 @@ class Artist
   end
 
   def self.create name
-    self.new(name).save
+    artist = self.new(name).save
   end
 
   def add_songs(songs)

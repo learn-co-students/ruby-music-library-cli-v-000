@@ -43,12 +43,12 @@ class Song
   end
 
   def save
-    self.class.all << self
+    self.class.all << self if !@@all.include?(self)
     self
   end
 
-  def self.create name
-    self.new(name, artist = nil, genre = nil).save
+  def self.create (name, artist = nil, genre = nil)
+    self.new(name, artist, genre).save
   end
 
   def self.destroy_all
@@ -58,13 +58,20 @@ class Song
   def self.new_from_filename filename
     filename = filename.split(" - ")
     filename[2] = filename[2].gsub(".mp3", "")
-    artist = Artist.new (filename[0])
-    genre = Genre.new (filename[2])
-    song = self.new(filename[1])
-    song.artist = artist
-    song.genre = genre
+    artist = Artist.find_or_create_by_name(filename[0])
+    genre = Genre.find_or_create_by_name(filename[2])
+    song = self.new(filename[1], artist, genre)
     song
   end
+
+  def self.create_from_filename filename
+    filename = filename.split(" - ")
+    filename[2] = filename[2].gsub(".mp3", "")
+    artist = Artist.find_or_create_by_name(filename[0])
+    genre = Genre.find_or_create_by_name(filename[2])
+    self.create(filename[1], artist, genre)
+  end
+
 
 
 end
