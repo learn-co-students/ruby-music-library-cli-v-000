@@ -11,9 +11,6 @@ class MusicLibraryController
     input  = nil
     until input == "exit"
       input = gets
-      if gets == "list songs"
-        Song.all.each {|song| puts "#{song.index}. #{song.artist} - #{song.name} - #{song.genre}"}
-      end
     end
   end
 
