@@ -17,7 +17,7 @@ class MusicLibraryController
     until input == "exit" do
       puts "'list songs', 'list artists', 'list genres' 'list artists songs',"
       puts "'list songs in a certain genre', 'play song'"
-      input = gets.chomp
+      input = gets.strip
     
     case input
     when "list songs"
@@ -28,9 +28,9 @@ class MusicLibraryController
       genres
     when "play song"
       play_song
-    when "list artists songs"
-      artists_songs
-    when "list songs in a certain genre"
+    when "list artist"
+      artist_songs
+    when "list genre"
       genre_songs
       end
     end               
@@ -56,8 +56,17 @@ class MusicLibraryController
     puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 
+  def artist_songs
+    puts "Please select artist."
+    artist_input= gets.strip
+    Artist.find_by_name(artist_input).songs.each{|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}" }
+  end
 
-
+  def genre_songs
+    puts "Please select genre."
+    genre_input = gets.strip
+    Genre.find_by_name(genre_input).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}" }
+  end
 end
 
 
