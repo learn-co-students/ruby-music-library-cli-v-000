@@ -27,7 +27,7 @@ class Genre
   end
 
   def save
-    self.class.all << self
+    self.class.all << self if !@@all.include?(self)
     self
   end
 

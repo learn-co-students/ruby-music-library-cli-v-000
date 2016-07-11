@@ -6,7 +6,8 @@ module Concerns
     end
 
     def find_or_create_by_name(name)
-      if !self.all.any?{|a| a.name}
+      binding.pry
+      if !self.find_by_name(name)
         self.new(name) 
       else
         self.all.detect{|a| a.name}
