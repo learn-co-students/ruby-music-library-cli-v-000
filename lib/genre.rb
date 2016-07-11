@@ -2,12 +2,20 @@ require 'pry'
 
 class Genre
 
-  attr_accessor :name
+  extend Concerns::Findable
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize name
     @name = name
+    @songs = []
+    @all_artists = []
+    @@all << self
+  end
+
+  def artists
+    @all_artists
   end
 
   def self.all

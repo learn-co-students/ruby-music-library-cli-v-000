@@ -3,8 +3,8 @@ require 'pry'
 class Artist
   
   extend Concerns::ClassMethods
+  extend Concerns::Findable
   include Concerns::InstanceMethods
-  include Findable
   include Paramable
 
   attr_accessor :name
@@ -15,6 +15,12 @@ class Artist
   def initialize name
     @name  = name
     @songs = []
+    @all_genres = []
+    @@all << self
+  end
+
+  def genres
+    @all_genres
   end
 
   def self.all
