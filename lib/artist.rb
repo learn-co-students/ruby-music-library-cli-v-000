@@ -17,6 +17,7 @@ class Artist
     @songs = []
     @all_genres = []
     @@all << self
+    self
   end
 
   def genres
