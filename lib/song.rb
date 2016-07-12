@@ -14,7 +14,7 @@ class Song
     @@all << self
     if !(artist == nil)
       self.artist = artist
-      self.artist.songs << self 
+      self.artist.songs << self if !self.artist.songs.include?(self)
     end
     if !(genre == nil)
       self.genre = genre 
