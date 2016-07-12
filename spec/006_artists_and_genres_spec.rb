@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Artists have many genres through songs" do
   describe '#genres' do
@@ -7,7 +8,7 @@ describe "Artists have many genres through songs" do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In an Aeroplane Over the Sea", artist, genre)
       song = Song.new("Two Headed Boy pt 1", artist, genre)
-
+  
       expect(artist.genres).to include(genre)
       expect(artist.genres.size).to eq(1)
     end
