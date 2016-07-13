@@ -25,6 +25,7 @@ class Artist
   def self.create(name)
     artist = Artist.new(name)
     artist.save
+    return artist
   end
 
   def songs
