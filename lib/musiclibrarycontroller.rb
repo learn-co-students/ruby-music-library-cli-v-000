@@ -39,8 +39,8 @@ class MusicLibraryController
   end
 
   def list_songs
-    self.music_importer.files.each_with_index do |file, index|
-      puts "#{index + 1}. #{file.slice(/(.)*.mp3/)}"
+    Song.all.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
