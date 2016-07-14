@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/song.rb'
+# require_relative '../../lib/song.rb'
 
 describe "Song Basics" do
   describe '#initialize with #name' do
