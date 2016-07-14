@@ -9,18 +9,22 @@ class MusicLibraryController
 
   def call
     input = nil
-    inputs = []
+
     while input != "exit" do
       input = gets
       puts "#{input}"
-      inputs << input
     end
-    if inputs.include?("list songs")
+
+    if input == "list songs"
       self.list_songs
     end
 
-    if inputs.include?("list artists")
+    if input == "list artists"
       self.list_artists
+    end
+
+    if input == "list genres"
+      self.list_genres
     end
   end
 
@@ -31,9 +35,23 @@ class MusicLibraryController
   end
 
   def list_artists
+    artists = []
     @music_importer.songs.each do |song|
-      puts "#{song.artist}"
+      artists << song.artist.name
     end
+    puts "#{artists.uniq}"
   end
+
+  def list_genres
+    genres = []
+    @music_importer.songs.each do |song|
+      genres << song.genre.name
+    end
+    puts "#{genres.uniq}"
+  end
+
+  def play_song(song_number)
+  end
+
 
 end
