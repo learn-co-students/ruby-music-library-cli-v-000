@@ -7,37 +7,46 @@ class MusicLibraryController
     @music_importer.import
   end
 
+  def music_importer
+    @music_importer
+  end
+
   def call
+    input = nil
     puts "Hello, what would you like to do?"
-    input = gets
-
-    if input == "list songs"
-      self.list_songs
+    while input != "exit"
+      input = gets
+      case input
+      when "list songs"
+        self.list_songs
+      when "list artists"
+        self.list_artists
+      when "list genres"
+        self.list_genres
+      when "play song"
+        song_number = gets
+        self.play_song(song_number)
+      when "list artist"
+        artist = gets
+        self.list_artist(artist)
+      when "list genre"
+        genre = gets
+        self.list_genre(genre)
+      else
+        puts "Please enter a valid command"
+      end
     end
-
-    if input == "list artists"
-      self.list_artists
-    end
-
-    if input == "list genres"
-      self.list_genres
-    end
-
-    if input == "exit"
-      return exit
-    end
-
   end
 
   def list_songs
-    @music_importer.files.each do |file|
+    self.music_importer.files.each do |file|
       puts "#{file.index + 1} #{file.slice(/(.)*.mp3/)}"
     end
   end
 
   def list_artists
     artists = []
-    @music_importer.songs.each do |song|
+    self.music_importer.songs.each do |song|
       artists << song.artist.name
     end
     puts "#{artists.uniq}"
@@ -45,14 +54,34 @@ class MusicLibraryController
 
   def list_genres
     genres = []
-    @music_importer.songs.each do |song|
+    self.music_importer.songs.each do |song|
       genres << song.genre.name
     end
     puts "#{genres.uniq}"
   end
 
   def play_song(song_number)
+    self.music_importer.files.each do |file|
+      if file.index == song_number
+        puts "Playing #{file.slice(/(.)*.mp3/)}"
+      end
+    end
   end
 
+  def list_artist(artist)
+    self.music_importer.files.each do |file|
+      if file.include?(artist)
+        puts "#{file.slice(/(.)*.mp3/)}"
+      end
+    end
+  end
+
+  def list_genre(genre)
+    self.music_importer.files.each do |file|
+      if file.include?(genre)
+        puts "#{file.slice(/(.)*.mp3/)}"
+      end
+    end
+  end
 
 end

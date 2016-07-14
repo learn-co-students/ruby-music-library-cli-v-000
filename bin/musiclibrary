@@ -4,8 +4,4 @@ require 'pry'
 require_relative '../config/environment.rb'
 require_relative '../concerns/findable.rb'
 
-music_library_session = MusicLibraryController.new
-
-until music_library_session.call == exit
-  music_library_session.call
-end
+MusicLibraryController.new.call

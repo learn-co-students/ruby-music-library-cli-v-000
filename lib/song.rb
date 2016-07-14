@@ -95,7 +95,7 @@ class Song
     artist_name = split_filename[0]
     artist = Artist.find_or_create_by_name(artist_name)
     #holds "genre", creates new instance of Genre if neccessary
-    genre_name = split_filename[2].slice(/(\w*).mp3/, 1)
+    genre_name = split_filename[2].slice(/(.*).mp3/, 1)
     genre = Genre.find_or_create_by_name(genre_name)
 
     song = self.create(song_name, artist, genre)
