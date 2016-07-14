@@ -39,8 +39,8 @@ class MusicLibraryController
   end
 
   def list_songs
-    self.music_importer.files.each do |file|
-      puts "#{file.index + 1}. #{file.slice(/(.)*.mp3/)}"
+    self.music_importer.files.each_with_index do |file, index|
+      puts "#{index + 1}. #{file.slice(/(.)*.mp3/)}"
     end
   end
 
@@ -61,9 +61,9 @@ class MusicLibraryController
   end
 
   def play_song(song_number)
-    self.music_importer.files.each do |file|
-      if file.index == song_number
-        puts "Playing #{file.slice(/(.)*.mp3/)}"
+    self.music_importer.files.each_with_index do |file, index|
+      if index + 1 == song_number
+        puts "Playing #{file.slice(/(.*).mp3/)}"
       end
     end
   end
