@@ -1,14 +1,9 @@
 require 'pry'
 class MusicImporter
-  attr_accessor :path, :songs
+  attr_accessor :path
 
   def initialize(path)
     @path = path
-    @songs = []
-  end
-
-  def songs
-    @songs
   end
 
   def files
@@ -18,10 +13,7 @@ class MusicImporter
   def import
     files.each do |file_name|
        song = Song.create_from_filename(file_name)
-       self.songs << song
     end
   end
-
-
 
 end
