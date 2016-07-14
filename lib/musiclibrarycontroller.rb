@@ -8,12 +8,8 @@ class MusicLibraryController
   end
 
   def call
-    input = nil
-
-    while input != "exit" do
-      input = gets
-      puts "#{input}"
-    end
+    puts "Hello, what would you like to do?"
+    input = gets
 
     if input == "list songs"
       self.list_songs
@@ -26,6 +22,11 @@ class MusicLibraryController
     if input == "list genres"
       self.list_genres
     end
+
+    if input == "exit"
+      return exit
+    end
+
   end
 
   def list_songs
