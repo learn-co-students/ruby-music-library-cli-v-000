@@ -2,7 +2,8 @@ class Artist
   extend Concerns::Findable
   extend Concerns::Persistable::ClassMethods
   include Concerns::Persistable::InstanceMethods
-  attr_accessor :name, :songs, :genre
+  attr_accessor :name, :songs
+  attr_reader :genre
   @@all = []
 
   def initialize(name)
@@ -23,4 +24,7 @@ class Artist
     @songs << song unless @songs.include?(song)
   end
 
+  def genres
+    self.songs.collect {|song| song.genre}
+  end
 end
