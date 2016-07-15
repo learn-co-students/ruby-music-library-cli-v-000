@@ -8,7 +8,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    save
   end
 
   def self.all
@@ -21,7 +20,7 @@ class Artist
 
   def add_song(song)
     song.artist = self unless song.artist == self
-    song.save unless @songs.include?(song)
+    @songs << song unless @songs.include?(song)
   end
 
 end
