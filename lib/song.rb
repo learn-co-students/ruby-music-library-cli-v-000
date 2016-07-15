@@ -6,8 +6,7 @@ class Song
   attr_reader :songs, :artist, :genre
   @@all = []
 
-  def initialize(name, artist = nil, song = nil, genre = nil)
-    @songs = []
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     @song = song
     self.genre = genre if genre
