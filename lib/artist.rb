@@ -3,7 +3,6 @@ class Artist
   extend Concerns::Persistable::ClassMethods
   include Concerns::Persistable::InstanceMethods
   attr_accessor :name, :songs
-  attr_reader :genre
   @@all = []
 
   def initialize(name)
@@ -25,6 +24,7 @@ class Artist
   end
 
   def genres
-    self.songs.uniq!collect {|song| song.genre}
+    new_array = self.songs.collect {|song| song.genre}.uniq!
+    new_array
   end
 end
