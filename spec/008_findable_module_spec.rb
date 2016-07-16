@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec_helper.rb'
 
 describe 'Concerns::Findable' do
   it 'defines a module Concerns::Findable' do
