@@ -31,7 +31,6 @@ class Artist
     artist
   end
 
-
   # artist has many songs.
   def add_song(song)
      @songs << song

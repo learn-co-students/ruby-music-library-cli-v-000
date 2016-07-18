@@ -20,7 +20,7 @@ class Song
   def save
     self.class.all << self # makes the code more reusable
   end
-
+  
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
   def self.create(song)
     song = Song.new(name)
@@ -28,15 +28,10 @@ class Song
     song
   end
 
-
-    def artist=(artist)
-      # song = Song.new(name)
-      # artist.songs << add_song(song)
-      # @@all
-      artist = artist.add_song(song)
-      # binding.pry
-      # song=Song.new(name)
-      # artist.songs
-    end
+  # adds the song to the artist\'s songs
+  def artist=(artist)
+    @artist = artist
+    artist.songs << self
+  end
 
 end
