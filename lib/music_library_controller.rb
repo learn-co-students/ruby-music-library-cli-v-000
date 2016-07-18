@@ -32,34 +32,34 @@ class MusicLibraryController
 
   def songs
     Song.all.each.with_index(1) do |song, i|
-      puts "#{i}. #{song}"
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def artists
     Artist.all.each.with_index(1) do |artist, i|
-      puts "#{i}. #{artist}"
+      puts "#{i}. #{artist.name}"
     end
   end
 
   def genres
     Genre.all.each.with_index(1) do |genre, i|
-      puts "#{i}. #{genre}"
+      puts "#{i}. #{genre.name}"
     end
   end
 
   def play_song
     puts "What song number would you like to play?"
     song_input = gets.strip
-    puts "Playing #{Song.all[song_input.to_i-1]}"
+    puts "Playing #{Song.all[song_input.to_i-1].artist.name} - #{Song.all[song_input.to_i-1].name} - #{Song.all[song_input.to_i-1].genre.name}"
   end
 
   def list_artist
     puts "What artist by name you like to list songs for?"
     artist_input = gets.strip
     if artist = Artist.find_by_name(artist_input)
-      artist.songs.each do |song, i|
-        puts "#{i}. #{song}"
+      artist.songs.each do |song|
+        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
       end
     end
   end
@@ -68,8 +68,8 @@ class MusicLibraryController
     puts "What genre by name you like to list songs for?"
     genre_input = gets.strip
     if genre = Genre.find_by_name(genre_input)
-      genre.songs.each do |song, i|
-        puts "#{i}. #{song}"
+      genre.songs.each do |song|
+        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
       end
     end
   end
