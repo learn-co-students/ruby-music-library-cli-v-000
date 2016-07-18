@@ -33,7 +33,12 @@ class Artist
 
   # artist has many songs.
   def add_song(song)
-     @songs << song
-     song.artist = self
+    @songs << song
+    if @songs.include?(@artist)
+      song.artist != self
+    else
+      song.artist = self
+    end
+    # binding.pry
   end
 end

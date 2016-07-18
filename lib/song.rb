@@ -18,9 +18,9 @@ class Song
   end
 
   def save
-    self.class.all << self # makes the code more reusable
+    self.class.all << self # saves each instance of the class into the all class array. Note: This syntax self.class.all is  more reusable
   end
-  
+
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
   def self.create(song)
     song = Song.new(name)
