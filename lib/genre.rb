@@ -31,4 +31,8 @@ extend Concerns::Findable
     @songs << song unless @songs.include?(song)
   end
 
+  def artists
+    self.songs.collect{|song| song.artist}.uniq
+  end
+
 end
