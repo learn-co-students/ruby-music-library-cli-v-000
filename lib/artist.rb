@@ -9,7 +9,6 @@ class Artist
     @name = name
     @@all << self
     @songs =[]
-
   end
 
   def self.all
@@ -39,5 +38,14 @@ class Artist
       @songs << song
     end
     # binding.pry
+
+    # artist have many gneres
+    def genres
+      self.songs.collect do |song|
+        song.genre
+        binding.pry
+      end
+    end
+
   end
 end
