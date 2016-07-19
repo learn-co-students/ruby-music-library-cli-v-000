@@ -24,7 +24,7 @@ class Artist
   end
 
   def genres
-    new_array = self.songs.collect {|song| song.genre}.uniq!
-    new_array
+    new_array = self.songs.collect {|song| song.genre}
+    new_array.uniq
   end
 end

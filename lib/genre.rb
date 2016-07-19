@@ -27,4 +27,8 @@ class Genre
     @songs << song unless @songs.include?(song)
   end
 
+  def artists
+    new_array = self.songs.collect {|song| song.artist}
+    new_array.uniq
+  end
 end
