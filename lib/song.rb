@@ -9,8 +9,7 @@ class Song
     @@all << self
     @artist = artist
     @genre = genre
-    @artist = artist
-    @artist.songs << self
+    song.artist.add_song(self)
     # binding.pry
   end
 
