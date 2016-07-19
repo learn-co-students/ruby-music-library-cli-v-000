@@ -6,7 +6,7 @@ class MusicImporter
   end
 
   def files
-    @files
+    
   end
 
 end
