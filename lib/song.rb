@@ -9,6 +9,8 @@ class Song
     @@all << self
     @artist = artist
     @genre = genre
+    @artist = artist
+    @artist.songs << self
     # binding.pry
   end
 
