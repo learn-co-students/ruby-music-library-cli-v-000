@@ -1,4 +1,6 @@
 class Song
+  extend Findable::ClassMethods  #share class methods from Findable module
+  include Findable::InstanceMethods #share instance class methods from Findable module
 
   attr_accessor :name, :artist, :genre
 
@@ -7,10 +9,17 @@ class Song
   def initialize(name, artist=nil, genre=nil)
     @name = name
     @@all << self
-    @artist = artist
-    @genre = genre
-    song.artist.add_song(self)
-    # binding.pry
+    # below we are saying if we get an artist passed in as an argument
+    # then artist is set to the artist that was passed in and not nil
+    if artist
+      @artist = artist
+      @artist.add_song(self)
+    end
+    # and artist.add_song(self) will successfully add the song to the artist once it is not set to nil
+    if genre
+      @genre = genre
+      @genre.add_song(self)
+    end
   end
 
   def self.all

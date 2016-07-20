@@ -1,5 +1,7 @@
 require "pry"
 class Artist
+  extend Findable::ClassMethods  #share class methods from Findable module
+  include Findable::InstanceMethods #share instance class methods from Findable module
 
   attr_accessor :name, :songs
 
@@ -39,13 +41,13 @@ class Artist
     end
     # binding.pry
 
-    # artist have many gneres
-    def genres
-      self.songs.collect do |song|
-        song.genre
-        binding.pry
-      end
-    end
-
+  # artist have many gnres through songs
+  def genres
+    songs.collect{|song| song.genre}.uniq
+      #unless songs.include?(song.genre)
+      # binding.pry
+    # end
   end
+  end
+
 end

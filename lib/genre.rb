@@ -8,6 +8,7 @@ class Genre
     @name = name
     @@all << self
     @songs = []
+
   end
 
   def self.all
@@ -36,6 +37,14 @@ class Genre
     elsif !@songs.include?(song)
       @songs << song
     end
+  end
+
+  def artists
+    songs.collect{|song| song.artist}.uniq
+      #unless songs.include?(song.genre)
+      # binding.pry
+    # end
+    # end
   end
 
 end
