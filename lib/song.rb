@@ -36,7 +36,7 @@ class Song
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
   def self.create(name)
-    song = Song.new(name)
+    song = Song.new(name, artist=nil, genre=nil)
     song.save
     song
   end
@@ -52,10 +52,25 @@ class Song
     genre.add_song(self)
   end
 
-  def find_by_name
+  def find_by_name(name)
+    self.all.find {|a| a.name }
   end
 
-  def find_or_create_by_name
+  def find_or_create_by_name(name)
+    # self.find_by_name(name)? self.find_by_name(name) : self.create(name) refactored below
+    self.find_by_name(name) || self.create(name)
+  end
+
+  #creates a new instance of a song from the file that\'s passed in
+  def self.new_from_filename(filename)
+    artist_name, name, genre_name = filename.split(" - ")
+    new_song = self.new(name, artist_name, genre_name)
+
+    # binding.pry
+  end
+
+  def create_from_filename
+
   end
 
 end

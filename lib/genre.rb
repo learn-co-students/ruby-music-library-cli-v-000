@@ -22,11 +22,11 @@ class Genre
   end
 
   def save
-    @@all << Song.new(name)
+    @@all << Song.new(name, artist=nil, genre=nil)
   end
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
-  def self.create(genre)
+  def self.create(name)
     genre = Genre.new(name)
     genre.save
     genre
