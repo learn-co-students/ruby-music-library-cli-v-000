@@ -1,6 +1,6 @@
 class Song
-  extend Findable::ClassMethods  #share class methods from Findable module
-  include Findable::InstanceMethods #share instance class methods from Findable module
+  # below we extracting some common functionality of the Findable module into the class
+  extend Concerns::Findable # Folder::Filename:  ruby's convention of namespacing modules
 
   attr_accessor :name, :artist, :genre
 

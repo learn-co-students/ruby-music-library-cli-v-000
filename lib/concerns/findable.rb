@@ -1,13 +1,8 @@
-module Findable
+module Concerns::Findable
 
-  module ClassMethods
-    class Person
-
-    end
+  def find_by_name(name)
   end
 
-  module InstanceMethods
-
+  def find_or_create_by_name(name)
   end
-
 end

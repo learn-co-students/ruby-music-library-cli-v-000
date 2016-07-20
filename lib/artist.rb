@@ -1,7 +1,7 @@
 require "pry"
 class Artist
-  extend Findable::ClassMethods  #share class methods from Findable module
-  include Findable::InstanceMethods #share instance class methods from Findable module
+  # below we extracting some common functionality of the Findable module into the class
+  extend Concerns::Findable # Folder::Filename:  ruby's convention of namespacing modules
 
   attr_accessor :name, :songs
 
@@ -22,7 +22,7 @@ class Artist
   end
 
   def save
-    @@all << Song.new(name)
+    @@all << self
   end
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
@@ -39,15 +39,11 @@ class Artist
     elsif !@songs.include?(song)
       @songs << song
     end
-    # binding.pry
+  end
 
   # artist have many gnres through songs
   def genres
     songs.collect{|song| song.genre}.uniq
-      #unless songs.include?(song.genre)
-      # binding.pry
-    # end
-  end
   end
 
 end

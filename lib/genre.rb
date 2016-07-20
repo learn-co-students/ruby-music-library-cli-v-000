@@ -1,4 +1,6 @@
 class Genre
+  # below we extracting some common functionality of the Findable module into the class
+  extend Concerns::Findable # Folder::Filename:  ruby's convention of namespacing modules
 
   attr_accessor :name, :songs
 
@@ -40,11 +42,7 @@ class Genre
   end
 
   def artists
-    songs.collect{|song| song.artist}.uniq
-      #unless songs.include?(song.genre)
-      # binding.pry
-    # end
-    # end
+    self.songs.collect{|song| song.artist}.uniq
   end
 
 end
