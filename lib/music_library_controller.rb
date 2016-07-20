@@ -20,7 +20,7 @@ class MusicLibraryController
         artists
       when "list genres"
         genres
-      when "play a song"
+      when "play song"
         play_song
       end
     end
