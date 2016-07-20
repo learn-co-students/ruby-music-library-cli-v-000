@@ -35,7 +35,7 @@ class Song
   end
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
-  def self.create(song)
+  def self.create(name)
     song = Song.new(name)
     song.save
     song
@@ -50,6 +50,12 @@ class Song
   def genre=(genre)
     @genre = genre
     genre.add_song(self)
+  end
+
+  def find_by_name
+  end
+
+  def find_or_create_by_name
   end
 
 end

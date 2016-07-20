@@ -34,8 +34,8 @@ class Genre
 
   # artist has many songs.
   def add_song(song)
-    if song.artist!=self
-      song.artist = self
+    if song.genre!=self
+      song.genre = self
     elsif !@songs.include?(song)
       @songs << song
     end

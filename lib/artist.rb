@@ -26,7 +26,7 @@ class Artist
   end
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
-  def self.create(artist)
+  def self.create(name)
     artist = Artist.new(name)
     artist.save
     artist
