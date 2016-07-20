@@ -48,4 +48,24 @@ class Song
     self.create(song_name, artist, genre)
   end
 
+  def self.sort_all_alphabet
+    @@all.sort do |x, y|
+      if x.artist.name == y.artist.name
+        y.artist.name<=>x.artist.name
+      else
+        y.name<=>x.name
+      end
+     end
+  end
+
 end
+
+#def self.sort_all_alphabet
+#    @@all.sort do |x, y|# uses the sort command http://ruby-doc.org/core-1.9.3/Array.html#method-i-sort
+#      if x.artist.name == y.artist.name # if the artist.name is equal to the other artist name
+#        y.artist.name<=>x.artist.name #sorts by artist name, for instance if y has the array element of 1 and x has 0, then y will get -1 to index and x will get +1 which is what happens with <=> operators, also known as the spaceship operator.
+#      else
+#        y.name<=>x.name # sorts by name
+#      end
+#     end
+#  end

@@ -20,26 +20,34 @@ class MusicLibraryController
         artists
       when "list genres"
         genres
+      when "play a song"
+        play_song
       end
     end
   end
 
   def songs
-    Song.all.each.with_index(1) do |song, index|
+    Song.sort_all_alphabet.each.with_index(1) do |song, index|
       puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def artists
     Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
+      puts "#{i}. #{a.name}"
     end
   end
 
   def genres
-    Genres.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
+    Genre.all.each.with_index(1) do |g, i|
+      puts "#{i}. #{g.name}"
     end
+  end
+
+  def play_song
+    puts "What song number would you like to play?"
+    song_input = gets.strip
+    puts "Playing #{Song.sort_all_alphabet[song_input.to_i-1]}"
   end
 
 end
