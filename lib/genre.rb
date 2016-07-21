@@ -1,14 +1,11 @@
 class Genre
   # below we extracting some common functionality of the Findable module into the class
   extend Concerns::Findable # Folder::Filename:  ruby's convention of namespacing modules
-
   attr_accessor :name, :songs
-
   @@all =[]
 
   def initialize(name)
     @name = name
-    @@all << self
     @songs = []
 
   end
@@ -22,7 +19,7 @@ class Genre
   end
 
   def save
-    @@all << Song.new(name, artist=nil, genre=nil)
+   self.class.all << self
   end
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.

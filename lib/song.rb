@@ -1,24 +1,19 @@
 class Song
   # below we extracting some common functionality of the Findable module into the class
   extend Concerns::Findable # Folder::Filename:  ruby's convention of namespacing modules
-
   attr_accessor :name, :artist, :genre
-
   @@all =[]
 
   def initialize(name, artist=nil, genre=nil)
     @name = name
-    @@all << self
     # below we are saying if we get an artist passed in as an argument
     # then artist is set to the artist that was passed in and not nil
     if artist
-      @artist = artist
-      @artist.add_song(self)
+      self.artist = artist
     end
     # and artist.add_song(self) will successfully add the song to the artist once it is not set to nil
     if genre
-      @genre = genre
-      @genre.add_song(self)
+      self.genre = genre
     end
   end
 
@@ -35,10 +30,11 @@ class Song
   end
 
   # instantiates an instance using .new but also evokes #save on that instance, forcing it to persist immediately.
-  def self.create(name)
-    song = Song.new(name, artist=nil, genre=nil)
+  def self.create(name, artist=nil, genre = nil)
+    song = self.new(name, artist, genre)
     song.save
     song
+    # binding.pry
   end
 
   # adds the song to the artist\'s songs
@@ -72,7 +68,7 @@ class Song
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(new_genre_name)
 
-    song = self.new(song_name, artist, genre)
+    self.new(song_name, artist, genre)
   end
 
   # Add a new method to the Song class called .create_from_filename that creates
@@ -86,8 +82,7 @@ class Song
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(new_genre_name)
-    song = self.new(song_name, artist, genre)
-    # binding.pry
+    song = self.create(song_name, artist, genre) # here use create to save the song in addition to creating it
   end
 
 end
