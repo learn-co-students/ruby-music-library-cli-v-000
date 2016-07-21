@@ -1,6 +1,6 @@
 class Artist
   @@all = []
-  attr_accessor :name, :songs
+  attr_accessor :name
 
   def initialize(name)
     @name = name
@@ -13,6 +13,7 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.destroy_all
@@ -20,7 +21,9 @@ class Artist
   end
 
   def self.create(name)
-    self.new(name).tap {|s| s.save}
+    # self.new(name).tap {|s| s.save}
+    artist = self.new(name)
+    artist.save
   end
 
   def songs
@@ -28,6 +31,12 @@ class Artist
   end
 
   def add_song(song)
-    self.songs << song
+    self.songs << song unless self.songs.include? song
+    song.artist = self
+    # if song.artist
+    #   song.artist
+    # else
+    #   song.artist = self
+    # end
   end
 end
