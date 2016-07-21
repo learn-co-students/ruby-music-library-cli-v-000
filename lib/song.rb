@@ -61,16 +61,33 @@ class Song
     self.find_by_name(name) || self.create(name)
   end
 
-  #creates a new instance of a song from the file that\'s passed in
+  # Add a new method to the Song class called .new_from_filename that creates a Song based on a filename
   def self.new_from_filename(filename)
-    artist_name, name, genre_name = filename.split(" - ")
-    new_song = self.new(name, artist_name, genre_name)
+    artist_name, song_name, genre_name = filename.split(" - ") # seperate eaach file by
+    new_genre_name = genre_name.gsub(".mp3","") # remove the extra .mp3 at the end
 
-    # binding.pry
+    # the name is supposed to return as a string while
+    # the artist, genre parameters are returned as objects
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(new_genre_name)
+
+    song = self.new(song_name, artist, genre)
   end
 
-  def create_from_filename
+  # Add a new method to the Song class called .create_from_filename that creates
+  # a Song based on a filename and saves it to the @@all class variable
+  def self.create_from_filename(filename)
+    artist_name, song_name, genre_name = filename.split(" - ") # seperate eaach file by
+    new_genre_name = genre_name.gsub(".mp3","") # remove the extra .mp3 at the end
 
+    # the name is supposed to return as a string while
+    # the artist, genre parameters are returned as objects
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(new_genre_name)
+    song = self.new(song_name, artist, genre)
+    # binding.pry
   end
 
 end
