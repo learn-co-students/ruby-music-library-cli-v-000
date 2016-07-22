@@ -30,13 +30,13 @@ class MusicLibraryController
 
   def artists
     Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
+      puts "#{i}. #{a.name}"
     end
   end
 
   def genres
     Genre.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
+      puts "#{i}. #{g.name}"
     end
   end
 
@@ -68,7 +68,7 @@ class MusicLibraryController
 
   def songs
     Song.all.each.with_index(1) do |s, i|
-      puts "#{i}. #{s}"
+      puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
   end
 end
