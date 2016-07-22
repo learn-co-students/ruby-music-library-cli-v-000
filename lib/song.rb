@@ -67,7 +67,6 @@ class Song
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(new_genre_name)
-
     self.new(song_name, artist, genre)
   end
 
@@ -82,7 +81,7 @@ class Song
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(new_genre_name)
-    song = self.create(song_name, artist, genre) # here use create to save the song in addition to creating it
+    self.create(song_name, artist, genre) # here use create to save the song in addition to creating it
   end
 
 end

@@ -1,6 +1,7 @@
+require "pry"
 class MusicImporter
 
-  attr_accessor :path, :artist
+  attr_reader :path
 
   def initialize(path)
     @path = path
@@ -12,5 +13,11 @@ class MusicImporter
       file == ".." || file =="."
     end
   end
+
+  # imports the files into the library by creating songs from a filename
+  def import
+    files.each {|filename| Song.create_from_filename(filename)}
+  end
+
 
 end

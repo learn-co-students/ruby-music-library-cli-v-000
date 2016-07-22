@@ -2,14 +2,11 @@ require "pry"
 class Artist
   # below we extracting some common functionality of the Findable module into the class
   extend Concerns::Findable # Folder::Filename:  ruby's convention of namespacing modules
-
   attr_accessor :name, :songs
-
   @@all =[]
 
   def initialize(name)
     @name = name
-    @@all << self
     @songs =[]
   end
 
