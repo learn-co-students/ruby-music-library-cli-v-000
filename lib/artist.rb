@@ -1,6 +1,6 @@
 require 'pry'
 class Artist
-
+	extend Concerns::Findable
 	attr_accessor :name, :songs
 	@@all = []
 
@@ -28,16 +28,21 @@ class Artist
 	end
 
 	def add_song(song)
-		if !self.songs.include?(song)
-			song.artist = self
-			@songs << song
-		end
+		song.artist = self if song.artist != self
+		@songs << song if !self.songs.include?(song)
 	end
+
+	def genres
+		self.songs.collect {|s| s.genre}.uniq
+	end
+
 
 end
 
 # rspec spec/002_artist_basics_spec.rb
 # rspec spec/004_songs_and_artists_spec.rb
+# rspec spec/006_artists_and_genres_spec.rb
+# rspec spec/009_findable_artists_and_genres_spec.rb
 
 
 
