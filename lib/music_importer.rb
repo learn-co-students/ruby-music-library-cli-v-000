@@ -1,3 +1,4 @@
+require "pry"
 class MusicImporter
   attr_reader :path
 
@@ -14,8 +15,18 @@ class MusicImporter
 
   # imports the files into the library by creating songs from a filename
   def import
-    files.each {|filename| Song.create_from_filename(filename)}
+    files.each do |filename|
+       song = Song.create_from_filename(filename)
+    end
   end
 
+  def print_songs
+    files.each_with_index do |filename, i|
+      sort_array =[]
+        sort_array << "#{i+1}. #{filename.gsub(".mp3", "")}"
+       sort_array.sort!
+       puts sort_array
+    end
+  end
 
 end
