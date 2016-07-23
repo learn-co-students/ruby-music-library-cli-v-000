@@ -21,7 +21,7 @@ attr_accessor :path
       when 'list artists'
         artists
       when 'list genres'
-        artists
+        genres
       end
     end
   end

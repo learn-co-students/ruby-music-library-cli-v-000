@@ -33,10 +33,8 @@ class MusicImporter
   end
 
   def print_genres
-    array = []
     files.sort.each do |filename|
-      array << Song.create_from_filename(filename).genre.name
-    puts  array.uniq!
+      puts Song.create_from_filename(filename).genre.name
     end
   end
 
