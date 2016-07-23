@@ -1,5 +1,6 @@
 require "pry"
 class MusicLibraryController
+
 attr_accessor :path
 
   def initialize(path = "./db/mp3s")
@@ -17,12 +18,27 @@ attr_accessor :path
       case input
       when 'list songs'
         songs
+      when 'list artists'
+        artists
+      when 'list genres'
+        artists
       end
     end
   end
 
+  # allows a user to list songs
   def songs
     MusicImporter.new(path).print_songs
+  end
+
+  # allows a user to list artists
+  def artists
+    MusicImporter.new(path).print_artists
+  end
+
+  # allows a user to list genres
+  def genres
+    MusicImporter.new(path).print_genres
   end
 
 end

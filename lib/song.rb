@@ -81,7 +81,20 @@ class Song
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(new_genre_name)
-    self.create(song_name, artist, genre) # here use create to save the song in addition to creating it
+    song = self.create(song_name, artist, genre) # here use create to save the song in addition to creating it
+    song
+    # binding.pry
   end
+
+  def print_artists
+      puts self.create_from_filename(filename).artist
+      binding.pry
+  end
+
+  # def print_songs
+  #   self.create_from_filename(filename)
+  #   puts song.artist
+  #   binding.pry
+  # end
 
 end

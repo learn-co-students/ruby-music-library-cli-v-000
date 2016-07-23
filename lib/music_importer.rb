@@ -21,11 +21,22 @@ class MusicImporter
   end
 
   def print_songs
-    files.each_with_index do |filename, i|
-      sort_array =[]
-        sort_array << "#{i+1}. #{filename.gsub(".mp3", "")}"
-       sort_array.sort!
-       puts sort_array
+    files.sort.each_with_index do |filename, i|
+      puts "#{i+1}. #{filename.gsub(".mp3", "")}"
+    end
+  end
+
+  def print_artists
+    files.sort.each do |filename|
+      puts Song.create_from_filename(filename).artist.name
+    end
+  end
+
+  def print_genres
+    array = []
+    files.sort.each do |filename|
+      array << Song.create_from_filename(filename).genre.name
+    puts  array.uniq!
     end
   end
 
