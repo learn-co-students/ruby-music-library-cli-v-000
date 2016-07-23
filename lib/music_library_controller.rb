@@ -22,6 +22,12 @@ attr_accessor :path
         artists
       when 'list genres'
         genres
+      when 'play song'
+        play_songs
+      when 'list artist'
+        songs
+      when 'list genre'
+        songs
       end
     end
   end
@@ -39,6 +45,11 @@ attr_accessor :path
   # allows a user to list genres
   def genres
     MusicImporter.new(path).print_genres
+  end
+
+  # allows a user to play songs
+  def play_songs
+    MusicImporter.new(path).play_song
   end
 
 end

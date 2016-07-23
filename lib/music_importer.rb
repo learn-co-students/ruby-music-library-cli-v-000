@@ -20,21 +20,33 @@ class MusicImporter
     end
   end
 
+  # print songs to the CLI
+  # list artists
+  # list genres
   def print_songs
     files.sort.each_with_index do |filename, i|
       puts "#{i+1}. #{filename.gsub(".mp3", "")}"
     end
   end
 
+  # print artists to the CLI
   def print_artists
     files.sort.each do |filename|
       puts Song.create_from_filename(filename).artist.name
     end
   end
 
+  # print genres to the CLI
   def print_genres
     files.sort.each do |filename|
       puts Song.create_from_filename(filename).genre.name
+    end
+  end
+
+  # print artists to the CLI
+  def play_song
+    files.sort.each_with_index do |filename, i|
+      puts "Playing #{filename.gsub(".mp3", "")}"
     end
   end
 
