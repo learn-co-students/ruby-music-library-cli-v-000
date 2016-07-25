@@ -1,7 +1,9 @@
 require 'pry'
+# require_relative './concerns/findable'
 class Artist
   @@all = []
   attr_accessor :name, :songs
+  extend Concerns::Findable
 
   def initialize(name)
     @name = name
@@ -27,16 +29,9 @@ class Artist
     artist.save
   end
 
-  # def songs
-  #   @songs
-  # end
-
   def add_song(song)
     self.songs << song unless self.songs.include? song
-    # song.artist = self
-    if !song.artist
-      song.artist
-    else
+    if song.artist != self
       song.artist = self
     end
   end

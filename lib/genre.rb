@@ -1,6 +1,8 @@
+# require_relative './concerns/findable'
 class Genre
   @@all = []
   attr_accessor :name, :songs
+  extend Concerns::Findable
 
   def initialize(name)
     @name = name
@@ -28,6 +30,13 @@ class Genre
 
   def songs
     @songs
+  end
+
+  def add_song(song)
+    self.songs << song unless self.songs.include? song
+    if song.genre != self
+      song.genre = self
+    end
   end
 
   def artists
