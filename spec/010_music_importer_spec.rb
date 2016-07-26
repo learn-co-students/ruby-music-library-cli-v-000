@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe "MusicImporter" do
   describe '#intialize' do
     it 'accepts a file path to parse mp3 files from' do
