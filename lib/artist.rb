@@ -1,5 +1,3 @@
-require 'pry'
-# require_relative './concerns/findable'
 class Artist
   @@all = []
   attr_accessor :name, :songs
@@ -24,7 +22,6 @@ class Artist
   end
 
   def self.create(name)
-    # self.new(name).tap {|s| s.save}
     artist = self.new(name)
     artist.save
   end
