@@ -1,6 +1,6 @@
 class Genre
 
-  module Concerns::Findable
+
 
   attr_accessor :name
 
@@ -11,6 +11,20 @@ class Genre
     @name = name
   end
 
-end
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    self.all.clear
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    Genre.new(name).tap {|genre| genre.save}
+  end
 
 end
