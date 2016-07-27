@@ -4,10 +4,10 @@ class Artist
 
 
 
-  attr_accessor :name
+  attr_accessor :name, :song
 
   @@all = []
-  
+
 
 
   def initialize(name)
@@ -30,10 +30,9 @@ class Artist
     Artist.new(name).tap {|artist| artist.save}
   end
 
-  @song = []
-
-
-
+  def songs
+    songs = []
+  end
 
 
 
