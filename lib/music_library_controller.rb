@@ -10,9 +10,16 @@ attr_accessor :path
 
   def call
     input=""
-    puts "list songs"
-    puts "exit"
+    invalid = "invalid command. Must be typed exactly."
     puts "Choose One from these options:"
+    puts "1. list songs"
+    puts "2. list artists"
+    puts "3. list genres"
+    puts "4. play song"
+    puts "5. list artist"
+    puts "6. list genre"
+    puts "7. exit"
+
     while input !="exit"
       input = gets.strip
       case input
@@ -28,8 +35,13 @@ attr_accessor :path
         songs
       when 'list genre'
         songs
+      when 'exit'
+        puts 'You have now left the Music Library.'
+      else
+        puts invalid
       end
     end
+
   end
 
   # allows a user to list songs
