@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Artist Basics" do
   describe '#initialize with #name' do
