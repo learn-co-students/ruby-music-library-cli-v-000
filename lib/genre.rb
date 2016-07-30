@@ -1,9 +1,9 @@
+require 'pry'
 class Genre
 
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :artists
 
-
-  extend Findable::ClassMethods
+  extend Concerns::Findable
   extend Persistable::ClassMethods
   extend Memorable::ClassMethods
   extend Nameable::ClassMethods
@@ -26,5 +26,7 @@ class Genre
     new(name).tap{|s| s.save}
   end
 
-
+  def artists
+    self.songs.collect{|s| s.artist}.uniq
+  end
 end
