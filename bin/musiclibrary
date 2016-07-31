@@ -2,4 +2,7 @@
 
 require_relative '../config/environment'
 
+puts "Welcome!"
+puts "What would you like to do?"
+
 MusicLibraryController.new.call
