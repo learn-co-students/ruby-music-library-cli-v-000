@@ -109,5 +109,8 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
 
 [QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
  - This Q&A led by Avi Flombaum covers setting up a bin file, setting up a Gemfile and installing gems, and identifying objects and their responsibilties. There are general tips on requirements, gems, and design. 
+ 
+[Debugging an Error in Music Library CLI](https://www.youtube.com/watch?v=J_BSGPW37AE)
+- This walkthrouugh traces an error to its source in the code. In addition it covers how to change file permissions, and create an executable file to initialize a sandbox environment.
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/ruby-music-library-cli'>Music Library CLI</a> on Learn.co and start learning to code for free.</p>
