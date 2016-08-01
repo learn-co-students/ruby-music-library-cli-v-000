@@ -29,4 +29,14 @@ class Artist
     song.artist = self unless song.artist == self
   end
 
+  def genres
+
+    genres = self.songs.collect do |song|
+      song.genre
+    end
+
+    genres.uniq
+
+  end
+
 end
