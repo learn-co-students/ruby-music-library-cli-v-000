@@ -105,7 +105,9 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
   * Add a `#call` method that starts the CLI and asks the user for input. Check out the tests for specifics.
 
 
+## Resources
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/ruby-music-library-cli' title='Ruby Music Library'>Ruby Music Library</a> on Learn.co and start learning to code for free.</p>
+[QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
+ - This Q&A led by Avi Flombaum covers setting up a bin file, setting up a Gemfile and installing gems, and identifying objects and their responsibilties. There are general tips on requirements, gems, and design. 
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/ruby-music-library-cli'>Music Library CLI</a> on Learn.co and start learning to code for free.</p>
