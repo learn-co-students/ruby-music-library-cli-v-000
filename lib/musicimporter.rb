@@ -1,23 +1,23 @@
 class MusicImporter
-  attr_accessor :path
+  attr_accessor :path, :files
 
   def initialize(path)
     @path = path
+    @files = []
   end
 
   def files
-    files = []
 
     Dir.glob(File.join(@path, '*.mp3')).each do |file|
       file = file.split("/")[4]
       files << file
     end
     
-    files
+    @files
   end
 
   def import
-    files.each do |file|
+    @files.each do |file|
       Song.create_from_filename(file)
     end
   end
