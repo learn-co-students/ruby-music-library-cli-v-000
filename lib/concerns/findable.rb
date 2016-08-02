@@ -7,7 +7,7 @@ module Findable
   def find_or_create_by_name(name)
     #self.find_by_name(name) || self.new(name)
     if !self.find_by_name(name)
-      self.new(name)
+      self.create(name)
     else
       self.find_by_name(name)
     end
