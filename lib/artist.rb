@@ -31,6 +31,10 @@ class Artist
     song.artist = self unless song.artist == self
   end
 
+  def to_s
+    self.name
+  end
+
   def genres
 
     genres = self.songs.collect do |song|

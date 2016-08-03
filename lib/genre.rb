@@ -30,6 +30,10 @@ class Genre
     @songs << song unless @songs.include?(song)
   end
 
+  def to_s
+    self.name
+  end
+
   def artists
     artists = @songs.collect do |song|
       song.artist

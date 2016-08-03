@@ -39,7 +39,6 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    binding.pry
     new_song = self.new_from_filename(filename)
     new_song.save
     new_song
@@ -55,6 +54,10 @@ class Song
 
   def save
     @@all << self
+  end
+
+  def to_s
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
   end
 
 end
