@@ -23,14 +23,16 @@ class Song
     @@all << self
   end
 
-  def self.create(name)
+
+
+  def self.create(name, artist = nil, genre = nil)
     # self.new.tap do |i|
     #   i.name = name
     # end
 
 
 
-    s = self.new(name)
+    s = self.new(name, artist, genre)
     s.save
     s
 
@@ -60,16 +62,27 @@ class Song
 
 
 
-  # def self.new_from_filename(filename)
-  #   a = filename.split(" - ")[0]
-  #   s = filename.split(" - ")[1]
-  #   g = filename.split(" - ")[2]
+  def self.new_from_filename(filename)
+    a = filename.split(" - ")[0]
+    s = filename.split(" - ")[1]
+    g = filename.split(" - ")[2].gsub(".mp3", "")
 
-  #   artist = Artist.find_or_create_by_name(a)
-  #   genre = Genre.find_or_create_by_name(g)
-  #   self.new(s, a, g)
-  # end
+    artist = Artist.find_or_create_by_name(a)
+    genre = Genre.find_or_create_by_name(g)
+
+    self.new(s, artist, genre)
+  end
  
+  def self.create_from_filename(filename)
+    a = filename.split(" - ")[0]
+    s = filename.split(" - ")[1]
+    g = filename.split(" - ")[2].gsub(".mp3", "")
+
+    artist = Artist.find_or_create_by_name(a)
+    genre = Genre.find_or_create_by_name(g)
+
+    self.create(s, artist, genre)
+  end
 
 
 
