@@ -2,4 +2,32 @@
 
 require_relative '../config/environment'
 
-MusicLibraryController.new.call
+music_library_controller = MusicLibraryController.new.call
+if music_library_controller.include?("list songs")
+	puts "#{Song.all.each_with_index.collect {|i, j| puts "#{j+1}. #{i.artist.name} - #{i.name} - #{i.genre.name}"}}"
+end
+
+if music_library_controller.include?("list artists")
+	puts "#{Artist.all.collect {|i| puts i.name}}"
+end
+
+if music_library_controller.include?("list genres")
+	puts "#{Genre.all.collect {|i| puts i.name}}"
+end
+
+if music_library_controller.include?("play song")
+	i = music_library_controller[1].to_i - 1
+	puts "Playing #{Song.all[i].artist.name} - #{Song.all[i].name} - #{Song.all[i].genre.name}"
+end
+
+
+if music_library_controller.include?("list artist")
+	artist = Artist.find_by_name(music_library_controller[1])
+	puts artist.songs.collect {|i| puts "#{i.artist.name} - #{i.name} - #{i.genre.name}"}
+end
+
+if music_library_controller.include?("list genre")
+	genre = Genre.find_by_name(music_library_controller[1])
+	puts genre.songs.collect {|i| puts "#{i.artist.name} - #{i.name} - #{i.genre.name}"}
+end
+
