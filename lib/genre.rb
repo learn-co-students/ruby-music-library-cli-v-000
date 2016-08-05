@@ -1,21 +1,15 @@
-require 'pry'
+ require 'pry'
 class Genre
 
-  attr_accessor :name, :songs, :artists
+  attr_accessor :name, :songs, :artists, :genre
 
   extend Concerns::Findable
-  extend Persistable::ClassMethods
-  extend Memorable::ClassMethods
-  extend Nameable::ClassMethods
-  include Persistable::InstanceMethods
-  include Nameable::InstanceMethods
 
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    save
   end
 
   def self.all
@@ -24,6 +18,22 @@ class Genre
 
   def self.create(name)
     new(name).tap{|s| s.save}
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.destroy_all
+    @@all.clear
+  end
+
+  def self.sort
+    @@all.sort! { |a, b|  b.name <=> a.name}
+  end
+
+  def to_s
+    self.name
   end
 
   def artists
