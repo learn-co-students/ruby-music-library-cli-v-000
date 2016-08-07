@@ -35,4 +35,9 @@ def self.all
   def genres
     self.songs.collect {|s| s.genre}.uniq
   end
+
+  def to_s
+    self.name
+  end
+  
   end

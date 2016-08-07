@@ -18,8 +18,8 @@ class Song
 
   def self.find_by_name(name)
     self.all.detect{|s| s.name == name}
-  end
 
+  end
   def self.find_or_create_by_name(name)
     self.find_by_name(name) || self.create(name)
   end
@@ -60,5 +60,7 @@ class Song
     @@all << self
   end
 
-
+  def to_s
+   "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+ end
 end
