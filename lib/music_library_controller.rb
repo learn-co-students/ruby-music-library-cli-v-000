@@ -40,6 +40,7 @@ class MusicLibraryController
     end
   end
 
+
   def list_artist
     puts "What artist by name you like to list songs for?"
     artist_input = gets.strip
@@ -66,9 +67,9 @@ class MusicLibraryController
     puts "Playing #{Song.all[song_input.to_i]}"
   end
 
-  def songs
-    Song.all.each.with_index(1) do |s, i|
-      puts "#{i}. #{s}"
-    end
+def songs
+  Song.all.each.with_index(1) do |s, i|
+    puts "#{i}. #{s}"
   end
+end
 end
