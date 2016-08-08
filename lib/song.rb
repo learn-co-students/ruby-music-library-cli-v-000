@@ -51,21 +51,19 @@ class Song
   end
 
   def self.new_from_filename(filename)
-      holder_array = filename.split(" - ")
-      artist, song, genre = holder_array[0], holder_array[1], holder_array[2].gsub(".mp3", "")
-
-     new_artist = Artist.find_or_create_by_name(artist)
-     new_genre = Genre.find_or_create_by_name(genre)
-     self.new(song, artist, genre)
+    holder_array = filename.split(" - ")
+    artist_name, song_name, genre_name = holder_array[0], holder_array[1], holder_array[2].gsub(".mp3", "")
+    new_artist = Artist.find_or_create_by_name(artist_name)
+    new_genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name, new_artist, new_genre)
   end
 
   def self.create_from_filename(filename)
-      holder_array = filename.split(" - ")
-      artist, song, genre = holder_array[0], holder_array[1], holder_array[2].gsub(".mp3", "")
-
-     new_artist = Artist.find_or_create_by_name(artist)
-     new_genre = Genre.find_or_create_by_name(genre)
-     self.create(song, artist, genre)
+    holder_array = filename.split(" - ")
+    artist_name, song_name, genre_name = holder_array[0], holder_array[1], holder_array[2].gsub(".mp3", "")
+    new_artist = Artist.find_or_create_by_name(artist_name)
+    new_genre = Genre.find_or_create_by_name(genre_name)
+    self.create(song_name, new_artist, new_genre)
   end
 
 end
