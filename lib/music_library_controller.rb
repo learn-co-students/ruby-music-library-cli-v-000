@@ -1,4 +1,5 @@
 require 'pry'
+
 class MusicLibraryController
 
   attr_accessor :path, :import
@@ -8,7 +9,7 @@ class MusicLibraryController
   end
 
   def call
-    "type anything"
+    puts "type anything"
     input = gets.chomp
 
     if input == "list songs"
@@ -40,7 +41,17 @@ class MusicLibraryController
       artist_name = gets.chomp
       Song.all.each do |song|
         if song.artist.name == artist_name
-          song
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
+      end
+    end
+
+    if input == "list genre"
+      puts "Enter Genre Name"
+      genre_name = gets.chomp
+      Song.all.each do |song|
+        if song.genre.name == genre_name
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
       end
     end
