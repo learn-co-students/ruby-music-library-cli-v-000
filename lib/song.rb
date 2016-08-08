@@ -12,7 +12,7 @@ attr_accessor :name, :artist, :genre, :file_name
   end
 
   def self.all
-    @@all.sort_by { |song| song.artist.name }
+    @@all
   end
 
   def self.destroy_all

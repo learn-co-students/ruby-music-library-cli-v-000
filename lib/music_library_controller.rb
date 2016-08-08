@@ -13,7 +13,8 @@ class MusicLibraryController
     input = gets.chomp
 
     if input == "list songs"
-      Song.all.each_with_index do |song, i|
+      sorted_songs = Song.all.sort_by { |song| song.artist.name }
+      sorted_songs.each_with_index do |song, i|
         puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       end
     end
