@@ -36,7 +36,7 @@ class Artist
 
   def genres
     @songs.each do |song|
-      @genres << song.genre
+      @genres << song.genre unless @genres.include?(song.genre)
     end
     @genres
   end
