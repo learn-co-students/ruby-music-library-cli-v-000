@@ -36,7 +36,9 @@ class Genre
     self.songs.collect {|song| song.artist}.uniq
   end
 
-
+  def to_s
+    self.name
+  end
 
 
 end
