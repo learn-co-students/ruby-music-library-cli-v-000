@@ -17,7 +17,7 @@ class Song
     puts "@@all1 = #{@@all}"
     song.save
     puts "@@all2 = #{@@all}"
-
+    song
   end
 
   def self.all
