@@ -8,6 +8,7 @@ class MusicLibraryController
   end
 
   def call
+    puts "Please type exit" until gets == "exit"
   end
 
 end
