@@ -10,7 +10,7 @@ describe "Songs and Genres" do
 
     it 'can push a song into the genre\'s song collection' do
       genre = Genre.new("indie rock")
-      song = Song.new("In an Aeroplane Over the Sea")
+      song = Song.new("In the Aeroplane over the Sea")
 
       genre.songs << song
       expect(genre.songs).to include(song)
@@ -20,7 +20,7 @@ describe "Songs and Genres" do
   context 'Songs belong to a genre' do
     describe '#genre=' do
       it 'accepts an genre for the song' do
-        song = Song.new("In an Aeroplane Over the Sea")
+        song = Song.new("In the Aeroplane over the Sea")
         genre = Genre.new("indie rock")
         song.genre = genre
 
@@ -28,7 +28,7 @@ describe "Songs and Genres" do
       end
 
       it 'adds the song to the genre\'s songs' do
-        song = Song.new("In an Aeroplane Over the Sea")
+        song = Song.new("In the Aeroplane over the Sea")
         genre = Genre.new("indie rock")
         song.genre = genre
 
@@ -36,7 +36,7 @@ describe "Songs and Genres" do
       end
 
       it 'does not add the song to the genre\'s songs if it already exists' do
-        song = Song.new("In an Aeroplane Over the Sea")
+        song = Song.new("In the Aeroplane over the Sea")
         genre = Genre.new("indie rock")
 
         song.genre = genre
@@ -52,7 +52,7 @@ describe "Songs and Genres" do
     it 'songs accept an optional argument for the genre' do
       genre = Genre.new("indie rock")
       artist = Artist.new("Neutral Milk Hotel")
-      song = Song.new("In an Aeroplane Over the Sea", artist, genre)
+      song = Song.new("In the Aeroplane over the Sea", artist, genre)
 
       expect(genre.songs).to include(song)
       expect(song.genre).to eq(genre)
