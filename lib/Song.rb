@@ -32,7 +32,7 @@ class Song
   end
 
   def self.create(name)
-    song = self.new(name, artist, genre)
+    song = self.new(name)
     song.save
     song
   end
@@ -54,7 +54,7 @@ class Song
     if self.find_by_name(name)
       self.find_by_name(name)
     else
-      self.create(name,artist,genre)
+      self.create(name)
     end
   end
 
