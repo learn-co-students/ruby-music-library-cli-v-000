@@ -3,6 +3,7 @@ class Artist
 
   attr_accessor :name
 
+
   def songs
     @songs
   end
@@ -14,7 +15,11 @@ class Artist
   def initialize(name, artist=nil)
     @name = name
     @songs = []
+  end
 
+  def genres
+    x = self.songs.map { |song| song.genre }
+    x.uniq
   end
 
 
