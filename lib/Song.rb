@@ -5,29 +5,22 @@ class Song
   attr_reader :artist
 
 
-    @@all = []
+  @@all = []
 
-    def artist= (artist)
-      #binding.pry
-      @artist = artist
-      #binding.pry
-      self.artist.add_song(self)
-      #self.artist.songs.push(self)
+  def artist= (artist)
+    @artist = artist
+    self.artist.add_song(self)
+  end
 
-    end
-
-    def initialize(name, artist=nil)
-      #binding.pry
-      self.artist= artist if artist
-      @name = name
-      #binding.pry
-
-    end
+  def initialize(name, artist=nil)
+    self.artist= artist if artist
+    @name = name
+  end
 
 
-    def self.all
-      @@all
-    end
+  def self.all
+    @@all
+  end
 
   def self.destroy_all
     @@all.clear
@@ -44,4 +37,3 @@ class Song
   end
 
 end
-#binding.pry
