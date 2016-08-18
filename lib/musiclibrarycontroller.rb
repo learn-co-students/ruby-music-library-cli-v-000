@@ -35,7 +35,7 @@ class MusicLibraryController
   end
 
   def songs
-    Song.all.each_with_index  {|song, i| puts "#{i + 1}.  #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    Song.all.each_with_index  {|song, i| puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
   def artists
