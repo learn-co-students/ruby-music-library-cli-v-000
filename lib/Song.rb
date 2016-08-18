@@ -2,7 +2,7 @@ require "pry"
 class Song
 
   attr_accessor :name
-  attr_reader :artist
+  attr_reader :artist, :genre
 
 
   @@all = []
@@ -12,9 +12,10 @@ class Song
     self.artist.add_song(self)
   end
 
-  def initialize(name, artist=nil)
+  def initialize(name, artist=nil, genre=nil)
     self.artist= artist if artist
     @name = name
+    self.genre= genre if genre
   end
 
 
@@ -34,6 +35,15 @@ class Song
     song = self.new(name)
     song.save
     song
+  end
+
+  def genre= (genre)
+    @genre = genre
+    self.genre.songs.push(self) if does_not_have(self)
+  end
+
+  def does_not_have(song)
+    self.genre.songs.none? { |a_song| a_song.name == song.name}
   end
 
 end
