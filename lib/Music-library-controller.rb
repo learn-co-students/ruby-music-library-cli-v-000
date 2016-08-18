@@ -8,6 +8,7 @@ class MusicLibraryController
   end
 
   def call
+    "list songs"
     while input = gets.chomp
       break if input == "exit"
     end
