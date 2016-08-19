@@ -12,7 +12,7 @@ class MusicLibraryController
 
 
   def call
-    input = nil
+    input = ""
     while input != "exit"
       puts "Welcome to Your Music Library!"
       puts "What would you like to do?"
@@ -35,7 +35,7 @@ class MusicLibraryController
   end
 
   def songs
-    Song.sort
+
     Song.all.each.with_index(1) do |song, i| puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 
@@ -50,29 +50,28 @@ class MusicLibraryController
   def play_song
     puts "Enter a song number"
     input = gets.strip.to_i
-    Song.sort
     song = Song.all[input - 1]
     puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 end
 
-def list_artist
-  puts "Enter artist name"
-  input = gets.strip.to_i
-  Song.sort
-  artist = Artist.all[input - 1]
-  artist.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-end
-end
 
-def list_genre
-  puts "Enter genre name"
-  input = gets.strip
-   Genre.all.each do |g|
-    if g.name == input
-  g.songs.each do |song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-end
-end
-end
 
-end
+  def list_artist
+    puts "Enter artist name"
+    artist = gets.strip
+    artist = Artist.find_by_name(artist)
+    artist.songs.each {|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"}
+  end
+
+
+  def list_genre
+    puts "Enter genre name"
+    genre = gets.strip
+    genre = Genre.find_by_name(genre)
+    genre.songs.each  {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+  end
+
+
+
+  end
