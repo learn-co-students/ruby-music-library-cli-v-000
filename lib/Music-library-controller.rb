@@ -1,3 +1,4 @@
+require "pry"
 class MusicLibraryController
 
   attr_reader :path
@@ -5,13 +6,18 @@ class MusicLibraryController
   def initialize(path='./db/mp3s')
     new = MusicImporter.new(path)
     new.import
+
   end
 
   def call
-    "list songs"
-    while input = gets.chomp
-      break if input == "exit"
+    input = ""
+    while input != "exit"
+      puts "Welcome to your music library!"
+      puts "what would you like to do?"
+      input = gets.chomp
     end
-    "exit"
   end
+
+
+
 end
