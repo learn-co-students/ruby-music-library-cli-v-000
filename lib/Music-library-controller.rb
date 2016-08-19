@@ -15,6 +15,11 @@ class MusicLibraryController
       puts "Welcome to your music library!"
       puts "what would you like to do?"
       input = gets.chomp
+      case input
+      when "list songs"
+        songs
+      end
+
     end
   end
 
