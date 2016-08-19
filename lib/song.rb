@@ -32,9 +32,18 @@ class Song
     @song
   end
 
+  def self.sort
+     @@all.sort! { |a, b|  b.name <=> a.name}
+   end
+
+   def to_s
+     self.name
+   end
 
 
-    def artist=(artist)
+
+
+  def artist=(artist)
       @artist = artist
       artist.add_song(self)
     end

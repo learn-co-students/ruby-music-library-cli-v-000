@@ -26,6 +26,14 @@ class Genre
     @@all << self
   end
 
+  def self.sort
+     @@all.sort! { |a, b|  b.name <=> a.name}
+   end
+
+   def to_s
+     self.name
+   end
+
   def self.create(name)
     Genre.new(name).tap {|genre| genre.save}
   end

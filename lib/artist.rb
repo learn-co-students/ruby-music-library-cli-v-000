@@ -4,7 +4,7 @@ class Artist
 
 
 
-  attr_accessor :name, :song
+  attr_accessor :name, :songs
 
   @@all = []
 
@@ -34,6 +34,14 @@ class Artist
   def songs
     @songs
   end
+
+  def self.sort
+     @@all.sort! { |a, b|  b.name <=> a.name}
+   end
+
+   def to_s
+     self.name
+   end
 
   def artist
     artist.songs = self
