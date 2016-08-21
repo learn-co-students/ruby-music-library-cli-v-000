@@ -34,7 +34,7 @@ class MusicLibraryController
     def songs
       song_array = @imported.import
       song_array.each.with_index(1) {|song, index| print  "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name} " }
-    end
+      end
 
     def list_artists
       song_array = @imported.import
@@ -60,6 +60,7 @@ class MusicLibraryController
       song_array = @imported.import
       song_array.each {|song| print  "#{song.artist.name} - #{song.name} - #{song.genre.name} "}
     end
+
 
 
 
