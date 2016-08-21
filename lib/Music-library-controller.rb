@@ -33,6 +33,7 @@ class MusicLibraryController
 
     def songs
       song_array = @imported.import
+      song_array = song_array.sort {|a,b| a.artist.name <=> b.artist.name}
       song_array.each.with_index(1) {|song, index| print  "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name} " }
       end
 
