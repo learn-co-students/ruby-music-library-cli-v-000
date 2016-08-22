@@ -113,6 +113,6 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
 [Debugging an Error in Music Library CLI](https://www.youtube.com/watch?v=J_BSGPW37AE)
 - This walkthruugh traces an error to its source in the code. In addition it covers how to change file permissions, and create an executable file to initialize a sandbox environment.
 
-[Lab Review](https://github.com/learn-co-curriculum/oo-ruby-video-review-music-library-cli)
+[Lab Review](https://www.youtube.com/watch?v=iClea2crypU)
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/ruby-music-library-cli'>Music Library CLI</a> on Learn.co and start learning to code for free.</p>
