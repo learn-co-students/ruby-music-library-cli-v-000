@@ -51,7 +51,7 @@ class MusicLibraryController
         puts "One more time, please: "
       end
       
-    # binding.pry
+     binding.pry
     end
     puts "Goodbye!"
   end
