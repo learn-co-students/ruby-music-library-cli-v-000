@@ -1,5 +1,6 @@
 require 'pry'
 class MusicLibraryController
+  extend Concerns::Findable
   attr_accessor :path, :new_importer
 
   def initialize(filepath = './db/mp3s')
@@ -23,12 +24,26 @@ class MusicLibraryController
       when 'list artists'
         self.new_importer.each do |song|
           ary = song.split(" - ")
-          ary[1]
+          puts ary[0]
         end      
 
       when 'list genres'
+        self.new_importer.each do |song|
+          ary = song.split(" - ")
+          puts ary[2]
+        end
 
       when 'play song'
+        puts "Playing " + self.new_importer[0]
+
+      when 'list artist'
+        puts self.new_importer
+        artist = gets.chomp
+        binding.pry
+        self.new_importer.collect do |song|
+          song.find_by_name(artist)
+        end
+
 
       when 'exit'
         break
@@ -36,32 +51,8 @@ class MusicLibraryController
         puts "One more time, please: "
       end
       
-    #  binding.pry
+    # binding.pry
     end
     puts "Goodbye!"
-
   end
-      
-    #   case reply
-    #   when "list songs"
-    #     puts self.songs
-    #     binding.pry
-    #   when "list artists"
-    #     self.songs.collect {|x| x.artist}
-    #     # @songs is an array of instances
-    #     # i need .collect artists of @songs 
-    #   when "list genres"
-    #     puts self.songs.genres
-
-    #   when "play song"
-        
-    #   when "list artist"
-
-    #   when "list genre"
-        
-    #   else
-    #     puts "blah"
-    #   end
-    # end
-
 end
