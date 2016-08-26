@@ -10,22 +10,26 @@ class MusicLibraryController
   end
 
 
+  
   def call
-    puts "Input please: "
-    loop do
-      input = gets.chomp
+    input = ""
 
+    while input != "exit"
+      puts "Input here, please: "
+      puts "And: "
+      input = gets.chomp
+      
       case input
       when 'list songs'
-        self.new_importer.each_with_index do |song, index|
-        puts "#{index + 1}. " + song
-      end
+        self.new_importer.each.with_index(1) do |song, index|
+        puts "#{index}. " + song
+      end      
 
       when 'list artists'
         self.new_importer.each do |song|
           ary = song.split(" - ")
           puts ary[0]
-        end      
+        end   
 
       when 'list genres'
         self.new_importer.each do |song|
@@ -37,21 +41,27 @@ class MusicLibraryController
         puts "Playing " + self.new_importer[0]
 
       when 'list artist'
-        puts self.new_importer
-        artist = gets.chomp
-        binding.pry
-        self.new_importer.collect do |song|
-          song.find_by_name(artist)
+        ary = self.new_importer
+        ary.each do |song|
+          song = song.split(" - ")
+          puts "#{song[0]} - #{song[1]} - #{song[2]}"
+        
         end
 
-
+      when 'list genre'
+        self.new_importer.each do |song|
+          song = song.split(" - ")
+          puts "#{song[0]} - #{song[1]} - #{song[2]}"
+        end
+      
       when 'exit'
         break
+
       else
         puts "One more time, please: "
       end
       
-     binding.pry
+  #  binding.pry
     end
     puts "Goodbye!"
   end
