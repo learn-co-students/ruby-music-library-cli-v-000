@@ -13,8 +13,8 @@ class MusicImporter
   end
 
   def files
-    list_of_filenames = Dir.glob(["#{@path}/*"])
-    binding.pry
+    list_of_filenames = Dir.entries(@path).sort
+    list_of_filenames.delete_if { |entry| entry.length < 3}
     list_of_filenames.collect do |filename|
       filename.sub!(/^#{@path}\//, '')
     end
