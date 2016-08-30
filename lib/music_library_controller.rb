@@ -71,19 +71,28 @@ class MusicLibraryController
       else
         artist_songs
       end
-    end
+      puts "\nenter 'exit' to leave app or press any button to return to the main menu"
+      print ":"
       exit_back
+    end
   end
 
   def genre_songs
     puts "\n\nPlease type the name of the genre to display its songs"
     print ":"
     input = gets.strip
-    genre = Genre.find_by_name(input)
-      genre.songs.each do |song|
-        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    unless input == "exit"
+      if genre = Genre.find_by_name(input)
+        genre.songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
+      else
+        genre_songs
       end
+      puts "\nenter 'exit' to leave app or press any button to return to the main menu"
+      print ":"
       exit_back
+    end
   end
 
   def call
