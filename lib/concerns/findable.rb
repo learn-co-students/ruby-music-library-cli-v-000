@@ -8,8 +8,7 @@ module Concerns::Findable
   ###############################################################
 
   def find_or_create_by_name(name)
-    binding.pry
-    o = self.all.detect { |o| o.name = name}
+    o = self.all.detect { |o| o.name == name}
     if o == nil
       self.new(name)
     else
