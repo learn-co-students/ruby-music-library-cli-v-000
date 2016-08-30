@@ -7,10 +7,15 @@ def initialize(path="./db/mp3s")
 end
 
 def call
+  input = ""
+  until input == "exit"
   input = gets.chomp
-  while true
-  if input == "exit"
-    return "exit"
+  if input == "list songs"
+    i = 0
+    Song.all.each do |song|
+      i += 1
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 end
 end

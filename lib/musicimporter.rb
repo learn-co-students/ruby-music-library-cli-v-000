@@ -14,6 +14,7 @@ class MusicImporter
 
   def files
     list_of_filenames = Dir.glob(["#{@path}/*"])
+    binding.pry
     list_of_filenames.collect do |filename|
       filename.sub!(/^#{@path}\//, '')
     end
