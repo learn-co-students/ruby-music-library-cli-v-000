@@ -15,4 +15,9 @@ class Genre
   def self.all
     @@all
   end
+
+  def artists
+    artists = self.songs.collect {|song| song.artist}
+    artists.uniq
+  end
 end
