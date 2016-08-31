@@ -53,20 +53,20 @@ class MusicLibraryController
 
   def play_song
     @songs = @imports.sort!.map { |song| song.gsub(".mp3","")}
-    songs = @songs.each {|song|  puts "Playing #{song}"}
+    songs = @songs.each { |song|  puts "Playing #{song}"}
   end
 
   def list_artist(input)
     input = input.to_s
     @songs = @imports.sort!.map { |song| song.gsub(".mp3","").split(" - ")}
-    song_ary = @songs.map.select {|song| song[0] == input}
+    song_ary = @songs.map.select { |song| song[0] == input}
     song_ary.each {|song| puts "#{song.join(" - ")}"}
   end
 
   def list_genres(input)
     input = input.to_s
     @songs = @imports.sort!.map { |song| song.gsub(".mp3","").split(" - ")}
-    song_ary = @songs.map.select {|song| song[2] == input}
+    song_ary = @songs.map.select { |song| song[2] == input}
     song_ary.each {|song| puts "#{song.join(" - ")}"}
   end
 
