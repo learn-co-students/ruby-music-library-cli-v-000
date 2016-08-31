@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
   extend Concerns::Findable
   extend Persistable::ClassMethods
@@ -18,12 +20,10 @@ class Song
 
   def self.new_from_filename(filename)
     parts = filename.split(" - ")
-    artist= Artist.find_or_create_by_name(parts.first)
-    genre= Genre.find_or_create_by_name(parts[2])
-    song= self.create(parts[1])
-    binding.pry
+    self.new(parts[1], parts.first, parts[2])
+    Artist.find_or_create_by_name(parts.first)
+    Genre.find_or_create_by_name(parts[2])
   end
-
 
   def self.create_from_filename(filename)
     song = self.new_from_filename(filename)
