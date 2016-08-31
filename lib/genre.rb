@@ -1,6 +1,7 @@
 class Genre
-  extend Memorable::ClassMethods
-  include Memorable::InstanceMethods
+  extend Concerns::Memorable::ClassMethods
+  extend Concerns::Findable
+  include Concerns::Memorable::InstanceMethods
 
   attr_accessor :name
   @@all = []
@@ -8,5 +9,4 @@ class Genre
   def self.all
     @@all
   end
-
 end
