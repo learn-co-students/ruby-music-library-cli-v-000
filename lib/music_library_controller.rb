@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
 
   attr_accessor :imports
@@ -25,7 +27,9 @@ class MusicLibraryController
         input = gets.strip
         list_artist(input)
       when "list genre"
-        list_genres
+        puts "Which genre?"
+        input = gets.strip
+        list_genres(input)
       when "play song"
         play_song
       end
@@ -56,12 +60,14 @@ class MusicLibraryController
     input = input.to_s
     @songs = @imports.sort!.map { |song| song.gsub(".mp3","").split(" - ")}
     song_ary = @songs.map.select {|song| song[0] == input}
-    song_ary.each {|song| puts "#{song}"}
+    song_ary.each {|song| puts "#{song.join(" - ")}"}
   end
 
-  def list_genres
-    @songs = @imports.sort!.map { |song| song.gsub(".mp3","")}
-    genre_list = @songs.each {|song|  puts "#{song}"}
+  def list_genres(input)
+    input = input.to_s
+    @songs = @imports.sort!.map { |song| song.gsub(".mp3","").split(" - ")}
+    song_ary = @songs.map.select {|song| song[2] == input}
+    song_ary.each {|song| puts "#{song.join(" - ")}"}
   end
 
 
