@@ -17,11 +17,12 @@ class Song
       self
     end
 
+    def self.create(name)
+      self.new(name).save
+    end
+
     def self.destroy_all
       @@all.clear
     end
 
-    def self.create(name)
-      Song.new(name).save
-    end
 end
