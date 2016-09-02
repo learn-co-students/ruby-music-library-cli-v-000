@@ -1,3 +1,4 @@
+require 'pry'
 class Artist
 
   attr_accessor :name, :songs
@@ -10,6 +11,12 @@ class Artist
 
     def self.all
       @@all
+    end
+
+    def add_song(song)
+      songs << song unless songs.include?(song)
+      song.artist = self unless song.artist
+      #binding.pry
     end
 
     def save

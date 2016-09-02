@@ -1,11 +1,19 @@
-#require 'pry'
+require 'pry'
 class Song
 
   attr_accessor :name
+  attr_reader :artist
   @@all = []
 
-    def initialize(name)
+    def initialize(name, artist = nil)
       @name = name
+      artist=(artist) unless artist == nil
+    end
+
+    def artist=(artist)
+      @artist = artist
+      artist.add_song(self)
+      #binding.pry
     end
 
     def self.all
