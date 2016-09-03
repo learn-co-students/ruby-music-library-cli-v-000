@@ -36,15 +36,23 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    song = Song.new(filename.split(" - ")[1])
+    song = self.new(filename.split(" - ")[1])
     song.artist = Artist.find_or_create_by_name (filename.split(" - ")[0])
     song.genre = Genre.find_or_create_by_name(filename.split(" - ")[2].split(".")[0])
     song
   end
 
   def self.create_from_filename(filename)
-    song = Song.new_from_filename(filename)
+    song = self.new_from_filename(filename)
     song.save
     song
+  end
+
+  def self.list
+    self.all.each_with_index {|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+  end
+
+  def self.play
+    self.all.each {|song| puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 end

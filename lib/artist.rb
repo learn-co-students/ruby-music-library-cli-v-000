@@ -27,4 +27,12 @@ class Artist
     genres = self.songs.collect {|song| song.genre}
     genres.uniq
   end
+
+  def list_songs
+    self.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+  end
+
+  def self.list
+    self.all.each {|artist| puts "#{artist.name}"}
+  end
 end
