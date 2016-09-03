@@ -14,9 +14,11 @@ class Artist
     end
 
     def add_song(song)
+      # binding.pry
       songs << song unless songs.include?(song)
-      song.artist = self unless song.artist != nil
-      #binding.pry
+      song.artist=(self) unless song.artist == self
+      songs
+      # binding.pry
     end
 
     def save

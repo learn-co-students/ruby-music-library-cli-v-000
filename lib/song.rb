@@ -13,7 +13,9 @@ class Song
 
     def artist=(a)
       @artist = a
-      a.add_song(self)
+      # binding.pry
+      a.add_song(self) unless a.songs.include?(self)
+      # binding.pry
     end
 
 
