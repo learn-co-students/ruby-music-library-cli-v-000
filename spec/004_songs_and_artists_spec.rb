@@ -95,7 +95,7 @@ describe "Songs and Artists" do
     it 'new songs accept an optional argument for the artist' do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In the Aeroplane Over the Sea", artist)
-binding.pry
+ binding.pry
       expect(artist.songs).to include(song)
       expect(song.artist).to eq(artist)
     end

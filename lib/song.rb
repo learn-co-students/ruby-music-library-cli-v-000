@@ -3,18 +3,19 @@ class Song
 
   attr_accessor :name
   attr_reader :artist
+
   @@all = []
 
-    def initialize(name, artist = nil)
+    def initialize(name, art = nil)
       @name = name
-      artist=(artist) unless artist == nil
+      artist=(art) unless art == nil
     end
 
-    def artist=(artist)
-      @artist = artist
-      artist.add_song(self)
-      #binding.pry
+    def artist=(a)
+      @artist = a
+      a.add_song(self)
     end
+
 
     def self.all
       @@all
