@@ -1,5 +1,7 @@
 class Genre
 
+  include Concerns::Findable
+
   attr_accessor :name, :songs
   @@all = []
 
@@ -18,11 +20,8 @@ class Genre
     end
 
     def add_song(song)
-      # binding.pry
       songs << song unless songs.include?(song)
       song.genre=(self) unless song.genre == self
-      #songs
-      # binding.pry
     end
 
     def artists

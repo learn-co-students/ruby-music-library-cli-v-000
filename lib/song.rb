@@ -1,6 +1,8 @@
 require 'pry'
 class Song
 
+  include Concerns::Findable
+
   attr_accessor :name, :genre
   attr_reader :artist
 
@@ -9,23 +11,18 @@ class Song
     def initialize(name, artist = nil, genre = nil)
       @name = name
       self.artist=(artist) unless artist == nil
-      #binding.pry
       self.genre = genre unless genre == nil
     end
 
     def artist=(artist)
       @artist = artist
-      # binding.pry
       artist.add_song(self) unless artist.songs.include?(self)
-      # binding.pry
     end
 
     def genre=(genre)
       @genre = genre
       genre.add_song(self) unless genre.songs.include?(self)
     end
-
-
 
     def self.all
       @@all
@@ -43,5 +40,16 @@ class Song
     def self.destroy_all
       @@all.clear
     end
+
+    # def self.find_by_name(name)
+    #   all.find{|song| song.name == name}
+    # end
+    #
+    # def self.find_or_create_by_name(name)
+    #   if find_by_name(name)
+    #     find_by_name(name)
+    #   else create(name)
+    #   end
+    # end
 
 end
