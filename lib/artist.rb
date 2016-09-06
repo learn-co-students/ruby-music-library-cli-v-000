@@ -34,4 +34,7 @@ class Artist
       @@all.clear
     end
 
+    def genres
+      songs.collect {|song| song.genre}.uniq
+    end
 end
