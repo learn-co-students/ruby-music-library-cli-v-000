@@ -9,10 +9,7 @@ module Concerns
     end
 
     def find_or_create_by_name(name)
-      if find_by_name(name)
-        find_by_name(name)
-      else create(name)
-      end
+      find_by_name(name) || create(name)
     end
 
   end
