@@ -10,13 +10,8 @@ class Genre
       @songs = []
     end
 
-    def self.all
-      @@all
-    end
-
-    def save
-      @@all << self
-      self
+    def self.create(name)
+      self.new(name).save
     end
 
     def add_song(song)
@@ -24,12 +19,17 @@ class Genre
       song.genre=(self) unless song.genre == self
     end
 
+    def save
+      @@all << self
+      self
+    end
+
     def artists
       songs.collect {|song| song.artist}.uniq
     end
 
-    def self.create(name)
-      self.new(name).save
+    def self.all
+      @@all
     end
 
     def self.destroy_all
