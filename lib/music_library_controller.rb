@@ -8,7 +8,9 @@ attr_accessor :path
   end
 
   def call
-    input = gets.chomp until input == "exit"
+    input = ""
+    while input != "exit"
+      input = gets.chomp
     case input
     when "list songs"
       list_songs
@@ -18,17 +20,18 @@ attr_accessor :path
       list_genres
   end
 end
+end
 
   def list_songs
-    Song.all.each_with_index {|song, index| puts "#{index}. #{song}"}
+    Song.all.each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
   def list_artists
-    Artist.all.each {|artist| puts "#{artist}"}
+    Artist.all.each {|artist| puts "#{artist.name}"}
   end
 
   def list_genres
-    Genre.all.each {|genre| puts "#{genre}"}
+    Genre.all.each {|genre| puts "#{genre.name}"}
   end
 
 end
