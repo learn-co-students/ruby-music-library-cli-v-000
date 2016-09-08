@@ -1,5 +1,6 @@
 class Song
   attr_accessor :name
+  extend Concerns::Findable
   @@all = []
 
   def self.create(name)
@@ -49,5 +50,6 @@ class Song
   def self.destroy_all
     @@all.clear
   end
+
 
 end
