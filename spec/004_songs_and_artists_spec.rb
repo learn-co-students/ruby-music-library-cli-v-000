@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Songs and Artists" do
   context 'Artists have many songs' do
@@ -47,13 +48,16 @@ describe "Songs and Artists" do
         artist.add_song(song)
 
         expect(artist.songs).to include(song)
+
       end
+
       it 'assigns the artist to the song' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         artist.add_song(song)
 
         expect(song.artist).to eq(artist)
+
       end
       it 'does not assign the artist to the song if the song already has the artist' do
         song = Song.new("In the Aeroplane Over the Sea")

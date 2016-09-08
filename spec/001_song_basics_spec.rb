@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Song Basics" do
   describe '#initialize with #name' do
@@ -47,7 +48,6 @@ describe "Song Basics" do
   describe '.create' do
     it 'initializes and saves the song' do
       song = Song.create("In the Aeroplane Over the Sea")
-
       expect(Song.all).to include(song)
     end
   end
