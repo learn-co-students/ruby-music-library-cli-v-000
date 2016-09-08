@@ -28,21 +28,17 @@ class MusicLibraryController
   private
   def list_songs_from_artist(artist)
     songs = Artist.find_by_name(artist).songs
-    songs.each do |song|
-      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-    end
+    print_songs(songs)
   end
 
   def list_songs_from_genre(genre)
     songs = Genre.find_by_name(genre).songs
-    songs.each do |song|
-      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-    end
+    print_songs(songs)
   end
 
   def list_songs
     Song.all.each_with_index do |song, i|
-      puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      puts "#{i + 1}. #{song_info(song)}"
     end
   end
 
@@ -60,6 +56,17 @@ class MusicLibraryController
 
   def play_song(song_number)
     song = Song.all[song_number - 1]
-    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    puts "Playing #{song_info(song)}"
+  end
+
+  def song_info(song)
+    "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+  end
+  
+  def print_songs(songs)
+    songs.each do |song|
+      puts song_info(song)
+    end
   end
 end
+
