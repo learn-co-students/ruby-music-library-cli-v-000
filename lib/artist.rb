@@ -3,12 +3,23 @@ class Artist
   @@all = []
 
   def self.create(name)
-    initialize(name)
-    save
+    artist = Artist.new(name)
+    @@all << artist
+    artist
   end
 
   def initialize(name)
     @name = name
+    @songs = []
+  end
+
+  def songs
+    @songs
+  end
+
+  def add_song(song)
+    @songs << song unless @songs.include?(song)
+    song.artist = self unless song.artist == self
   end
 
   def save
@@ -20,7 +31,7 @@ class Artist
   end
 
   def self.destroy_all
-    self.all.clear
+    @@all.clear
   end
 
 end

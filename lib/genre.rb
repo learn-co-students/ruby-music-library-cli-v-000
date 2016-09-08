@@ -3,8 +3,9 @@ class Genre
   @@all = []
 
   def self.create(name)
-    initialize(name)
-    save
+    genre = Genre.new(name)
+    @@all << genre
+    genre
   end
 
   def initialize(name)
@@ -20,7 +21,7 @@ class Genre
   end
 
   def self.destroy_all
-    self.all.clear
+    @@all.clear
   end
 
 end
