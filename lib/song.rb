@@ -66,5 +66,4 @@ class Song
     self.new_from_filename(file_name).save
   end
 
-
 end
