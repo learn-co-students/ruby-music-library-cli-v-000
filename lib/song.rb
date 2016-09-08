@@ -51,5 +51,23 @@ class Song
     @@all.clear
   end
 
+  def self.new_from_filename(filename)
+      artist, song, genre = filename.split(" - ")
+      genre = genre.gsub(".mp3", "")
+      new_song = Song.find_or_create_by_name(song)
+      new_song.artist = Artist.find_or_create_by_name(artist)
+      new_song.genre = Genre.find_or_create_by_name(genre)
+      new_song
+  end
+
+  def self.create_from_filename(filename)
+    artist, song, genre = filename.split(" - ")
+    genre = genre.gsub(".mp3", "")
+    new_artist = Artist.find_or_create_by_name(artist)
+    new_genre = Genre.find_or_create_by_name(genre)
+    new_song = Song.new(song, new_artist, new_genre)
+    @@all << new_song unless @@all.include?(new_song)
+    new_song
+  end
 
 end
