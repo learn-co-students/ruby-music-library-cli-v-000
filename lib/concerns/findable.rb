@@ -18,5 +18,9 @@ module Concerns
                 self.find_by_name(name)
             end
         end
+        
+        def sort_by_name
+            self.all.sort{|x,y| x.name <=> y.name}
+        end
     end
 end

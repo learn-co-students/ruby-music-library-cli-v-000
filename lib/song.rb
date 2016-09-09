@@ -20,6 +20,10 @@ class Song
         @@all
     end
     
+    def self.sort_by_artist
+        self.all.sort{|x,y| x.artist.name <=> y.artist.name}
+    end
+    
     def self.destroy_all
         self.all.clear
     end
