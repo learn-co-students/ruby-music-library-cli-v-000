@@ -39,10 +39,10 @@ class MusicLibraryController
         list_songs
       elsif input == "list artists"
         puts
-        Song.all.each{|song| puts song.artist.name}
+        Artist.all.each{|artist| puts artist.name}
       elsif input == "list genres"
         puts
-        Song.all.each{|song| puts song.genre.name}
+        Genre.all.each{|genre| puts genre.name}
       elsif input == "play song"
         puts
         list_songs
@@ -78,5 +78,5 @@ class MusicLibraryController
     end
 
   end
-  
+
 end
