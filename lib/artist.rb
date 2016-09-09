@@ -22,10 +22,9 @@ class Artist
   end
 
   def genres
-    genre_list = self.songs.collect do |song|
+    self.songs.collect do |song|
       song.genre
-    end
-    genre_list.uniq!
+    end.uniq
   end
 
   def self.all
