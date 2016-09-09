@@ -7,16 +7,16 @@ class MusicLibraryController
     end
     
     def list_commands
-        puts "list songs - lists all songs by artist name"
-        puts "play song - plays a song from the above list"
-        puts "list artists - lists all artists by name"
-        puts "list artist - lists all songs by a particular artist"
-        puts "list genres - lists all genres by name"
-        puts "list genre - lists all songs within a particular genre"
-        puts "exit - exits the program"
+        puts "list songs === lists all songs by artist name"
+        puts "play song ==== plays a song from the above list"
+        puts "list artists = lists all artists by name"
+        puts "list artist == lists all songs by a particular artist"
+        puts "list genres == lists all genres by name"
+        puts "list genre === lists all songs within a particular genre"
+        puts "exit ========= exits the program"
     end
     
-    def list_songs
+    def songs
         Song.sort_by_artist.each_with_index do |this_song, index|
             puts "#{index + 1}. #{this_song.artist.name} - #{this_song.name} - #{this_song.genre.name}"
         end
@@ -30,7 +30,7 @@ class MusicLibraryController
         puts "Playing #{songs[index].artist.name} - #{songs[index].name} - #{songs[index].genre.name}"
     end
     
-    def list_artists
+    def artists
         Artist.sort_by_name.each do |this_artist|
             puts "#{this_artist.name}"
         end
@@ -50,7 +50,7 @@ class MusicLibraryController
         end
     end
     
-    def list_genres
+    def genres
         Genre.sort_by_name.each do |this_genre|
             puts "#{this_genre.name}"
         end
@@ -73,7 +73,6 @@ class MusicLibraryController
     def call
         puts "What would you like to do?"
         puts "(enter help for help)"
-    
         input = gets.strip
         
         if input == "exit"
@@ -82,24 +81,24 @@ class MusicLibraryController
             list_commands
             call
         elsif input == "list songs"
-            list_songs
+            songs
             call
         elsif input == "play song"
             play_song
             call
         elsif input == "list artists"
-            list_artists
+            artists
             call
         elsif input == "list artist"
             list_artist_songs
             call
         elsif input == "list genres"
-            list_genres
+            genres
             call
         elsif input == "list genre"
             list_genre_songs
             call
-        else
+        else 
             puts "I'm sorry, I don't understand that command."
             call
         end
