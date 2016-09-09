@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Artists have many genres through songs" do
   describe '#genres' do
