@@ -45,7 +45,7 @@ class Song
     # end
 
     def self.new_from_filename(filename)
-      arr = filename.split("-")
+      arr = filename.split("- ")
       arr.each{|element| element.strip!}
 
       genre = Genre.find_or_create_by_name(arr[-1].split(".").first)

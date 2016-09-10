@@ -1,3 +1,4 @@
+require 'pry'
 class MusicImporter
 
   attr_accessor :path
@@ -12,7 +13,8 @@ class MusicImporter
     files_arr.each do |long_file|
       mp3_files << long_file.split("/").last
     end
-    mp3_files
+    #binding.pry
+    mp3_files.sort
 
   end
 
