@@ -15,7 +15,7 @@ class MusicLibraryController
       case input
       when "list songs"
         Song.all.each_with_index do |song, index|
-          puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+          puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
       when "list artists"
         Song.all.each do |song|
