@@ -26,11 +26,21 @@ class MusicLibraryController
           puts "#{song.genre.name}"
         end
       when "play song"
-        puts "enter the number of the song to play"
-        song_number = gets.chomp
-        #need more code here...
-      when "list artist" #needs more code, based on artist entered by user
-      when "list genre" #needs more code, based on genre entered by user
+       puts "enter the number of the song to play"
+       song_number = (gets.chomp.to_i)-1 #based on import order of files/correction for indexing array of songs relative to user-displayed list
+       puts "Playing #{Song.all[song_number].artist.name} - #{Song.all[song_number].name} - #{Song.all[song_number].genre.name}"
+      when "list artist"
+        puts "enter the artist"
+        name = gets.chomp
+        Artist.find_by_name(name).songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
+      when "list genre"
+        puts "enter the genre"
+        genre = gets.chomp
+        Genre.find_by_name(genre).songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
       end
 
     end
