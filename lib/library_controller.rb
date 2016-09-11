@@ -7,6 +7,9 @@ class MusicLibraryController
   end
 
   def call
+    puts "Music was imported!  Use the following commands:\n\n list songs (returns all songs in in the library)\n list artists (returns an unordered list of the artists in the library)\n list genres (returns an ordered list of the genres in the library)"
+    puts " play song (plays selected song by entering song number)\n list artist (returns all songs by the specified artist)\n list genre (returns all songs in the specified genre)"
+    puts " exit (ends the session and returns to prompt)\n\n"
     input = nil
     until input == "exit"
       puts "what do you want to do?"
