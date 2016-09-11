@@ -9,7 +9,7 @@ class MusicLibraryController
   def call
     input = nil
     until input == "exit"
-      puts "enter user input"
+      puts "what do you want to do?"
       input = gets.chomp
 
       case input
@@ -32,14 +32,20 @@ class MusicLibraryController
       when "list artist"
         puts "enter the artist"
         name = gets.chomp
-        Artist.find_by_name(name).songs.each do |song|
-          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        if Artist.find_by_name(name).songs.each do |song|
+            puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+          end
+        else
+          puts "sorry, that artist isn't in the library"
         end
       when "list genre"
         puts "enter the genre"
         genre = gets.chomp
-        Genre.find_by_name(genre).songs.each do |song|
-          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        if Genre.find_by_name(genre).songs.each do |song|
+            puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+          end
+        else
+          puts "sorry, that genre isn't in the library"
         end
       end
 
