@@ -38,10 +38,6 @@ class Song
     artist.add_song(self)
   end
 
-  def artist
-    @artist
-  end
-
   def genre=(genre)
     @genre = genre
     genre.add_song(self)
@@ -64,6 +60,7 @@ class Song
   def self.new_from_filename(file)
     artist_name, song_name = file.split(" - ")
     genre_name = (file.split.last).gsub!(".mp3","")
+
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
     self.new(song_name, artist, genre)
@@ -72,6 +69,7 @@ class Song
   def self.create_from_filename(file)
     artist_name, song_name = file.split(" - ")
     genre_name = (file.split.last).gsub!(".mp3","")
+    
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
     self.new(song_name, artist, genre)
