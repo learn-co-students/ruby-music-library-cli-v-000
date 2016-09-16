@@ -26,17 +26,10 @@ class Artist
   end
   
   def self.create(artist)  
-    new_artist = self.new(artist)
+    artist = self.new(artist)
+    artist.save
+    artist
   end
 end  
 
-
- # def add_song(song)
-  #   if @songs.include? song == true
-  #     @songs
-  #   elsif @songs.include? song == false
-  #     @songs << song
-  #   end
-  #   binding.pry
-  # end    
 

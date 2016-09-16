@@ -20,7 +20,9 @@ attr_accessor :name
   end
   
   def self.create(genre)
-    new_genre = self.new(genre)         
+    genre = self.new(genre)
+    genre.save
+    genre         
   end
 
 end  
