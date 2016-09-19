@@ -31,8 +31,4 @@ extend Concerns::Findable
     genre.save
     genre         
   end      
-
-  def to_s
-    self.name
-  end  
 end

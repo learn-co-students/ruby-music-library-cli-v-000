@@ -20,17 +20,17 @@ class MusicLibraryController
       when "list artists"
         artists 
       when "list genres"
-        genres   
-
+        genres  
+    
       when "list artist"
         puts "Which artist"
         input = gets.strip
         list_artist(input) 
-      
-      when "list genres"
+
+      when "list genre"
         puts "Which genre"
         input = gets.strip
-        list_genre(input)
+        list_genres(input)
       
       when "play song"
         play_song
@@ -60,12 +60,18 @@ class MusicLibraryController
   end
 
 
-  def list_artist
-    puts "Which artist's songs do you want a list of?"
-    artist_input = gets.strip
-    if artist = Artist.find_by_name(artist_input)
-      artist.songs.each{|song| puts song.name}
-    end
+  def list_artist(input)
+    input = input.to_s
+    @songs = @imports.map {|song| song.gsub(".mp3", "").split(" - ")}
+    tunes = @songs.map.select {|song| song[0] == input}
+    tunes.each {|song| puts "#{song.join(" - ")}"}
+  end  
+
+  def list_genres(input)
+   input = input.to_s
+   @songs = @imports.map { |song| song.gsub(".mp3","").split(" - ")}
+   tunes = @songs.map.select { |song| song[2] == input}
+   tunes.each {|song| puts "#{song.join(" - ")}"}
   end
 end
 
