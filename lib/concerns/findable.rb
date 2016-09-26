@@ -1,7 +1,7 @@
 module Concerns::Findable
 	def find_by_name(name)
-    names = self.all.each do |e|
-      if e.name == name then return e end
+    names = self.all.each do |i|
+      if i.name == name then return i end
     end
     nil
   end
