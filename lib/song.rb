@@ -1,3 +1,5 @@
+require_relative './concerns/findable.rb'
+
 class Song
 
 	attr_accessor :name
@@ -5,5 +7,7 @@ class Song
 	def initialize(name)
 		@name = name
 	end
+
+	@@all = []
 
 end

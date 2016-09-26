@@ -1,3 +1,5 @@
+require_relative './concerns/findable.rb'
+
 class Genre
 
 	attr_accessor :name
@@ -5,5 +7,7 @@ class Genre
 	def initialize(name)
 		@name = name
 	end
+
+	@@all = []
 
 end
