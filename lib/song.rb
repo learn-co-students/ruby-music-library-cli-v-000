@@ -1,35 +1,82 @@
 class Song
-  extend Concerns::Findable
+  attr_reader :artist, :genre
+  attr_accessor :name
 
   @@all = []
-  attr_accessor :name
-  attr_reader :artist, :genre
 
-  def initialize(name, artist=nil, genre=nil)
-    @name = name
-    if artist then self.artist = artist end
-    if genre then self.genre = genre end
+  def initialize(*data)
+    @name   = data[0]
+    @artist = data[1]; artist.songs << self if data[1]
+    @genre  = data[2]; genre.songs  << self if data[2]
   end
 
-  def self.new_from_filename(filename)
-    split = filename.split(" - ")
-    artist = split[0]
-    name = split[1]
-    genre = split[2].slice(0, (split[2].length) - 4)
-    artist = Artist.find_or_create_by_name(artist)
-    genre = Genre.find_or_create_by_name(genre)
-    if self.find_by_name(name).nil?
-      self.new(name, artist, genre)
+  class << self
+    def all
+      @@all
+    end
+
+    def destroy_all
+      @@all.clear
+    end
+
+    def create(*data)
+      song_name, artist, genre = data
+
+      instance = self.new(song_name, artist, genre)
+      instance.save
+
+      instance
+    end
+
+    def new_from_filename(file)
+      artist_name, song_name, genre_name = data_from_filename(file)
+
+      artist = find_artist(artist_name)
+      genre = find_genre(genre_name)
+
+      artist ||= Artist.new(artist_name)
+      genre ||= Genre.new(genre_name)
+
+      Song.new(song_name, artist, genre)
+    end
+
+    def create_from_filename(file)
+      artist_name, song_name, genre_name = data_from_filename(file)
+
+      artist = find_artist(artist_name)
+      genre = find_genre(genre_name)
+
+      Song.create(song_name, artist, genre)
+    end
+
+    def data_from_filename(filename)
+      filename.chomp('.mp3').split(' - ')
+    end
+
+    def find_by_name(name)
+      all.find { |song| song.name == name }
+    end
+
+    def find_or_create_by_name(name)
+      song = find_by_name(name)
+      song ||= create(name)
+
+      song
+    end
+
+    def find_artist(artist_name)
+      Artist.all.find { |artist| artist.name == artist_name }
+    end
+
+    def find_genre(genre_name)
+      Genre.all.find { |genre| genre.name == genre_name }
     end
   end
 
-  def self.create_from_filename(filename)
-    self.new_from_filename(filename).tap{|s| s.save}
-  end
 
-  def genre=(genre)
-    @genre = genre
-    genre.add_song(self)
+
+  def save
+    self.class.all << self
   end
 
   def artist=(artist)
@@ -37,19 +84,8 @@ class Song
     artist.add_song(self)
   end
 
-  def save
-    self.class.all << self
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all = []
-  end
-
-  def self.create(name)
-    self.new(name).tap{|s| s.save}
+  def genre=(genre)
+    @genre = genre
+    genre.songs << self unless genre.songs.include? self
   end
 end
