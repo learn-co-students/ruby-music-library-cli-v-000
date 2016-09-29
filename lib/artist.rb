@@ -1,5 +1,3 @@
-require 'pry'
-
 class Artist
   extend Concerns::Findable
   attr_accessor :name, :songs, :genres
@@ -24,8 +22,7 @@ class Artist
   end
 
   def self.create(name)
-    binding.pry
-    artist = Artist.new(name)
+    artist = self.new(name)
     artist.save
     artist
   end

@@ -22,7 +22,7 @@ class Song
   end
 
   def self.create(name, artist = nil, genre = nil)
-    song = Song.new(name, artist, genre)
+    song = self.new(name, artist, genre)
     song.save
     song
   end
@@ -59,7 +59,7 @@ class Song
 
   def self.create_from_filename(filename)
     name = filename.split(" - ")
-    puts artist_name = name[0]
+    artist_name = name[0]
     song_name = name[1]
     genre = name[2].split(".")[0]
 
