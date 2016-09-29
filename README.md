@@ -111,7 +111,7 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
  - This Q&A led by Avi Flombaum covers setting up a bin file, setting up a Gemfile and installing gems, and identifying objects and their responsibilties. There are general tips on requirements, gems, and design. 
  
 [Debugging an Error in Music Library CLI](https://www.youtube.com/watch?v=J_BSGPW37AE)
-- This walkthruugh traces an error to its source in the code. In addition it covers how to change file permissions, and create an executable file to initialize a sandbox environment.
+- This walkthrough traces an error to its source in the code. In addition it covers how to change file permissions, and create an executable file to initialize a sandbox environment.
 
 [Lab Review](https://www.youtube.com/watch?v=iClea2crypU)
 
