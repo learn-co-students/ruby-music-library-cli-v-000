@@ -1,6 +1,5 @@
 module Findable
-  module ClassMethods
-    
+
     def self.find_by_name(name)
       self.all.detect{|s| s.name == name}
     end
@@ -9,5 +8,4 @@ module Findable
       self.find_by_name(name) || self.create(name)
     end
 
-  end
 end
