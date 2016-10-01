@@ -1,10 +1,10 @@
-# Ruby Music Library
+  # Ruby Music Library
 
 ## Overview
 
 You're going to be implementing a Music Library domain composed of 3 main models, `Song`, `Artist`, and `Genre` that will relate to each other and collaborate heavily. Additionally, you're going to be extracting some common functionality of those models into a module, `Concerns::Findable` and mixing that module into those classes. You'll then build a collaborating object, `MusicImporter`, that can parse a directory of MP3 files and use the filenames to create instances of `Song`, `Artist`, and `Genre`. Finally, you'll build a CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that lets a user browse the library of MP3s imported by song, artist, and genre.
 
-This is a complex lab with many parts, go slow, try to understand what you're trying to build holistically before starting. Read this entire README before jumping in. As you go from spec to spec, we recommend doing them in numbered order. 
+This is a complex lab with many parts, go slow, try to understand what you're trying to build holistically before starting. Read this entire README before jumping in. As you go from spec to spec, we recommend doing them in numbered order.
 
 ## Concerns
 
@@ -71,7 +71,7 @@ Song.all #=> [#<Song: @name="Blank Space">]
   * `Artist`s have many `Genre`s through `Song`. Implement a `#genres` method for this association.
   * `Genre`s have many `Artists`s through `Song`. Implement a `#artists` method for this association.
 
-## Finding 
+## Finding
 
 ### Song
 First implement the following two methods in your `Song` class
@@ -108,8 +108,8 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a CLI so th
 ## Resources
 
 [QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
- - This Q&A led by Avi Flombaum covers setting up a bin file, setting up a Gemfile and installing gems, and identifying objects and their responsibilties. There are general tips on requirements, gems, and design. 
- 
+ - This Q&A led by Avi Flombaum covers setting up a bin file, setting up a Gemfile and installing gems, and identifying objects and their responsibilties. There are general tips on requirements, gems, and design.
+
 [Debugging an Error in Music Library CLI](https://www.youtube.com/watch?v=J_BSGPW37AE)
 - This walkthruugh traces an error to its source in the code. In addition it covers how to change file permissions, and create an executable file to initialize a sandbox environment.
 
