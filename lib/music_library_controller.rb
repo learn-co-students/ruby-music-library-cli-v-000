@@ -5,8 +5,8 @@ class MusicLibraryController
   end
 
   def call
-    lists = Song.all.sort_by{|a| a.artist.name }
     input = ""
+    lists = Song.all.sort_by{|a| a.artist.name }
     while input != "exit"
       puts "input something"
       input = gets.strip

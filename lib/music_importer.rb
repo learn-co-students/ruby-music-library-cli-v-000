@@ -10,8 +10,9 @@ class MusicImporter
   end
 
   def import
-    self.files.map do |song_file|
-      Song.create_from_filename(song_file)
-    end
+    files.map{|song_file| Song.create_from_filename(song_file)}
+    # self.files.map do |song_file|
+    #   Song.create_from_filename(song_file)
+    # end
   end
 end
