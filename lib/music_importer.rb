@@ -1,5 +1,3 @@
-# can parse a directory of MP3 files and use
-# the filenames to create instances of Song, Artist, and Genre.
 
 class MusicImporter
   attr_accessor :path
@@ -13,7 +11,7 @@ class MusicImporter
   end
 
   def import
-    files.each{ |x| Song.create_from_filename(x)}
+    files.each{ |file| Song.create_from_filename(file)}
   end
 
 end

@@ -8,10 +8,6 @@ class Genre
     @songs = []
   end
 
-  def self.create(name)
-    new(name).tap{|a| a.save}
-  end
-
   def self.all
     @@all
   end
@@ -20,13 +16,16 @@ class Genre
     @@all.clear
   end
 
-  def artists
-    self.songs.collect{|s| s.artist}.uniq
-  end
-
   def save
     @@all << self
   end
 
+  def self.create(name)
+    new(name).tap{|genre| genre.save}
+  end
+
+  def artists
+    self.songs.collect{|song| song.artist}.uniq
+  end
 
 end

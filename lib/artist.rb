@@ -8,10 +8,6 @@ class Artist
     @songs = []
   end
 
-  def self.create(name)
-    new(name).tap{|a| a.save}
-  end
-
   def self.all
     @@all
   end
@@ -20,17 +16,23 @@ class Artist
     @@all.clear
   end
 
-  def add_song(song)
-    song.artist = self unless song.artist == self
-    @songs << song unless @songs.include?(song)
-  end
-
-  def genres
-    self.songs.collect{|s| s.genre}.uniq
-  end
-
   def save
     @@all << self
   end
 
+  def self.create(name)
+    self.new(name).tap{|artist| artist.save}
+  end
+
+  def add_song(song)
+    # assigns the artist to the song
+    song.artist = self unless song.artist == self
+    # does not add the song to the artist's song collection if the artist already has the song
+    @songs << song unless @songs.include?(song)
+  end
+
+  def genres
+    self.songs.collect{|song| song.genre}.uniq
+  end
+  
 end
