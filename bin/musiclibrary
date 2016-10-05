@@ -4,29 +4,3 @@ require 'pry'
 require_relative '../config/environment'
 
 user_input = MusicLibraryController.new.call
-
-if user_input = "list songs"
-  Song.all.each_with_index do |song, index|
-  	song_name = song.name
-	  artist_name = song.artist.name
-	  genre_name = song.genre.name
-    puts "#{index + 1}. #{artist_name} - #{song_name} - #{genre_name}"
-  end  
-end
-
-
-
-
-
-
-
-# genre_name songs list 
-#     Song.all.collect{|song| song.genre.name == genre_name}
-# artist_name songs list
-#    Song.all.collect{|song| song.artist.name == artist_name}     
-
-# by artist' songs
-#   Song.all.collect{|song| song.artist.name == name}
-# by genre's songs 
-#   Song.all.collect{|song| song.genre.name == name}
-
