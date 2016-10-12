@@ -3,7 +3,7 @@ describe 'Artists and Genres being extended by Concerns::Findable' do
     it 'is extended by the Concerns::Findable module' do
       expect(Artist).to respond_to(:find_by_name)
       expect(Artist).to respond_to(:find_or_create_by_name)
-    end
+     end
 
     describe ".find_by_name" do
       it 'finds an artist instance in @@all by the name property of the artist' do
@@ -23,6 +23,7 @@ describe 'Artists and Genres being extended by Concerns::Findable' do
       end
     end
   end
+
   context 'Genre' do
     it 'is extended by the Concerns::Findable module' do
       expect(Genre).to respond_to(:find_by_name)
@@ -46,5 +47,6 @@ describe 'Artists and Genres being extended by Concerns::Findable' do
         expect(genre_1).to eq(genre_2)
       end
     end
-  end
+   end
+
 end
