@@ -29,7 +29,8 @@ class MusicLibraryController
 
   def songs
     num = 1
-    Song.all.each do |song|
+    @songs = sorted_songs
+    @songs.each do |song|
       puts "#{num}. #{song.artist} - #{song.name} - #{song.genre.name}"
       num +=1
     end
@@ -71,5 +72,9 @@ class MusicLibraryController
         puts "#{song.artist} - #{song.name} - #{song.genre.name}"
       end
     end
+  end
+
+  def sorted_songs
+    Song.all.sort!{|x, y| x.artist.name <=> y.artist.name}
   end
 end
