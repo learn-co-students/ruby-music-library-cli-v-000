@@ -10,7 +10,7 @@ class MusicImporter
 
   def files
     @list_of_filenames = Dir.glob("#{@path}/*.mp3")
-    @list_of_filenames.each { |filename| filename.slice!(0, 21)}
+    @list_of_filenames.collect { |filename| filename.gsub("#{@path}/", "")}
   end
 
   def import
