@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicImporter
 
   attr_accessor :list_of_filenames, :path
