@@ -50,6 +50,11 @@ class MusicLibraryController
 	  end
   end
 
+  def list_artists_genres(input)
+		classname = input[5..-2].capitalize
+		Object.const_get(classname).all.each {|item| puts item.name}
+  end
+
 	def call
 		input = ''
 		puts "Welcome to the Music Library.\nYour options are:"
@@ -60,8 +65,7 @@ class MusicLibraryController
 			when input == "list songs"
 				list_songs
 			when input == "list artists" || input == "list genres"
-				classname = input[5..-2].capitalize
-				Object.const_get(classname).all.each {|item| puts item.name}
+				list_artists_genres(input)
 			when input == "play song"
 				play_song
       when input == "list artist" || input == "list genre"
