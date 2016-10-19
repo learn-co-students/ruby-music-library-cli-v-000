@@ -20,23 +20,33 @@ class MusicLibraryController
     end
   end
 
+  def validate_class(classname)
+  	['Artist', 'Genre'].include?(classname) ? classname : false
+  end
+
+  def validate_choice(classname)
+		valid = false
+    print "OK: which #{classname}? "
+  	while !valid
+  		input = gets.chomp
+  		valid = Object.const_get(classname).find_by_name(input)
+  		if !valid 
+  			puts 'Um... I\'m not seeing it. Check the spelling and try again.'
+  		end
+  	end
+  	valid
+  end
+
   def list_artist_genre(command)
-  	target_class = command[5..-1]
-  	if target_class != 'artist' && target_class != 'genre'
+  	valid_classname = validate_class(command[5..-1].capitalize)
+  	if !valid_classname
   		begin
   			raise StandardError
   		rescue
   			"Whoops.. That's not right..."
   		end
   	else
-	    print "OK: which #{target_class}? "
-	  	input = gets.chomp
-	    list = Object.const_get(target_class.capitalize).find_by_name(input)
-	    if !list
-	    	puts 'Um... I\'m not seeing it. Check the spelling and try again.'
-	    else
-	    	list.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-	    end
+	    validate_choice(valid_classname).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
 	  end
   end
 
