@@ -1,4 +1,5 @@
 class Artist
+
   extend Concerns::Findable
 
   attr_accessor :name, :songs
@@ -23,9 +24,11 @@ class Artist
   end
 
   def self.create(name)
-    new_from_filename = self.new(name)
-    new_from_filename.save
-    new_from_filename
+    if !@@all.detect { |item| item.name == name }
+      new_from_filename = self.new(name)
+      new_from_filename.save
+      new_from_filename
+    end
   end
 
   def add_song(song)
