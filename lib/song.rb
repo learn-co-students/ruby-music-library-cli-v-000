@@ -20,7 +20,6 @@ class Song
 
   def self.create_from_filename(filename)
     new_song = self.new_from_filename(filename)
-    #binding.pry
     self.all << new_song
     new_song
   end
@@ -50,7 +49,6 @@ class Song
   def self.create(name)
     song = self.new(name)
     song.save
-    #self.all << song
     song
   end
 

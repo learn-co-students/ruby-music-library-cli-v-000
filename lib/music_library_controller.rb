@@ -6,7 +6,7 @@ class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
     self.path = path if path != "./db/mp3s"
-    @music_importer = MusicImporter.new(path).import.sort!
+    @music_importer = MusicImporter.new(path).import
   end
 
   def call
@@ -42,7 +42,7 @@ class MusicLibraryController
   end
 
   def list_songs
-    @music_importer.each_with_index {|song, index| puts "#{index+1}. #{song.chomp(".mp3")}"}
+    @music_importer.sort.each_with_index {|song, index| puts "#{index+1}. #{song.chomp(".mp3")}"}
   end
 
   def list_artists
@@ -58,6 +58,7 @@ class MusicLibraryController
     list_songs
     puts "Enter the song number:"
     song_number = gets.strip.to_i
+    @music_importer.sort!
     puts "Playing #{@music_importer[song_number-1].chomp(".mp3")}"
   end
 

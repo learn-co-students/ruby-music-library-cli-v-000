@@ -30,8 +30,8 @@ class Artist
   end
 
   def add_song(song)
-    self.songs.include?(song) ? self.songs : self.songs << song
-    song.artist ? nil : song.artist = self
+    self.songs.include?(song) ? self.songs : self.songs << song #Adds song only if doesnt exist
+    song.artist ? nil : song.artist = self #Adds song artist only if it doesnt exist already
   end
 
   def genres
