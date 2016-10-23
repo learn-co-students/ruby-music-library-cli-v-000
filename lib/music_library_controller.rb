@@ -60,7 +60,7 @@ class MusicLibraryController
     puts "What genre by name you like to list songs for?"
     genre_input = gets.strip
     if genre = Genre.find_by_name(genre_input)
-      genre.songs.each do |s,i|
+      genre.songs.each do |s, i|
         puts "#{i}. #{s}"
       end
     end
