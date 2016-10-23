@@ -66,6 +66,9 @@ class Song
 		artist.add_song(self)
 	end
 
+	def to_s
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
 
 end
 
