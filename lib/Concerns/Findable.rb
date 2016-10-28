@@ -1,6 +1,7 @@
 require "pry"
 
-module Concerns::Findable
+module Concerns
+  module Findable
   ##module InstanceMethods
 
   def create_from_filename(songname)
@@ -30,5 +31,6 @@ module Concerns::Findable
   end
   ##binding.pry
   obj
+end
 end
 end

@@ -1,20 +1,35 @@
 class Song
   attr_accessor :name
-  attr_reader :artist
-
-  def initialize(name)
+  attr_reader :artist, :genre
+  extend Concerns::Findable
+  @@all = []
+  def initialize(name,artist = nil, genre = nil)
     @name = name
-    @all = []
-    artist=nil
+    @@all << self
+    if artist != nil
+      artist.add_song(self)
+    end
+    @artist = artist
+    if genre != nil
+      genre.add_song(self)
+    end
+    @genre = genre
   end
 
- def artist=(artist)
-   e  = artist.songs.include?(self)
-   if e == false
-artist.songs << self
-end
-@artist = artist
 
+
+ def genre=(genre)
+   @genre=genre
+   if genre != nil
+   genre.add_song(self)
+   end
+ end
+
+ def artist=(artist)
+   @artist = artist
+   if artist != nil
+   artist.add_song(self)
+   end
  end
 
 
