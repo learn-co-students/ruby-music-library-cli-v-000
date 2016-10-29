@@ -1,13 +1,16 @@
-require "pry"
-require_relative  "Song.rb"
-
 class Artist
+  extend  Concerns::Findable
   attr_accessor :name, :songs
 
   def initialize(name)
     @name = name
-    @all = []
-    @songs=[]
+    @@all << self
+    @songs = []
+  end
+
+  def genres
+  genres=self.songs.collect do |song| song.genre end
+  genres.uniq
   end
 
   def self.all
@@ -28,29 +31,13 @@ class Artist
     artist
 end
 
- def add_song(song)
+def add_song(song)
 e  = self.songs.include?(song)
 if e == false
-  puts "adding to songs e is " + e.to_s
-self.songs << song
+  self.songs << song
 end
 if song.artist == nil
-song.artist = self
+  song.artist = self
 end
 end
 end
-
-
-song = Song.new("In the Aeroplane Over the Sea")
-artist = Artist.new("Neutral Milk Hotel")
-puts "calling first time"
-puts artist.songs
-puts "-----------------"
-artist.add_song(song)
-
-puts "calling second time"
-puts artist.songs
-puts "-----------------"
-artist.add_song(song)
-
-puts artist.songs
