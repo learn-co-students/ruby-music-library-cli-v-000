@@ -1,6 +1,6 @@
 module Concerns
     module Findable
-        def initialize(name, second= nil)
+        def initialize(name, second= nil, third =nil)
             self.name = name
             self.class.all << self
         end

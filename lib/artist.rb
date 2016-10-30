@@ -22,4 +22,15 @@ class Artist
         end
     end
 
+    def genres
+      @songs.collect{|song| song.genre}.uniq
+    end
+
+
+    # def add_genre(genre)
+    #   if !self.genres.include?(genre)
+    #     @genres<<genre
+    #   end
+    # end
+
 end
