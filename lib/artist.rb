@@ -31,10 +31,10 @@ class Artist
     end
 
     def genres
-      self.songs.uniq do |song|
-      song.genre
-        #  binding.pry
+      collected_genres = self.songs.collect do |song|
+         song.genre
        end
+       collected_genres.uniq
      end
 
 end
