@@ -1,7 +1,5 @@
 require 'bundler'
 Bundler.require
-
-module Concerns
-end
+require 'require_all'
 
 require_all 'lib'
