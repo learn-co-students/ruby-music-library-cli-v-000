@@ -32,11 +32,6 @@ class Genre
     @songs << song unless @songs.include?(song)
   end
 
-  def genre
-     @songs.collect do |song|
-       song.genre
-       binding.pry
-     end
   end
 
 end
