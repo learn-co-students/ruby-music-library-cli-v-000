@@ -7,7 +7,7 @@ class MusicImporter
 
 	def files
 		directory = Dir.glob("#{path}/*.mp3")
-		files = directory.map { |file| file.gsub("#{path}/", "") }	
+		files = directory.map { |file| file.gsub("#{path}/", "") }.sort	
 	end
 
 	def import
