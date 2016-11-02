@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Songs and Artists" do
+
   context 'Artists have many songs' do
     it 'initializes with a songs property set to an empty array' do
       artist = Artist.new("Neutral Milk Hotel")
