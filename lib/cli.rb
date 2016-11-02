@@ -20,7 +20,7 @@ class MusicLibraryController
 				genres
 			when "list artist"
 				list_artist
-			when "list genres"
+			when "list genre"
 				list_genre
 			when "play song"
 				play_song
@@ -67,7 +67,8 @@ class MusicLibraryController
 	def play_song
 		puts "What song number would you like to play"
 		number = gets.strip.to_i
-		puts "Playing #{Song.all[number-1].name}"
+		song = Song.all[number - 1]
+		puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
 	end
 
 end
