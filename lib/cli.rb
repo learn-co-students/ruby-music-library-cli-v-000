@@ -1,46 +1,52 @@
 class MusicLibraryController
 	def initialize(path = "./db/mp3s")
-		importer = MP3Import.new(path)
+		importer = MusicImporter.new(path)
 		importer.import
 	end
 
 	def call
-		puts "Welcome to your Music Library!\n What would you like to do?"
-		action = gets.strip
+		action = nil
 
-		case action.downcase
-		when "list songs"
-			songs
-		when "list artists"
-			artists
-		when "list genres"
-			genres
-		when "list artist"
-			list_artist
-		when "list genres"
-			list_genre
-		when "play song"
-			play_song
+		while action != "exit"
+		puts "Welcome to your Music Library!\nWhat would you like to do?"
+		action = gets.strip.downcase
+
+			case action
+			when "list songs"
+				 songs
+			when "list artists"
+				artists
+			when "list genres"
+				genres
+			when "list artist"
+				list_artist
+			when "list genres"
+				list_genre
+			when "play song"
+				play_song
+			else
+				"Not a valid command"
+			end
 		end
 	end
 
 	def songs
-		Song.all.each_with_index {|s, i| puts "#{i+1}. #{s}"}
+		Song.all.each_with_index {|s, i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
 	end
 
 	def artists
-		Artist.all.each_with_index {|a, i| puts "#{i+1}. #{a}"}
+		Artist.all.each_with_index {|a, i| puts "#{i+1}. #{a.name}"}
 	end
 
 	def genres
-		Genre.all.each_with_index {|g, i| puts "#{i+1}. #{g}"}
+		Genre.all.each_with_index{|g, i| puts "#{i+1}. #{g.name}"}
 	end
 
 	def list_artist
-		"Which artist would you like to list songs for"
+		puts "Which artist would you like to list songs for"
 		name = gets.strip
 		if artist = Artist.find_by_name(name)
-			artist.songs.each_with_index {|s, i| puts "#{i+1}. #{s}"}
+			artist.songs.each_with_index {|s, i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
 		else
 			puts "That artist is not in the collection"
 		end
@@ -48,10 +54,10 @@ class MusicLibraryController
 	end
 
 	def list_genre
-		"Which genre would you like to list songs for"
+		puts "Which genre would you like to list songs for"
 		name = gets.strip
 		if genre = Genre.find_by_name(name)
-			genre.songs.each_with_index {|s, i| puts "#{i+1}. #{s}"}
+			genre.songs.each_with_index {|s, i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
 		else
 			puts "That genre is not in the collection"
 		end
@@ -59,9 +65,9 @@ class MusicLibraryController
 	end
 
 	def play_song
-		"What song number would you like to play"
+		puts "What song number would you like to play"
 		number = gets.strip.to_i
-		puts "Playing #{Song.all[number-1]}"
+		puts "Playing #{Song.all[number-1].name}"
 	end
 
 end

@@ -1,6 +1,6 @@
 class Genre
 	attr_accessor :name, :songs
-	extend Concerns:Findable
+	extend Concerns::Findable
 	include Concerns::InstanceMethods
 
 	@@all = []
@@ -15,6 +15,11 @@ class Genre
 	end
 
 	def artists
-		self.songs.map { |song| song.artist }
+		self.songs.map { |song| song.artist }.uniq
 	end
+
+	#def add_song(song)
+	#	song.genre = self unless song.genre == self
+	#	self.songs << song unless self.songs.include?(song)
+	#end
 end

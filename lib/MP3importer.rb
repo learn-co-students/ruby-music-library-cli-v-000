@@ -1,9 +1,8 @@
-class MP3Import
+class MusicImporter
 	attr_reader :path
 
-	def initialize(path = "./db/mp3s")
+	def initialize(path = "../db/mp3s")
 		@path = path
-
 	end
 
 	def files
@@ -12,7 +11,7 @@ class MP3Import
 	end
 
 	def import
-		files.each {|file| Song.new_from_filename(file)}
+		files.each {|file| Song.create_from_filename(file)}
 	end
 
 end
