@@ -1,10 +1,12 @@
-
+require './concerns/findable.rb'
 
 class Genre
-  attr_accessor :name
+  extend Concerns::Findable
+  attr_accessor :name, :songs
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   @@all = [] #holds all Genre objects
@@ -25,6 +27,11 @@ class Genre
 
   def save
     @@all << self
+  end
+
+  def artists
+    artists = @songs.collect {|song| song.artist }
+    artists.uniq
   end
 
 end

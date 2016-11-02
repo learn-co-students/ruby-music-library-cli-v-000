@@ -1,19 +1,24 @@
-
+require './concerns/findable.rb'
+require 'pry'
 
 class Artist
+  extend Concerns::Findable
   attr_accessor :name
+
+  @@all = [] #holds all Artist objects
 
   def initialize(name)
     @name = name
     @songs = []
   end
 
-  @@all = [] #holds all Artist objects
-
   def self.create(name)
-    s = Artist.new(name)
-    s.save
-    s
+    artist_already_exists = @@all.detect {|artist| artist.name == name }
+    if artist_already_exists == nil
+      s = Artist.new(name)
+      s.save
+      s
+    end
   end
 
   def self.all
@@ -40,6 +45,11 @@ class Artist
     if song.artist != self
       song.artist = self
     end
+  end
+
+  def genres
+    genres = @songs.collect {|song| song.genre }
+    genres.uniq
   end
 
 end
