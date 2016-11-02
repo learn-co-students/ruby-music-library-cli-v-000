@@ -25,7 +25,7 @@ class MusicLibraryController
 	end
 
 	def songs
-		Song.all.each_with_index {|s, i| puts "#{i+1}. #{s}"
+		Song.all.each_with_index {|s, i| puts "#{i+1}. #{s}"}
 	end
 
 	def artists
