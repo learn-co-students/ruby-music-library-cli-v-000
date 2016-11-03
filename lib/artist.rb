@@ -1,6 +1,7 @@
 require 'pry'
 class Artist
 
+  extend Concerns::Findable
   attr_accessor :name, :genre
   attr_reader :songs
 
@@ -32,6 +33,10 @@ class Artist
   def add_song(song)
     @songs << song unless @songs.include?(song)
     song.artist = self unless song.artist != nil
+  end
+
+  def genres
+    @songs.collect {|song| song.genre}.uniq
   end
 
 end
