@@ -9,10 +9,14 @@ class MusicLibraryController
   end
 
   def call
-    MusicLibraryController.new
-    loop do
+    user_input = " "
+    while user_input != "exit"
       puts "Please input information. When done type 'exit'."
-      break if gets.chomp == "exit"
+      user_input = gets.chomp
+      case user_input
+      when "list songs"
+        
+      end
     end
 
   end
