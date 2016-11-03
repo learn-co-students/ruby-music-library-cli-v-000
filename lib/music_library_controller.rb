@@ -9,6 +9,11 @@ class MusicLibraryController
   end
 
   def call
+    MusicLibraryController.new
+    loop do
+      puts "Please input information. When done type 'exit'."
+      break if gets.chomp == "exit"
+    end
 
-  end 
+  end
 end
