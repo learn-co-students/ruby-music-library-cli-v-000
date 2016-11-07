@@ -17,7 +17,7 @@ class MusicLibraryController
 
            if input == "list songs"
              song_list = Song.all.each_with_index {|value, index| puts "#{index += 1}. #{value}"}
-             song_list
+             song_list.to_s
               # binding.pry
            elsif
              input == "list artists"
