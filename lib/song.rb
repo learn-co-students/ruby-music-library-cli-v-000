@@ -17,6 +17,7 @@ extend Concerns::Findable
 
     def self.all
       @@all
+
     end
 
     def self.destroy_all
@@ -47,18 +48,26 @@ extend Concerns::Findable
       song = self.new(new_file_name)
 
       artist_name = file_name[0].strip
-      artist = Artist.new(artist_name)
+      artist = Artist.find_or_create_by_name(artist_name)
       artist.add_song(song)
        song.artist = artist
 
+
       genre_name = file_name[2].strip
       new_genre_name = genre_name[0..-5]
-      genre = Genre.new(new_genre_name)
+      genre = Genre.find_or_create_by_name(new_genre_name)
       genre.add_song(song)
        song.genre = genre
 
       song
     end
+
+    def self.create_from_filename(name)
+      file = self.new_from_filename(name)
+        file.save
+          file
+    end
+
 
 
   end
