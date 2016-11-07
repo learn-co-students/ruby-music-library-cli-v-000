@@ -35,5 +35,10 @@ class Artist
     song.artist = self unless song.artist == self
     self.songs << song unless self.songs.include?(song)
   end
+
+  def genres
+    #use an iterator
+    songs.collect {|song| song.genre}.uniq
+  end
 #  binding.pry
 end
