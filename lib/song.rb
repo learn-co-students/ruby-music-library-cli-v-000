@@ -24,6 +24,10 @@ extend Concerns::Findable
       @@all.clear
     end
 
+  #   def to_s
+  #   self.name
+  # end
+
     def self.create(name)
       new_song = self.new(name)
       @@all << new_song

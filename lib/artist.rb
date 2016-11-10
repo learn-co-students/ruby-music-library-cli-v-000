@@ -27,10 +27,10 @@ extend Concerns::Findable
     def self.destroy_all
       @@all.clear
     end
-
-    def to_s
-    self.name
-  end
+  # 
+  #   def to_s
+  #   self.name
+  # end
 
     def self.create(name)
       new_name = self.new(name)

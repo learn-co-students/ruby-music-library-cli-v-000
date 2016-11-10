@@ -18,6 +18,10 @@ extend Concerns::Findable
     @@all
   end
 
+  # def to_s
+  #   self.name
+  # end
+
   def self.destroy_all
     @@all.clear
   end

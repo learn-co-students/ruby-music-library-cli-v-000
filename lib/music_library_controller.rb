@@ -16,12 +16,15 @@ class MusicLibraryController
           input = gets.chomp
 
            if input == "list songs"
-             song_list = Song.all.each_with_index {|value, index| puts "#{index += 1}. #{value}"}
-             song_list.to_s
-              # binding.pry
+             song_list = Song.all.each_with_index do |value, index|
+              #  binding.pry
+               puts "#{index += 1}. #{value.artist.name} - #{value.name} - #{value.genre}"
+            end
+            song_list
+
            elsif
              input == "list artists"
-             artist_list = Artist.all.each_with_index {|value, index| puts "#{index += 1}. #{value}";}
+             artist_list = Artist.all.each_with_index {|value, index| puts "#{index += 1}. #{value}"}
              artist_list
            elsif
 
