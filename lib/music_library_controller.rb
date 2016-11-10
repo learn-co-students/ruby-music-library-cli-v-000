@@ -32,8 +32,6 @@ class MusicLibraryController
           Genre.all.each do |genre|
             genre.songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
           end
-          else
-          puts "Invalid option!"
       end
     end
   end
