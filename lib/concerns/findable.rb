@@ -1,9 +1,14 @@
 module Concerns
-  
+
   module Creatable
     def self.extended(base)
       base.class_variable_set(:@@all, [])
     end
+
+    def save
+      @@all << self
+    end
+    
   end
 
   module Findable
