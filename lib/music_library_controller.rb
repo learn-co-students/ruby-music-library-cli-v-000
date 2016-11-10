@@ -14,6 +14,7 @@ class MusicLibraryController
        until input == "exit"
          puts "Please enter your desired input"
           input = gets.chomp
+          binding.pry
 
            if input == "list songs"
              song_list = Song.all.each_with_index do |value, index|
