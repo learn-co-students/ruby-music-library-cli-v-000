@@ -12,27 +12,27 @@ class MusicLibraryController
     def call
       input = ""
        until input == "exit"
-        #  puts "Please enter your desired input"
           input = gets.chomp
 
            if input == "list songs"
-             song_list = Song.all.each_with_index {|value, index|
+             Song.all.each_with_index {|value, index|
                puts "#{index += 1}. #{value.artist.name} - #{value.name} - #{value.genre.name}"}
 
-            song_list
-
            elsif
-             input == "list artists"
-             artist_list = Artist.all.each_with_index {|value, index| puts "#{index += 1}. #{value.artist.name} - #{value.name} - #{value.genre.name}"}
-             artist_list
-           elsif
+             input == "list #{self}"
+             self.all.collect {|value| puts value.name}
 
-           input == "list genres"
-           genre_list = Genre.all.each_with_index {|value, index| puts "#{index += 1}. #{value.artist.name} - #{value.name} - #{value.genre.name}"}
-            genre_list
+          #  elsif
+          #  input == "list genres"
+          #  Genre.all.collect {|value| puts value.name}
 
           else
-            puts "Please enter your desired input"
+           song_list = Song.all.each_with_index {|value, index|
+               counter = ""
+               index == counter
+               puts "Playing #{value.artist.name} - #{value.name} - #{value.genre.name}"
+            }
+              song_list
 
            end
          end

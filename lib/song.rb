@@ -45,7 +45,7 @@ extend Concerns::Findable
 
     def self.new_from_filename(name)
 
-      file_name = name.split("-")
+      file_name = name.split(" - ")
 
       new_file_name = file_name[1].strip
       song = self.new(new_file_name)
