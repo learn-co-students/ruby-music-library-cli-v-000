@@ -20,7 +20,9 @@ class Artist
     @@all.clear
   end
 
-
+  def save
+    @@all << self
+  end
 
   def self.create(name)
     self.new(name).tap do |artist|
