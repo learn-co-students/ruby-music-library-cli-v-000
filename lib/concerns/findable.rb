@@ -11,12 +11,6 @@ module Concerns
       self.all.detect {|song| song.name == name}
     end
 
-    def self.create(name)
-      self.new(name).tap do |artist|
-        artist.save
-      end
-    end
-
     def find_or_create_by_name(name)
       self.find_by_name(name) || self.create(name)
     end

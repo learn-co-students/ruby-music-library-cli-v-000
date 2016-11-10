@@ -24,7 +24,11 @@ class Artist
     @@all << self
   end
 
-
+  def self.create(name)
+    self.new(name).tap do |artist|
+      artist.save
+    end
+  end
 
   def add_song(song)
     song.artist = self unless song.artist == self
