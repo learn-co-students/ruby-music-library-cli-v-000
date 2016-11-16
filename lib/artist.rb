@@ -41,9 +41,7 @@ def self.destroy_all
 end
 
 def self.create(name)
-	artist = Artist.new(name)
-	artist.save
-	self.all[0]
+	new(name).tap{|a|a.save}
 end
 
 end

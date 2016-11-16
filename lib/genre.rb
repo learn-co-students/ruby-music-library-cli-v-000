@@ -40,9 +40,7 @@ def self.destroy_all
 end
 
 def self.create(name)
-	genre = Genre.new(name)
-	genre.save
-	self.all[0]
-end
+	new(name).tap{|a| a.save}
+	end
 
 end

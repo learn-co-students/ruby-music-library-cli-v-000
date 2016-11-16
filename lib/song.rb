@@ -68,8 +68,7 @@ attr_reader :artist, :genre
 	end
 
 	def self.create(name)
-		song = Song.new(name)
-		song.save
-		self.all[0]
-	end
+    new(name).tap{|a| a.save}
+  	end
+
 end
