@@ -1,0 +1,16 @@
+require_relative '../config/environment.rb'
+
+test_music_path = "./spec/fixtures/mp3s"
+music_importer = MusicImporter.new(test_music_path)
+music_importer.import
+puts "Song.all size: #{Song.all.size}"
+puts "Artist.all size: #{Artist.all.size}"
+puts "Genre.all size: #{Genre.all.size}"
+
+Song.all.each do |song|
+  puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+end
+
+Song.all.each do |song|
+  puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+end
