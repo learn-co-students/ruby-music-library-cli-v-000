@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe "Song Basics" do
   describe '#initialize with #name' do
     it 'accepts a name for the song' do
