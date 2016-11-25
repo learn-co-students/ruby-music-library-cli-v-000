@@ -10,7 +10,8 @@ class MusicImporter
   end
 
   def import
-    self.files = Dir["#{self.path}/*"].collect{|song_file| song_file.split("/")[4]}
+    # self.files = Dir["#{self.path}/*"].collect{|song_file| song_file.split("/")[4]}
+    self.files
     self.files.collect{|file_name| Song.create_from_filename(file_name)}
   end
 end
