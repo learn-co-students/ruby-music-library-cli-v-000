@@ -3,25 +3,12 @@ require 'pry'
 class Song
   attr_accessor :name, :artist, :genre
   # attr_reader :artist
-
   @@all = []
 
   def initialize(name, artist=nil, genre = nil)
-    @name = name
-    if artist != nil && genre != nil
-      @artist = artist
-      @genre = genre
-      artist.add_song(self) unless artist.songs.include?(self)
-      genre.add_song(self) unless genre.songs.include?(self)
-    elsif artist != nil
-      @artist = artist
-      artist.add_song(self) unless artist.songs.include?(self)
-    elsif genre != nil
-      @genre = genre
-      genre.add_song(self) unless genre.songs.include?(self)
-    else
-      nil
-    end
+    self.name = name
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def self.all
@@ -42,6 +29,7 @@ class Song
   end
 
   def artist=(artist)
+    # binding.pry
     @artist = artist
     artist.add_song(self) unless artist.songs.include?(self)
   end
@@ -52,29 +40,31 @@ class Song
   end
 
   def self.find_by_name(name)
+    binding.pry
     self.all.detect {|k| k.name.include?(name)}
   end
 
-  def self.find_or_create_by_name(name)
+  def self.find_or_create_by_name(name, artist = nil, genre = nil)
     if self.all.detect {|k| k.name == name}
       self.all.detect {|k| k.name == name}
     else
-      song = self.new(name)
+      song = self.new(name, artist = nil, genre = nil)
       self.all << song
       song
     end
+    # song
   end
 
   def self.new_from_filename(file_name)
-    # binding.pry
-    song = self.new(file_name.split("-")[1].strip)
-    song.artist = Artist.find_or_create_by_name(file_name.split("-")[0].strip) unless song.artist == (file_name.split("-")[0].strip)
-    song.genre = Genre.find_or_create_by_name(file_name.split("-")[2].split(".")[0].strip) unless song.genre == (file_name.split("-")[2].split(".")[0].strip)
+    song = self.new((file_name.split("-")[1].strip),Artist.find_or_create_by_name(file_name.split("-")[0].strip),Genre.find_or_create_by_name(file_name.split("-")[2].split(".")[0].strip))
+  end
+
+  def self.create_from_filename(file_name)
+    song = self.new((file_name.split("-")[1].strip),Artist.find_or_create_by_name(file_name.split("-")[0].strip),Genre.find_or_create_by_name(file_name.split("-")[2].split(".")[0].strip))
     binding.pry
   end
 
-  # def self.create_from_filename
-
+#Song.find_by_name("For Love I Come")
 
 end
 
