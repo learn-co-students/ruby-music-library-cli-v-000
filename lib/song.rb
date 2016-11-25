@@ -66,6 +66,7 @@ class Song
   end
 
   def self.new_from_filename(file_name)
+    binding.pry
     song = self.new(file_name.split("-")[1].strip)
     song.artist = Artist.find_or_create_by_name(file_name.split("-")[0].strip) unless song.artist == file_name.split("-")[0].strip
     song.genre = Genre.find_or_create_by_name(file_name.split("-")[2].split(".")[0].strip) unless song.genre == file_name.split("-")[2].split(".")[0].strip
