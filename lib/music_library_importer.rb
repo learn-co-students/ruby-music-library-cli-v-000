@@ -2,12 +2,12 @@ class MusicLibraryController
 
   def initialize(path='./db/mp3s')
     importer = MusicImporter.new(path)
-    binding.pry
+    # binding.pry
     # importer.import
 
   end
 
-  def split
+  def call
 
   end
 
