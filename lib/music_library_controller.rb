@@ -12,8 +12,8 @@ class MusicLibraryController
     # genres = @@MusicLibrary.collect{|songs| songs.genre.name}
     # songs = @@MusicLibrary.collect.with_index(1){|songs, index| "##{index}. #{songs.artist.name} - #{songs.name} - #{songs.genre.name}"}
     input = ""
-    puts "Welcome to Nick's CLI Music Library"
     while input != "exit"
+      puts "Welcome to Nick's CLI Music Library"
       puts "Whats Goodie?"
       input = gets.strip
       if input = "list songs"
