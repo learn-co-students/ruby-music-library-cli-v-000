@@ -58,7 +58,8 @@ class Song
   end
 
   def self.create_from_filename(file_name)
-    song = self.new((file_name.split("-")[1].strip),Artist.find_or_create_by_name(file_name.split("-")[0].strip),Genre.find_or_create_by_name(file_name.split("-")[2].split(".")[0].strip))
+    # binding.pry
+    song = self.new((file_name.split("-")[1].strip),Artist.find_or_create_by_name(file_name.split("-")[0].strip),Genre.find_or_create_by_name(file_name.split(" - ")[2].split(".")[0].strip))
     song.save
     song
   end

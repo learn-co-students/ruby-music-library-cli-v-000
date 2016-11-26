@@ -15,29 +15,17 @@ class MusicLibraryController
     while input != "exit"
       puts "Welcome to Nick's CLI Music Library"
       puts "Whats Goodie?"
+      # binding.pry
       input = gets.strip
-      if input = "list songs"
-        @@MusicLibrary.collect.with_index(1){|songs, index| "#{index}. #{songs.artist.name} - #{songs.name} - #{songs.genre.name}"}
-
-
-
-
-
-
-      # case input
-      # when "list songs"
-      #   #1. Action Bronson - Larry Csonka - indie
-      #   @@MusicLibrary.collect.with_index(1){|songs, index| "#{index}. #{songs.artist.name} - #{songs.name} - #{songs.genre.name}"}
-      # when "list artists"
-      #   @@MusicLibrary.collect{|songs| songs.artist.name}
-      # when "list genres"
-      #   @@MusicLibrary.collect{|songs| songs.artist.name}
-      # when "list artist"
-      #   artist
-      # when "list genre"
-      #   genre
-      # when "play song"
-      #   play_song
+      if input == "list songs"
+        # puts "Lets List Songs"
+        @@MusicLibrary.collect.with_index(1){|songs, index| puts "#{index}. #{songs.artist.name} - #{songs.name} - #{songs.genre.name}"}
+      elsif input == "list artists"
+        @@MusicLibrary.collect{|songs| puts "#{songs.artist.name}"}
+      elsif input == "list genres"
+        @@MusicLibrary.collect{|songs| puts "#{songs.genre.name}"}
+      elsif "play song"
+        @@MusicLibrary.collect{|songs| puts "Playing #{songs.artist.name} - #{songs.name} - #{songs.genre.name}"}
       end
     end
   end
