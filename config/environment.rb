@@ -9,7 +9,13 @@ end
 module Concerns::Findable
 end
 
-module Concerns::NewModules
+module NewModules
+end
+
+module NewModules::ClassMethods
+end
+
+module NewModules::InstanceMethods
 end
 
 require_all 'lib'

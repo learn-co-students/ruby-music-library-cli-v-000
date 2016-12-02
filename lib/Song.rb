@@ -4,11 +4,13 @@ class Song
   attr_reader :artist, :genre
 #  @@all = []
 
-  extend NewModules::ClassMethods
-  include NewModules::InstanceMethods
+  # extend NewModules::ClassMethods
+  # include NewModules::InstanceMethods
+
+  @@all=[]
 
   def initialize(name, artist=nil, genre=nil)
-    self.class.destroy_all
+    #self.class.destroy_all
     @name = name
     self.artist=(artist) if artist != nil
     self.genre=(genre) if genre != nil
@@ -69,31 +71,34 @@ class Song
     #binding.pry
     #new_file = self.new_from_filename(filename)
     split_file = filename.split(" - ")
+    #binding.pry
     unless @@all.include?(self.find_by_name(split_file[1]))
-      self.new_from_filename(filename)
+      new_file = self.new_from_filename(filename)
+      new_file.save
+      #binding.pry
   #    new_create = self.new_from_filename(filename)
-  # @@all << new_file
     end
-    #new_file
+    new_file
+  #  binding.pry
   end
 
-  #
-  # def self.all
-  #   @@all
-  # end
-  #
-  # def self.destroy_all
-  #   @@all.clear
-  # end
-  #
-  # def save
-  #   @@all << self
-  # end
-  #
-  # def self.create(name)
-  #   created = self.new(name)
-  #   created.save
-  #   created
-  # end
-  #binding.pry
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    @@all.clear
+  end
+
+  def self.create(name)
+    created = self.new(name)
+    created.save
+    created
+    #binding.pry
+  end
+
+  def save
+    self.class.all << self
+  end
+
 end

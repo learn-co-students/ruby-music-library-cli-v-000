@@ -5,6 +5,7 @@ attr_accessor :path
 @@files = []
 
   def initialize(path)
+    @@files.clear
     @path=path
     #binding.pry
     Dir["#{path}/*"].each do |file|
