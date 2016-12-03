@@ -14,7 +14,7 @@ attr_accessor :name, :artist, :genre
 
   def artist=(artist)
    @artist = artist
-   artist.songs(self) unless artist.songs.include?(self)
+   artist.add_song(self) unless artist.add_song.include?(self)
   end
 
   def genre=(genre)
