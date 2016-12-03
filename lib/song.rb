@@ -14,12 +14,12 @@ attr_accessor :name, :artist, :genre
 
   def artist=(artist)
    @artist = artist
-   artist.add_song(self) unless artist.add_song(self)
+   artist.songs(self) unless artist.songs.include?(self)
   end
 
   def genre=(genre)
    @genre = genre
-   genre.songs << self unless artist.songs.include?(self)
+   genre.songs << self unless genre.songs.include?(self)
   end
 
   def self.all
