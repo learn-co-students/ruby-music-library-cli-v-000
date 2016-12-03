@@ -23,6 +23,7 @@ describe "Songs and Artists" do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
+        #  .artist= set's the song's @artist property
 
         expect(song.artist).to eq(artist)
       end
