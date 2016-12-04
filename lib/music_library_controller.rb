@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
 
 
@@ -9,17 +11,25 @@ class MusicLibraryController
   end
 
   def call
-    puts "What you want me to list fam? Start off saying lists _______, your choices are artists,songs, genres"
-    input = gets.chomp
+    input = nil
     while input != "exit" do
+      puts "Hey! Guess what time it is! Music Library Time!!!"
+      puts "What you want me to list fam? Start off saying lists _______, your choices are artists,songs, genres"
+      input = gets.chomp
       case input
       when "lists artists"
-        artists
+        lists_artists
       when "lists songs"
        songs
       end
     end
 end
 
+  def lists_artists
+   Artist.all.each_wih_index(1) do |artist, index|
+    puts "#{index}. #{artist}"
+    binding.pry
+   end
+  end
 
 end
