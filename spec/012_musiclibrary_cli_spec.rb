@@ -1,3 +1,5 @@
+require 'pry'
+
 describe 'Music Library CLI' do
 
   it 'allows a user to list songs' do
@@ -27,7 +29,7 @@ describe 'Music Library CLI' do
     expect(output).to include("Thundercat")
   end
 
-  it 'allows a user to list genres' do
+  it 'allows a user o list genres' do
     music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
