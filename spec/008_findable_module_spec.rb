@@ -6,15 +6,15 @@ describe 'Concerns::Findable' do
     expect(Concerns::Findable).to be_a(Module)
   end
 
-  class Person
+  class Genre
     extend Concerns::Findable
   end
 
   it 'adds a find_by_name class method to classes that are extended by the module' do
-    expect(Person).to respond_to(:find_by_name)
+    expect(Genre).to respond_to(:find_by_name)
   end
 
   it 'adds a find_or_create_by_name class method to classes that are extended by the module' do
-    expect(Person).to respond_to(:find_or_create_by_name)
+    expect(Genre).to respond_to(:find_or_create_by_name)
   end
 end
