@@ -32,4 +32,10 @@ class Artist
   def self.create(name)
     new(name).tap{|s| s.save}
   end
+
+  # Returns unique genres belonging to all the songs of the artist
+  def genres
+    self.songs.collect{ |song| song.genre }.uniq
+  end
+
 end

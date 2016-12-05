@@ -29,4 +29,15 @@ class Genre
     new(name).tap{|s| s.save}
   end
 
+  def songs
+    @songs
+  end
+
+  def add_song(song)
+    @songs << song
+  end
+
+  def artists
+    self.songs.collect {|song| song.artist }.uniq
+  end
 end
