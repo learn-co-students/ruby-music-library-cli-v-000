@@ -45,4 +45,12 @@ class Song
     new(name, artist).tap{|s| s.save}
   end
 
+  def self.find_by_name(name)
+    @@all.find { |a| a.name == name }
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
+
 end
