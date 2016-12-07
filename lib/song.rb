@@ -71,8 +71,8 @@ class Song
     self.create(song_name, artist, genre)
   end
 
-  #def to_s
-  #  "#{self.artist.name} - #{self.name} - #{self.genre.name}"
-  #end
+  def to_s
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
 
 end
