@@ -12,9 +12,10 @@ class MusicLibraryController
     #  input = gets.strip
       puts "Welcome to Your Music Library!"
       puts "What would you like to do?"
-      while input != "exit"
-
         input = gets.strip
+        while input != "exit"
+
+
         case input
         when "list songs"
           songs
@@ -40,7 +41,8 @@ class MusicLibraryController
 
   def songs
     Song.all.each.with_index(1) do |song, index|
-      puts "#{index}. #{song}"
+      # puts "#{index}. #{song}"
+   puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
