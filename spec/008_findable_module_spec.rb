@@ -1,3 +1,4 @@
+
 require 'spec_helper'
 
 describe 'Concerns::Findable' do
