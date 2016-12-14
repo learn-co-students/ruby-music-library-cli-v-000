@@ -11,7 +11,7 @@ module Concerns
     end
 
     def find_by_name(name)
-      place = self.all.select { |song| song.name == name }
+      place = self.all.select { |e| e.name == name }
       place[0]
     end
 
@@ -19,7 +19,7 @@ module Concerns
       if find_by_name(name)
         find_by_name(name)
       else
-        self.class.create(name)
+        self.create(name)
       end
     end
   end

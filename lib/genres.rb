@@ -1,7 +1,7 @@
 class Genre
   extend Concerns::Findable
   include Concerns::InstanceMethods
-  
+
   attr_accessor :name, :songs
 
   @@all = []
