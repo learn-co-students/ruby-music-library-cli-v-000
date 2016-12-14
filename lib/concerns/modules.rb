@@ -12,7 +12,7 @@ module Concerns
 
     def find_by_name(name)
       place = self.all.select { |song| song.name == name }
-      song[0]
+      place[0]
     end
 
     def find_or_create_by_name(name)
