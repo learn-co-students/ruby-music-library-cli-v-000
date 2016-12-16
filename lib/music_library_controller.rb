@@ -1,5 +1,4 @@
 class MusicLibraryController
-  attr_accessor :path 
 
   def initialize(path='./db/mp3s')
     importer = MusicImporter.new(path)
@@ -7,7 +6,6 @@ class MusicLibraryController
   end
 
   def call
-    MusicLibraryController.new
     input = ""
     while input != "exit"
       puts "========== Music Library CLI =========="
@@ -31,29 +29,31 @@ class MusicLibraryController
   end
 
   def songs
-    Song.all.each_with_index { |song, i| puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}" }
+    Song.all.each.with_index(1) { |song, i| puts "#{i}. #{song}" }
   end
 
   def artists
-    Artist.all.each { |artist| puts "#{artist.name}" }
+    Artist.all.each.with_index(1) do |a, i|
+      puts "#{i}. #{a.name}"
+    end
   end
 
   def genres
-    Song.all.each { |song| puts "#{song.genre}" }
+    Genre.all.each { |genre| puts genre.name }
   end
 
   def play_song
     puts "Select song number you want to play: "
     input = gets.strip
-    puts "Playing #{Song.all[input - 1]}"
+    puts "Playing #{Song.all[input.to_i-1]}"
   end
 
   def list_artist
     puts "What artist by name would you like to list songs for?"
-    artist_input = gets.strip
-    if artist = Artist.find_by_name(artist_input)
+    input = gets.strip
+    if artist = Artist.find_by_name(input)
       artist.songs.each do |song, i|
-        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        puts "#{i}. #{song}"
       end
     end
   end

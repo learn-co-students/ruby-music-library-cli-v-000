@@ -9,7 +9,7 @@ class Song
     @name = name
     self.artist = artist if artist
     self.genre = genre if genre
-    @songs = []
+    # @songs = []
   end
 
   def songs
@@ -34,7 +34,7 @@ class Song
     @@all << self
   end
 
-  def self.create(song, artist, genre)
+  def self.create(song, artist=nil, genre=nil)
     song = Song.new(song, artist, genre)
     song.save
     song
@@ -64,6 +64,10 @@ class Song
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
     self.create(song_name, artist, genre)
+  end
+
+  def to_s
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
   end
 
 end
