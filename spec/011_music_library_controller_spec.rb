@@ -7,7 +7,7 @@ describe 'MusicLibraryController' do
     end
 
     it 'the path argument defaults to ./db/mp3s' do
-      expect(MusicImporter).to receive(:new).with('./db/mp3s').and_return(MusicImporter.new('./db/mp3s'))
+    expect(MusicImporter).to receive(:new).with('./db/mp3s').and_return(MusicImporter.new('./db/mp3s'))
       MusicLibraryController.new
     end
 
