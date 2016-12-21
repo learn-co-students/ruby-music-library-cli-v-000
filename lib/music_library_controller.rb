@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 class MusicLibraryController
   
   def initialize(path = "./db/mp3s")
@@ -45,3 +46,16 @@ class MusicLibraryController
     end
   end
 end
+=======
+  attr_reader :path
+
+  def initialize(path = "./db/mp3s")
+    MusicImporter.new(path).import
+  end
+
+  def call
+
+  end
+  
+end
+>>>>>>> bc99f2111444b6029301bd99f91826a6256996a4

@@ -1,7 +1,7 @@
 class Song
 
   extend Concerns::Findable
-  
+
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -49,5 +49,9 @@ class Song
     new_from_filename(f).tap{|s| s.save}
   end
 
+<<<<<<< HEAD
 
 end
+=======
+end
+>>>>>>> bc99f2111444b6029301bd99f91826a6256996a4
