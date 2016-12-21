@@ -56,7 +56,7 @@ class MusicLibraryController
     puts "What artist's name?"
     input = gets.strip
     if artist = Artist.find_by_name(input)
-      artist.songs.each.with_index(1) {|song| puts "#{i}. #{song}"}
+      artist.songs.each.with_index(1) {|song,i| puts "#{i}. #{song}"}
     else
       puts "There's no artist with this name in database!"
     end
@@ -66,7 +66,7 @@ class MusicLibraryController
     puts "What genre's name?"
     input = gets.strip
     if genre = Genre.find_by_name(input)
-      genre.songs.each.with_index(1) {|song| puts "#{i}. #{song}"}
+      genre.songs.each.with_index(1) {|song,i| puts "#{i}. #{song}"}
     else
       puts "There's no genre with this name in database!"
     end
