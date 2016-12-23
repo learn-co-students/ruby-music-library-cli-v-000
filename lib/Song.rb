@@ -64,4 +64,8 @@ attr_accessor :name, :artist, :genre
     self.find_by_name(name) || self.create(name)
   end
 
+  def self.sort_songs
+    self.all.sort{|x, y| x.artist.name <=> y.artist.name}
+end
+
 end
