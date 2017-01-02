@@ -20,13 +20,9 @@ class MusicLibraryController
       when "list genres"
         genres
       when "list artist"
-        puts "What artist would you like to see?"
-        input = gets.chomp
-        list_artist(input)
+        list_artist
       when "list genre"
-        puts "Which genre would you like to see? For example, you can type 'dance'"
-        input = gets.chomp
-        list_genres(input)
+        list_genre
       when "play song"
         play_song
       end
@@ -46,15 +42,33 @@ class MusicLibraryController
   end
 
   def play_song # selects song by number, returns "Playing" + name of full song
-
+    i = -1
+    begin
+      puts "Select a song by its corresponding number, please."
+      i = gets.chomp.to_i - 1
+    end until i.between?(0, Song.all.count - 1)
+      psong = Song.all[i]
+      puts "Playing #{psong.track}"
   end
 
   def list_artist #returns a list of specific artist's full songs after user selects artist
-
+    self.artists
+    artist = nil # >> already defined?!
+    begin
+      puts "Select an artist by entering their name, please."
+      lartist = Artist.find_by_name(gets.chomp)
+    end until lartist
+    lartist.songs.each { |song| puts song.track}
   end
 
   def list_genre #returns a list of full songs that match the selected genre
-
+    self.genres
+    genre = nil # >> already defined?!
+    begin
+      puts "Select a genre by entering its name, please."
+      lgenre = Genre.find_by_name(gets.chomp)
+    end until lgenre
+    lgenre.songs.each { |song| puts song.track}
   end
 
 end
