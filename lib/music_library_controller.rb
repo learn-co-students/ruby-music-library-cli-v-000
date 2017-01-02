@@ -8,33 +8,35 @@ class MusicLibraryController
 
   def call
     input = ""
-    while input != "exit"
-      puts "Welcome to my laboratory!"
-      puts "Let's get started. What would you like me to do?"
-      input = gets.strip
-      case input
-      when "list songs"
-        songs
-      when "list artists"
-        artists
-      when "list genres"
-        genres
-      when "play song"
-        play_song
-      when "list artist"
-        list_artist
-      when "list genre"
-        list_genre
-      end
+    until input == "exit"
+      puts "Welcome to my laboratory! Let's get started. What would you like me to do?"
+      puts "For example, 'list songs' will return a list of songs. Give it a try!"
+      input = gets.chomp
     end
   end
 
+  def list_songs #returns track number + full song info
 
-  def songs
-		Song.all.each_with_index(1) do |s, i|
-			puts "#{i}. #{s}"
-		end
-	end
+  end
 
+  def list_artists #returns only artist name
+
+  end
+
+  def list_genres #returns only a list of song genres
+
+  end
+
+  def play_song # selects song by number, returns "Playing" + name of full song
+
+  end
+
+  def list_artist #returns a list of specific artist's full songs after user selects artist
+
+  end
+
+  def list_genre #returns a list of full songs that match the selected genre
+
+  end
 
 end
