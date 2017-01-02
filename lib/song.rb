@@ -66,4 +66,5 @@ class Song
   def track
     "#{self.artist.name} - #{self.name} - #{self.genre.name}"
   end
+  
 end
