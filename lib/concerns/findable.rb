@@ -1,14 +1,9 @@
 module Concerns::Findable
-  def self.all
-    @@all
+  def find_by_name(name)
+    self.all.detect{|s| s.name == name}
   end
-  def self.destroy_all
-    self.all.clear
-  end
-  def save
-    @@all << self
-  end
-  def self.create(name)
-    self.new(name).tap {|artist| artist.save}
+
+  def find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
   end
 end
