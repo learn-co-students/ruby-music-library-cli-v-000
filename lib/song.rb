@@ -29,7 +29,9 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
   def self.new_from_filename(filename)
-
+    solution = filename.split(" - ")
+    name = solution[1]
+    self.new(name)
   end
 
 end
