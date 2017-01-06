@@ -17,7 +17,7 @@ class Song
     @@all << self
   end
   def self.create(name, artist=nil, genre=nil)
-    new(name, artist, genre).tap {|artist| artist.save}
+    self.new(name, artist, genre).tap {|artist| artist.save}
   end
   ###
   def artist=(artist=nil)
