@@ -12,7 +12,7 @@ class MusicLibraryController
       input = gets.chomp.strip
       if input == "list songs"
         Song.all.each.with_index(1) do |sng, index|
-          puts "#{index}. #{sng.artist.name} - " + "#{sng.name} - " + "#{sng.genre.name}"
+          puts "#{index}. #{sng}"
         end
       end
     end
