@@ -17,7 +17,7 @@ class Song
     @@all << self
   end
   def self.create(name, artist=nil, genre=nil)
-    self.new(name, artist, genre).tap {|artist| artist.save}
+    self.new(name, artist, genre).tap {|object| object.save}
   end
   ###
   def artist=(artist=nil)
@@ -32,11 +32,20 @@ class Song
     solution = filename.split(" - ")
     artist_name = solution[0]
     song_name = solution[1]
-    genre_name = solution[2].delete('.mp3')
+    genre_name = solution[2].delete(".mp3")
 
-    artist = Artist.new.find_or_create_by_name(artist_name)
-    genre = Genre.new.find_or_create_by_name(genre_name)
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
     self.create(song_name, artist, genre)
   end
+  def self.create_from_filename(filename)
+    solution = filename.split(" - ")
+    artist_name = solution[0]
+    song_name = solution[1]
+    genre_name = solution[2].delete('.mp3')
 
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.create(song_name, artist, genre)
+  end
 end
