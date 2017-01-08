@@ -32,7 +32,7 @@ class Song
     solution = filename.split(" - ")
     artist_name = solution[0]
     song_name = solution[1]
-    genre_name = solution[2].delete(".mp3")
+    genre_name = solution[2].gsub(".mp3","")
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
@@ -42,7 +42,7 @@ class Song
     solution = filename.split(" - ")
     artist_name = solution[0]
     song_name = solution[1]
-    genre_name = solution[2].delete('.mp3')
+    genre_name = solution[2].gsub(".mp3","")
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
