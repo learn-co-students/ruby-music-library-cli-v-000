@@ -24,7 +24,7 @@ class MusicLibraryController
 				  puts "#{halp.artist.name} - #{halp.name} - #{halp.genre.name}"
 				end
 			elsif input == "list genre"
-				puts "May I have a genre, sweetie!"
+				puts "May I have a genre, sweetie?"
 				genre_input = gets.strip
 				genre = Genre.find_by_name(genre_input)
 				genre.songs.each do |halp|
