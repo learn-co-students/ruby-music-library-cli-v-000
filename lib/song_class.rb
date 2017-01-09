@@ -9,6 +9,11 @@ class Song
     self.genre = genre if genre
   end
 
+  def add_artist_genre_oneway(artist, genre)
+    @artist = artist
+    @genre = genre
+  end
+
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
@@ -48,5 +53,16 @@ class Song
     else
       self.create(name)
     end
+  end
+
+  def self.new_from_filename(name)
+    parsed = name.split(' - ')
+    name = parsed[1]
+    artist = Artist.new(parsed[0])
+    genre = Genre.new(parsed[2].sub('.mp3', ''))
+
+    song = self.new(name)
+    song.add_artist_genre_oneway(artist, genre)
+    song
   end
 end
