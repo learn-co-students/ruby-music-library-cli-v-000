@@ -8,4 +8,8 @@ class MusicImporter
   def files
     Dir[path + "/*"].collect{|name| name.split('/')[-1]}
   end
+
+  def import
+    files.collect{|file| Song.create_from_filename(file)}
+  end
 end
