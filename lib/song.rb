@@ -39,10 +39,8 @@ class Song
     self.find_by_name(name) || self.create(name)
   end
 
-  def self.new_from_filename(filename)
-    #binding.pry
-    artist, name, genre = filename.split(" - ")
-    self.create(name)
+  def self.new_from_filename(file)
+    artist, song, genre = file.split(" - ")
   end
 
   def save
