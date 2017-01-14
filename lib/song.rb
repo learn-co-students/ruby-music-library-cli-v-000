@@ -40,6 +40,12 @@ class Song
     self.find_by_name(name) || self.create(name)
   end
 
+  def self.new_from_filename(filename)
+    artist, song = filename.split(" - ")
+    song = self.new(name).tap { |s| s.save }
+    song.artist = Artist.find_or_create_by_name(name)
+  end
+
   def save
     @@all << self
   end
