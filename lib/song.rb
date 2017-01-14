@@ -41,6 +41,7 @@ class Song
 
   def self.new_from_filename(file)
     artist, song, genre = file.split(" - ")
+    song = self.new(name)
   end
 
   def save
