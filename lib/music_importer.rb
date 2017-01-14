@@ -1,8 +1,8 @@
 class MusicImporter
   attr_accessor :path, :file, :name
 
-  def initialize(path)
-    @path = "./spec/fixtures/mp3s"
+  def initialize(path = "./db/mp3s")
+    @path = path 
     @files = []
   end
 
