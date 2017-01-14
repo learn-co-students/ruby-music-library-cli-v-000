@@ -2,8 +2,7 @@ require 'pry'
 
 class Song
 
-  attr_accessor :name
-  attr_reader :artist, :genre
+  attr_accessor :name, :artist, :genre
 
   @@all = []
 
@@ -41,9 +40,9 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    artist, song = filename.split(" - ")
-    song = self.new(name).tap { |s| s.save }
-    song.artist = Artist.find_or_create_by_name(name)
+    #binding.pry
+    artist, name, genre = filename.split(" - ")
+    self.create(name)
   end
 
   def save
