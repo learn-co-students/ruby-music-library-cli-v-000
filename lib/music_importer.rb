@@ -11,7 +11,7 @@ class MusicImporter
       @files << filename
     end
     @files.each { |file| file.slice! ("./spec/fixtures/mp3s/") }
-    Song.new_from_filename(file)
+    #Song.new_from_filename(file)
   end
 
 
