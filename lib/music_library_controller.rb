@@ -5,7 +5,6 @@ class MusicLibraryController
   end
 
   def call
-    #binding.pry
       user_input = ""
       while user_input != "exit"
         puts "What would you like to listen to?"
