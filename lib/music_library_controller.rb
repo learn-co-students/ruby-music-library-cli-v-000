@@ -16,8 +16,12 @@ class MusicLibraryController
         Artist.all.each { |a| puts a.name }
       elsif user_input == "list genres"
         Genre.all.each { |g| puts g.name }
-      elsif user_input == "play a song"
+      elsif user_input == "play song"
         Song.all.detect { |song| puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+      elsif user_input == "list artist"
+        Song.all.select { |song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}" }
+      elsif user_input == "list genre"
+        Song.all.select { |song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}" }
       end
     end
   end
