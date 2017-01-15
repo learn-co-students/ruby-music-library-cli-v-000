@@ -10,7 +10,7 @@ class MusicLibraryController
         puts "What would you like to listen to?"
         user_input = gets.strip
       if user_input == "list songs"
-        "what about now"
+        songs.each { |s| puts s }
       end
     end
 
