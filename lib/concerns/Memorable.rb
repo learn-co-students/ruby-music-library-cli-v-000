@@ -2,7 +2,7 @@ module Memorable
   module ClassMethods
 
     def create(name)
-      self.new(name).tap {|x| x.save}
+      new(name).tap {|x| x.save}
     end
 
     def destroy_all
