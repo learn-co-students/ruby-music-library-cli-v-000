@@ -18,7 +18,6 @@ class Song
     @artist = artist
     artist.add_song(self) #unless artist.songs.include?(self)
   end
-  # binding.pry
 
   def genre=(genre)
     @genre = genre
@@ -27,6 +26,10 @@ class Song
 
   def self.all
     @@all
+  end
+
+  def self.create(name, artist = nil, genre = nil)
+    new(name, artist, genre).tap {|x| x.save}
   end
 
   def self.find_by_name(name)
@@ -43,7 +46,6 @@ class Song
     artist = Artist.find_or_create_by_name(artist)
     genre = Genre.find_or_create_by_name(genre)
     self.new(song, artist, genre)
-    # binding.pry
   end
 
   def self.create_from_filename(filename)
@@ -51,7 +53,10 @@ class Song
     genre.gsub!(".mp3","")
     artist = Artist.find_or_create_by_name(artist)
     genre = Genre.find_or_create_by_name(genre)
-    self.new(song, artist, genre).save
+    self.create(song, artist, genre)
   end
-  # binding.pry
+
+  def self.list_song(song)
+    "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+  end
 end
