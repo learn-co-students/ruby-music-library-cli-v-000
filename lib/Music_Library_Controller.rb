@@ -24,6 +24,9 @@ class MusicLibraryController
           songs_by_artist
         when "list genre"
           songs_by_genre
+        when "exit"
+          puts "I pity the fool!"
+          sleep 3
         end
 
       end
@@ -61,7 +64,7 @@ class MusicLibraryController
   end
 
   def songs_by_genre
-    puts "I pity the fool!"
+    puts "Which genre fool?"
     input = gets.strip
     if genre = Genre.find_by_name(input)
       genre.songs.each do |s|
