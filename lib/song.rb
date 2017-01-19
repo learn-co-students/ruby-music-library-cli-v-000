@@ -19,7 +19,7 @@ class Song
   end
 
   def self.destroy_all
-    @@all = []
+    @@all.clear
   end
 
   def save
@@ -32,9 +32,9 @@ class Song
     new_song
   end
 
-  def artist=(art)
-    @artist = art
-    art.add_song(self)
+  def artist=(new_artist)
+    @artist = new_artist
+    new_artist.add_song(self) unless new_artist.songs.include?(self) == true
   end
 
   def genre=(new_genre)
@@ -44,11 +44,9 @@ class Song
 
   def self.new_from_filename(filename)
     array = filename.split(" - ")
-    song_name = array[1]
     artist_name = Artist.find_or_create_by_name(array[0])
     genre_name = Genre.find_or_create_by_name(array[2][0..-5])
-    new_song = Song.new(song_name, artist_name, genre_name)
-    new_song
+    new_song = Song.new(array[1], artist_name, genre_name)
   end
 
   def self.create_from_filename(filename)
