@@ -97,6 +97,7 @@ describe "Songs and Artists" do
 
       expect(artist.songs).to include(song)
       expect(song.artist).to eq(artist)
+
     end
   end
 end
