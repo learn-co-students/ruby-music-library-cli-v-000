@@ -13,10 +13,14 @@ class Song
     @name = name
      if artist.is_a?(Artist)
        self.artist=(artist)
+     else
+       self.artist=(Artist.new(artist))
      end
 
      if genre.is_a?(Genre)
        self.genre=(genre)
+     else
+       self.genre=(Genre.new(genre))
      end
 
   end
@@ -52,6 +56,15 @@ class Song
   def genre=(genre)
     @genre = genre
     @genre.add_song(self) unless @genre.songs.include?(self)
+  end
+
+  def self.new_from_filename(filename)
+      music = filename.split(" - ")
+      new_song = self.new(music[1],music[0],music[2].chomp(".mp3"))
+      # new_song.artist = (music[0])
+      # new_song.genre = (music[2].chomp(".mp3"))
+      # new_song
+      # binding.pry
   end
 
 end

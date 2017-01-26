@@ -51,11 +51,11 @@ def add_song(song)
   end
 
   def genres
-    genre = self.songs.each do |song|
-      song.genre.name
-    end
-    binding.pry
-    genre
+  # genre=
+    self.songs.collect do |song|
+      song.genre
+    end.uniq
+    # genre.uniq
   end
 
 end

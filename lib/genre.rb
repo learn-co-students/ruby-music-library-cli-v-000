@@ -49,5 +49,12 @@ class Genre
 
   end
 
+  def artists
+    if songs.size > 1
+    self.songs.collect {|song| song.artist}.uniq
+  end
+
+  end
+
 
 end
