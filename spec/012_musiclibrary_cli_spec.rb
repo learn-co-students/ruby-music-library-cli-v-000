@@ -8,10 +8,10 @@ describe 'Music Library CLI' do
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
-    expect(output).to include("1. Action Bronson - Larry Csonka - indie")
-    expect(output).to include("2. Real Estate - Green Aisles - country")
+    expect(output).to include("1. Real Estate - Green Aisles - country")
+    expect(output).to include("2. Thundercat - For Love I Come - dance")
     expect(output).to include("3. Real Estate - It's Real - hip-hop")
-    expect(output).to include("4. Thundercat - For Love I Come - dance")
+    expect(output).to include("4. Action Bronson - Larry Csonka - indie")
   end
 
   it 'allows a user to list artists' do
@@ -46,7 +46,6 @@ describe 'Music Library CLI' do
 
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
     expect(music_library_controller).to receive(:gets).and_return("play song", "1", "exit")
-
     output = capture_puts {run_file("./bin/musiclibrary")}
 
     expect(output).to include("Playing Action Bronson - Larry Csonka - indie")
