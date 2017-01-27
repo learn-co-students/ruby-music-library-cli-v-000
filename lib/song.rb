@@ -1,5 +1,6 @@
 require 'pry'
 class Song
+  extend Concerns::Findable
 attr_accessor :name 
 @@all = []
 
@@ -23,9 +24,8 @@ end# of save
 
 
 def self.create(name)
-  song = self.new(name)
+  song = self.new(name).save 
   #binding.pry 
-  @@all << song  
 end# of self.create
 
 end# of Song
