@@ -1,3 +1,6 @@
+require_relative '../concerns/findable.rb'
+require 'pry'
+
 class MusicImporter
 
   attr_accessor :path
@@ -12,8 +15,7 @@ class MusicImporter
     end
 
     def import
-      @files.each { |filename| Song.new_from_filename(filename) }
-
+      files.collect { |filename| Song.create_from_filename(filename) }
     end
 
 end
