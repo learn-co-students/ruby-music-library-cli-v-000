@@ -1,10 +1,11 @@
 class Artist
   extend Concerns::Findable
-attr_accessor :name 
+attr_accessor :name, :songs  
 @@all = []
 
 def initialize(name)
   @name = name 
+  @songs = []
 end# of initialize
 
 
@@ -23,8 +24,8 @@ end# of save
 
 
 def self.create(name)
-  artist = self.new(name).save 
-  #binding.pry 
+  self.new(name).save
+  self  
 end# of self.create
 
 end# of Artist

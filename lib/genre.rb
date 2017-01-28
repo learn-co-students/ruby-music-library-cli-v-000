@@ -23,8 +23,8 @@ end# of save
 
 
 def self.create(name)
-  genre = self.new(name).save 
-  #binding.pry 
+  self.new(name).save 
+  self 
 end# of self.create
 
 end# of Artist
