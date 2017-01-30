@@ -33,6 +33,7 @@ describe "Songs and Artists" do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
+
         expect(artist.songs).to include(song)
       end
     end
@@ -51,7 +52,7 @@ describe "Songs and Artists" do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         artist.add_song(song)
-
+        
         expect(song.artist).to eq(artist)
       end
       it 'does not assign the artist to the song if the song already has the artist' do
