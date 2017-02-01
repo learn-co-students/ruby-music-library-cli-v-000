@@ -62,4 +62,28 @@ def self.find_or_create_by_name(name)
 end# of self.find_or_create_by_name
 
 
+def self.new_from_filename(file_name)
+    data = file_name.split("-")
+    artist_name = data[0].strip
+    song_name = data[1].strip
+    song_genre = data[2].strip.split(".mp3").join("")
+    song = self.new(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(song_genre)
+    song 
+end# of self.new_by_filename
+
+
+def self.create_from_filename(file_name)
+    data = file_name.split("-")
+    artist_name = data[0].strip
+    song_name = data[1].strip
+    song_genre = data[2].strip.split(".mp3").join("")
+    song = self.find_or_create_by_name(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(song_genre)
+    song 
+end# of self.create_from_filename
+
+
 end# of Song

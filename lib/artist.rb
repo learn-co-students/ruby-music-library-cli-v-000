@@ -38,6 +38,19 @@ def self.create(name)
 end# of self.create
 
 
+def self.find_by_name(name)
+  self.all.find {|artist| artist.name == name}
+end# of self.find_by_name
+
+
+def self.find_or_create_by_name(name)
+  if self.find_by_name(name) == nil
+      self.create(name)
+  else 
+    self.find_by_name(name) 
+  end# of if 
+end# of self.find_or_create_by_name
+
 def add_song(song)
   song.artist ||= self  
   @songs << song unless @songs.include?(song)

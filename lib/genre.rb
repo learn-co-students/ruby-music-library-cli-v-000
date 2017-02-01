@@ -30,8 +30,24 @@ end# of save
 
 
 def self.create(name)
-  self.new(name).save 
-  self 
+  genre = self.new(name)
+  genre.save 
+  genre 
 end# of self.create
+
+
+def self.find_by_name(name)
+  self.all.find {|song| song.name == name}
+end# of self.find_by_name
+
+
+def self.find_or_create_by_name(name)
+  if self.find_by_name(name) == nil
+      self.create(name)
+  else 
+    self.find_by_name(name) 
+  end# of if 
+end# of self.find_or_create_by_name
+
 
 end# of Artist
