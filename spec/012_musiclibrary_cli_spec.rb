@@ -70,7 +70,7 @@ describe 'Music Library CLI' do
 
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
     expect(music_library_controller).to receive(:gets).and_return("list genre", "dance", "exit")
-
+    
     output = capture_puts {run_file("./bin/musiclibrary")}
 
     expect(output).to include("Thundercat - For Love I Come - dance")

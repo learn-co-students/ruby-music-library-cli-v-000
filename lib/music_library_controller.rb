@@ -1,36 +1,38 @@
 require 'pry'
 class MusicLibraryController
+  attr_accessor :path, :library
 
-  def initialize(path = "./db/mp3s")
-    
-    importer = MusicImporter.new(path)
-    importer.import 
+  def initialize(path = "./db/mp3s") 
+    @library = MusicImporter.new(path).import 
   end# of initialize
 
 
   def call
     input = nil 
     while input != "exit" 
-      puts "Please make a selection" 
+      #puts "Please make a selection" 
       input = gets.chomp
 
       case input
 
         when "list songs"
-          Song.all.each.with_index(1) {
-            |song, index| puts "#{index}. #{song}"
+          @library.each_with_index { |mp3, index | 
+            puts "#{index+1}. #{mp3}"
           }
 
         when "list artists"
-          Artist.all.each.with_index(1) {
-            |artist, index| puts "#{index}. #{artist}"
-          }
+          @library.each {|file| 
+          data = file.split(" -")
+          artist = data[0].strip 
+          puts artist 
+        }
 
         when "list genres"
-          Genre.all.each.with_index(1) {
-            |genre, index| puts "#{index}. #{genre}"
-          }
-        
+          @library.each {|file|
+          data = file.split(" -")
+          genre = data[2].split(".mp3").join("")
+          puts "#{genre.strip}" 
+        }
 
         when "play song" 
           puts "Which track number would you like to play?"
@@ -51,8 +53,11 @@ class MusicLibraryController
         when "list genres"
           puts "Which genre would you like to explore the songs of?"
           selection = gets.chomp
-          genre = Genre.find_by_name(selection)
-          genre.songs.each {|song| puts song}
+          @library.collect {|file|
+            data = file.split(" -")
+            genre = data[2].split(".mp3").join("")
+            if genre == selection
+              puts file end }
           
 
       end# of case
