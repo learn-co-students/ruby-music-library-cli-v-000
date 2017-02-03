@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-require_relative '../config/environment.rb'
-require 'irb'
-
-def reload!
-  load './config/environment.rb'
-end# of reload
-
-IRB.start 

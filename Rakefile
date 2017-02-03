@@ -13,3 +13,7 @@ task :console do
   puts "Console started:"
   Pry.start
 end
+
+# task :start do
+#   system('irb -r ./config/environment.rb')
+# end

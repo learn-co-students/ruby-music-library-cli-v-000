@@ -1,4 +1,3 @@
-require 'pry'
 class MusicImporter
 attr_accessor :path, :files 
 @@files = []

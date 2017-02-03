@@ -7,7 +7,6 @@ attr_reader :genres
 def initialize(name)
   @name = name 
   @songs = []
-  save 
 end# of initialize
 
 

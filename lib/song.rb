@@ -10,7 +10,6 @@ def initialize(name, artist = nil, genre = nil)
   @name = name
   self.artist=(artist) if artist
   self.genre=(genre) if genre  
-  save
 end# of initialize
 
 
@@ -63,7 +62,7 @@ end# of self.find_or_create_by_name
 
 
 def self.new_from_filename(file_name)
-    data = file_name.split("-")
+    data = file_name.split(" -")
     artist_name = data[0].strip
     song_name = data[1].strip
     song_genre = data[2].strip.split(".mp3").join("")
@@ -75,7 +74,7 @@ end# of self.new_by_filename
 
 
 def self.create_from_filename(file_name)
-    data = file_name.split("-")
+    data = file_name.split(" -")
     artist_name = data[0].strip
     song_name = data[1].strip
     song_genre = data[2].strip.split(".mp3").join("")
