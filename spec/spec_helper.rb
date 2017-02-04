@@ -1,4 +1,4 @@
-require_relative "../config/environment.rb"
+require_relative "../db/config/environment.rb"
 
 RSpec.configure do |config|
   config.order = :default
