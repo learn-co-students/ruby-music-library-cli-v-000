@@ -10,7 +10,7 @@ class MusicLibraryController
   def call
     input = nil 
     while input != "exit" 
-      #puts "Please make a selection" 
+      puts "Please make a selection" 
       input = gets.chomp
 
       case input
@@ -50,14 +50,13 @@ class MusicLibraryController
             end# of if 
           }
 
-        when "list genres"
+        when "list genre"
           puts "Which genre would you like to explore the songs of?"
           selection = gets.chomp
-          @library.collect {|file|
-            data = file.split(" -")
-            genre = data[2].split(".mp3").join("")
-            if genre == selection
-              puts file end }
+          genre = Genre.find_by_name(selection)
+          genre.songs.each do |song|
+            puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+          end# of do 
           
 
       end# of case
