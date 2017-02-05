@@ -20,7 +20,6 @@ class MusicLibraryController
   end
 
 
-
   def call
       self.menu
       input = ""
