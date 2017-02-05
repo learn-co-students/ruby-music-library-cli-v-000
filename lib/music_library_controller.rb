@@ -55,7 +55,7 @@ class MusicLibraryController
           selection = gets.chomp
           genre = Genre.find_by_name(selection)
           genre.songs.each do |song|
-            puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+            puts "#{song.artist.name} - #{song.name} - #{genre.name}"
           end# of do 
           
 
