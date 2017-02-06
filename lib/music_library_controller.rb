@@ -71,20 +71,18 @@ class MusicLibraryController
             when "play song" #plays a song by number
               self.clear_window
               puts "Which song would you like to play? Input Song Number or [exit] to return to Menu."
-                while input = gets.chomp
-                  if input.to_i > song.all.length
+              puts ""
+                input = gets.chomp
+                  if input.to_i > Song.all.length
                      puts "Invalid song number. Please try again!"
-                     print line
-                     input = gets.chomp
-                  if input.to_i.between?(0,100)
+                  elsif input.to_i.between?(0,100)
                       current_song = Song.all[input.to_i - 1]
                       puts "\nPlaying #{current_song.artist.name} - #{current_song.name} - #{current_song.genre.name}\n\n\n"
-                      puts line
-                      break
+                      puts "______________________"
+                      print line
                   elsif input == "exit"
                       self.clear_window
                       menu
-                      break
                     end
 
             when "list genre" #list all songs for a given genre
