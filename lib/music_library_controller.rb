@@ -7,9 +7,10 @@ def initialize(path = "./db/mp3s")
 end
 
 def call
-  response = ""
-  while(response != "exit")
-    puts "Please Enter Input"
+   response = ""
+  while (response != "exit")
+
+  puts "Please Enter Input"
   response =  gets.strip
   case response
       when "list songs"
@@ -24,19 +25,21 @@ def call
         list_genre
       when "play song"
         play_song
-      end
+      when "exit"
+        puts "Exiting program"
+        exit
+            end
 end
 end
+
 
 def songs
 Song.all.each{|song| song.name}
 end
 
 def artists
-  Artist.all.each.with_index(1) do |a|
-        puts "#{a}"
+  Artist.all.each{|artist| artist.name}
       end
-end
 
 def genres
 Genre.all.each{|genre| genre.name}
