@@ -22,6 +22,11 @@ class Artist
   end
 
   def self.create(name)
-    self.new(name).tap{|song| song.save}
+    self.new(name).tap{|artist| artist.save}
+  end
+
+  def add_song(song)
+    songs << song unless songs.include?(song)
+    song.artist = self unless song.artist == self
   end
 end
