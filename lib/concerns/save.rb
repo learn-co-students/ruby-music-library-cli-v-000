@@ -3,16 +3,18 @@ require 'pry'
 module Concerns
   module Save
     module ClassMethods
-      def self.all
+      @@all = []
+
+      def all
         @@all
       end
 
-      def self.destroy_all
+      def destroy_all
         all.clear
       end
 
-      def self.create(name)
-        self.new(name).tap{|x| x.save}
+      def create(name)
+        new(name).tap{|x| x.save}
       end
     end
 
