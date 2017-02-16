@@ -5,15 +5,11 @@ class Genre
   extend Concerns::Save::ClassMethods
   include Concerns::Save::InstanceMethods
   attr_accessor :name
+  attr_reader :songs
 
   def initialize(name)
     @name = name
     @songs = []
-  end
-
-
-  def songs
-    @songs
   end
 
   def artists

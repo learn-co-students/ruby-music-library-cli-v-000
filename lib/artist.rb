@@ -1,10 +1,10 @@
-require 'pry'
 
 class Artist
   extend Concerns::Findable
   extend Concerns::Save::ClassMethods
   include Concerns::Save::InstanceMethods
   attr_accessor :name
+  attr_reader :songs
 
   def initialize(name)
     @name = name
@@ -14,10 +14,6 @@ class Artist
   def add_song(song)
     songs << song unless songs.include?(song)
     song.artist = self unless song.artist == self
-  end
-
-  def songs
-    @songs
   end
 
   def genres

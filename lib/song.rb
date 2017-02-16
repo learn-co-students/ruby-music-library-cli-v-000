@@ -22,4 +22,33 @@ class Song
     @genre = genre
     genre.songs << self unless genre.songs.include?(self)
   end
+
+  def self.new_from_filename(filename)
+    arr = filename.split(" - ")
+    artist_tmp = Artist.find_or_create_by_name(arr[0])
+    song = find_or_create_by_name(arr[1])
+    genre_name = arr[2]
+    genre_name.slice!(-4,4)
+    genre_tmp = Genre.find_or_create_by_name(genre_name)
+    song.artist = artist_tmp
+    song.genre = genre_tmp
+    song
+  end
+
+  def self.create_from_filename(filename)
+      arr = filename.split(" - ")
+
+      artist_tmp = Artist.find_or_create_by_name(arr[0])
+
+      song = find_or_create_by_name(arr[1])
+
+      genre_name = arr[2]
+      genre_name.slice!(-4,4)
+      genre_tmp = Genre.find_or_create_by_name(genre_name)
+
+      song.artist = artist_tmp
+      song.genre = genre_tmp
+      binding.pry
+      song
+  end
 end
