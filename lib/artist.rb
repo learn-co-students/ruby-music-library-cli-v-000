@@ -1,7 +1,8 @@
 require 'pry'
-
 class Artist
-  attr_accessor :name, :song
+  include Concerns::Findable
+  extend Concerns::Findable
+  attr_accessor :name, :songs
 
   @@all = []
 
@@ -10,13 +11,14 @@ class Artist
     @songs = []
   end
 
-  def songs
+ #since we have the attr_accessor i'm going to remove this
+  `def songs
     @songs
-  end
+  end`
 
   def add_song(song)
-    self.songs << song unless @songs.find {|song| song}
     song.artist = self unless song.artist == self
+    @songs << song unless @songs.include?(song)
   end
 
   def self.all
@@ -32,8 +34,14 @@ class Artist
     self
   end
 
-  def self.create(song)
-    new_song = self.new(song)
-    new_song.save
+  def genres
+    # this method looks correct :D so let's look at what it calls
+    self.songs.collect{|song| song.genre}.uniq
+    # binding.pry
+
+  end
+
+  def self.create(name)
+    self.new(name).tap{ |g| g.save}
   end
 end

@@ -1,8 +1,10 @@
+require 'pry'
 require 'spec_helper'
 
 describe "Artists have many genres through songs" do
   describe '#genres' do
     it 'returns the unique genres belonging to all the songs of the artist' do
+      # binding.pry
       genre = Genre.new("indie rock")
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In the Aeroplane Over the Sea", artist, genre)
@@ -19,7 +21,13 @@ describe "Artists have many genres through songs" do
 
       song = Song.new("Long-Forgotten Fairytale", artist, electro_pop)
       song = Song.new("The Book of Love", artist, indie_rock)
+
+      # binding.pry
       song = Song.new("Papa was a Rodeo", artist, indie_rock)
+      #shouldn't that return 2? electro_pop and indie_rock?
+      #exactly! Let's investigate. hmmm
+           #let's take a look at artist.genres
+      # binding.pry 
 
       expect(artist.genres).to match_array([indie_rock, electro_pop])
       expect(artist.genres.size).to eq(2)
