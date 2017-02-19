@@ -4,14 +4,16 @@ describe "Songs and Artists" do
   context 'Artists have many songs' do
     it 'initializes with a songs property set to an empty array' do
       artist = Artist.new("Neutral Milk Hotel")
-
+      # require 'pry'
+      # binding.pry
       expect(artist.songs).to eq([])
     end
 
     it 'can push a song into the songs collection' do
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In the Aeroplane Over the Sea")
-
+      # require 'pry'
+      #binding.pry
       artist.songs << song
       expect(artist.songs).to include(song)
     end
@@ -22,8 +24,10 @@ describe "Songs and Artists" do
       it 'accepts an artist for the song' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
+        # binding.pry
         song.artist = artist
-
+        # require 'pry'
+        # binding.pry
         expect(song.artist).to eq(artist)
       end
 
@@ -33,6 +37,8 @@ describe "Songs and Artists" do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
+        #  require 'pry'
+        #  binding.pry
 
         expect(artist.songs).to include(song)
       end
