@@ -2,7 +2,8 @@
 
 require_relative '../config/environment'
 
-# MusicLibraryController.new.call
+interface = MusicLibraryController.new.call
 
-files = MusicImporter.new(spec/fixtures/mp3s)
-Song.create_from_filename(files)
+if interface = "list songs"
+  puts Song.all
+end
