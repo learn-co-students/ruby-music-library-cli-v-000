@@ -25,7 +25,14 @@ class MusicLibraryController
         genre_list.each{|genre| puts genre}
 
       when "play song"
+        input = gets.chomp.to_i
+        song = song_list[input-1]
+        puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
 
+      when Artist.find_by_name(input).name
+        Artist.find_by_name(input).songs.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
       end
 
     end

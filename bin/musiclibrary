@@ -3,7 +3,3 @@
 require_relative '../config/environment'
 
 interface = MusicLibraryController.new.call
-
-if interface = "list songs"
-  puts Song.all
-end
