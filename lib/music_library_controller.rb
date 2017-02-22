@@ -13,6 +13,15 @@ class MusicLibraryController
     array = []
     i = nil
     while answer != "exit"
+      puts "What would you like to do?"
+      puts "Your options are (enter exactly as shown):"
+      puts "list songs"
+      puts "list artists"
+      puts "list genres"
+      puts "play song"
+      puts "list artist"
+      puts "list genre"
+      puts "exit"
       answer = gets.strip
       case answer
         when "list songs"
@@ -23,16 +32,17 @@ class MusicLibraryController
         when "list genres"
           puts Genre.all.collect {|a| a.name}
         when "play song"
+          puts "enter song number as a number"
           i = gets.strip
           song = Song.all[i.to_i-1]
           puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
         when "list artist"
-          artist = nil
+          "enter the artist name"
           i = gets.strip
           artist = Artist.all.detect {|a| a.name == i}
           puts artist.songs.collect {|a| "#{a.artist.name} - #{a.name} - #{a.genre.name}"}
         when "list genre"
-          genre = nil
+          puts "enter the genre name"
           i = gets.strip
           genre = Genre.all.detect {|a| a.name == i}
           puts genre.songs.collect {|a| "#{a.artist.name} - #{a.name} - #{a.genre.name}"}
