@@ -34,6 +34,7 @@ class MusicLibraryController
         end
       end
 
+<<<<<<< HEAD
       def artists
         Artist.all.each.with_index(1) do |a, i|
           puts "#{i}. #{a}"
@@ -44,6 +45,14 @@ class MusicLibraryController
         Genre.all.each.with_index(1) do |g, i|
           puts "#{i}. #{g}"
         end
+=======
+  def list_artist
+    puts "What artist by name you like to list songs for?"
+    artist_input = gets.strip
+    if artist = Artist.find_by_name(artist_input)
+      artist.songs.each do |s,i|
+        puts "#{i}. #{s}"
+>>>>>>> 6197a1617fb2d89b09bd81d034e133eed61f6d13
       end
 
       def play_song
@@ -52,6 +61,7 @@ class MusicLibraryController
       end
       end
 
+<<<<<<< HEAD
       def list_artist
         Artist.all.each do |a|
           a.songs.each do |s|
@@ -67,4 +77,17 @@ class MusicLibraryController
           end
         end
       end
+=======
+  def play_song
+    puts "What song number would you like to play?"
+    song_input = gets.strip
+    puts "Playing #{Song.all[song_input.to_i-1]}"
+  end
+
+  def songs
+    Song.all.each.with_index(1) do |s, i|
+      puts "#{i}. #{s}"
+    end
+  end
+>>>>>>> 6197a1617fb2d89b09bd81d034e133eed61f6d13
 end
