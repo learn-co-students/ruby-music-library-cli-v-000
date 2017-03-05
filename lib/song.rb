@@ -15,11 +15,10 @@ class Song
     @@all << self
   end
 
-  # def artist= (name)
-  #     # self.artist = Artist.find_or_create_by_name(name) #sets artist to artist object using the find_or_create_by_name method in Artist class which takes in a string
-  #     self.artist = Artist.new(name)
-  #     self.artist.add_song(self) #adds song in artists collection using the Artist add_song method
-  # end
+  def artist_name= (name)
+      self.artist = Artist.find_or_create_by_name(name) #sets artist to artist object using the find_or_create_by_name method in Artist class which takes in a string
+      self.artist.add_song(self) #adds song in artists collection using the Artist add_song method
+  end
 
   def self.create(name)
     Song.new(name).tap{|song| song.save}
