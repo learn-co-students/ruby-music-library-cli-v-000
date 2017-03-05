@@ -39,8 +39,7 @@ attr_accessor :path
       end
 
       def songs #Oh my fuck. They've been fucking supplying it in the spec. Jesus Christ.
-        count = 0
-        Song.all.each {|song| puts ("#{count +=1}. ") + song.artist.name + " - " + song.name + " - " + song.genre.name}
+        count = 0; Song.all.each {|song| puts ("#{count +=1}. ") + song.artist.name + " - " + song.name + " - " + song.genre.name}
       end
 
       def artists

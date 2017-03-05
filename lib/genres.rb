@@ -25,19 +25,12 @@ class Genre
     @@all << self
   end
 
-  def artists #Leaving this multiline for my own sanity an later reference.
-    songartists = []
-      @songs.each do |song|
-        if !songartists.include?(song.artist)
-          songartists << song.artist
-        end
-      end
-    songartists
+  def artists
+    songartists = []; @songs.each {|song| songartists << song.artist if !songartists.include?(song.artist)}; songartists
   end
 
   def self.create(genre)
-    new_genre = Genre.new(genre)
-    new_genre.save
+    new_genre = Genre.new(genre); new_genre.save
     return new_genre
   end
 

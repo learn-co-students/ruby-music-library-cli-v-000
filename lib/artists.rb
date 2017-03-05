@@ -24,22 +24,20 @@ class Artist
   end
 
   def genres
-    genlist = [] #local var, cleared each time .genres is invoked.
-    @songs.each {|song| genlist << song.genre if !genlist.include?(song.genre)} #neater, but I'm not sure it's more readable.
-    genlist
+    genlist = []; @songs.each {|song| genlist << song.genre unless genlist.include?(song.genre)}; genlist #neater, but I'm not sure it's more readable.
   end
 
   def save
     @@all << self
   end
 
-  def add_song(song)
-    @songs << song if !self.songs.include?(song) #one-liners but kinda awkward/unreadable. :/
+  def add_song(song) #add to artist's @songs array and sets song's artist to self if there isn't one yet
+    @songs << song if !self.songs.include?(song)
     song.artist = self if song.artist == ""
   end
 
   def self.create(name) #creates new artist by name and saves to Artist's @@all array.
-    new_artist = Artist.new(name) #self.new also works. I guess self = Artist, dunno wtf self.class means then...
+    new_artist = Artist.new(name)
     new_artist.save
     return new_artist
   end
