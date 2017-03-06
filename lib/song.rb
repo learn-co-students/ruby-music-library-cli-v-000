@@ -6,10 +6,12 @@ class Song
 
   def initialize(name, artist = nil)
     @name = name
-    # binding.pry
-    if artist != nil
-      artist.add_song(self)
-    end
+    self.artist = artist if artist
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
   end
 
   def save
