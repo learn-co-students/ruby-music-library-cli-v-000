@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "MusicImporter" do
   describe '#initialize' do
@@ -34,10 +35,11 @@ describe 'Making Songs from filenames' do
   describe 'Song.new_from_filename' do
     it 'initializes a song based on the filename delimiters' do
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-
+      
       expect(song.name).to eq("For Love I Come")
       expect(song.artist.name).to eq("Thundercat")
       expect(song.genre.name).to eq("dance")
+      
     end
 
     it 'maintains unique objects' do
