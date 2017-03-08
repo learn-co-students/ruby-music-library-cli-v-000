@@ -31,7 +31,6 @@ class Song
     # binding.pry
     title = song_data[1]
     song = self.new(title, artist, genre) #creates a new song
-    # song #returns the song
   end
 
   def self.create_from_filename(filename)

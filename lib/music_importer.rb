@@ -7,9 +7,10 @@ class MusicImporter
   end
 
   def files
-    @files = Dir.glob("#{self.path}/*mp3") #sets files array equal to the files with mp3
-    @files = @files.collect{|x| x.gsub("#{path}/", "")} #removes the path from the files so it returns just the artist/song info
-    # binding.pry
+    @files ||= Dir.glob("#{path}/*.mp3").sort.collect{|f| f.gsub("#{path}/", "")}
+    # the_files = Dir.glob("#{self.path}/*mp3") #sets files array equal to the files with mp3
+    # @files = the_files.collect{|x| x.gsub("#{path}/", "")} #removes the path from the files so it returns just the artist/song info
+    # # binding.pry
   end
 
   def import
