@@ -17,6 +17,13 @@ class Artist
     @songs << song if !@songs.include?(song)
   end
 
+  def genres
+    self.songs.collect{|song| song.genre}.uniq
+  end
+
+
+  #class methods
+
   def self.create(name)
     Artist.new(name).tap{|artist| artist.save}
   end
