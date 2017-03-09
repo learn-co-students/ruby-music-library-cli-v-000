@@ -1,0 +1,2 @@
+class MusicLibraryController
+end
