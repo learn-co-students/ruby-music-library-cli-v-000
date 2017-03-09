@@ -10,6 +10,7 @@ class MusicLibraryController
       if input == "exit"
         puts "Goodbye!"
         break
+
       elsif input == "commands"
         puts "'list songs' - lists all songs"
         puts "'play song' - plays a specified song"
@@ -18,16 +19,16 @@ class MusicLibraryController
         puts "'list artist' - list all songs of specified artist"
         puts "'list genre' - lists all songs for specified genre"
         puts "'exit' - quit Music Library CLI"
+
       elsif input == "list songs"
-        a = []
-        Song.all.each_with_index do |song, index|
-          a << "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-        end
-        puts a
+        puts (Song.all.map.with_index(1) { |song, index| "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}" })
+
       elsif input == "list artists"
         Song.all.collect { |song, index| puts "#{song.artist.name}" }
+        
       elsif input == "list genres"
         Song.all.collect { |song, index| puts "#{song.genre.name}" }
+
       elsif input == "play song"
         puts "Play which song number?"
         song_index = gets.strip.to_i - 1
@@ -37,34 +38,28 @@ class MusicLibraryController
         else
           puts "Invalid song number. Cannot play song."
         end
+
       elsif input == "list artist"
         puts "List songs for which artist?"
         artist_name = gets.strip
-        a = []
         if Artist.find_by_name(artist_name)
-          Artist.find_by_name(artist_name).songs.each do |song|
-            a << "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-          end
+          puts (Artist.find_by_name(artist_name).songs.collect { |song| "#{song.artist.name} - #{song.name} - #{song.genre.name}" })
         else
           puts "Invalid artist name. Cannot list songs."
         end
-        puts a
+
       elsif input == "list genre"
         puts "List songs for which genre?"
         genre_name = gets.strip
-        a = []
         if Genre.find_by_name(genre_name)
-          Genre.find_by_name(genre_name).songs.each do |song|
-            a << "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-          end
+          puts (Genre.find_by_name(genre_name).songs.collect { |song| "#{song.artist.name} - #{song.name} - #{song.genre.name}" })
         else
           puts "Invalid genre name. Cannot list songs."
         end
-        puts a
+
       else
         puts "Invalid command. Type 'commands' for a list of commands."
       end
     end
   end
-
 end

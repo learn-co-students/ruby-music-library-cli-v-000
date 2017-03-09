@@ -23,15 +23,11 @@ class Genre
   end
 
   def self.create(genre)
-    this_genre = self.new(genre)
-    this_genre.save
-    this_genre
+    self.new(genre).tap { |o| o.save }
   end
 
   def artists
-    artists = []
-    songs.each { |song| artists << song.artist }
-    artists.uniq
+    @songs.collect { |s| s.artist }.uniq
   end
 
 end

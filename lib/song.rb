@@ -6,9 +6,9 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     @artist = artist
-    @artist.add_song(self) if @artist
+    artist.add_song(self) if @artist
     @genre = genre
-    @genre.songs << self if @genre
+    genre.songs << self if @genre
   end
 
   def self.all
@@ -24,19 +24,17 @@ class Song
   end
 
   def self.create(song)
-    this_song = self.new(song)
-    this_song.save
-    this_song
+    self.new(song).tap { |o| o.save }
   end
 
   def artist=(artist)
     @artist = artist
-    @artist.add_song(self)
+    artist.add_song(self)
   end
 
   def genre=(genre)
     @genre = genre
-    @genre.songs << self unless @genre.songs.include? self
+    genre.songs << self unless @genre.songs.include? self
   end
 
   def self.find_by_name(name)
@@ -51,26 +49,17 @@ class Song
     end
   end
 
-  def parse(filename)
-    parsed_name = filename.split(" - ")
-    @parsed_song = parsed_name[1]
-    @parsed_artist = parsed_name[0]
-    @parsed_genre = parsed_name[2]
-  end
-
   def self.new_from_filename(filename)
     parsed_name = filename.split(" - ")
 
-    song = self.new(parsed_name[1])
-    song.artist = Artist.find_or_create_by_name(parsed_name[0])
-    song.genre = Genre.find_or_create_by_name(parsed_name[2].chomp(".mp3"))
-    song
+    song = self.new(parsed_name[1]).tap do |o|
+      o.artist = Artist.find_or_create_by_name(parsed_name[0])
+      o.genre = Genre.find_or_create_by_name(parsed_name[2].chomp(".mp3"))
+    end
   end
 
   def self.create_from_filename(filename)
-    song = self.new_from_filename(filename)
-    song.save
-    song
+    song = self.new_from_filename(filename).tap { |o| o.save }
   end
 
 end
