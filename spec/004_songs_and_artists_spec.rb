@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Songs and Artists" do
   context 'Artists have many songs' do
