@@ -2,14 +2,10 @@ class MusicImporter
   #attributes & variables
   attr_accessor :path, :files
 
-  #Modules
-
   #initialize
   def initialize(path)
     @path = path
   end
-
-  #class methods
 
   #instance methods
   def files

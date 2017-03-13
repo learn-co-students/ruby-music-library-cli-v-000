@@ -2,14 +2,10 @@ class MusicLibraryController
   #attribute and variables
   attr_accessor :path
 
-  #Modules
-
   #initialize
   def initialize(path = "./db/mp3s")
     @path = MusicImporter.new(path).import
   end
-
-  #class methods
 
   #instance methods
   def call
