@@ -1,12 +1,14 @@
 require_relative '../concerns/findable.rb'
 
 class Genre
-  attr_accessor :name
+  extend Concerns::Findable
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def save
@@ -19,6 +21,13 @@ class Genre
 
   def self.destroy_all
     @@all = []
+  end
+
+  def artists
+    @songs.collect do |song|
+        song.artist
+    end
+    .uniq
   end
 
   # constructor
