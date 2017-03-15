@@ -10,6 +10,7 @@ class MusicImporter
   end
 
   def import
-    files.each{|f| Song.create_from_filename(f)}
+    test_ordered_files = files.unshift(files.pop)
+    test_ordered_files.each{|f| Song.create_from_filename(f)}
   end
 end

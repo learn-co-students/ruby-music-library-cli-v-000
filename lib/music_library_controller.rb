@@ -1,5 +1,4 @@
 
-require "pry"
 class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
@@ -45,8 +44,6 @@ class MusicLibraryController
 
   def list_artist
     puts "What artist by name you like to list songs for?"
-    genre_input = gets.strip
-    if genre = Genre.find_by_name(genre_input)
     artist_input = gets.strip
     if artist = Artist.find_by_name(artist_input)
       artist.songs.each do |s,i|
@@ -57,6 +54,8 @@ class MusicLibraryController
 
   def list_genre
     puts "What genre by name you like to list songs for?"
+      genre_input = gets.strip
+      if genre = Genre.find_by_name(genre_input)
       genre.songs.each do |s,i|
         puts "#{i}. #{s}"
       end
@@ -71,6 +70,7 @@ class MusicLibraryController
 
   def songs
     Song.all.each.with_index(1) do |s,i|
+      
       puts "#{i}. #{s}"
     end
   end
