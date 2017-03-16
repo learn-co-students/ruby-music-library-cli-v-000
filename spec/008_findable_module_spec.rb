@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'Concerns::Findable' do
-  it 'defines a module Concerns::Findable' do
-    expect(defined?(Concerns::Findable)).to be_truthy
-    expect(Concerns::Findable).to be_a(Module)
+describe 'Findable' do
+  it 'defines a module Findable' do
+    expect(defined?(Findable)).to be_truthy
+    expect(Findable).to be_a(Module)
   end
 
   class Person
-    extend Concerns::Findable
+    extend Findable
   end
 
   it 'adds a find_by_name class method to classes that are extended by the module' do

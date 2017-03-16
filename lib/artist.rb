@@ -16,15 +16,15 @@ class Artist
     @@all = []
   end
 
-  def initialize(name)
-    self.name = name
+  def initialize(n)
+    @name = n
     self.songs = []
   end
 
-  def self.create(name)
-    self.new(name).tap do |artist|
-      @@all << artist
-    end
+  def self.create(n)
+    artist = self.new(n)
+    @@all << artist
+    artist
   end
 
   def save
@@ -41,6 +41,12 @@ class Artist
     self.songs.collect {|song| song.genre}.uniq
   end
 
-end
+  def self.list_artists
+    self.all.each {|artist| puts "#{artist.name}"}
+  end
 
-#
+  def list_artist_songs # the similar method for this that I'm creating for Genres could be modularized
+    self.songs.each {|song| puts "#{song.song_attributes}"} # iterate over the artist_object's song array and put for each song the song attributes
+  end
+
+end
