@@ -1,13 +1,15 @@
 class Artist
 
-  attr_accessor :name, :genres, :songs
+  extend Concerns::Findable
+
+  attr_accessor :name, :songs
+  attr_writer :genres
 
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
   end
 
   def self.all
@@ -35,11 +37,6 @@ class Artist
   def add_song(song)
     song.artist = self unless song.artist == self
     @songs << song unless @songs.include?(song)
-  end
-
-  def add_genre(song)
-    song.genre = self unless song.genre == self
-    @genres << song.genre unless @genres.include?(song.genre)
   end
 
   def genres
