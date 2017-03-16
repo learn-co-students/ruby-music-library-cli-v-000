@@ -18,11 +18,11 @@ describe "Songs and Artists" do
   end
 
   context 'Songs belong to an artist' do
-    describe '#artist=' do
+    describe '#assign_artist' do
       it 'accepts an artist for the song' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
-        song.artist = artist
+        song.assign_artist(artist)
 
         expect(song.artist).to eq(artist)
       end
@@ -32,7 +32,7 @@ describe "Songs and Artists" do
       it 'adds the song to the artist\'s songs' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
-        song.artist = artist
+        song.assign_artist(artist)
 
         expect(artist.songs).to include(song)
       end
@@ -78,14 +78,14 @@ describe "Songs and Artists" do
       end
     end
 
-    describe 'Song#artist=' do
+    describe 'Song#assign_artist' do
       it 'uses add_song to add the song to the artist\'s collection' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
 
         expect(artist).to receive(:add_song)
 
-        song.artist = artist
+        song.assign_artist(artist)
       end
     end
   end

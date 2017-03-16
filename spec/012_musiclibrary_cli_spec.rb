@@ -56,7 +56,7 @@ describe 'Music Library CLI' do
     music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
-    expect(music_library_controller).to receive(:gets).and_return("list artist", "Real Estate", "exit")
+    expect(music_library_controller).to receive(:gets).and_return("list artist songs", "Real Estate", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
@@ -68,7 +68,7 @@ describe 'Music Library CLI' do
     music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
 
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
-    expect(music_library_controller).to receive(:gets).and_return("list genre", "dance", "exit")
+    expect(music_library_controller).to receive(:gets).and_return("list genre songs", "dance", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
 
