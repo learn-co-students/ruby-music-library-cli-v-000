@@ -7,12 +7,10 @@ class Genre
 
   def initialize(name)
     @name = name
-    #binding.pry
     @songs = []
   end
 
   def self.all
-    #binding.pry
     @@all
   end
 
@@ -21,13 +19,11 @@ class Genre
   end
 
   def save
-    #binding.pry
     @@all << self
   end
 
   def self.create(name)
     genre = Genre.new(name)
-    #binding.pry
     genre.save
     genre
   end

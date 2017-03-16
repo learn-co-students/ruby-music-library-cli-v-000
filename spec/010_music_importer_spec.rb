@@ -72,7 +72,6 @@ end
 
 describe "MusicImporter#import" do
   it 'imports the files into the library by creating songs from a filename' do
-    binding.pry
     test_music_path = "./spec/fixtures/mp3s"
     music_importer = MusicImporter.new(test_music_path)
     music_importer.import
