@@ -2,6 +2,7 @@ class Song
 #  extend Findable
 
   attr_accessor :name, :artist
+  attr_reader :genre
   @@all = []
 
   def self.all
@@ -12,9 +13,10 @@ class Song
     @@all = []
   end
 
-  def initialize(name, a = nil)
+  def initialize(name, a = nil, g = nil)
     self.name = name
     self.assign_artist=(a) unless a == nil
+    self.genre=(g) unless g == nil
   end
 
   def self.create(name)
@@ -29,8 +31,11 @@ class Song
 
   def assign_artist=(a)
     a.add_song(self)
-    # @artist = a #set
-    # a.songs << self unless a.songs.include?(self)
+  end
+
+  def genre=(g)
+    @genre = g
+    g.songs << self unless g.songs.include?(self)
   end
 
 end

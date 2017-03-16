@@ -1,11 +1,12 @@
 class Genre
   extend Findable
 
-  attr_accessor :name
+  attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
     self.name = name
+    self.songs = []
   end
 
   def self.all
