@@ -1,5 +1,10 @@
+# require 'pry'
+# require_relative './artist.rb'
+# require_relative './genre.rb'
+require_relative './concerns/findable.rb'
+
 class Song
-#  extend Findable
+  extend Findable
 
   attr_accessor :name, :artist
   attr_reader :genre
@@ -39,3 +44,6 @@ class Song
   end
 
 end
+
+# Song.find_or_create_by_name("Happy")
+# Song.find_or_create_by_name("Happy")

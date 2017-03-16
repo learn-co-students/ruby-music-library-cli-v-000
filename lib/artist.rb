@@ -1,9 +1,9 @@
-require 'pry'
-require_relative './song.rb'
-# require_relative './concerns/findable.rb'
+# require 'pry'
+# require_relative './song.rb'
+require_relative './concerns/findable.rb'
 
 class Artist
-#  extend Findable
+  extend Findable
 
   attr_accessor :name, :songs
   @@all = []
