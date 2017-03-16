@@ -1,17 +1,18 @@
 class Genre
-  attr_accessor :name, :songs, :genre
-
   extend Concerns::Findable
+
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
+    #binding.pry
     @songs = []
-    @genres = []
   end
 
   def self.all
+    #binding.pry
     @@all
   end
 
@@ -20,11 +21,13 @@ class Genre
   end
 
   def save
+    #binding.pry
     @@all << self
   end
 
   def self.create(name)
     genre = Genre.new(name)
+    #binding.pry
     genre.save
     genre
   end
