@@ -32,10 +32,13 @@ class Artist
   end
 
   def add_song(song)
-#    binding.pry
     self.songs << song unless self.songs.include?(song) # add song to the instance's songs array unless the current instance's songs array already includes song
     song.artist = self if song.artist == nil # set the artist attribute to self (current instance) if the artist attribute is empty
     song
+  end
+
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
   end
 
 end
