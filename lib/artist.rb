@@ -27,14 +27,10 @@ class Artist
   end
 
   def add_song(song)
-    if !self.songs.include?(song)
-      self.songs << song
-    end
-    # if self.songs.include?(song)
-    #   nil
-    # else
-    #   self.songs << song
-    # end
-    song.artist == nil ? song.artist = self : nil
+    # song.artist == nil ? song.artist = self : nil
+    song.artist = self unless song.artist == self
+    # self.songs.include?(song) || self.songs << song
+    # above wouldn't pass tests
+    self.songs << song unless self.songs.include?(song)
   end
 end
