@@ -2,7 +2,7 @@ describe 'Music Library CLI' do
 
   it 'allows a user to list songs' do
     music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
-binding.pry
+
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
     expect(music_library_controller).to receive(:gets).and_return("list songs", "exit")
 
