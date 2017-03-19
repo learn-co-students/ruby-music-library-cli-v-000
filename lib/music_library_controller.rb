@@ -17,7 +17,25 @@ class MusicLibraryController
             counter += 1
           end
       when "list artists"
-        puts "artists"
+        Artist.all.each {|artist| puts "#{artist.name}"}
+      when "list genres"
+        Genre.all.each {|genre| puts "#{genre.name}"}
+      when "play song"
+        puts "Which song would you like to play?"
+        song_number = gets.strip.to_i
+        puts "Playing #{Song.all[song_number-1].artist.name} - #{Song.all[song_number-1].name} - #{Song.all[song_number-1].genre.name}}"
+      when "list artist"
+        puts "Which artists songs would you like to see?"
+        a = gets.strip
+        Song.all.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}" if song.artist.name == a
+        end
+      when "list genre"
+        puts "Which genre would you like to see?"
+        g = gets.strip
+        Song.all.each do |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}" if song.genre.name == g
+        end
       end
     end
   end
