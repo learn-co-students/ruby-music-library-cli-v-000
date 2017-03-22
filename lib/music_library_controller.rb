@@ -22,9 +22,9 @@ attr_accessor :path
          list_artists
        when "list genres"
          list_genres
-       when "list songs by artist"
+       when "list artist"
          list_artist_songs
-       when "list songs in genre"
+       when "list genre"
          list_genre_songs
        when "play song"
          play_song
@@ -53,20 +53,18 @@ attr_accessor :path
   def list_artist_songs
     puts "Which artist would you like to listen to?"
     artist = gets.strip
+    a = Artist.all.find{ |art| artist == art.name }
     Artist.all.each do |a|
-      if artist == a.name
-        a.songs.collect {|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"}
-      end
+      a.songs.collect {|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"}
     end
   end
 
   def list_genre_songs
     puts "Which genre would you like to listen to?"
     genre = gets.strip
+    g = Genre.all.find{ |ge| genre == ge.name}
     Genre.all.each do |g|
-      if genre == g.name
-        g.songs.collect { |g| puts "#{g.artist.name} - #{g.song.name} - #{g.name}"}
-      end
+      g.songs.collect { |song| puts "#{song.artist.name} - #{song.name} - #{g.name}"}
     end
   end
 
