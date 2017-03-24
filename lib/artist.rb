@@ -1,18 +1,15 @@
 class Artist
 
   extend Concerns::Findable
-  attr_accessor :name, :songs
+  extend Persistable::ClassMethods
 
-  @@all = []
+  include Persistable::InstanceMethods
+
+  attr_accessor :name, :songs, :genre
 
   def initialize(name)
     @name=name
     @songs = []
-  end
-
-  def save
-    artist = Artist.new(name)
-    @@all << self
   end
 
   def self.all
@@ -23,14 +20,6 @@ class Artist
     artist = Artist.new(name)
     artist.save
     artist
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def songs
-    @songs
   end
 
   def add_song(song)

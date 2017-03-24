@@ -1,9 +1,12 @@
 class Song
 
     extend Concerns::Findable
-    attr_accessor :name, :genre, :artist
+    extend Persistable::ClassMethods
+  #  extend Nameable::ClassMethods
 
-    @@all = []
+    include Persistable::InstanceMethods
+
+    attr_accessor :name, :genre, :artist
 
     def initialize(name, artist = nil, genre = nil)
       @name = name
@@ -11,23 +14,14 @@ class Song
       self.genre = genre if genre
     end
 
-    def save
-      song = Song.new(name)
-      @@all << self
-    end
-
     def self.all
       @@all
     end
 
-    def self.create(name)
-      song = Song.new(name)
+   def self.create(name)
+     song = Song.new(name)
       song.save
       song
-    end
-
-    def self.destroy_all
-      @@all.clear
     end
 
     def artist=(artist)

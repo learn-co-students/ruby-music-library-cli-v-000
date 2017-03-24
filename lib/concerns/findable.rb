@@ -1,4 +1,5 @@
 module Concerns::Findable
+  extend Extendable
 
     def find_by_name(name)
       self.all.detect { |a| a.name == name}
@@ -6,6 +7,7 @@ module Concerns::Findable
 
     def find_or_create_by_name(name)
       if self.find_by_name(name) == nil
+        #self.create(name)
         self.create(name)
       else
         self.find_by_name(name)
