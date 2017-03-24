@@ -52,7 +52,8 @@ class MusicLibraryController
   end
 
   def call
-      puts "Welcome! Begin browsing this music library by songs, artists or genres."
+      puts "Welcome to the Music Library! Please start browsing by songs, artists or genres."
+      puts "Please type EXIT to exit."
       user_input = ""
 
       until user_input == "exit"
@@ -72,9 +73,9 @@ class MusicLibraryController
         when "list genre"
           self.list_genres_songs
         when "exit"
-          puts "We hope you enjoyed browsing our music library. Goodbye for now!"
+          puts "We hope you enjoyed browsing here. Hope to see you here again soon. Goodbye for now!"
         else
-          puts "That course of action could not be executed. Please enter a valid command."
+          puts "That is an invalid command. Please enter a valid command."
         end
       end
     end
