@@ -1,4 +1,5 @@
 class Genre
+  extend Concerns::Findable
 
   @@all = []
 
@@ -7,6 +8,10 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
+  end
+
+  def artists
+    self.songs.collect {|song| song.artist}.uniq
   end
 
   def save
