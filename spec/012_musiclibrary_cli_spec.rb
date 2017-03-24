@@ -59,7 +59,7 @@ describe 'Music Library CLI' do
     expect(music_library_controller).to receive(:gets).and_return("list artist", "Real Estate", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
-
+    # binding.pry
     expect(output).to include("Real Estate - Green Aisles - country")
     expect(output).to include("Real Estate - It's Real - hip-hop")
   end
