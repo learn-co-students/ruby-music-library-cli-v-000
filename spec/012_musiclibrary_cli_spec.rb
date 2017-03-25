@@ -48,8 +48,9 @@ describe 'Music Library CLI' do
     expect(music_library_controller).to receive(:gets).and_return("play song", "1", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
-
+    #binding.pry
     expect(output).to include("Playing Action Bronson - Larry Csonka - indie")
+
   end
 
   it 'allows a user to list an artist\'s songs' do
