@@ -33,7 +33,16 @@ class Artist
     @name
   end
 
+  def self.create(name)
+    new(name).tap{|o| o.save}
+  end
+
+  def genres
+    self.songs.map{|s| s.genre}.uniq
+  end
+
   def save
     @@all << self
   end
+
 end

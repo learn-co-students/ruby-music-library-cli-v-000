@@ -49,34 +49,33 @@ class MusicLibraryController
   end
 
   def call
-      puts "Welcome to your music library!"
-      puts "What would you like to listen to?"
-      user_input = gets.strip
-      case user_input
-      when "list songs"
-        songs
-        call
-      when "list artists"
-        artists
-        call
-      when "list genres"
-        genres
-        call
-      when "list artist"
-        list_artist_songs
-        call
-      when "list genre"
-        list_genre_songs
-        call
-      when "play song"
-        play_song
-        call
-      when "exit"
-        puts "Exiting"
-      else
-        puts "Invalid input"
-        call
-      end
+    puts "Welcome to your music library!"
+    puts "What would you like to listen to?"
+    user_input = gets.strip
+    case user_input
+    when "list songs"
+      songs
+      call
+    when "list artists"
+      artists
+      call
+    when "list genres"
+      genres
+      call
+    when "list artist"
+      list_artist_songs
+      call
+    when "list genre"
+      list_genre_songs
+      call
+    when "play song"
+      play_song
+      call
+    when "exit"
+      puts "Exiting"
+    else
+      puts "Invalid input"
+      call
+    end
   end
-
 end
