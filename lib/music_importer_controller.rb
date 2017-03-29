@@ -16,7 +16,7 @@ class MusicLibraryController
         when "play song" then play_song
         when "list artist" then list_artist_songs
         when "list genre" then list_genre_songs
-        else puts "invalid entry"
+        else puts "invalid entry" unless input == "exit"
       end
     end
   end
@@ -40,14 +40,21 @@ class MusicLibraryController
 
   def play_song
     puts "What number song would you like to play?"
-    song_input = gets.strip.to_i - 1
-    selected_song = Song.all[song_input]
+    song_input = gets.strip.to_i
+    until (1..Song.all.length).include?(song_input)
+      puts "Invalid entry. What number song would you like to play?"
+    end
+    selected_song = Song.all[song_input - 1]
     puts "Playing #{selected_song.artist.name} - #{selected_song.name} - #{selected_song.genre.name}"
   end
 
   def list_artist_songs
     puts "Which artist would you like to see the songs of?"
     artist_input = gets.strip
+    until Artist.find_by_name(artist_input)
+      puts "Invalid entry. Which artist would you like to see the songs of?"
+      artist_input = gets.strip
+    end
     Artist.find_by_name(artist_input).songs.each do |song|
       puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
@@ -56,6 +63,10 @@ class MusicLibraryController
   def list_genre_songs
     puts "Which genre would you like to see the songs of?"
     genre_input = gets.strip
+    until Genre.find_by_name(genre_input)
+      puts "Invalid entry. Which genre would you like to see the songs of?"
+      genre_input = gets.strip
+    end
     Genre.find_by_name(genre_input).songs.each do |song|
       puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
