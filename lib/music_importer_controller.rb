@@ -7,12 +7,12 @@ class MusicLibraryController
   def call
     input = ""
     while input != "exit"
-      puts "Welcome to Your Music Library!\nWhat would you like to do? (list songs, list artists, list genres, play song, list artist, list genre)"
+      puts "Welcome to Your Music Library!\nWhat would you like to do? (list songs, list artists, list genres, play song, list artist, list genre, exit)"
       input = gets.strip
       case input
-        when "list songs" then songs
-        when "list artists" then artists
-        when "list genres" then genres
+      when "list songs" then list_songs
+      when "list artists" then list_artists
+      when "list genres" then list_genres
         when "play song" then play_song
         when "list artist" then list_artist_songs
         when "list genre" then list_genre_songs
@@ -23,32 +23,34 @@ class MusicLibraryController
 
   private
 
-  def songs
-    #Song.all.each{|song| puts song.name}
+  def list_songs
     Song.all.each_with_index do |song, index|
       puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
-  def artists
+  def list_artists
     Artist.all.each{|artist| puts artist.name}
   end
 
-  def genres
-    Genre.all.each{|genre| puts genre.name}
+  def list_genres
+    Genre.all.sort_by{|genre| genre.name}.each{|genre| puts genre.name}
   end
 
   def play_song
+    list_songs
     puts "What number song would you like to play?"
     song_input = gets.strip.to_i
-    until (1..Song.all.length).include?(song_input)
+    while song_input < 1 || song_input > Song.all.length
       puts "Invalid entry. What number song would you like to play?"
+      song_input = gets.strip.to_i
     end
     selected_song = Song.all[song_input - 1]
     puts "Playing #{selected_song.artist.name} - #{selected_song.name} - #{selected_song.genre.name}"
   end
 
   def list_artist_songs
+    list_artists
     puts "Which artist would you like to see the songs of?"
     artist_input = gets.strip
     until Artist.find_by_name(artist_input)
@@ -61,6 +63,7 @@ class MusicLibraryController
   end
 
   def list_genre_songs
+    list_genres
     puts "Which genre would you like to see the songs of?"
     genre_input = gets.strip
     until Genre.find_by_name(genre_input)
