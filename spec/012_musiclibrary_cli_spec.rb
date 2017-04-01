@@ -43,12 +43,9 @@ describe 'Music Library CLI' do
 
   it 'allows a user to play a song' do
     music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
-
     expect(MusicLibraryController).to receive(:new).and_return(music_library_controller)
     expect(music_library_controller).to receive(:gets).and_return("play song", "1", "exit")
-
     output = capture_puts {run_file("./bin/musiclibrary")}
-
     expect(output).to include("Playing Action Bronson - Larry Csonka - indie")
   end
 
