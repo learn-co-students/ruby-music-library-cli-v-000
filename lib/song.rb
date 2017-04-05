@@ -1,20 +1,17 @@
 require 'pry'
+require_relative "./artist.rb" # Path to Artist class
 
 class Song
   attr_accessor :name, :artist
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = nil) # optional artist argument
     @name = name
+    if artist != nil # if artist is not nil add artist to song
+      self.artist = artist
+      binding.pry
+    end
   end
-
-  #def artist_name
-  #  if self.artist != nil
-  #    self.artist.name
-      #binding.pry
-  #  else nil
-  #  end
-  #end
 
   def self.all
     @@all
@@ -31,14 +28,19 @@ class Song
   # #.tap method yields self to the block, and then returns self. The primary purpose of this method is to
   # “tap into” a method chain, in order to perform operations on intermediate results within the chain.
 
-  def self.create(name)
-    self.new(name).tap do |song| # taps new instance without conflict with song.name
-      song.save  # song == #<Song:0x0000000112bf78 @name="At Your Feet">
-      #binding.pry
+  def self.create(name, artist)
+    self.new(name, artist).tap do |s| # taps new instance without conflict with song.name
+      s.save  # song == #<Song:0x0000000112bf78 @name="At Your Feet">
+      binding.pry
     end
-    #binding.pry
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self) # adds the song to the artist's songs
+    binding.pry
   end
 end
 
-#song = Song.create("At Your Feet")
+song = Song.create("Voice of Truth", "Casting Crowns")
 #puts song.name
