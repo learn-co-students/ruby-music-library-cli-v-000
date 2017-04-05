@@ -29,4 +29,8 @@ class Artist
     song.artist ||= self
     self.songs << song unless self.songs.include?(song)
   end
+
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
+  end
 end

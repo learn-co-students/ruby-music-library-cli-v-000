@@ -15,7 +15,7 @@ class MusicLibraryController
       response = gets.chomp
       case response
       when "list songs"
-        "Listing songs"
+        songs
       when "list artists"
         artists
       when "list genres"
@@ -23,12 +23,19 @@ class MusicLibraryController
       when "list artist"
         songs_by_artist
       when "list genre"
-        "Listing all songs in this genre"
+        songs_by_genre
       when "play song"
-        "Playing song"
+        play_song
       else
-        "See you later!"
+        puts "See you later!"
       end
+    end
+  end
+
+  def songs
+    songs = Song.all.sort {|a, b| a.artist.name <=> b.artist.name}
+    songs.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
@@ -46,15 +53,28 @@ class MusicLibraryController
 
   def songs_by_artist
     puts "Which artist would you like to see?"
-    art
+    artist_input = gets.chomp
+    if artist = Artist.find_by_name(artist_input)
+      artist.songs.each do |song|
+        puts "#{artist.name} - #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
+  def songs_by_genre
+    puts "Which genre would you like to see?"
+    genre_input = gets.chomp
+    if genre = Genre.find_by_name(genre_input)
+      genre.songs.each do |song|
+        puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    play_input = gets.to_i
+    song = Song.all[play_input-1]
+    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 end
-
-#  def response
-#    puts "Would you like to (a) continue or (b) exit?"
-#    response = gets
-#    response == 'exit' ? true : false
-#  end
-#end
-
-#MusicImporter.new(path).import
