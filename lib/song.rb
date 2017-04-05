@@ -2,13 +2,17 @@ require 'pry'
 #require_relative "./artist.rb" # Path to Artist class
 
 class Song
-  attr_accessor :name, :artist, :add_song
+  attr_accessor :name, :artist
   @@all = []
 
-  def initialize(name, artist = nil) # optional artist argument
+  def initialize(name, artist = nil, genre = nil) # optional artist argument
     @name = name
     if artist != nil # if artist is not nil add artist to song
       self.artist = artist
+      #binding.pry
+    end
+    if genre != nil # if artist is not nil add artist to song
+      self.genre = genre
       #binding.pry
     end
   end

@@ -1,11 +1,12 @@
 require 'pry'
 
 class Genre
-  attr_accessor :name
+  attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -29,7 +30,19 @@ class Genre
       #binding.pry
     end
   end
+
+  def add_song(song)
+    song.genre = self unless song.genre == self
+    # Tells a song that it belongs to genre. This should happen when that song is added to
+    # the genre's @songs collection, unless song already has a genre.
+    if @songs.include?(song) == false
+      @songs << song
+    end
+    # Add song to genre's @songs collection, unless song is already in genre's collection
+    #binding.pry
+  end
 end
+
 
 #genre = Genre.create("christian")
 #puts genre.name
