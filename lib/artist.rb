@@ -1,5 +1,5 @@
 require 'pry'
-require_relative "./song.rb" # Path to Song class
+#require_relative "./song.rb" # Path to Song class
 
 class Artist
   attr_accessor :name, :songs
@@ -16,7 +16,7 @@ class Artist
   def self.create(name)
     self.new(name).tap do |artist| # taps into new Artist instance without conflict with artist.name
       artist.save  # artist == #<Artist:0x0000000112bf78 @name="Rich Mullins">
-      binding.pry
+      #binding.pry
     end
   end
 
@@ -32,9 +32,11 @@ class Artist
     song.artist = self unless song.artist == self
     # Tells a song that it belongs to an artist. This should happen when that song is added to
     # the artist's @songs collection, unless song already has the artist.
-    @songs << song unless @songs.include?(song)
+    if @songs.include?(song) == false
+      @songs << song
+    end
     # Add song to artist's @songs collection, unless song is already in artist's collection
-    binding.pry
+    #binding.pry
   end
 
   def save
@@ -66,5 +68,5 @@ class Artist
   #end
 end
 
-artist = Artist.create("Casting Crowns")
+#casting_crowns = Artist.create("Casting Crowns")
 #puts artist.name
