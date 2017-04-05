@@ -1,20 +1,12 @@
 require 'pry'
 
-class Song
-  attr_accessor :name, :artist
+class Genre
+  attr_accessor :name
   @@all = []
 
   def initialize(name)
     @name = name
   end
-
-  #def artist_name
-  #  if self.artist != nil
-  #    self.artist.name
-      #binding.pry
-  #  else nil
-  #  end
-  #end
 
   def self.all
     @@all
@@ -32,13 +24,12 @@ class Song
   # “tap into” a method chain, in order to perform operations on intermediate results within the chain.
 
   def self.create(name)
-    self.new(name).tap do |song| # taps new instance without conflict with song.name
-      song.save  # song == #<Song:0x0000000112bf78 @name="At Your Feet">
+    self.new(name).tap do |genre| # taps new instance without conflict with genre.name
+      genre.save  # genre == #<Genre:0x0000000112bf78 @name="christian">
       #binding.pry
     end
-    #binding.pry
   end
 end
 
-#song = Song.create("At Your Feet")
-#puts song.name
+#genre = Genre.create("christian")
+#puts genre.name
