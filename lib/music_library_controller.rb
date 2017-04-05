@@ -17,11 +17,11 @@ class MusicLibraryController
       when "list songs"
         "Listing songs"
       when "list artists"
-        "Listing artists"
+        artists
       when "list genres"
-        "Listing genres"
+        genres
       when "list artist"
-        "Listing all songs by this artist"
+        songs_by_artist
       when "list genre"
         "Listing all songs in this genre"
       when "play song"
@@ -30,6 +30,23 @@ class MusicLibraryController
         "See you later!"
       end
     end
+  end
+
+  def artists
+    Artist.all.each do |a|
+      puts "#{a.name}"
+    end
+  end
+
+  def genres
+    Genre.all.each do |g|
+      puts "#{g.name}"
+    end
+  end
+
+  def songs_by_artist
+    puts "Which artist would you like to see?"
+    art
   end
 end
 
