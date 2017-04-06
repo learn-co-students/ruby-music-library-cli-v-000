@@ -32,14 +32,14 @@ class Artist
   end
 
   def add_song(song) #add to artist's @songs array and sets song's artist to self if there isn't one yet
-    @songs << song if !self.songs.include?(song)
-    song.artist = self if song.artist == ""
+    @songs << song unless @songs.include?(song)
+    song.artist = self if song.artist == nil
   end
 
   def self.create(name) #creates new artist by name and saves to Artist's @@all array.
     new_artist = Artist.new(name)
     new_artist.save
-    return new_artist
+    new_artist
   end
 
 end

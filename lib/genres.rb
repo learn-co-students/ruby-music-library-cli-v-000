@@ -26,7 +26,7 @@ class Genre
   end
 
   def artists
-    songartists = []; @songs.each {|song| songartists << song.artist if !songartists.include?(song.artist)}; songartists
+    songartists = []; songs.each {|song| songartists << song.artist if !songartists.include?(song.artist)}; songartists
   end
 
   def self.create(genre)

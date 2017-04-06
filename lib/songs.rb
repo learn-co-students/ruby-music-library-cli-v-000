@@ -6,12 +6,12 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist="", genre="")
+  def initialize(name, artist= nil, genre= nil)
     @name = name
     @artist = artist
     @genre = genre
-    genre.songs << self if genre != "" #adds genre to genre's songs collection if.... my brain IS melting. Need a break D:
-    artist.songs << self if artist != ""
+    genre.songs << self unless genre == nil #adds genre to genre's songs collection if.... my brain IS melting. Need a break D:
+    artist.songs << self unless artist == nil
   end
 
   def self.all
@@ -33,13 +33,13 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    genre.songs << (self) unless genre.songs.include?(self) #I think my brain is melting.
+    genre.songs << self unless genre.songs.include?(self) #I think my brain is melting.
   end
 
-  def self.create(name, artist="", genre="")
+  def self.create(name, artist=nil, genre=nil)
     created_song = Song.new(name, artist, genre)
     created_song.save
-    return created_song #do not get why I need to return this?
+    created_song #do not get why I need to return this?
   end
 
   def self.new_from_filename(filename)
