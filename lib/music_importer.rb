@@ -1,5 +1,3 @@
-require 'pry'
-
 class MusicImporter
   attr_accessor :path
 
@@ -14,8 +12,7 @@ class MusicImporter
   end
 
   def import
-    song_list = self.files
-    song_list.each do |filename|
+    self.files.each do |filename|
       Song.create_from_filename(filename)
     end
   end

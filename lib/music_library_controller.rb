@@ -21,31 +21,37 @@ class MusicLibraryController
           counter += 1
           puts "#{counter}. #{filename}"
         end
+
       elsif input == "list artists"
         Artist.all.each do |artist|
           puts artist.name
         end
+
       elsif input == "list genres"
         Genre.all.each do |genre|
           puts genre.name
         end
+
       elsif input == "play song"
         puts "Which song?"
         number = gets.strip.to_i
         song = Song.all[number-1]
         puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+
       elsif input == "list artist"
         puts "Which artists songs?"
         artist_name = gets.strip
         Artist.find_by_name(artist_name).songs.each do |song|
           puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
+
       elsif input == "list genre"
         puts "Which genres songs?"
         genre_name = gets.strip
         Genre.find_by_name(genre_name).songs.each do |song|
           puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
+        
       end
     end
   end

@@ -1,5 +1,3 @@
-require 'pry'
-
 class Song
   extend Findable::ClassMethods
   attr_accessor :name
@@ -34,13 +32,11 @@ class Song
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
-    #binding.pry
   end
 
   def genre=(genre)
     @genre = genre
     genre.add_song(self)
-    #binding.pry
   end
 
   def self.new_from_filename(filename)
