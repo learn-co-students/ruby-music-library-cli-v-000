@@ -50,4 +50,39 @@ class Song
     end
   end
 
+  def self.find_or_new(name)
+    if self.find_by_name(name) == nil
+      self.new(name)
+    else
+      self.find_by_name(name)
+    end
+  end
+
+
+  def self.new_from_filename(file)
+    elements = file.split(" - ")
+    artist = elements[0]
+    name = elements[1]
+    genre = elements[2].split(".mp3").join
+
+    new_song = self.find_or_new(name)
+    new_song.artist = Artist.find_or_new(artist)
+    new_song.genre = Genre.find_or_new(genre)
+
+    new_song
+  end
+
+  def self.create_from_filename(file)
+    elements = file.split(" - ")
+    artist = elements[0]
+    name = elements[1]
+    genre = elements[2].split(".mp3").join
+
+    new_song = self.find_or_create_by_name(name)
+    new_song.artist = Artist.find_or_create_by_name(artist)
+    new_song.genre = Genre.find_or_create_by_name(genre)
+
+    new_song
+  end
+
 end

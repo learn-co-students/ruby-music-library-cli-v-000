@@ -11,5 +11,13 @@ module Concerns::Findable
     end
   end
 
+  def find_or_new(name)
+    if self.find_by_name(name) == nil
+      self.new(name)
+    else
+      self.find_by_name(name)
+    end
+  end
+
 
 end
