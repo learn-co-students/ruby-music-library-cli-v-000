@@ -1,6 +1,8 @@
 require 'pry'
 
 class Genre
+  extend Concerns::Findable # extend is used for Class methods, additionally the Concerns module
+  # is in the config/environment.rb file
   attr_accessor :name, :songs
   @@all = []
 

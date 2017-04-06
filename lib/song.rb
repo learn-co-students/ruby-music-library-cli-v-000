@@ -1,5 +1,5 @@
 require 'pry'
-#require_relative "./artist.rb" # Path to Artist class.
+#require_relative "./artist.rb" # Path to Artist class
 
 class Song
   attr_accessor :name, :artist, :genre
@@ -29,7 +29,7 @@ class Song
 
   def self.create(name, artist = nil, genre = nil)
     self.new(name, artist, genre).tap do |s| # taps new instance without conflict with song.name
-      s.save  # song == #<Song:0x0000000112bf78 @name="At Your Feet">
+      s.save  # song instance is added to @@all array through #save method
       #binding.pry
     end
   end

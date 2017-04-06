@@ -2,6 +2,8 @@ require 'pry'
 #require_relative "./song.rb" # Path to Song class.
 
 class Artist
+  extend Concerns::Findable # extend is used for Class methods, additionally the Concerns module
+  # is in the config/environment.rb file
   attr_accessor :name, :songs
   @@all = []
 
@@ -60,16 +62,6 @@ class Artist
   def to_s
     self.name
   end
-
-  #def self.find_or_create_by_name(name) # this method is called from Song class
-  #  self.find(name) || self.create(name)
-  #end
-
-  #def self.find(name)
-  #  self.all.find do |artist| # searches for artist name in @@all array
-  #    artist.name == name
-  #  end
-  #end
 
   #def add_song_by_name(name, genre)
   #  song = Song.new(name, genre)
