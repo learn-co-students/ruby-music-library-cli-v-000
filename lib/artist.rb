@@ -1,5 +1,5 @@
 require 'pry'
-#require_relative "./song.rb" # Path to Song class
+#require_relative "./song.rb" # Path to Song class.
 
 class Artist
   attr_accessor :name, :songs
@@ -69,4 +69,5 @@ class Artist
 end
 
 #casting_crowns = Artist.create("Casting Crowns")
-#puts artist.name
+#puts casting_crowns.name.inspect
+#puts casting_crowns.to_s.inspect
