@@ -21,7 +21,7 @@ describe 'Music Library CLI' do
     expect(music_library_controller).to receive(:gets).and_return("list artists", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
-
+    #binding.pry
     expect(output).to include("Action Bronson")
     expect(output).to include("Real Estate")
     expect(output).to include("Thundercat")

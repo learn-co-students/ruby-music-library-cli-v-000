@@ -21,7 +21,6 @@ describe "MusicImporter" do
     it 'normalizes the filename to just the mp3 filename with no path' do
       test_music_path = "./spec/fixtures/mp3s"
       music_importer = MusicImporter.new(test_music_path)
-
       expect(music_importer.files).to include("Action Bronson - Larry Csonka - indie.mp3")
       expect(music_importer.files).to include("Real Estate - Green Aisles - country.mp3")
       expect(music_importer.files).to include("Real Estate - It's Real - hip-hop.mp3")
@@ -53,7 +52,7 @@ describe 'Making Songs from filenames' do
   describe 'Song.create_from_filename' do
     it 'initializes and saves a song based on the filename delimiters' do
       song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
-
+      #binding.pry
       expect(song).to eq(Song.find_by_name("For Love I Come"))
       expect(song.artist).to eq(Artist.find_by_name("Thundercat"))
       expect(song.genre).to eq(Genre.find_by_name("dance"))
