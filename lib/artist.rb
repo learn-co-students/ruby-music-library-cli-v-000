@@ -15,7 +15,7 @@ class Artist
 
   def self.create(name)
     self.new(name).tap do |artist| # taps into new Artist instance without conflict with artist.name
-      artist.save  # artist == #<Artist:0x0000000112bf78 @name="Rich Mullins">
+      artist.save  # add artist instance (#<Artist:0x0000000112bf78 @name="Rich Mullins">) to @@all array
       #binding.pry
     end
   end
@@ -35,8 +35,22 @@ class Artist
     if @songs.include?(song) == false
       @songs << song
     end
-    # Add song to artist's @songs collection, unless song is already in artist's collection
+    # Add song to artist's @songs collection if song is not already in artist's collection
     #binding.pry
+  end
+
+  def self.songs
+    @songs
+  end
+
+  def genres
+    self.songs.collect do |song|
+      song.genre
+    end
+    .uniq
+    # The #genres method iterates over the @songs array, stored in the #songs instance method, and
+    # calls the #genre method on each song in order to collect the genre that is associated to that
+    # song. The return value of the #genres method should be an array of unique(uniq) genre objects.
   end
 
   def save
@@ -45,10 +59,6 @@ class Artist
 
   def to_s
     self.name
-  end
-
-  def self.songs
-    @songs
   end
 
   #def self.find_or_create_by_name(name) # this method is called from Song class

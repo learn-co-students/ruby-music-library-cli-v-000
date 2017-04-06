@@ -31,6 +31,17 @@ class Genre
     self.class.all << self
   end
 
+  def artists
+    @songs.collect do |song|
+      song.artist
+      #binding.pry
+    end
+    .uniq
+    # The #artists method iterates over the @songs array and calls the #artist method on each song
+    # in order to collect the artist that is associated to that song. The return value of the #artists
+    # method should be an array of unique(.uniq) artist objects.
+  end
+
   def to_s
     self.name
   end
