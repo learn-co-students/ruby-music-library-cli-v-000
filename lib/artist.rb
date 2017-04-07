@@ -17,7 +17,7 @@ class Artist
 
   def self.create(name)
     self.new(name).tap do |artist| # taps into new Artist instance without conflict with artist.name
-      artist.save  # add artist instance (#<Artist:0x0000000112bf78 @name="Rich Mullins">) to @@all array
+      artist.save  # add artist instance to @@all array
       #binding.pry
     end
   end

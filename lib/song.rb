@@ -34,6 +34,18 @@ class Song
     end
   end
 
+  def self.find_by_name(name)
+    self.all.detect do |song|
+      song.name == name
+    end
+    # finds an instance in @@all by the name property of the song
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
+  # finds or creates a song by name maintaining uniqueness of objects by their name property
+
   def artist=(artist)
     @artist = artist
     artist.add_song(self) # adds the song to the artist's songs
