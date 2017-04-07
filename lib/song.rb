@@ -83,7 +83,6 @@ class Song
       genre.songs << self
     end
     #adds genre to @songs array if genre does not exist
-    #genre.songs << self unless genre.songs.include?(self)
     #binding.pry
   end
 

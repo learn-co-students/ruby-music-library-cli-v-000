@@ -2,7 +2,7 @@ require 'pry'
 
 class Genre
   extend Concerns::Findable # extend is used for Class methods, additionally the Concerns module
-  # is in the config/environment.rb file
+  # is included in the config/environment.rb file
   attr_accessor :name, :songs
   @@all = []
 
@@ -16,7 +16,7 @@ class Genre
 
   def self.create(name)
     self.new(name).tap do |genre| # taps new instance without conflict with genre.name
-      genre.save  # genre == #<Genre:0x0000000112bf78 @name="christian">
+      genre.save  # genre instance is saved to @@all array
       #binding.pry
     end
   end
@@ -50,5 +50,5 @@ class Genre
 end
 
 
-#genre = Genre.create("christian")
+#christian = Genre.create("christian")
 #puts genre.name

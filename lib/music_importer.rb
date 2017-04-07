@@ -16,15 +16,13 @@ class MusicImporter
   end
 
   def import
-    @files.each do |file_name|
+    files.each do |file_name|
       Song.create_from_filename(file_name)
     end
   end
 end
 
-#test_music_path = "./spec/fixtures/mp3s"
-#music_path = "./db/mp3s"
-#music_importer = MusicImporter.new(test_music_path)
+#test_path = "./spec/fixtures/mp3s"
+#music_importer = MusicImporter.new(test_path)
 #music_importer.files
 #music_importer.import
-#song = Song.new("Creed")
