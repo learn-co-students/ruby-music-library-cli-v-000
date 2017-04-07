@@ -12,11 +12,11 @@ class MusicImporter
       File.basename(file)
       #binding.pry
     end
-    binding.pry
+    #binding.pry
   end
 
   def import
-    files.each do |file_name|
+    @files.each do |file_name|
       Song.create_from_filename(file_name)
     end
   end
@@ -73,11 +73,8 @@ class Song
   # “tap into” a method chain, in order to perform operations on intermediate results within the chain.
 
   def self.create(name, artist = nil, genre = nil) # include artist and genre if known
-    #if artist.songs.include?(name) == false
       self.new(name, artist, genre).tap do |s| # taps new instance without conflict with song.name
-        s.save  # song instance is added to @@all array
-      #if @@all.include?(s) == false
-      #  s.save
+        s.save  # song instance (including artist and genre) is added to @@all array
       end
       #binding.pry
     #end
@@ -85,9 +82,10 @@ class Song
 
   def self.find_by_name(name)
     self.all.detect do |song|
-      if song.name == name
-        puts "The song '#{name}' you are trying to find and/or create currently exists in the music library."
-      end
+      song.name == name
+      #if song.name == name
+      #  puts "The song '#{name}' you are trying to find and/or create currently exists in the music library."
+      #end
     end
     # finds an instance in @@all by the name property of the song
   end
@@ -99,9 +97,7 @@ class Song
 
   def artist=(artist) # artist setter within Song instance
     @artist = artist
-    #if artist.songs.include?(self.name) == false
-      artist.add_song(self) # adds the song to the artist's songs
-    #end
+    artist.add_song(self) # adds the song to the artist's songs
     #binding.pry
   end
 
@@ -111,7 +107,6 @@ class Song
       genre.songs << self
     end
     #adds genre to songs array if genre does not exist
-    #genre.songs << self unless genre.songs.include?(self)
     #binding.pry
   end
 
@@ -123,7 +118,7 @@ end
 #--------------------  ARTIST CLASS  ------------------------
 
 class Artist
-  attr_accessor :name, :songs, :genre
+  attr_accessor :name, :songs, :genre, :all
   @@all = []
 
   def initialize(name)
@@ -143,9 +138,10 @@ class Artist
 
   def self.find_by_name(name)
     self.all.detect do |artist|
-      if artist.name == name
-        puts "The artist '#{name}' you are trying to find and/or create currently exists in the music library."
-      end
+      artist.name == name
+      #if artist.name == name
+      #  puts "The artist '#{name}' you are trying to find and/or create currently exists in the music library."
+      #end
     end
     # finds an instance in @@all by the name property of the artist
   end
@@ -170,8 +166,6 @@ class Artist
     if @songs.include?(song) == false
       @songs << song
     end
-    #@songs << song unless @songs.include?(song)
-    #end
     # Add song to artist's @songs collection, unless song is already in artist's collection
     #binding.pry
   end
@@ -212,9 +206,10 @@ class Genre
 
   def self.find_by_name(name)
     self.all.detect do |genre|
-      if genre.name == name
-        puts "The genre '#{name}' you are trying to find and/or create currently exists in the music library."
-      end
+      genre.name == name
+      #if genre.name == name
+      #  puts "The genre '#{name}' you are trying to find and/or create currently exists in the music library."
+      #end
     end
     # finds an instance in @@all by the name property of the genre
   end
@@ -244,39 +239,48 @@ end
 
 ##------------------------  TEST CODE  --------------------------
 test_music_path = "./spec/fixtures/mp3s"
-#music_path = "./db/mp3s"
+
 music_importer = MusicImporter.new(test_music_path)
 music_importer.files
-#music_importer.import
+music_importer.import
 
-christian = Genre.create("christian")
-jazz = Genre.create("jazz")
-rock = Genre.create("rock")
+indie = Genre.create("indie")
 
-casting_crowns = Artist.create("Casting Crowns")
-david_sanborn = Artist.create("David Sanborn")
-boston = Artist.create("Boston")
+action_bronson = Artist.create("Action Bronson")
 
-voice_of_truth = Song.create("Voice of Truth", casting_crowns, christian)
-chicago_song = Song.create("Chicago Song", david_sanborn, jazz)
-dont_look_back = Song.create("Don't Look Back", boston, rock)
-more_than_a_feeling = Song.create("More Than A Feeling", boston, rock)
-who_am_i = Song.create("Who Am I", casting_crowns, christian)
+new_song = Song.create("New Song", action_bronson, indie)
 
-song = Song.find_or_create_by_name("At Your Feet")
-at_your_feet = Song.create("At Your Feet", casting_crowns, christian)
+puts action_bronson.songs
+#puts "Action Bronson".songs
 
-#song = Song.find_or_create_by_name("Chicago Song")
-#artist = Artist.find_or_create_by_name("Casting Crowns")
-#genre = Genre.find_or_create_by_name("christian")
-genre = Genre.find_or_create_by_name("jazz")
+#christian = Genre.create("christian")
+#jazz = Genre.create("jazz")
+#rock = Genre.create("rock")
 
-puts casting_crowns.songs # artist has many songs
-puts david_sanborn.songs
-puts boston.songs
+#casting_crowns = Artist.create("Casting Crowns")
+#david_sanborn = Artist.create("David Sanborn")
+#boston = Artist.create("Boston")
 
-puts voice_of_truth.genre # song has genre
-puts more_than_a_feeling.genre
+#voice_of_truth = Song.create("Voice of Truth", casting_crowns, christian)
+#chicago_song = Song.create("Chicago Song", david_sanborn, jazz)
+#dont_look_back = Song.create("Don't Look Back", boston, rock)
+#more_than_a_feeling = Song.create("More Than A Feeling", boston, rock)
+#who_am_i = Song.create("Who Am I", casting_crowns, christian)
 
-puts who_am_i.artist # song belongs to artist
-puts chicago_song.artist
+#song = Song.find_or_create_by_name("At Your Feet")
+#at_your_feet = Song.create("At Your Feet", casting_crowns, christian)
+
+##song = Song.find_or_create_by_name("Chicago Song")
+##artist = Artist.find_or_create_by_name("Casting Crowns")
+##genre = Genre.find_or_create_by_name("christian")
+#genre = Genre.find_or_create_by_name("jazz")
+
+#puts casting_crowns.songs # artist has many songs
+#puts david_sanborn.songs
+#puts boston.songs
+
+#puts voice_of_truth.genre # song has genre
+#puts more_than_a_feeling.genre
+
+#puts who_am_i.artist # song belongs to artist
+#puts chicago_song.artist

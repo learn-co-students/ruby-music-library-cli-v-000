@@ -62,12 +62,7 @@ class Artist
   def to_s
     self.name
   end
-
-  #def add_song_by_name(name, genre)
-  #  song = Song.new(name, genre)
-  #  @songs << song
-  #  song.artist = self
-  #end
+  
 end
 
 #casting_crowns = Artist.create("Casting Crowns")

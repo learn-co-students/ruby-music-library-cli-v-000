@@ -1,5 +1,4 @@
 require 'pry'
-#require_relative "./artist.rb" # Path to Artist class
 
 class Song
   attr_accessor :name, :artist, :genre
@@ -23,6 +22,10 @@ class Song
   def save
     self.class.all << self
   end
+
+  ## Song class parses file_name, variables are assigned song, artist and genre and also
+  ## creates instances. These methods collaborate with Artist and Genre classes by assigning
+  ## Artist and Genre what is produced by the #find_or_create_by_name(name) method
 
   def self.new_from_filename(file_name) # file_name argument from MusicImporter Class
     artist_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
@@ -73,10 +76,6 @@ class Song
     artist.add_song(self) # adds the song to the artist's songs
     #binding.pry
   end
-
-  ## Song class parses filename, variables are assigned song and artist name and also
-  ## creates instance of song. The #artist_name=(name) method collaborates with Artist
-  ## class by assigning the song.artist what is produced by the #find_or_create_by_name(name) method
 
   def genre=(genre)
     @genre = genre
