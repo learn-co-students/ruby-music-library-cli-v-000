@@ -1,11 +1,12 @@
 class Song
-  attr_accessor :name
-  attr_reader :artist
+  attr_accessor :name, :artist
+  #attr_reader :artist
 
   @@all = []
 
   def initialize(name)
     @name = name
+    #binding.pry
   end
 
   def self.all
@@ -27,8 +28,12 @@ class Song
   end
 
   def artist=(artist_name)
-    artist_name.songs << self unless artist_name.songs.include?(self)
-    @artist = artist_name
+    #binding.pry
+    #artist_name.songs << self unless artist_name.songs.include?(self)
+    #@artist = artist_name
+    artist_name.add_song(self)
+    binding.pry
+    artist_name
   end
 
 end

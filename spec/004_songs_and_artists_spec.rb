@@ -85,6 +85,7 @@ describe "Songs and Artists" do
         #binding.pry
 
         expect(artist).to receive(:add_song)
+        #binding.pry
 
         song.artist = artist
       end
