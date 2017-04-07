@@ -6,7 +6,7 @@ class MusicImporter
 
   def files
     items = Dir.entries(@path)
-    @files = items.select{|file| file.include?(".mp3")}
+    @files = items.select{|file| file.include?(".mp3")}.sort
   end
 
   def import
