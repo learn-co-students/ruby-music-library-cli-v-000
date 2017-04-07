@@ -43,13 +43,13 @@ class MusicLibraryController
   end
 
   def artists
-    Artist.all.each do |a|
-      puts "#{a.name}"
+    Artist.all.each do |a| # |a| = artist
+      puts "#{a.name}"     #a.name = artist.name
     end
   end
 
   def genres
-    Genre.all.each do |g|
+    Genre.all.each do |g|  #|g| = genre
       puts "#{g.name}"
     end
   end
@@ -58,9 +58,7 @@ class MusicLibraryController
     puts "Which artist would you like to see?"
     artist_input = gets.chomp
     if artist = Artist.find_by_name(artist_input)
-      artist.songs.each do |song|
-        puts "#{artist.name} - #{song.name} - #{song.genre.name}"
-      end
+      artist.songs.each { |song| puts "#{artist.name} - #{song.name} - #{song.genre.name}" }  
     end
   end
 
