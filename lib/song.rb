@@ -24,18 +24,26 @@ class Song
     self.class.all << self
   end
 
-  def self.new_from_filename(file_name) # file_name argument from MP3Importer Class
-    song = self.new(file_name) # create a song instance
-    song.name = file_name.split(" - ")[1] # song name equals file_name index[1]
-    art_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
-    song.artist_name = (art_name) # get artist name when you use getter method #.artist_name
-    song
+  def self.new_from_filename(file_name) # file_name argument from MusicImporter Class
+    artist_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
+    song_name = file_name.split(" - ")[1] # song name equals file_name index[1]
+    genre_name = file_name.split(" - ")[2].gsub(".mp3", "") # genre name equals file_name index[2] minus ".mp3" extension
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name, artist, genre) # create new instances
     #binding.pry
   end
 
-  def self.create_from_filename(file_name)
+  def self.create_from_filename(file_name) # file_name argument from MusicImporter Class
+    artist_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
+    song_name = file_name.split(" - ")[1] # song name equals file_name index[1]
+    genre_name = file_name.split(" - ")[2].gsub(".mp3", "") # genre name equals file_name index[2] minus ".mp3" extension
 
-
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.create(song_name, artist, genre)
+    #binding.pry
   end
 
   # #.tap method yields self to the block, and then returns self. The primary purpose of this method is to
