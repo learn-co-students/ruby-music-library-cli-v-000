@@ -24,6 +24,20 @@ class Song
     self.class.all << self
   end
 
+  def self.new_from_filename(file_name) # file_name argument from MP3Importer Class
+    song = self.new(file_name) # create a song instance
+    song.name = file_name.split(" - ")[1] # song name equals file_name index[1]
+    art_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
+    song.artist_name = (art_name) # get artist name when you use getter method #.artist_name
+    song
+    #binding.pry
+  end
+
+  def self.create_from_filename(file_name)
+
+
+  end
+
   # #.tap method yields self to the block, and then returns self. The primary purpose of this method is to
   # “tap into” a method chain, in order to perform operations on intermediate results within the chain.
 
@@ -52,12 +66,16 @@ class Song
     #binding.pry
   end
 
+  ## Song class parses filename, variables are assigned song and artist name and also
+  ## creates instance of song. The #artist_name=(name) method collaborates with Artist
+  ## class by assigning the song.artist what is produced by the #find_or_create_by_name(name) method
+
   def genre=(genre)
     @genre = genre
     if genre.songs.include?(self) == false
       genre.songs << self
     end
-    #adds genre to song if song does not have a genre
+    #adds genre to @songs array if genre does not exist
     #genre.songs << self unless genre.songs.include?(self)
     #binding.pry
   end
