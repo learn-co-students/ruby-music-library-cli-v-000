@@ -1,4 +1,5 @@
 class MusicImporter
+  extend Concerns::Findable
   attr_accessor :path
 
   def initialize(path)
