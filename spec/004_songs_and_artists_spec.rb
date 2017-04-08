@@ -82,10 +82,8 @@ describe "Songs and Artists" do
       it 'uses add_song to add the song to the artist\'s collection' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
-        #binding.pry
 
         expect(artist).to receive(:add_song)
-        #binding.pry
 
         song.artist = artist
       end

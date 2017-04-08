@@ -1,12 +1,12 @@
 class Artist
-  attr_accessor :name
-  attr_reader :songs
+  #An Artist has many songs
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
-    @songs = []
+    @songs = [] #initializes with an Artist instance
   end
 
   def self.all
@@ -28,9 +28,7 @@ class Artist
   end
 
   def add_song(song)
-    #binding.pry
-    @songs << song unless @songs.include?(song)
-    song.artist = self unless song.artist == self
-    #binding.pry
+    @songs << song
+    #song.artist = self
   end
 end
