@@ -4,8 +4,12 @@ class Song
 
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = nil)
+    binding.pry
     @name = name
+    #if artist
+    #  self.artist(artist)
+    #end
   end
 
   def self.all
@@ -21,6 +25,7 @@ class Song
   end
 
   def artist=(artist_name)
+    artist_name.songs << self unless artist_name.songs.include?(self)
     @artist = artist_name
   end
 

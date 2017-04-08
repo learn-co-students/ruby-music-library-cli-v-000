@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'irb'
 
-MusicLibraryController.new.call
+def reload!
+  load './config/environment.rb'
+end
+
+IRB.start
+
+#MusicLibraryController.new.call
