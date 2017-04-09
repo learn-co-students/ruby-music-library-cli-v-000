@@ -1,5 +1,6 @@
 class Artist
   #An Artist has many songs
+  extend Concerns::Findable
   attr_accessor :name, :songs
 
   @@all = []
@@ -32,5 +33,9 @@ class Artist
     if song.artist == nil
       song.artist = self
     end
+  end
+
+  def genres
+    self.songs.collect{|song| song.genre}.uniq
   end
 end
