@@ -16,7 +16,7 @@ class Genre
 
   def self.create(name)
     self.new(name).tap do |genre| # taps new instance without conflict with genre.name
-      genre.save  # genre instance is saved to @@all array
+      genre.save  # genre instance is saved to @@all array through #save method
       #binding.pry
     end
   end

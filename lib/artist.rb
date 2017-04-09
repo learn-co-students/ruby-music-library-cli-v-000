@@ -16,7 +16,7 @@ class Artist
 
   def self.create(name)
     self.new(name).tap do |artist| # taps into new Artist instance without conflict with artist.name
-      artist.save  # add artist instance to @@all array
+      artist.save  # add artist instance to @@all array through #save method
       #binding.pry
     end
   end
