@@ -10,9 +10,9 @@ class MusicLibraryController
       puts "Welcome to Your Music Library!\nWhat would you like to do? (list songs, list artists, list genres, play song, list artist, list genre, exit)"
       input = gets.strip
       case input
-      when "list songs" then list_songs
-      when "list artists" then list_artists
-      when "list genres" then list_genres
+        when "list songs" then list_songs
+        when "list artists" then list_artists
+        when "list genres" then list_genres
         when "play song" then play_song
         when "list artist" then list_artist_songs
         when "list genre" then list_genre_songs
