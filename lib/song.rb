@@ -49,8 +49,22 @@ class Song
     song = file_name.split(" - ")[1]
     split_artist = file_name.split(" - ")[0]
     split_genre = file_name.split(" - ")[2].chomp(".mp3")
-    artist = Artist.new(split_artist)
-    genre = Genre.new(split_genre)
+
+    artist = Artist.find_or_create_by_name(split_artist)
+    genre = Genre.find_or_create_by_name(split_genre)
+
+    new_song = self.new(song, artist, genre)
+    new_song
+  end
+
+  def self.create_from_filename(file_name)
+    song = file_name.split(" - ")[1]
+    split_artist = file_name.split(" - ")[0]
+    split_genre = file_name.split(" - ")[2].chomp(".mp3")
+
+    artist = Artist.find_or_create_by_name(split_artist)
+    genre = Genre.find_or_create_by_name(split_genre)
+
     new_song = self.new(song, artist, genre)
     new_song
   end
