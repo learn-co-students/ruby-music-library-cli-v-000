@@ -3,8 +3,8 @@ require 'pry'
 class MusicLibraryController
 
   def initialize(path = "./db/mp3s") # set default path
-    test_path = "./spec/fixtures/mp3s"
-    music_importer = MusicImporter.new(test_path)
+    #test_path = "./spec/fixtures/mp3s"
+    music_importer = MusicImporter.new(path)
     music_importer.import
   end
 
@@ -13,8 +13,7 @@ class MusicLibraryController
     while input != "exit"
       puts "Welcome to Your Music Library!"
       puts "What would you like to do?"
-      input = gets.strip # "gets" a line of text (this is the user's input)
-      # #strip method removes both trailing whitespace and new lines
+      input = gets.strip
       case input
       when "list songs"
         songs

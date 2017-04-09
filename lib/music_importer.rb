@@ -1,9 +1,9 @@
 require 'pry'
 
 class MusicImporter
-  attr_reader :path
+  attr_reader :path # getter
 
-  def initialize(path)
+  def initialize(path) #setter
     @path = path
   end
 
@@ -16,7 +16,7 @@ class MusicImporter
   end
 
   def import
-    files.each do |file_name|
+    files.sort.each do |file_name| # had to use #.sort method to sort by artist name
       Song.create_from_filename(file_name)
     end
   end

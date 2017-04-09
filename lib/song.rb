@@ -6,8 +6,8 @@ class Song
 
   def initialize(name, artist = nil, genre = nil) # optional artist and genre arguments
     @name = name
-    self.artist = artist if artist != nil
-    self.genre = genre if genre != nil
+    self.artist = artist if artist != nil # if artist provided then assign artist to song
+    self.genre = genre if genre != nil # if genre provided then assign genre to song
     #binding.pry
   end
 
@@ -30,7 +30,7 @@ class Song
   def self.new_from_filename(file_name) # file_name argument from MusicImporter Class
     artist_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
     song_name = file_name.split(" - ")[1] # song name equals file_name index[1]
-    genre_name = file_name.split(" - ")[2].gsub(".mp3", "") # genre name equals file_name index[2] minus ".mp3" extension
+    genre_name = file_name.split(" - ")[2].gsub(".mp3", "") # genre name equals file_name index[2] minus(used gsub) ".mp3" extension
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
@@ -41,18 +41,18 @@ class Song
   def self.create_from_filename(file_name) # file_name argument from MusicImporter Class
     artist_name = file_name.split(" - ")[0] # artist name equals file_name index[0]
     song_name = file_name.split(" - ")[1] # song name equals file_name index[1]
-    genre_name = file_name.split(" - ")[2].gsub(".mp3", "") # genre name equals file_name index[2] minus ".mp3" extension
+    genre_name = file_name.split(" - ")[2].gsub(".mp3", "") # genre name equals file_name index[2] minus(used gsub) ".mp3" extension
 
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
-    self.create(song_name, artist, genre)
+    self.create(song_name, artist, genre) # create new instances
     #binding.pry
   end
 
   # #.tap method yields self to the block, and then returns self. The primary purpose of this method is to
   # “tap into” a method chain, in order to perform operations on intermediate results within the chain.
 
-  def self.create(name, artist = nil, genre = nil)
+  def self.create(name, artist = nil, genre = nil) # include artist and genre if known
     self.new(name, artist, genre).tap do |s| # taps new instance without conflict with song.name
       s.save  # song instance is added to @@all array through #save method
       #binding.pry
@@ -62,6 +62,9 @@ class Song
   def self.find_by_name(name)
     self.all.detect do |song|
       song.name == name
+      #if song.name == name
+      #  puts "The song '#{name}' you are trying to find and/or create currently exists in the music library."
+      #end
     end
     # finds an instance in @@all by the name property of the song
   end
