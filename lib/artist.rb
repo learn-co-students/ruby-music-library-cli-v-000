@@ -9,12 +9,17 @@ class Artist
   end
 
   def add_song(song)
+    self.save unless self.class.all.include?(self)
     self.songs << song unless self.songs.include?(song)
     song.artist = self unless song.artist == self
   end
 
   def save
     @@all << self
+  end
+
+  def genres
+    @songs.collect{|song| song.genre}.uniq
   end
 
   def self.all

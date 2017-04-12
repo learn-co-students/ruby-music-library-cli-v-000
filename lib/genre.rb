@@ -8,8 +8,18 @@ class Genre
     @songs = []
   end
 
+  def add_song(song)
+    self.save unless self.class.all.include?(self)
+    self.songs << song unless self.songs.include?(song)
+    song.genre = self unless song.genre == self
+  end
+
   def save
     @@all << self
+  end
+
+  def artists
+    @songs.collect{|song| song.artist}.uniq
   end
 
   def self.create(name)
