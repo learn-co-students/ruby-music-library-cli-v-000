@@ -1,7 +1,7 @@
 class MusicImporter
   attr_accessor :path, :files
 
-  @@win = true
+  @@win = false #true
 
   def initialize(path)
     @path = path
