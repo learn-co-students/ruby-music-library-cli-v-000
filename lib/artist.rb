@@ -35,4 +35,9 @@ class Artist
   def self.create(name)
     Artist.new(name).tap{|new_artist| new_artist.save}
   end
+
+  def self.list
+    puts "Please type the name of the artist!"
+    super
+  end
 end

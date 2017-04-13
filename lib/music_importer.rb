@@ -26,4 +26,8 @@ class MusicImporter
     mp3_info[:artist], mp3_info[:song], mp3_info[:genre] = file.match(/(.*) - (.*) - (.*)\.mp3/i).captures
     mp3_info
   end
+
+  def printer
+    files.each_with_index{|mp3info, i| puts "#{i + 1}. #{mp3info}"}
+  end
 end

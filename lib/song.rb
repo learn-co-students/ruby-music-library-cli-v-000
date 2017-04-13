@@ -54,6 +54,10 @@ class Song
     new_song.save
   end
 
+  def slugify
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
+
   # def self.find_by_name(name)
   #   self.all.detect{|song| song.name == name}
   # end

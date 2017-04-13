@@ -35,4 +35,9 @@ class Genre
   def self.destroy_all
     @@all.clear
   end
+
+  def self.list
+    puts "Please type the name of the genre!"
+    super
+  end
 end
