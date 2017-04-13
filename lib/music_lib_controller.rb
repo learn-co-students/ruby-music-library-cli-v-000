@@ -31,6 +31,7 @@ class MusicLibraryController
         #Genre.list
         self.list_genre
       when /play song/i
+        #self.playlist.printer # you can add this to make it better and also system('clear') above
         self.play_song
     end
   end
