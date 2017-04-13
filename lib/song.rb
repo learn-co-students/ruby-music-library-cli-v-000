@@ -23,7 +23,7 @@ class Song
   end
 
   def save
-    @@all << self
+    (@@all << self; self) unless @@all.include?(self)
   end
 
   def self.create(name)
@@ -36,6 +36,22 @@ class Song
 
   def self.destroy_all
     @@all.clear
+  end
+
+  def self.new_from_filename(filename)
+    artist_name, song_name, song_genre = MusicImporter.file_shredder(filename).values
+
+    self.new(song_name).tap do |song|
+      new_artist = Artist.find_or_create_by_name(artist_name)
+      new_artist.add_song(song)
+      new_genre = Genre.find_or_create_by_name(song_genre)
+      new_genre.add_song(song)
+    end
+  end
+
+  def self.create_from_filename(filename)
+    new_song = self.new_from_filename(filename)
+    new_song.save
   end
 
   # def self.find_by_name(name)
