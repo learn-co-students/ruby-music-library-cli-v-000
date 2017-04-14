@@ -46,5 +46,5 @@ class Artist
     songs.each {|song| genres_uniq << song.genre unless genres_uniq.include?(song.genre)}
     genres_uniq
   end
-
+  
 end

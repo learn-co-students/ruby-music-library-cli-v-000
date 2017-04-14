@@ -16,7 +16,7 @@ class MusicImporter
   end
 
   def import
-    self.files # get the .mp3 files
+    files # get the .mp3 files
     @files.each do |file|
       Song.new_from_filename(file) # send the filenames to the Song class
     end
