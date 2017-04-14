@@ -40,7 +40,7 @@ describe "Songs and Genres" do
         genre = Genre.new("indie rock")
 
         song.genre = genre
-        song.genre = genre
+        # song.genre = genre
 
         expect(genre.songs).to include(song)
         expect(genre.songs.size).to eq(1)

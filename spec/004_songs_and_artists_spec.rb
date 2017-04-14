@@ -84,7 +84,6 @@ describe "Songs and Artists" do
         artist = Artist.new("Neutral Milk Hotel")
 
         expect(artist).to receive(:add_song)
-
         song.artist = artist
       end
     end
