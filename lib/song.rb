@@ -1,6 +1,8 @@
 class Song
-  #Songs belongs to an artist
   extend Concerns::Findable
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
+
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -8,68 +10,41 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    if artist
-     self.artist=(artist)
-    end
-    if genre
-      self.genre=(genre)
-    end
+    self.artist=(artist) if artist
+    self.genre=(genre) if genre
   end
 
   def self.all
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def artist=(artist_name)
-    artist_name.songs << self unless artist_name.songs.include?(self)
-    @artist = artist_name
-    artist_name.add_song(self)
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
   end
 
   def genre=(genre)
-    genre.songs << self unless genre.songs.include?(self)
     @genre = genre
-  end
-
-  def self.create(name)
-    song = self.new(name).tap do |song|
-      song.save
-    end
+    genre.songs << self unless genre.songs.include?(self)
   end
 
   def self.new_from_filename(file_name)
-    song = file_name.split(" - ")[1]
-    split_artist = file_name.split(" - ")[0]
-    split_genre = file_name.split(" - ")[2].chomp(".mp3")
+    song = split_filename(file_name)
+    artist = Artist.find_or_create_by_name(song[0])
+    genre = Genre.find_or_create_by_name(song[2])
 
-    artist = Artist.find_or_create_by_name(split_artist)
-    genre = Genre.find_or_create_by_name(split_genre)
-
-    new_song = self.new(song, artist, genre)
-    new_song
+    new_song = self.new(song[1], artist, genre)
   end
 
   def self.create_from_filename(file_name)
-    song = file_name.split(" - ")[1]
-    split_artist = file_name.split(" - ")[0]
-    split_genre = file_name.split(" - ")[2].chomp(".mp3")
+    song = split_filename(file_name)
+    artist = Artist.find_or_create_by_name(song[0])
+    genre = Genre.find_or_create_by_name(song[2])
 
-    found_artist = Artist.find_or_create_by_name(split_artist)
-    found_genre = Genre.find_or_create_by_name(split_genre)
-    new_song = self.create(song)
-
-
-    new_song.artist = found_artist
-    new_song.genre = found_genre
-    new_song
+    self.create(song[1]).tap do |song|
+      song.artist = artist
+      song.genre = genre
+    end
   end
 
 end

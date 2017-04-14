@@ -1,6 +1,8 @@
 require 'pry'
 
 class MusicLibraryController
+  extend Memorable::ClassMethods
+
   attr_accessor :music
 
   def initialize(path = "./db/mp3s")
@@ -8,77 +10,84 @@ class MusicLibraryController
     @music.import
   end
 
-  def input_to_index(user_input)
-    user_input.to_i - 1
-  end
-
-  def gets
-    #puts "What would you like to do?"
-    user_input = gets.chomp
+  def sorter
+    @music.files.sort
   end
 
   def call
-    input = gets
-    case input
-    when "list songs"
-      @list_of_songs = @music.files.sort
-      @list_of_songs.each_with_index do|elem, i|
-        puts "#{i+1}. #{elem}"
+    puts "Welcome to Your Music Library!"
+    input = ""
+    @sorted_songs = sorter
+    while input != "exit"
+      puts "What would you like to do?"
+      input = gets.strip
+      case input
+      when "list songs"
+        songs
+      when  "list artists"
+        artists
+      when "list genres"
+        genres
+      when "play song"
+        play_song
+      when "list artist"
+        list_artist
+      when "list genre"
+        list_genre
       end
-      gets
-    when  "list artists"
-      Artist.all.each do |artist|
-        puts artist.name
+    end
+  end
+
+  def songs
+    @sorted_songs.each_with_index do|song, num|
+      puts "#{num+1}. #{song}"
+    end
+  end
+
+  def artists
+    Artist.all.each do |artist|
+      puts artist.name
+    end
+  end
+
+  def genres
+    Genre.all.each do |genre|
+      puts genre.name
+    end
+  end
+
+  def play_song
+    puts "What song number would you like to play?"
+    song_num = gets.chomp
+    playing_song = @sorted_songs[song_num.to_i - 1]
+    puts "Playing #{playing_song}"
+  end
+
+  def list_artist
+    array = @music.files.collect do |file|
+      song = self.class.split_filename(file)
+    end
+    puts "What artist would you like to list songs for?"
+    artist_input = gets.chomp
+    artist = Artist.find_by_name(artist_input)
+    array.each do |song|
+      if song[0] == artist.name
+        puts "#{song[0]} - #{song[1]} - #{song[2]}"
       end
-      gets
-    when "list genres"
-      Genre.all.each do |genre|
-        puts genre.name
+    end
+  end
+
+  def list_genre
+    array = @music.files.collect do |file|
+      song = self.class.split_filename(file)
+    end
+    puts "What genre would you like to list songs for?"
+    genre_input = gets.chomp
+    genre = Genre.find_by_name(genre_input)
+    array.each do |song|
+      if song[2] == genre.name
+        puts "#{song[0]} - #{song[1]} - #{song[2]}"
       end
-      gets
-    when "play song"
-      user_input = gets
-      index = input_to_index(user_input)
-      songs = @music.files.sort
-      playing_song = songs[index]
-      puts "Playing #{playing_song}"
-      gets
-    when "list artist"
-      array = []
-      @music.files.each do |file|
-        song = file.split(" - ")[1]
-        split_artist = file.split(" - ")[0]
-        split_genre = file.split(" - ")[2].chomp(".mp3")
-        array << [song, split_artist, split_genre]
-      end
-      user_input = gets
-      artist = Artist.find_by_name(user_input)
-      array.each do |song|
-        if song[1] == artist.name
-          puts "#{song[1]} - #{song[0]} - #{song[2]}"
-        end
-      end
-      gets
-    when "list genre"
-      array = []
-      @music.files.each do |file|
-        song = file.split(" - ")[1]
-        split_artist = file.split(" - ")[0]
-        split_genre = file.split(" - ")[2].chomp(".mp3")
-        array << [song, split_artist, split_genre]
-      end
-      user_input = gets
-      genre = Genre.find_by_name(user_input)
-      array.each do |song|
-        if song[2] == genre.name
-          puts "#{song[1]} - #{song[0]} - #{song[2]}"
-        end
-      end
-      gets
-    when "exit"
-      puts "Exiting..."
-    else
-      call
     end
   end
 end

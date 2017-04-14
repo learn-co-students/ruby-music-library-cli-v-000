@@ -1,5 +1,8 @@
 class Genre
   extend Concerns::Findable
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -11,20 +14,6 @@ class Genre
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def self.create(name)
-    genre = self.new(name).tap do |genre|
-      genre.save
-    end
   end
 
   def artists

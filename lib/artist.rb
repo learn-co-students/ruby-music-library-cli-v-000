@@ -1,31 +1,19 @@
 class Artist
-  #An Artist has many songs
   extend Concerns::Findable
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
+
   attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
-    @songs = [] #initializes with an Artist instance
+    @songs = []
   end
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def self.create(name)
-    artist = self.new(name).tap do |artist|
-      artist.save
-    end
   end
 
   def add_song(song)
