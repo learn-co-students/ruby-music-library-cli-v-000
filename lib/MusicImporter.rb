@@ -8,4 +8,7 @@ class MusicImporter
    files = Dir.entries(path)
    files.slice(2,files.size)
   end
+  def import
+    files.each {|x| Song.create_from_filename(x)}
+  end
 end

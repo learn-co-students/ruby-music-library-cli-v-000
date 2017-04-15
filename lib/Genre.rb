@@ -1,3 +1,4 @@
+require 'pry'
 class Genre
 extend Concerns::Findable
 attr_accessor :name
@@ -8,7 +9,7 @@ def initialize(name)
   @songs = []
 end
 def self.all
- @@all
+ @@all.uniq
 end
 def self.destroy_all
   @@all = []

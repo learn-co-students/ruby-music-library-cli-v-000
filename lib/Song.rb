@@ -39,11 +39,15 @@ class Song
   end
 
   def self.new_from_filename(name)
-    array = name.gsub(/-/, ',').split(',')
-    song = Song.new(name: array[1])
+    array = name.gsub(" - ", ',').split(',')
     #binding.pry
-    song.artist = Artist.new(array[0].strip)
-    #binding.pry
+    song = Song.create(array[1].strip)
+    song.artist = Artist.find_or_create_by_name(array[0].strip)
+    song.genre = Genre.find_or_create_by_name(array[2].strip.slice(0, array[2].size-4))
+    song
+  end
+  def self.create_from_filename(name)
+    self.new_from_filename(name)
   end
 end
 #binding.pry
