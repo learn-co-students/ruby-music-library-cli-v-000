@@ -17,6 +17,7 @@ class MusicLibraryController
     puts "list artist (will list all songs for the artist)"
     puts "list genre (will list all artists for the genre)"
     puts "play song"
+    puts "exit"
     @request = ""
     input = ""
     while  input != "exit"
@@ -56,26 +57,30 @@ class MusicLibraryController
   end
 
   def songs
-    Song.all.each_with_index do |song, i|
+    sorted_by_song = Song.all.sort_by {|song| song.name}
+    sorted_by_song.each_with_index do |song, i|
       puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def artists
-    Artist.all.each_with_index do |artist, i|
+    sorted_by_artist = Artist.all.sort_by {|artist| artist.name}
+    sorted_by_artist.each_with_index do |artist, i|
       puts "#{i+1}. #{artist.name}"
     end
   end
 
   def genres
-    Genre.all.each_with_index do |genre, i|
+    sorted_by_genre = Genre.all.sort_by {|genre| genre.name}
+    sorted_by_genre.each_with_index do |genre, i|
       puts "#{i+1}. #{genre.name}"
     end
   end
 
   def list_artist
     @artist_songs = 0
-    Song.all.each do |song|
+    sorted_by_song = Song.all.sort_by {|song| song.name}
+    sorted_by_song.each do |song|
       if song.artist.name == @artist
         puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         @artist_songs+= 1
@@ -88,7 +93,8 @@ class MusicLibraryController
 
   def list_genre
     @genre_songs = 0
-    Song.all.each do |song|
+    sorted_by_artist = Song.all.sort_by {|song| song.artist.name}
+    sorted_by_artist.each do |song|
       if song.genre.name == @genre
         puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
         @genre_songs+= 1
