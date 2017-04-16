@@ -10,6 +10,13 @@ class MusicLibraryController
   def call
     puts "Welcome to Your Music Library!"
     puts "What would you like to do?"
+    puts "Please choose from the following list:"
+    puts "list songs"
+    puts "list artists"
+    puts "list genres"
+    puts "list artist (will list all songs for the artist)"
+    puts "list genre (will list all artists for the genre)"
+    puts "play song"
     @request = ""
     input = ""
     while  input != "exit"
@@ -30,17 +37,19 @@ class MusicLibraryController
       when "play song"
         @request = "play song"
         puts "Please enter the song number"
+      when "exit"
+        @request = "exit"
       else
         case @request
-        when "play song"
-          @song_num = input.to_i
-          play_song
         when "list artist"
           @artist = input
           list_artist
         when "list genre"
           @genre = input
           list_genre
+        when "play song"
+          @song_num = input.to_i
+          play_song
         end
       end
     end
@@ -61,14 +70,6 @@ class MusicLibraryController
   def genres
     Genre.all.each_with_index do |genre, i|
       puts "#{i+1}. #{genre.name}"
-    end
-  end
-
-  def play_song
-    Song.all.each_with_index do |song, i|
-      if @song_num == (i+1)
-        puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      end
     end
   end
 
@@ -95,6 +96,14 @@ class MusicLibraryController
     end
     if @genre_songs == 0
       puts "#{@genre} not found!"
+    end
+  end
+
+  def play_song
+    Song.all.each_with_index do |song, i|
+      if @song_num == (i+1)
+        puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
     end
   end
 
