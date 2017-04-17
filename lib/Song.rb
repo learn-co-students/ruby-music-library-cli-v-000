@@ -8,29 +8,9 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     @artist = artist
-    artist.add_song(self) unless artist == nil #unless를 안붙이면 오류가 났던 이유 = nil classㅇㅔ는 add_song 메소드가 없으니까
     @genre = genre
+    artist.add_song(self) unless artist == nil
     genre.songs << self unless genre == nil
-
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def self.create(name)
-    song = self.new(name)
-    song.save
-    song #ㅇ이걸 왜 해야 하지
-    #binding.pry
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
   end
 
   def artist=(artist)
@@ -46,13 +26,41 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
-  def self.find_by_name(name)
-    self.all.detect do |song|
-      song.name == name
-    end
+  def self.all
+    @@all
   end
 
-  def self.find_or_create_by_name(name)
-    self.find_by_name(name)? self.find_by_name(name) : self.create(name)
+  def save
+    self.class.all << self
   end
+
+  def self.create(name)
+    song = self.new(name)
+    song.save
+    song #ㅇ이걸 왜 해야 하지
+  end
+
+  def self.new_from_filename(filename)
+    filename_arr = filename.split(" - ")
+    artist_name = filename_arr[0]
+    song_name = filename_arr[1]
+    genre_name = filename_arr[2].split(".")[0]
+
+    song = self.new(song_name)
+    artist = Artist.find_or_create_by_name(artist_name)
+    artist.add_song(song)
+    genre = Genre.find_or_create_by_name(genre_name)
+    genre.add_song(song)
+    song
+  end
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+    song
+
+  end
+  def self.destroy_all
+    self.all.clear
+  end
+
 end

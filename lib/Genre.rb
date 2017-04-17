@@ -17,8 +17,12 @@ class Genre
   def self.create(name)
     genre = self.new(name)
     genre.save
-    genre #ㅇ이걸 왜 해야 하지
-    #binding.pry
+    genre
+  end
+  
+  def add_song(song)
+    song.genre = self if song.genre == nil
+    self.songs << song unless self.songs.include?(song)
   end
 
   def self.all
@@ -31,9 +35,7 @@ class Genre
 
   def artists
     artists = []
-    self.songs.each do |song|
-      artists << song.artist unless artists.include?(song.artist)
-    end
+    self.songs.each {|song| artists << song.artist unless artists.include?(song.artist)}
     artists
   end
 
