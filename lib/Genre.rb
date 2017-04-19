@@ -1,7 +1,7 @@
 require 'pry'
 
 class Genre
-  attr_accessor :artist, :name, :song
+  attr_accessor :artist, :name, :songs
   extend Concerns::Findable
 
   @@all = []
