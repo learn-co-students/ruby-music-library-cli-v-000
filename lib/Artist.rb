@@ -36,7 +36,7 @@ class Artist
   end
 
   def genres
-    self.songs.uniq
+    self.songs.map{ |song| song.genre }.uniq
   end
 
   # def add_song(song)
