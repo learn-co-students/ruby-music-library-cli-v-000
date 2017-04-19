@@ -8,7 +8,6 @@ class Song
 
     def initialize(name)
       @name = name
-
     end
 
     def self.all
@@ -87,6 +86,86 @@ class Song
     #   song.artist_name = new_song[0].strip
     #   song.name = new_song[1].split(".")[0].strip
     #   song.save
+    # end
+
+    # @@count = 0
+    # @@genres = []
+    # @@artists = []
+
+    # def initialize(name, artist, genre)
+    #   @name = name
+    #   @artist =  artist
+    #   @genre = genre
+    #   @@count += 1
+    #   @@genres << @genre
+    #   @@artists << @artist
+    # end
+    #
+    # def self.count
+    #   @@count
+    # end
+    #
+    # def self.artists
+    #   @@artists.uniq!
+    # end
+    #
+    # def self.genres
+    #   @@genres.uniq!
+    # end
+    #
+    # def self.genre_count
+    #   all_genres = {}
+    #   @@genres.each do |genre|
+    #     all_genres[genre] ? all_genres[genre] += 1 : all_genres[genre] = 1
+    #   end
+    #   all_genres
+    # end
+    #
+    # def self.artist_count
+    #   all_artists = {}
+    #   @@artists.each do |artist|
+    #     all_artists[artist] ? all_artists[artist] += 1 : all_artists[artist] = 1
+    #   end
+    #   all_artists
+    # end
+
+    # class Song
+    #   extend Memorable::ClassMethods
+    #   extend Findable::ClassMethods
+    #   include Memorable::InstanceMethods
+    #   include Paramable::InstanceMethods
+    #   attr_accessor :name
+    #   attr_reader :artist
+    #
+    #   @@songs = []
+    #
+    #   # def initialize
+    #   #   self.class.all << self
+    #   # end
+    #
+    #   # def self.find_by_name(name)
+    #   #   @@songs.detect{|a| a.name == name}
+    #   # end
+    #
+    #   def artist=(artist)
+    #     @artist = artist
+    #   end
+    #
+    #   # def self.reset_all
+    #   #   @@songs.clear
+    #   # end
+    #
+    #   # def to_param
+    #   #   name.downcase.gsub(' ', '-')
+    #   # end
+    #
+    #   # def self.count
+    #   #   self.all.count
+    #   # end
+    #
+    #   def self.all
+    #     @@songs
+    #   end
     # end
 
   end
