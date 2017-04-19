@@ -5,6 +5,7 @@ class Song
   extend Concerns::Findable
 
     @@all = []
+    @@count = 0
 
     def initialize(name, artist=nil)
       @name = name
@@ -38,8 +39,24 @@ class Song
 
     def genre=(genre)
       @genre = genre
-      genre.songs << self
+      genre.songs << self unless genre.songs.include?(self)
     end
+
+    # def self.count
+    #   @@count
+    # end
+    #
+    # def self.genres
+    #   @@genres.uniq!
+    # end
+    #
+    # def self.genre_count
+    #   all_genres = {}
+    #   @@genres.each do |genre|
+    #     all_genres[genre] ? all_genres[genre] += 1 : all_genres[genre] = 1
+    #   end
+    #   all_genres
+    # end
 
 
 

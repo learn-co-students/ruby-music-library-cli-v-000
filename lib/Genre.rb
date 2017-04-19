@@ -24,6 +24,8 @@ class Genre
     self
   end
 
+
+
   def self.create(name)
     song = self.new(name)
     song.save
