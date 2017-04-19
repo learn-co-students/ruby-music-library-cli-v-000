@@ -30,10 +30,11 @@ class Genre
     song
   end
 
+
   # def add_song(song)
   #   @songs << song
-  #   @genres << song.genre.artists
-  #   song.genre.artists << self
+  #   @genres << song.genre.artist
+  #   song.genre.artist << self
   # end
 
 end
