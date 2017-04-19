@@ -35,6 +35,18 @@ class Artist
     @songs << song unless @songs.include?(song)
   end
 
+  # def add_song(song)
+  #   @songs << song
+  #   @genres << song.genre
+  #   song.genre.artists << self
+  # end
+
+  # def genres
+  #   self.songs.collect do |song|
+  #     song.genre
+  #   end
+  # end
+
 
 
   # def add_songs(songs)

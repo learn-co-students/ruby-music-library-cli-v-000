@@ -34,10 +34,14 @@ class Song
       artist.add_song(self)
     end
 
+
+
+
+
     # def artist_name=(name)
     #   self.artist = Artist.find_or_create_by_name(name)
     # end
-
+    #
     # def self.new_by_filename(filename)
     #   song_name = filename.split(" - ")[1]
     #   song_artist = filename.split(" - ")[0]
@@ -87,6 +91,10 @@ class Song
     #   song.name = new_song[1].split(".")[0].strip
     #   song.save
     # end
+
+
+
+
 
     # @@count = 0
     # @@genres = []
