@@ -4,7 +4,7 @@ module Concerns::Findable
       self.all.detect{|a| a.name == name}
     end
 
-    def find_or_create_by_name
+    def find_or_create_by_name(name)
       self.find_by_name(name) || self.create(name)
         # self.all.detect do |obj|
         #   obj.name == name
