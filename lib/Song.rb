@@ -106,16 +106,15 @@ class Song
       song #returns new song
     end
 
-    #
-    # def self.create_from_filename(filename)
-    #   song = Song.new
-    #   new_song = filename.split("-")
-    #   song.artist_name = new_song[0].strip
-    #   song.name = new_song[1].split(".")[0].strip
-    #   song.save
-    # end
 
-
+    def self.create_from_filename(filename)
+      new_song = filename.split("-")
+      name = new_song[1].strip
+      song = Song.new(name)
+      song.artist = Artist.find_or_create_by_name(new_song[0].strip)
+      song.genre = Genre.find_or_create_by_name(new_song[2].split(".")[0].strip)
+      song.save #this method has to be saved
+    end
 
 
 
