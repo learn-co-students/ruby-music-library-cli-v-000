@@ -1,7 +1,7 @@
 require 'pry'
 
 class Song
-  attr_accessor :artist, :name, :genre, :songs
+  attr_accessor :artist, :name, :genre, :songs, :title
   extend Concerns::Findable
 
     @@all = []
@@ -59,9 +59,6 @@ class Song
     # end
 
 
-
-
-
     # def artist_name=(name)
     #   self.artist = Artist.find_or_create_by_name(name)
     # end
@@ -100,13 +97,15 @@ class Song
     #   @@all.sort_by { |word| word.name }
     # end
     #
-    # def self.new_from_filename(filename)
-    #   song = Song.new
-    #   new_song = filename.split("-") #splits the string at the hyphen
-    #   song.artist_name = new_song[0].strip #assigns the stripped first element to variable
-    #   song.name = new_song[1].split(".")[0].strip #splits element at period, strips first element, deletes mp3
-    #   song #returns new song
-    # end
+    def self.new_from_filename(filename)
+      new_song = filename.split("-") #splits the string at the hyphen
+      name = new_song[1].strip #splits element at period, strips first element, deletes mp3
+      song = Song.new(name)
+      song.artist = Artist.find_or_create_by_name(new_song[0].strip)
+      song.genre = Genre.find_or_create_by_name(new_song[2].split(".")[0].strip)#splits element at period, strips first element, deletes mp3
+      song #returns new song
+    end
+
     #
     # def self.create_from_filename(filename)
     #   song = Song.new
