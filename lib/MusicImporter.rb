@@ -17,12 +17,3 @@ class MusicImporter
 
 
 end
-
-# class MusicImporter
-#   attr_accessor :artist, :name, :genre, :songs, :song
-#
-#   def initialize(url)
-#
-#   end
-#
-# end

@@ -99,10 +99,10 @@ class Song
     #
     def self.new_from_filename(filename)
       new_song = filename.split("-") #splits the string at the hyphen
-      name = new_song[1].strip #splits element at period, strips first element, deletes mp3
-      song = Song.new(name)
-      song.artist = Artist.find_or_create_by_name(new_song[0].strip)
-      song.genre = Genre.find_or_create_by_name(new_song[2].split(".")[0].strip)#splits element at period, strips first element, deletes mp3
+      name = new_song[1].strip #returns the second element in the array at index 1 = song title
+      song = Song.new(name) #new instance of a song with ne song title as name
+      song.artist = Artist.find_or_create_by_name(new_song[0].strip) #pushes artist to new instnace of and Artist in new instance of Song
+      song.genre = Genre.find_or_create_by_name(new_song[2].split(".")[0].strip) #splits element at period, returns first element at index 0
       song #returns new song
     end
 
