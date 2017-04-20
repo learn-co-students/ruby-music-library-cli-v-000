@@ -5,12 +5,12 @@ module Concerns
     end
 
     def find_or_create_by_name(name)
-        if song = self.all.find { |song| song.name == name }
+        if song = self.all.find {|name| name}
       else
-        song = self.new(name)
-        song.save
+        new_object = self.new(name)
+        new_object.save
       end
-      song
+      new_object
     end
 
   end
