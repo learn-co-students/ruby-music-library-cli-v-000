@@ -34,7 +34,9 @@ require 'pry'
    end
 
    def list_songs
-     Song.all.sort_by!{|a| a.artist.name}.each_with_index do |song, index|
+     #prendo tutte le canzoni e le mettoin ordine alfabetico secondo artista.
+     #per ognuna di quelle canzoni stampo il nome nel formato: artista - nome - genere.
+     Song.all.sort_by!{|song| song.artist.name}.each_with_index do |song, index|
        puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
      end
    end
@@ -50,6 +52,7 @@ require 'pry'
    def play_song
       puts "Enter song number : "
      input = gets.strip
+     #nella mia playlist di canzoni, tra tutti i file, cerco quello con indice pari all'input -1.
      puts "Playing #{self.playlist.files[input.to_i - 1]}"
    end
 
@@ -57,7 +60,7 @@ require 'pry'
      puts "Enter artist name:"
      input = gets.strip
      self.playlist.files.each do |song|
-       puts "#{song}" if song.include?(input)
+       puts "#{song}" if song.split(" - ")[0] == input #posso anche usare song.include?(input).
      end
    end
 
@@ -65,7 +68,7 @@ require 'pry'
      puts "Enter genre:"
      input = gets.strip
      self.playlist.files.each do |song|
-       puts "#{song}" if song.include?(input)
+       puts "#{song}" if song.split(" - ")[2].gsub(".mp3", "") == input  #posso anche usare .include?(input)
      end
    end
 
