@@ -12,7 +12,9 @@ class MusicLibraryController
     def call
       puts "What would you like?"
       input = gets.chomp
-      if input == "exit"
+      if input == "list songs"
+        return 
+      elsif input == "exit"
         return "exit"
       else
         call
