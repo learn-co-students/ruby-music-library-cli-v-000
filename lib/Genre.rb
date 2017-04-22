@@ -34,11 +34,4 @@ class Genre
     self.songs.map{ |song| song.artist }.uniq
   end
 
-
-  # def add_song(song)
-  #   @songs << song
-  #   @genres << song.genre.artist
-  #   song.genre.artist << self
-  # end
-
 end
