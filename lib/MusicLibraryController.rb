@@ -29,13 +29,14 @@ class MusicLibraryController
             Song.all.each do |song|
                 puts "#{song.genre.name}"
               end
+              # binding.pry
           elsif input == "play song"
             puts "Which number?"
-            number = gets.chomp
-            play_song = Song.all.sort_by { |song| song.artist.name }
-            play_song.all.each.with_index do |song, index|
-              puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}" if index == number
-            end
+            index = gets.chomp
+            Song.all["#{index}"]
+              puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+            #play_song.each.with_index do |song, index|
+              #puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}" if index == number
           end
         end
       end
