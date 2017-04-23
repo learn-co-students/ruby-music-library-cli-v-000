@@ -36,8 +36,8 @@ class MusicLibraryController
           elsif input == "list artist"
             puts "Which artist?"
             choice = gets.chomp
-            song = Song.all.collect{ |song| song if song == choice }
-            binding.pry
+            song = Song.all
+            song.collect{ |song| song if song.artist.name == choice }
             song.each do |song|
               puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
             end
