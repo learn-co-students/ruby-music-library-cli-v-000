@@ -20,8 +20,16 @@ class MusicLibraryController
           end
         elsif input == "list artists"
           sort_artists = Artist.all.sort_by { |song| song.artist.name }
-          sorted.each.with_index do |song, index|
-            puts "#{song.artist.name}"
+          sort_artists.each do |song|
+              puts "#{song.artist.name}"
+            end
+        elsif input == "list genres"
+          # sort_genres = Artist.all.sort_by { |song| song.artist.name }
+          Genre.all.each do |song|
+              puts "#{song.genre.name}"
+            end
+
+          end
         else
           return "exit"
         end
