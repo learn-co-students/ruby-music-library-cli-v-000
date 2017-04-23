@@ -25,16 +25,22 @@ class MusicLibraryController
                 puts "#{song.artist.name}"
               end
           elsif input == "list genres"
-            # sort_genres = Artist.all.sort_by { |song| song.artist.name }
             Song.all.each do |song|
                 puts "#{song.genre.name}"
               end
-              # binding.pry
           elsif input == "play song"
             puts "Which number?"
             index = gets.chomp.to_i - 1
             song = Song.all[index]
               puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+          elsif input == "list artist"
+            puts "Which artist?"
+            choice = gets.chomp
+            song = Song.all.collect{ |song| song if song == choice }
+            binding.pry
+            song.each do |song|
+              puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+            end
           end
         end
       end
