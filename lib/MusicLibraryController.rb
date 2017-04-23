@@ -20,13 +20,13 @@ class MusicLibraryController
                 puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
               end
           elsif input == "list artists"
-            sort_artists = Artist.all.sort_by { |song| song.artist.name }
+            sort_artists = Song.all.sort_by { |song| song.artist.name }.uniq
             sort_artists.each do |song|
                 puts "#{song.artist.name}"
               end
           elsif input == "list genres"
             # sort_genres = Artist.all.sort_by { |song| song.artist.name }
-            Genre.all.each do |song|
+            Song.all.each do |song|
                 puts "#{song.genre.name}"
               end
           elsif input == "play song"
