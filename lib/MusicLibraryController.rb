@@ -32,11 +32,9 @@ class MusicLibraryController
               # binding.pry
           elsif input == "play song"
             puts "Which number?"
-            index = gets.chomp
-            Song.all["#{index}"]
+            index = gets.chomp.to_i - 1
+            Song.all[index]
               puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
-            #play_song.each.with_index do |song, index|
-              #puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}" if index == number
           end
         end
       end
