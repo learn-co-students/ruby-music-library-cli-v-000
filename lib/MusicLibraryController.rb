@@ -12,13 +12,17 @@ class MusicLibraryController
     def call
       puts "What would you like?"
       input = gets.chomp
-      while input != "exit" do
+      while input != "exit"
         if input == "list songs"
           sorted = Song.all.sort_by { |song| song.artist.name }
           sorted.each.with_index do |song, index|
             puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
           end
-        else input == "exit"
+        elsif input == "list artists"
+          sort_artists = Artist.all.sort_by { |song| song.artist.name }
+          sorted.each.with_index do |song, index|
+            puts "#{song.artist.name}"
+        else
           return "exit"
         end
       end
