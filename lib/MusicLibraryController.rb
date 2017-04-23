@@ -33,7 +33,7 @@ class MusicLibraryController
           elsif input == "play song"
             puts "Which number?"
             index = gets.chomp.to_i - 1
-            Song.all[index]
+            song = Song.all[index]
               puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
           end
         end
