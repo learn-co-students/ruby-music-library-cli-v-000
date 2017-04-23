@@ -1,9 +1,7 @@
-module Concerns
-  module Findable
+module Concerns::Findable
     def self.find_by_name(name)
       @@all.select {|x| x.name == name}
     end
-  end
 end
 
 
