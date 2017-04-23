@@ -1,13 +1,6 @@
-module Memorable
-  module ClassMethods
-    def destroy_all
-      self.all.clear
-    end
+module Concerns
 
-    def create(name)
-      self.new(name).save
-    end
-
+  module Findable
     def find_by_name(name)
       self.all.detect {|song| song.name == name }
     end
@@ -18,16 +11,6 @@ module Memorable
       else
         self.find_by_name(name)
       end
-    end
-
-  end
-
-
-  module InstanceMethods
-
-    def save
-      self.class.all << self
-      self
     end
   end
 
