@@ -10,9 +10,10 @@ class MusicLibraryController
     end
 
     def call
+      input = " "
       while input != "exit"
-        puts "What would you like?"
         input = gets.chomp
+        puts "What would you like?"
           if input == "list songs"
             sorted = Song.all.sort_by { |song| song.artist.name }
             sorted.each.with_index do |song, index|
@@ -31,8 +32,10 @@ class MusicLibraryController
           elsif input == "play song"
             puts "Which number?"
             number = gets.chomp
-          else
+          elsif input == "exit"
             return "exit"
+          else
+            call
           end
       end
     end
