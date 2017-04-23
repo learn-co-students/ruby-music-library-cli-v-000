@@ -1,6 +1,5 @@
 require 'pry'
 class Song
-  require Concerns::Findable::find_by_name
   attr_accessor :name
   attr_reader :genre, :artist
   @@all = []
