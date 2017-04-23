@@ -13,6 +13,7 @@ class MusicLibraryController
       puts "What would you like?"
       input = gets.chomp
       while input != "exit"
+        call
         if input == "list songs"
           sorted = Song.all.sort_by { |song| song.artist.name }
           sorted.each.with_index do |song, index|
@@ -28,8 +29,9 @@ class MusicLibraryController
           Genre.all.each do |song|
               puts "#{song.genre.name}"
             end
-
-          end
+        elsif input == "play song"
+          puts "Which number?"
+          number = gets.chomp
         else
           return "exit"
         end
