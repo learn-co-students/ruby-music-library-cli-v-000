@@ -14,6 +14,9 @@ class Genre
     song.genre = self if !song.genre
     songs<<song if !songs.include?(song)
   end
+  def artists
+    songs.collect{|song| song.artist}.uniq
+  end
   def self.all
     @@all
   end

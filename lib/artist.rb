@@ -10,11 +10,13 @@ class Artist
   def initialize(name)
     self.name=name
     @songs = []
-    self.save
   end
   def add_song(song)
     songs << song if !songs.include?(song)
     song.artist = self if !song.artist
+  end
+  def genres
+    songs.collect {|song| song.genre}.uniq
   end
   def self.all
     @@all
