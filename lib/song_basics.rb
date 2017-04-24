@@ -44,7 +44,11 @@ class Song
   end
 
   def self.find_by_name(name)
+<<<<<<< HEAD
     @@all.find {|song| song.name == name}
+=======
+    @@all.find {|name| name}
+>>>>>>> f32922c522b50c58ac0210697679ac27a199c493
   end
 
   def self.find_or_create_by_name(name)
