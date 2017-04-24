@@ -14,8 +14,7 @@ class Artist
   end
   def add_song(song)
     songs << song if !songs.include?(song)
-    song.artist = self if !song.artist==self
-    binding.pry
+    song.artist = self if !song.artist
   end
   def self.all
     @@all
