@@ -9,10 +9,9 @@ class Genre
   def initialize(name)
     self.name=name
     self.songs=[]
-    self.save
   end
   def add_song(song)
-    song.genre=self
+    song.genre = self if !song.genre
     songs<<song if !songs.include?(song)
   end
   def self.all

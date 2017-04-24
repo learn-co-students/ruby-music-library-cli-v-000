@@ -1,7 +1,7 @@
 class Song
 
-  attr_accessor :name, :genre
-  attr_reader :artist
+  attr_accessor :name
+  attr_reader :artist, :genre
   extend Findable::ClassMethods
   include Findable::InstanceMethods
   @@all=[]
@@ -9,11 +9,14 @@ class Song
     self.name=name
     self.artist=artist if artist
     self.genre=genre if genre
-    self.save
   end
   def artist= (artist)
     @artist=artist
     artist.add_song(self)
+  end
+  def genre= (genre)
+    @genre=genre
+    genre.add_song(self)
   end
   def self.all
     @@all
