@@ -3,8 +3,8 @@ class Artist
 
   attr_accessor :name
   attr_reader :songs
-  extend Findable::ClassMethods
-  include Findable::InstanceMethods
+  extend Concerns::Memorable::ClassMethods, Concerns::Findable
+  include Concerns::Memorable::InstanceMethods
   @@all=[]
 
   def initialize(name)

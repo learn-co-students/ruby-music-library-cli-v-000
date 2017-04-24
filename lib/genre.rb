@@ -2,8 +2,8 @@ class Genre
 
   attr_accessor :name, :songs
 
-  extend Findable::ClassMethods
-  include Findable::InstanceMethods
+  extend Concerns::Memorable::ClassMethods, Concerns::Findable
+  include Concerns::Memorable::InstanceMethods
   @@all=[]
 
   def initialize(name)
