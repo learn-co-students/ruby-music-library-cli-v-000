@@ -18,6 +18,17 @@ class Song
     @genre=genre
     genre.add_song(self)
   end
+  def self.find_by_name(name)
+    all.detect{|song| song.name==name}
+  end
+  def self.find_or_create_by_name(name)
+    song = find_by_name(name)
+    if !song
+      song = Song.new(name)
+      song.save
+    end
+    song
+  end
   def self.all
     @@all
   end
