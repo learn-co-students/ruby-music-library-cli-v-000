@@ -47,5 +47,13 @@ class Artist
     genres.uniq
   end
 
+#  def self.find_or_create_by_name(name)
+#      if song = self.all.find { |artist| artist.name == name }
+#    else
+#      artist = self.new(name)
+#      artist.save
+#    end
+#    artist
+#  end
 
 end
