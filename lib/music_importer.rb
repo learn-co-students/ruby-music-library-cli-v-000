@@ -12,11 +12,7 @@ class MusicImporter
   end
 
   def import
-<<<<<<< HEAD
-    files.each { |filename| Song.create_from_filename(filename)}
-=======
-    files.each { |filename| Song.new_from_filename(filename) }
->>>>>>> f32922c522b50c58ac0210697679ac27a199c493
+     files.each { |filename| Song.new_from_filename(filename) }
   end
 
 end

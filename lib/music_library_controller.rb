@@ -29,6 +29,8 @@ class MusicLibraryController
         Song.all.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
 
       when input = "list genre"
+        genre = gets.strip
+        Song.all.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
 
       end
     end
