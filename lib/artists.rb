@@ -1,4 +1,5 @@
 require_relative '../lib/concerns/memorable'
+require_relative '../lib/concerns/concerns'
 
 class Artist
   attr_accessor :name
@@ -6,7 +7,7 @@ class Artist
   @@all = []
 
   include Memorable::InstanceMethods
-  extend Memorable::ClassMethods
+  extend Memorable::ClassMethods, Concerns::Findable
 
   def initialize(name)
     @name = name
@@ -21,6 +22,11 @@ class Artist
     self.songs.push(song) unless songs.include?(song)
     song.artist ||= self
   end
+
+  def genres
+      self.songs.collect {|s| s.genre}.uniq
+  end
+
 end
 
 

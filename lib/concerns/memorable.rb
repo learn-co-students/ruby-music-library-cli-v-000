@@ -12,7 +12,7 @@ module Memorable
     def create(param)
       instance = self.new(param)
       instance.save
-      instance#add after running rspec 001_song_basics_spec WHAT FOR???
+      instance# ??? add after running rspec 001_song_basics_spec WHAT FOR???
     end
 
   end
