@@ -1,10 +1,13 @@
 require "pry"
+
 class Artist
+
+  extend Concerns::Memorable::ClassMethods, Concerns::Findable
+  include Concerns::Memorable::InstanceMethods
 
   attr_accessor :name
   attr_reader :songs
-  extend Concerns::Memorable::ClassMethods, Concerns::Findable
-  include Concerns::Memorable::InstanceMethods
+
   @@all=[]
 
   def initialize(name)
@@ -12,8 +15,8 @@ class Artist
     @songs = []
   end
   def add_song(song)
-    songs << song if !songs.include?(song)
-    song.artist = self if !song.artist
+    song.artist = self unless song.artist == self
+    songs << song unless songs.include?(song)
   end
   def genres
     songs.collect {|song| song.genre}.uniq

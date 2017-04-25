@@ -1,16 +1,11 @@
 module Concerns
   module Findable
       def find_by_name(name)
-        all.detect{|model| model.name==name}
+        all.detect{|o| o.name==name}
       end
       def find_or_create_by_name(name)
-        model = find_by_name(name)
-        if !model
-          model = self.new(name)
-          model.save
-        end
-        model
-      end
+        find_by_name(name) || create(name)
+    end
   end
   module Memorable
     module InstanceMethods
@@ -20,9 +15,9 @@ module Concerns
     end
     module ClassMethods
       def create(name)
-        model = self.new(name)
-        model.save
-        model
+        o = self.new(name)
+        o.save
+        o
       end
       def destroy_all
         self.all.clear
