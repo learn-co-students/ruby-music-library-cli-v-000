@@ -1,3 +1,4 @@
+require "pry"
 class MusicLibraryController
   attr_accessor :importer
   def initialize(path="./db/mp3s")
@@ -5,15 +6,8 @@ class MusicLibraryController
   end
   def call
     user_input = nil
+
     while user_input != "exit"
-      # puts "Welcome to our Music Library"
-      # puts "What would you like to do?"
-      # puts "Please press 1 to list songs,
-      # press 2 to list artists,
-      # press 3 to list genres
-      # press 4 to play a song,
-      # press 5 to list an artist's song,
-      # press 6 to list a genre's song."
       user_input = gets.chomp
       case user_input
       when "list songs"
@@ -22,7 +16,7 @@ class MusicLibraryController
         list_artists
       when "list genres"
         list_genres
-      when "play a song"
+      when "play song"
         play_a_song
       when "artists song"
         artists_song
@@ -50,6 +44,10 @@ class MusicLibraryController
     end
   end
   def play_a_song
+    user_input = gets.chomp
+    song = Song.all[user_input.to_i-1]
+    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+
   end
   def artists_song
   end
