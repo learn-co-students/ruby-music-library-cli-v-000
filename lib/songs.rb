@@ -46,9 +46,10 @@ class Song
   end
 
   def self.create_from_filename(file_name)
-    self.create(file_name.split(" - ")[1]).tap do |s| #!test doesn't require validation on unique song
-      s.artist = Artist.find_or_create_by_name(file_name.split(" - ")[0])
-      s.genre = Genre.find_or_create_by_name(file_name.split(" - ")[2].split(".")[0])
+    file_name_parts = file_name.split(" - ")
+    self.create(file_name_parts[1]).tap do |s| #!test doesn't require validation on unique song
+      s.artist = Artist.find_or_create_by_name(file_name_parts[0])
+      s.genre = Genre.find_or_create_by_name(file_name_parts[2].split(".")[0])
     end
   end
 

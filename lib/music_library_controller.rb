@@ -1,20 +1,41 @@
-#require_relative '../lib/music_importer'
 require 'pry'
 
 class MusicLibraryController
 
+  attr_reader :path, :repertuar
+
   def initialize(path = "./db/mp3s")
-    MusicImporter.new(path).import
+    @path = path
+    @repertuar = MusicImporter.new(path).import
   end
 
   def call
-    puts "Please enter the path to the music's folder"
+    puts "Hey, enter smth:"
     input = gets.chomp
-    #binding.pry
-    if input != "exit"
-      MusicLibraryController.new(input)
-    else
+  #    if input == "list songs" && !(self.repertuar.empty?)
+  #      self.repertuar.each {|f| "1. #{f}"}
+  #    elsif !(input == "exit")
+  #      songs = MusicLibraryController.new(input)
+  #      call
+  #    end
+
+    if input == "list songs"
+      sorted_repertuar = self.repertuar.sort
+      sorted_repertuar.each.with_index do |f, i|
+        i += 1
+        puts "#{i}. #{f.gsub(".mp3", "")}"
+      end
       call
+    elsif !(input == "exit") #it gave an infinitive loop with until ??????
+        MusicLibraryController.new(input)
+        call
     end
+
+    #unless input == "exit" #it gave an infinitive loop with until ??????
+    #    songs = MusicLibraryController.new(input)
+    #    call
+    #end
+    #songs
   end
+
 end
