@@ -1,0 +1,17 @@
+
+[1mFrom:[0m /home/ubuntu/workspace/object-oriented-ruby/final-projects/ruby-music-library-cli-v-000/lib/song.rb @ line 41 Song.new_from_filename:
+
+    [1;34m37[0m: [32mdef[0m [1;36mself[0m.[1;34mnew_from_filename[0m(file_name)
+    [1;34m38[0m:   song_data = file_name.split([31m[1;31m"[0m[31m.[1;31m"[0m[31m[0m)[[1;34m0[0m].split([31m[1;31m"[0m[31m-[1;31m"[0m[31m[0m).map(&[33m:strip[0m)
+    [1;34m39[0m: 
+    [1;34m40[0m:   new_song = [1;36mself[0m.new(song_data[[1;34m1[0m])
+ => [1;34m41[0m:   binding.pry
+    [1;34m42[0m:   new_song.artist = [1;34;4mArtist[0m.find_or_create_by_name(song_data[[1;34m0[0m])
+    [1;34m43[0m:   new_song.genre = [1;34;4mGenre[0m.find_or_create_by_name(song_data[[1;34m2[0m])
+    [1;34m44[0m:   [1;34m# new_song.artist.add_song(new_song)[0m
+    [1;34m45[0m:   [1;34m# new_song.genre.add_song(new_song)[0m
+    [1;34m46[0m:   binding.pry
+    [1;34m47[0m:   
+    [1;34m48[0m:   new_song
+    [1;34m49[0m: [32mend[0m
+

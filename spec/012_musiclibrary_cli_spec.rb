@@ -1,3 +1,4 @@
+require 'pry'
 describe 'Music Library CLI' do
 
   it 'allows a user to list songs' do
@@ -7,6 +8,7 @@ describe 'Music Library CLI' do
     expect(music_library_controller).to receive(:gets).and_return("list songs", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
+    # binding.pry
 
     expect(output).to include("1. Action Bronson - Larry Csonka - indie")
     expect(output).to include("2. Real Estate - Green Aisles - country")
@@ -59,7 +61,7 @@ describe 'Music Library CLI' do
     expect(music_library_controller).to receive(:gets).and_return("list artist", "Real Estate", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
-
+    
     expect(output).to include("Real Estate - Green Aisles - country")
     expect(output).to include("Real Estate - It's Real - hip-hop")
   end
@@ -71,7 +73,7 @@ describe 'Music Library CLI' do
     expect(music_library_controller).to receive(:gets).and_return("list genre", "dance", "exit")
 
     output = capture_puts {run_file("./bin/musiclibrary")}
-
+    
     expect(output).to include("Thundercat - For Love I Come - dance")
   end
 end
