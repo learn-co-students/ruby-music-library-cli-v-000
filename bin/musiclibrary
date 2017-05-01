@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
 
+puts "Hi. Welcome to your Command Line Music Library"
 MusicLibraryController.new.call
+

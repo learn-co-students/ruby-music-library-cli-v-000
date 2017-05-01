@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'pry'
+
 
 describe "MusicImporter" do
   describe '#initialize' do
