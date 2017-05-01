@@ -18,7 +18,7 @@ describe 'Artists and Genres being extended by Concerns::Findable' do
       it 'finds or creates an artist by name maintaining uniqueness of objects by name property' do
         artist_1 = Artist.find_or_create_by_name("Neutral Milk Hotel")
         artist_2 = Artist.find_or_create_by_name("Neutral Milk Hotel")
-
+        
         expect(artist_1).to eq(artist_2)
       end
     end
