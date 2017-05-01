@@ -7,7 +7,7 @@ describe 'Concerns::Findable' do
   end
 
   class Person
-    extend Concerns::Findable
+   extend Concerns::Findable
   end
 
   it 'adds a find_by_name class method to classes that are extended by the module' do
