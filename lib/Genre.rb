@@ -15,14 +15,11 @@ class Genre
 	end
 
 	def artists
-		# refactor sandwich code
-		results = []
-		self.songs.each { |song| results << song.artist unless results.include?(song.artist) }
-		results
+		self.songs.collect { |song| song.artist }.uniq
 	end
 
 	def self.create(name)
-		genre = Genre.new(name)
+		genre = self.new(name)
 		genre.save
 		genre
 	end

@@ -6,8 +6,11 @@ class MusicLibraryController
 	end
 
 	def call
+		puts 'Welcome to the Music Library!'
+		puts 'Enter "help" to see the list of commands'
+
 		loop do
-			puts 'Please enter command: '
+			puts 'What would you like to do? '
 			input = gets.chomp
 
 			case input
@@ -17,10 +20,6 @@ class MusicLibraryController
 				Artist.print_artists
 			when 'list genres'
 				Genre.print_genres
-			when 'play song'
-				puts 'Enter song number: '
-				number = gets.chomp.to_i
-				Song.play(number)
 			when 'list artist'
 				puts 'Enter artist name: '
 				artist = gets.chomp
@@ -29,6 +28,12 @@ class MusicLibraryController
 				puts 'Enter genre name: '
 				genre = gets.chomp
 				Song.print_songs_by_genre(genre)
+			when 'play song'
+				puts 'Enter song number: '
+				number = gets.chomp.to_i
+				Song.play(number)
+			when 'help'
+				puts '["list songs", "list artists", "list genres", "list artist", "list genre", play song]'
 			end
 
 			break if input == 'exit'
