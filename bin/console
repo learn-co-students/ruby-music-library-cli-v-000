@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+#setup console to test in IRB
+require 'irb'
+require "irb/completion" #easy tab completion
+require 'require_all'
+require_relative '../config/environment'
+require_all 'bin'
+
+def reload!
+  load './config/environment.rb'
+  load './lib/Artist.rb'
+  load './lib/Genre.rb'
+  load './lib/Song.rb'
+  load './lib/MusicLibraryController.rb'
+  load './lib/MusicImporter.rb'
+  load './bin/musiclibrary'
+end
+
+ puts "...loading your environment"
+IRB.start
