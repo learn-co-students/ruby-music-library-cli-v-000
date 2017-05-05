@@ -9,6 +9,7 @@ attr_accessor :name
 def initialize(name)
         @name = name
         @songs = []
+        
 end
 
 def save
@@ -29,7 +30,15 @@ def add_song(song)
         end
 end
 
-
+def genres
+artist_genres = []
+@songs.each{|song| 
+            if !artist_genres.include?(song.genre)
+            artist_genres << song.genre
+            end
+        }
+artist_genres
+end
 
 
 #----------------------------------------------------------------------------------------

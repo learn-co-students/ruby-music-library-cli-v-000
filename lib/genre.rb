@@ -21,7 +21,16 @@ end
 
 
     
-
+def artists
+    genre_artists = []
+    @songs.each{|song|
+                            if !genre_artists.include?(song.artist)
+                                genre_artists << song.artist
+                            end
+                            
+                    }
+genre_artists
+end
 
 
 
