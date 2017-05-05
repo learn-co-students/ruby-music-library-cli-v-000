@@ -7,12 +7,20 @@ attr_accessor :name
 #instance
 def initialize(name)
     @name = name
+    @songs = []
 end
 
 def save
     @@all << self
 end
 
+#songs getter
+def songs
+@songs
+end
+
+
+    
 
 
 

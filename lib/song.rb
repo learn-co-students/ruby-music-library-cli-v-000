@@ -1,17 +1,25 @@
 class Song
 #----------------------------------------------------------------------------------------
 #vars and macros
-attr_accessor :name, :genre
+attr_accessor :name
 @@all = []
 #----------------------------------------------------------------------------------------
 #instance
-def initialize(name, artist=nil)
+def initialize(name, artist=nil, genre=nil)
     @name = name
     @artist = artist
     #adds song to artist iff artist was provided at init
+    
     artist.add_song(self) if @artist != nil
+    
+    if genre != nil
+        @genre = genre
+        
+        if ! genre.songs.include?(self)
+            genre.songs << self
+        end
+    end
 
-    @genre = nil
 end
 
 def save
@@ -30,13 +38,25 @@ def artist= (artist)
         # if ! artist.songs.include?(self)
         # artist.songs << self
         # end
-
 end
-#---
+
 def artist
 @artist
 end
 
+
+def genre
+        @genre
+end
+
+
+def genre= (genre)
+        @genre = genre
+        if !genre.songs.include?(self)
+            genre.songs << self
+        end
+        
+end
 
 
 #----------------------------------------------------------------------------------------
