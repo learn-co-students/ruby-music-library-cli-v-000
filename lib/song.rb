@@ -76,7 +76,27 @@ def self.create(name)
     this_song
 end
 
+def self.new_from_filename(filename)
+  
+    new_song = self.find_or_create_by_name(filename.chomp(".mp3").split(" - ")[1])
+  
+    new_song.genre = Genre.find_or_create_by_name(filename.chomp(".mp3").split(" - ")[2])
+ 
+    new_song.artist = Artist.find_or_create_by_name(filename.chomp(".mp3").split(" - ")[0])
+new_song
+
+end
 
 
+def self.create_from_filename(filename)
+  
+    new_song = self.find_or_create_by_name(filename.chomp(".mp3").split(" - ")[1])
+  
+    new_song.genre = Genre.find_or_create_by_name(filename.chomp(".mp3").split(" - ")[2])
+ 
+    new_song.artist = Artist.find_or_create_by_name(filename.chomp(".mp3").split(" - ")[0])
+new_song
+
+end
 #---
 end
