@@ -18,10 +18,10 @@ module Findable
 
     def find_or_create_by_name(name)
         found = nil
-        if find_by_name
-           found = find_by_name
+        if find_by_name(name)
+           found = find_by_name(name)
         else
-            found = self.new(name)
+            found = self.create(name)
         end
         found
     end

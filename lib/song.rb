@@ -3,6 +3,7 @@ class Song
 #vars and macros
 attr_accessor :name
 @@all = []
+extend Concerns::Findable
 #----------------------------------------------------------------------------------------
 #instance
 def initialize(name, artist=nil, genre=nil)
