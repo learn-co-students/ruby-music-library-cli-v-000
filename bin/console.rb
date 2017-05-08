@@ -3,4 +3,4 @@
 require_relative '../config/environment'
 require 'irb'
 
-MusicLibraryController.new.call
+IRB.start
