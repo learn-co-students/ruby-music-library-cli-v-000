@@ -1,13 +1,16 @@
 class Song
 
   extend Concerns::Findable
+  extend Concerns::Persistable::ClassMethods
+  extend Concerns::Nameable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
 
   @@all = []
 
   attr_accessor :name
   attr_reader :artist, :genre
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name = nil, artist = nil, genre = nil)
     self.name = name
     self.artist= artist
     self.genre= genre
@@ -15,20 +18,6 @@ class Song
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def self.create(name, artist = nil, genre = nil)
-    new_song = Song.new(name, artist, genre).tap do |song|
-      song.save
-    end
   end
 
   def artist= (name)
@@ -42,7 +31,6 @@ class Song
   end
 
   def self.filename_splitter(filename)
-    # binding.pry
     if filename.is_a? String
       new_filename = filename.split(' - ').tap do |filename|
         filename[2].chomp!(".mp3")
@@ -50,65 +38,44 @@ class Song
     else
       filename.map! {|filename| filename.split(" - ")}
       filename.each {|filename| filename[2].chomp!(".mp3")}
-      
+
     end
   end
 
   def self.new_from_filename(filename)
     filename_info = self.filename_splitter(filename)
 
-    if Artist.all.detect {|artist| artist.name == filename_info[0]} == nil
-      new_artist = Artist.new(filename_info[0])
-    else
-      new_artist = Artist.all.detect {|artist| artist.name == filename_info[0]}
+    Artist.all.detect {|artist| artist.name == filename_info[0]} == nil ? new_artist = Artist.new(filename_info[0]) : new_artist = Artist.all.detect {|artist| artist.name == filename_info[0]}
+
+    Genre.all.detect {|genre| genre.name == filename_info[2]}  == nil ? new_genre = Genre.new(filename_info[2]) : new_genre = Genre.all.detect {|genre| genre.name == filename_info[2]}
+
+    Song.new(filename_info[1]).tap do |o|
+      o.artist = new_artist
+      o.genre = new_genre
     end
-
-    if Genre.all.detect {|genre| genre.name == filename_info[2]}  == nil
-      new_genre = Genre.new(filename_info[2])
-    else
-      new_genre = Genre.all.detect {|genre| genre.name == filename_info[2]}
-    end
-
-    new_song = Song.new(filename_info[1], new_artist, new_genre)
-
-    new_song
   end
 
   def self.create_from_filename(filename)
     filename_info = self.filename_splitter(filename)
-    # binding.pry
     if filename_info[0].is_a? String
-      if Artist.all.detect {|artist| artist.name == filename_info[0]} == nil
-        new_artist = Artist.create(filename_info[0])
-      else
-        new_artist = Artist.all.detect {|artist| artist.name == filename_info[0]}
-      end
+      Artist.all.detect {|artist| artist.name == filename_info[0]} == nil ? new_artist = Artist.create(filename_info[0]) : new_artist = Artist.all.detect {|artist| artist.name == filename_info[0]}
 
-      if Genre.all.detect {|genre| genre.name == filename_info[2]}  == nil
-        new_genre = Genre.create(filename_info[2])
-      else
-        new_genre = Genre.all.detect {|genre| genre.name == filename_info[2]}
-      end
+      Genre.all.detect {|genre| genre.name == filename_info[2]}  == nil ? new_genre = Genre.create(filename_info[2]) : new_genre = Genre.all.detect {|genre| genre.name == filename_info[2]}
 
-      new_song = Song.create(filename_info[1], new_artist, new_genre)
-      new_song
+      Song.create(filename_info[1]).tap do |o|
+        o.artist = new_artist
+        o.genre = new_genre
+      end
     else
       filename_info.collect do |filename|
-        if Artist.all.detect {|artist| artist.name == filename[0]} == nil
-          new_artist = Artist.create(filename[0])
-        else
-          new_artist = Artist.all.detect {|artist| artist.name == filename[0]}
-        end
+        Artist.all.detect {|artist| artist.name == filename[0]} == nil ? new_artist = Artist.create(filename[0]) : new_artist = Artist.all.detect {|artist| artist.name == filename[0]}
 
-        if Genre.all.detect {|genre| genre.name == filename[2]}  == nil
-          new_genre = Genre.create(filename[2])
-        else
-          new_genre = Genre.all.detect {|genre| genre.name == filename[2]}
-        end
+        Genre.all.detect {|genre| genre.name == filename[2]}  == nil ? new_genre = Genre.create(filename[2]) : new_genre = Genre.all.detect {|genre| genre.name == filename[2]}
 
-        new_song = Song.create(filename[1], new_artist, new_genre)
-        new_song
-        # binding.pry
+        Song.create(filename[1]).tap do |o|
+          o.artist = new_artist
+          o.genre = new_genre
+        end
       end
     end
   end
