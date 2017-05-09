@@ -30,7 +30,7 @@ class Song
     genre.add_song(self) unless self.genre == nil
   end
 
-  def self.filename_splitter(filename)
+  def self.filename_splitter(filename) #Checks for multiple filenames then splits them to remove the " - " and ".mp3"
     if filename.is_a? String
       new_filename = filename.split(' - ').tap do |filename|
         filename[2].chomp!(".mp3")
@@ -42,7 +42,7 @@ class Song
     end
   end
 
-  def self.new_from_filename(filename)
+  def self.new_from_filename(filename) #splits fieneames then checks for uniqueness, and creates a new Song based on the filename
     filename_info = self.filename_splitter(filename)
 
     Artist.all.detect {|artist| artist.name == filename_info[0]} == nil ? new_artist = Artist.new(filename_info[0]) : new_artist = Artist.all.detect {|artist| artist.name == filename_info[0]}
@@ -55,7 +55,7 @@ class Song
     end
   end
 
-  def self.create_from_filename(filename)
+  def self.create_from_filename(filename) #same as new_from_filename, but checks for multiple filenames and saves songs using #create
     filename_info = self.filename_splitter(filename)
     if filename_info[0].is_a? String
       Artist.all.detect {|artist| artist.name == filename_info[0]} == nil ? new_artist = Artist.create(filename_info[0]) : new_artist = Artist.all.detect {|artist| artist.name == filename_info[0]}
