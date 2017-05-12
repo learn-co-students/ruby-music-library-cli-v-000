@@ -1,3 +1,5 @@
+require_relative '../lib/concerns/findable.rb'
+
 class Genre
 
   extend Concerns::Findable
@@ -30,5 +32,4 @@ end
 def artists
     self.songs.collect{|songs| songs.artist}.uniq
   end
-
 end
