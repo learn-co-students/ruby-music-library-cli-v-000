@@ -34,9 +34,9 @@ def self.create(name)
     new(name).tap{|x| x.save}
   end
 
-  def genre
+  def genre=(genre)
     @genre = genre
-    genre.songs << self unless genre.songs.include?(self)
+    genre.add_song(self)
   end
 
   def self.find_by_name(name)
@@ -48,11 +48,13 @@ def self.create(name)
   end
 
   def self.new_from_filename(filename)
-    artist, song, genre = filename.split(" - ")
-    genre.gsub!(".mp3","")
-    artist = Artist.find_or_create_by_name(artist)
-    genre = Genre.find_or_create_by_name(genre)
-    self.new(song, artist, genre)
+    artist_name, title, genre_name = filename.gsub(/\.mp3/, '').split(' - ')
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    song = Song.new(title)
+    artist.add_song(song)
+    genre.add_song(song)
+    song
   end
 
   def artist=(artist)

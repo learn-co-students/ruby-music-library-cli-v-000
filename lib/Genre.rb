@@ -32,4 +32,13 @@ end
 def artists
     self.songs.collect{|songs| songs.artist}.uniq
   end
+
+  def add_song(song)
+    if !self.songs.include?(song)
+      self.songs << song
+    end
+    if !song.genre
+      song.genre = self
+    end
+  end
 end
