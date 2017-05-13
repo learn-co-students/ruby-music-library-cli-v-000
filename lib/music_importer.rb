@@ -6,10 +6,11 @@ class MusicImporter
   end
 
   def files
-    @files = Dir.entries(self.path).delete_if { |i| i.end_with?("mp3") == false }
-  end
+   Dir.glob("#{@path}/*.mp3").select{ |f| File.file?(f) }.map{ |f| File.basename f }
+ end
+
 
   def import
-  self.files.each {|file| Song.create_from_filename(file)}
+    self.files.each{|filename| Song.create_from_filename(filename) }
   end
 end
