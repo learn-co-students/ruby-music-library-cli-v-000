@@ -68,16 +68,22 @@ class Song
       song.genre_name=(genre)
       song.artist = Artist.find_or_create_by_name(artist)
       song
+      
     end 
 
     def artist_name=(name)
         self.artist = Artist.find_or_create_by_name(name)
         self.artist.add_song(self)
     end
+
     def genre_name=(name)
         self.genre = Genre.find_or_create_by_name(name)
     end
+
     def self.create_from_filename(file_name)
+        song = self.new_from_filename(file_name)
+       
+        song
         
     end
     
