@@ -26,3 +26,5 @@ class MusicLibraryController
            self.list_genre
        end
      end
+   end
+ end
