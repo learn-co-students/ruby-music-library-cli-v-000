@@ -1,3 +1,6 @@
+require 'pry'
+
+
 require 'spec_helper'
 
 describe "MusicImporter" do
@@ -34,7 +37,7 @@ describe 'Making Songs from filenames' do
   describe 'Song.new_from_filename' do
     it 'initializes a song based on the filename delimiters' do
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-      binding.pry
+     # binding.pry
       expect(song.name).to eq("For Love I Come")
       expect(song.artist.name).to eq("Thundercat")
       expect(song.genre.name).to eq("dance")

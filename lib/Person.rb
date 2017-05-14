@@ -16,21 +16,22 @@ class MusicImporter
     end
 
     def files
-        Dir.glob("#{path}/*.mp3").collect {|file| file.gsub("#{path}/", "")}
+      Dir.glob("#{path}/*.mp3").collect {|f| f.gsub("#{path}/", "")}
 
     end
 
-     def self.new_from_filename(file_name)
- +       
- +      title = file_name.split(" - ")[1]
- +      song = self.new(title)
- +      artist = file_name.split(" - ")[0]
- +      song.artist_name=(artist)
- +      song.artist = Artist.find_or_create_by_name(artist)
- +      song
+#      def self.new_from_filename(file_name)
+#  +       
+#  +      title = file_name.split(" - ")[1]
+#  +      song = self.new(title)
+#  +      artist = file_name.split(" - ")[0]
+#  +      song.artist_name=(artist)
+#  +      song.artist = Artist.find_or_create_by_name(artist)
+#  +      song
 
-    end 
-
-    
-
+#     end 
+    def import
+        files.each { |f| Song.create_from_filename(f)}
+    end
 end
+

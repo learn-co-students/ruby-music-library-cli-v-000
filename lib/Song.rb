@@ -48,9 +48,9 @@ class Song
     end
    
 
-    def self.find_by_name(name)
-        self.all.detect {|s| s.name == name}
-    end
+    # def self.find_by_name(name)
+    #     self.all.detect {|s| s.name == name}
+    # end
 
     
 
@@ -82,7 +82,7 @@ class Song
 
     def self.create_from_filename(file_name)
         song = self.new_from_filename(file_name)
-       
+        song.save
         song
         
     end
