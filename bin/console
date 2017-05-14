@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+require 'irb'
+
+puts "starting the console exit"
+
+IRB.start
