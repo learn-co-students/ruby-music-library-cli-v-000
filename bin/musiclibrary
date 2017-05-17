@@ -7,6 +7,6 @@ def reload!
   load './config/environment.rb'
 end
 
-IRB.start
+#IRB.start
 
 MusicLibraryController.new.call

@@ -10,7 +10,7 @@ module Concerns
       if !self.find_by_name(name)
         self.create(name)
       else
-        find_by_name(name)
+        self.find_by_name(name)
       end
     end
 
