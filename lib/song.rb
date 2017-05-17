@@ -10,6 +10,7 @@ class Song
       @artist = artist
       artist.add_song(self)
     end
+
     if genre != nil
       @genre = genre
       genre.songs << self
