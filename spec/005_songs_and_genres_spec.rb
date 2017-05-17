@@ -41,7 +41,7 @@ describe "Songs and Genres" do
 
         song.genre = genre
         song.genre = genre
-
+# binding.pry
         expect(genre.songs).to include(song)
         expect(genre.songs.size).to eq(1)
       end
