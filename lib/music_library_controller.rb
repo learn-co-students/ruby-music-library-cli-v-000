@@ -1,5 +1,3 @@
-require 'pry'
-
 class MusicLibraryController
   attr_accessor :path
 
@@ -33,14 +31,12 @@ class MusicLibraryController
 
   def songs
     Song.all.each_with_index do |song, index|
-      #binding.pry
       puts "#{index.to_i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def artists
     Artist.all.each_with_index do |artist, index|
-      #binding.pry
       puts "#{index.to_i + 1}. #{artist.name}"
     end
   end
