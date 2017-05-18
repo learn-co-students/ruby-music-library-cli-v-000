@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe "Songs and Artists" do
   context 'Artists have many songs' do
     it 'initializes with a songs property set to an empty array' do
@@ -72,6 +72,7 @@ describe "Songs and Artists" do
 
         artist.add_song(song)
         artist.add_song(song)
+        
 
         expect(artist.songs).to include(song)
         expect(artist.songs.size).to eq(1)
