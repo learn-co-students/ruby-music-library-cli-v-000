@@ -18,9 +18,13 @@ class MusicLibraryController
       case input
       when "list songs"
 
-      Song.all.each_with_index do |s, i|
-           puts "#{i + 1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
-         end
+        sorted_songs = Song.all.sort{|a, b| a.artist.name <=> b.artist.name}
+
+          sorted_songs.each_with_index do |s, i|
+            puts "#{i + 1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+          end
+
+
 
        when "list artists"
          Artist.all.each{|artist| puts "#{artist.name}"}
@@ -31,17 +35,18 @@ class MusicLibraryController
        when "list artist"
          Artist.all.each do |a|
            a.songs.each{|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" }
-         end
+         end #each
+
+       when "play song"
+         Song.all.each{|s| puts "Playing #{s.artist.name} - #{s.name} - #{s.genre.name}"}
 
        when "list genre"
          Genre.all.each do |a|
            a.songs.each{|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" }
-         end
-       when "play song"
-         Song.all.each{|s| puts "Playing #{s.artist.name} - #{s.name} - #{s.genre.name}"}
-       end
+         end #each
 
-    end
-  end
+       end#case
+    end #while loop
+  end #call Method
 
-end
+end #class
