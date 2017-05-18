@@ -32,6 +32,8 @@ class Song
 
     def save
         @@all << self
+      #  @@all.sort {|song1, song2| binding.pry; song1<=>song2}
+        
     end
 
 
