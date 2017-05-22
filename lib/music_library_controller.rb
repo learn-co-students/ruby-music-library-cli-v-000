@@ -37,8 +37,7 @@ class MusicLibraryController
   end
   def list_genre
     input = gets.strip
-    Genre.all.each{|genre| puts genre.name}
-    genre = Genre.all.detect{|gerne| genre.name == input}
+    genre = Genre.all.detect{|gerne| gerne.name == input}
     if genre
       Song.all.select{|song| song.genre == genre}.each{|song| puts print_song(song)}
     end
