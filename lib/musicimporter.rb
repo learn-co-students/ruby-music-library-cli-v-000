@@ -1,9 +1,10 @@
+require 'pry'
 require_relative 'artist.rb'
 require_relative 'song.rb'
 require_relative 'genre.rb'
 
 class MusicImporter
-  attr_accessor :path
+  attr_accessor :path, :files
 
   def initialize(file)
     @path = file
@@ -14,8 +15,10 @@ class MusicImporter
     @files.collect {|file| File.basename file}
   end
 
-  def import(list_of_filenames)
-    list_of_filenames.each{ |filename| Song.new_by_filename(filename) }
+  def import
+    files.each{ |filename|
+      Song.create_from_filename(filename)
+    }
   end
 
 end
