@@ -14,7 +14,7 @@ class MusicLibraryController
     while input != "exit"
       input = gets.strip
 
-
+    #Base on user input, display results
       case input
       when "list songs"
         list_songs
@@ -22,19 +22,14 @@ class MusicLibraryController
         list_artists
       when "list genres"
         list_genres
-
       when "play song"
         play_song
+      when "list artist"
+        list_artist_songs
+      when "list genre"
+        list_genre_songs
       end
-      # case input
-      # when "list songs"
-      #   songs
-      # when "list artists"
-      #   artists
-      # when "list genres"
-      #   genres
-      # when "play song"
-      #   play_song
+      
     end
   end
 
@@ -54,15 +49,34 @@ class MusicLibraryController
   end
 
   def play_song
-    puts "What song number will you like to play?"
-    song_input = gets.strip
-    puts "Playing #{Song.all[song_input.to_i-1]}"
+    puts "What song number would you like to play?"
+    input_song = gets.strip
+    song = Song.all[input_song.to_i-1]
+    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 
   def list_artist_songs
+    puts "Songs by which artist?"
+    input_artist = gets.strip
+    Artist.all.collect{|artist|
+      if artist.name == input_artist
+        artist.songs.collect{ |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        }
+      end
+    }
   end
 
   def list_genre_songs
+    puts "Songs of which genre?"
+    input_genre = gets.strip
+    Genre.all.collect{|genre|
+      if genre.name == input_genre
+        genre.songs.collect{ |song|
+          puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+        }
+      end
+    }
   end
 
 end
