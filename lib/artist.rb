@@ -1,5 +1,6 @@
 class Artist
-  extend Concerns::Findable
+  extend Concerns::Findable #takes all methods in the Findable module and adds them as class methods
+
   attr_accessor :name, :songs
   @@all = []
 
@@ -35,5 +36,9 @@ class Artist
 
   def save
     @@all << self
+  end
+
+  def self.find_by_name(name)
+    @@all.detect{|artist| artist.name==name}
   end
 end
