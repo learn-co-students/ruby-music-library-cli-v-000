@@ -8,7 +8,7 @@ RSpec.configure do |config|
         klass = Kernel.const_get(class_name)
         if klass.respond_to?(:destroy_all)
           klass.destroy_all
-        else
+        elsif klass.class_variable_defined?(:@@all) && klass.class_variable_get(:@@all).kind_of?(Array)
           klass.class_variable_set(:@@all, [])
         end
       end
