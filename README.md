@@ -8,6 +8,15 @@ This is a complex lab with many parts, so go slowly. Take time to understand wha
 ## Concerns
 A quick note on the placement of Modules. It's Ruby convention to put all Modules in a `concerns/` folder nested under `lib/`, and each module should be namespaced like this: `Concerns::ModuleName`.
 
+Because of the way that the test suite is set up, we'll have to create a bare-bones `Concerns::Findable` module before we dive into the other tests. Go ahead and create a `concerns/` directory nested under `lib/`, and inside that create a file named `findable.rb`. In our new Ruby file, we're going to sketch the outline for our future module:
+
+```ruby
+module Concerns::Findable
+end
+```
+
+Save the file, and that's it for now. Don't worry — we'll circle back later to add code to our empty module!
+
 ## Instructions
 
 ## `Song`, `Artist`, and `Genre` basics
