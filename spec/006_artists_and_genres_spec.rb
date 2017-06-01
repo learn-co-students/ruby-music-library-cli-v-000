@@ -6,8 +6,9 @@ describe "Artists have many genres through songs" do
       genre = Genre.new("indie rock")
       artist = Artist.new("Neutral Milk Hotel")
       song = Song.new("In the Aeroplane Over the Sea", artist, genre)
+      puts artist.genres
       song = Song.new("Two-Headed Boy", artist, genre)
-
+      puts artist.genres
       expect(artist.genres).to include(genre)
       expect(artist.genres.size).to eq(1)
     end
