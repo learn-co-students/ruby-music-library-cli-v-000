@@ -6,16 +6,22 @@ module Concerns
     end
     def find_or_create_by_name(name)
       a = self.all.detect{|instance| instance.name == name}
-    
+
       if(a.nil?)
         return self.create(name)
       end
       return a
     end
-  end
-  module ClassMethods
-    def self.destroy_all
+    def destroy_all
       self.all.clear
+    end
+    def create(name)
+      self.new(name).tap{|a| a.save}
+    end
+  end
+  module InstanceMethods
+    def save
+      self.class.all << self
     end
   end
 end

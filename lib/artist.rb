@@ -1,6 +1,7 @@
 require_relative "concerns/concerns.rb"
 class Artist
   extend Concerns::Findable
+  include Concerns::InstanceMethods
   attr_accessor :name, :songs
   @@all = []
   def initialize(name="")
@@ -28,14 +29,5 @@ class Artist
   end
   def self.all
     @@all
-  end
-  def save
-    self.class.all << self
-  end
-  def self.destroy_all
-    self.all.clear
-  end
-  def self.create(name)
-    self.new(name).tap{|a| a.save}
   end
 end

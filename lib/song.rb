@@ -1,7 +1,7 @@
 require_relative "concerns/concerns.rb"
 class Song
   extend Concerns::Findable
-  extend Concerns::ClassMethods
+  include Concerns::InstanceMethods
   attr_accessor :name, :artist, :genre
 
   @@all = []
@@ -30,14 +30,8 @@ class Song
       @genre.add_song(self)
     end
   end
-  def save
-    self.class.all << self
-  end
   def self.all
     @@all
-  end
-  def self.create(name, artist = nil, genre = nil)
-    self.new(name,artist,genre).tap{|s| s.save}
   end
   def self.new_from_filename(file_name)
     split = file_name.split(" - ")
@@ -49,8 +43,5 @@ class Song
   end
   def self.create_from_filename(file_name)
     self.new_from_filename(file_name).tap{|song| song.save}
-  end
-  def self.destroy_all
-    self.all.clear
   end
 end

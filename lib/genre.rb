@@ -2,6 +2,8 @@ require_relative "concerns/concerns.rb"
 class Genre
   attr_accessor :songs, :name
   extend Concerns::Findable
+  include Concerns::InstanceMethods
+  
   @@all = []
   def initialize(name="")
     @name = name
@@ -27,14 +29,5 @@ class Genre
   end
   def self.all
     @@all
-  end
-  def self.destroy_all
-    self.all.clear
-  end
-  def save
-    self.class.all << self
-  end
-  def self.create(name)
-    self.new(name).tap{|a| a.save}
   end
 end
