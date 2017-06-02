@@ -42,10 +42,9 @@ describe "Associations — Song and Genre:" do
     end
 
     describe "#genre=" do
-      it "accepts a genre for the song" do
+      it "assigns a genre to the song (song belongs to genre)" do
         @song.genre = @genre
-
-        expect(@song.genre).to eq(@genre)
+        expect(@song.genre).to be(@genre)
       end
 
       it "adds the song to the genre's songs" do

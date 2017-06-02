@@ -43,7 +43,7 @@ describe "Associations — Song and Artist:" do
     describe "#artist=" do
       it "assigns an artist to the song (song belongs to artist)" do
         @song.artist = @artist
-        expect(@song.artist).to eq(@artist)
+        expect(@song.artist).to be(@artist)
       end
     end
   end
@@ -52,7 +52,7 @@ describe "Associations — Song and Artist:" do
     describe "#add_song" do
       it "assigns the current artist to the song's 'artist' property (song belongs to artist)" do
         @artist.add_song(@song)
-        expect(@song.artist).to eq(@artist)
+        expect(@song.artist).to be(@artist)
       end
 
       it "does not re-assign the artist to the song if the song already has an artist" do
