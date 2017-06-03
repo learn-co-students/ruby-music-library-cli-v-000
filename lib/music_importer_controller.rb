@@ -9,8 +9,13 @@ attr_accessor :path
   end
 
   def call
+    input= " "
+    while input!= "exit"
+      input = gets.chomp
+      input
+    end
   end
-  
+
 
 
 end
