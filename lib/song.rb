@@ -1,44 +1,45 @@
 #require 'pry'
+require 'pry'
 class Song
+  class Song
 
-  attr_accessor :name, :artist
+    attr_accessor :name, :artist
 
-  @@all = []
+    @@all = []
 
-  def initialize(name, artist = nil)
-    @name = name
-    #
-    @artist = artist
+    def initialize(name, artist = nil)
+      @name = name
+      self.artist = artist
+    end
 
-    #@@all << self
+    def self.all
+      @@all
+    end
+
+    def self.destroy_all
+      @@all.clear
+    end
+
+    def self.save
+      @@all << self
+    end
+
+    def self.create(name)
+      new(name).tap{|s| s.save}
+    end
+
+    # def add_song(song)
+    #   @songs << song unless song.artist == self
+    #   song.artist = self
+      # end
+
+    def artist=(artist)
+      @artist = artist
+      artist.add_song(self)
+    end
+
+    #Song.new("Comatose", "Skillet")
+    #binding.pry
+
   end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.create(name)
-    new(name).tap{|s| s.save}
-    #binding pry
-  end
-
-  # def add_song(song)
-  #   @songs << song unless song.artist == self
-  #   song.artist = self
-    # end
-
-  def artist=(artist)
-    @artist = artist
-    artist.add_song(self)
-  end
-
-
 end
