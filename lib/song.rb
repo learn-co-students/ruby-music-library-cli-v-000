@@ -5,10 +5,10 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist = artist)
+  def initialize(name, artist = nil)
     @name = name
     self.artist = artist if artist
-    binding.pry
+
 
     #@@all << self
   end
@@ -27,6 +27,7 @@ class Song
 
   def self.create(name)
     new(name).tap{|s| s.save}
+    #binding pry
   end
 
   # def add_song(song)
