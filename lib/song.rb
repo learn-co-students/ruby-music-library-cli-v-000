@@ -37,8 +37,8 @@ class Song
       artist.add_song(self)
     end
 
-    #Song.new("Comatose", "Skillet")
-    #binding.pry
+    Song.new("Comatose", "Skillet")
+    binding.pry
 
 
 end
