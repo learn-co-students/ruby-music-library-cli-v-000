@@ -12,7 +12,6 @@ describe 'Findable Songs' do
     it 'finds or creates a song by name maintaining uniqueness of objects by their name property' do
       song_1 = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
       song_2 = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
-
       expect(song_1).to be_a(Song)
       expect(song_1).to eq(song_2)
       expect(song_1.name).to eq("In the Aeroplane Over the Sea")
