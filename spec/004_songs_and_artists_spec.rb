@@ -57,12 +57,13 @@ describe "Songs and Artists" do
       end
       it 'does not assign the artist to the song if the song already has the artist' do
         song = Song.new("In the Aeroplane Over the Sea")
+#binding.pry
         artist = Artist.new("Neutral Milk Hotel")
-
+#binding.pry
         song.artist = artist
 
         expect(song).to_not receive(:artist=)
-
+#binding.pry
         artist.add_song(song)
       end
 
