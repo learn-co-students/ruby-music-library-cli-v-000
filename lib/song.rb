@@ -27,18 +27,15 @@ class Song
       new(name).tap{|s| s.save}
     end
 
-    # def add_song(song)
-    #   @songs << song unless song.artist == self
-    #   song.artist = self
-      # end
+    def add_song(song)
+      @songs << song unless song.artist == self
+      song.artist = self
+    end
 
     def artist=(artist)
       @artist = artist
       artist.add_song(self)
     end
-
-    Song.new("Comatose", "Skillet")
-    binding.pry
-
-
 end
+    # Song.new("Gold and Silver", "Stavesacre")
+    # binding.pry
