@@ -1,7 +1,6 @@
 #require 'pry'
 require 'pry'
 class Song
-  class Song
 
     attr_accessor :name, :artist
 
@@ -41,5 +40,5 @@ class Song
     #Song.new("Comatose", "Skillet")
     #binding.pry
 
-  end
+
 end
