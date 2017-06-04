@@ -8,10 +8,10 @@ class Song
 
     def initialize(name, artist = nil)
       @name = name
-      #
-      @artist = artist
 
-      #@@all << self
+      self.artist = artist
+
+
     end
 
     def self.all
@@ -22,7 +22,7 @@ class Song
       @@all.clear
     end
 
-    def save
+    def self.save
       @@all << self
     end
 
@@ -40,8 +40,8 @@ class Song
       artist.add_song(self)
     end
 
-    Song.new("Twilight", "Shawn Groves")
-    binding.pry
+    #Song.new("Comatose", "Skillet")
+    #binding.pry
 
   end
 end
