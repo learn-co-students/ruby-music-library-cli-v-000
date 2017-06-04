@@ -8,7 +8,7 @@ class Song
 
     def initialize(name, artist = nil)
       @name = name
-      self.artist = artist
+      self.artist = artist unless artist == nil
     end
 
     def self.all
@@ -19,7 +19,7 @@ class Song
       @@all.clear
     end
 
-    def self.save
+    def save
       @@all << self
     end
 
