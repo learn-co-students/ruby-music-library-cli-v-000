@@ -10,7 +10,7 @@ class MusicLibraryController
     user_input = ""
     while user_input != "exit"
 
-      puts "\nType in 'list songs', 'list artists', 'list genres', \n'play song', 'list artist songs' or 'list genre songs'"
+      puts "\nType in 'list songs', 'list artists', 'list genres', \n'play song', 'list artist' or 'list genre'"
       user_input = gets.strip
 
       case user_input
@@ -18,8 +18,8 @@ class MusicLibraryController
       when "list artists" then list_artists
       when "list genres" then list_genres
       when "play song" then play_song
-      when "list artist songs" then list_artist_songs
-      when "list genre songs" then list_genre_songs
+      when "list artist" then list_artist_songs
+      when "list genre" then list_genre_songs
       end
     end
   end

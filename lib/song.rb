@@ -1,9 +1,7 @@
-# require_relative './concerns/findable.rb'
-require 'pry'
 class Song
 
-  extend Concerns::Findable
-
+  extend Concerns::Findable, Memorable::ClassMethods
+  include Memorable::InstanceMethods
   attr_accessor :name, :artist, :genre
 
   @@all = []
@@ -27,21 +25,6 @@ class Song
   def self.all
     @@all
   end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def self.create(name)
-    new_song = Song.new(name)
-    new_song.save
-    new_song
-  end
-
 
   def self.new_from_filename(file_name)
     new_song = self.new(file_name.split(" - ")[1])
