@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../lib/concerns/findable.rb'
 
 describe 'Concerns::Findable' do
   it 'defines a module Concerns::Findable' do
