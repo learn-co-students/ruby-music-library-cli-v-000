@@ -1,6 +1,6 @@
 class Song
-  #extend Concerns::AllClass
-  #include AllInstance
+  extend Concerns::AllClass
+  include Concerns::AllInstance
   attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
@@ -34,14 +34,6 @@ class Song
     song = MusicImporter.new(filename)
   end
 
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
   def self.find_by_name(name)
     @@all.detect {|a| a.name == name}
   end
@@ -69,6 +61,14 @@ class Song
     song = self.new_from_filename(file)
     song.save
     song
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    @@all.clear
   end
 
   def save
