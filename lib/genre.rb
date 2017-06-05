@@ -1,3 +1,4 @@
+require 'pry'
 class Genre
   attr_accessor :name
   @@all = []
@@ -21,6 +22,15 @@ class Genre
 
   def self.create(name)
     new(name).tap{|s| s.save}
+    #binding.pry
   end
+
+  def add_song(song)
+    @songs << song unless @songs.include?(song)
+    song.genre = self unless song.genre == self
+    #binding.pry
+  end
+
+
 
 end
