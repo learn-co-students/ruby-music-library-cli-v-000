@@ -27,7 +27,7 @@ class Song
 
     def self.create(name)
       new(name).tap{|s| s.save}
-      binding.pry
+      #binding.pry
     end
 
     def add_song(song)

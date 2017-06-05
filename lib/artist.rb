@@ -1,6 +1,6 @@
-#require 'pry'
+require 'pry'
 class Artist
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :genre
   @@all = []
 
   def initialize(name)
@@ -32,9 +32,13 @@ class Artist
   # binding.pry
   end
 
-  # def genres
-  #   artist.songs.each do |
-  # end
+  def genres
+    @genres = []
+    self.songs.collect do |song|
+      @genres << song.genre
+    #binding.pry
+    end
+  end
 
 
 end
