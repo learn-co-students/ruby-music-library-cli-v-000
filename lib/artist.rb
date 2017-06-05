@@ -36,6 +36,7 @@ class Artist
     @genres = []
     self.songs.collect do |song|
       @genres << song.genre
+      @genres.uniq
     #binding.pry
     end
   end
