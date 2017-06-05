@@ -1,5 +1,5 @@
 
-#require 'pry'
+require 'pry'
 class Song
 
     attr_accessor :name, :artist, :genre
@@ -27,6 +27,7 @@ class Song
 
     def self.create(name)
       new(name).tap{|s| s.save}
+      binding.pry
     end
 
     def add_song(song)
