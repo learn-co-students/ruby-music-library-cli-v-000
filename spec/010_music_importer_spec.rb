@@ -5,7 +5,14 @@ describe "MusicImporter" do
     it 'accepts a file path to parse mp3 files from' do
       test_music_path = "./spec/fixtures/mp3s"
       music_importer = MusicImporter.new(test_music_path)
+      expect(music_importer.instance_variable_defined?(:@path)).to be(true)
+      expect(music_importer.instance_variable_get(:@path)).to eq(test_music_path)
+    end
+  end
 
+  describe "#path" do
+    it "retrieves the path provided to the MusicImporter object" do
+      music_importer = MusicImporter.new(test_music_path)
       expect(music_importer.path).to eq(test_music_path)
     end
   end
