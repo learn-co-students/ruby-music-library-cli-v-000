@@ -10,6 +10,7 @@ class Song
       @name = name
       self.artist = artist unless artist == nil
       self.genre = genre unless genre == nil
+      save
     end
 
     def self.all
@@ -36,6 +37,11 @@ class Song
     def artist=(artist)
       @artist = artist
       artist.add_song(self)
+    end
+
+    def genre=(genre)
+      @genre = genre
+      genre.add_song(self)
     end
 end
     # Song.new("Gold and Silver", "Stavesacre")
