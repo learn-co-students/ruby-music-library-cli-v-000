@@ -1,6 +1,4 @@
 class Artist
-  extend Concerns::Findable
-  extend Concerns::AllClass
   include Concerns::AllInstance
   attr_accessor :name, :songs
   @@all = []
