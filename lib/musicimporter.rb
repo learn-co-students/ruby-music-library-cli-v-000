@@ -14,14 +14,7 @@ class MusicImporter
   def import
     self.files
     @files.each do |file|
-      filename = file.split(" - ")
-      name = filename[1]
-      artist = Artist.find_or_create_by_name(filename[0])
-      genre = Genre.find_or_create_by_name(filename[2])
-      song = Song.new(name, artist, genre)
-      artist.add_song(song)
-      genre.add_song(song)
-      song
+      song = Song.create_from_filename(file)
     end
   end
 end

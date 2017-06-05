@@ -54,9 +54,21 @@ class Song
     end
   end
 
-  def self.create_from_filename(filename)
-    importer = MusicImporter.new(filename)
-    importer.import
+  def self.new_from_filename(file)
+    filename = file.split(" - ")
+    name = filename[1]
+    artist = Artist.find_or_create_by_name(filename[0])
+    genre = Genre.find_or_create_by_name(filename[2].chomp(".mp3"))
+    song = Song.new(name, artist, genre)
+    artist.add_song(song)
+    genre.add_song(song)
+    song
+  end
+
+  def self.create_from_filename(file)
+    song = self.new_from_filename(file)
+    song.save
+    song
   end
 
   def save

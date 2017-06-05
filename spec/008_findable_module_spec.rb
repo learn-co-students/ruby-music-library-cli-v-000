@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../lib/concerns/findable.rb'
+require 'pry'
 
 describe 'Concerns::Findable' do
   it 'defines a module Concerns::Findable' do
@@ -10,7 +10,6 @@ describe 'Concerns::Findable' do
   class Person
     extend Concerns::Findable
   end
-
   it 'adds a find_by_name class method to classes that are extended by the module' do
     expect(Person).to respond_to(:find_by_name)
   end
