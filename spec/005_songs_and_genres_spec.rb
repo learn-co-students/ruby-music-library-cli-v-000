@@ -47,18 +47,15 @@ describe "Associations — Song and Genre:" do
         expect(@song.genre).to be(@genre)
       end
 
-      it "adds the song to the genre's songs" do
+      it "adds the song to the genre's collection of songs (genre has many songs)" do
         @song.genre = @genre
-
         expect(@genre.songs).to include(@song)
       end
 
-      it "does not add the song to the genre's songs if it already exists" do
-        @song.genre = @genre
-        @song.genre = @genre
-
+      it "does not add the song to the genre's collection of songs if it already exists therein" do
+        2.times { @song.genre = @genre }
         expect(@genre.songs).to include(@song)
-        expect(@genre.songs.size).to eq(1)
+        expect(@genre.songs.size).to be(1)
       end
     end
   end
