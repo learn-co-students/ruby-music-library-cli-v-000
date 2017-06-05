@@ -18,7 +18,7 @@ describe "Associations — Song and Genre:" do
       it "returns the genre's 'songs' collection (genre has many songs)" do
         expect(@genre.songs).to eq([])
         @genre.songs << @song
-        expect(@genre.songs).to eq([@song])
+        expect(@genre.songs).to include(@song)
       end
     end
   end

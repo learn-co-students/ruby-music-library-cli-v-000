@@ -18,7 +18,7 @@ describe "Associations — Song and Artist:" do
       it "returns the artist's 'songs' collection (artist has many songs)" do
         expect(@artist.songs).to eq([])
         @artist.songs << @song
-        expect(@artist.songs).to eq([@song])
+        expect(@artist.songs).to include(@song)
       end
     end
   end
@@ -58,7 +58,7 @@ describe "Associations — Song and Artist:" do
 
         it "#add_song adds the song to the current artist's 'songs' collection" do
           @artist.add_song(@song)
-          expect(@artist.songs).to eq([@song])
+          expect(@artist.songs).to include(@song)
         end
       end
 
