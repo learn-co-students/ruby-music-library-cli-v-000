@@ -9,14 +9,6 @@ module Concerns
       self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
     end
 
-    def create(name)
-      self.new(name).tap {|art| art.save}
-    end
-
-
   end
-
-
-
 
 end

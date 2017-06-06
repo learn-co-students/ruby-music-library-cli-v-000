@@ -40,6 +40,8 @@ class Artist
   #  if song.artist == nil
     song.artist ||= self
   #  end
+    @@all.push(self) unless @@all.include?(self)
+
   end
 
   def genres
