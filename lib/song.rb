@@ -1,5 +1,6 @@
 
 require 'pry'
+include Concerns::Findable
 class Song
 
     attr_accessor :name, :artist, :genre
@@ -44,6 +45,7 @@ class Song
       @genre = genre
       genre.add_song(self)
     end
+
 end
     # Song.new("Gold and Silver", "Stavesacre")
     # binding.pry
