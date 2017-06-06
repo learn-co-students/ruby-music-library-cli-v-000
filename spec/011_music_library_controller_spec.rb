@@ -1,51 +1,57 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'MusicLibraryController' do
-  describe '#initialize' do
-    it 'accepts a path to import music' do
-      expect{MusicLibraryController.new('./spec/fixtures/mp3s')}.to_not raise_error
+describe "MusicLibraryController" do
+  describe "#initialize" do
+    it "accepts one argument, the path to the MP3 files to be imported" do
+      expect{ MusicLibraryController.new("./spec/fixtures/mp3s") }.to_not raise_error
     end
 
-    it 'the path argument defaults to ./db/mp3s' do
-      expect(MusicImporter).to receive(:new).with('./db/mp3s').and_return(MusicImporter.new('./db/mp3s'))
+    it "creates a new MusicImporter object, passing in the 'path' value" do
+      expect(MusicImporter).to receive(:new).with("./spec/fixtures/mp3s").and_return(double(MusicImporter, import: true))
+      MusicLibraryController.new("./spec/fixtures/mp3s")
+    end
+
+    it "the 'path' argument defaults to './db/mp3s'" do
+      expect(MusicImporter).to receive(:new).with("./db/mp3s").and_return(double(MusicImporter, import: true))
       MusicLibraryController.new
     end
 
-    it 'creates a MusicImporter with that path and imports the music' do
-      music_importer = MusicImporter.new('./spec/fixtures/mp3s')
-      expect(MusicImporter).to receive(:new).with('./spec/fixtures/mp3s').and_return(music_importer)
+    it "invokes the #import method on the created MusicImporter object" do
+      music_importer = MusicImporter.new("./spec/fixtures/mp3s")
+      expect(MusicImporter).to receive(:new).and_return(music_importer)
       expect(music_importer).to receive(:import)
-
-      MusicLibraryController.new('./spec/fixtures/mp3s')
-    end
-
-    it 'populates Song, Artist, and Genre' do
-      music_importer = MusicImporter.new('./spec/fixtures/mp3s')
-      expect(MusicImporter).to receive(:new).with('./spec/fixtures/mp3s').and_return(music_importer)
-
-      MusicLibraryController.new('./spec/fixtures/mp3s')
-      expect(Song.all.size).to eq(4)
-      expect(Artist.all.size).to eq(3)
-      expect(Genre.all.size).to eq(4)
+      MusicLibraryController.new
     end
   end
 
-  describe '#call' do
-    it 'responds to a call method to start the CLI' do
-      expect(MusicLibraryController.new).to respond_to(:call)
+  describe "#call" do
+    before(:each) do
+      @music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+      allow(@music_library_controller).to receive(:gets).and_return("exit", "a", "b", "exit")
     end
 
-    it 'asks the user for input at some point' do
-      music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    it "welcomes the user" do
+      expect($stdout).to receive(:puts).with("Welcome to your music library!")
+      expect($stdout).to receive(:puts).with("To list all of your songs, enter 'list songs'.")
+      expect($stdout).to receive(:puts).with("To list all of the artists in your library, enter 'list artists'.")
+      expect($stdout).to receive(:puts).with("To list all of the genres in your library, enter 'list genres'.")
+      expect($stdout).to receive(:puts).with("To list all of the songs by a particular artist, enter 'list artist'.")
+      expect($stdout).to receive(:puts).with("To list all of the songs of a particular genre, enter 'list genre'.")
+      expect($stdout).to receive(:puts).with("To play a song, enter 'play song'.")
+      expect($stdout).to receive(:puts).with("To quit, type 'exit'.")
+      expect($stdout).to receive(:puts).with("What would you like to do?")
 
-      expect(music_library_controller).to receive(:gets).and_return("exit")
-      music_library_controller.call
+      @music_library_controller.call
     end
 
-    it 'loops and asks for user input until they type in exit' do
-      music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
-      expect(music_library_controller).to receive(:gets).and_return("a", "b", "exit")
-      music_library_controller.call
+    it "asks the user for input" do
+      expect(@music_library_controller).to receive(:gets).and_return("exit")
+      capture_puts { @music_library_controller.call }
+    end
+
+    it "loops and asks for user input until they type in exit" do
+      expect(@music_library_controller).to receive(:gets).and_return("a", "b", "exit")
+      capture_puts { @music_library_controller.call }
     end
   end
 end
