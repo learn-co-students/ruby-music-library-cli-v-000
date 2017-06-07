@@ -10,6 +10,6 @@ module Concerns::Findable
 
   def find_or_create_by_name(name)
     self.name != name
-    self.find_by_name(name) || self.new_by_name(name).tap{|s| s.save}
+    self.find_by_name(name) ? self.find_by_name(name) : self.new_by_name(name).tap{|s| s.save}
   end
 end
