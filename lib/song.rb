@@ -24,7 +24,7 @@ class Song
   def self.create(name)
     song = Song.new(name)
     song.save
-    song 
+    song
   end
 
   def self.all
@@ -42,8 +42,6 @@ class Song
     artist = Artist.find_or_create_by_name(art)
     genre = Genre.find_or_create_by_name(gen)
     song = self.new(song_name,artist,genre)
-    artist.add_song(song)
-    genre.add_song(song)
     song
   end
 
