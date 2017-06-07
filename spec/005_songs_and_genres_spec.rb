@@ -58,5 +58,14 @@ describe "Associations — Song and Genre:" do
         expect(@genre.songs.size).to be(1)
       end
     end
+
+    describe "#initialize" do
+      it "invokes #genre= instead of simply assigning to a @genre instance variable to ensure that associations are created upon initialization" do
+        artist = Artist.new("Neutral Milk Hotel")
+
+        expect_any_instance_of(Song).to receive(:genre=).with(@genre)
+        Song.new("In the Aeroplane Over the Sea", artist, @genre)
+      end
+    end
   end
 end

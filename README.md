@@ -76,6 +76,10 @@ Song.all #=> [#<Song: @name="Blank Space">]
   * Artists have many genres through their songs. Implement a `#genres` method for this association.
   * Genres have many artists through their songs. Implement an `#artists` method for this association.
 
+***Note:*** there are a few tests concerned with switching the `Song#initialize` method from setting instance variables for `@artist` and `@genre` to using the custom setter methods that you define (e.g., `Song#genre=`). We want to use the custom setter methods because they keep our associations in sync. For example, when we call our custom `Song#artist=` method, it sets the song's `@artist` property _and_ adds the song to the artist's collection of songs. When you reach these tests, make sure those setter methods are only invoked _if_ `Song#initialize` is called with artist and/or genre arguments. Otherwise, the `@artist` and/or `@genre` properties will be initialized as `nil`, and you'll have some unexpected consequences in both your code and the test suite.
+  * If we call `Song.new("Song Title", artist_object, genre_object)`, both `Song#artist=` and `Song#genre=` should be invoked.
+  * If we call `Song.new("This Song Has No Artist or Genre")`, neither `Song#artist=` nor `Song#genre=` should be invoked.
+
 ## Finding
 
 ### Song
@@ -106,7 +110,6 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CL
   * Add a `#call` method that starts the CLI and prompts the user for input. Read the tests carefully for specifics.
 
 Have fun!
-
 
 ## Resources
 
