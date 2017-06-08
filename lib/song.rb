@@ -1,14 +1,16 @@
 require 'pry'
 
 class Song
+  extend Concerns::Findable
   attr_accessor :name
-  attr_reader :artist
+  attr_reader :artist, :genre
 
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   # convention for saving - .new (unsaved) .create(saved) .find (already saved) all return objects
@@ -35,4 +37,12 @@ class Song
     artist.add_song(self)
   end
 
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
+  end
+
+  def self.count
+    @all.size
+  end
 end
