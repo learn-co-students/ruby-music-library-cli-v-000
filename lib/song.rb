@@ -72,13 +72,18 @@ class Song
       new_song.genre = Genre.find_or_create_by_name(genre)
       new_song.genre.add_song(new_song)
       new_song #want to use tap here
+      end
 
-
-    end
-   end
+      def self.create_from_filename(file)
+        self.new_from_filename(file).tap{|s| s.save}
+#          @@all << self.new_from_filename(file)
+#          self.new_from_filename(file)
 #
-#
-#
-#end
+#       end
+      end
+# #
+# #
+# #
+end
 #     #Song.new("Gold and Silver", "Stavesacre")
 #     #binding.pry
