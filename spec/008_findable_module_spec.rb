@@ -5,54 +5,62 @@ describe "Concerns::Findable" do
     expect(defined?(Concerns::Findable)).to be_truthy
     expect(Concerns::Findable).to be_a(Module)
   end
+end
 
-  class FindableTest
-    extend Concerns::Findable
-    attr_accessor :name
-    @@all = []
-
-    def self.all
-      @@all
-    end
-
-    def self.create(*args)
-    end
+describe "Artist" do
+  it "extends the Concerns::Findable module" do
+    expect(Artist.singleton_class.ancestors).to include(Concerns::Findable)
   end
+end
 
-  instance1 = FindableTest.new.tap{ |ft| ft.name = "Test Double 1" }
-  instance2 = FindableTest.new.tap{ |ft| ft.name = "Test Double 2" }
-  FindableTest.all.push(instance1, instance2)
+describe "Genre" do
+  it "extends the Concerns::Findable module" do
+    expect(Genre.singleton_class.ancestors).to include(Concerns::Findable)
+  end
+end
+
+describe "Concerns::Findable" do
+  let!(:artist) { Artist.create("Slowdive") }
+  let!(:genre) { Genre.create("shoegaze") }
 
   describe ".find_by_name" do
     it "is added as a class method to classes that extend the module" do
-      expect(FindableTest).to respond_to(:find_by_name)
+      expect(Artist).to respond_to(:find_by_name)
     end
 
     context "works exactly like a generic version of Song.find_by_name," do
       it "searching the extended class's @@all variable for an instance that matches the provided name" do
-        expect(FindableTest.find_by_name("Test Double 2")).to be(instance2)
+        expect(Artist.find_by_name("Slowdive")).to be(artist)
       end
+    end
+
+    it "isn't hard-coded" do
+      expect(Genre.find_by_name("shoegaze")).to be(genre)
     end
   end
 
   describe ".find_or_create_by_name" do
     it "is added as a class method to classes that extend the module" do
-      expect(FindableTest).to respond_to(:find_or_create_by_name)
+      expect(Artist).to respond_to(:find_or_create_by_name)
     end
 
     context "works exactly like a generic version of Song.find_or_create_by_name:" do
       it "finds (does not recreate) an existing instance with the provided name if one exists in @@all" do
-        expect(FindableTest.find_or_create_by_name("Test Double 2")).to be(instance2)
+        expect(Artist.find_or_create_by_name("Slowdive")).to be(artist)
+      end
+
+      it "isn't hard-coded" do
+        expect(Genre.find_or_create_by_name("shoegaze")).to be(genre)
       end
 
       it "invokes .find_by_name instead of re-coding the same functionality" do
-        expect(FindableTest).to receive(:find_by_name)
-        FindableTest.find_or_create_by_name("Test Double 3")
+        expect(Artist).to receive(:find_by_name)
+        Artist.find_or_create_by_name("Slowdive")
       end
 
       it "invokes the extended class's .create method, passing in the provided name, if an existing match is not found" do
-        expect(FindableTest).to receive(:create)
-        FindableTest.find_or_create_by_name("Test Double 3")
+        expect(Artist).to receive(:create)
+        Artist.find_or_create_by_name("M83")
       end
     end
   end

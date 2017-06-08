@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "MusicImporter" do
-  test_music_path = "./spec/fixtures/mp3s"
+  let(:test_music_path) { "./spec/fixtures/mp3s" }
 
   describe "#initialize" do
     it "accepts a file path to parse MP3 files from" do
@@ -74,8 +74,9 @@ end
 
 describe "MusicImporter" do
   describe "#import" do
+    let(:test_music_path) { "./spec/fixtures/mp3s" }
+
     before(:each) do
-      test_music_path = "./spec/fixtures/mp3s"
       @music_importer = MusicImporter.new(test_music_path)
     end
 
