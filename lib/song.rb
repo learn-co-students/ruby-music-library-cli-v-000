@@ -26,11 +26,7 @@ class Song
     @@all << self
   end
 
-  def self.create(name)
-    song = Song.new(self)
-    song.save
-    song
-  end
+
 
   def artist=(artist)
     @artist = artist
@@ -45,4 +41,9 @@ class Song
   def self.count
     @all.size
   end
+
+
+
+
+
 end

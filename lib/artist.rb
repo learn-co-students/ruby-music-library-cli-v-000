@@ -24,11 +24,7 @@ class Artist
     @@all << self
   end
 
-  def self.create(name)
-    artist = Artist.new(self)
-    artist.save
-    artist
-  end
+
 
   def add_song(song)
     @songs << song unless @songs.include?(song)
