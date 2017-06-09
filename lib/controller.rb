@@ -18,5 +18,6 @@ class MusicLibraryController
       when "list genres"
         genres
       end
-    end 
+    end
+  end 
 end

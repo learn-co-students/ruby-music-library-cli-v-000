@@ -42,6 +42,29 @@ class Song
     @all.size
   end
 
+  def self.new_from_filename(filename)
+    parts = filename.split(" - ")
+    artist_name = parts[0]
+    artist = Artist.find_or_create_by_name(artist_name)
+
+    genre = parts[2].chomp(".mp3")
+    genre = Genre.find_or_create_by_name(genre)
+    name = parts[1]
+    song = self.new(name, artist, genre)
+    song
+
+  end
+
+  def self.create_from_filename(filename)
+    # parts = filename.split(" - ")
+    # artist_name = parts[0]
+    # genre = parts[2].chomp(".mp3")
+    #
+    # song = self.create
+    # song.name = name_of_song
+    # song.artist_name = artist_name
+    # song
+  end
 
 
 
