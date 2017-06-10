@@ -1,18 +1,19 @@
 class MusicImporter
 
-  attr_accessor :path
+  attr_accessor :path, :musiclibrarycontroller
 
-  def initialize(path)
+  def initialize(path = "./db/*mp3")
     @path = path
   end
 
   def files
-    Dir.glob("./#{path}/*.mp3").collect{|file| file.gsub("./#{path}/", '')}
+    Dir.glob("./#{path}/*.mp3").collect{|file| file.gsub("./#{path}/", '')}.sort
  end
 
  def import
    files.each do |file|
      Song.create_from_filename(file)
+     Artist.create_from_filename(file)
    end
 end
 end
