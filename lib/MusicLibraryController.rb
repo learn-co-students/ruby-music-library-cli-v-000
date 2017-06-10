@@ -43,12 +43,12 @@ class MusicLibraryController
       list_songs
     #   binding.pry
     # end
-    when "list artist"
+  when "list artists"
       list_artists
-    # when "list genres"
-    #   list_genres
-    # when "play song"
-    #   play_song = "Playing #{song}"
+     when "list genres"
+      list_genres
+     when "play song"
+      play_song
     #
     # artist_songs = @artist.songs
     # genre_songs = @genre.songs
@@ -71,8 +71,21 @@ class MusicLibraryController
   end
 
   def list_artists
-    Artist.all.each_with_index do |song, index|
-      puts "#{index = 1}. #{song.artist.name}"
+    Artist.all.each do |artist|
+      puts "#{artist.name}"
+      #binding.pry
+    end
+  end
+
+  def list_genres
+    Genre.all.each do |genre|
+      puts "#{genre.name}"
+    end
+  end
+
+  def play_song
+    Song.all.each do |s|
+      puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
