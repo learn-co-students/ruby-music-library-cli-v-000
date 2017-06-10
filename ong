@@ -1,0 +1,31 @@
+=> [[32m#<Song:0x0000000125a868[0m
+  @artist[32m=[0m
+   [32m#<Artist:0x0000000125a9a8[0m
+    @name[32m=[0m[31m[1;31m"[0m[31mNeutral Milk Hotel[1;31m"[0m[31m[0m,
+    @songs[32m=[0m[[32m#<Song:0x0000000125a868[0m ...[32m>[0m][32m>[0m,
+  @genre[32m=[0m[32m#<Genre:0x0000000125aac0[0m @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m, @songs[32m=[0m[...][32m>[0m,
+  @name[32m=[0m[31m[1;31m"[0m[31mIn the Aeroplane Over the Sea[1;31m"[0m[31m[0m[32m>[0m,
+ [32m#<Song:0x0000000125a778[0m
+  @artist[32m=[0m
+   [32m#<Artist:0x0000000125a930[0m
+    @name[32m=[0m[31m[1;31m"[0m[31mThe Magnetic Fields[1;31m"[0m[31m[0m,
+    @songs[32m=[0m
+     [[32m#<Song:0x0000000125a778[0m ...[32m>[0m,
+      [32m#<Song:0x0000000125a688[0m
+       @artist[32m=[0m[32m#<Artist:0x0000000125a930[0m ...[32m>[0m,
+       @genre[32m=[0m[32m#<Genre:0x0000000125aac0[0m @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m, @songs[32m=[0m[...][32m>[0m,
+       @name[32m=[0m[31m[1;31m"[0m[31mPapa was a Rodeo[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+  @genre[32m=[0m[32m#<Genre:0x0000000125aac0[0m @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m, @songs[32m=[0m[...][32m>[0m,
+  @name[32m=[0m[31m[1;31m"[0m[31mThe Book of Love[1;31m"[0m[31m[0m[32m>[0m,
+ [32m#<Song:0x0000000125a688[0m
+  @artist[32m=[0m
+   [32m#<Artist:0x0000000125a930[0m
+    @name[32m=[0m[31m[1;31m"[0m[31mThe Magnetic Fields[1;31m"[0m[31m[0m,
+    @songs[32m=[0m
+     [[32m#<Song:0x0000000125a778[0m
+       @artist[32m=[0m[32m#<Artist:0x0000000125a930[0m ...[32m>[0m,
+       @genre[32m=[0m[32m#<Genre:0x0000000125aac0[0m @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m, @songs[32m=[0m[...][32m>[0m,
+       @name[32m=[0m[31m[1;31m"[0m[31mThe Book of Love[1;31m"[0m[31m[0m[32m>[0m,
+      [32m#<Song:0x0000000125a688[0m ...[32m>[0m][32m>[0m,
+  @genre[32m=[0m[32m#<Genre:0x0000000125aac0[0m @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m, @songs[32m=[0m[...][32m>[0m,
+  @name[32m=[0m[31m[1;31m"[0m[31mPapa was a Rodeo[1;31m"[0m[31m[0m[32m>[0m]
