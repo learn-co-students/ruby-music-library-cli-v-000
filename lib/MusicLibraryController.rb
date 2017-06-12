@@ -9,13 +9,11 @@ class MusicLibraryController
   end
 
   def call
-    #puts "Welcome To Your Awesome Music Library"#would be nice to greet user with thier name
-    #user_input
+    puts "Welcome To Your Awesome Music Library"
     list_commands
   end
 
   def user_input
-    #puts "Please choose from this list of options"
     input = gets.strip
   end
 
@@ -41,8 +39,6 @@ class MusicLibraryController
     case input
     when "list songs"
       list_songs
-    #   binding.pry
-    # end
     when "list artists"
       list_artists
     when "list genres"
