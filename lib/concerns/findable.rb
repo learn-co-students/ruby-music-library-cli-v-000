@@ -15,12 +15,10 @@ module Concerns::Findable
 end
 
 def new_from_filename(file)
-  #binding.pry
   file = file.split(" - ")
   artist = file[0]
   song = file[1]
   genre = file[2].gsub(".mp3", "")
-  #binding.pry
   new_song = self.new_by_name(song)
   new_song.artist = Artist.find_or_create_by_name(artist)
 
@@ -32,8 +30,4 @@ def new_from_filename(file)
 
   def create_from_filename(file)
     self.new_from_filename(file).tap{|s| s.save}
-#          @@all << self.new_from_filename(file)
-#          self.new_from_filename(file)
-#
-#       end
   end

@@ -23,7 +23,6 @@ class MusicLibraryController
 
   def list_commands
     puts "Please choose from this list of options"
-    #user_input = gets.strip
     input = " "
   while input != "exit" do
     puts "To list all of your songs, enter 'list songs'."
@@ -66,14 +65,12 @@ class MusicLibraryController
   def list_songs
     Song.all.each_with_index do |song, index|
       puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      #binding.pry
      end
   end
 
   def list_artists
     Artist.all.each do |artist|
       puts "#{artist.name}"
-      #binding.pry
     end
   end
 

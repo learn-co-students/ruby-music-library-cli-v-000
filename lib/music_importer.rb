@@ -13,7 +13,6 @@ class MusicImporter
  def import
    files.each do |file|
      Song.create_from_filename(file)
-     #Artist.create_from_filename(file).uniq
    end
 end
 end
