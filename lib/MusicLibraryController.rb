@@ -43,14 +43,16 @@ class MusicLibraryController
       list_songs
     #   binding.pry
     # end
-  when "list artists"
+    when "list artists"
       list_artists
-     when "list genres"
+    when "list genres"
       list_genres
-     when "play song"
+    when "play song"
       play_song
-  when "artist songs"
-    artist_songs
+    when "list artist"
+      artist_songs
+    when "list genre"
+      genre_songs
     #
     # artist_songs = @artist.songs
     # genre_songs = @genre.songs
@@ -92,9 +94,21 @@ class MusicLibraryController
   end
 
   def artist_songs
-    @artist.songs.each do |song|
-      puts "#{song.artist.name} - #{artist.song.name} - #{song.genre.name}"
+
+    #binding.pry
+    if artist = Artist.find_by_name(user_input)
+      artist.songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
+  end
+  end
+
+  def genre_songs
+    if genre = Genre.find_by_name(user_input)
+      genre.songs.each do |genre|
+      puts "#{genre.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
   end
 
 end
