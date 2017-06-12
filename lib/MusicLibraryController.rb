@@ -105,8 +105,8 @@ class MusicLibraryController
 
   def genre_songs
     if genre = Genre.find_by_name(user_input)
-      genre.songs.each do |genre|
-      puts "#{genre.artist.name} - #{song.name} - #{song.genre.name}"
+      genre.songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
   end
