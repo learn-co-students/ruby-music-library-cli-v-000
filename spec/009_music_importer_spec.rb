@@ -18,7 +18,7 @@ describe "MusicImporter" do
 
   describe "#files" do
     it "loads all the MP3 files in the path directory" do
-      expect(music_importer.files.size).to eq(4)
+      expect(music_importer.files.size).to eq(5)
     end
 
     it "normalizes the filename to just the MP3 filename with no path" do
@@ -75,19 +75,10 @@ describe "MusicImporter" do
 
     it "imports the files into the library by invoking Song.create_from_filename" do
       expect(Song).to receive(:create_from_filename).with("Action Bronson - Larry Csonka - indie.mp3")
+      expect(Song).to receive(:create_from_filename).with("Jurassic 5 - What's Golden - hip-hop.mp3")
       expect(Song).to receive(:create_from_filename).with("Real Estate - Green Aisles - country.mp3")
       expect(Song).to receive(:create_from_filename).with("Real Estate - It's Real - hip-hop.mp3")
       expect(Song).to receive(:create_from_filename).with("Thundercat - For Love I Come - dance.mp3")
-
-      music_importer.import
-    end
-
-    it "sorts the files alphabetically prior to creating new songs from the filenames" do
-      music_importer.instance_variable_set(:@files, ["Cass McCombs - County Line - indie.mp3", "Alpha 9 - Bliss - trance.mp3", "Bob Dylan - Ballad of a Thin Man - folk.mp3"])
-
-      expect(Song).to receive(:create_from_filename).with("Alpha 9 - Bliss - trance.mp3").ordered
-      expect(Song).to receive(:create_from_filename).with("Bob Dylan - Ballad of a Thin Man - folk.mp3").ordered
-      expect(Song).to receive(:create_from_filename).with("Cass McCombs - County Line - indie.mp3").ordered
 
       music_importer.import
     end

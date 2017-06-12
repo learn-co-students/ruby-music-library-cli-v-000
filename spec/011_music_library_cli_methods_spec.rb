@@ -5,57 +5,62 @@ describe "CLI Methods" do
   let(:other_music_library_controller) { MusicLibraryController.new("./spec/fixtures/other_mp3s") }
 
   describe "#list_songs" do
-    it "prints all songs in the music library in a numbered list" do
-      expect($stdout).to receive(:puts).with("1. Action Bronson - Larry Csonka - indie")
+    it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
+      expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
       expect($stdout).to receive(:puts).with("2. Real Estate - Green Aisles - country")
       expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
-      expect($stdout).to receive(:puts).with("4. Thundercat - For Love I Come - dance")
+      expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
+      expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
 
       music_library_controller.list_songs
     end
 
     it "is not hard-coded" do
-      expect($stdout).to receive(:puts).with("1. Alpha 9 - Bliss - trance")
-      expect($stdout).to receive(:puts).with("2. Bob Dylan - Ballad of a Thin Man - folk")
-      expect($stdout).to receive(:puts).with("3. Bob Dylan - Masters of War - folk")
-      expect($stdout).to receive(:puts).with("4. Cass McCombs - County Line - indie")
+      expect($stdout).to receive(:puts).with("1. Bob Dylan - Ballad of a Thin Man - folk")
+      expect($stdout).to receive(:puts).with("2. Alpha 9 - Bliss - trance")
+      expect($stdout).to receive(:puts).with("3. Cass McCombs - County Line - indie")
+      expect($stdout).to receive(:puts).with("4. Bob Dylan - Masters of War - folk")
 
       other_music_library_controller.list_songs
     end
   end
 
   describe "#list_artists" do
-    it "prints all artists in the music library in a numbered list" do
+    it "prints all artists in the music library in a numbered list (alphabetized by artist name)" do
       expect($stdout).to receive(:puts).with("1. Action Bronson")
-      expect($stdout).to receive(:puts).with("2. Real Estate")
-      expect($stdout).to receive(:puts).with("3. Thundercat")
+      expect($stdout).to receive(:puts).with("2. Jurassic 5")
+      expect($stdout).to receive(:puts).with("3. Real Estate")
+      expect($stdout).to receive(:puts).with("4. Thundercat")
 
       music_library_controller.list_artists
     end
 
     it "is not hard-coded" do
+      Artist.create("ZZ Top")
+
       expect($stdout).to receive(:puts).with("1. Alpha 9")
       expect($stdout).to receive(:puts).with("2. Bob Dylan")
       expect($stdout).to receive(:puts).with("3. Cass McCombs")
+      expect($stdout).to receive(:puts).with("4. ZZ Top")
 
       other_music_library_controller.list_artists
     end
   end
 
   describe "#list_genres" do
-    it "prints all genres in the music library in a numbered list" do
-      expect($stdout).to receive(:puts).with("1. indie")
-      expect($stdout).to receive(:puts).with("2. country")
+    it "prints all genres in the music library in a numbered list (alphabetized by genre name)" do
+      expect($stdout).to receive(:puts).with("1. country")
+      expect($stdout).to receive(:puts).with("2. dance")
       expect($stdout).to receive(:puts).with("3. hip-hop")
-      expect($stdout).to receive(:puts).with("4. dance")
+      expect($stdout).to receive(:puts).with("4. indie")
 
       music_library_controller.list_genres
     end
 
     it "is not hard-coded" do
-      expect($stdout).to receive(:puts).with("1. trance")
-      expect($stdout).to receive(:puts).with("2. folk")
-      expect($stdout).to receive(:puts).with("3. indie")
+      expect($stdout).to receive(:puts).with("1. folk")
+      expect($stdout).to receive(:puts).with("2. indie")
+      expect($stdout).to receive(:puts).with("3. trance")
 
       other_music_library_controller.list_genres
     end
@@ -78,12 +83,15 @@ describe "CLI Methods" do
       music_library_controller.list_songs_by_artist
     end
 
-    it "prints all songs by a particular artist in a numbered list" do
+    it "prints all songs by a particular artist in a numbered list (alphabetized by song name)" do
+      Song.create_from_filename("Real Estate - Wonder Years - dream pop.mp3")
+
       allow(music_library_controller).to receive(:gets).and_return("Real Estate")
 
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
       expect($stdout).to receive(:puts).with("1. Green Aisles - country")
       expect($stdout).to receive(:puts).with("2. It's Real - hip-hop")
+      expect($stdout).to receive(:puts).with("3. Wonder Years - dream pop")
 
       music_library_controller.list_songs_by_artist
     end
@@ -115,11 +123,12 @@ describe "CLI Methods" do
       music_library_controller.list_songs_by_genre
     end
 
-    it "prints all songs by a particular genre in a numbered list" do
+    it "prints all songs by a particular genre in a numbered list (alphabetized by song name)" do
       allow(music_library_controller).to receive(:gets).and_return("hip-hop")
 
       expect($stdout).to receive(:puts).with("Please enter the name of a genre:")
       expect($stdout).to receive(:puts).with("1. Real Estate - It's Real")
+      expect($stdout).to receive(:puts).with("2. Jurassic 5 - What's Golden")
 
       music_library_controller.list_songs_by_genre
     end
@@ -157,13 +166,13 @@ describe "CLI Methods" do
       allow(music_library_controller).to receive(:gets).and_return("4")
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
-      expect($stdout).to receive(:puts).with("Playing For Love I Come by Thundercat")
+      expect($stdout).to receive(:puts).with("Playing Larry Csonka by Action Bronson")
 
       music_library_controller.play_song
     end
 
     it "does not 'puts' anything out if a matching song is not found" do
-      allow(music_library_controller).to receive(:gets).and_return("5")
+      allow(music_library_controller).to receive(:gets).and_return("6")
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
       expect($stdout).to_not receive(:puts)
