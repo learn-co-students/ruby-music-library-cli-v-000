@@ -24,8 +24,8 @@ describe "Genre" do
     end
   end
 
-  describe '@@all' do
-    it 'is set to an empty array' do
+  describe "@@all" do
+    it "is initialized as an empty array" do
       all = Genre.class_variable_get(:@@all)
 
       expect(all).to match_array([])
@@ -44,6 +44,8 @@ describe "Genre" do
 
   describe ".destroy_all" do
     it "resets the @@all class variable to an empty array" do
+      Genre.class_variable_set(:@@all, [genre])
+
       Genre.destroy_all
 
       expect(Genre.all).to match_array([])

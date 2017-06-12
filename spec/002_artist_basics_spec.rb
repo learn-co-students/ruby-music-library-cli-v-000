@@ -24,8 +24,8 @@ describe "Artist" do
     end
   end
 
-  describe '@@all' do
-    it 'is set to an empty array' do
+  describe "@@all" do
+    it "is initialized as an empty array" do
       all = Artist.class_variable_get(:@@all)
 
       expect(all).to match_array([])
@@ -44,6 +44,8 @@ describe "Artist" do
 
   describe ".destroy_all" do
     it "resets the @@all class variable to an empty array" do
+      Artist.class_variable_set(:@@all, [artist])
+
       Artist.destroy_all
 
       expect(Artist.all).to match_array([])

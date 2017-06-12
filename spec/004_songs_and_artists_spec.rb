@@ -45,7 +45,9 @@ describe "Associations — Song and Artist:" do
       it "assigns an artist to the song (song belongs to artist)" do
         song.artist = artist
 
-        expect(song.artist).to be(artist)
+        assigned_artist = song.instance_variable_get(:@artist)
+
+        expect(assigned_artist).to be(artist)
       end
     end
   end
