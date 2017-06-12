@@ -49,6 +49,8 @@ class MusicLibraryController
       list_genres
      when "play song"
       play_song
+  when "artist songs"
+    artist_songs
     #
     # artist_songs = @artist.songs
     # genre_songs = @genre.songs
@@ -84,10 +86,15 @@ class MusicLibraryController
   end
 
   def play_song
-    Song.all.each do |s|
+    Song.all.each do |song|
       puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
+  def artist_songs
+    @artist.songs.each do |song|
+      puts "#{song.artist.name} - #{artist.song.name} - #{song.genre.name}"
+    end
+  end
 
 end
