@@ -1,21 +1,36 @@
-describe 'Findable Songs' do
-  describe ".find_by_name" do
-    it 'finds a song instance in @@all by the name property of the song' do
-      song = Song.new("In the Aeroplane Over the Sea")
-      song.save
+context "Song" do
+  let!(:song) { Song.create("In the Aeroplane Over the Sea") }
 
-      expect(Song.find_by_name("In the Aeroplane Over the Sea")).to eq(song)
+  describe ".find_by_name" do
+    it "finds a song instance in @@all by the name property of the song" do
+      expect(Song.find_by_name("In the Aeroplane Over the Sea")).to be(song)
     end
   end
 
   describe ".find_or_create_by_name" do
-    it 'finds or creates a song by name maintaining uniqueness of objects by their name property' do
-      song_1 = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
-      song_2 = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
+    it "returns (does not recreate) an existing song with the provided name if one exists in @@all" do
+      same_song = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
 
-      expect(song_1).to be_a(Song)
-      expect(song_1).to eq(song_2)
-      expect(song_1.name).to eq("In the Aeroplane Over the Sea")
+      expect(Song.all.length).to eq(1)
+      expect(same_song).to be(song)
+    end
+
+    it "invokes .find_by_name instead of re-coding the same functionality" do
+      expect(Song).to receive(:find_by_name).with("Kaohsiung Christmas")
+
+      Song.find_or_create_by_name("Kaohsiung Christmas")
+    end
+
+    it "creates a song if an existing match is not found" do
+      other_song = Song.find_or_create_by_name("I'd Rather Go Blind")
+
+      expect(Song.all).to include(other_song)
+    end
+
+    it "invokes .create instead of re-coding the same functionality" do
+      expect(Song).to receive(:create).with("Kaohsiung Christmas")
+
+      Song.find_or_create_by_name("Kaohsiung Christmas")
     end
   end
 end

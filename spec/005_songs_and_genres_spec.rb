@@ -1,61 +1,75 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe "Songs and Genres" do
-  context 'Genres have many songs' do
-    it 'initializes with a songs property set to an empty array' do
-      genre = Genre.new("indie rock")
+describe "Associations — Song and Genre:" do
+  let(:song) { Song.new("In the Aeroplane Over the Sea") }
+  let(:genre) { Genre.new("indie rock") }
 
-      expect(genre.songs).to eq([])
+  context "Genre" do
+    describe "#initialize" do
+      it "creates a 'songs' property set to an empty array (genre has many songs)" do
+        expect(genre.instance_variable_defined?(:@songs)).to be(true)
+        expect(genre.instance_variable_get(:@songs)).to eq([])
+      end
     end
 
-    it 'can push a song into the genre\'s song collection' do
-      genre = Genre.new("indie rock")
-      song = Song.new("In the Aeroplane Over the Sea")
+    describe "#songs" do
+      it "returns the genre's 'songs' collection (genre has many songs)" do
+        expect(genre.songs).to eq([])
 
-      genre.songs << song
-      expect(genre.songs).to include(song)
+        genre.songs << song
+
+        expect(genre.songs).to include(song)
+      end
     end
   end
 
-  context 'Songs belong to a genre' do
-    describe '#genre=' do
-      it 'accepts an genre for the song' do
-        song = Song.new("In the Aeroplane Over the Sea")
-        genre = Genre.new("indie rock")
+  context "Song" do
+    describe "#initialize" do
+      it "can be invoked with an optional third argument, a Genre object to be assigned to the song's 'genre' property (song belongs to genre)" do
+        artist = Artist.new("Neutral Milk Hotel")
+        song_with_artist_and_genre = Song.new("In the Aeroplane Over the Sea", artist, genre)
+
+        expect(song_with_artist_and_genre.instance_variable_defined?(:@genre)).to be(true)
+        expect(song_with_artist_and_genre.instance_variable_get(:@genre)).to be(genre)
+      end
+    end
+
+    describe "#genre" do
+      it "returns the genre of the song (song belongs to genre)" do
+        song.instance_variable_set(:@genre, genre)
+
+        expect(song.genre).to be(genre)
+      end
+    end
+
+    describe "#genre=" do
+      it "assigns a genre to the song (song belongs to genre)" do
         song.genre = genre
 
-        expect(song.genre).to eq(genre)
+        expect(song.genre).to be(genre)
       end
 
-      it 'adds the song to the genre\'s songs' do
-        song = Song.new("In the Aeroplane Over the Sea")
-        genre = Genre.new("indie rock")
+      it "adds the song to the genre's collection of songs (genre has many songs)" do
         song.genre = genre
 
         expect(genre.songs).to include(song)
       end
 
-      it 'does not add the song to the genre\'s songs if it already exists' do
-        song = Song.new("In the Aeroplane Over the Sea")
-        genre = Genre.new("indie rock")
-
-        song.genre = genre
-        song.genre = genre
+      it "does not add the song to the genre's collection of songs if it already exists therein" do
+        2.times { song.genre = genre }
 
         expect(genre.songs).to include(song)
-        expect(genre.songs.size).to eq(1)
+        expect(genre.songs.size).to be(1)
       end
     end
-  end
 
-  context 'initializing a song with a genre' do
-    it 'songs accept an optional argument for the genre' do
-      genre = Genre.new("indie rock")
-      artist = Artist.new("Neutral Milk Hotel")
-      song = Song.new("In the Aeroplane Over the Sea", artist, genre)
+    describe "#initialize" do
+      it "invokes #genre= instead of simply assigning to a @genre instance variable to ensure that associations are created upon initialization" do
+        artist = Artist.new("Neutral Milk Hotel")
 
-      expect(genre.songs).to include(song)
-      expect(song.genre).to eq(genre)
+        expect_any_instance_of(Song).to receive(:genre=).with(genre)
+        Song.new("In the Aeroplane Over the Sea", artist, genre)
+      end
     end
   end
 end
