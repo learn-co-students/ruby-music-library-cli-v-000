@@ -10,13 +10,15 @@ end
 
 describe "Artist" do
   it "extends the Concerns::Findable module" do
-    expect(Artist.singleton_class.ancestors).to include(Concerns::Findable)
+    artist_extends_concerns_findable = Artist.singleton_class.ancestors.include?(Concerns::Findable)
+    expect(artist_extends_concerns_findable).to be(true)
   end
 end
 
 describe "Genre" do
   it "extends the Concerns::Findable module" do
-    expect(Genre.singleton_class.ancestors).to include(Concerns::Findable)
+    genre_extends_concerns_findable = Genre.singleton_class.ancestors.include?(Concerns::Findable)
+    expect(genre_extends_concerns_findable).to be(true)
   end
 end
 
