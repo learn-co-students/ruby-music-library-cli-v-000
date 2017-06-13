@@ -5,18 +5,6 @@ You're going to be implementing a Music Library domain composed of 3 main models
 
 This is a complex lab with many parts, so go slowly. Take time to understand what you're building holistically before starting. Read this entire README before jumping in. As you go from spec to spec, we recommend doing them in numbered order.
 
-## Concerns
-A quick note on the placement of Modules. It's Ruby convention to put all Modules in a `concerns/` folder nested under `lib/`, and each module should be namespaced like this: `Concerns::ModuleName`.
-
-Because of the way that the test suite is set up, we'll have to create a bare-bones `Concerns::Findable` module before we dive into the other tests. Go ahead and create a `concerns/` directory nested under `lib/`, and inside that create a file named `findable.rb`. In our new Ruby file, we're going to sketch the outline for our future module:
-
-```ruby
-module Concerns::Findable
-end
-```
-
-Save the file, and that's it for now. Don't worry — we'll circle back later to add code to our empty module!
-
 ## Instructions
 
 ## `Song`, `Artist`, and `Genre` basics
@@ -88,13 +76,18 @@ First implement the following two methods in your `Song` class:
   * Songs should have a `find_or_create_by_name` method.
 
 ### `Concerns::Findable`
-Now that you've gotten the methods working in `Song`, let's adapt them for general reuse by putting them into a module that we can mix into our `Artist` and `Genre` classes:
+Now that you've gotten the methods working in `Song`, let's adapt them for general reuse by putting them into a module that we can mix into our `Artist` and `Genre` classes. It's Ruby convention to put modules in a `concerns/` folder nested under `lib/`, and each module should be namespaced like this:
+```ruby
+module Concerns::ModuleName
+  # Module code here
+end
+```
+Once the basic module structure is good to go, it's time to code our two class methods again:
   * Implement a generic `#find_by_name` method that uses the `.all` method defined by the class to find an instance of the class by name.
   * Implement a generic `#find_or_create_by_name` method that uses the `.all` method defined by the class to find an instance of the class by name and to create a new instance if a match is not found.
   * Add this module to your `Genre` and `Artist` class.
 
 ## `MusicImporter`
-
 Create a `MusicImporter` class that works with your `Song`, `Genre`, and `Artist` objects to import a directory of MP3 files. This class will have the following methods:
   * `#initialize` accepts a file path to a directory of MP3 files.
   * `#files` returns all of the imported filenames.
@@ -112,7 +105,6 @@ Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CL
 Have fun!
 
 ## Resources
-
 * [QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
   - This Q&A led by Avi Flombaum covers setting up a bin file, setting up a `Gemfile` and installing gems, and identifying objects and their responsibilities. It contains general tips on requirements, gems, and design.
 * [Debugging an Error in Music Library CLI](https://www.youtube.com/watch?v=J_BSGPW37AE)
