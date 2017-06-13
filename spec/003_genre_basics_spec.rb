@@ -5,8 +5,11 @@ describe "Genre" do
 
   describe "#initialize" do
     it "accepts a name for the new genre" do
-      expect(genre.instance_variable_defined?(:@name)).to be(true)
-      expect(genre.instance_variable_get(:@name)).to eq("indie rock")
+      new_genre = Genre.new("shoegaze")
+
+      new_genre_name = new_genre.instance_variable_get(:@name)
+
+      expect(new_genre_name).to eq("shoegaze")
     end
   end
 
@@ -20,7 +23,9 @@ describe "Genre" do
     it "can set the name of a genre" do
       genre.name = "classics"
 
-      expect(genre.name).to eq("classics")
+      genre_name = genre.instance_variable_get(:@name)
+
+      expect(genre_name).to eq("classics")
     end
   end
 

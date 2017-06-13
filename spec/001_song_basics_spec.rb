@@ -5,8 +5,11 @@ describe "Song" do
 
   describe "#initialize" do
     it "accepts a name for the new song" do
-      expect(song.instance_variable_defined?(:@name)).to be(true)
-      expect(song.instance_variable_get(:@name)).to eq("In the Aeroplane Over the Sea")
+      new_song = Song.new("Alison")
+
+      new_song_name = new_song.instance_variable_get(:@name)
+
+      expect(new_song_name).to eq("Alison")
     end
   end
 
@@ -20,7 +23,9 @@ describe "Song" do
     it "can set the name of a song" do
       song.name = "Jump Around"
 
-      expect(song.name).to eq("Jump Around")
+      song_name = song.instance_variable_get(:@name)
+
+      expect(song_name).to eq("Jump Around")
     end
   end
 

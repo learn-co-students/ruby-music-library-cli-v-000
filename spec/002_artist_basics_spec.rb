@@ -5,8 +5,11 @@ describe "Artist" do
 
   describe "#initialize" do
     it "accepts a name for the new artist" do
-      expect(artist.instance_variable_defined?(:@name)).to be(true)
-      expect(artist.instance_variable_get(:@name)).to eq("Neutral Milk Hotel")
+      new_artist = Artist.new("Slowdive")
+
+      new_artist_name = new_artist.instance_variable_get(:@name)
+
+      expect(new_artist_name).to eq("Slowdive")
     end
   end
 
@@ -20,7 +23,9 @@ describe "Artist" do
     it "can set the name of an artist" do
       artist.name = "Jeff Mangum"
 
-      expect(artist.name).to eq("Jeff Mangum")
+      artist_name = artist.instance_variable_get(:@name)
+
+      expect(artist_name).to eq("Jeff Mangum")
     end
   end
 
