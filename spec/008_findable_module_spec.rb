@@ -3,6 +3,7 @@ require "spec_helper"
 describe "Concerns::Findable" do
   it "defines a module named Concerns::Findable" do
     expect(defined?(Concerns::Findable)).to be_truthy
+    expect(Concerns::Findable).to_not be_a(Class)
     expect(Concerns::Findable).to be_a(Module)
   end
 end
