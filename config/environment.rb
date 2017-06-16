@@ -6,4 +6,3 @@ end
 
 require_all 'lib'
 
-require_relative '../concerns/findable.rb'
