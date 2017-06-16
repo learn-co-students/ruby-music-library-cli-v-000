@@ -20,9 +20,15 @@ class Song
     @@all << self
   end
 
-  def create
-    song = self.new
-    song.name = name
-    @@all << song
+  def self.create(name)
+    new(name).tap{|s| s.save}
   end
+
+  # describe '.create' do
+  #   it 'initializes and saves the song' do
+  #     song = Song.create("In the Aeroplane Over the Sea")
+  #
+  #     expect(Song.all).to include(song)
+  #   end
+  # end
 end
