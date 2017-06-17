@@ -1,5 +1,6 @@
 require 'pry'
-class Song
+class Genre
+
   attr_accessor :name
   @@all = []
 
@@ -20,9 +21,9 @@ class Song
   end
 
   def self.create(name)
-    song = Song.new(name)
-    song.save
-    song
+    genre = Genre.new(name)
+    genre.save
+    genre
   end
 
 end
