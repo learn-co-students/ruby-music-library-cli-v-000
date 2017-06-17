@@ -5,14 +5,8 @@ class Song
   def initialize(name, artist="", genre="")
     @name = name
     ### Unique attribute ####
-    if artist != ""
-      self.artist = artist
-    end
-
-    if genre != ""
-      self.genre = genre
-    end
-
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def self.all
