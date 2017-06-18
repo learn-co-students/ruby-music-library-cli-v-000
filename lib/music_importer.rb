@@ -6,15 +6,11 @@ class MusicImporter
   end
 
   def files
-    @files = Dir.entries(@path).select{|f| !File.directory? f}.sort
+    Dir.entries(@path).select {|f| !File.directory? f}.sort
   end
 
   def import
-    self.files
-    @files.each do |filename|
-      song = Song.create_from_filename(filename)
-      song.artist.add_song(song)
-    end
+    self.files.each {|filename| Song.create_from_filename(filename)}
   end
 
 end

@@ -1,28 +1,57 @@
 class MusicLibraryController
-  def initialize(path = "./db/mp3s")
+  def initialize(path = './db/mp3s')
     MusicImporter.new(path).import
   end
 
   def call
-    puts "Please enter your input"
+    puts "What would you like to do?"
     input = gets.chomp
-    if input == "list songs"
-      Song.all.each_with_index{|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+
+    case input
+    when "list songs"
+      songs
+    when "list artists"
+      artists
+    when "list genres"
+      genres
+    when "play song"
+      puts "What track number?"
+      @number = gets.chomp.to_i-1
+      song
+    when "list artist"
+      puts "Which artist?"
+      @artist = gets.chomp
+      artist_songs
+    when "list genre"
+      puts "Which genre?"
+      @genre = gets.chomp
+      genre_songs
     end
-    if input == "list artists"
-      Artist.all.each{|artist| puts "#{artist.name}"}
-    end
-    if input == "list genres"
-      Genre.all.each{|genre| puts genre.name}
-    end
-    if input.to_i.class == Fixnum && input.to_i != 0
-      song = Song.all[input.to_i-1]
-      puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    end
-    if Artist.all.detect{|artist| artist.name == input }
-      songs = Song.all.select{|song| song.artist.name == input}
-      songs.each{|song| puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"}
-    end
+
     self.call if input != "exit"
+  end
+
+  def songs
+    Song.all.each_with_index{|s, index| puts "#{index+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
+  end
+
+  def artists
+    Artist.all.each{|a| puts a.name}
+  end
+
+  def genres
+    Genre.all.each{|g| puts g.name}
+  end
+
+  def song
+    puts "Playing #{Song.all[@number].artist.name} - #{Song.all[@number].name} - #{Song.all[@number].genre.name}"
+  end
+
+  def artist_songs
+    Song.all.each{|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" if s.artist.name == @artist}
+  end
+
+  def genre_songs
+    Song.all.each{|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" if s.genre.name == @genre}
   end
 end
