@@ -6,15 +6,16 @@ class Song
   def initialize(name)
     @name = name
     @songs = []
-    song.artist # hey song, here's an artist
+    @artist = artist
+    #(Video Review: Music Library CLI, OO video: Collaberating Objects) hey song, here's an artist
 
   end
 
-  def self.all # candidate for module
+  def self.all # candidate for module (Class reader)
     @@all
   end
 
-  def self.destroy_all # candidate for module
+  def self.destroy_all # candidate for module (Class helper)
     @@all.clear
   end
 
