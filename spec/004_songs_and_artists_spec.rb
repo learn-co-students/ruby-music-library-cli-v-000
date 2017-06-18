@@ -22,7 +22,7 @@ describe "Songs and Artists" do
       it 'accepts an artist for the song' do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
-        song.artist = artist
+        song.artist=(artist)
 
         expect(song.artist).to eq(artist)
       end
