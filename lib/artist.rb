@@ -6,6 +6,7 @@ class Artist
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all # candidate for module
@@ -25,6 +26,10 @@ class Artist
       artist = Artist.new(name)
       artist.save
       artist
+    end
+
+    def songs
+      @songs
     end
 
 end
