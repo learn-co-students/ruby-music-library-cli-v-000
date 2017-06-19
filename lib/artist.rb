@@ -1,4 +1,5 @@
 class Artist
+  include Concerns::Findable
   attr_accessor :name, :songs, :genres
   @@all = []
 
@@ -52,14 +53,6 @@ class Artist
           song.genre
         end
     end
-  end
-
-  def self.find(name) #finds exisitng artist by name
-    self.all.find {|artist| artist.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    self.find(name) || self.create(name)
   end
 
 end
