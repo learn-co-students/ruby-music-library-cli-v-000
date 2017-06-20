@@ -18,7 +18,7 @@ class Artist
   end
 
   def save # candidate for module
-    self.class.all << self
+    @@all << self
   end
 
 
