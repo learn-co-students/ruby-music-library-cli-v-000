@@ -9,7 +9,17 @@ class Genre
 
   def add_song(song)
     @songs << song unless @songs.include?(song)
-  end\
+    self.artists
+    @songs
+  end
+
+  def artists
+    artists = []
+    self.songs.each do |song|
+      artists << song.artist unless artists.include?(song.artist)
+    end
+    artists
+  end
 
   def self.all
     @@all
