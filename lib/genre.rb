@@ -6,6 +6,7 @@ class Genre
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all # candidate for module
@@ -17,13 +18,17 @@ class Genre
   end
 
   def save # candidate for module
-    self.class.all << self
+    @@all << self
   end
 
   def self.create(name)
     genre = Genre.new(name)
     genre.save
     genre
+  end
+
+  def songs
+    @songs
   end
 
 end

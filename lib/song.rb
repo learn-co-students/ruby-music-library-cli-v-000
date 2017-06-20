@@ -1,28 +1,29 @@
 require 'pry'
 class Song
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    if artist != nil
-      @artist = artist
-      artist.add_song(self) unless artist.songs.include?(self)
-    end
+    self.artist = artist if artist
+    self.genre = genre if genre
     @songs = []
-    #(Video Review: Music Library CLI, OO video: Collaberating Objects) hey song, here's an artist
   end
 
-  def artist=(song)
-    artist.add_song(self) unless artist.songs.include?(self)
-    @artist 
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
   end
+
+  def genre=(genre)
+    @genre = genre
+    genre.songs << self unless genre.songs.include?(self)
+  end
+
+
 
   #We can set an individual instance of Song equal
   #to an instance of the Artist class like this:
-
-
-
 
   def self.all # candidate for module (Class reader)
     @@all

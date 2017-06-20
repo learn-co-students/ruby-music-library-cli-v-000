@@ -7,6 +7,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
+    @genres = []
   end
 
   def self.all # candidate for module
@@ -20,7 +21,6 @@ class Artist
   def save # candidate for module
     @@all << self
   end
-
 
     def self.create(name)
       artist = Artist.new(name)
