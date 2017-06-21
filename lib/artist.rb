@@ -1,13 +1,12 @@
 require 'pry'
 class Artist
 
-  attr_accessor :name, :song
+  attr_accessor :name, :song, :genre
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
   end
 
   def self.all # candidate for module
@@ -36,6 +35,15 @@ class Artist
       @songs << song unless @songs.include?(song)
       song.artist = self if song.artist != self
       @songs
+    end
+
+    def genres
+      self.songs.collect do |song|
+        #if song.artist.genre != self
+           song.genre
+        #end
+        binding.pry
+      end
     end
 
 end
