@@ -5,6 +5,11 @@ class Artist
 
   def initialize(name)
     @name = name
+    @songs = []
+  end
+
+  def songs
+    @songs
   end
 
   def self.all
@@ -25,4 +30,21 @@ class Artist
     artist
   end
 
+  def add_song(song)
+    song.artist = self unless song.artist == self
+    @songs << song  unless @songs.include?(song)  
+  end
+
+  # def add_song(song)
+  #
+  #   if song.artist == self
+  #   else
+  #     song.artist = self
+  #   end
+  #   # binding.pry
+  #   if @songs.include?(song)
+  #   else
+  #     @songs << song
+  #   end
+  # end
 end
