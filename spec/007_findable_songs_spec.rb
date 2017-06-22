@@ -1,4 +1,4 @@
-require 'pry'
+
 context "Song" do
   let!(:song) { Song.create("In the Aeroplane Over the Sea") }
 

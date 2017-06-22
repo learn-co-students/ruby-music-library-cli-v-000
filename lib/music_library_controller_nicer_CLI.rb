@@ -1,14 +1,18 @@
-class MusicLibraryController
+class MusicLibraryControllerFancy
   attr_accessor :path
-  MENU = ["Welcome to your music library!",
-          "To list all of your songs, enter 'list songs'.",
-          "To list all of the artists in your library, enter 'list artists'.",
-          "To list all of the genres in your library, enter 'list genres'.",
-          "To list all of the songs by a particular artist, enter 'list artist'.",
-          "To list all of the songs of a particular genre, enter 'list genre'.",
-          "To play a song, enter 'play song'.",
-          "To quit, type 'exit'.",
-          "What would you like to do?"]
+  MENU = [" ---------------------------------------------------------------------",
+          "|                  Welcome to your music library!                     |",
+          "|---------------------------------------------------------------------",
+          "|To list all of your songs, enter 'list songs'.                       |",
+          "|To list all of the artists in your library, enter 'list artists'.    |",
+          "|To list all of the genres in your library, enter 'list genres'.      |",
+          "|To list all of the songs by a particular artist, enter 'list artist'.|",
+          "|To list all of the songs of a particular genre, enter 'list genre'.  |",
+          "|To play a song, enter 'play song'.                                   |",
+          "|To quit, type 'exit'.                                                |",
+          " ---------------------------------------------------------------------",
+          "|               >>> What would you like to do? <<<                    |",
+          " ---------------------------------------------------------------------",]
 
   def initialize(path='./db/mp3s')
     @path = path
@@ -17,26 +21,36 @@ class MusicLibraryController
 
   def call
     command = " "
+    MENU.each{|message| puts "#{message}"}
     while command != "exit"
-      MENU.each{|message| puts "#{message}"} #I like to see the menu after each input
       command = gets.chomp.downcase
       case command
       when "list songs"
         list_songs
       when "list artists"
         list_artists
+        puts MENU[4]
       when "list genres"
         list_genres
+        puts MENU[5]
       when "list artist"
         list_songs_by_artist
       when "list genre"
         list_songs_by_genre
-        puts "To list songs by genre, enter 'list genre'"
       when "play song"
         play_song
       when "h"
-          MENU.each_with_index{|message, ind| puts "#{message}" if ind != MENU.length-1}
+        puts MENU[0]
+          MENU.each_with_index{|message, ind| puts "#{message}" if ind > 2 }
+       else
+        puts "Please enter a valid command :)"
       end
+       if command != "h"
+          puts MENU[0]
+          puts MENU[9]
+          puts "|Enter 'h' for the help menu, 'exit' to exit                          |"
+          puts MENU[0]
+       end
     end
   end
 
@@ -65,11 +79,12 @@ class MusicLibraryController
   end
 
   def play_song
+    list_songs
     target = ask_for_input("Which song number would you like to play?").to_i
     if target > 0 && target < Song.all.length
       Song.list_by_name do |obj,ind|
         if ind == target - 1
-          puts "Playing #{obj.name} by #{obj.artist.name}"
+          puts "\nPlaying #{obj.name} by #{obj.artist.name}\n"
         end
       end
     end
