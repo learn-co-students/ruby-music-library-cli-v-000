@@ -1,32 +1,21 @@
 class Genre
-  attr_accessor :name, :songs, :artists
+  extend Concerns::ClassMethods
+  extend Concerns::Findable
+  extend Concerns::Searchable
+  include Concerns::InstanceMethods
+  attr_accessor :name, :songs
   @@all = []
-
-  def initialize(name)
-    @name = name
-    @songs = []
-  end
 
   def self.all
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.create(name)
-    self.new(name).save
-    self
-  end
-
   def add_song(song)
     self.songs.include?(song) || @songs << song
-    #self.artists
+  end
+
+  def artists
+    self.songs.collect{|obj| obj.artist}.uniq
   end
 
 end
