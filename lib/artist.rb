@@ -39,10 +39,8 @@ class Artist
 
     def genres
       self.songs.collect do |song|
-        #if song.artist.genre != self
            song.genre
-        #end
-        binding.pry
+         binding.pry
       end
     end
 
