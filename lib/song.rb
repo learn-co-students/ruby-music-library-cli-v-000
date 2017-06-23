@@ -20,8 +20,6 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
-
-
   #We can set an individual instance of Song equal
   #to an instance of the Artist class like this:
 
@@ -46,5 +44,13 @@ class Song
   def songs
     @songs
   end
+
+  def self.find_by_name(name)
+    @@all.detect{|a| a.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+  self.find_by_name(name) || self.create(name)
+ end
 
 end
