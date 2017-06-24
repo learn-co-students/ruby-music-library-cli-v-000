@@ -1,6 +1,5 @@
-require 'pry'
-
 class Genre
+  include Concerns::Findable
   attr_accessor :name, :songs
   @@all = []
 
@@ -14,7 +13,7 @@ class Genre
   end
 
   def self.destroy_all
-    @@all = []
+    @@all.clear
   end
 
   def save
@@ -22,11 +21,15 @@ class Genre
   end
 
   def self.create(name)
-    new(name).tap{|g| g.save}
+    new(name).tap{|s| s.save}
   end
 
   def add_song(song)
-    @songs << song unless songs.include?(song)
+    @songs << song unless @songs.include?(song)
     song.genre = self unless song.genre == self
+  end
+
+  def artists
+    self.songs.collect{|song| song.artist}.uniq
   end
 end
