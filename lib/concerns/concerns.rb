@@ -1,4 +1,5 @@
 module Concerns::ClassMethods
+  
     def create(name)
       new_obj = self.new(name)
       new_obj.save
@@ -8,6 +9,11 @@ module Concerns::ClassMethods
     def destroy_all
       self.all.clear
     end
+
+    def self.extended(base)
+        base.class_variable_set(:@@all, [])
+    end
+
 end
 
 module Concerns::InstanceMethods
@@ -46,6 +52,5 @@ module Concerns::Searchable
     list = source.songs.sort{|a,b| a.name <=> b.name}.uniq
     list.each_with_index{|obj,ind| yield(obj,ind)}
   end
-
 
 end

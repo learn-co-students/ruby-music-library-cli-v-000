@@ -4,7 +4,6 @@ class Song
   extend Concerns::Searchable
   include Concerns::InstanceMethods
   attr_accessor :name, :artist, :genre
-  @@all = []
 
   def initialize(name, artist=nil, genre=nil)
     @name = name

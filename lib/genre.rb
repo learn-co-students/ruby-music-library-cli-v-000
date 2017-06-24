@@ -4,7 +4,6 @@ class Genre
   extend Concerns::Searchable
   include Concerns::InstanceMethods
   attr_accessor :name, :songs
-  @@all = []
 
   def self.all
     @@all
