@@ -4,13 +4,58 @@ class MusicLibraryController
     MusicImporter.new(filepath).import
   end
 
+  # def call
+  #   puts "Welcome to your music library!"
+  #   loop do
+  #     puts "To list all of your songs, enter 'list songs'."
+  #     user_input = gets
+  #     break if user_input == exit
+  #   end
+  # end
+
   def call
+    response = ""
     puts "Welcome to your music library!"
-    loop do
-      puts "To list all of your songs, enter 'list songs'."
-      user_input = gets
-      break if user_input == exit
+    puts "Type a command now or 'help' to see instructions: "
+    while response != 'exit'
+      puts "What would you like to do?"
+      response = gets.chomp
+      case response
+      when 'help'
+        list_instructions
+      when 'list songs'
+        list_songs
+      when 'list artists'
+        list_artists
+      when 'list genres'
+        list_genres
+      when 'list artist'
+        list_songs_by_artist
+      when 'list genre'
+        list_songs_by_genre
+      when 'play song'
+        play_song
+      else
+        puts "Type 'help' or 'exit' to close the program: "
+      end
     end
+    puts "=" * 40
+    puts "Exiting... Music Library CLI"
+  end
+
+  def list_instructions
+    puts "=" * 50
+    puts "USER INSTRUCTIONS"
+    puts "=" * 50
+    puts "To list all of your songs, enter 'list songs'."
+    puts "To list all of the artists in your library, enter 'list artists'."
+    puts "To list all of the genres in your library, enter 'list genres'."
+    puts "To list all of the songs by a particular artist, enter 'list artist'."
+    puts "To list all of the songs of a particular genre, enter 'list genre'."
+    puts "To play a song, enter 'play song'."
+    puts "To quit, type 'exit'."
+    puts "=" * 50
+    puts "What would you like to do?"
   end
 
   def list_songs
@@ -69,9 +114,10 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     user_input = gets.to_i
+    i = user_input - 1
     if user_input >= 1 && user_input <= Song.all.count && user_input != nil
       song_arr = Song.all.sort_by { |s| s.name }
-      puts "Playing #{song_arr[user_input-1].name} by #{song_arr[user_input-1].artist.name}"
+      puts "Playing #{song_arr[i].name} by #{song_arr[i].artist.name}"
     end
   end
 
