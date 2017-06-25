@@ -1,7 +1,8 @@
 require 'pry'
+#require_relative "../concerns/findable.rb"
 class Song
   extend Concerns::Findable
-  
+
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -62,10 +63,9 @@ class Song
 
       song = self.new(song_name)
       song.artist_name = artist_name
-      genre = Genre.new(genre_name)
+      genre = Genre.find_or_create_by_name(genre_name)
       song.genre = genre
       #binding.pry
-
     song
   end
 
