@@ -27,7 +27,6 @@ class MusicLibraryController
         play_song
       else
         puts "What would you like to do?"
-        response = gets.chomp
       end
     end
   end
