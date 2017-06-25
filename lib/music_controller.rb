@@ -16,9 +16,8 @@ class MusicLibraryController
   def call
     response = ""
     puts "Welcome to your music library!"
-    puts "Type a command now or 'help' to see instructions: "
+    list_instructions
     while response != 'exit'
-      puts "What would you like to do?"
       response = gets.chomp
       case response
       when 'help'
@@ -36,17 +35,13 @@ class MusicLibraryController
       when 'play song'
         play_song
       else
-        puts "Type 'help' or 'exit' to close the program: "
+        puts "What would you like to do?"
+        response = gets.chomp
       end
     end
-    puts "=" * 40
-    puts "Exiting... Music Library CLI"
   end
 
   def list_instructions
-    puts "=" * 50
-    puts "USER INSTRUCTIONS"
-    puts "=" * 50
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
     puts "To list all of the genres in your library, enter 'list genres'."
@@ -54,8 +49,6 @@ class MusicLibraryController
     puts "To list all of the songs of a particular genre, enter 'list genre'."
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
-    puts "=" * 50
-    puts "What would you like to do?"
   end
 
   def list_songs
