@@ -69,6 +69,11 @@ class Song
     song
   end
 
+  def create_from_filename(file_name)
+    song_from_file = Song.new_from_filename(file_name)
+    @@all << song_from_file 
+  end
+
   def artist_name=(name)
     artist = Artist.find_or_create_by_name(name)
     self.artist = artist
