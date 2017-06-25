@@ -50,16 +50,11 @@ class MusicLibraryController
   end
 
   def list_artists
-    artist_arr = Artist.all.collect { |a| a.name }.sort
-    artist_arr.each_with_index do |a,i| puts "#{i+1}. #{a}"
-    end
+    Artist.list_by
   end
 
   def list_genres
-    genre_arr = Genre.all.collect { |g| g.name }.sort
-    genre_arr.each_with_index do |g, i|
-      puts "#{i+1}. #{g}"
-    end
+    Genre.list_by
   end
 
   def list_songs_by_artist

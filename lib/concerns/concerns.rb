@@ -14,3 +14,14 @@ module Concerns::Findable
   end
 
 end
+
+module Concerns::Listable
+
+  def list_by
+    arr = all.collect { |x| x.name }.sort
+    arr.each_with_index do |item, i|
+      puts "#{i+1}. #{item}"
+    end
+  end
+
+end
