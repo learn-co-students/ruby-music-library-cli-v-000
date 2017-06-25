@@ -1,5 +1,5 @@
 require 'pry'
-require_relative '../db/mp3s'
+
 class MusicLibraryController
   attr_accessor :path
 
@@ -26,10 +26,13 @@ class MusicLibraryController
  end
 
  def list_songs
-   import.sort do |a,b|
-     a <=> b
+   Song.all.map do |song|
+     binding.pry 
+     i = 0
+     puts "#{i+=1}. #{song.name} - #{song.artist.name} - #{song.genre.name}"
    end
  end
+
 
 
 end
