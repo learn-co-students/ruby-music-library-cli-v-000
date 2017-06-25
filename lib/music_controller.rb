@@ -4,15 +4,6 @@ class MusicLibraryController
     MusicImporter.new(filepath).import
   end
 
-  # def call
-  #   puts "Welcome to your music library!"
-  #   loop do
-  #     puts "To list all of your songs, enter 'list songs'."
-  #     user_input = gets
-  #     break if user_input == exit
-  #   end
-  # end
-
   def call
     response = ""
     puts "Welcome to your music library!"
@@ -52,23 +43,20 @@ class MusicLibraryController
   end
 
   def list_songs
-    # artist - title - genre
-      sorted_arr = Song.sorted_song_list
-      sorted_arr.each_with_index do |s,i|
-        puts "#{i+1}. #{s}"
-      end
+  songs = Song.all.sort_by { |song| song.name }
+    songs.each_with_index do |song, i|
+      puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 
   def list_artists
-    artist_arr = Artist.all.collect { |a| a.name }
-    artist_arr = artist_arr.sort
+    artist_arr = Artist.all.collect { |a| a.name }.sort
     artist_arr.each_with_index do |a,i| puts "#{i+1}. #{a}"
     end
   end
 
   def list_genres
-    genre_arr = Genre.all.collect { |g| g.name }
-    genre_arr = genre_arr.sort
+    genre_arr = Genre.all.collect { |g| g.name }.sort
     genre_arr.each_with_index do |g, i|
       puts "#{i+1}. #{g}"
     end

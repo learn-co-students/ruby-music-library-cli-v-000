@@ -74,13 +74,4 @@ class Song
     new_song.save
   end
 
-  def self.sorted_song_list
-    song_arr = Song.all.collect do |s|
-      "#{s.artist.name} - #{s.name} - #{s.genre.name}"
-    end
-    song_arr = song_arr.collect { |s| s.split(" - ")}
-    song_arr = song_arr.sort_by { |s| s[1] }
-    song_arr.collect { |s| s.join(" - ")}
-  end
-
 end
