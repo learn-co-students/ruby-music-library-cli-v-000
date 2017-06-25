@@ -69,9 +69,9 @@ class Song
     song
   end
 
-  def create_from_filename(file_name)
+  def self.create_from_filename(file_name)
     song_from_file = Song.new_from_filename(file_name)
-    @@all << song_from_file 
+    @@all << song_from_file
   end
 
   def artist_name=(name)
