@@ -25,13 +25,16 @@ class MusicLibraryController
     end
  end
 
+ def sorted_songs
+  Song.all.sort_by do |song|
+    song.name
+  end
+ end
+
  def list_songs
    i = 0
-   sorted_array = Song.all.sort_by do |song|
-    song.name
-   end
 
-   sorted_array.each do |song|
+   sorted_songs.each do |song|
      puts "#{i+=1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
    end
  end
@@ -60,16 +63,45 @@ class MusicLibraryController
  end
 
  def list_songs_by_artist
-   i = 0
    puts "Please enter the name of an artist:"
    input = gets.strip
 
-   #artist_array = Song.all.collect do |artist|
-     #if artist.name == input
-       #artist.name
-     #end
-     #binding.pry
-   #end
+   if artist_object = Artist.find_by_name(input) # return value is either an instance or nil
+     songs = artist_object.songs.sort_by do |song|# sounds good do that here lol
+       song.name
+     end
+     songs.each_with_index do |song, i| # |element, index|
+       puts "#{i + 1}. #{song.name} - #{song.genre.name}"
+     end
+   end
+   # binding.pry
+   # find the artist
+   # user the getter for the songs and list the song names
+   # if the artist isn't found (conditionally), then you would say something to the effect
+   # of artist not found or invalid artist name, and use recursion to keep your program going.
+ end
+
+ def list_songs_by_genre
+   puts "Please enter the name of a genre:"
+   input = gets.strip
+
+   if genre_object = Genre.find_by_name(input) # return value is either an instance or nil
+     songs = genre_object.songs.sort_by do |song|# sounds good do that here lol
+       song.name
+     end
+     songs.each_with_index do |song, i| # |element, index|
+       puts "#{i + 1}. #{song.artist.name} - #{song.name}"
+     end
+   end
+ end
+
+ def play_song
+   puts "Which song number would you like to play?"
+   index = gets.strip.to_i - 1
+
+   if index.between?(0, sorted_songs.length - 1) && song = sorted_songs[index]
+      puts "Playing #{song.name} by #{song.artist.name}"
+   end
  end
 
 end
