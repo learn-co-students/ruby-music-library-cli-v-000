@@ -26,13 +26,50 @@ class MusicLibraryController
  end
 
  def list_songs
-   Song.all.map do |song|
-     binding.pry 
-     i = 0
-     puts "#{i+=1}. #{song.name} - #{song.artist.name} - #{song.genre.name}"
+   i = 0
+   sorted_array = Song.all.sort_by do |song|
+    song.name
+   end
+
+   sorted_array.each do |song|
+     puts "#{i+=1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
    end
  end
 
+ def list_artists
+   i = 0
+   sorted_array = Artist.all.sort_by do |artist|
+     #binding.pry
+     artist.name
+   end
 
+   sorted_array.each do |artist|
+     puts "#{i+=1}. #{artist.name}"
+   end
+ end
+
+ def list_genres
+   i = 0
+   sorted_array = Genre.all.sort_by do |genre|
+     genre.name
+   end
+
+   sorted_array.each do |genre|
+     puts "#{i+=1}. #{genre.name}"
+   end
+ end
+
+ def list_songs_by_artist
+   i = 0
+   puts "Please enter the name of an artist:"
+   input = gets.strip
+
+   #artist_array = Song.all.collect do |artist|
+     #if artist.name == input
+       #artist.name
+     #end
+     #binding.pry
+   #end
+ end
 
 end
