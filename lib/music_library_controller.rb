@@ -8,7 +8,7 @@ class MusicLibraryController
     MusicImporter.new(path).import
   end
 
- def call
+  def call
    puts "Welcome to your music library!"
    puts "To list all of your songs, enter 'list songs'."
    puts "To list all of the artists in your library, enter 'list artists'."
@@ -19,10 +19,24 @@ class MusicLibraryController
    puts "To quit, type 'exit'."
    puts "What would you like to do?"
    input = gets.strip
-
-    if input != "exit"
+   #binding.pry
+   if input != "exit"
+    if input == "list songs"
+      list_songs
+    elsif input == "list artists"
+      list_artists
+    elsif input == "list genres"
+      list_genres
+    elsif input == "list artist"
+      list_songs_by_artist
+    elsif input == "list genre"
+      list_songs_by_genre
+    elsif input == "play song"
+      play_song
+    else
       call
     end
+   end
  end
 
  def sorted_songs
@@ -66,27 +80,22 @@ class MusicLibraryController
    puts "Please enter the name of an artist:"
    input = gets.strip
 
-   if artist_object = Artist.find_by_name(input) # return value is either an instance or nil
-     songs = artist_object.songs.sort_by do |song|# sounds good do that here lol
+   if artist_object = Artist.find_by_name(input)
+     songs = artist_object.songs.sort_by do |song|
        song.name
      end
-     songs.each_with_index do |song, i| # |element, index|
+     songs.each_with_index do |song, i|
        puts "#{i + 1}. #{song.name} - #{song.genre.name}"
      end
    end
-   # binding.pry
-   # find the artist
-   # user the getter for the songs and list the song names
-   # if the artist isn't found (conditionally), then you would say something to the effect
-   # of artist not found or invalid artist name, and use recursion to keep your program going.
  end
 
  def list_songs_by_genre
    puts "Please enter the name of a genre:"
    input = gets.strip
 
-   if genre_object = Genre.find_by_name(input) # return value is either an instance or nil
-     songs = genre_object.songs.sort_by do |song|# sounds good do that here lol
+   if genre_object = Genre.find_by_name(input)
+     songs = genre_object.songs.sort_by do |song|
        song.name
      end
      songs.each_with_index do |song, i| # |element, index|
@@ -103,5 +112,4 @@ class MusicLibraryController
       puts "Playing #{song.name} by #{song.artist.name}"
    end
  end
-
 end
