@@ -3,7 +3,7 @@ class MusicImporter
   attr_accessor :path
 
   def import
-    files.each{ |file| Song.new_from_filenam(file) }
+    files.each{ |file| Song.create_from_filename(file) }
   end
 
   def initialize(path)
