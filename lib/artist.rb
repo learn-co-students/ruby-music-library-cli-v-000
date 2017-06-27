@@ -40,4 +40,9 @@ class Artist
       @songs << name
     end
   end
+
+  def genres
+    something = @songs.collect {|x| x.genre}
+    something.uniq
+  end
 end
