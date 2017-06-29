@@ -1,4 +1,5 @@
 require "spec_helper"
+require "pry"
 
 describe "CLI Methods" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
@@ -11,7 +12,6 @@ describe "CLI Methods" do
       expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
       expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
       expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
-
       music_library_controller.list_songs
     end
 
