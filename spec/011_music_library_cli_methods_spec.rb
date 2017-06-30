@@ -144,7 +144,7 @@ describe "CLI Methods" do
   end
 
   describe "#play_song" do
-    it "prompts the user to choose a song" do
+    it "prompts the user to choose a song from the alphabetized list output by #list_songs" do
       allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
@@ -162,7 +162,7 @@ describe "CLI Methods" do
       music_library_controller.play_song
     end
 
-    it "'plays' a song" do
+    it "upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs" do
       allow(music_library_controller).to receive(:gets).and_return("4")
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
