@@ -1,5 +1,4 @@
 require "spec_helper"
-
 describe "Artist" do
   let(:artist) { Artist.new("Neutral Milk Hotel") }
 
@@ -32,7 +31,6 @@ describe "Artist" do
   describe "@@all" do
     it "is initialized as an empty array" do
       all = Artist.class_variable_get(:@@all)
-
       expect(all).to match_array([])
     end
   end

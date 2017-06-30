@@ -1,5 +1,4 @@
 require "spec_helper"
-
 describe "Song" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
 
@@ -8,7 +7,6 @@ describe "Song" do
       new_song = Song.new("Alison")
 
       new_song_name = new_song.instance_variable_get(:@name)
-
       expect(new_song_name).to eq("Alison")
     end
   end
@@ -68,7 +66,6 @@ describe "Song" do
   describe ".create" do
     it "initializes and saves the song" do
       created_song = Song.create("Kaohsiung Christmas")
-
       expect(Song.all).to include(created_song)
     end
   end
