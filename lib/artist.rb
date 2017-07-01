@@ -8,13 +8,6 @@ class Artist
     @songs = []
   end
 
-  def name
-    @name
-  end
-
-  def name=(name)
-    @name = name
-  end
 
   def self.all
     @@all
@@ -35,11 +28,11 @@ class Artist
   end
 
   def add_song(song)
-    unless @songs.include?(song)
-      @songs << song
-    end
     if song.artist == nil
       song.artist = self
+    end
+    unless @songs.include?(song)
+      @songs << song
     end
   end
 
@@ -47,12 +40,12 @@ class Artist
     @songs
   end
 
-  def genres  #needs work
-      self.songs.collect do |song|
-        unless @songs.include?(song.genre)
-          song.genre
-        end
+  def genres
+    genres = []
+    @songs.collect do |song|
+      genres << song.genre
     end
+    genres.uniq
   end
 
 end
