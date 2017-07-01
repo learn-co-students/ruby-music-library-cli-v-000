@@ -16,9 +16,9 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.chomp
-      # unless input == exit
-      #   "please put a thing in the thing"
-      # end
+        unless input == "exit"
+          "please put a thing in the thing"
+        end
       case input
         when "list songs"
          list_songs
@@ -67,7 +67,7 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist_name = gets
+    artist_name = gets.chomp
     artist = Artist.find_by_name(artist_name)
     if artist != nil
       artist_sorted = artist.songs.sort do |x, y|
@@ -82,7 +82,7 @@ class MusicLibraryController
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    genre_name = gets
+    genre_name = gets.chomp
     genre = Genre.find_by_name(genre_name)
     if genre != nil
       genre_sorted = genre.songs.sort do |x, y|
