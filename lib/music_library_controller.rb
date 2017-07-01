@@ -49,13 +49,6 @@ class MusicLibraryController
      end
    end
 
-  # def list_genres
-  #   Genre.all.sort!{ |genre1, genre2| genre1.name.downcase <=> genre2.name.downcase }
-  #   Genre.all.each_with_index do |genre, i|
-  #     puts "#{i+1}. #{genre.name}"
-  #   end
-   #end
-
    def list_genres
      Genre.all.sort{ |genre1, genre2| genre1.name <=> genre2.name }.each.with_index(1) do |genre, i|
        puts "#{i}. #{genre.name}"
@@ -64,9 +57,27 @@ class MusicLibraryController
 
    def list_songs_by_artist #in progress
      puts "Please enter the name of an artist:"
-     input = gets.chomp
+     artist = gets.chomp
+     artist = Artist.find_by_name(artist)
+     artist.songs.sort{ |song1, song2| song1.name <=> song2.name }.each_with_index do |song, i|
+         puts "#{i+1}. #{song.name} - #{song.genre.name}"
+       end
    end
 
+   def list_songs_by_genre #in progress
+     puts "Please enter the name of a genre:"
+     genre = gets.chomp
+     genre = Genre.find_by_name(genre)
+     genre.songs.sort{ |song1, song2| song1.name <=> song2.name }.each_with_index do |song, i|
+         puts "#{i+1}. #{song.artist.name} - #{song.name}"
+       end
+   end
 
+   def play_song
+     puts "Which song number would you like to play?"
+     song = gets.chomp.to_i
+        file_name = Song.all[song - 1]
+        puts "Playing #{file_name.song.name} by #{file_name.artist.name}"
+   end
 
 end

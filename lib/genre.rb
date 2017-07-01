@@ -8,23 +8,6 @@ class Genre
     @songs = []
   end
 
-  #def name
-  #  @name
-  #end
-
-  #def name=(name)
-  #  @name = name
-  #end
-
-  #def add_song(song)
-  #  unless @songs.include?(song)
-  #    @songs << song
-  #  end
-  #  if song.genre == nil
-  #    song.genre = self
-  #  end
-  #end
-
   def songs
     @songs
   end

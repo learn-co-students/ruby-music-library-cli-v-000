@@ -1,4 +1,7 @@
+require "pry"
+
 class Artist
+
   extend Concerns::Findable
   attr_accessor :name, :songs, :genres
   @@all = []
@@ -7,7 +10,6 @@ class Artist
     @name = name
     @songs = []
   end
-
 
   def self.all
     @@all
