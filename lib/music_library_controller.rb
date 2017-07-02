@@ -1,0 +1,52 @@
+class MusicLibraryController
+  attr_accessor :path
+
+  def initialize(path = "./db/mp3s")
+    importer = MusicImporter.new(path)
+    importer.import
+  end
+
+  def call
+    input = ""
+
+     while input != "exit"
+      puts "Welcome To Your Music Library"
+      puts "What Would You Like To Do"
+
+      input = gets.strip
+
+      case input
+      when "list songs"
+
+        sorted_songs = Song.all.sort{|a, b| a.artist.name <=> b.artist.name}
+
+          sorted_songs.each_with_index do |s, i|
+            puts "#{i + 1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+          end
+
+
+
+       when "list artists"
+         Artist.all.each{|artist| puts "#{artist.name}"}
+
+       when "list genres"
+         Genre.all.each{|genre| puts "#{genre.name}"}
+
+       when "list artist"
+         Artist.all.each do |a|
+           a.songs.each{|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" }
+         end #each
+
+       when "play song"
+         Song.all.each{|s| puts "Playing #{s.artist.name} - #{s.name} - #{s.genre.name}"}
+
+       when "list genre"
+         Genre.all.each do |a|
+           a.songs.each{|s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" }
+         end #each
+
+       end#case
+    end #while loop
+  end #call Method
+
+end #class
