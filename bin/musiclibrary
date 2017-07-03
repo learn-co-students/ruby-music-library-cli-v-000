@@ -3,7 +3,8 @@
 require_relative '../config/environment'
 
 
-require '../lib/music_importer.rb'
-
-
 MusicLibraryController.new.call
+
+input = gets.strip
+if input == "list songs"
+MusicLibraryController.list_songs

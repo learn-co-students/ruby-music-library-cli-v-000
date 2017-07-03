@@ -55,29 +55,41 @@ class MusicLibraryController
      end
    end
 
-   def list_songs_by_artist #in progress
+   def list_songs_by_artist
      puts "Please enter the name of an artist:"
-     artist = gets.chomp
-     artist = Artist.find_by_name(artist)
-     artist.songs.sort{ |song1, song2| song1.name <=> song2.name }.each_with_index do |song, i|
+     input = gets.chomp
+     artist = Artist.find_by_name(input)
+     if artist
+       artist.songs.sort{ |song1, song2| song1.name <=> song2.name }.each_with_index do |song, i|
          puts "#{i+1}. #{song.name} - #{song.genre.name}"
        end
+     else
+       nil
+     end
    end
 
-   def list_songs_by_genre #in progress
+   def list_songs_by_genre
      puts "Please enter the name of a genre:"
-     genre = gets.chomp
-     genre = Genre.find_by_name(genre)
-     genre.songs.sort{ |song1, song2| song1.name <=> song2.name }.each_with_index do |song, i|
+     input = gets.chomp
+     genre = Genre.find_by_name(input)
+     if genre
+       genre.songs.sort{ |song1, song2| song1.name <=> song2.name }.each_with_index do |song, i|
          puts "#{i+1}. #{song.artist.name} - #{song.name}"
        end
+     else
+       nil
+     end
    end
 
    def play_song
      puts "Which song number would you like to play?"
-     song = gets.chomp.to_i
-        file_name = Song.all[song - 1]
-        puts "Playing #{file_name.song.name} by #{file_name.artist.name}"
+     input = gets.chomp.to_i
+     if (0..Song.all.length).include?(input)
+        song = Song.all[input - 1]
+        puts "Playing #{song.name} by #{song.artist.name}"
+      else
+        nil
+      end
    end
 
 end
