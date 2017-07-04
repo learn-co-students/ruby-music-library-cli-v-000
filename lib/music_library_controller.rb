@@ -15,24 +15,29 @@ class MusicLibraryController
      puts "To list all of the songs of a particular genre, enter 'list genre'."
      puts "To play a song, enter 'play song'."
      puts "To quit, type 'exit'."
-     puts "What would you like to do?"
-     input = gets.strip
+     input = " "
 
-      if input != "exit"
-        call
-      elsif input == "list songs"
-        list_songs
-      elsif input == "list artists"
-        list_artists
-      elsif input == "list genres"
-        list_genres
-      elsif input == "list artist"
-        list_songs_by_artist
-      elsif input == "list genre"
-        list_songs_by_genre
-      elsif input == "play song"
-        play_song
-      end
+     until input == "exit"
+       puts "What would you like to do?"
+       input = gets.strip
+       #binding.pry
+
+       case input
+       when "list songs"
+         list_songs
+       when "list artist"
+         list_songs_by_artist
+       when "list genre"
+         list_songs_by_genre
+       when "play song"
+         play_song
+       when "list genres"
+         list_genres
+       when "list artists"
+         list_artists
+       end
+
+     end
    end
 
    def list_songs
@@ -82,14 +87,15 @@ class MusicLibraryController
    end
 
    def play_song
+     list = Song.all.sort_by!{ |song| song.name }
      puts "Which song number would you like to play?"
-     input = gets.chomp.to_i
-     if (0..Song.all.length).include?(input)
-        song = Song.all[input - 1]
-        puts "Playing #{song.name} by #{song.artist.name}"
-      else
+     song = gets.chomp.to_i
+     if (1..Song.all.length).include?(song)
+        file = list[song - 1]
+        puts "Playing #{file.name} by #{file.artist.name}"
+     else
         nil
-      end
+     end
    end
 
 end
