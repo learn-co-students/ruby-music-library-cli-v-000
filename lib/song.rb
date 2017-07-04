@@ -60,4 +60,19 @@ class Song
     self.all.each {|song| puts song.name}
   end
 
+  def self.new_from_filename(file_name)
+    artist, name, genre = file_name.split(" - ")
+    new_song = self.find_or_create_by_name(name)
+    new_song.artist = Artist.find_or_create_by_name(artist)
+    new_song.genre = Genre.find_or_create_by_name(genre.chomp(".mp3"))
+    new_song
+    #binding.pry
+  end
+
+  def self.create_from_filename(file_name)
+    saved_song = self.new_from_filename(file_name)
+    saved_song.save
+    saved_song
+  end
+
 end
