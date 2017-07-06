@@ -1,13 +1,17 @@
 require 'pry'
 class MusicImporter
-  attr_reader :path, :file_list
+  attr_reader :path
+  attr_accessor :file_list
 
   def initialize(path)
     @path = path
   end
 
   def files
-    file_list = Dir.entries(self.path).select {|f| f.match(/(.mp3)/)}
+    self.file_list = Dir.entries(self.path).select {|f| f.match(/(.mp3)/)}
   end
 
+  def import
+    self.files.each {|f| Song.create_from_filename(f)} #unless self.file_list == nil
+  end
 end
