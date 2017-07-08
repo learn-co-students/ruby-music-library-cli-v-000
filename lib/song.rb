@@ -8,6 +8,7 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     @artist = artist
+    # artist.add_song(name)
     @genre = genre
   end
 
@@ -31,7 +32,7 @@ class Song
   end
 
   def self.find_by_name(name)
-    @@all.select { |name| name.include? }
+    @@all.find { |song_name| song_name == name }
   end
 
   def self.find_or_create_by_name(name)

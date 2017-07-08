@@ -32,12 +32,14 @@ class Artist
       @songs
     end
 
-    def add_song(song_name)
-      if Song.artist = nil
-      Song.artist = self
+    def add_song(song)
+      exists = @songs.find(ifnone = nil) { |song_name| song_name == song }
+      if exists == nil
+        @songs << song
       end
-
-
+      if song.artist == nil
+        song.artist = self
+      end
     end
 
 end
