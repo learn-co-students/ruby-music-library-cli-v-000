@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
   attr_accessor :name
 
@@ -21,6 +23,7 @@ class Song
 
   def self.create(name)
     new(name).save
+    # binding.pry
   end
 
 end
