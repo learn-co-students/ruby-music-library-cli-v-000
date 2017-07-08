@@ -1,0 +1,29 @@
+
+[1mFrom:[0m /home/emanao-49242/code/labs/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 12 MusicLibraryController#call:
+
+     [1;34m7[0m: [32mdef[0m [1;34mcall[0m
+     [1;34m8[0m:   user_input = [1;36mnil[0m
+     [1;34m9[0m: 
+    [1;34m10[0m:   [32mwhile[0m user_input != [31m[1;31m"[0m[31mexit[1;31m"[0m[31m[0m
+    [1;34m11[0m:     user_input = gets.chomp
+ => [1;34m12[0m:     binding.pry      
+    [1;34m13[0m:     [32mcase[0m user_input
+    [1;34m14[0m:     [32mwhen[0m [31m[1;31m"[0m[31mlist songs[1;31m"[0m[31m[0m
+    [1;34m15[0m:       list_songs
+    [1;34m16[0m:     [32mwhen[0m [31m[1;31m"[0m[31mlist artists[1;31m"[0m[31m[0m
+    [1;34m17[0m:       list_artists
+    [1;34m18[0m:     [32mwhen[0m [31m[1;31m"[0m[31mlist genres[1;31m"[0m[31m[0m
+    [1;34m19[0m:       list_genres
+    [1;34m20[0m:     [32mwhen[0m [31m[1;31m"[0m[31mplay a song[1;31m"[0m[31m[0m
+    [1;34m21[0m:       play_a_song
+    [1;34m22[0m:     [32mwhen[0m [31m[1;31m"[0m[31martists song[1;31m"[0m[31m[0m
+    [1;34m23[0m:       binding.pry
+    [1;34m24[0m:       artists_song
+    [1;34m25[0m:     [32mwhen[0m [31m[1;31m"[0m[31mgenres song[1;31m"[0m[31m[0m
+    [1;34m26[0m:       genres_song
+    [1;34m27[0m:     [1;34m# else[0m
+    [1;34m28[0m:     [1;34m#   puts"Remember only numbers between 1 and 6 are valid"[0m
+    [1;34m29[0m:     [32mend[0m
+    [1;34m30[0m:   [32mend[0m
+    [1;34m31[0m: [32mend[0m
+
