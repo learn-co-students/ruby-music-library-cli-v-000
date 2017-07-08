@@ -12,6 +12,6 @@ class MusicImporter
   end
 
   def import
-    self.files.each {|f| Song.create_from_filename(f)} #unless self.file_list == nil
+    self.files.each {|f| Song.create_from_filename(f)} 
   end
 end
