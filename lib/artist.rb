@@ -2,6 +2,8 @@ require 'pry'
 class Artist
   extend Concerns::Findable
   # extend Concerns::Listable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
   attr_accessor :name, :songs
   @@all = []
 
@@ -10,9 +12,9 @@ class Artist
     @songs = []
   end
 
-  def save
-    @@all << self
-  end
+  # def save
+  #   @@all << self
+  # end
 
   def add_song(song)
     song.artist = self if song.artist == nil
@@ -26,10 +28,10 @@ class Artist
   def self.all
     @@all
   end
-
-  def self.destroy_all
-    self.all.clear
-  end
+  
+  # def self.destroy_all
+  #   self.all.clear
+  # end
 
   def self.create(name)
     self.new(name).tap {|artist| artist.save}

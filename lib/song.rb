@@ -2,6 +2,8 @@ require 'pry'
 
 class Song
   # extend Concerns::Listable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
   attr_accessor :name
   attr_reader :genre, :artist
   @@all = []
@@ -12,9 +14,9 @@ class Song
     self.genre=(genre) unless genre == nil
   end
 
-  def save
-    @@all << self
-  end
+  # def save
+  #   @@all << self
+  # end
 
   def artist=(artist)
     @artist = artist
@@ -30,9 +32,9 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
+  # def self.destroy_all
+  #   self.all.clear
+  # end
 
   def self.create(name)
     self.new(name).tap {|song| song.save}
