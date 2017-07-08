@@ -1,16 +1,17 @@
-require 'pry'
+class Genre
 
-class Song
   attr_accessor :name
 
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
     @@all
+    # binding.pry
   end
 
   def save
@@ -22,8 +23,13 @@ class Song
   end
 
   def self.create(name)
-    new(name).save
-    # binding.pry
+    s = new(name)
+    s.save
+    s
+  end
+
+  def songs
+    @songs
   end
 
 end
