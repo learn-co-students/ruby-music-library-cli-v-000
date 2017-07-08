@@ -3,3 +3,16 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+ song_list = []
+
+ Song.all.each do |song|
+  song_list << "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+end
+
+song_list.sort.each_with_index do |song, index|
+     puts "#{index + 1}. #{song}"
+end
+
+song_list.sort.each_with_index do |song, index|
+     puts "Playing #{song}"
+end
