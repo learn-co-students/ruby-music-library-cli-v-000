@@ -1,6 +1,7 @@
 require 'pry'
 
 class Song
+  # extend Concerns::Listable
   attr_accessor :name
   attr_reader :genre, :artist
   @@all = []
@@ -59,5 +60,10 @@ class Song
   def self.create_from_filename(filename)
     self.new_from_filename(filename).save
   end
-  
+
+  # def self.sorted_list
+  #   super.each_with_index do |s,i|
+  #     puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+  #   end
+  # end
 end

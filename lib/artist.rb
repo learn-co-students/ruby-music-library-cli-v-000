@@ -1,6 +1,7 @@
 require 'pry'
 class Artist
   extend Concerns::Findable
+  # extend Concerns::Listable
   attr_accessor :name, :songs
   @@all = []
 
@@ -33,4 +34,10 @@ class Artist
   def self.create(name)
     self.new(name).tap {|artist| artist.save}
   end
+  #
+  # def self.sorted_list
+  #   super.each_with_index do |a,i|
+  #     puts "#{i+1}. #{a.name}"
+  #   end
+  # end
 end

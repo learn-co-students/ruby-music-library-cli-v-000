@@ -1,5 +1,6 @@
 class Genre
   extend Concerns::Findable
+  # extend Concerns::Listable
   attr_accessor :name, :songs
   @@all = []
 
@@ -27,4 +28,11 @@ class Genre
   def self.create(name)
     self.new(name).tap {|genre| genre.save}
   end
+
+  # def self.sorted_list
+  #   super.each_with_index do |g,i|
+  #     puts "#{i+1}. #{g.name}"
+  #   end
+  # end
+
 end
