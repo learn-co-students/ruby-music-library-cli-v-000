@@ -7,11 +7,19 @@ class Artist
     @@all << self
   end
 
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   def save
     @@all << self
   end
+
+  def add_song(song)
+    if song.artist == nil
+      song.artist = self
+    end
+    !self.songs.include?(song)
+      self.songs << song
+    end
 
   def self.all
     @@all
