@@ -9,16 +9,16 @@ class Song
 
   attr_accessor :name
 
+  def save
+    @@all << self
+  end
+
   def self.all
     @@all
   end
 
   def self.destroy_all
     @@all.clear
-  end
-
-  def self.save
-    self.all << self
   end
 
   def self.create(name)
