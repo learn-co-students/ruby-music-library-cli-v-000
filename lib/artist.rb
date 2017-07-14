@@ -21,9 +21,9 @@ class Artist
     end
 
     def self.create(name)
-      artist = Artist.new(name)
+      artist = new(name)
       artist.save
-      self
+      artist
     end
 
     def songs
@@ -39,13 +39,5 @@ class Artist
       self.songs.collect{|s|s.genre}.uniq
     end
 
-    def Artist.find_or_create_by_name(name)
-    if self.all.detect{|artist| artist.name == name} == nil
-      Song.artist = Artist.new(name)
-    else
-      self.all.detect{|artist| artist.name == name}
-    end
-
-  end
 
 end
