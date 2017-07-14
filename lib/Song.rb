@@ -4,11 +4,17 @@ class Song
 
   def initialize(name, artist=nil)
     @name = name
-    @artist = artist
+    self.artist = artist unless artist == nil
     @@all << self
   end
 
-  attr_accessor :name, :artist
+  attr_accessor :name#, :artist
+  attr_reader :artist
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self) unless artist.songs.include?(self)
+  end
 
   def save
     @@all << self
