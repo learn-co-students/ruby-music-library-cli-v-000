@@ -1,4 +1,5 @@
 class Genre
+  extend Concerns::Findable
   @@all = []
 
   def initialize(name)

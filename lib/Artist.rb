@@ -1,4 +1,5 @@
 class Artist
+  extend Concerns::Findable
   @@all = []
 
   def initialize(name)
