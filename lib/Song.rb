@@ -40,6 +40,17 @@ class Song
     end
   end
 
+  def self.new_from_filename(file_name)
+    arr = file_name.split(" - ")
+    song = self.find_or_create_by_name(arr[1])
+    song.artist = arr[0]
+    song.artist.add_song(song)
+  end
+
+  def self.create_from_filename(file_name)
+    self.new_from_file_name(file_name).save
+  end
+
   def self.all
     @@all
   end
