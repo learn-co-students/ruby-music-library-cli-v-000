@@ -1,5 +1,3 @@
-require "pry"
-
 class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
@@ -47,48 +45,38 @@ class MusicLibraryController
   end
 
   def list_songs
-    counter = 0
     songs = self.generate_song_list
 
-    songs.each do |song|
-      counter += 1
-      puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    songs.each.with_index(1) do |song, index|
+      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    counter = 0
     artists = Artist.all.sort_by {|artist| artist.name}
 
-    artists.each do |artist|
-      counter += 1
-      puts "#{counter}. #{artist.name}"
+    artists.each.with_index(1) do |artist, index|
+      puts "#{index}. #{artist.name}"
     end
   end
 
   def list_genres
-    counter = 0
-    genres = Genre.all
-    genres_sorted = genres.sort_by {|genre| genre.name}
+    genres = Genre.all.sort_by {|genre| genre.name}
 
-    genres_sorted.each do |genre|
-      counter += 1
-      puts "#{counter}. #{genre.name}"
+    genres.each.with_index(1) do |genre, index|
+      puts "#{index}. #{genre.name}"
     end
   end
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     input = gets.chomp
-    artist = Artist.find_by_name(input)
 
-    if artist != nil
+    if artist = Artist.find_by_name(input)
       song_list = artist.songs.sort_by {|song| song.name}
-      counter = 0
 
-      song_list.each do |song|
-        counter += 1
-        puts "#{counter}. #{song.name} - #{song.genre.name}"
+      song_list.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
       end
     end
   end
@@ -96,15 +84,12 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     input = gets.chomp
-    genre = Genre.find_by_name(input)
 
-    if genre != nil
+    if genre = Genre.find_by_name(input)
       song_list = genre.songs.sort_by {|song| song.name}
-      counter = 0
 
-      song_list.each do |song|
-        counter += 1
-        puts "#{counter}. #{song.artist.name} - #{song.name}"
+      song_list.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
       end
     end
   end

@@ -1,8 +1,8 @@
 class Genre
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
   @@all = []
-
-  extend Concerns::Findable
 
   ### INSTANTIATION METHODS ###
   def initialize(name)
@@ -31,17 +31,12 @@ class Genre
   end
 
   def add_song(song)
-    unless self.songs.include?(song)
-      self.songs << song
-    end
-    unless song.genre
-      song.genre = self
-    end
+    self.songs << song unless self.songs.include?(song)
+    song.genre = self unless song.genre
   end
 
   def artists
-    artists = self.songs.collect {|song| song.artist}
-    artists.uniq
+    self.songs.collect {|song| song.artist}.uniq
   end
 
 end

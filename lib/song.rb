@@ -1,19 +1,15 @@
 class Song
+  extend Concerns::Findable
+
   attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
 
-  extend Concerns::Findable
-
   ### INSTANTIATION METHODS ###
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    if artist != nil
-      self.artist=(artist)
-    end
-    if genre != nil
-      self.genre=(genre)
-    end
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def self.create(name, artist = nil, genre = nil)
