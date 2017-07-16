@@ -22,6 +22,9 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.each{|e|puts e}
+    count = 0
+    arr = Song.all
+    binding.pry
+    arr.each{|e|puts "#{count += 1}. #{e.artist.name} - #{e.name} - #{e.genre.name}"}
   end
 end
