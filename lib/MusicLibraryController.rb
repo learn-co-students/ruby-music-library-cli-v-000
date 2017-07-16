@@ -20,4 +20,8 @@ class MusicLibraryController
       input = gets
     end
   end
+
+  def list_songs
+    Song.all.each{|e|puts e}
+  end
 end
