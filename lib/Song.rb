@@ -33,7 +33,6 @@ class Song
   def self.find_or_create_by_name(name)
     song = self.find_by_name(name)
     if song == nil
-      #create a song
       self.create(name)
     else
       song
@@ -42,13 +41,17 @@ class Song
 
   def self.new_from_filename(file_name)
     arr = file_name.split(" - ")
+    #binding.pry
+    artist = Artist.find_or_create_by_name(arr[0])
+    genre = Genre.find_or_create_by_name(arr[2].chomp('.mp3'))
     song = self.find_or_create_by_name(arr[1])
-    song.artist = arr[0]
-    song.artist.add_song(song)
+    song.artist = artist
+    song.genre = genre
+    song
   end
 
   def self.create_from_filename(file_name)
-    self.new_from_file_name(file_name).save
+    self.new_from_filename(file_name).save
   end
 
   def self.all
