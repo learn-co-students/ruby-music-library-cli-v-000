@@ -33,7 +33,8 @@ class Artist
     end
 
     def add_song(song)
-      exists = @songs.find(ifnone = nil) { |song_name| song_name == song }
+      exists = @songs.detect { |s| s.name == song }
+      # binding.pry
       if exists == nil
         @songs << song
       end
