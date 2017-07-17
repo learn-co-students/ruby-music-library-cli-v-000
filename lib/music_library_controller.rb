@@ -1,74 +1,84 @@
 class MusicLibraryController
-  extend Concerns::Findable
   def initialize(path = "./db/mp3s")
-    importer = MusicImporter.new(path)
-    importer.import
+    MusicImporter.new(path).import
   end
 
   def call
-    input = ""
-    while input != "exit"
-      puts "Welcome to your music library!"
-      puts "What would you like to do?"
-      input = gets.strip
+    loop do
+       puts "Welcome to your music library!"
+       puts "To list all of your songs, enter 'list songs'."
+      input = gets.chomp
+
       case input
       when "list songs"
-        songs
+        list_songs
       when "list artists"
-        artists
+        list_artists
       when "list genres"
-        genres
-      when "list artist"
-        list_artist
-      when "list genre"
-        list_genre
+        list_genres
       when "play song"
-        play_song
+        print "Enter the song number: "
+        song_num = gets.chomp.to_i
+        play_song(song_num)
+      when "exit"
+        break
       end
+
+      if artists.include?(input)
+        list_artist_songs(input)
+      elsif genres.include?(input)
+        list_genre_songs(input)
+      end
+
     end
   end
 
   def artists
-    Artist.all.each.with_index(1) do |a, i|
-      puts "#{i}. #{a}"
-    end
+    artists = songs.collect { |song| song.artist.name}.uniq.sort
   end
 
   def genres
-    Genre.all.each.with_index(1) do |g, i|
-      puts "#{i}. #{g}"
-    end
-  end
-
-  def list_artist
-    puts "What artist by name you like to list songs for?"
-    artist_input = gets.strip
-    if artist = Artist.find_by_name(artist_input)
-      artist.songs.each do |s,i|
-        puts "#{i}. #{s}"
-      end
-    end
-  end
-
-  def list_genre
-    puts "What genre by name you like to list songs for?"
-    genre_input = gets.strip
-    if genre = Genre.find_by_name(genre_input)
-      genre.songs.each do |s,i|
-        puts "#{i}. #{s}"
-      end
-    end
-  end
-
-  def play_song
-    puts "What song number would you like to play?"
-    song_input = gets.strip
-    puts "Playing #{Song.all[song_input.to_i-1]}"
+    genres = songs.collect { |song| song.genre.name}.uniq.sort
   end
 
   def songs
-    Song.all.each.with_index(1) do |s, i|
-      puts "#{i}. #{s}"
+    songs = Song.all.sort_by { |song| [ song.artist.name, song.name ] }
+  end
+
+  def list_artists
+    artists.each do |artist|
+      puts "#{artist}"
     end
+  end
+
+  def list_artist_songs(artist_name)
+    artist = Artist.find_by_name(artist_name)
+    artist.songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_genre_songs(genre_name)
+    genre = Genre.find_by_name(genre_name)
+    genre.songs.each do |song|
+      puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_genres
+    genres.each do |genre|
+      puts "#{genre}"
+    end
+  end
+
+  def list_songs
+    songs.each do |song|
+      puts "#{songs.index(song)+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def play_song(song_num)
+    song = songs[song_num - 1]
+    puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 end
