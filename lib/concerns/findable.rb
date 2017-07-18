@@ -9,5 +9,10 @@ module Concerns
       find_by_name(name) || create(name)
     end
 
+    # def create_by_name(name)
+    #   self.new.tap {|o| o.name = name}
+    # end
+
   end
+
 end
