@@ -1,4 +1,6 @@
 class Genre
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -34,7 +36,5 @@ class Genre
     song
     #new(name).tap{|s| s.save}
   end
-
-
 
 end

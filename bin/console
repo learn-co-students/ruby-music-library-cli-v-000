@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'irb'
+require_relative '../config/environment'
+
+puts "loading your CLI environment"
+IRB.start
+
+###########
+#in console type:
+#chmod +x bin/console 
+#this adds executable permission to run the file
+#then type:
+# ./bin/console  #to start
