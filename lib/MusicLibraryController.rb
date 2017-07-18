@@ -23,8 +23,53 @@ class MusicLibraryController
 
   def list_songs
     count = 0
-    arr = Song.all
-    binding.pry
+    arr = Song.all.sort {|x,y| x.name <=> y.name}
     arr.each{|e|puts "#{count += 1}. #{e.artist.name} - #{e.name} - #{e.genre.name}"}
+  end
+
+  def list_artists
+    count = 0
+    arr = Artist.all.sort {|x,y| x.name <=> y.name}
+    arr.each{|e|puts "#{count += 1}. #{e.name}"}
+  end
+
+  def list_genres
+    count = 0
+    arr = Genre.all.sort {|x,y| x.name <=> y.name}
+    arr.each{|e|puts "#{count += 1}. #{e.name}"}
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist = gets
+    count = 0
+    artist_object = Artist.find_by_name(artist)
+    if artist_object != nil
+      arr = artist_object.songs.sort {|x, y| x.name <=> y.name}
+      arr.each{|e|puts "#{count += 1}. #{e.name} - #{e.genre.name}"}
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre = gets
+    count = 0
+    genre_object = Genre.find_by_name(genre)
+    if genre_object != nil
+      arr = genre_object.songs.sort {|x, y| x.name <=> y.name}
+      arr.each{|e|puts "#{count += 1}. #{e.artist.name} - #{e.name}"}
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_choice = gets
+    arr = Song.all.sort {|x,y| x.name <=> y.name}
+binding.pry
+    if [1...arr.length-1].include?(song_choice)
+      song = arr[song_choice-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
+
   end
 end

@@ -6,11 +6,10 @@ class Song
     @name = name
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
-    @@all << self
+    #@@all << self
   end
 
-  attr_accessor :name
-  attr_reader :artist, :genre
+  attr_accessor :name, :artist, :genre
 
   def artist=(artist)
     @artist = artist
@@ -31,12 +30,13 @@ class Song
   end
 
   def self.find_or_create_by_name(name)
-    song = self.find_by_name(name)
-    if song == nil
-      self.create(name)
-    else
-      song
-    end
+    # song = self.find_by_name(name)
+    # if song == nil
+    #   self.create(name)
+    # else
+    #   song
+    # end
+    self.find_by_name(name) || self.create(name)
   end
 
   def self.new_from_filename(file_name)
@@ -44,14 +44,16 @@ class Song
     #binding.pry
     artist = Artist.find_or_create_by_name(arr[0])
     genre = Genre.find_or_create_by_name(arr[2].chomp('.mp3'))
-    song = self.find_or_create_by_name(arr[1])
-    song.artist = artist
-    song.genre = genre
-    song
+    song = self.new(arr[1], artist, genre)
+    # song.artist = artist
+    # song.genre = genre
+    # song
   end
 
   def self.create_from_filename(file_name)
     self.new_from_filename(file_name).save
+    # song.save
+    # song
   end
 
   def self.all
@@ -62,7 +64,9 @@ class Song
     @@all.clear
   end
 
-  def self.create(name)
-    song = Song.new(name)
+  def self.create(name, artist = nil, genre = nil)
+    song = Song.new(name, artist, genre)
+    song.save
+    song
   end
 end
