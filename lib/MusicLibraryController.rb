@@ -63,10 +63,10 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    song_choice = gets
-    arr = Song.all.sort {|x,y| x.name <=> y.name}
-binding.pry
-    if [1...arr.length-1].include?(song_choice)
+    song_choice = gets.strip.to_i
+    arr = Song.all.sort {|x, y| x.name <=> y.name}
+    #binding.pry
+    if (1..arr.length).to_a.include?(song_choice)
       song = arr[song_choice-1]
       puts "Playing #{song.name} by #{song.artist.name}"
     end
