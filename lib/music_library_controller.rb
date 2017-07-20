@@ -1,5 +1,4 @@
 class MusicLibraryController
-  attr_accessor :name
 
   def initialize(path = './db/mp3s')
     MusicImporter.new(path).import
@@ -40,7 +39,7 @@ class MusicLibraryController
 
   def list_songs
     Song.all.sort{|a, b| a.name <=> b.name}.each_with_index(1) do |s, i|
-      puts "#{i}. #{s.artist.name} - #{s.name} -#{s.genre.name}"
+      puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
   end
 
@@ -57,8 +56,8 @@ class MusicLibraryController
   end
 
   def list_songs_by_artist
-    puts "Please enter the name of the artist"
-    input = gets.chomp
+    puts "Please enter the name of the artist:"
+    input = gets.strip
 
     if artist = Artist.find_by_name(input)
       artist.song.sort{|a, b| a.name <=> b.name}.each_with_index(1) do |s, i|
@@ -67,6 +66,28 @@ class MusicLibraryController
     end
   end
 
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
 
+    if genre = Genre.find_by_name(input)
+      genre.songs.sort{|a, b| a.name <=> b.name}.each_with_index(1) do |s, i|
+        puts "#{i}. #{s.artist.name} - #{s.name}"
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+
+    if (1..Song.all.length).include?(input)
+      song = Song.all.sort{|a, b| a.name <=> b.name}.each_with_index(1) do |s, i|
+        puts "#{i}. #{s.artist.name} - #{s.name}"
+      end
+
+      puts "Playing #{song.name} by #{song.artist.name}" if song
+    end
+  end
 
 end
