@@ -15,12 +15,12 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    self.artist.add_song(self) unless self.artist.songs.include?(self)
+    self.artist.add_song(self)
   end
 
   def genre=(genre)
     @genre = genre
-    self.genre.add_song(self) unless self.genre.songs.include?(self)
+    self.genre.add_song(self)
   end
 
   def self.all
@@ -42,18 +42,14 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    file = File.basename(filename)
-    artist, song, genre = file.split(" - ")[0], file.split(" - ")[1], file.split(" - ")[2]
-    # binding.pry
+    artist, song, genre = filename.split(" - ")[0], filename.split(" - ")[1], filename.split(" - ")[2].sub(/.mp3/, '')
+    artist = Artist.find_or_create_by_name(artist)
+    genre = Genre.find_or_create_by_name(genre)
     self.new(song, artist, genre)
-    # song.artist=(artist_name)
-    # song.genre=(genre_name)
-    # song.artist.add_song(song)
-    # song
   end
 
   def self.create_from_filename(filename)
-    
+    self.new_from_filename(filename).save
   end
 
 end

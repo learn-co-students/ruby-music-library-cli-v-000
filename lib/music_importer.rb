@@ -10,11 +10,8 @@ class MusicImporter
     mp3_files.select { |file| file.include?('mp3')}
   end
 
-  def self.import
-    file = files.collect do |filename|
-      filename.split(" - ")
-    Song.new_from_filename(filename)
-    end
+  def import
+    files.collect { |filename| Song.create_from_filename(filename) }
   end
 
 end
