@@ -1,6 +1,7 @@
 require 'pry'
 
 class Song
+  extend Concerns::Findable
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -38,19 +39,6 @@ class Song
     s = new(name)
     s.save
     s
-  end
-
-  def self.find_by_name(name)
-    @@all.find { |song_name| song_name == name }
-  end
-
-  def self.find_or_create_by_name(name)
-    s = self.find_by_name(name)
-    if s = nil
-      self.create(name)
-    else
-      s
-    end
   end
 
 end
