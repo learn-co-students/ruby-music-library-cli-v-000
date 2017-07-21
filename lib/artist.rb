@@ -1,6 +1,6 @@
 class Artist
 
-    attr_accessor :name
+    attr_accessor :name, :songs
 
     @@all = []
 
@@ -11,7 +11,6 @@ class Artist
 
     def self.all
       @@all
-      # binding.pry
     end
 
     def save
@@ -33,14 +32,16 @@ class Artist
     end
 
     def add_song(song)
-      exists = @songs.detect { |s| s.name == song }
-      # binding.pry
-      if exists == nil
-        @songs << song
+      @songs << song unless @songs.include?(song)
+      song.artist = self unless song.artist == self
+      song
+    end
+
+    def genres
+      genres = @songs.collect do |song|
+        song.genre
       end
-      if song.artist == nil
-        song.artist = self
-      end
+      genres.uniq
     end
 
 end
