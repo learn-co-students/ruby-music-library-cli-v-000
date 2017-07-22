@@ -46,6 +46,45 @@ class MusicLibraryController
     list.sort.uniq.each_with_index { |string, index | puts "#{index+1}. #{string}" }
   end
 
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    list = Artist.all.sort_by do | artist |
+        artist.name
+      end
+    list.uniq.each_with_index do | artist, index |
+      if input == artist.name
+      puts "#{index+1}. #{artist.name} - #{artist.songs.genre.name}"
+      end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    list = Genre.all.sort_by do | genre |
+        genre.name
+      end
+    list.uniq.each_with_index do | genre, index |
+      if input == genre.name
+      puts "#{index+1}. #{genre.name} - #{genre.artist.name}"
+      end
+    end
+  end
+
+  # def list_songs_by_artist
+  #   puts "Please enter the name of an artist:"
+  #   input = gets.strip
+  #   list = Song.all.sort_by do | song |
+  #       song.artist.name
+  #     end
+  #   list.uniq.each_with_index do | song, index |
+  #     if input == song.artist.name
+  #     puts "#{index+1}. #{song.artist.name} - #{song.genre.name}"
+  #     end
+  #   end
+  # end
+
   # def list_songs_by_artist
   #     puts "Please enter the name of an artist:"
   #     input = gets.chomp
