@@ -69,7 +69,7 @@ describe "Genre" do
     it "initializes and saves the genre" do
       created_genre = Genre.create("shoegaze")
 
-      expect(Genre.all).to include(created_genre)
+      expect(Genre.all.length).to eq(1)
     end
   end
 end

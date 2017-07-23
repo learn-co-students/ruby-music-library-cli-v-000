@@ -33,12 +33,12 @@ describe "Concerns::Findable" do
 
     context "works exactly like a generic version of Song.find_by_name," do
       it "searching the extended class's @@all variable for an instance that matches the provided name" do
-        expect(Artist.find_by_name("Slowdive")).to be(artist)
+        expect(Artist.find_by_name("Slowdive")).to eq(artist)
       end
     end
 
     it "isn't hard-coded" do
-      expect(Genre.find_by_name("shoegaze")).to be(genre)
+      expect(Genre.find_by_name("shoegaze")).to eq(genre)
     end
   end
 
@@ -49,11 +49,11 @@ describe "Concerns::Findable" do
 
     context "works exactly like a generic version of Song.find_or_create_by_name:" do
       it "finds (does not recreate) an existing instance with the provided name if one exists in @@all" do
-        expect(Artist.find_or_create_by_name("Slowdive")).to be(artist)
+        expect(Artist.find_or_create_by_name("Slowdive")).to eq(artist)
       end
 
       it "isn't hard-coded" do
-        expect(Genre.find_or_create_by_name("shoegaze")).to be(genre)
+        expect(Genre.find_or_create_by_name("shoegaze")).to eq(genre)
       end
 
       it "invokes .find_by_name instead of re-coding the same functionality" do

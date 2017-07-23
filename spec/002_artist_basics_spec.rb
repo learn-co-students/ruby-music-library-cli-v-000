@@ -69,7 +69,7 @@ describe "Artist" do
     it "initializes and saves the artist" do
       created_artist = Artist.create("Fear of Tigers")
 
-      expect(Artist.all).to include(created_artist)
+      expect(Artist.all.length).to eq(1)
     end
   end
 end
