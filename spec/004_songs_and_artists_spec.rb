@@ -30,6 +30,7 @@ describe "Associations — Song and Artist:" do
 
         expect(song_with_artist.instance_variable_defined?(:@artist)).to be(true)
         expect(song_with_artist.instance_variable_get(:@artist)).to be(artist)
+
       end
     end
 
