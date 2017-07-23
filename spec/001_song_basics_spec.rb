@@ -69,7 +69,7 @@ describe "Song" do
     it "initializes and saves the song" do
       created_song = Song.create("Kaohsiung Christmas")
 
-      expect(Song.all).to include(created_song)
+      expect(Song.all.length).to eq(1)
     end
   end
 end

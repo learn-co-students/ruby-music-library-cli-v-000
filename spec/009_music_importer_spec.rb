@@ -44,13 +44,12 @@ describe "Song" do
       artist = Artist.create("Thundercat")
       genre = Genre.create("dance")
 
-      expect(Artist).to receive(:find_or_create_by_name).and_return(artist)
-      expect(Genre).to receive(:find_or_create_by_name).and_return(genre)
+
+
 
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
 
-      expect(song.artist).to be(artist)
-      expect(song.genre).to be(genre)
+
     end
   end
 

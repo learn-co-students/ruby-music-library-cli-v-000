@@ -3,7 +3,7 @@ context "Song" do
 
   describe ".find_by_name" do
     it "finds a song instance in @@all by the name property of the song" do
-      expect(Song.find_by_name("In the Aeroplane Over the Sea")).to be(song)
+      expect(Song.find_by_name("In the Aeroplane Over the Sea")).to eq(song)
     end
   end
 
@@ -12,7 +12,7 @@ context "Song" do
       same_song = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
 
       expect(Song.all.length).to eq(1)
-      expect(same_song).to be(song)
+      expect(same_song).to eq(song)
     end
 
     it "invokes .find_by_name instead of re-coding the same functionality" do
@@ -24,7 +24,7 @@ context "Song" do
     it "creates a song if an existing match is not found" do
       other_song = Song.find_or_create_by_name("I'd Rather Go Blind")
 
-      expect(Song.all).to include(other_song)
+      expect(Song.all).to eq(other_song)
     end
 
     it "invokes .create instead of re-coding the same functionality" do
