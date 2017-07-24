@@ -36,5 +36,9 @@ class Artist
       song.genre
     end.uniq
   end
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 2dbfac2cbce8289218d3409c72fc89f33be75725
 end
