@@ -73,6 +73,7 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     user_input = gets.strip.to_i
     list_songs
+    binding.pry
     Song.all.sort {|a,b| a.name <=> b.name}.each_with_index do |song, number|
     if user_input == number
       puts "#{songs.artist.name} - #{songs.name}"
