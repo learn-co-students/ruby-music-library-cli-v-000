@@ -1,0 +1,67 @@
+=> [32m#<Song:0x00000001789d70[0m
+ @artist[32m=[0m
+  [32m#<Artist:0x000000022d82f8[0m
+   @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+   @songs[32m=[0m
+    [[32m#<Song:0x000000022d84d8[0m
+      @artist[32m=[0m[32m#<Artist:0x000000022d82f8[0m ...[32m>[0m,
+      @genre[32m=[0m
+       [32m#<Genre:0x000000022cf9a0[0m
+        @artist[32m=[0m[],
+        @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+        @songs[32m=[0m
+         [[32m#<Song:0x000000022d84d8[0m ...[32m>[0m,
+          [32m#<Song:0x0000000232c678[0m
+           @artist[32m=[0m[32m#<Artist:0x000000022d82f8[0m ...[32m>[0m,
+           @genre[32m=[0m[32m#<Genre:0x000000022cf9a0[0m ...[32m>[0m,
+           @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+          [32m#<Song:0x00000001789d70[0m ...[32m>[0m][32m>[0m,
+      @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+     [32m#<Song:0x0000000232c678[0m
+      @artist[32m=[0m[32m#<Artist:0x000000022d82f8[0m ...[32m>[0m,
+      @genre[32m=[0m
+       [32m#<Genre:0x000000022cf9a0[0m
+        @artist[32m=[0m[],
+        @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+        @songs[32m=[0m
+         [[32m#<Song:0x000000022d84d8[0m
+           @artist[32m=[0m[32m#<Artist:0x000000022d82f8[0m ...[32m>[0m,
+           @genre[32m=[0m[32m#<Genre:0x000000022cf9a0[0m ...[32m>[0m,
+           @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+          [32m#<Song:0x0000000232c678[0m ...[32m>[0m,
+          [32m#<Song:0x00000001789d70[0m ...[32m>[0m][32m>[0m,
+      @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+     [32m#<Song:0x00000001789d70[0m ...[32m>[0m][32m>[0m,
+ @genre[32m=[0m
+  [32m#<Genre:0x000000022cf9a0[0m
+   @artist[32m=[0m[],
+   @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+   @songs[32m=[0m
+    [[32m#<Song:0x000000022d84d8[0m
+      @artist[32m=[0m
+       [32m#<Artist:0x000000022d82f8[0m
+        @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+        @songs[32m=[0m
+         [[32m#<Song:0x000000022d84d8[0m ...[32m>[0m,
+          [32m#<Song:0x0000000232c678[0m
+           @artist[32m=[0m[32m#<Artist:0x000000022d82f8[0m ...[32m>[0m,
+           @genre[32m=[0m[32m#<Genre:0x000000022cf9a0[0m ...[32m>[0m,
+           @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+          [32m#<Song:0x00000001789d70[0m ...[32m>[0m][32m>[0m,
+      @genre[32m=[0m[32m#<Genre:0x000000022cf9a0[0m ...[32m>[0m,
+      @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+     [32m#<Song:0x0000000232c678[0m
+      @artist[32m=[0m
+       [32m#<Artist:0x000000022d82f8[0m
+        @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+        @songs[32m=[0m
+         [[32m#<Song:0x000000022d84d8[0m
+           @artist[32m=[0m[32m#<Artist:0x000000022d82f8[0m ...[32m>[0m,
+           @genre[32m=[0m[32m#<Genre:0x000000022cf9a0[0m ...[32m>[0m,
+           @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+          [32m#<Song:0x0000000232c678[0m ...[32m>[0m,
+          [32m#<Song:0x00000001789d70[0m ...[32m>[0m][32m>[0m,
+      @genre[32m=[0m[32m#<Genre:0x000000022cf9a0[0m ...[32m>[0m,
+      @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+     [32m#<Song:0x00000001789d70[0m ...[32m>[0m][32m>[0m,
+ @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m
