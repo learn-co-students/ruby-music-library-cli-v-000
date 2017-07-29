@@ -1,5 +1,5 @@
 require "spec_helper"
-
+require 'pry'
 describe "CLI Methods" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
   let(:other_music_library_controller) { MusicLibraryController.new("./spec/fixtures/other_mp3s") }
@@ -37,7 +37,7 @@ describe "CLI Methods" do
 
     it "is not hard-coded" do
       Artist.create("ZZ Top")
-
+  
       expect($stdout).to receive(:puts).with("1. Alpha 9")
       expect($stdout).to receive(:puts).with("2. Bob Dylan")
       expect($stdout).to receive(:puts).with("3. Cass McCombs")
