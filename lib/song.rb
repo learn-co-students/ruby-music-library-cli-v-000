@@ -25,7 +25,7 @@ class Song #belongs to an Artist and a Genre
   end
 
   def save #returns an array
-    @@all << self
+    @@all << self unless @@all.detect {|song| song == self}
     self
   end
 

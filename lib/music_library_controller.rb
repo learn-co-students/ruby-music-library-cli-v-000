@@ -4,10 +4,13 @@ class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
     @path = path
-    new = MusicImporter.new(path).import
+    MusicImporter.new(path).import
   end
 
   def call
+    counter = 0
+    user_input = nil
+    while user_input != "exit" && counter < 4
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -17,24 +20,27 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    counter = 0
     user_input = gets.strip
-    if user_input != "exit" || counter > 4
-      counter += 1
-      self.call
-    elsif user_input == "exit" || counter == 4
-      "exit"
+    case user_input
+      when "list songs"
+        self.list_songs
+      when "list artists"
+        self.list_artists
+      when "list genres"
+        self.list_genres
+      when "list artist"
+        self.list_songs_by_artist
+      when "list genre"
+        self.list_songs_by_genre
+      when "play song"
+        self.play_song
     end
+    counter += 1
   end
+end
 
   def list_songs #prints list of filenames alphabetized by song name
-    #need an array of with all the songs parsed from a path
-    library = Dir.glob("./#{@path}/*").collect {|file| File.basename("#{file}").sub(".mp3", "")}
-    nested_library = library.collect {|song_string| song_string.split(" - ")}
-    alphabetized_array = nested_library.sort_by {|song_array| song_array[1]}
-    beta_array = alphabetized_array.collect {|array| array.join(" - ")}
-    beta_array.each_with_index {|value, index| puts "#{index+1}. #{value}"}
-
+    Song.all.uniq.sort_by {|song| song.name}.each.with_index(1) {|song, index| puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
   def list_artists
@@ -71,15 +77,13 @@ class MusicLibraryController
   end
 
   def play_song
+    puts "Which song number would you like to play?"
     user_input = gets.strip
     integer_input = user_input.to_i
-    puts "Which song number would you like to play?"
-
-    if Song.all.length >= integer_input
+    if Song.all.length >= integer_input && integer_input > 0
       alpha_songs = Song.all.sort_by {|song| song.name}
       name = alpha_songs[integer_input - 1].name
       artist = alpha_songs[integer_input - 1].artist.name
-      binding.pry
       #breakdown = self.list_songs.
       #breakdown shows as an array in pry, but the value of self.list_songs is actually nil because of puts
       #array = breakdown.split(",")
