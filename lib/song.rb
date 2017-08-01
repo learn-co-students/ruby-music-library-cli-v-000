@@ -1,11 +1,14 @@
 require 'pry'
 class Song
+  extend Concerns::Findable
   attr_accessor :name, :genre, :artist
+
   @@all = []
+
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist= (artist) if artist != nil
-    self.genre= (genre) if artist != nil
+    self.artist= artist if artist != nil
+    self.genre= genre if artist != nil
   end
 
   def self.all #class reader
@@ -20,21 +23,21 @@ class Song
     @@all << self
   end
 
-  def self.create(song)
-    songs = new(song)
-    songs.save
-    songs
+  def self.create(name)
+    song = Song.new(name)
+    song.save
+    song
   end
 
-   def artist=(artist_name)
+   def artist=(artist)
      #artist= instead of simply assigning to an @artist instance variable
      #to ensure that associations are created upon initialization
-     artist_name.add_song(self) unless artist_name.songs.include?(self)
-    @artist = artist_name
+     self.artist.add_song(self)
+    @artist = artist
   end
 
     def genre=(genre)
-      genre.songs << self unless genre.songs.include?(self)
+      self.genre.songs << self unless genre.songs.include?(self)
       @genre = genre
     end
 

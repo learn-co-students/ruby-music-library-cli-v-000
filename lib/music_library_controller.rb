@@ -1,9 +1,10 @@
 require 'pry'
 class MusicLibraryController
+  extend Concerns::Findable
+  attr_reader :path, :music_importer
 
   def initialize(path = './db/mp3s')
-    @path = path
-    music_importer = MusicImporter.new(path)
+    @music_importer = MusicImporter.new(path)
     music_importer.import
   end
 
@@ -17,20 +18,30 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+
     user_input = gets.strip # loop while getting user input
+
       until user_input == "exit"
+
         case user_input
+          
           when "list songs"
-            list songs
+            list_songs
             user_input = "exit"
           when "list artists"
-            list artists
+            list_artists
             user_input = "exit"
           when "list genres"
-            list genres
+            list_genres
+            user_input = "exit"
+          when "list artist"
+            list_songs_by_artist
+            user_input = "exit"
+          when "list genre"
+            list_songs_by_genre
             user_input = "exit"
           when "play song"
-            play song
+            play_song
             user_input = "exit"
           else
             puts "I dont understand your response"
@@ -144,4 +155,5 @@ class MusicLibraryController
        end
      }
    end
+
 end
