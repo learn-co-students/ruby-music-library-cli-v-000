@@ -15,11 +15,11 @@ class Artist
   end
 
   def self.destroy_all
-    @@all.clear
+    self.all.clear
   end
 
   def save
-    self.all << self
+    @@all << self
   end
 
   def self.create(name)
@@ -30,8 +30,8 @@ class Artist
 
 
   def add_song(song)
-    @songs << song unless @songs.include? song
     song.artist = self unless song.artist == self
+    @songs << song unless @songs.include?(song)
   end
 
   def genres

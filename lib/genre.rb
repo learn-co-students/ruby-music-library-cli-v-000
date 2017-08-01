@@ -20,13 +20,13 @@ class Genre
   end
 
   def save
-    @all << self
+    @@all << self
   end
 
   def self.create(name)
-    genres = Genre.new(name)
-    genres.save
-    genres
+    genre = Genre.new(name)
+    genre.save
+    genre
   end
 
   def add_song(song)

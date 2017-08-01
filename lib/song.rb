@@ -7,8 +7,8 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist= artist if artist != nil
-    self.genre= genre if artist != nil
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def self.all #class reader
@@ -16,29 +16,27 @@ class Song
   end
 
   def self.destroy_all
-    @@all.clear
+    self.all.clear
   end
 
   def save
     @@all << self
   end
 
-  def self.create(name)
-    song = Song.new(name)
-    song.save
-    song
+  def self.create(name, artist = nil, genre = nil)
+    new(name, artist, genre).tap{|s| s.save}
   end
 
    def artist=(artist)
      #artist= instead of simply assigning to an @artist instance variable
      #to ensure that associations are created upon initialization
-     self.artist.add_song(self)
-    @artist = artist
+     @artist = artist
+     artist.add_song(self)
   end
 
     def genre=(genre)
-      self.genre.songs << self unless genre.songs.include?(self)
       @genre = genre
+      genre.add_song(self)
     end
 
     def self.new_from_filename(file_name)
