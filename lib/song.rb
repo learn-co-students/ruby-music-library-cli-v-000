@@ -4,16 +4,18 @@ class Song
   @@all = []
   def initialize(name, artist=nil, genre=nil)
     @name = name
-    self.artist = artist
-    self.genre = genre
+    self.artist = artist if artist != nil
+    self.genre = genre if genre != nil
   end
 
   def artist=(artist)
     @artist = artist
+    artist.add_song(self)
   end
 
   def genre=(genre)
     @genre = genre
+    genre.add_song(self) unless genre.songs.include?(self)
   end
 
   def save
@@ -50,18 +52,15 @@ class Song
   end
 
   def self.new_from_filename(file)
-    self.create(file.split("-")[1].split(".")[0].strip)
-    self.artist = file.split("-")[0].strip
-    self.genre = file.split("-")[2].split(".")[0].strip
-    self.save
-    self
+    song_name = file.split("-")[1].split(".")[0].strip
+    artist_name = file.split("-")[0].strip
+    genre_name = file.split("-")[2].split(".")[0].strip
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    new(song_name, artist, genre)
   end
 
   def self.create_from_filename(file)
-    song = self.create
-    song.name = file.split("-")[1].split(".")[0].strip
-    song.artist = file.split("-")[0].strip
-    song.save
-    song
+    new_from_filename(file).tap{ |song| song.save }
   end
 end

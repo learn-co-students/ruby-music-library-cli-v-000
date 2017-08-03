@@ -16,9 +16,7 @@ class Genre
   end
 
   def artists
-    @songs.collect do |song|
-      song.artist
-    end
+    self.songs.collect {|song| song.artist}.uniq
   end
 
   def add_song(song)
