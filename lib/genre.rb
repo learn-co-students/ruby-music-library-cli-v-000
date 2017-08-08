@@ -21,7 +21,7 @@ class Genre
   end
 
   def self.create(name)
-    new_genre = new(name)
+    new_genre = self.new(name)
     @@all << new_genre
     new_genre
   end
