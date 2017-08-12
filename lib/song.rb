@@ -1,5 +1,5 @@
 class Song   
-  
+   
   attr_accessor :name , :genre
   attr_reader :artist
 
@@ -40,6 +40,13 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
   
+   def self.find_by_name(name)
+    self.all.detect{|s| s.name == name}
+   end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
   
   
   
