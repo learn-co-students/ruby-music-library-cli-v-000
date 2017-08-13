@@ -9,12 +9,13 @@ class MusicImporter
   def files
     #loads all the mp3 files in the path directory
     #normalizes the filename to just the mp3 filename with no path
-    my_files = Dir.glob('./spec/fixtures/mp3s/*')
+    my_files = Dir.glob("#{@path}/*.mp3")
 
     my_files.collect do |e|
-      files_path_removed = e
-      files_path_removed.slice! "./spec/fixtures/mp3s/"
-      files_path_removed
+      e.gsub("#{@path}/","")
+      # files_path_removed = e
+      # files_path_removed.slice! "./spec/fixtures/mp3s/"
+      # files_path_removed
     end
 
   end
