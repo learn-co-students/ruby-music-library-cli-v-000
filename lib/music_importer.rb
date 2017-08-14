@@ -17,6 +17,10 @@ class MusicImporter
       # files_path_removed.slice! "./spec/fixtures/mp3s/"
       # files_path_removed
     end
+####OR:
+#def files
+  #  @files ||= Dir.glob("#{path}/*.mp3").collect{|f| f.gsub("#{path}/", "")}
+#  end
 
   end
 
