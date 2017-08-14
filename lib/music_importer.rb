@@ -9,7 +9,7 @@ class MusicImporter
   
   def files
     # binding.pry
-    @path ||= Dir.glob("#{path}/*.mp3").collect{ |x| x.gsub("#{path}/", "")}
+    @files ||= Dir.glob("#{path}/*.mp3").collect{ |x| x.gsub("#{path}/", "")}
   end
   
   # def import(file)
