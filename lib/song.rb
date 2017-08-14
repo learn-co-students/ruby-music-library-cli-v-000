@@ -26,7 +26,7 @@ class Song
   
 
    def self.create(name,artist=nil, genre=nil)
-    song = Song.new(name)
+    song = Song.new(name,artist,genre)
     song.save
     song
    end
@@ -53,18 +53,28 @@ class Song
      
      filename = filename.split('-')
      
-     artist_from_file = filename[0]
-     song_from_file = filename[1]
-     genre_from_file = filename[2].split('.')[0]
-     artist = find_or_create_by_name(artist_from_file)
-     song = find_or_create_by_name(song_from_file)
-     genre = find_or_create_by_name(genre_from_file)
-     binding.pry
+     artist_from_file = filename[0].strip
+     song_from_file = filename[1].strip
+     genre_from_file = filename[2].split('.')[0].strip
+     
+     artist = Artist.find_or_create_by_name(artist_from_file)
+     genre = Genre.find_or_create_by_name(genre_from_file)
+     song = Song.new(song_from_file,artist,genre)
+      
      
      
    end
   
   def self.create_from_filename(filename)
+     filename = filename.split('-')
+     
+     artist_from_file = filename[0].strip
+     song_from_file = filename[1].strip
+     genre_from_file = filename[2].split('.')[0].strip
+     
+     artist = Artist.find_or_create_by_name(artist_from_file)
+     genre = Genre.find_or_create_by_name(genre_from_file)
+     song = Song.create(song_from_file,artist,genre)
      
   end
   
