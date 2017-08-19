@@ -51,8 +51,4 @@ class Song
 	def self.destroy_all
 		@@all.clear
 	end
-
-	def self.sorted
-		Song.all.sort {|a, b| a.name <=> b.name}
-	end
 end
