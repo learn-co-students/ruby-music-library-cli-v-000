@@ -28,6 +28,6 @@ class MusicLibraryController
 	end
 
 	def list_artists
-		
+		Artist.sorted.each_with_index {|artist, i| puts "#{i+1}. #{artist.name}"}
 	end
 end
