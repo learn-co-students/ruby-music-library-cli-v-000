@@ -2,7 +2,7 @@ class MusicLibraryController
 	attr_accessor :path
 	def initialize(path = './db/mp3s')
 		@path = path
-		MusicImporter.new(path).import
+		library = MusicImporter.new(path).import
 	end
 
 	def call
@@ -20,5 +20,9 @@ class MusicLibraryController
 			puts "what would you like to do?"
 			input = gets.strip
 		end
+	end
+	
+	def list_songs
+		library.songs.all.sort
 	end
 end
