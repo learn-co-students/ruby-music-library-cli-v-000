@@ -34,16 +34,14 @@ class Song
 
 	def self.new_from_filename(filename)
 		attributes = filename.chomp(".mp3").split(" - ")
-		song = Song.find_or_create_by_name(attributes[1])
-		artist_name = Artist.find_or_create_by_name(attributes[0])
-		genre_name = Genre.find_or_create_by_name(attributes[2])
-		song.artist = artist_name
-		song.genre = genre_name
+		song = Song.new(attributes[1])
+		song.artist = Artist.find_or_create_by_name(attributes[0])
+		song.genre = Genre.find_or_create_by_name(attributes[2])
 		song
 	end
 
 	def self.create_from_filename(filename)
-		self.new_from_filename(filename).save
+		self.new_from_filename(filename).tap {|song| song.save}
 	end
 
 	def self.all
@@ -52,5 +50,9 @@ class Song
 
 	def self.destroy_all
 		@@all.clear
+	end
+
+	def self.sorted
+		Song.all.sort {|a, b| a.name <=> b.name}
 	end
 end
