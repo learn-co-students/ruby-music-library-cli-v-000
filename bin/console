@@ -8,4 +8,4 @@ IRB.start
 # to start this in ruby type: chmod +x bin/console then chmod +x console  to give it permision to execute
 # min 8:00 at debugging Tuff one in music CLI https://youtu.be/J_BSGPW37AE
 
-# to start console run ./bin/console while in the (master) ruby-music-library-cli-v-000
+# to start console run ./bin/console while in the (master) ruby-music-library-cli-v-000exit

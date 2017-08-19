@@ -47,25 +47,33 @@ class MusicLibraryController
       Artist.all.each{ |artist| puts artist.name}
   end
   
+  
   def genres
     Genre.all.each{|genre| puts genre.name}
   end
   
   def play_song
-    puts "What song number would you like to listen to?"
-    genre_input = gets.strip
-    if genre = Genre.find_by_name(genre_input)
-      genre.songs.each do |s|
-        puts s
-      end
+    Song.all.sort_by! do |a|
+       a.artist.name
     end
-
+     song_number = gets.strip.to_i - 1
+     puts "Playing #{Song.all[song_number].artist.name} - #{Song.all[song_number].name} - #{Song.all[song_number].genre.name}"
   end
+
   
-  
+  # take the input and iterate thru the Genre with find by name to find the same genre. Then iterate thru the Genre songs to puts them out
   def list_genre
-   
+       genre = gets.chomp
+     Genre.all.each do |a|
+       if a.name == genre
+         a.songs.collect { |s| puts "#{s.artist.name} - #{s.name} - #{s.genre.name}" }
+       end
+     end
   end
-
+  
+      #class end 
 end
+   
+
+
 
