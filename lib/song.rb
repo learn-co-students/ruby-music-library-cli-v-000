@@ -30,13 +30,13 @@ class Song
 		artist.add_song(self)
 	end
 
-	# def artist
-	# 	@artist
-	# end
+	def self.find_by_name(name)
+		self.all.detect {|song| song.name == name}
+	end
 
-	# def genre
-	# 	@genre
-	# end
+	def self.find_or_create_by_name(name)
+		self.find_by_name(name) || self.create(name)
+	end
 
 	def self.all
 		@@all
