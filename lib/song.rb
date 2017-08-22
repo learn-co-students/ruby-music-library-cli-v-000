@@ -24,7 +24,6 @@ class Song
   def self.find_or_create_by_name(name)
     self.find_by_name(name).tap do |result|
       self.create(name)
-      binding.pry
     end
   end
 
