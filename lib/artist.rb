@@ -69,7 +69,7 @@ class Artist
 
   def self.create(name)
     self.new(name).tap do |new_artist|
-      new_artist.save 
+      new_artist.save
     end
   end
 
