@@ -1,0 +1,9 @@
+require 'pry'
+class CLI_Methods
+  def list_songs
+    binding.pry
+    music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+    other_music_library_controller = MusicLibraryController.new("./spec/fixtures/other_mp3s")
+
+  end
+end
