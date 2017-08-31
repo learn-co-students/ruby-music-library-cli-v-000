@@ -1,8 +1,8 @@
 class Artist
   extend Concerns::Findable
   extend Persistable::ClassMethods
-  extend Nameable::ClassMethods
   include Persistable::InstanceMethods
+  extend Nameable::ClassMethods
 
   attr_accessor :name
 
@@ -21,13 +21,13 @@ class Artist
     @songs
   end
 
-  def add_song(song)
-    song.artist=(self) unless song.artist == self
-    @songs << song unless @songs.include?(song)
+  def add_song(song) #I'll be putting in a Song instance as an argument
+    song.artist=(self) unless song.artist == self # Write the Artist in, unless the song's artist reader is already defined
+    songs << song unless songs.include?(song)
   end
 
   def genres
-    @songs.map{|song| song.genre}.uniq
+    songs.map{|song| song.genre}.uniq
   end
 
 end

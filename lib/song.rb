@@ -1,35 +1,35 @@
-require 'pry'
 class Song
   extend Concerns::Findable
   extend Persistable::ClassMethods
-  extend Nameable::ClassMethods
   include Persistable::InstanceMethods
+  extend Nameable::ClassMethods
+
   attr_accessor :name
 
   @@all = []
 
   def initialize(name, singer = nil, genre = nil)
     @name = name
-    self.artist=(singer) if singer
-    self.genre=(genre) if genre
+    self.artist=(singer) if singer #must be self and not @, calling method here
+    self.genre=(genre) if genre #must be self and not @, calling method here
   end
 
-  def artist
+  def artist #same as attr_reader :artist
     @artist
   end
 
-  def artist=(singer)
-    @artist = singer
-    @artist.add_song(self)
+  def artist=(singer) #Constructor writer
+    @artist = singer  #has to be @ and not self.
+    @artist.add_song(self) #instance method in Artist class
   end
 
-  def genre
+  def genre #simple attr :genre
     @genre
   end
 
-  def genre=(genre)
+  def genre=(genre)  #Constructor writer
     @genre = genre
-    @genre.add_song(self)
+    @genre.add_song(self) #add_song an instance method in Genre class
   end
 
   def self.all
@@ -38,7 +38,7 @@ class Song
 
   def self.new_from_filename(filename)
     array = filename.split(' - ')
-
+      # 'Bob Dylan - Ballad of a Thin Man - folk.mp3' => typical file name
     singer = array[0]
     title = array[1]
     type = array[2].chomp(".mp3")
@@ -55,3 +55,9 @@ class Song
   end
 
 end
+
+# Chain:
+# start from self.create_from_filename(filename)
+#   filename =  'Bob Dylan - Ballad of a Thin Man - folk.mp3'
+# calls self.new_from_filename(filename)
+# calls self.find_or_create_by_name(title)
