@@ -10,6 +10,10 @@ module Concerns
 		end
 	end
 
+	module Findable
+
+	end
+
 	module ClassMethods
 
 		def destroy_all

@@ -13,6 +13,10 @@ class Artist < Super
 		instance
 	end
 
+  def genres
+    self.songs.map {|song|song.genre}.uniq
+  end
+
   def add_song(song)
     song.artist = self if song.artist == nil
     self.songs << song if self.songs.include?(song) == false
