@@ -37,21 +37,18 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    array = filename.split(' - ')
+    parts = filename.split(' - ')
       # 'Bob Dylan - Ballad of a Thin Man - folk.mp3' => typical file name
-    singer = array[0]
-    title = array[1]
-    type = array[2].chomp(".mp3")
+    artist_name, song_name, genre_name = parts[0], parts[1], parts[2].chomp(".mp3")
 
-    #tap it up when you get the chance
-    song = self.find_or_create_by_name(title)
-    song.artist = Artist.find_or_create_by_name(singer)
-    song.genre= Genre.find_or_create_by_name(type)
-    song
+    artist_instance = Artist.find_or_create_by_name(artist_name)
+    genre_instance = Genre.find_or_create_by_name(genre_name)
+
+    self.new(song_name, artist_instance, genre_instance)
   end
 
   def self.create_from_filename(filename)
-    self.new_from_filename(filename)
+    self.new_from_filename(filename).tap{|song| song.save}
   end
 
 end
