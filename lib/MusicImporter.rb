@@ -16,9 +16,15 @@ class MusicImporter
 
   def files
     array = []
+    lol = []
     x = Dir.open(path)
-    x.each {|y| array << y}
-    array = array[2,5]
+    x.each do |file|
+      lol << file
+      if file != "." && file != ".."
+        array << file
+      end
+    end
+   array
   end
 
   def import

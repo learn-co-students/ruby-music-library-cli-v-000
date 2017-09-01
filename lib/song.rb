@@ -35,6 +35,7 @@ class Song
 
   def self.new_from_filename(name)
     if self.find_by_name(name) == nil
+    #  binding.pry
       array = name.split(" -")
       person = array[0]
       title = array[1]

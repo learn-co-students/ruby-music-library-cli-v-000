@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
 
   def initialize(path = './db/mp3s')
@@ -25,26 +27,85 @@ class MusicLibraryController
   end
 
   def list_songs
-#    array = name.split(" -")
-#    person = array[0]
-#    title = array[1]
-  #  musicprototype = array[2].split(".mp3")
-#    music = musicprototype[0]
     array = []
-    index = 1
+    index = -1
      @importer.files.each do |song|
-       title = song[1]
        array << song.split(" -")[1].lstrip
      end
      ordered = array.sort
-     @importer.files.each do |song|
-       while index < ordered.length
-         if song.include? ordered[index - 1]
-           puts index + ". " + song
-           index = index + 1
+     ordered.each do |song|
+       index = -1
+       completed = false
+       while completed != true
+         index = index + 1
+         if @importer.files[index].include? song
+           answer = @importer.files[index].split(".mp3")
+           puts "#{ordered.index(song) + 1}. #{answer[0]}"
+           completed = true
          end
        end
      end
+  end
+
+  def list_artists
+    array = []
+     @importer.files.each do |song|
+       array << song.split(" -")[0]
+     end
+     Artist.all.each do |artist|
+       array << artist.name
+     end
+     array = array.flatten
+     ordered = array.sort
+     ordered = ordered.uniq
+     ordered.each do |artist|
+        puts "#{ordered.index(artist) + 1}. #{artist}"
+     end
+  end
+
+  def list_genres
+    array = []
+     @importer.files.each do |song|
+       answer = song.split(" -")[2].lstrip
+       answer = answer.split(".mp3")
+     end
+     Genre.all.each do |artist|
+       array << artist.name
+     end
+     array = array.flatten
+     ordered = array.sort
+     ordered = ordered.uniq
+     ordered.each do |genre|
+        puts "#{ordered.index(genre) + 1}. #{genre}"
+     end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets
+    array = []
+    array4artists = []
+    Song.all.each do |song|
+      #binding.pry
+      if song.artist.name == gets
+        array << "#{song.name} - #{song.genre.name}"
+        array4artists << song.name
+      end
+    end
+    array4artists = array4artists.sort
+#    binding.pry
+    array4artists.each do |entry|
+      boolean = false
+      index = -1
+      while boolean == false
+        index = index + 1
+        if array[index].include? entry
+          puts "#{index + 1}. #{array[index]}"
+          boolean = true
+          binding.pry
+        end
+      end
+    end
   end
 
 end
