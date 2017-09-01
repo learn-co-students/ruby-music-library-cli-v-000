@@ -2,6 +2,7 @@ class Super
 
 	include Concerns::InstanceMethods
 	extend Concerns::ClassMethods
+	extend Concerns::Findable
 
 	attr_accessor :name
 
