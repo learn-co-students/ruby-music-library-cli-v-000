@@ -38,6 +38,7 @@ class Song < Super
   def self.create_from_filename(file_name)
     file = Song.new_from_filename(file_name)
     file.save
+    file
   end
 
   def self.find_by_name(song_name)
