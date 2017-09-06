@@ -17,13 +17,16 @@ class Song
   def save
     self.class.all << self
   end
+
   def genre=(genre)
-    @genre = Genre.find_or_create_by_name(genre)
+    @genre = genre
+    # @genre = Genre.find_or_create_by_name(genre)
     self.genre.songs << self unless self.genre.songs.include?(self)
   end
 
   def artist=(artist)
-      @artist = Artist.find_or_create_by_name(artist)
+    @artist = artist
+      # @artist = Artist.find_or_create_by_name(artist)
       self.artist.add_song(self) unless self.artist.songs.include?(self)
   end
 
@@ -43,7 +46,9 @@ class Song
   def self.new_from_filename(file_name)
     song_array = file_name.split(" - ")
     if Song.find_by_name(song_array[1]) == nil  # NEW SONG INSTANCE WITH NAME
-      new_song = Song.new(song_array[1], song_array[0], song_array[2].gsub(/\W(...)\z/,""))
+      artist = Artist.find_or_create_by_name(song_array[0])
+      genre = Genre.find_or_create_by_name(song_array[2].gsub(/\W(...)\z/,""))
+      new_song = Song.new(song_array[1], artist, genre) 
     else
       Song.find_by_name(song_array[1])
     end
