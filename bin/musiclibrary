@@ -1,5 +1,5 @@
+require 'pry'
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
