@@ -1,5 +1,5 @@
 require "spec_helper"
-
+require 'pry'
 describe "Associations — Song and Artist:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
   let(:artist) { Artist.new("Neutral Milk Hotel") }
@@ -15,7 +15,6 @@ describe "Associations — Song and Artist:" do
     describe "#songs" do
       it "returns the artist's 'songs' collection (artist has many songs)" do
         expect(artist.songs).to eq([])
-
         artist.songs << song
 
         expect(artist.songs).to include(song)
