@@ -7,7 +7,7 @@ module Concerns::Findable
     self.new(obj_name).tap {|x| x.save}
   end
 
-  def find_or_create_by_name(song)
-    self.find_by_name(song) ? self.find_by_name(song) : self.create(song)
+  def find_or_create_by_name(obj_name)
+    self.find_by_name(obj_name) ? self.find_by_name(obj_name) : self.create(obj_name)
   end
 end
