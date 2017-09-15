@@ -1,7 +1,8 @@
 class Artist
   extend Concerns::Findable
 
-  attr_accessor :name, :song, :genre
+  attr_accessor :name
+  attr_reader :songs
 
   @@all = []
 
@@ -12,10 +13,9 @@ class Artist
   # Add instance to Artists' songs array for self
   def initialize(name, artist=nil, genre=nil)
     @name = name
-    @artist = artist
-    @genre = genre
+    # @artist = artist
+    # @genre = genre
     @songs = []
-    @@all << self
   end
 
 
@@ -38,13 +38,13 @@ class Artist
   # Add song to artist's instance if not exists
   # Add song to artist's roster if not included
   def add_song(song)
-    song.artist = self unless song.artist === self
+    song.artist = self unless song.artist
     @songs << song unless @songs.include?(song)
   end
 
 
   # Class Methods #
-  
+
   def self.all
     @@all
   end
