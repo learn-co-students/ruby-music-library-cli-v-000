@@ -27,18 +27,22 @@ class MusicLibraryController
   def list_songs
     # binding.pry
    sorted_songs = Song.all.uniq.sort_by {|song| song.name}
-   sorted_songs.each_with_index do |song, index|
-     puts "#{index}. #{song.genre.class}"
+   sorted_songs.each_with_index(1) do |song, index|
+     puts "#{index}. #{song.artist} - #{song.name} - #{song.genre}"
    end
 
   end
 
   def list_artists
-    Artist.all.uniq.sort { |a| a.artist <=> b.artist }
+    Artist.all.uniq.sort.each_with_index(1) do |song, index|
+      puts "#{index}. #{song.artist} - #{song.name} - #{song.genre}"
+    end
   end
 
   def list_genres
-    Genre.all.uniq.sort {|a, b| a.genre <=> b.genre}
+    Genre.all.uniq.sort.each_with_index(1) do |song, index|
+      puts "#{index}. #{song.artist} - #{song.name} - #{song.genre.class}"
+    end
   end
 
   def play_song

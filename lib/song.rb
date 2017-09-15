@@ -51,8 +51,8 @@ class Song
   end
 
   def self.create(name)
-    new_song = self.new(name)
-    new_song.save
+    song = self.new(name)
+    song.save
   end
 
   # Parse filename, slice off file extension

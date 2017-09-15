@@ -1,12 +1,12 @@
 class MusicImporter
   attr_accessor :path
 
-  # Initialize
+  # Initialize #
   def initialize(path)
     @path = path
   end
 
-  # Instance Methods
+  # Instance Methods #
   def files
     Dir.entries(@path).keep_if {|song| song.include?(".mp3")}.map { |mp3| File.basename(mp3)}
   end
