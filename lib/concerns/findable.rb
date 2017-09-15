@@ -4,7 +4,7 @@ module Concerns::Findable
 
   # Find if instance exists by searching name
   def find_by_name(name)
-    all.detect{|el| el.name === name}
+    all.detect{ |el| el.name === name}
   end
 
   # Find instance, else, create instance based on #create procedures for each Class
