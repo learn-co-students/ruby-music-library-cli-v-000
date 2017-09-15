@@ -10,7 +10,6 @@ class Song
 
     artist != "" ? self.artist=(artist) : @artist = artist
     genre != "" ? self.genre=(genre) : @genre = genre
-    #self.save
   end
 
   def genre=(genre)
@@ -33,7 +32,7 @@ class Song
     song = filename.split(" - ")[1]
     genre = filename.split(" - ")[2].gsub(/\..*/,"")
 
-    new_song = self.find_or_create_by_name(song)
+    new_song = Song.new(song)
     new_song.tap do |song|
       song.artist = Artist.find_or_create_by_name(artist)
       song.genre = Genre.find_or_create_by_name(genre)
@@ -41,7 +40,8 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    self.new_from_filename(filename)
+    new_song = self.new_from_filename(filename)
+    new_song.save
   end
 
   def self.create(name)
