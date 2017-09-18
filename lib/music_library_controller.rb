@@ -87,6 +87,10 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     input = gets.chomp
+    genre_list = Song.get_song_by_genre(input)
+    genre_list.each_with_index do |list,i|
+      puts "#{i+1}. #{list}"
+    end
   end
 
 end

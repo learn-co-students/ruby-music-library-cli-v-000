@@ -79,4 +79,29 @@ class Song
     song_list
   end
 
+  def self.get_song_by_genre(genre_name)
+    genre_list = []
+    song_name = []
+    ordered_list = []
+    i = 0
+    x = 0
+    @@all.collect do |instance|
+      if instance.genre.name == genre_name
+        genre_list[i] = "#{instance.artist.name} - #{instance.name}"
+        song_name[i] = instance.name
+        i += 1
+      end
+    end
+
+    song_name.each do |name|
+      genre_list.each do |list|
+        if list.include? "#{name}"
+          ordered_list[x] = list
+          x += 1
+        end
+      end
+    end
+    ordered_list
+  end
+
 end
