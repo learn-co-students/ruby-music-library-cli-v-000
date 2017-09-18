@@ -25,16 +25,16 @@ class MusicLibraryController
     song = []
     sort_list = []
 
-    Song.all.each_with_index do |x, i| #gets names of all songs
-      song_names[i] = x.name
-      song[i] = x
+    Song.all.each_with_index do |x, i|
+      song_names[i] = x.name #gets names of all songs
+      song[i] = x #gets class of all songs
     end
-    song_names.sort!
+    song_names.sort! # sorts song names alpha order
 
     song.each do |list|
       song_names.each_with_index do |name , i|
-        if list.name == name
-          sort_list[i] = list
+        if list.name == name #checks if class song name is name as alpha order string song name
+          sort_list[i] = list # if it has the same name the class is placed in its postion in new array now in alpha order
         end
       end
     end
@@ -42,7 +42,7 @@ class MusicLibraryController
     sort_list.each_with_index do |list, i|  # print in order
       puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
     end
-    
+
   end
 
   def list_artists
