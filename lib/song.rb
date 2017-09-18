@@ -28,11 +28,14 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
   def self.new_from_filename(filename)
-    artist, file_song, genre = filename.split(" - ")
+    file_artist, file_song, file_genre = filename.split(" - ")
+    file_genre = file_genre.gsub(".mp3", "")
     song = self.new(file_song)
+    artist = Artist.new(file_artist)
+    genre = Genre.new(file_genre)
     song.artist = artist
+    song.genre = genre
     song
-    binding.pry
   end
 
 end
