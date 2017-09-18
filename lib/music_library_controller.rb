@@ -24,11 +24,13 @@ class MusicLibraryController
     song = []
     name = []
     sort_list = []
-    @list.each_with_index do |list, i|
+
+    @list.each_with_index do |list, i| #creates classes
       song[i] = Song.create_from_filename(list)
-      name[i] = song[i].name
+      name[i] = song[i].name # just a vector of song names
     end
-    name_list = name.sort
+
+    name_list = name.sort #sorts into alpha order
     song.each do |list|
       name_list.each_with_index do |name , i|
         if list.name == name
@@ -36,7 +38,10 @@ class MusicLibraryController
         end
       end
     end
-    binding.pry
+    sort_list.each_with_index do |list, i|  # print in order
+      puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
+    end
+    
     #song[i].name.sort! {||}
     #song[0].name = song name song[0].artist.name artist name song[0].genre.song
 
