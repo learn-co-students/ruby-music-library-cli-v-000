@@ -41,9 +41,6 @@ class MusicLibraryController
     sort_list.each_with_index do |list, i|  # print in order
       puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
     end
-    
-    #song[i].name.sort! {||}
-    #song[0].name = song name song[0].artist.name artist name song[0].genre.song
-
   end
+  
 end
