@@ -20,7 +20,7 @@ class MusicLibraryController
     end
   end
 
-  def list_songs
+  def find_songs
     song_names = []
     song = []
     sort_list = []
@@ -38,10 +38,16 @@ class MusicLibraryController
         end
       end
     end
+    sort_list
+  end
+
+  def list_songs
+    sort_list = self.find_songs
 
     sort_list.each_with_index do |list, i|  # print in order
       puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
     end
+
 
   end
 
@@ -90,6 +96,16 @@ class MusicLibraryController
     genre_list = Song.get_song_by_genre(input)
     genre_list.each_with_index do |list,i|
       puts "#{i+1}. #{list}"
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.chomp
+    list = self.find_songs
+    input = "#{input}".to_i - 1
+    if input >= 0 && input <= list.length
+      puts "Playing #{list[input].name} by #{list[input].artist.name}" unless list[input] == nil
     end
   end
 
