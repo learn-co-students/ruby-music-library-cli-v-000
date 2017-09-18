@@ -44,14 +44,16 @@ class MusicLibraryController
   end
 
   def list_artists
-    song = []
-    name = []
-
-    @list.each_with_index do |list, i| #creates classes
-      song[i] = Song.create_from_filename(list)
-      name[i] = song[i].artist.name # just a vector of song names
+    artist_names =[]
+    Artist.all.each_with_index do |x, i|
+      artist_names[i] = x.name
     end
-    binding.pry
+    artist_names.sort!
+  
+    artist_names.each_with_index do |name, i|
+      puts "#{i+1}. #{name}"
+    end
+
   end
 
 end
