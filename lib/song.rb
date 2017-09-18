@@ -27,5 +27,12 @@ class Song
     @genre = genre
     genre.songs << self unless genre.songs.include?(self)
   end
+  def self.new_from_filename(filename)
+    artist, file_song, genre = filename.split(" - ")
+    song = self.new(file_song)
+    song.artist = artist
+    song
+    binding.pry
+  end
 
 end
