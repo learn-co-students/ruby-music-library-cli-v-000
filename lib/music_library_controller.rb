@@ -1,7 +1,7 @@
 class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
-    MusicImporter.new(path).import
+    @list = MusicImporter.new(path).import
   end
 
   def call
@@ -18,5 +18,14 @@ class MusicLibraryController
     until input == "exit"
       input = gets.chomp
     end
+  end
+
+  def list_songs
+    song = []
+    @list.each_with_index do |list, i|
+      song[i] = Song.create_from_filename(list)
+      binding.pry
+    end
+    #song[0].name = song name song[0].artist.name artist name song[0].genre.song
   end
 end
