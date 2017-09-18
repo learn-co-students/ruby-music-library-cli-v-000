@@ -22,11 +22,23 @@ class MusicLibraryController
 
   def list_songs
     song = []
+    name = []
+    sort_list = []
     @list.each_with_index do |list, i|
       song[i] = Song.create_from_filename(list)
+      name[i] = song[i].name
     end
-    song.name.sort!
-    #song[0].name = song name song[0].artist.name artist name song[0].genre.song
+    name_list = name.sort
+    song.each do |list|
+      name_list.each_with_index do |name , i|
+        if list.name == name
+          sort_list[i] = list
+        end
+      end
+    end
     binding.pry
+    #song[i].name.sort! {||}
+    #song[0].name = song name song[0].artist.name artist name song[0].genre.song
+
   end
 end

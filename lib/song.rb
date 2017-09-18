@@ -10,7 +10,7 @@ class Song
     self.genre=(genre) unless genre == nil
   end
   def self.all
-    @@all.dup.freeze
+    @@all
   end
   def save
     @@all << self
