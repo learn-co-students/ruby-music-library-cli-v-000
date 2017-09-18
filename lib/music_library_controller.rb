@@ -60,4 +60,29 @@ class MusicLibraryController
 
   end
 
+  def list_genres
+    genre_names =[]
+
+    Genre.all.each_with_index do |x, i| #gets names of all arthist
+      genre_names[i] = x.name
+    end
+
+    genre_names.sort! # alpha order
+
+    genre_names.each_with_index do |name, i| # prints names
+      puts "#{i+1}. #{name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.chomp
+    song_list = Song.get_song_by_name(input)
+    song_list.sort!
+    song_list.each_with_index do |list,i|
+      puts "#{i+1}. #{list}"
+    end
+
+  end
+
 end

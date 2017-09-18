@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 
+
 module Concerns
   module Findable
     def find_by_name(name)
@@ -30,5 +31,8 @@ module Concerns
   end
 
 end
+
+require_relative '../lib/concerns/findable.rb'
+
 
 require_all 'lib'

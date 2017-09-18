@@ -18,6 +18,12 @@ class Genre
   def self.destroy_all
     @@all.clear
   end
+
+
+  def self.create(name)
+    self.new(name).save
+  end
+
   def artists
     artist = []
     @songs.collect do |song|
