@@ -22,30 +22,27 @@ class MusicLibraryController
 
   def list_songs
     song_names = []
-    Songs.all.each_with_indexdo |x, i| #gets names of all songs
+    song = []
+    sort_list = []
+
+    Song.all.each_with_index do |x, i| #gets names of all songs
       song_names[i] = x.name
+      song[i] = x
     end
-    #song = []
-    #name = []
-    #sort_list = []
+    song_names.sort!
 
-    #@list.each_with_index do |list, i| #creates classes
-      #song[i] = Song.create_from_filename(list)
-      #name[i] = song[i].name # just a vector of song names
-    #end
+    song.each do |list|
+      song_names.each_with_index do |name , i|
+        if list.name == name
+          sort_list[i] = list
+        end
+      end
+    end
 
-    #name_list = name.sort #sorts into alpha order
-    #song.each do |list|
-      #name_list.each_with_index do |name , i|
-        #if list.name == name
-          #sort_list[i] = list
-        #end
-      #end
-    #end
-    #sort_list.each_with_index do |list, i|  # print in order
-      #puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
-    #end
-    binding.pry
+    sort_list.each_with_index do |list, i|  # print in order
+      puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
+    end
+    
   end
 
   def list_artists
