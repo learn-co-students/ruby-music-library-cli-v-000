@@ -42,5 +42,16 @@ class MusicLibraryController
       puts "#{i+1}. #{list.artist.name} - #{list.name} - #{list.genre.name}"
     end
   end
-  
+
+  def list_artists
+    song = []
+    name = []
+
+    @list.each_with_index do |list, i| #creates classes
+      song[i] = Song.create_from_filename(list)
+      name[i] = song[i].artist.name # just a vector of song names
+    end
+    binding.pry
+  end
+
 end
