@@ -24,8 +24,9 @@ class MusicLibraryController
     song = []
     @list.each_with_index do |list, i|
       song[i] = Song.create_from_filename(list)
-      binding.pry
     end
+    song.name.sort!
     #song[0].name = song name song[0].artist.name artist name song[0].genre.song
+    binding.pry
   end
 end
