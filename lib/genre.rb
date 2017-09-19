@@ -31,5 +31,4 @@ class Genre
     @songs
   end
 
-
 end
