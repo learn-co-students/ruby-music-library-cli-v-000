@@ -32,8 +32,8 @@ class MusicLibraryController
     when 'list songs'   then list_songs
     when 'list artists' then list_artists
     when 'list genres'  then list_genres
-    when 'list artist'  then list_artist
-    when 'list genre'   then list_genre
+    when 'list artist'  then list_songs_by_artist
+    when 'list genre'   then list_songs_by_genre
     when 'play song'    then play_song
     end
   end
@@ -66,6 +66,34 @@ class MusicLibraryController
 
   def genres_sorted_by_name
     Genre.all.sort_by { |genre| genre.name }
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_name = gets.strip
+    songs_and_genre_by_artist(artist_name)
+  end
+
+  def songs_and_genre_by_artist(artist_name)
+    artist = Artist.find_by_name(artist_name)
+    unless artist.nil?
+      artist.songs.sort_by {|song| song.name}
+      .each_with_index {|song, index| puts "#{index +1}. #{song.name} - #{song.genre.name}"}
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_name = gets.strip
+    artist_name_and_songs_by_genre(genre_name)
+  end
+
+  def artist_name_and_songs_by_genre(genre_name)
+    genre = Genre.find_by_name(genre_name)
+    unless genre.nil?
+      genre.songs.sort_by { |song| song.name }
+      .each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
+    end
   end
 
 
