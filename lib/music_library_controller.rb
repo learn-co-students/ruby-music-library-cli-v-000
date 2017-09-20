@@ -45,7 +45,7 @@ class MusicLibraryController
   end
 
   def songs_sorted_by_name
-    Song.all.sort_by { |song| song.name }
+    Song.all.sort_by {|song| song.name}
   end
 
   def list_artists
@@ -93,6 +93,18 @@ class MusicLibraryController
     unless genre.nil?
       genre.songs.sort_by { |song| song.name }
       .each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_number = gets.strip.to_i
+    if song_number > 0 && song_number <= songs_sorted_by_name.length
+      index       = song_number - 1
+      song        = songs_sorted_by_name[index]
+      song_name   = song.name
+      artist_name = song.artist.name
+      puts "Playing #{song_name} by #{artist_name}"
     end
   end
 
