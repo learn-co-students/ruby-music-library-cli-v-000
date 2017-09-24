@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+test_music_path = "./spec/fixtures/mp3s"
+music_importer = MusicImporter.new(test_music_path)
+#music_importer.import
+
+# puts "Songs"
+# puts Song.all.each {|s| puts s.name}
+# puts "\n Artists"
+# puts Artist.all.each {|s| puts s.name}
+# puts "\nGenres"
+# puts Genre.all.each {|s| puts s.name}
+
+# f = music_importer.files
+
+# f.each do |file|
+#   s = Song.create_from_filename(file)
+#   puts s.name
+#   puts "Song: #{Song.all.length}\nArtist: #{Artist.all.length}\nGenre: #{Genre.all.length}\n\n"
+# end
+ 
+a1 = Artist.find_or_create_by_name("Action Bronson")
+s2 = Artist.find_or_create_by_name("Real Estate")
+s3 = Artist.find_or_create_by_name("Real Estate")
+
+puts Artist.all.length
