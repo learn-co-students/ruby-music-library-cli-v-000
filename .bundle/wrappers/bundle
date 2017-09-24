@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if
+  [[ -s "/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/environment" ]]
+then
+  source "/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/environment"
+  exec bundle "$@"
+else
+  echo "ERROR: Missing RVM environment file: '/home/nitrous/code/labs/ruby-music-library-cli-v-000/.bundle/environment'" >&2
+  exit 1
+fi
