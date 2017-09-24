@@ -1,4 +1,4 @@
-# Ruby Music Library
+## Ruby Music Library
 
 ## Overview
 You're going to be implementing a Music Library domain composed of 3 main models, `Song`, `Artist`, and `Genre`. The models will relate to each other and collaborate heavily. Additionally, you're going to be extracting some common functionality out of those models and into a module, `Concerns::Findable`, which you'll then mix back into the models. You'll then build a collaborating object, `MusicImporter`, that can parse a directory of MP3 files and use the extracted filenames to create instances of `Song`, `Artist`, and `Genre` objects. Finally, you'll build a CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that lets a user browse the library of MP3s imported by song, artist, and genre.
