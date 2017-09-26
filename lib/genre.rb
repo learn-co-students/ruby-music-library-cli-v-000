@@ -7,6 +7,7 @@ class Genre
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -23,6 +24,14 @@ class Genre
 
   def self.create(name)
       self.new(name).tap{|a| a.save} #initializes and saves the genre
+  end
+
+  def songs
+    @songs
+  end
+
+  def artists
+      self.songs.collect{ |s| s.artist }.uniq
   end
 
 end
