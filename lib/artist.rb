@@ -28,16 +28,23 @@ class Artist
 
 
  def add_song(song)
-   if song.instance_variable_defined?(:@artist) == false
+   if  song.artist == nil
        song.artist = self
-   elsif @songs.include?(song) == false
-       @songs << song
+   end
+   if @songs.include?(song) == false
+        @songs << song
    end
  end
 
  def genres
-   self.songs.collect do |song|
-     song.genre
+   genres_array = []
+   @songs.collect do |song|
+     genres_array << song.genre
    end
+   genres_array.uniq
  end
+
+
+
+
 end

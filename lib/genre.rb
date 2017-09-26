@@ -29,9 +29,16 @@ class Genre
  end
 
  def artists
-   @songs.collect do |song|
-     song.artist
-   end
- end
+   artists_array = []
+     @songs.collect do |song|
+       artists_array << song.artist
+     end
+   artists_array.uniq
+  end
+
+
+
+
+
 
 end
