@@ -1,5 +1,6 @@
 class Song
   attr_accessor :name, :artist, :genre
+  extend Concerns::Findable
 
   @@all = []
 
@@ -38,4 +39,4 @@ class Song
   end
 
 
-  end
+end

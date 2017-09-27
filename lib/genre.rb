@@ -1,5 +1,6 @@
 class Genre
   attr_accessor :name, :songs
+  extend Concerns::Findable
 
  @@all = []
 
@@ -28,6 +29,6 @@ class Genre
 
  def artists
    songs.collect { |song| song.artist }.uniq
- end 
+ end
 
 end

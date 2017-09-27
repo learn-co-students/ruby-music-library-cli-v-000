@@ -1,5 +1,6 @@
 class Artist
   attr_accessor :name, :songs
+  extend Concerns::Findable
 
   @@all = []
 
@@ -36,4 +37,4 @@ class Artist
     @songs.each { |song| genre_array << song.genre unless genre_array.include?(song.genre) }
     genre_array
   end
-end 
+end
