@@ -2,46 +2,65 @@ require 'pry'
 
 class Song
 
-  attr_accessor :name, :artist, :genre
+  # extend Concerns::Findable
 
-  @@all = []
+    attr_accessor :name, :artist, :genre
 
-  def initialize(name, artist = nil, genre = nil)
-    @name = name
-    # binding.pry
-    @artist = artist
-    self.artist = artist if artist
-    self.genre = genre if genre
-  end
+    @@all = []
 
-  def self.all
-    @@all
-  end
+    def initialize(name, artist = nil, genre = nil)
+      @name = name
+      @artist = artist
+      self.artist = artist if artist
+      self.genre = genre if genre
+    end
 
-  def self.destroy_all
-    self.all.clear
-  end
+    def self.all
+      @@all
+    end
 
-  def save
-    @@all << self
-  end
+    def self.destroy_all
+      self.all.clear
+    end
 
-  def self.create(name)
+    def save
+      @@all << self
+    end
+
+    def self.create(name)
       self.new(name).tap{|a| a.save} #initializes and saves the song
-  end
+    end
 
-  def artist=(artist)
-    @artist = artist
-    artist.add_song(self)
-  end
+    def artist=(artist)
+      @artist = artist
+      artist.add_song(self)
+    end
 
-  def genre=(genre)
-    @genre = genre
-    genre.songs << self unless genre.songs.include?(self)
-  end
+    def genre=(genre)
+      @genre = genre
+      genre.songs << self unless genre.songs.include?(self)
+    end
 
-  def self.find_by_name #finds a song instance in @@all by the name property
-    @@all.select{|a| a.name == name}
-  end
+    def self.new_from_filename(filename) #initializes a song based on the passed-in filename
+      artist, name, genre = filename.gsub(".mp3", "").split(" - ")
+      song = self.new(name)
+      song.artist = Artist.find_or_create_by_name(artist)
+      song.genre = Genre.find_or_create_by_name(genre)
+      song
+    end
+
+    def self.create_from_filename(filename) #initializes & saves the newly-created song based on the passed-in filename
+      artist, name, genre = filename.gsub(".mp3", "").split(" - ")
+      song = self.new_from_filename(filename)
+      song.save
+    end
+
+    def self.find_by_name(name) #finds a song instance in @@all by the name property
+      self.all.detect{|a| a.name == name}
+    end
+
+    def self.find_or_create_by_name(name)
+      self.find_by_name(name) || self.create(name)
+    end
 
 end
