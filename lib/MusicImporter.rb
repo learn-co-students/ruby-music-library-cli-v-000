@@ -3,15 +3,14 @@ class MusicImporter
 
   def initialize(path)
     @path = path
-
   end
 
 #this works -- but I do not understand it
   def files
     @files = Dir.glob("#{@path}/*.mp3")
-    @files.collect do |song|
-       File.basename(song)
-     end
+    @files.collect do |instance|
+      File.basename(instance)
+    end
   end
 
   def import
