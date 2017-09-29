@@ -5,8 +5,8 @@ class Song
 
   def initialize(new_song_name, artist= nil, genre= nil)
     @name = new_song_name
-    self.artist = artist unless artist.nil?
-    self.genre = genre unless genre.nil?
+    self.artist = artist unless artist.nil?   #collaborates artist property with initialized Song instance unless no artist argument given
+    self.genre = genre unless genre.nil?      #collaborates genre property with initialized Song instance unless no genre argument given 
   end
 
   def save

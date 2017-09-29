@@ -39,18 +39,33 @@ class MusicLibraryController
     end
   end
 
-  def play_song
-    puts "Which song number would you like to play?"
-    song_input = gets.strip.to_i+1
-    if song_input.between?(1, Song.all.count+1)
-      puts "Playing #{list_songs[song_input.to_i-1].name} by #{list_songs[song_input.to_i-1].artist.name}"
-    end
-  end
-
   def list_songs
     Song.sorted.each_with_index do |song, index|
       puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_input = gets.strip.to_i                      #song_input stores user request, adjusted for index beginning at 0.
+    if song_input.between?(1, Song.all.count)         #play_song runs element if song_input is in in range 1 - collection size
+      #song = Song.sorted[song_input-1] 
+      song = Song.all.sort {|x,y| x.name <=> y.name}[song_input-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_input = gets.strip
+
+    artist = Artist.find_by_name(artist_input)                      #artist_input is searched through all instances of artist class
+      if artist                                                     #if artist variable returns truthy value, iterator is run, nil value skips each iterator.
+         sorted_songs = artist.songs.sort {|a,b| a.name <=> b.name} #alphabetize songs by artist instance with sort method, stored in variable sorted_songs
+         sorted_songs.each_with_index do |song, index|              #sorted_songs alphabetized instance songs to be displayed in each_with_index iterator
+           puts "#{index+1}. #{song.name} - #{song.genre.name}"
+         end
+      end
   end
 
   def list_artists
@@ -65,24 +80,14 @@ class MusicLibraryController
     end
   end
 
-  def list_songs_by_artist
-    puts "Please enter the name of an artist:"
-    artist_input = gets.strip
-
-    artist = Artist.find_by_name(artist_input)
-      if artist
-        artist.songs.sorted.each do |song|
-          puts "#{index+1}. #{song.name} - #{song.genre.name}"
-        end
-      end
-  end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     genre_input = gets.strip
     genre = Genre.find_by_name(genre_input)
       if genre
-        genre.songs.sorted.each do |song|
+        sorted_genres = genre.songs.sort {|a,b| a.name <=> b.name}
+        sorted_genres.each_with_index do |song, index|
           puts "#{index+1}. #{song.artist.name} - #{song.name}"
         end
       end
