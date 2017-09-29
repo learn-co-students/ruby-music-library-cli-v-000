@@ -36,9 +36,28 @@ class MusicLibraryController
 
     sorted.each_with_index do |entry, index|
       sorted = entry.join(" - ")
-      
+
       puts "#{index + 1}. #{sorted}"
     end
+  end
 
+  def artists
+    records = []
+    @collection.collect do |instance|
+      records << instance.split(" - ")
+    end
+
+    trimmed = records.each do |entry|
+      breakup = entry[2].split(".")
+      entry[2] = breakup[0]
+    end
+
+    sorted = records.sort { |a, b| a[0] <=> b[0] }
+
+    sorted.each_with_index do |entry, index|
+      sorted = entry.join(" - ")
+
+      puts "#{index + 1}. #{sorted}"
+    end
   end
 end
