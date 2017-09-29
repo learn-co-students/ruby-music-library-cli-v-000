@@ -54,7 +54,6 @@ class Song
     # artist.add_song(song)
     genre = entry[2].split(".")
 
-<<<<<<< HEAD
     genre =  Genre.find_or_create_by_name(genre[0])
     song.genre = genre
     genre.songs << song
@@ -65,7 +64,8 @@ class Song
   def self.create_from_filename(file)
     new = self.new_from_filename(file)
     @@all << new
-=======
+  end
+
   def self.find_or_create_by_name(name)
     found = find_by_name(name)
     if !found
@@ -88,11 +88,5 @@ class Song
     genre.songs << song
     artist.songs << song
     song
-  end
-
-  def self.create_from_filename(file_name)
-    song = new_from_filename(file_name)
-    @@all << song
->>>>>>> 5396266cef0fa1d0766b47036d93730832073e30
   end
 end
