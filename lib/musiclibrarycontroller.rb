@@ -41,23 +41,22 @@ class MusicLibraryController
     end
   end
 
-  def artists
+  def list_artists
     records = []
+    artists = []
     @collection.collect do |instance|
       records << instance.split(" - ")
     end
 
-    trimmed = records.each do |entry|
-      breakup = entry[2].split(".")
-      entry[2] = breakup[0]
+    records.each do |entry|
+    artists <<  entry[0]
     end
 
-    sorted = records.sort { |a, b| a[0] <=> b[0] }
+    sorted = artists.sort { |a, b| a <=> b}
 
-    sorted.each_with_index do |entry, index|
-      sorted = entry.join(" - ")
-
-      puts "#{index + 1}. #{sorted}"
+    sorted.uniq.each_with_index do |entry, index|
+      puts "#{index + 1}. #{entry}"
+      binding.pry
     end
   end
 end
