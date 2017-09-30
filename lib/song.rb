@@ -2,7 +2,7 @@ require 'pry'
 
 class Song
 
-  # extend Concerns::Findable
+   extend Concerns::Findable
 
     attr_accessor :name, :artist, :genre
 
@@ -27,9 +27,9 @@ class Song
       @@all << self
     end
 
-    def self.create(name)
-      self.new(name).tap{|a| a.save} #initializes and saves the song
-    end
+    # def self.create(name)
+    #   self.new(name).tap{|a| a.save} #initializes and saves the song
+    # end
 
     def artist=(artist)
       @artist = artist
@@ -55,12 +55,12 @@ class Song
       song.save
     end
 
-    def self.find_by_name(name) #finds a song instance in @@all by the name property
-      self.all.detect{|a| a.name == name}
-    end
-
-    def self.find_or_create_by_name(name)
-      self.find_by_name(name) || self.create(name)
-    end
+    # def self.find_by_name(name) #finds a song instance in @@all by the name property
+    #   self.all.detect{|a| a.name == name}
+    # end
+    # 
+    # def self.find_or_create_by_name(name)
+    #   self.find_by_name(name) || self.create(name)
+    # end
 
 end
