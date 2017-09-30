@@ -39,8 +39,8 @@ class MusicLibraryController
 
   def list_songs
     songs = Song.all
-    sorted = songs.uniq.sort { |a, b| a.name <=> b.name }
-    sorted.each_with_index do |entry, index|
+    sorted_songs = songs.uniq.sort { |a, b| a.name <=> b.name }
+    sorted_songs.each_with_index do |entry, index|
       puts "#{index + 1}. #{entry.artist.name} - #{entry.name} - #{entry.genre.name}"
     end
   end
@@ -64,10 +64,40 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     artist = gets.chomp
-    singer = Artist.find_or_create_by_name(artist)
-    sorted = singer.songs.sort { |a, b| a.song.name <=> b.song.name }
-    sorted.songs.each_with_index do |song, index|
-      puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+
+    singer = Artist.find_by_name(artist)
+    if singer
+      sorted = singer.songs.sort { |a, b| a.name <=> b.name }
+      sorted = sorted.uniq
+      sorted.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+      end
+    # else
+    #   list_songs_by_artist
     end
   end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre = gets.chomp
+    genre = Genre.find_by_name(genre)
+    if genre
+      sorted = genre.songs.sort { |a, b| a.name <=> b.name }
+      sorted = sorted.uniq
+      sorted.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    number = gets.chomp.to_i
+    songs = Song.all
+    sorted = songs.uniq.sort { |a, b| a.name <=> b.name }
+    if number > 0 && number < sorted.length
+      puts "Playing #{sorted[number - 1].name} by #{sorted[number - 1].artist.name}"
+    end
+  end
+
 end
