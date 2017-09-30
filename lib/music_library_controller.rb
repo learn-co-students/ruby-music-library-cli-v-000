@@ -31,27 +31,30 @@ class MusicLibraryController
   end
 
   def list_songs
-    binding.pry
-    songs = Song.all.sort_by! {|s| songs }#sort song list alphabetically
-    songs.each_with_index {|song, index| puts "#{index+1} - #{song} " }#print all songs in a numbered list
+    songs = Song.all
+    songs = songs.sort_by { |s| s.name }
+    songs.each_with_index { |song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+}
   end
 
   def list_artists
-    #sort artists list alphabetically
-    #print all artists in a numbered list
-    #each_with_index?
+    artists = Artist.all
+    artists = artists.sort_by { |a| a.name } #sort artists list alphabetically
+    artists.each_with_index { |artist, index| puts "#{index + 1}. #{artist.name}" } #print all artists in a numbered list
   end
 
   def list_genres
-    #sort genres list alphabetically
-    #print all genres in a numbered list
-    #each_with_index?
+    genres = Genre.all
+    genres = genres.sort_by { |g| g.name } #sort genres list alphabetically
+    genres.each_with_index { |genre, index| puts "#{index + 1}. #{genre.name}" } #print all genres in a numbered list
   end
 
   def list_songs_by_artist
-    #prompts user to enter an artist
-    #accepts user input
+    input = ""
+    puts "Please enter the name of an artist:" #prompts user to enter an artist
+    input = gets.strip #accepts user input
     #prints all songs by a particular artist in a numbered, alphabetized list
+    #call list_songs to return list --if artist found, print, else nil
     #does nothing if no matching artist is found
   end
 
