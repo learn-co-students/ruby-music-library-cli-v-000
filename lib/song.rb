@@ -27,10 +27,6 @@ class Song
       @@all << self
     end
 
-    # def self.create(name)
-    #   self.new(name).tap{|a| a.save} #initializes and saves the song
-    # end
-
     def artist=(artist)
       @artist = artist
       artist.add_song(self)
@@ -54,13 +50,5 @@ class Song
       song = self.new_from_filename(filename)
       song.save
     end
-
-    # def self.find_by_name(name) #finds a song instance in @@all by the name property
-    #   self.all.detect{|a| a.name == name}
-    # end
-    # 
-    # def self.find_or_create_by_name(name)
-    #   self.find_by_name(name) || self.create(name)
-    # end
 
 end

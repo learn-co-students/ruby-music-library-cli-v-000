@@ -25,10 +25,6 @@ class Genre
     @@all << self
   end
 
-  # def self.create(name)
-  #     self.new(name).tap{|a| a.save} #initializes and saves the genre
-  # end
-
   def songs
     @songs
   end
