@@ -20,8 +20,28 @@ def call
 
   until command == "exit"
     command = gets.chomp.downcase
-    #case command
-  end
+
+  case command
+  when "list songs"
+    list_songs
+
+  when "list artists"
+    list_artists
+
+  when "list genres"
+    list_genres
+
+  when "list artist"
+    list_songs_by_artist
+
+  when "list genre"
+    list_songs_by_genre
+
+  when "play song"
+    play_song
+
+ end
+end
 end
 
     def list_songs
@@ -39,6 +59,7 @@ end
   end
 
   def list_genres
+    # binding.pry
     sorted_genres = Genre.all.sort_by {|genre| genre.name}
     sorted_genres.each_with_index do |genre,index|
       puts "#{index+1}. #{genre.name}"
