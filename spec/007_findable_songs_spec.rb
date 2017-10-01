@@ -10,7 +10,7 @@ context "Song" do
   describe ".find_or_create_by_name" do
     it "returns (does not recreate) an existing song with the provided name if one exists in @@all" do
       same_song = Song.find_or_create_by_name("In the Aeroplane Over the Sea")
-
+    
       expect(Song.all.length).to eq(1)
       expect(same_song).to be(song)
     end
