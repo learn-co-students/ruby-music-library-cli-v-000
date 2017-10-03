@@ -1,7 +1,9 @@
 require 'pry'
 class Artist
 
-  attr_accessor :name
+extend Concerns::Findable
+
+  attr_accessor :name, :genre
   attr_reader :song
 
   @@all = []
@@ -38,4 +40,9 @@ class Artist
     song.artist = self unless song.artist
     songs << song unless songs.include?(song)
   end
+
+  def genres
+    songs.collect{ |s| s.genre }.uniq
+  end
+
 end #Artist class
