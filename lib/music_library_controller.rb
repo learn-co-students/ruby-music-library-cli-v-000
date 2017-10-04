@@ -2,7 +2,6 @@ class MusicLibraryController
   attr_accessor :path
 
   def initialize(path = "./db/mp3s")
-    @path = path
     MusicImporter.new(path).import
   end
 
@@ -41,28 +40,22 @@ class MusicLibraryController
 
   def list_songs
     Song.all.sort! { |a, b|  a.name <=> b.name }
-    i = 1
-    Song.all.each do |instance|
+    Song.all.each.with_index(1) do |instance, i|
       puts "#{i}. #{instance.artist.name} - #{instance.name} - #{instance.genre.name}"
-      i += 1
     end
   end
 
   def list_artists
     Artist.all.sort! { |a, b|  a.name <=> b.name }
-    i = 1
-    Artist.all.each do |instance|
+    Artist.all.each.with_index(1) do |instance, i|
       puts "#{i}. #{instance.name}"
-      i += 1
     end
   end
 
   def list_genres
     Genre.all.sort! { |a, b|  a.name <=> b.name }
-    i = 1
-    Genre.all.each do |instance|
+    Genre.all.each.with_index(1) do |instance, i|
       puts "#{i}. #{instance.name}"
-      i += 1
     end
   end
 
@@ -70,12 +63,9 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     input_artist = gets.strip
 
-    Song.all.sort! { |a, b|  a.name <=> b.name }
-    i = 1
-    Song.all.each do |instance|
-      if instance.artist.name == input_artist
-        puts "#{i}. #{instance.name} - #{instance.genre.name}"
-        i += 1
+    if artist = Artist.find_by_name(input_artist)
+      artist.songs.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
+        puts "#{i}. #{s.name} - #{s.genre.name}"
       end
     end
   end
@@ -84,12 +74,9 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
     input_genre = gets.strip
 
-    Song.all.sort! { |a, b|  a.name <=> b.name }
-    i = 1
-    Song.all.each do |instance|
-      if instance.genre.name == input_genre
-        puts "#{i}. #{instance.artist.name} - #{instance.name}"
-        i += 1
+    if genre = Genre.find_by_name(input_genre)
+      genre.songs.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
+        puts "#{i}. #{s.artist.name} - #{s.name}"
       end
     end
   end
@@ -97,14 +84,10 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     input_play = gets.strip.to_i
-    Song.all.sort! { |a, b|  a.name <=> b.name }
-    i = 1
-    Song.all.each do |instance|
-      if i == input_play
-        puts "Playing #{instance.name} by #{instance.artist.name}"
-      end
-      i += 1
+    if (1..Song.all.length).include?(input_play)
+      song = Song.all.sort{ |a, b| a.name <=> b.name }[input_play - 1]
     end
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 
 end

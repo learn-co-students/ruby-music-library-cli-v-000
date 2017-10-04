@@ -7,14 +7,15 @@ class Song
   @@all = []
 
   def self.create(name)
-    Song.new(name)
+    song = new(name)
+    song.save
+    song
   end
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist=(artist) if artist != nil
     self.genre=(genre) if genre != nil
-    self.save
   end
 
   def save
@@ -48,7 +49,7 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    new_song = new_from_filename(filename)
+    new_from_filename(filename).tap { |s| s.save}
   end
 
 
