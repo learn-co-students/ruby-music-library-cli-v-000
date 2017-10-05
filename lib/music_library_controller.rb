@@ -1,10 +1,11 @@
 class MusicLibraryController
 
-  def initialize(path="./db/mp3s")
+  def initialize(path="./db/mp3s")  #accepts one argument, the path to the MP3 files to be imported, the 'path' argument defaults to './db/mp3s'
     @path = path
-    music = MusicImporter.new(path)
-    music.import
+    music = MusicImporter.new(path) #creates a new MusicImporter object, passing in the 'path' value
+    music.import  #invokes the #import method on the created MusicImporter object
   end
+
 
   def call
     input = ""

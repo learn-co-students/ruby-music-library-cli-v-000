@@ -31,6 +31,3 @@ class Genre
     self.songs.map {|song| song.artist}.uniq     #does not return duplicate artists if the genre has more than one song by a particular artist
   end
 end
-
-
-# rspec --f-f

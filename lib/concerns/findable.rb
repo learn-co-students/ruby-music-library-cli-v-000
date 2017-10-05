@@ -7,7 +7,7 @@ module Concerns::Findable
     self.find_by_name(instance_name) || self.create(instance_name)  #finds (does not recreate) an existing instance with the provided name if one exists in @@all
   end                                                               #invokes the extended class's .create method, passing in the provided name, if an existing match is not found
 
-  def sorted                                                        #class module method to sort collections alphabetically 
+  def sorted                                                        #class module method to sort collections alphabetically
     self.all.sort_by {|object| object.name }
   end
 end

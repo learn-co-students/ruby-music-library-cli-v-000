@@ -1,7 +1,7 @@
 class Artist
   attr_accessor :name           #retrieves the name of an artist and set it a new name
   attr_reader   :songs          #returns the artist's 'songs' collection
-  extend Concerns::Findable     #extends the Concerns::Findable module class methods 
+  extend Concerns::Findable     #extends the Concerns::Findable module class methods
   @@all = []                    #class variable all in Artist is initialized as an empty array to store all Artist instances
 
   def initialize(name)          #accepts a name for the new artist
@@ -36,6 +36,3 @@ class Artist
     self.songs.map {|song| song.genre}.uniq   #does not return duplicate genres if the artist has more than one song of a particular genre
   end
 end
-
-
-# rspec --f-f
