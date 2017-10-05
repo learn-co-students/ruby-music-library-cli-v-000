@@ -21,4 +21,10 @@ class Artist
     @@all << self
   end
 
+  def self.create(artist)
+    artist = self.new(name)
+
+  end
+
+
 end
