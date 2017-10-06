@@ -76,19 +76,11 @@ class MusicLibraryController
     input = gets.strip
     song_array = []
     idea = Artist.all.detect {|artist| artist.name == input }
-    binding.pry
     if idea
-        idea.songs.each { |song| song_array << "#{song.name} - #{song.genre.name}" }
-        song_array.sort!
+        song_array = idea.songs.collect { |song| "#{song.name} - #{song.genre.name}" }.sort!
         song_array.each_with_index { |song, index| puts "#{index + 1}. #{song}" }
     end
   end
-    # files.each {|song| song_list << song if song.split(" - ")[0] == artist}
-    #
-    # song_list.collect! {|song| song.split(" - ")}
-    # song_list.each_with_index do |song, index|
-    #   puts "#{index + 1}. #{song[1]} - #{song[2].gsub(".mp3", "")}"
-    # end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
