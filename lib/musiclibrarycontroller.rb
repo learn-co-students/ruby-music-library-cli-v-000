@@ -75,12 +75,12 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     input = gets.strip
     song_array = []
-    Artist.all.each do |artist|
-      if artist.name == input
-        artist.songs.each { |song| song_array << "#{song.name} - #{song.genre.name}" }
+    idea = Artist.all.detect {|artist| artist.name == input }
+    binding.pry
+    if idea
+        idea.songs.each { |song| song_array << "#{song.name} - #{song.genre.name}" }
         song_array.sort!
         song_array.each_with_index { |song, index| puts "#{index + 1}. #{song}" }
-      end
     end
   end
     # files.each {|song| song_list << song if song.split(" - ")[0] == artist}
