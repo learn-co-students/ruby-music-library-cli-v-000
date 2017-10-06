@@ -23,6 +23,20 @@ class MusicLibraryController
 
       input = gets.strip
     end
+    case input
+    when "list songs"
+      list_songs
+    when "list artists"
+      list_artists
+    when "list genres"
+      list_genres
+    when "list artist"
+      list_songs_by_artist
+    when "list genre"
+      list_songs_by_genre
+    when "play song"
+      play_song
+    end
   end
 
   def files
@@ -93,7 +107,9 @@ class MusicLibraryController
     song_list = list_songs
     puts "Which song number would you like to play?"
     song = gets.strip
-    song_list.detect do |choice| choice[0] == song
+    index = song.to_i - 1
+    if index.between(0, song_list.length -1)
+
       pieces = choice.split(" - ")
       puts "Playing #{pieces[1]} by #{pieces[0]}"
     end
