@@ -3,8 +3,7 @@ class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
     @path = path
-    importer = MusicImporter.new(path)
-    importer.import
+    MusicImporter.new(path).import
   end
 
   def call
@@ -44,51 +43,52 @@ class MusicLibraryController
   end
 
   def list_songs
-    list = files
-    song_sorter = []
-    final_list = []
-    files.each {|song| song_sorter << song.split(" - ")}
-    song_sorter.map {|song| song[0], song[1] = song[1], song[0] }
-    song_sorter.sort!
-    song_sorter.map {|song| song[0], song[1] = song[1], song[0] }
-    song_sorter.collect! {|song| song.join(" - ").gsub(".mp3", "")}
-    list = song_sorter
-    list.each_with_index do |song, index|
-      final_list << "#{index + 1}. #{song}"
-      puts "#{index + 1}. #{song}"
+    song_array = []
+    Song.all.each do |song|
+      list = [song.artist.name, song.name, song.genre.name]
+      song_array << list
     end
-    final_list
-
+    song_array.sort_by{|p| p[1]}.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.join(" - ")}"
+    end
   end
 
   def list_artists
-    list = files.sort
-    list.collect! {|song| song.split(" - ")[0]}.uniq!
-    list.each_with_index do |song, index|
-      puts "#{index + 1}. #{song}"
+    artist_array = []
+    Artist.all.each { |artist| artist_array << artist.name }
+    artist_array.sort!.uniq!
+    artist_array.each_with_index do |artist, index|
+      puts "#{index + 1}. #{artist}"
     end
   end
 
   def list_genres
-    list = files
-    list.collect! {|song| song.split(" - ")[2].gsub(".mp3", "")}.uniq!
-    list.sort!
-    list.each_with_index do |song, index|
-      puts "#{index + 1}. #{song}"
+    genre_array = []
+    Genre.all.each { |genre| genre_array << genre.name }
+    genre_array.sort!.uniq!
+    genre_array.each_with_index do |genre, index|
+      puts "#{index + 1}. #{genre}"
     end
   end
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist = gets.strip
-    song_list = []
-    files.each {|song| song_list << song if song.split(" - ")[0] == artist}
-
-    song_list.collect! {|song| song.split(" - ")}
-    song_list.each_with_index do |song, index|
-      puts "#{index + 1}. #{song[1]} - #{song[2].gsub(".mp3", "")}"
+    input = gets.strip
+    song_array = []
+    Artist.all.each do |artist|
+      if artist.name == input
+        artist.songs.each { |song| song_array << "#{song.name} - #{song.genre.name}" }
+        song_array.sort!
+        song_array.each_with_index { |song, index| puts "#{index + 1}. #{song}" }
+      end
     end
   end
+    # files.each {|song| song_list << song if song.split(" - ")[0] == artist}
+    #
+    # song_list.collect! {|song| song.split(" - ")}
+    # song_list.each_with_index do |song, index|
+    #   puts "#{index + 1}. #{song[1]} - #{song[2].gsub(".mp3", "")}"
+    # end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
