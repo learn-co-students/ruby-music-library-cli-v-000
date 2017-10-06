@@ -22,20 +22,20 @@ class MusicLibraryController
       puts "What would you like to do?"
 
       input = gets.strip
-    end
-    case input
-    when "list songs"
-      list_songs
-    when "list artists"
-      list_artists
-    when "list genres"
-      list_genres
-    when "list artist"
-      list_songs_by_artist
-    when "list genre"
-      list_songs_by_genre
-    when "play song"
-      play_song
+      case input
+      when "list songs"
+        list_songs
+      when "list artists"
+        list_artists
+      when "list genres"
+        list_genres
+      when "list artist"
+        list_songs_by_artist
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
+      end
     end
   end
 
@@ -104,15 +104,14 @@ class MusicLibraryController
   end
 
   def play_song
-    song_list = list_songs
     puts "Which song number would you like to play?"
+    songs = files
     song = gets.strip
     index = song.to_i - 1
-    if index.between(0, song_list.length -1)
-
-      pieces = choice.split(" - ")
-      puts "Playing #{pieces[1]} by #{pieces[0]}"
+    length = files.length-1
+    if index.between?(0, length)
+      pieces = files.collect {|song| song.split(" - ")}.sort_by{|p| p[1]}
+      puts "Playing #{pieces[index][1]} by #{pieces[index][0]}"
     end
-
   end
 end
