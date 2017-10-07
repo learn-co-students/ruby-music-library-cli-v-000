@@ -4,8 +4,7 @@ class Song
 
   @@all = [ ]
 
-  attr_accessor :name
-  attr_reader :artist
+  attr_accessor :name, :artist
 
   def initialize(name, artist = nil)
     @name = name
@@ -31,7 +30,8 @@ class Song
   end
 
   def artist=(artist)
-    artist.add_song(self)
+    self.artist.add_song(self)
+    binding.pry
   end
 
 end
