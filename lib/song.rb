@@ -1,3 +1,4 @@
+require 'pry'
 class Song
   attr_accessor :name, :artist, :genre
 
@@ -23,30 +24,32 @@ class Song
     self.all.detect{|song|song.name == name}
   end
 
-  def self.create_by_name(name)
-    song = self.create
-    song.name = name
-    song
+  # def self.create_by_name(name)
+  #   song = self.create
+  #   song.name = name
+  #   song
+  # end
+
+  # def self.find_or_create_by_name(name)
+  #   self.find_by_name(name) || self.create(name)
+  # end
+
+
+  def self.new_from_filename(filename)
+
+    song_name = filename.split(" - ")[1]
+    artist_name = filename.split(" - ")[0]
+    genre_name = filename.split(" - ")[2].gsub(".mp3","")
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    self.new(song_name,artist,genre)
   end
 
-  def self.find_or_create_by_name(name)
-    self.find_by_name(name) || self.create(name)
-  end
-
-
-  def self.new_from_filename(file_name)
-    song_name = file_name.split("-")[1]
-    new_song = self.new(song_name)
-
-
-  end
-
-  def self.create_from_filename(file_name)
-
-    # artist=Artist.find_or_create_by_name(name)
-    # genre = Genre.find_or_create_by_name(name)
-    # self.create(name)
-
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
   end
 
 
