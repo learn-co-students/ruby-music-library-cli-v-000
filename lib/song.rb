@@ -19,7 +19,8 @@ class Song
   end
 
   def self.create(name)
-    self.new(name).save
-    binding.pry
+    self.new(name)
+    self.save
+    self
   end
 end
