@@ -32,4 +32,40 @@ class MusicLibraryController
     end
   end
 
+  def list_artists
+    Artist.all.sort_by! {|a| a.name}
+    Artist.all.each_with_index { |a, i| puts "#{i+1}. #{a.name}" }
+  end
+
+  def list_genres
+    Genre.all.sort_by! {|g| g.name}
+    Genre.all.each_with_index { |g, i| puts "#{i+1}. #{g.name}"}
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    Artist.all.each do |artist|
+      if artist.name == input
+        artist.songs.sort_by! {|s| s.name}
+        artist.songs.each_with_index do |s, i|
+          puts "#{i+1}. #{s.name} - #{s.genre.name}"
+        end
+      end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    Genre.all.each do |genre|
+      if genre.name == input
+        genre.songs.sort_by! {|s| s.name}
+        genre.songs.each_with_index do |s, i|
+          puts "#{i+1}. #{s.artist.name} - #{s.name}"
+        end
+      end
+    end
+  end
+
 end
