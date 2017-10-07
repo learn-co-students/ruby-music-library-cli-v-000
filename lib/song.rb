@@ -44,13 +44,9 @@ class Song
     artist_name = filename_arr[0]
     song_name = filename_arr[1]
     genre_name = filename_arr[2].chomp(".mp3")
-    song = self.find_or_create_by_name(song_name)
     artist = Artist.find_or_create_by_name(artist_name)
     genre = Genre.find_or_create_by_name(genre_name)
-    song.artist = artist
-    song.genre = genre
-    song
-
+    self.new(song_name, artist, genre)
   end
 
   def self.create_from_filename(filename)
