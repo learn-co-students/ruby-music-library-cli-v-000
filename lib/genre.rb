@@ -19,6 +19,8 @@ class Genre
   end
 
   def self.create(name)
-    self.new(name).save
+    new_object = self.new(name)
+    new_object.save
+    new_object
   end
 end
