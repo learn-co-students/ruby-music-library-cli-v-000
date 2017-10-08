@@ -17,7 +17,6 @@ class Genre
     self.songs.collect {|song| song.artist}.uniq
   end
 
-
   def self.all
     @@all
   end
@@ -35,7 +34,5 @@ class Genre
     genre.save
     genre
   end
-
-
 
 end
