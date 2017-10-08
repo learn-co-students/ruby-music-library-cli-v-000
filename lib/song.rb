@@ -5,11 +5,12 @@ class Song
   @@all = [ ]
 
   attr_accessor :name
-  attr_reader :artist
+  attr_reader :artist, :genre
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist
+    artist == nil ? @artist = artist : self.artist = artist #wouldn't have gottent his unless instructions indicated don't run #artist= if there is no artist argument
+    genre == nil ? @genre = genre : self.genre = genre
   end
 
   def self.all #had to fix - forgot self
@@ -30,11 +31,15 @@ class Song
     song
   end
 
-  def artist=(arty)
+  def artist=(artist)
     #self.artist = arty # IS THIS THE DANG PROBLEM??  THIS SAYS STACK LEVEL TOO DEEP -- this is where the loop is happening??
-    @artist = arty
+    @artist = artist
+    self.artist.add_song(self)
+  end
 
-  #  self.artist.add_song(self)
+  def genre=(genre)
+    @genre = genre
+    self.genre.add_song(self)
   end
 
 end
