@@ -36,4 +36,10 @@ class Genre
     end
   end
 
+  def artists
+    all_artists = []
+    songs.each { |song| all_artists << song.artist }
+    all_artists.uniq
+  end
+
 end
