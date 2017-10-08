@@ -31,4 +31,12 @@ class Genre
     @songs
   end
 
+  def artists
+    genart = []
+    self.songs.each do |song|
+      genart << song.artist
+    end
+    genart.uniq
+  end
+
 end

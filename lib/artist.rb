@@ -39,4 +39,12 @@ class Artist
     end
   end
 
+  def genres
+    artgenre = []
+    self.songs.each do |song|
+      artgenre << song.genre
+    end 
+    artgenre.uniq
+  end 
+
 end
