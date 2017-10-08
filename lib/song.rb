@@ -4,7 +4,8 @@ class Song
 
   @@all = [ ]
 
-  attr_accessor :name, :artist
+  attr_accessor :name
+  attr_reader :artist
 
   def initialize(name, artist = nil)
     @name = name
@@ -29,9 +30,11 @@ class Song
     song
   end
 
-  def artist=(artist)
-    self.artist.add_song(self)
-    binding.pry
+  def artist=(arty)
+    #self.artist = arty # IS THIS THE DANG PROBLEM??  THIS SAYS STACK LEVEL TOO DEEP -- this is where the loop is happening??
+    @artist = arty
+
+  #  self.artist.add_song(self)
   end
 
 end
