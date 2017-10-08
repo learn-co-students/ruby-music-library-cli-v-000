@@ -1,12 +1,15 @@
 class Song
   attr_accessor :name
-  attr_reader :artist
+  attr_reader :artist, :genre
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     if artist != nil
      self.artist = artist
+    end
+    if genre != nil
+     self.genre = genre
     end
   end
 
@@ -33,4 +36,24 @@ class Song
     artist.add_song(self)
   end
 
+  def genre=(genre)
+    if !genre.songs.include?(self)
+      @genre = genre
+      genre.songs << self
+    end
+  end
+
+  def self.find_by_name(song_name)
+    self.all.find do |song|
+      song.name == song_name
+    end
+  end
+
+  def self.find_or_create_by_name(song_name)
+    if self.find_by_name(song_name) == nil
+      Song.create(song_name)
+    else
+      self.find_by_name(song_name)
+    end
+  end
 end
