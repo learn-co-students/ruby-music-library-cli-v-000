@@ -1,5 +1,7 @@
 class Song
   extend Concerns::Findable
+  extend Concerns::Persistable
+  include Concerns::Persistable::InstanceMethods
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -9,18 +11,10 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    all.clear
-  end
-
   def self.create(name, artist = nil, genre = nil)
     song = self.new(name)
     song.save
     song
-  end
-
-  def save
-    self.class.all << self
   end
 
   def initialize(name, artist = nil, genre = nil)
@@ -54,7 +48,5 @@ class Song
     all << song
     song
   end
-
-
 
 end
