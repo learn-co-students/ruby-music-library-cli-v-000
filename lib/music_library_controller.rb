@@ -60,12 +60,12 @@ class MusicLibraryController
   puts "Please enter the name of an artist:"
   artist_name = gets
 
-  # found_artist = Artist.all.find {|artist| artist.name == artist_name}
-  # counter = 1
-  # found_artist.songs.each do |song|
-  #   puts "#{counter}. #{song.name} - #{song.genre.name}"
-  #   counter += 1
-  # end
+  found_artist = Artist.all.find {|artist| artist.name == artist_name}
+  counter = 1
+  found_artist.songs.each do |song|
+    puts "#{counter}. #{song.name} - #{song.genre.name}"
+    counter += 1
+  end
  end
 
 
