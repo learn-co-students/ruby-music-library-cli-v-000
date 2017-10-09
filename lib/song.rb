@@ -44,11 +44,6 @@ class Song
     self.genre.add_song(self)
   end
 
-#Go back and make sure you can delete given the module
-  # def self.find_by_name(name)
-  #   self.all.detect { |s| s.name == name }
-  # end
-
   def self.new_from_filename(filename)
     song_title = filename.split(" - ")[1]
     artist_name = filename.split(" - ")[0]
@@ -61,6 +56,7 @@ class Song
 
   def self.create_from_filename(filename)
     s = new_from_filename(filename)
+    # s.save - this resulted in double saving
   end
 
 end
