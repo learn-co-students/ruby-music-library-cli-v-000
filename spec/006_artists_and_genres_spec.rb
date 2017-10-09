@@ -14,6 +14,7 @@ describe "Associations — Artist and Genre:" do
 
         expect(artist.genres).to include(genre)
         expect(artist.genres).to include(other_genre)
+
         expect(artist.genres.size).to be(2)
       end
 

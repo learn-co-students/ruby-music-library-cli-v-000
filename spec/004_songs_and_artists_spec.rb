@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Associations — Song and Artist:" do
-  let(:song) { Song.new("In the Aeroplane Over the Sea") }
+  let(:song)   { Song.new("In the Aeroplane Over the Sea") }
   let(:artist) { Artist.new("Neutral Milk Hotel") }
 
   context "Artist" do
@@ -56,7 +56,6 @@ describe "Associations — Song and Artist:" do
     describe "#add_song" do
       it "assigns the current artist to the song's 'artist' property (song belongs to artist)" do
         artist.add_song(song)
-
         expect(song.artist).to be(artist)
       end
 
