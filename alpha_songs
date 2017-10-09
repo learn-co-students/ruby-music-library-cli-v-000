@@ -1,0 +1,28 @@
+
+[1mFrom:[0m /home/amayanga90-85487/code/labs/ruby-music-library-cli-v-000/lib/music_lib_controller.rb @ line 93 MusicLibraryController#play_song:
+
+     [1;34m77[0m: [32mdef[0m [1;34mplay_song[0m
+     [1;34m78[0m:   puts [31m[1;31m"[0m[31mWhich song number would you like to play?[1;31m"[0m[31m[0m
+     [1;34m79[0m:   input = gets.chomp
+     [1;34m80[0m: 
+     [1;34m81[0m:   [1;34m#while input.to_i < 1 || input.to_i > Song.all.size[0m
+     [1;34m82[0m:   [1;34m#  puts "Which song number would you like to play?"[0m
+     [1;34m83[0m:   [1;34m#  input = gets.chomp[0m
+     [1;34m84[0m:   [1;34m#end[0m
+     [1;34m85[0m: 
+     [1;34m86[0m:   [1;34m# Ask user for input[0m
+     [1;34m87[0m:   [1;34m# Take the input and minus 1, whcih gets you the index number for a song[0m
+     [1;34m88[0m:   [1;34m# You want to "puts" the #{selected_song[index].artist.name}...."[0m
+     [1;34m89[0m: 
+     [1;34m90[0m: 
+     [1;34m91[0m:   index = input.to_i - [1;34m1[0m
+     [1;34m92[0m:   alpha_songs = [1;34;4mSong[0m.all.sort_by{ |song| song.name }
+ =>  [1;34m93[0m:   binding.pry
+     [1;34m94[0m:   selected_song = alpha_songs[index]
+     [1;34m95[0m:   [32mif[0m selected_song != [1;36mnil[0m
+     [1;34m96[0m:     puts [31m[1;31m"[0m[31mPlaying #{selected_song.name}[0m[31m by #{selected_song.artist.name}[0m[31m[1;31m"[0m[31m[0m
+     [1;34m97[0m:   [32melse[0m
+     [1;34m98[0m:     [1;36mnil[0m
+     [1;34m99[0m:   [32mend[0m
+    [1;34m100[0m: [32mend[0m
+
