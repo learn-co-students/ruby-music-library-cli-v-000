@@ -45,16 +45,8 @@ class Song
   end
 
 #Go back and make sure you can delete given the module
-  def self.find_by_name(name)
-    self.all.detect { |s| s.name == name }
-  end
-
-  # def self.find_or_create_by_name(name)
-  #   if self.find_by_name(name)
-  #     self.find_by_name(name)
-  #   else
-  #     self.create(name)
-  #   end
+  # def self.find_by_name(name)
+  #   self.all.detect { |s| s.name == name }
   # end
 
   def self.new_from_filename(filename)
@@ -69,7 +61,6 @@ class Song
 
   def self.create_from_filename(filename)
     s = new_from_filename(filename)
-#    s.save
   end
 
 end
