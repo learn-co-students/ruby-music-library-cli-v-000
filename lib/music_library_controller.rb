@@ -20,6 +20,19 @@ class MusicLibraryController
   command = nil
   until command == "exit" do
    command = gets
+   if command == "list songs"
+     list_songs
+   elsif command == "list artists"
+     list_artists
+   elsif command == "list genres"
+     list_genres
+   elsif command == "list artist"
+     list_songs_by_artist
+   elsif command == "list genre"
+     list_songs_by_genre
+   elsif command == "play song"
+     play_song
+   end
   end
  end
 
