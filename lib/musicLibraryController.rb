@@ -1,10 +1,11 @@
 class MusicLibraryController
 
-  attr_accessor :alphabetized_songs
+  #attr_accessor :alphabetized_songs
 
   def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
+    #@alphabetized_songs = []
   end
 
   def call
@@ -33,18 +34,18 @@ class MusicLibraryController
   end
 
   def list_artists
-    new_array = Artist.all.sort_by { |obj| obj.name }
+    alphabetized_artists = Artist.all.sort_by { |obj| obj.name }
     i = 1
-    new_array.each do |a|
+    alphabetized_artists.each do |a|
         puts "#{i}. #{a.name}"
       i += 1
     end
   end
 
   def list_genres
-    new_array = Genre.all.sort_by { |obj| obj.name }
+    alphabetized_genres = Genre.all.sort_by { |obj| obj.name }
     i = 1
-    new_array.each do |a|
+    alphabetized_genres.each do |a|
         puts "#{i}. #{a.name}"
       i += 1
     end
@@ -79,16 +80,12 @@ class MusicLibraryController
   end
 
   def play_song
+    alphabetized_songs = Song.all.sort_by { |obj| obj.name }
     puts "Which song number would you like to play?"
-    input = gets.chomp
-    binding.pry
-    if input.to_i > 0 && input.to_i <= alphabetized_songs.count
-      puts "Playing #{alphabetized_songs[input-1].name} by #{alphabetized_songs[input-1].artist.name}"
-    else
-      play_song
+    song_number = gets.chomp.to_i
+    if song_number > 0 && song_number <= alphabetized_songs.count
+      puts "Playing #{alphabetized_songs[song_number-1].name} by #{alphabetized_songs[song_number-1].artist.name}"
     end
-
   end
-
 
 end
