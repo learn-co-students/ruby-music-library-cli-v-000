@@ -23,5 +23,17 @@ class MusicLibraryController
     end
   end
 
+  def list_songs
+    new_Array = Song.all.sort_by { |obj| obj.name }
+    binding.pry
+    i = 1
+    new_Array.each do |s|
+      puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+      i += 1
+    end
+
+  end
+
+
 
 end

@@ -44,6 +44,7 @@ class Song
     self.genre.add_song(self)
   end
 
+#Go back and make sure you can delete given the module
   def self.find_by_name(name)
     self.all.detect { |s| s.name == name }
   end
@@ -68,8 +69,7 @@ class Song
 
   def self.create_from_filename(filename)
     s = new_from_filename(filename)
-    s.save
-
+#    s.save
   end
 
 end
