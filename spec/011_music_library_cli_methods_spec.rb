@@ -101,7 +101,6 @@ describe "CLI Methods" do
 
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
       expect($stdout).to_not receive(:puts)
-
       music_library_controller.list_songs_by_artist
     end
   end

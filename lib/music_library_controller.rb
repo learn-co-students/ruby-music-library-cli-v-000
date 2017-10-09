@@ -59,14 +59,52 @@ class MusicLibraryController
  def list_songs_by_artist
   puts "Please enter the name of an artist:"
   artist_name = gets
-
   found_artist = Artist.all.find {|artist| artist.name == artist_name}
-  counter = 1
-  found_artist.songs.each do |song|
-    puts "#{counter}. #{song.name} - #{song.genre.name}"
-    counter += 1
+  if found_artist == nil
+    # does nothing
+  else
+    found_artist.songs.sort! do |song1, song2|
+      song1.name <=> song2.name
+    end
+    counter = 1
+    found_artist.songs.each do |song|
+      puts "#{counter}. #{song.name} - #{song.genre.name}"
+      counter += 1
+    end
+   end
   end
- end
 
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_name = gets
+
+    genre_name = Genre.all.find {|genre| genre.name == genre_name}
+    if genre_name == nil
+      # does nothing
+    else
+      genre_name.songs.sort! do |song1, song2|
+        song1.name <=> song2.name
+      end
+      counter = 1
+      genre_name.songs.each do |song|
+        puts "#{counter}. #{song.artist.name} - #{song.name}"
+        counter += 1
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_number = gets.to_i
+    biggest_number = Song.all.length
+    if song_number > biggest_number || song_number <= 0
+
+    else
+      sorted_songs = Song.all.sort do |song1, song2|
+                      song1.name <=> song2.name
+                    end
+      puts "Playing #{sorted_songs[song_number - 1].name} by #{sorted_songs[song_number - 1].artist.name}"
+    end
+  end
 
 end # class end
