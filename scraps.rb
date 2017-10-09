@@ -12,4 +12,7 @@ end
 secondArray = newArray.sort_by { |obj| obj.name }
 
 
- x = MusicLibraryController.new('./spec/fixtures/mp3s')
+ main = MusicLibraryController.new('./spec/fixtures/mp3s')
+
+ re = Artist.find_by_name("Real Estate")
+ re.songs.count #=>2
