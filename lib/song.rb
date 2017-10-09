@@ -11,11 +11,11 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    artist == nil ? @artist = artist : self.artist = artist #wouldn't have gottent his unless instructions indicated don't run #artist= if there is no artist argument
+    artist == nil ? @artist = artist : self.artist = artist
     genre == nil ? @genre = genre : self.genre = genre
   end
 
-  def self.all #had to fix - forgot self
+  def self.all
     @@all
   end
 
@@ -24,17 +24,16 @@ class Song
   end
 
   def save
-    self.class.all << self #had to fix -- forgot self.class
+    self.class.all << self
   end
 
-  def self.create(name) #had to fix - the problem was it wanted me to return the created instance.
+  def self.create(name)
     song = self.new(name)
     song.save
     song
   end
 
   def artist=(artist)
-    #self.artist = arty # IS THIS THE DANG PROBLEM??  THIS SAYS STACK LEVEL TOO DEEP -- this is where the loop is happening??
     @artist = artist
     self.artist.add_song(self)
   end
@@ -56,8 +55,6 @@ class Song
 
   def self.create_from_filename(filename)
     self.new_from_filename(filename)
-    # s = new_from_filename(filename)
-    # s.save - this resulted in double saving
   end
 
 end

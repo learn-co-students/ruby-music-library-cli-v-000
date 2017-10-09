@@ -20,7 +20,7 @@ class Artist
     self.all.clear
   end
 
-  def save #again, can't just put all << self b/c "all" is a class method
+  def save
     self.class.all << self
   end
 

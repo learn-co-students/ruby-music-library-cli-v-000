@@ -1,11 +1,8 @@
 class MusicLibraryController
 
-  #attr_accessor :alphabetized_songs
-
   def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
-    #@alphabetized_songs = []
   end
 
   def call
@@ -67,7 +64,7 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     input = gets.chomp
-    if Artist.all.detect { |a| a.name == input } #this drove me nuts for a while, all b/c I forgot to use == instead of =
+    if Artist.all.detect { |a| a.name == input }
       artist_obj = Artist.all.detect { |a| a.name == input }
       new_array = artist_obj.songs.sort_by { |obj| obj.name }
       i = 1
