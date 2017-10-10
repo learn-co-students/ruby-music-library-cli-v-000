@@ -3,7 +3,7 @@ require 'pry'
 class Artist
 #add shared module
 
-    attr_accessor :name, :songs
+    attr_accessor :name, :song
     @@all = []
 
     def initialize(name)
@@ -19,8 +19,6 @@ class Artist
       song.artist = self unless song.artist
       songs<<song unless songs.include?(song)
     end
-
-
 
     def self.all # class reader
       @@all

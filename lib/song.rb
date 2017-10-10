@@ -2,13 +2,12 @@ require 'pry'
 class Song
 
   attr_accessor :name, :artist, :genre
-  @@all = []
+  @@all = [] # all songs
 
-    def initialize(name, artist="none", genre="none")
+    def initialize(name, artist=nil, genre=nil)
       @name = name
-      @artist = artist
-      if (@name || @artist)
-        @songs<<name
+      @artist= self.artist=
+      @genre = genre
     end
 
     def self.all
@@ -23,11 +22,20 @@ class Song
       @@all << self
     end
 
-    
+
     def self.create(name)
       song = Song.new(name) # song = self.new song.name = name @@all << song
       song.save
+      song
     end
+
+
+    def artist=(artist)
+       @artist = artist
+       artist.add_song(self)
+    end
+
+end
   #
   # def self.new_from_filename(name)
   #    song = self.new
@@ -68,6 +76,3 @@ class Song
   #
   # def genre=(genre)
   # end
-
-end
-#
