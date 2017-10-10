@@ -1,5 +1,10 @@
 require 'pry'
+require './lib/concerns/findable.rb'
+
+
 class Song
+  extend Findable::ClassMethods
+  include Findable::InstanceMethods
 
   attr_accessor :name
   attr_reader :artist, :genre

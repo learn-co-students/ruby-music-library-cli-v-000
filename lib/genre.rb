@@ -1,5 +1,12 @@
+require 'pry'
+require './lib/concerns/findable.rb'
+
+
 class Genre
-#add shared module
+
+  extend Findable::ClassMethods
+  include Findable::InstanceMethods
+  
     attr_accessor :name, :songs
     @@all = []
 
