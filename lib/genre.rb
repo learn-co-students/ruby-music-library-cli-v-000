@@ -8,6 +8,21 @@ class Genre
       @songs = []
     end
 
+    def songs
+      @songs
+    end
+
+    def add_song(song)
+      @songs << song
+    end
+
+    def artists
+     @artists = @songs.collect do |song|
+        song.artist
+      end
+      @artists = @artists.uniq
+    end
+
     def self.all
       @@all
     end

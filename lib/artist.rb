@@ -1,10 +1,14 @@
 require 'pry'
+require './lib/concerns/findable.rb'
 
 class Artist
-#add shared module
+  extend Findable::ClassMethods
+  include Findable::InstanceMethods
 
-    attr_accessor :name, :song
-    @@all = []
+
+  attr_accessor :name
+  attr_reader :song
+  @@all = []
 
     def initialize(name)
       @name = name
@@ -19,6 +23,13 @@ class Artist
       song.artist = self unless song.artist
       songs<<song unless songs.include?(song)
     end
+    def genres
+      @genres = self.songs.collect do |song|
+        song.genre
+      end
+      @genres = @genres.uniq
+    end
+
 
     def self.all # class reader
       @@all
