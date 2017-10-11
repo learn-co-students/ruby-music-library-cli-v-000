@@ -1,15 +1,17 @@
-# require 'pry'
-# class MusicImporter
-#   attr_accessor
-#
-#   def initialize(filepath)
-#   end
-#
-#   def files
-#    @files
-#   end
-#
-#   def self.import
-#   #imports all the songs from library,
-#   #song.new for each file
-#   end
+require 'pry'
+class MusicImporter
+  attr_accessor :path
+
+  def initialize(path)
+    @path = path
+  end
+
+  def files
+   @files ||= Dir.glob("#{path}/*.mp3").collect{ |f| f.gsub("#{path}/", "") }
+  end
+
+  def self.import
+   files.each{|f| song.create_by_filename(f)}
+  end
+
+end

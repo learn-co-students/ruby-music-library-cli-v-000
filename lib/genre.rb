@@ -4,9 +4,8 @@ require './lib/concerns/findable.rb'
 
 class Genre
 
-  extend Findable::ClassMethods
-  include Findable::InstanceMethods
-  
+    extend Concerns::Findable
+
     attr_accessor :name, :songs
     @@all = []
 

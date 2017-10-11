@@ -3,8 +3,7 @@ require './lib/concerns/findable.rb'
 
 
 class Song
-  extend Findable::ClassMethods
-  include Findable::InstanceMethods
+    include Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -40,7 +39,8 @@ class Song
     end
 
     def self.create(name)
-      song = Song.new(name)
+      song = Song.new
+      song.name = name
       song.save
       song
     end
@@ -49,48 +49,22 @@ class Song
       self.all.detect{|s| s.name == name }
     end
 
-
+#create_by_name is the same as .create??
     def self.find_or_create_by_name(name)
       self.find_by_name(name) || self.create(name)
     end
+##
+    def self.new_from_filename(filename)
+      artist, song = filename.split(" - ")
+      #self.all.detect{|a| a.name == name } find by name
+      song = self.new
+      song.name = name
+      song
+    end
+
+    def self.create_from_filename(filename)
+      self.new_from_filename(filename)
+      song.save
+      song
+    end
 end
-  #
-  # def self.new_from_filename(name)
-  #    song = self.new
-  #    song.name = name
-  #    song
-  # end
-  #
-  # def self.create_from_filename
-  #   song = self.create
-  #   song.name = name
-  #   song
-  # end
-  #
-  #
-  # def self.find_by_name
-  #   self.all.detect {|song| song.name == name}
-  # end
-  #
-  # def self.find_or_create_by_name(name)
-  #   self.find_by_name(name || self.create_by_name(name)
-  # end
-  #
-  #
-  #
-  # def artist_name=(name)
-  #   if (self.artist.nil?)
-  #     self.artist = Artist.new(name)
-  #   else
-  #     self.artist.name
-  #   end
-  # end
-  # # @artist = artist unless @artist
-  # # artist.add_song(self) unless artist.song.include?(self)
-  #
-  # def artist=
-  #   artist.add_song
-  # end
-  #
-  # def genre=(genre)
-  # end
