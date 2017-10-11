@@ -1,16 +1,15 @@
 class Artist
 
-  attr_accessor :name, :artist, :genre
+  attr_accessor :name, :song
+  attr_reader :artist
 
   @@all = []
   extend Concerns::Findable
 
   def initialize(name)
     @name = name
-    #@artist = artist
-    @genre = genre
+    @song = song
     @songs = []
-    @genres = []
 
   end
 
@@ -24,7 +23,6 @@ class Artist
 
 
   def add_song(song)
-    #binding.pry
     @songs << song unless @songs.include?(song)
     song.artist = self unless song.artist
   end
@@ -34,9 +32,10 @@ class Artist
   end
 
   def genres
-    @song.artist = self
-    @genres << self
+    genres = []
+    @songs.each do |song|
+    genres << song.genre if !genres.include?(song.genre)
   end
-
-
+  genres
+  end
 end

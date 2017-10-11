@@ -1,12 +1,14 @@
 class Genre
 
-  attr_accessor :name, :genre, :artist
+  attr_accessor :name, :genre
+  attr_reader :artist
 
   @@all = []
   extend Concerns::Findable
 
   def initialize(name)
     @name = name
+    @genre = genre
     @songs = []
   end
 
@@ -25,6 +27,14 @@ class Genre
 
   def songs
     @songs
+  end
+
+  def artists
+    artists = []
+    @songs.each do |song|
+    artists << song.artist if !artists.include?(song.artist)
+  end
+  artists
   end
 
 
