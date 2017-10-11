@@ -41,10 +41,10 @@ class Artist
       @@all.clear
     end
 
-    def self.create(name)
-      artist = Artist.new(name)
-      artist.save
-      artist
-    end
+    #def self.create(name)
+    #  artist = Artist.new(name)
+    #  artist.save
+    #  artist
+    #end
 
 end

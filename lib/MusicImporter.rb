@@ -2,7 +2,7 @@ require 'pry'
 class MusicImporter
   attr_accessor :path
 
-  def initialize(path)
+  def initialize(path='./db/mp3s')
     @path = path
   end
 
@@ -11,7 +11,7 @@ class MusicImporter
   end
 
   def self.import
-   files.each{|f| song.create_by_filename(f)}
+   files.each{|f| find_or_create_by_filename(f)}
   end
 
 end

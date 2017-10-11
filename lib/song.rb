@@ -3,7 +3,7 @@ require './lib/concerns/findable.rb'
 
 
 class Song
-    include Concerns::Findable
+    extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -38,33 +38,36 @@ class Song
       @@all << self
     end
 
-    def self.create(name)
-      song = Song.new
-      song.name = name
-      song.save
-      song
-    end
 
-    def self.find_by_name(name)
-      self.all.detect{|s| s.name == name }
-    end
+
+    # def self.find_by_name(name)
+    #   self.all.detect{|s| s.name == name }
+    # end
 
 #create_by_name is the same as .create??
-    def self.find_or_create_by_name(name)
-      self.find_by_name(name) || self.create(name)
-    end
+    # def self.find_or_create_by_name(name)
+    #   self.find_by_name(name) || self.create(name)
+    # end
+
+    # def self.create(name)
+    #   song = Song.new(name)
+    #   song.save
+    #   song
+    # end
 ##
     def self.new_from_filename(filename)
-      artist, song = filename.split(" - ")
+      artist, name, genre = filename.split(" - ")
       #self.all.detect{|a| a.name == name } find by name
-      song = self.new
-      song.name = name
-      song
+      #find_or_create_by_name(name) objects not strings
+      find_or_create_by_name(name)
+
+      # song = Song.new(name, artist, genre)
+      # song
+
     end
 
     def self.create_from_filename(filename)
-      self.new_from_filename(filename)
-      song.save
-      song
+      artist, name, genre = filename.split("-")
+      new_from_filename(name)
     end
 end
