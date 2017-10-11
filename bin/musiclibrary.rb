@@ -11,6 +11,8 @@
  #MusicLibraryController.new.call
 
  #what is this file?
+class MusicLibraryController
+
 
  def initialize(path='./db/mp3s')
    @path = path
@@ -32,5 +34,23 @@
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?")
-  end 
+  end
  end
+
+ def list_songs
+   #puts all songs -- not hard-coded, numbered list, alphabetized
+ end
+
+ def list_artists
+   #puts all artists-- numbered, not hard-coded
+ end
+
+ def list_genres
+   # same, numbered list, alphabetical order
+ end
+
+ def list_songs_by_artist
+   puts "Please enter the name of an artist:""Please enter the name of an artist:""Please enter the name of an artist:"Please enter the name of an artist:"
+ end
+
+end
