@@ -54,20 +54,21 @@ class Song
     #   song.save
     #   song
     # end
-##
+## these can be moved to findable
     def self.new_from_filename(filename)
-      artist, name, genre = filename.split(" - ")
-      #self.all.detect{|a| a.name == name } find by name
-      #find_or_create_by_name(name) objects not strings
-      find_or_create_by_name(name)
-
-      # song = Song.new(name, artist, genre)
-      # song
-
+      parts = filename.split(" - ")
+      artist_name, song_name, genre_name = parts.first, parts[1], parts[2].gsub(".mp3", "")
+      artist = Artist.find_or_create_by_name(artist_name)
+      genre = Genre.find_or_create_by_name(genre_name)
+      self.new(song_name, artist, genre)
+      #turn the strings into objects
     end
 
     def self.create_from_filename(filename)
-      artist, name, genre = filename.split("-")
-      new_from_filename(name)
+      parts = filename.split(" - ")
+      artist_name, song_name, genre_name = parts.first, parts[1], parts[2].gsub(".mp3", "")
+      artist = Artist.find_or_create_by_name(artist_name)
+      genre = Genre.find_or_create_by_name(genre_name)
+      self.create(song_name, artist, genre)
     end
 end

@@ -1,6 +1,4 @@
 require 'pry'
-require './lib/concerns/findable.rb'
-
 
 class Genre
 
@@ -12,6 +10,12 @@ class Genre
     def initialize(name)
       @name = name
       @songs = []
+    end
+
+    def self.create(name)
+      genre = Genre.new(name)
+      genre.save
+      genre
     end
 
     def songs
@@ -41,9 +45,5 @@ class Genre
       @@all.clear
     end
 
-    def self.create(name)
-      genre = Genre.new(name)
-      genre.save
-      genre
-    end
+
 end

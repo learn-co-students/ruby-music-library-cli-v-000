@@ -12,8 +12,12 @@
 
  #what is this file?
 class MusicLibraryController
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1fb1ca8c995adda2494771ed6d97d6a7b6d06eb6
 
+  
  def initialize(path='./db/mp3s')
    @path = path
    MusicImporter.import #is this right?
@@ -35,6 +39,7 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?")
   end
+<<<<<<< HEAD
  end
 
  def list_songs
@@ -52,5 +57,24 @@ class MusicLibraryController
  def list_songs_by_artist
    puts "Please enter the name of an artist:""Please enter the name of an artist:""Please enter the name of an artist:"Please enter the name of an artist:"
  end
+=======
+ end
+
+ def list_songs 
+   #puts all songs -- not hard-coded, numbered list, alphabetized 
+ end
+
+ def list_artists
+   #puts all artists-- numbered, not hard-coded 
+ end
+
+ def list_genres
+   # same, numbered list, alphabetical order 
+ end 
+
+ def list_songs_by_artist
+   puts "Please enter the name of an artist:""Please enter the name of an artist:""Please enter the name of an artist:"Please enter the name of an artist:"
+ end 
+>>>>>>> 1fb1ca8c995adda2494771ed6d97d6a7b6d06eb6
 
 end
