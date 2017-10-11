@@ -1,8 +1,9 @@
 require 'pry'
 class MusicImporter
+    extend Concerns::Findable
   attr_accessor :path
 
-  def initialize(path='./db/mp3s')
+  def initialize(path="./db/mp3s")
     @path = path
   end
 
@@ -10,8 +11,11 @@ class MusicImporter
    @files ||= Dir.glob("#{path}/*.mp3").collect{ |f| f.gsub("#{path}/", "") }
   end
 
-  def self.import
-   files.each{|f| find_or_create_by_filename(f)}
+  def import
+    files.collect do |filename|
+      Song.create_from_filename(filename)
+
+    end
   end
 
 end

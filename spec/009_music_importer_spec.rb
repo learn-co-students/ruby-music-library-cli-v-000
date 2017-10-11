@@ -66,7 +66,7 @@ describe "Song" do
 
       Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
     end
-  endgenre
+  end
 end
 
 describe "MusicImporter" do
