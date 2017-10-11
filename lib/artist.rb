@@ -40,4 +40,15 @@ class Artist
     song.artist
   end
 
+  def genres
+    genres = []
+    self.songs.collect do |song|
+      genres << song.genre
+    end
+    genres.uniq
+  end
+end
+
+class Artist
+  extend Concerns::Findable
 end
