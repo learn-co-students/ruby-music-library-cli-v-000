@@ -1,25 +1,14 @@
 require 'pry'
 class MusicLibraryController
+  extend Concerns::Findable
 
  def initialize(path="./db/mp3s")
-    importer = MusicImporter.new(path)
-    importer.import
+    MusicImporter.new(path).import
+
  end
 
  def call
 
-   input = ""
-   while input != "exit"
-
-    # puts "Welcome to your music library!",
-    #  "To list all of your songs, enter 'list songs'.",
-    #  "To list all of the artists in your library, enter 'list artists'.",
-    #  "To list all of the genres in your library, enter 'list genres'.",
-    #  "To list all of the songs by a particular artist, enter 'list artist'.",
-    #  "To list all of the songs of a particular genre, enter 'list genre'.",
-    #  "To play a song, enter 'play song'.",
-    #  "To quit, type 'exit'.",
-    # "What would you like to do?"
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -29,84 +18,90 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
+
       input = gets.strip
 
-    end
 
     case input
       when "list songs"
         list_songs
+        call
       when "list artists"
-        list_artists
+         list_artists
+         call
       when "list genres"
-        list_genres
+         list_genres
+         call
       when "list artist"
-        list_songs_by_artist
+       list_songs_by_artist
+       call
       when "list genre"
         list_songs_by_genre
+        call
       when "play song"
         play_song
+        call
+      when "exit"
+        
+      else
+        puts "try again"
+        call
     end
  end
 
  def list_songs
-   binding.pry
-   #puts all songs -- not hard-coded, numbered list, alphabetized
-    Song.all.sort.each_with_index do |song, number|
-     puts "#{number + 1}. #{song}"
-   end
 
+    Song.all.sort_by{|song| song.name}.each_with_index do |song, i|
+    puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+   end
  end
 
  def list_artists
-   #puts all artists-- numbered, not hard-coded
-   Artists.all.each_with_index do|artist, number|
-     puts "{number + 1 }. #{artist}"
+   Artist.all.sort_by{|artist| artist.name}.each_with_index do |artist, i|
+   puts "#{i + 1}. #{artist.name}"
    end
  end
 
  def list_genres
-   alpha = Genres.all.sort_by{|song| song.name}
-   alpha.each_with_index do |genre, number|
-     puts "#{number + 1}. #{genre}"
+   Genre.all.sort_by{|genre| genre.name}.each_with_index do |genre, i|
+     puts "#{i + 1}. #{genre.name}"
    end
-   # same, numbered list, alphabetical order
  end
 
  def list_songs_by_artist
-   input = ""
    puts "Please enter the name of an artist:"
    input = gets.strip
-   if input != nil
-     find_by_name(input)
-     alpha = Artist.songs.all.sort_by{|song| song.name}
-     alpha.each_with_index do |song, index|
-       puts "#{index + 1}. #{song}"
+# binding.pry
+#confused -- the input has the artist's name -- so how do I call Artist.songs?
+   if artist =  Artist.find_by_name(input)
+     #find Artist.songs -- how?
+    artist.songs.sort_by{|song| song.name}.each_with_index do |song, i|
+       puts "#{i + 1}. #{song.name} - #{song.genre.name}"
      end
    end
  end
 
  def list_songs_by_genre
-   input = ""
+
    puts "Please enter the name of a genre:"
-   input = gets.strip
-   if input != nil
-     find_by_name(input)
-     alpha = Genre.songs.all.sort_by{|song| song.name}
-     alpha.each_with_index do |song, index|
-       puts "#{index + 1}. #{song}"
+   input = gets.strip #why isn't this input working?
+
+   genre = Genre.find_by_name(input)
+   if genre
+     genre.songs.sort_by{|song| song.name}.each_with_index do |song, i|
+       puts "#{i+ 1}. #{song.artist.name} - #{song.name}"
      end
    end
  end
 
-
  def play_song
-   list_songs
-   input = ""
    puts "Which song number would you like to play?"
-   input = gets.strip
-   if input.between? 1, number.last#check if valid?
-     find_by_name(input)
+   input = gets.strip.to_i
+
+   if input.between?(1, Song.all.length)
+     song = Song.all.sort_by{|song| song.name}[input - 1]
+
+     puts "Playing #{song.name} by #{song.artist.name}"
    end
  end
 
