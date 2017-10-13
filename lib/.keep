@@ -1,0 +1,22 @@
+
+
+
+
+class Artist
+  attr_accessor :name
+  @@all = []
+
+  def initialize(name)
+    @name=name
+    @@all << self
+  end
+end
+
+class Genre
+  attr_access0r :name
+  @@all=[]
+  def initialize(name)
+    @name=name
+    @@all << self
+  end
+end
