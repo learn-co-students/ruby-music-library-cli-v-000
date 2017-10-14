@@ -1,11 +1,13 @@
 class Song
-  attr_accessor :name
+  attr_accessor :name, :artist
 
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = nil)
     @name = name
-    @@all << self
+    if artist
+      self.artist = artist # self.artist assigns instance's artist property to that artist
+    end
   end
 
   def self.all
@@ -25,4 +27,10 @@ class Song
     song.save
     song
   end
-end
+
+  def artist
+  
+  end
+
+
+  end
