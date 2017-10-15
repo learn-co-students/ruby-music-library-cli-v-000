@@ -30,10 +30,8 @@ class Artist
     @songs
   end
 
-  def add_song(song)
-    if song.artist == nil
-      song.artist = self
-      @songs << song
-    end
+  def add_song(song) #this method takes a song instance,and adds it to the artist's collection
+    song.artist = self if song.artist == nil
+    @songs << song if !@songs.include?(song) #adds the song to the artist's collection
   end
 end
