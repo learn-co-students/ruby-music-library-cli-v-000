@@ -46,10 +46,11 @@ class Song
     self.all.detect {|song| song.name == name}
   end
 
-  def self.find_or_create_by_name(name)
-    result = @@all.detect do |song|
-      song.name == name
-    end
-    result || self.find_by_name(name) || self.create(name)
-  end
+  def self.find_or_create_by_name(name) # how does it know which to do?
+    self.find_by_name(name) || self.find_or_create_by_name(name)
+  #   result = @@all.detect do |song|
+  #     song.name == name
+  #   end
+  #   result || self.find_by_name(name) || self.create(name)
+  # end
 end
