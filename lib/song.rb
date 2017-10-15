@@ -1,14 +1,18 @@
 class Song
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
 
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     if artist
       self.artist = artist # self.artist assigns instance's artist property to that artist
     end
+    if genre
+      self.genre = genre
+    end
   end
+
 
   def self.all
     @@all
@@ -33,4 +37,19 @@ class Song
     artist.add_song(self)
   end
 
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
   end
+
+  def self.find_by_name(name)
+    self.all.detect {|song| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    result = @@all.detect do |song|
+      song.name == name
+    end
+    result || self.find_by_name(name) || self.create(name)
+  end
+end
