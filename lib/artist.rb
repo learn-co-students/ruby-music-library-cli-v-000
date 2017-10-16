@@ -1,4 +1,7 @@
+#require_relative './concerns/findable.rb'
+
 class Artist
+  extend Concerns::Findable
 
   attr_accessor :name, :songs
   @@all = []
@@ -20,7 +23,7 @@ class Artist
     self.all.clear
   end
 
-  def self.create
+  def self.create(name)
     artist = Artist.new(name)
     artist.save
     artist
