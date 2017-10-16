@@ -59,7 +59,7 @@ end
     end
 
     def list_genres
-      sorted_genres = Genre.all.sort {|e, f| e.name <=> f.name}
+      sorted_genres = Genre.all.sort! {|e, f| e.name <=> f.name}
       sorted_genres.each_with_index do |value, index|
         puts "#{index+1}. #{value.name}"
       end
