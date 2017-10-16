@@ -30,10 +30,14 @@ class MusicLibraryController
       list_songs
     when 'list artists'
       list_artists
-    when 'list genre'
+    when 'list genres'
       list_genres
     when 'play song'
       play_song
+    when 'list genre'
+      list_songs_by_genre
+    when 'list artist'
+      list_songs_by_artist
     end
 
     break if user_input == 'exit'
@@ -59,7 +63,7 @@ end
     end
 
     def list_genres
-      sorted_genres = Genre.all.sort! {|e, f| e.name <=> f.name}
+      sorted_genres = Genre.all.sort {|e, f| e.name <=> f.name}
       sorted_genres.each_with_index do |value, index|
         puts "#{index+1}. #{value.name}"
       end
