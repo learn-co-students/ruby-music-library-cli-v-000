@@ -11,7 +11,7 @@ class MusicLibraryController
 
   def call
     input = nil
-    while input != exit
+    while input != "exit"
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -26,7 +26,7 @@ class MusicLibraryController
       when 'list songs'
         list_songs
       when 'list artists'
-        list_artist
+        list_artists
       when 'list genres'
         list_genres
       when 'list artist'
@@ -41,9 +41,23 @@ class MusicLibraryController
 
   def list_songs
     sorted_by_song_name = Song.all.sort{|a, b| a.name <=> b.name}
-    sorted_by_song_name.each.with_index(1){|song, i| puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    #binding.pry
+    sorted_by_song_name.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
   #binding.pry
+  def list_artists
+  end
+
+  def list_genres
+  end
+  def list_song_by_artist
+  end
+  def list_song_by_genre
+  end
+  def play_song
+  end
 
 end
 #music = MusicLibraryController.new("./spec/fixtures/mp3s")
