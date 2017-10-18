@@ -1,5 +1,4 @@
-#require_relative './concerns/findable.rb'
-
+#look at artist.rb for best refactoring
 class Genre
   extend Concerns::Findable
 
