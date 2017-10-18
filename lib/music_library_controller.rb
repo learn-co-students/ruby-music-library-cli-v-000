@@ -2,11 +2,9 @@ require 'pry'
 
 class MusicLibraryController
 
-  #attr_accessor :path
-
   def initialize(path = "./db/mp3s")
     @path = path
-    MusicImporter.new(path).path
+    MusicImporter.new(path).import
   end
 
   def call
@@ -30,9 +28,9 @@ class MusicLibraryController
       when 'list genres'
         list_genres
       when 'list artist'
-        list_song_by_artist
+        list_songs_by_artist
       when 'list genre'
-        list_song_by_genre
+        list_songs_by_genre
       when 'play song'
         play_song
       end
@@ -41,25 +39,55 @@ class MusicLibraryController
 
   def list_songs
     sorted_by_song_name = Song.all.sort{|a, b| a.name <=> b.name}
-    #binding.pry
     sorted_by_song_name.each.with_index(1) do |song, i|
       puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
-  #binding.pry
+
   def list_artists
+    sorted_by_artist_name = Artist.all.sort{|a, b| a.name <=> b.name}
+    sorted_by_artist_name.each.with_index(1) do |artist, i|
+      puts "#{i}. #{artist.name}"
+    end
   end
 
   def list_genres
+    sorted_by_genre = Genre.all.sort{|a, b| a.name <=> b.name}
+    sorted_by_genre.each.with_index(1) do |genre, i|
+      puts "#{i}. #{genre.name}"
+    end
   end
-  def list_song_by_artist
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    if artist = Artist.find_by_name(input)
+      sorted_artist_songs = artist.songs.sort{|a, b| a.name <=> b.name} #a,b are from songs array
+      sorted_artist_songs.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.name} - #{song.genre.name}"
+      end
+    end
   end
-  def list_song_by_genre
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    if genre = Genre.find_by_name(input)
+      sorted_genre_songs = genre.songs.sort{|a, b| a.name <=> b.name}
+      sorted_genre_songs.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.artist.name} - #{song.name}"
+      end
+    end
   end
+
   def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i-1
+    sorted_by_song_name = Song.all.sort{|a, b| a.name <=> b.name}
+    #binding.pry
+    if input.between?(0, sorted_by_song_name.length-1)
+      puts "Playing #{sorted_by_song_name[input].name} by #{sorted_by_song_name[input].artist.name}"
+    end
   end
 
 end
-#music = MusicLibraryController.new("./spec/fixtures/mp3s")
-#music.list_songs
-#binding.pry
