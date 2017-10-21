@@ -7,7 +7,6 @@ class Artist
   def initialize(name)
     #binding.pry
     self.name = name
-    @@all = []
     self.songs = []
   end
 

@@ -6,7 +6,6 @@ class Genre
 
   def initialize(name)
     self.name = name
-    @@all = []
     self.songs = []
   end
 

@@ -1,11 +1,11 @@
 class Song
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
 
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     self.name = name
-    @@all = []
     self.artist = artist if artist
     #binding.pry
     self.genre = genre if genre
@@ -38,14 +38,6 @@ class Song
     if(genre != nil) && (!genre.songs.include?(self))
         genre.songs << self
       end
-  end
-
-  def self.find_by_name(song_name)
-    @@all.detect {|song| song.name == song_name}
-  end
-
-  def self.find_or_create_by_name(song_name)
-    self.find_by_name(song_name) || self.create(song_name)
   end
 
   def self.create(name)
