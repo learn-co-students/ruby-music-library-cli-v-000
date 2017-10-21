@@ -1,11 +1,23 @@
 class Genre
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     self.name = name
     @@all = []
+    self.songs = []
+  end
+
+  def artists
+    unique = []
+    songs.map do |song|
+      song.artist
+      if(!unique.include?(song.artist))
+        unique << song.artist
+      end
+    end
+    unique
   end
 
   def self.all
