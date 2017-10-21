@@ -11,6 +11,12 @@ class Artist
     self.songs = []
   end
 
+  def self.create(name)
+    Artist.new(name).tap do |artist|
+      artist.save
+    end
+  end
+
   def genres
     unique = []
     songs.map do |song|
@@ -33,11 +39,7 @@ class Artist
     self.class.all << self
   end
 
-  def self.create(name)
-    Artist.new(name).tap do |artist|
-      artist.save
-    end
-  end
+
 
   def add_song(song)
     if(song.artist == nil)

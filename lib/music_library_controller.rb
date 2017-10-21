@@ -4,6 +4,13 @@ class MusicLibraryController
     MusicImporter.new(path).import
   end
 
+  def list_songs
+
+  end
+
+
+
+
   def call
     user_input = ""
     until user_input == "exit"
@@ -18,7 +25,7 @@ class MusicLibraryController
       puts "What would you like to do?"
       user_input = gets.chomp
     end
-
   end
+
 
 end
