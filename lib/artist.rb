@@ -5,6 +5,7 @@ class Artist
   @@all =[]
 
   def initialize(name)
+    #binding.pry
     self.name = name
     @@all = []
     self.songs = []
