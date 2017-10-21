@@ -1,0 +1,23 @@
+
+[1mFrom:[0m /home/omikolaj/temporary/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 73 MusicLibraryController#call:
+
+    [1;34m71[0m: [32mdef[0m [1;34mcall[0m
+    [1;34m72[0m:   user_input = [31m[1;31m"[0m[31m[1;31m"[0m[31m[0m
+ => [1;34m73[0m:   binding.pry
+    [1;34m74[0m:   [32mif[0m(user_input == [31m[1;31m"[0m[31mlist songs[1;31m"[0m[31m[0m)
+    [1;34m75[0m:     [1;36mself[0m.list_songs
+    [1;34m76[0m:   [32mend[0m
+    [1;34m77[0m:   [32mwhile[0m user_input != [31m[1;31m"[0m[31mexit[1;31m"[0m[31m[0m
+    [1;34m78[0m:     puts [31m[1;31m"[0m[31mWelcome to your music library![1;31m"[0m[31m[0m
+    [1;34m79[0m:     puts [31m[1;31m"[0m[31mTo list all of your songs, enter 'list songs'.[1;31m"[0m[31m[0m
+    [1;34m80[0m:     puts [31m[1;31m"[0m[31mTo list all of the artists in your library, enter 'list artists'.[1;31m"[0m[31m[0m
+    [1;34m81[0m:     puts [31m[1;31m"[0m[31mTo list all of the genres in your library, enter 'list genres'.[1;31m"[0m[31m[0m
+    [1;34m82[0m:     puts [31m[1;31m"[0m[31mTo list all of the songs by a particular artist, enter 'list artist'.[1;31m"[0m[31m[0m
+    [1;34m83[0m:     puts [31m[1;31m"[0m[31mTo list all of the songs of a particular genre, enter 'list genre'.[1;31m"[0m[31m[0m
+    [1;34m84[0m:     puts [31m[1;31m"[0m[31mTo play a song, enter 'play song'.[1;31m"[0m[31m[0m
+    [1;34m85[0m:     puts [31m[1;31m"[0m[31mTo quit, type 'exit'.[1;31m"[0m[31m[0m
+    [1;34m86[0m:     puts [31m[1;31m"[0m[31mWhat would you like to do?[1;31m"[0m[31m[0m
+    [1;34m87[0m:     user_input = gets.chomp
+    [1;34m88[0m:   [32mend[0m
+    [1;34m89[0m: [32mend[0m
+
