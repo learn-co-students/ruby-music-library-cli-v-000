@@ -58,12 +58,15 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.chomp
-    input.to_i
-    if(list_songs[input])
-      puts "Playing #{list_songs[input].name} by #{list_songs[input].name.artist}"
-
+    input = gets.chomp.to_i
+    if (1..Song.all.size).include?(input)
+      song = Song.all.sort do |a, b|
+        a.name <=> b.name
+      end[input -1]
+    end
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
+
 
   def call
     user_input = ""
