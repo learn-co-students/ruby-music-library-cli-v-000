@@ -4,9 +4,21 @@ class Artist
   attr_accessor :name, :songs, :song
   @@all = []
 
+  def self.all
+    @@all
+  end
+
   def initialize(name)
     @name = name
     @songs = []
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.destroy_all
+    @@all.clear
   end
 
   def genres
@@ -21,18 +33,6 @@ class Artist
   def add_song(song)
     @songs << song if @songs.include?(song) == false
     song.artist = self if song.artist == nil
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all = []
-  end
-
-  def save
-    self.class.all << self
   end
 
   def self.create(name)

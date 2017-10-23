@@ -4,25 +4,25 @@ class Genre
   attr_accessor :name
   @@all = []
 
+  def self.all
+    @@all
+  end
+
   def initialize(name)
     @name = name
     @songs = []
   end
 
-  def songs
-    @songs
-  end
-
-  def self.all
-    @@all
+  def save
+    @@all << self
   end
 
   def self.destroy_all
-    @@all = []
+    @@all.clear
   end
 
-  def save
-    self.class.all << self
+  def songs
+    @songs
   end
 
   def self.create(name)
