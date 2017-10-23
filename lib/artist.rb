@@ -1,9 +1,7 @@
 class Artist
-  include Concerns::Findable::InstanceMethods
-  extend Concerns::Findable
   @@all = []
-  attr_accessor :name
-
+  extend Concerns::Findable
+  attr_accessor :name, :songs
   def initialize(name)
     @name = name
     @songs = []
@@ -11,8 +9,15 @@ class Artist
   def self.all
     @@all
   end
-  def songs
-    @songs
+  def add_song(song)
+    song.artist = self unless song.artist
+    self.songs << song unless self.songs.include?(song)
+  end
+  def self.destroy_all
+    self.all.clear
+  end
+  def save
+    self.class.all << self
   end
   def self.create(name)
     artist = self.new(name)
@@ -20,13 +25,6 @@ class Artist
     artist
   end
   def genres
-    self.songs.collect {|song| song.genre }.uniq
-  end
-  def add_song(song)
-    #song.artist = self if !song.artist
-    song.artist ||= song.artist = self
-    if !self.songs.include?(song)
-      self.songs << song
-    end
+    self.songs.collect {|song|song.genre}.uniq
   end
 end
