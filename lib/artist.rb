@@ -22,16 +22,11 @@ class Artist
   end
 
   def genres
-    self.songs.collect {|song|
-      song.genre}.uniq
-  end
-
-  def songs
-    @songs
+    self.songs.collect {|song| song.genre}.uniq
   end
 
   def add_song(song)
-    @songs << song if @songs.include?(song) == false
+    @songs << song unless @songs.include?(song)
     song.artist = self if song.artist == nil
   end
 
