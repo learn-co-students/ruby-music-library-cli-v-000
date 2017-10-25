@@ -1,9 +1,9 @@
-
+require "pry"
 class Song
   extend Concerns::Findable
+  extend Concerns::Createdestroy
+  include Concerns::Save
   attr_accessor :name, :artist, :genre
-
-    @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -16,18 +16,16 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    Song.all.clear
-  end
+  def self.new_from_filename(filename)
+    file_parse = filename.gsub(".mp3","").split(" - ")
+    name = file_parse[1]
+    artist = Artist.new(file_parse[0])
+    genre = Genre.new(file_parse[2])
+    song = Song.new(name,artist,genre)
+    artist = Artist.find_or_create_by_name(song.artist)
+    genre = Genre.find_or_create_by_name(song.genre)
 
-  def self.create(name)
-    name = self.new(name)
-    name.save
-    name
-  end
-
-  def self.find_by_name(name)
-    Song.all.select{|song| return song if song.name == name}
+    return song
   end
 
   def self.find_or_create_by_name(name)
