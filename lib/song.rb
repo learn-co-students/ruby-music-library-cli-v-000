@@ -38,6 +38,20 @@ class Song
     end
   end
 
+  def self.new_from_filename(filename)
+    parsed_file = filename.split(' - ')
+    artist = Artist.find_or_create_by_name(parsed_file[0])
+    name = parsed_file[1]
+    genre = Genre.find_or_create_by_name(parsed_file[2].gsub('.mp3', ''))
+    new(name, artist, genre)
+  end
+
+  def self.create_from_filename(name)
+    new_from_filename(name).tap do |f|
+      f.save
+    end
+  end
+
   def save
     Song.all << self
   end
@@ -50,7 +64,6 @@ class Song
   def genre=(genre)
     @genre = genre
     if !genre.songs.include?(self)
-      Genre.create(genre)
       genre.songs << self
     end
   end
