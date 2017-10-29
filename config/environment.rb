@@ -7,11 +7,7 @@ module Concerns
       base.class_variable_set(:@@all,[])
     end
     def find_by_name(name)
-<<<<<<< HEAD
       self.all.detect{|object| return object if object.name == name}
-=======
-      all.detect{|object| object.name == name}
->>>>>>> 0410d92952a953497a00e9c2c4f5337759e895ab
     end
 
     def find_or_create_by_name(name)
