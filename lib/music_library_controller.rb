@@ -74,7 +74,6 @@ class MusicLibraryController
     genres_sorted.each do |genre|
       puts "#{counter}. #{genre}"
       counter += 1
-      binding.pry
     end
   end
 
