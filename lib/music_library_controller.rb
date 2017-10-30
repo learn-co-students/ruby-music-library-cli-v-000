@@ -74,16 +74,24 @@ class MusicLibraryController
     genres_sorted.each do |genre|
       puts "#{counter}. #{genre}"
       counter += 1
-    end 
+    end
   end
 
   def list_songs_by_artist
+    songs = []
+    puts "Please enter the name of an artist:"
+    artist = gets.strip
   end
 
   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre = gets.strip
+
   end
 
   def play_song
+    puts "Which song number would you like to play?"
+    song = gets.strip
   end
 
 end
