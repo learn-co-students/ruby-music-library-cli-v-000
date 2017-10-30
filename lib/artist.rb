@@ -4,6 +4,7 @@ class Artist
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -22,6 +23,10 @@ class Artist
     created_artist = self.new(artist)
     created_artist.save
     created_artist
+  end
+
+  def songs
+    @songs
   end
 
 end
