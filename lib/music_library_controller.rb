@@ -66,15 +66,15 @@ class MusicLibraryController
   def list_genres
     genres = []
     counter = 1
-    all_songs = Genre.all
-    all_songs.each do |song|
-      genres << song
+    genre_list = Genre.all
+    genre_list.each do |genre|
+      genres << genre.name
     end
     genres_sorted = genres.sort()
     genres_sorted.each do |genre|
       puts "#{counter}. #{genre}"
       counter += 1
-    end
+    end 
   end
 
   def list_songs_by_artist
