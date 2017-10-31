@@ -1,5 +1,6 @@
 require 'pry'
 class Artist
+  extend Findable
   attr_accessor :name
 
   @@all = []
@@ -42,9 +43,7 @@ class Artist
   end
 
   def genres
-    songs.collect do |s|
-      s.genre
-    end
+    @songs.collect{|s| s.genre}.uniq
   end
 
 end
