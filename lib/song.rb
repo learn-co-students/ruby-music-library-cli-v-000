@@ -44,6 +44,7 @@ class Song
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   # def self.find_by_name(name)
   #   #.detect => return the first element in the array that returns true
   #   self.all.detect{|o| o.name == name}
@@ -52,6 +53,8 @@ class Song
   def self.find_or_create_by_name(name)
     self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
 =======
+=======
+>>>>>>> 3d8b41c006abba6032a0ddaf0cdea182cc9f60b5
   def self.find_by_name(name)
     #.detect => return the first element in the array that returns true
     self.all.detect{|o| o.name == name}
@@ -66,6 +69,9 @@ class Song
       binding.pry
       self.new(name)
     end
+<<<<<<< HEAD
+>>>>>>> 3d8b41c006abba6032a0ddaf0cdea182cc9f60b5
+=======
 >>>>>>> 3d8b41c006abba6032a0ddaf0cdea182cc9f60b5
   end
 
