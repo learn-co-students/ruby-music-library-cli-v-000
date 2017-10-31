@@ -1,0 +1,32 @@
+
+[1mFrom:[0m /home/jessica/code/labs/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 106 MusicLibraryController#list_songs_by_artist:
+
+     [1;34m80[0m: [32mdef[0m [1;34mlist_songs_by_artist[0m
+     [1;34m81[0m:   songs = []
+     [1;34m82[0m:   puts [31m[1;31m"[0m[31mPlease enter the name of an artist:[1;31m"[0m[31m[0m
+     [1;34m83[0m:   artist = gets.strip
+     [1;34m84[0m:   @importer.files.collect [32mdo[0m |song|
+     [1;34m85[0m:     info = song.split([31m[1;31m"[0m[31m - [1;31m"[0m[31m[0m)
+     [1;34m86[0m:     genre = info[[1;34m2[0m].split([31m[1;31m"[0m[31m.[1;31m"[0m[31m[0m)
+     [1;34m87[0m:     info.pop()
+     [1;34m88[0m:     genre.pop()
+     [1;34m89[0m:     genre_s = genre.join()
+     [1;34m90[0m:     info << genre_s
+     [1;34m91[0m:     songs << info
+     [1;34m92[0m:   [32mend[0m
+     [1;34m93[0m:   sorted = songs.sort_by [32mdo[0m |song|
+     [1;34m94[0m:     songs[[1;34m1[0m]
+     [1;34m95[0m:   [32mend[0m
+     [1;34m96[0m:   sorted.each [32mdo[0m |song|
+     [1;34m97[0m:     name_genre = []
+     [1;34m98[0m:     counter = [1;34m1[0m
+     [1;34m99[0m:     [32mif[0m artist == song[[1;34m0[0m]
+    [1;34m100[0m:       name_genre << song[[1;34m1[0m]
+    [1;34m101[0m:       name_genre << song[[1;34m2[0m]
+    [1;34m102[0m:       puts [31m[1;31m"[0m[31m#{counter}[0m[31m. #{name_genre.join([1;31m"[0m[31m - [1;31m"[0m[31m[0m[31m)}[0m[31m[1;31m"[0m[31m[0m
+    [1;34m103[0m:       counter += [1;34m1[0m
+    [1;34m104[0m:     [32mend[0m
+    [1;34m105[0m:   [32mend[0m
+ => [1;34m106[0m:   binding.pry
+    [1;34m107[0m: [32mend[0m
+
