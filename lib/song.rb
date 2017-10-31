@@ -1,11 +1,14 @@
 require 'pry'
 class Song
-  attr_accessor :name, :artist
+  attr_accessor :name
+  attr_reader :artist, :genre
   @@all = []
 
-  def initialize(name, artist="artist")
-    @name = name
-    @artist = artist
+  def initialize(new_song, artist="", genre="")
+    @name = new_song
+    self.artist=(artist) unless artist == ""
+    # self.genre=(genre)
+    @genre = genre
   end
 
   def self.all
@@ -24,5 +27,14 @@ class Song
   created_song = self.new(song)
   created_song.save
   created_song
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
+  end
+
+  def genre=(genre)
+   song.genre=(genre)
   end
 end
