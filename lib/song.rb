@@ -7,8 +7,7 @@ class Song
   def initialize(new_song, artist="", genre="")
     @name = new_song
     self.artist=(artist) unless artist == ""
-    # self.genre=(genre)
-    @genre = genre
+    self.genre=(genre) unless genre == ""
   end
 
   def self.all
@@ -24,9 +23,9 @@ class Song
   end
 
   def self.create(song)
-  created_song = self.new(song)
-  created_song.save
-  created_song
+    created_song = self.new(song)
+    created_song.save
+    created_song
   end
 
   def artist=(artist)
@@ -35,6 +34,17 @@ class Song
   end
 
   def genre=(genre)
-   song.genre=(genre)
+    @genre = genre
+    genre.add_song(self)
   end
+
+  def self.find_by_name(name)
+    self.all.detect {|s| s.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
+
+
 end
