@@ -1,6 +1,8 @@
 require 'pry'
+
 class Song
-  attr_accessor :name
+  extend Concerns::Findable
+  attr_accessor :name, :musicimporter
   attr_reader :artist, :genre
   @@all = []
 
@@ -38,13 +40,8 @@ class Song
     genre.add_song(self)
   end
 
-  def self.find_by_name(name)
-    self.all.detect {|s| s.name == name}
-  end
+  def self.new_from_filename(file)
 
-  def self.find_or_create_by_name(name)
-    self.find_by_name(name) || self.create(name)
   end
-
 
 end
