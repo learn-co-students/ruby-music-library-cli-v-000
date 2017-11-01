@@ -2,7 +2,7 @@ require 'pry'
 
 class Song
   extend Concerns::Findable
-  attr_accessor :name, :musicimporter
+  attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
 
@@ -40,8 +40,19 @@ class Song
     genre.add_song(self)
   end
 
-  def self.new_from_filename(file)
+  def self.new_from_filename(filename)
+
+      data = filename.split(" - ")
+      artist = data[0]
+      song_name = data[1]
+      genre = data[2].gsub(".mp3", "")
+
+      new_artist = Artist.find_or_create_by_name(artist)
+      new_genre = Genre.find_or_create_by_name(genre)
+      new(song_name, new_artist, new_genre)
 
   end
+
+
 
 end
