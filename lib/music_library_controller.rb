@@ -23,4 +23,16 @@ class MusicLibraryController
     gets "c"
     gets "exit"
   end
+
+  def list_songs
+    sorted = Song.all.sort_by do |song|
+    song.name
+    end
+
+    sorted.each.with_index(1) do |song, index|
+     puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+    sorted
+  end
+
 end
