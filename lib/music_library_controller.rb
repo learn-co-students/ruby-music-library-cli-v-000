@@ -7,24 +7,39 @@ class MusicLibraryController
     imported_music.import
   end
 
-  def call(*)
-   puts "Welcome to your music library!"
-   puts "To list all of your songs, enter 'list songs'."
-   puts "To list all of the artists in your library, enter 'list artists'."
-   puts "To list all of the genres in your library, enter 'list genres'."
-   puts "To list all of the songs by a particular artist, enter 'list artist'."
-   puts "To list all of the songs of a particular genre, enter 'list genre'."
-   puts "To play a song, enter 'play song'."
-   puts "To quit, type 'exit'."
-   puts "What would you like to do?"
+  def call
 
-    gets "a"
-    gets "b"
-    gets "c"
-    gets "exit"
+    answer = ""
+
+    while answer != "exit"
+      puts "Welcome to your music library!"
+      puts "To list all of your songs, enter 'list songs'."
+      puts "To list all of the artists in your library, enter 'list artists'."
+      puts "To list all of the songs by a particular artist, enter 'list artist'."
+      puts "To list all of the genres in your library, enter 'list genres'."
+      puts "To list all of the songs of a particular genre, enter 'list genre'."
+      puts "To play a song, enter 'play song'."
+      puts "To quit, type 'exit'."
+      puts "What would you like to do?"
+
+      answer = gets.strip
+    if answer == 'list songs'
+      list_songs
+    elsif answer == 'list artists'
+      list_artists
+    elsif answer == 'list genres'
+      list_genres
+    elsif answer == 'list artist'
+      list_songs_by_artist
+    elsif answer == 'list genre'
+      list_songs_by_genre
+    elsif answer == 'play song'
+      play_song
+    end
+  end
   end
 
-  def list_songs
+  def list_songs(*)
     sorted = Song.all.sort_by do |song|
     song.name
     end
@@ -35,7 +50,7 @@ class MusicLibraryController
     sorted
   end
 
-  def list_artists
+  def list_artists(*)
     sorted = Artist.all.sort_by do |artist|
     artist.name
     end
@@ -46,7 +61,7 @@ class MusicLibraryController
     sorted
   end
 
-  def list_genres
+  def list_genres(*)
     sorted = Genre.all.sort_by do |genre|
     genre.name
     end
@@ -57,7 +72,7 @@ class MusicLibraryController
     sorted
   end
 
-  def list_songs_by_artist
+  def list_songs_by_artist(*)
      puts "Please enter the name of an artist:"
      response = gets.strip
 
@@ -71,7 +86,7 @@ class MusicLibraryController
       end
     end
 
-    def list_songs_by_genre
+    def list_songs_by_genre(*)
        puts "Please enter the name of a genre:"
        response = gets.strip
 
@@ -85,7 +100,7 @@ class MusicLibraryController
         end
       end
 
-      def play_song
+      def play_song(*)
         puts "Which song number would you like to play?"
         response = gets.to_i
         number_of_songs = Song.all.size
@@ -98,7 +113,5 @@ class MusicLibraryController
           puts "Playing #{song.name} by #{song.artist.name}"
       end
       end
-
-
 
 end
