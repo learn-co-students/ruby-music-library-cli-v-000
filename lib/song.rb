@@ -10,11 +10,14 @@ class Song
       self.genre = genre
     end
   end
-  def find_or_create_by_name(name)
-
+  def self.find_or_create_by_name(name)
+    a = self.find_by_name(name)
+    return a ? a : self.create(name)
   end
-  def find_by_name(name)
-
+  def self.find_by_name(name)
+    self.all.detect{|s|
+      s.name == name
+    }
   end
   def artist=(artist)
     @artist = artist
