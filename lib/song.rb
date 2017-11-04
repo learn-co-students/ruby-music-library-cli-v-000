@@ -1,4 +1,4 @@
-# require 'pry'
+require 'pry'
 
 class Song
 
@@ -36,7 +36,6 @@ class Song
     song = self.new(name)
     song.save
     song
-    # binding.pry
   end
 
 end
