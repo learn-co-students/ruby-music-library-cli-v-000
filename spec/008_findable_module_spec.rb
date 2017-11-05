@@ -1,4 +1,5 @@
 require "spec_helper"
+require "pry"
 
 describe "Concerns::Findable" do
   it "defines a module named Concerns::Findable" do
