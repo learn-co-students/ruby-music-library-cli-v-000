@@ -11,7 +11,7 @@ module Concerns::Findable
        self.create(name)
      else
        self.find_by_name(name)
-      all.detect {|song| song.name == name || self.new(name) }
+      # all.detect {|song| song.name == name || self.new(name) }
      end
   end
 
