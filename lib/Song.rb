@@ -38,18 +38,12 @@ class Song
     genrename = File.basename(filename.split(" - ")[2], ".mp3")
     artist = Artist.find_or_create_by_name(artistname)
     genre = Genre.find_or_create_by_name(genrename)
-    if self.find_by_name(songname)
-      song = self.find_by_name(songname)
-    else
-      song = self.new(songname, artist, genre)
-    end
-    song
+    self.new(songname, artist, genre) unless self.find_by_name(songname)
   end
 
   def self.create_from_filename(filename)
     song = self.new_from_filename(filename)
-    song.save
-    song
+    song.save unless self.all.include?(song)
   end
 
   def self.all
