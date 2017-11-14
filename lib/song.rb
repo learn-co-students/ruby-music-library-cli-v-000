@@ -1,14 +1,20 @@
+require 'pry'
+
 class Song
-  attr_accessor :name, :artist, :genre
+  attr_accessor :name, :artist
   @@all = []
 
-  def initialize(name)
+  def initialize(name, *artist_object)
     self.name = name
+
+    artist_object.first.add_song(self) unless artist_object.count == 0
+      
   end
 
   def self.create(name)
-    self.new(name).save
-    self.all
+    new_instance = self.new(name)
+    new_instance.save
+    new_instance
   end
 
   def save
