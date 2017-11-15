@@ -1,8 +1,11 @@
 require 'pry'
+require_relative '../config/environment.rb'
 
 class Artist
   attr_accessor :name, :songs
   @@all = []
+
+  extend Concerns::Findable
 
   def initialize(name)
     self.name = name
