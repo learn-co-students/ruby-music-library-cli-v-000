@@ -28,7 +28,11 @@ class Artist
   end
 
   def add_song(song_object)
-    self.songs << song_object unless self.songs.include?(song_object)
-    song_object.artist = self unless song_object.artist
+    self.songs << song_object unless self.songs.include?(song_object) #add song to collection if it's not in it
+    song_object.artist ||= self #add self as song's artist unless song already has an artist
+  end
+
+  def genres
+    self.songs.collect { |song| song.genre }.uniq
   end
 end
