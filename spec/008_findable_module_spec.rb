@@ -62,8 +62,8 @@ describe "Concerns::Findable" do
       end
 
       it "invokes the extended class's .create method, passing in the provided name, if an existing match is not found" do
-        expect(Artist).to receive(:create)
-        Artist.find_or_create_by_name("M83")
+        o = Artist.find_or_create_by_name("M83")
+        expect(Artist.all).to include(o)
       end
     end
   end
