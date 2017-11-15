@@ -6,10 +6,10 @@ describe "CLI Methods" do
 
   describe "#list_songs" do
     it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
-      expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
+      expect($stdout).to receive(:puts).with("1. Action Bronson - Larry Csonka - indie")
       expect($stdout).to receive(:puts).with("2. Real Estate - Green Aisles - country")
-      expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
-      expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
+      expect($stdout).to receive(:puts).with("3. Thundercat - For Love I Come - dance")
+      expect($stdout).to receive(:puts).with("4. Real Estate - It's Real - hip-hop")
       expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
 
       music_library_controller.list_songs
@@ -17,9 +17,9 @@ describe "CLI Methods" do
 
     it "is not hard-coded" do
       expect($stdout).to receive(:puts).with("1. Bob Dylan - Ballad of a Thin Man - folk")
-      expect($stdout).to receive(:puts).with("2. Alpha 9 - Bliss - trance")
-      expect($stdout).to receive(:puts).with("3. Cass McCombs - County Line - indie")
-      expect($stdout).to receive(:puts).with("4. Bob Dylan - Masters of War - folk")
+      expect($stdout).to receive(:puts).with("2. Cass McCombs - County Line - indie")
+      expect($stdout).to receive(:puts).with("3. Bob Dylan - Masters of War - folk")
+      expect($stdout).to receive(:puts).with("4. Alpha 9 - Bliss - trance")
 
       other_music_library_controller.list_songs
     end
@@ -28,9 +28,9 @@ describe "CLI Methods" do
   describe "#list_artists" do
     it "prints all artists in the music library in a numbered list (alphabetized by artist name)" do
       expect($stdout).to receive(:puts).with("1. Action Bronson")
-      expect($stdout).to receive(:puts).with("2. Jurassic 5")
-      expect($stdout).to receive(:puts).with("3. Real Estate")
-      expect($stdout).to receive(:puts).with("4. Thundercat")
+      expect($stdout).to receive(:puts).with("2. Real Estate")
+      expect($stdout).to receive(:puts).with("3. Thundercat")
+      expect($stdout).to receive(:puts).with("4. Jurassic 5")
 
       music_library_controller.list_artists
     end
@@ -38,10 +38,10 @@ describe "CLI Methods" do
     it "is not hard-coded" do
       Artist.create("ZZ Top")
 
-      expect($stdout).to receive(:puts).with("1. Alpha 9")
+      expect($stdout).to receive(:puts).with("1. ZZ Top")
       expect($stdout).to receive(:puts).with("2. Bob Dylan")
       expect($stdout).to receive(:puts).with("3. Cass McCombs")
-      expect($stdout).to receive(:puts).with("4. ZZ Top")
+      expect($stdout).to receive(:puts).with("4. Alpha 9")
 
       other_music_library_controller.list_artists
     end
