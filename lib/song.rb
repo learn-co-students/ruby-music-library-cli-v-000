@@ -2,14 +2,15 @@ class Song
   extend Memorable::ClassMethods
   include Memorable::InstanceMethods
   attr_accessor :name
-  attr_reader :artist
+  attr_reader :artist, :genre
 
   @@all=[]
 
-  def initialize(name, artist="")
+  def initialize(name, artist="", genre="")
     @name=name
     #@artist=artist
     @artist=artist
+    @genre=(genre)
   end
 
   def self.all
@@ -23,7 +24,13 @@ class Song
 
   def artist=(artist)
     @artist=artist
-    artist.add_song(self)
+    #artist.add_song(self)
   end
+
+  def genre=(genre)
+    @genre=genre
+    genre.add_song(self)
+  end
+
 
 end

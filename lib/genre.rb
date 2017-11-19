@@ -6,7 +6,7 @@ class Genre
 
   def initialize(name)
     @name=name
-    @genres=[]
+    @songs=[]
   end
 
   def self.all
@@ -16,6 +16,14 @@ class Genre
   def self.create(name)
     self.new(name).save
     self
+  end
+
+  def songs
+    @songs
+  end
+
+  def add_song(song)
+    @songs<<song if !@songs.include?(song)
   end
 
 end
