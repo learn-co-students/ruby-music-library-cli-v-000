@@ -1,5 +1,5 @@
 class Genre
-  extend Memorable::ClassMethods
+  extend Memorable::ClassMethods, Findable
   include Memorable::InstanceMethods
   attr_accessor :name
   @@all=[]

@@ -1,5 +1,5 @@
 class Artist
-  extend Memorable::ClassMethods
+  extend Memorable::ClassMethods, Findable
   include Memorable::InstanceMethods
   attr_accessor :name
   @@all=[]
@@ -20,8 +20,8 @@ class Artist
   end
 
   def add_song(song)
-    song.artist=self if song.artist==""
-    @songs<<song if !@songs.include?(song)
+    song.artist=self unless song.artist==self
+    @songs<<song unless @songs.include?(song)
     #@songs.detect {|s|  s.name== song}.artist=self
   end
 
