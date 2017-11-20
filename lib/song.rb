@@ -38,16 +38,16 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    puts filename
+    #puts filename
 
     parameters=filename.split(/\s-\s/)
-    puts parameters[2].split(".")[0]
+    #puts parameters[2].split(".")[0]
     self.new(parameters[1],Artist.new(parameters[0]),Genre.new(parameters[2].split(".")[0])) if find_by_name(parameters[1])==NilClass
   end
 
   def self.create_from_filename(filename)
     new_from_filename(filename)
-    puts all
+    #puts all
     #parameters=filename.split(/\s-\s/)
     #self.new(parameters[1],Artist.new(parameters[0]),Genre.new(parameters[2].split(".")[0])) if find_by_name(parameters[1])==NilClass
   end

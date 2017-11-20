@@ -18,8 +18,7 @@ class MusicImporter
 
 
     def import
-      #puts "Import! #{@files.size}"
-      self.files.each do |file|
+        self.files.each do |file|
         Song.create_from_filename(file)
         puts file
       end
