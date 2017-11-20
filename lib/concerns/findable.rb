@@ -1,7 +1,7 @@
 module Concerns
   module Findable
     def find_by_name(name)
-      all.detect{ |song| song.name == name }.class
+      all.detect{ |song| song.name == name }
     end
 
     def find_or_create_by_name(name)
