@@ -1,5 +1,5 @@
 class Artist
-  extend Memorable::ClassMethods, Findable
+  extend Memorable::ClassMethods, Concerns::Findable
   include Memorable::InstanceMethods
   attr_accessor :name
   @@all=[]

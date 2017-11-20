@@ -1,5 +1,5 @@
 class Song
-  extend Memorable::ClassMethods#, #Findable
+  extend Memorable::ClassMethods, Concerns::Findable
   include Memorable::InstanceMethods
 
   attr_accessor :name, :artist, :genre
@@ -11,13 +11,12 @@ class Song
     @name=name
     self.artist=artist unless artist==""
     self.genre=genre unless genre==""
-    #@@all<<self
-    #@genre=genre
   end
 
   def self.all
     @@all
   end
+
 
   def self.create(name)
     self.new(name).save
@@ -34,13 +33,23 @@ class Song
     genre.add_song(self)
   end
 
-  def self.find_by_name(name)
-    puts @@all.detect{|a| a.name==name}
-    @@all.detect{|a| a.name==name}
+  def self.save
+    all<<self
   end
 
-  def save
-    @@all<<self
+  def self.new_from_filename(filename)
+    puts filename
+
+    parameters=filename.split(/\s-\s/)
+    puts parameters[2].split(".")[0]
+    self.new(parameters[1],Artist.new(parameters[0]),Genre.new(parameters[2].split(".")[0])) if find_by_name(parameters[1])==NilClass
+  end
+
+  def self.create_from_filename(filename)
+    new_from_filename(filename)
+    puts all
+    #parameters=filename.split(/\s-\s/)
+    #self.new(parameters[1],Artist.new(parameters[0]),Genre.new(parameters[2].split(".")[0])) if find_by_name(parameters[1])==NilClass
   end
 
 end
