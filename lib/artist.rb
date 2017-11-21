@@ -1,6 +1,7 @@
 class Artist
 
-    attr_accessor :name
+    attr_accessor :name, :artist
+    attr_reader :songs, :genres
 
     @@all = []
 
@@ -25,10 +26,6 @@ class Artist
         self.new(name).save.last
     end
 
-    def songs
-        @songs
-    end
-
     def add_song(song)
         if song.artist
             song
@@ -37,5 +34,10 @@ class Artist
             @songs << song
         end 
     end
+
+    # def artist=(artist)
+    #     @artist = artist
+    #     add_song(self)
+    # end
 
 end
