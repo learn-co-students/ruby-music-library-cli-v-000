@@ -6,6 +6,7 @@ class MusicLibraryController
   def initialize(path='./db/mp3s')
     @music_importer=MusicImporter.new(path)
     @music_importer.import
+    @files=@music_importer.files
   end
 
   def call
@@ -29,19 +30,19 @@ class MusicLibraryController
        end
     end
   end
-  require 'pry'
+  #require 'pry'
 
 
   def list_songs
-    binding.pry
+    #binding.pry
     songs= @files.collect{|filename|
       filename.split(/\s-\s/)[1]}.sort
       #puts "Songs! #{songs}"
 
-    songs.each_with_index do |index,song|
-      binding.pry
-      puts "#{index}. #{song}"
-      songs
+    songs.each_with_index do |song, index|
+      puts "#{index+1}." + @files.detect {|file| file.include?(song)}.split(".")[0]
+      #puts "#{index}. #{song}"
+      #songs
     end
 
   end
