@@ -29,10 +29,8 @@ class Genre
     def songs
         @songs
     end
-end
 
-# def genres
-#     self.songs.collect do |song|
-#         song.genre
-#     end
-# end
+    def artists   
+        self.songs.map { |song| song.artist }.uniq
+    end
+end

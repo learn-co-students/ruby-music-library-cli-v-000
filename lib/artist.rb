@@ -1,7 +1,7 @@
+require 'pry'
 class Artist
 
-    attr_accessor :name, :artist
-    attr_reader :songs, :genres
+    attr_accessor :name, :songs
 
     @@all = []
 
@@ -27,23 +27,13 @@ class Artist
     end
 
     def add_song(song)
-        if song.artist
-            song
-        else 
-            song.artist = self
-            @songs << song
-     end 
+        @songs << song unless @songs.include?(song)
+        song.artist = self unless song.artist 
+    end 
 
-    def genres
-        self.songs.collect do |song|
-            song.genre
+    def genres   
+        self.songs.map { |song| song.genre }.uniq
     end
-    
-    end
-
-    # def artist=(artist)
-    #     @artist = artist
-    #     add_song(self)
-    # end
-
+ 
 end
+

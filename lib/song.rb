@@ -9,14 +9,8 @@ class Song
     
     def initialize(name, artist = nil, genre = nil)
         @name = name
-        @artist = artist
-        @genre = genre
-        if artist
-            self.artist=(artist)
-        if genre
-            self.genre=(genre)
-        end
-        end
+        self.artist=(artist) if artist
+        self.genre=(genre) if genre
     end
 
     def self.all
@@ -48,4 +42,15 @@ class Song
             genre.songs << self
         end
     end
+
+    def self.find_by_name(name)
+        @@all.find { |song| song.name == name }
+    end
+
+    # def find_or_create_by_name
+    #     def self.find_or_create_by_name(name)
+    #         if artist = @@all.find {|artist| artist.name == name}
+    #             artist
+    # end
+
 end
