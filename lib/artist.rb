@@ -32,7 +32,13 @@ class Artist
         else 
             song.artist = self
             @songs << song
-        end 
+     end 
+
+    def genres
+        self.songs.collect do |song|
+            song.genre
+    end
+    
     end
 
     # def artist=(artist)
