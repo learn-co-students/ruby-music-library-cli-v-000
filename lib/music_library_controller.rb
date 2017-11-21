@@ -75,6 +75,11 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     artist=gets
+    songs=@files.collect{|filename|
+        filename.split(/\s-\s)[1] if filename.split(/\s-\s)[0]==artist}.sort.uniq
+    songs.each_with_index do |song, index|
+      puts "#{index+1}. #{song}"
+    end
   end
 
   def play_song
