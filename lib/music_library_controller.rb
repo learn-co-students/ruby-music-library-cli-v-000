@@ -1,31 +1,11 @@
+#require "pry"
+
 class MusicLibraryController
   attr_accessor :path, :music_importer, :files
 
   def initialize(path='./db/mp3s')
-    @path=path
-    @music_importer=MusicImporter.new(path).import
-  end
-
-  def list_files
-    i=1
-    @music_importer.files.collect do |file|
-      puts "#{i}. #{file}"
-      i+=1
-    end
-  end
-
-  def list_songs
-    songs= @music_importer.files.collect{|filename|
-      filename.split(@path)[1].split("/")[1] }.sort
-    i=1
-    songs.each do |song|
-      puts "#{1}. #{song}"
-      i+=1
-    end
-
-  end
-
-  def list_artists
+    @music_importer=MusicImporter.new(path)
+    @music_importer.import
   end
 
   def call
@@ -39,10 +19,31 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    enter=gets
+    enter=""
     while enter!='exit' do
       enter=gets
+      puts "You entered: #{enter="exit"}"
+      case enter
+      when "list songs"
+        list_songs
+       end
     end
+  end
+  require 'pry'
+
+
+  def list_songs
+    binding.pry
+    songs= @files.collect{|filename|
+      filename.split(/\s-\s/)[1]}.sort
+      #puts "Songs! #{songs}"
+
+    songs.each_with_index do |index,song|
+      binding.pry
+      puts "#{index}. #{song}"
+      songs
+    end
+
   end
 
 end
