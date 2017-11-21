@@ -25,9 +25,17 @@ class MusicLibraryController
       enter=gets
       puts "You entered: #{enter="exit"}"
       case enter
-      when "list songs"
-        list_songs
-       end
+        when "list songs"
+          list_songs
+        when "list genres"
+          list_genres
+        when "list artist"
+          list_artists
+        when "play song"
+          play_song
+        else
+      end
+
     end
   end
   #require 'pry'
@@ -36,15 +44,40 @@ class MusicLibraryController
   def list_songs
     #binding.pry
     songs= @files.collect{|filename|
-      filename.split(/\s-\s/)[1]}.sort
+      filename.split(/\s-\s/)[1]}.sort.uniq
       #puts "Songs! #{songs}"
 
     songs.each_with_index do |song, index|
-      puts "#{index+1}." + @files.detect {|file| file.include?(song)}.split(".")[0]
+      puts "#{index+1}. " + @files.detect {|file| file.include?(song)}.split(".")[0].to_s
       #puts "#{index}. #{song}"
       #songs
     end
+  end
 
+  def list_artists
+    artists= @files.collect{|filename|
+      filename.split(/\s-\s/)[0]}.sort.uniq
+      #puts "Songs! #{songs}"
+
+    artists.each_with_index do |artist, index|
+      puts "#{index+1}. #{artist}"# +# @files.detect {|file| file.include?(artist)}.split(".")[0].to_s
+    end
+  end
+
+  def list_genres
+    genres=@files.collect{|filename|
+      filename.split(/\s-\s/)[2].split(".")[0]}.sort.uniq
+    genres.each_with_index do |genre, index|
+      puts "#{index+1}. #{genre}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist=gets
+  end
+
+  def play_song
   end
 
 end
