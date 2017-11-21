@@ -2,7 +2,8 @@ require 'pry'
 
 class Song
 
-    attr_accessor :name, :song, :artist
+    attr_accessor :name, :song
+    attr_reader :artist
 
     @@all = []
     
@@ -27,13 +28,7 @@ class Song
         self.new(name).save.last
     end
 
-    def artist=()
-        add_song(song)
-
+    def artist=(artist)
+        artist = add_song(song)
     end
-
-    # def add_song(song)
-    #     @songs << song
-    #     song.artist = self
-    # end
 end
