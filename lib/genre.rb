@@ -26,4 +26,8 @@ class Genre
     @songs<<song if !@songs.include?(song)
   end
 
+  def atrists
+    @songs.collect{|song| song.artist}.uniq
+  end
+
 end
