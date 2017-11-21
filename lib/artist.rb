@@ -28,4 +28,14 @@ class Artist
     def songs
         @songs
     end
+
+    def add_song(song)
+        if song.artist
+            song
+        else 
+            song.artist = self
+            @songs << song
+        end 
+    end
+
 end
