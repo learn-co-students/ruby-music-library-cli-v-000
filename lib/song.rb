@@ -51,14 +51,34 @@ class Song
         find_by_name(name) || create(name)
     end
 
-    def self.new_by_filename(filename)
-        split_file_name_song = filename.split(" - ")[1] 
-        name = filename.split(" - ")[0]    
-        song = self.new(split_file_name_song)
-        new_artist = Artist.find_or_create_by_name(name) 
-        song.artist = new_artist
-        new_artist.add_song(song)
+    def self.new_from_filename(file)
+        split_artist, split_song, split_genre = file.split(" - ") 
+        split_genre_chomp = split_genre.chomp(".mp3")
+        song = self.new(split_song)
+        artist = Artist.new(split_artist)
+        artist.add_song(song)
+        genre = Genre.new(split_genre_chomp)
+        song.genre=(genre)
         song
     end
 
+    # def create_from_filename
+    # end
+
 end
+
+
+# new_artist = Artist.find_or_create_by_name(split_file_name_artist) 
+# song.artist = new_artist
+# split_file_name_song = file.split(" - ")[1] 
+# name = name.split(" - ")[0]    
+# song = self.new(split_file_name_song)
+# def self.new_from_filename(filename)
+#     split_file_name_song = filename.split(" - ")[1] 
+#     name = name.split(" - ")[0]    
+#     song = self.new(split_file_name_song)
+#     new_artist = Artist.find_or_create_by_name(name) 
+#     song.artist = new_artist
+#     new_artist.add_song(song)
+#     song
+# end

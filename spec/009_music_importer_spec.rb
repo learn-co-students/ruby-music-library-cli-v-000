@@ -38,6 +38,7 @@ describe "Song" do
       expect(song.name).to eq("For Love I Come")
       expect(song.artist.name).to eq("Thundercat")
       expect(song.genre.name).to eq("dance")
+
     end
 
     it "invokes the appropriate Findable methods so as to avoid duplicating objects" do
