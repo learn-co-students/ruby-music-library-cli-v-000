@@ -32,6 +32,7 @@ describe "Concerns::Findable" do
     end
 
     context "works exactly like a generic version of Song.find_by_name," do
+
       it "searching the extended class's @@all variable for an instance that matches the provided name" do
         expect(Artist.find_by_name("Slowdive")).to be(artist)
       end
