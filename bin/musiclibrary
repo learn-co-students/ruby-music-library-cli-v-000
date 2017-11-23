@@ -4,13 +4,13 @@ require_relative '../config/environment'
 
 MusicLibraryController.new.call
 
-
+=begin
 puts "What would you like to do?"
 
 response = gets.chomp
 
 call(response)
-
+=end
 # puts "Hi! I'm HAL, what's your name?"
     # name = gets.strip
     # greeting(name)
