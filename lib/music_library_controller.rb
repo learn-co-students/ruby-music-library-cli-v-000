@@ -37,8 +37,12 @@ class MusicLibraryController
 end
 
     def list_songs
-        Song.all.each_with_index do |song, index| song.sort numbered_song = index.to_i-1 
-        puts "#{numbered_song}. #{song}" 
+        
+        Song.all.each_with_index do |song, index| numbered_song = index.to_i+1
+            # binding.pry
+            
+            puts "#{numbered_song}. #{song}" 
+       
         end
     end
 end
