@@ -56,11 +56,8 @@ class Song
         song
     end
 
-    def create_from_filename(file)
-        
-        song = self.new_from_filenamesong(split_song)
-         song.save
-      
-       
+    def self.create_from_filename(file)
+        song = self.new_from_filename(file)
+        song.save
     end
 end
