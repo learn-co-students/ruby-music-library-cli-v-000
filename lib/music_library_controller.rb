@@ -33,6 +33,12 @@ class MusicLibraryController
         puts "To quit, type 'exit'."
         puts "What would you like to do?"
 
-        end  
+    end
+end
+
+    def list_songs
+        Song.all.each_with_index do |song, index| song.sort numbered_song = index.to_i-1 
+        puts "#{numbered_song}. #{song}" 
+        end
     end
 end
