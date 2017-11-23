@@ -66,6 +66,9 @@ describe "Song" do
       expect(Song).to receive(:new_from_filename).and_return(double(save: true))
 
       Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
+   
+      
+   
     end
   end
 end

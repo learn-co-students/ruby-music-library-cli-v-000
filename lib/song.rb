@@ -54,30 +54,13 @@ class Song
         genre = Genre.find_or_create_by_name(split_genre_chomp)
         song.genre=(genre)
         song
-        binding.pry
     end
 
-    # def find_or_create_by_name(name)
-    #     find_by_name(name) || create(name)
-    # end
-
-    # def create_from_filename
-    # end
-
+    def create_from_filename(file)
+        
+        song = self.new_from_filenamesong(split_song)
+         song.save
+      
+       
+    end
 end
-
-
-# new_artist = Artist.find_or_create_by_name(split_file_name_artist) 
-# song.artist = new_artist
-# split_file_name_song = file.split(" - ")[1] 
-# name = name.split(" - ")[0]    
-# song = self.new(split_file_name_song)
-# def self.new_from_filename(filename)
-#     split_file_name_song = filename.split(" - ")[1] 
-#     name = name.split(" - ")[0]    
-#     song = self.new(split_file_name_song)
-#     new_artist = Artist.find_or_create_by_name(name) 
-#     song.artist = new_artist
-#     new_artist.add_song(song)
-#     song
-# end
