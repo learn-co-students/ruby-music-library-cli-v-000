@@ -35,4 +35,8 @@ class Genre
     def artists   
         self.songs.map { |song| song.artist }.uniq
     end
+
+    def self.sort_by_name
+        @@all.sort { |a,b| a.name.downcase <=> b.name.downcase }
+    end
 end

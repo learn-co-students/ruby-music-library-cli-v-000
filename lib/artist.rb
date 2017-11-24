@@ -1,4 +1,3 @@
-require 'pry'
 class Artist
 
     extend Concerns::Findable
@@ -37,6 +36,9 @@ class Artist
     def genres   
         self.songs.map { |song| song.genre }.uniq
     end
- 
+
+    def self.sort_by_name
+        @@all.sort { |a,b| a.name.downcase <=> b.name.downcase }
+    end
 end
 
