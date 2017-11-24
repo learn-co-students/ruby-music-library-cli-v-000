@@ -50,14 +50,10 @@ class Song
         split_genre_chomp = split_genre.chomp(".mp3")
         song = self.new(split_song)
         artist = Artist.find_or_create_by_name(split_artist)
-       artist.add_song(song)
+        artist.add_song(song)
         genre = Genre.find_or_create_by_name(split_genre_chomp)
         song.genre=(genre)
-        # song.artist=(artist)
         song
-
-        
-        # binding.pry
     end
 
     def self.create_from_filename(file)
@@ -68,7 +64,4 @@ class Song
     def self.sort_by_name
         @@all.sort { |a,b| a.name.downcase <=> b.name.downcase }
     end
-
-# sort the data by the last_name field
-
 end

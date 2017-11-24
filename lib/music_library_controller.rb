@@ -1,8 +1,6 @@
 require 'pry'
 
 class MusicLibraryController
-    
-    attr_reader :song
 
     def initialize(path = "./db/mp3s")
         @path = path
@@ -60,18 +58,39 @@ class MusicLibraryController
     
     def list_songs_by_artist
         puts "Please enter the name of an artist:"
-        user_input = gets.strip
-        user_input_array = []
-        user_input_array << user_input
-        user_input_array.each_with_index do |song, index| 
-        numbered_song = index.to_i+1     
-        
-        binding.pry
-        if user_input == song.artist.name
-            puts "#{numbered_song}. #{song.artist.name} - #{genre.name}"  
 
-          
-            end 
-        end       
+        user_input = gets.strip
+        if artist = Artist.find_by_name(user_input)
+            artist.songs.sort { |a,b| a.name.downcase <=> b.name.downcase }.each.with_index(1) do |song, index|
+                puts "#{index}. #{song.name} - #{song.genre.name}"   
+            end
+        end
+    end
+
+    def list_songs_by_genre
+        puts "Please enter the name of a genre:"
+
+        user_input = gets.strip
+        if genre = Genre.find_by_name(user_input)
+            genre.songs.sort { |a,b| a.name.downcase <=> b.name.downcase }.each.with_index(1) do |song, index|
+                puts "#{index}. #{song.artist.name} - #{song.name}"   
+            end
+        end
+    end
+
+    def play_song
+        puts "Which song number would you like to play?"
+        
+        user_input = gets.strip   
+        
+        self.list_songs.include?(user_input)
+            
+        end
+        # binding.pry
+            # 
+            #  puts "Playing #{song.name} by #{song.artist.name}"}
+            #  binding.pry
+        
+        
     end
 end
