@@ -9,20 +9,20 @@ class MusicLibraryController
     end
 
     def call
-        puts "Welcome to your music library!"
-        puts "To list all of your songs, enter 'list songs'."
-        puts "To list all of the artists in your library, enter 'list artists'."
-        puts "To list all of the genres in your library, enter 'list genres'."
-        puts "To list all of the songs by a particular artist, enter 'list artist'."
-        puts "To list all of the songs of a particular genre, enter 'list genre'."
-        puts "To play a song, enter 'play song'."
-        puts "To quit, type 'exit'."
-        puts "What would you like to do?"
-
+        puts_menu     
         user_input = gets.strip
+        until user_input == "exit"
+            if user_input == "list songs"
+                list_songs
+            end
 
-        until gets == "exit"
+            puts_menu
+    
+            user_input = gets.strip
+        end
+    end
 
+    def puts_menu
         puts "Welcome to your music library!"
         puts "To list all of your songs, enter 'list songs'."
         puts "To list all of the artists in your library, enter 'list artists'."
@@ -32,7 +32,6 @@ class MusicLibraryController
         puts "To play a song, enter 'play song'."
         puts "To quit, type 'exit'."
         puts "What would you like to do?"
-        end
     end
     
     def list_songs    
@@ -83,10 +82,13 @@ class MusicLibraryController
         
         user_input = gets.strip   
         
-        self.list_songs.include?(user_input)
+        songs = Song.sort_by_name
+
+        
+        
+    
             
-        end
-        # binding.pry
+        binding.pry
             # 
             #  puts "Playing #{song.name} by #{song.artist.name}"}
             #  binding.pry
