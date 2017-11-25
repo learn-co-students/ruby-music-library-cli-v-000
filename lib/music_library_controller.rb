@@ -39,7 +39,7 @@ class MusicLibraryController
     def list_songs    
         Song.sort_by_name.each_with_index do |song, index| 
             numbered_song = index.to_i+1          
-            puts "#{numbered_song}. #{song.artist.name} - #{song.name} - #{song.genre.name}"  
+            puts "#{numbered_song}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
         end
     end
     
@@ -81,8 +81,24 @@ class MusicLibraryController
 
     def play_song
         puts "Which song number would you like to play?"
+        user_input = gets.strip.to_i
+        # binding.pry
+        Song.all.sort{ |a,b| a.name.downcase <=> b.name.downcase }.each.with_index(1) do |song, index| 
+            if user_input == index 
+                puts "Playing #{song.name} by #{song.artist.name}" 
+                # binding.pry
+            end
+        end
+    end
+       
+       
+        # user puts number
+        # number corresponds with song from list of songs
+        # from user_input to simple index of list of sorted songs
+        # return song
         
-        # user_input = gets.strip #makes sure is a number   
+
+        # user_input = gets.strip #to_i makes sure is a number   
         # songs = Song.sort_by_name
         # song = Song.all.sort
         # first_song= Song.all.sort{my params}[4]
@@ -91,8 +107,5 @@ class MusicLibraryController
     
         #list of songs is not permanently changed ... sounds like it works from the sort as done in list_songs?
 
-        if songs.each.with_index { |song, index| index == user_input.to_i
-            puts "Playing #{song.name} by #{song.artist.name}" }
-        end
-    end
+       
 end
