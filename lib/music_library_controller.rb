@@ -82,8 +82,15 @@ class MusicLibraryController
     def play_song
         puts "Which song number would you like to play?"
         
-        user_input = gets.strip   
-        songs = Song.sort_by_name
+        # user_input = gets.strip #makes sure is a number   
+        # songs = Song.sort_by_name
+        # song = Song.all.sort
+        # first_song= Song.all.sort{my params}[4]
+
+        # if list_songs??
+    
+        #list of songs is not permanently changed ... sounds like it works from the sort as done in list_songs?
+
         if songs.each.with_index { |song, index| index == user_input.to_i
             puts "Playing #{song.name} by #{song.artist.name}" }
         end
