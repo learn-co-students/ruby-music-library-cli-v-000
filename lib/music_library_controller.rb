@@ -14,6 +14,8 @@ class MusicLibraryController
         until user_input == "exit"
             if user_input == "list songs"
                 list_songs
+            elsif user_input == "play song"
+                play_song
             end
 
             puts_menu
@@ -81,18 +83,9 @@ class MusicLibraryController
         puts "Which song number would you like to play?"
         
         user_input = gets.strip   
-        
         songs = Song.sort_by_name
-
-        
-        
-    
-            
-        binding.pry
-            # 
-            #  puts "Playing #{song.name} by #{song.artist.name}"}
-            #  binding.pry
-        
-        
+        if songs.each.with_index { |song, index| index == user_input.to_i
+            puts "Playing #{song.name} by #{song.artist.name}" }
+        end
     end
 end

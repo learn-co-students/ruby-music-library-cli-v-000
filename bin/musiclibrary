@@ -2,9 +2,9 @@
 
 require_relative '../config/environment'
 
-# MusicLibraryController.new.call
-m = MusicLibraryController.new
-m.play_song
+MusicLibraryController.new.call
+# m = MusicLibraryController.new
+# m.play_song
 
 =begin
 puts "What would you like to do?"
