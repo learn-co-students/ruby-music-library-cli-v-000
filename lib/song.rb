@@ -1,6 +1,5 @@
 class Song
   attr_accessor :name, :artist, :genre
-
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
@@ -14,6 +13,12 @@ class Song
       self.genre=(genre)
     end
 
+    self.save
+    # binding.pry
+    #
+    # if genre != nil && artist != nil
+    #   artist.genres << self.genre
+    # end
   end
 
   def artist=(artist)
