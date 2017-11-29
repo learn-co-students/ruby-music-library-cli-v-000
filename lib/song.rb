@@ -1,3 +1,4 @@
+require 'pry'
 class Song
   attr_accessor :name, :artist, :genre
   @@all = []
@@ -70,7 +71,7 @@ class Song
     unless self.find_by_name(filename.split(" - ")[1])
       song = self.new(filename.split(" - ")[1])
       song.artist_name = (filename.split(" - ")[0])
-      song.genre_name = (filename.split(" - ")[2].delete(".mp3"))
+      song.genre_name = filename.split(" - ")[2].split(".")[0]
       song
     end
   end
