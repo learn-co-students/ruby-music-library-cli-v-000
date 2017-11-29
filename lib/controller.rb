@@ -38,26 +38,20 @@ class MusicLibraryController
 
 
   def list_songs
-    counter = 1
-    Song.all.sort.each do |song|
-      puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      counter += 1
+    Song.all.sort_by{|song| song.name}.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    counter = 1
-    Artist.all.sort.each do |artist|
-      puts "#{counter}. #{artist.name}"
-      counter += 1
+    Artist.all.sort_by{|artist| artist.name}.each.with_index(1) do |artist, i|
+      puts "#{i}. #{artist.name}"
     end
   end
 
   def list_genres
-    counter = 1
-    Genre.all.sort.each do |genre|
-      puts "#{counter}. #{genre.name}"
-      counter += 1
+    Genre.all.sort_by{|genre| genre.name}.each.with_index(1) do |genre, i|
+      puts "#{i}. #{genre.name}"
     end
   end
 
@@ -65,10 +59,8 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     input = gets.strip
     if Artist.all.include?(input)
-      counter = 1
-      input.songs.name.sort.each do |song|
-        "#{counter}. #{song.name}"
-        counter += 1
+      input.songs.sort_by{|song| song.name}.each.with_index(1) do |song, i|
+        "#{i}. #{song.name}"
       end
     end
   end
@@ -77,12 +69,16 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
     input = gets.strip
     if Genre.all.include?(input)
-      counter = 1
-      input.songs.name.sort.each do |song|
-        "#{counter}. #{song.name}"
-        counter += 1
+      input.songs.sort_by{|song| song.name}.each.with_index(1) do |song, i|
+        "#{i}. #{song.name}"
       end
     end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip
+    
   end
 
 end
