@@ -9,6 +9,9 @@ attr_accessor :name, :songs
   def self.all
     @@all
   end
+  def genres
+
+  end
 
   def self.destroy_all
     @@all.clear
