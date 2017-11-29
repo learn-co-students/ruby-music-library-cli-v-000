@@ -10,7 +10,13 @@ attr_accessor :name, :songs
     @@all
   end
   def genres
-
+    temp = []
+    @songs.each do |song|
+      if !temp.includes?(song.genre)
+        temp << song
+      end
+    end
+  temp
   end
 
   def self.destroy_all
