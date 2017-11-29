@@ -1,26 +1,16 @@
-class MP3Importer
+class MusicImporter
 
-   attr_accessor :path
+   attr_accessor :path, :files
 
    def initialize(path)
      @path = path
-     @files = []
+     @files = Dir.entries(path).grep(/.mp3/)
    end
 
    def import
-     self.files.collect do |file_name|
-       Song.new_by_filename(file_name)
-     end
+     self.files.each {|file| Song.create_from_filename(file)}
    end
+end
 
-   def files
-     Dir.new(@path).collect do |file|
-       if file.include?(".mp3")
-         @files << file
-       end
-     end
-     @files
-   end
- end
 
-new_library = MP3Importer.new("./spec/fixtures/mp3s")
+new_library = MusicImporter.new("./spec/fixtures/mp3s")

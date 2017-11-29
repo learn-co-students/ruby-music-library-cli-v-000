@@ -47,4 +47,18 @@ class Song
       self.create(name)
     end
   end
+
+  def self.new_from_filename(filename)
+    unless self.find_by_name(filename.split(" - ")[1])
+      song = self.new(filename.split(" - ")[1])
+      song.artist.name = (filename.split(" - ")[0])
+      song.genre.name = (filename.split(" - ")[2])
+      song
+    end
+  end
+
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+  end
 end
