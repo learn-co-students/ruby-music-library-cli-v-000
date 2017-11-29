@@ -17,7 +17,7 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
 
-      input = gets.strip
+      input = gets.chomp
 
       case input
       when "list songs"
@@ -57,28 +57,30 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    input = gets.strip
-    if Artist.all.include?(input)
-      input.songs.sort_by{|song| song.name}.each.with_index(1) do |song, i|
-        "#{i}. #{song.name}"
+    input = gets.chomp
+    artist = Artist.find_by_name(input)
+    if artist
+      artist.songs.sort_by{|song| song.name}.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.name} - #{song.genre.name}"
       end
     end
   end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    input = gets.strip
-    if Genre.all.include?(input)
-      input.songs.sort_by{|song| song.name}.each.with_index(1) do |song, i|
-        "#{i}. #{song.name}"
+    input = gets.chomp
+    genre = Genre.find_by_name(input)
+    if genre
+      genre.songs.sort_by{|song| song.name}.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.artist.name} - #{song.name}"
       end
     end
   end
 
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.strip
-    
+    input = gets.chomp
+
   end
 
 end
