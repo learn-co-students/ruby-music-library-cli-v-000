@@ -25,7 +25,9 @@ attr_accessor :name, :songs
       name.save
     end
   end
-
+  def artists
+    songs.collect{ |s| s.artist }.uniq
+  end
 
 
 

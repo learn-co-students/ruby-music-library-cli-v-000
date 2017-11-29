@@ -10,7 +10,13 @@ attr_accessor :name, :songs
     @@all
   end
   def genres
-    songs.collect{ |s| s.genre }.uniq
+    temp = []
+    @songs.each do |song|
+      if temp.includes?(song.genre)
+        temp << song.genre
+      end
+    end
+    temp
 
   end
 
