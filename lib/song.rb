@@ -49,6 +49,15 @@ class Song
     end
   end
 
+  def genre_name=(name)
+    if (self.genre.nil?)
+      self.genre = Genre.find_or_create_by_name(name)
+      self.genre.add_song(self)
+    else
+      self.genre.name = name
+    end
+  end
+
   def self.find_or_create_by_name(name)
     if self.find_by_name(name)
       self.find_by_name(name)
@@ -61,7 +70,7 @@ class Song
     unless self.find_by_name(filename.split(" - ")[1])
       song = self.new(filename.split(" - ")[1])
       song.artist_name = (filename.split(" - ")[0])
-      song.genre.name = (filename.split(" - ")[2])
+      song.genre_name = (filename.split(" - ")[2].delete(".mp3"))
       song
     end
   end
