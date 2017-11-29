@@ -5,7 +5,8 @@ class MusicLibraryController
 
   def call
     input = ""
-    until input = "exit"
+
+    until input == "exit"
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -32,54 +33,56 @@ class MusicLibraryController
        when "play song"
          play_song
        end
-    end
+     end
+   end
 
-    def list_songs
+
+  def list_songs
+    counter = 1
+    Song.all.sort.each do |song|
+      puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      counter += 1
+    end
+  end
+
+  def list_artists
+    counter = 1
+    Artist.all.sort.each do |artist|
+      puts "#{counter}. #{artist.name}"
+      counter += 1
+    end
+  end
+
+  def list_genres
+    counter = 1
+    Genre.all.sort.each do |genre|
+      puts "#{counter}. #{genre.name}"
+      counter += 1
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    if Artist.all.include?(input)
       counter = 1
-      Song.all.sort.each do |song|
-        puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      input.songs.name.sort.each do |song|
+        "#{counter}. #{song.name}"
         counter += 1
-      end
-    end
-
-    def list_artists
-      counter = 1
-      Artist.all.sort.each do |artist|
-        puts "#{counter}. #{artist.name}"
-        counter += 1
-      end
-    end
-
-    def list_genres
-      counter = 1
-      Genre.all.sort.each do |genre|
-        puts "#{counter}. #{genre.name}"
-        counter += 1
-      end
-    end
-
-    def list_songs_by_artist
-      puts "Please enter the name of an artist:"
-      input = gets.strip
-      if Artist.all.include?(input)
-        counter = 1
-        input.songs.name.sort.each do |song|
-          "#{counter}. #{song.name}"
-          counter += 1
-        end
-      end
-    end
-
-    def list_songs_by_genre
-      puts "Please enter the name of a genre:"
-      input = gets.strip
-      if Genre.all.include?(input)
-        counter = 1
-        input.songs.name.sort.each do |song|
-          "#{counter}. #{song.name}"
-          counter += 1
-        end
       end
     end
   end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    if Genre.all.include?(input)
+      counter = 1
+      input.songs.name.sort.each do |song|
+        "#{counter}. #{song.name}"
+        counter += 1
+      end
+    end
+  end
+
 end
