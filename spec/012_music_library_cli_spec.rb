@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "CLI Commands" do
+describe "MusicLibraryController - CLI Commands" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
 
   describe "'list songs'" do
