@@ -1,15 +1,15 @@
 class MusicLibraryController
 attr_accessor :path
+
   def initialize(path = ("./db/mp3s"))
     @path = path
     new = MusicImporter.new(@path)
     new.import
   end
+
   def call #adapted from OO Tic Tac Toe
     @user_input = ""
     while @user_input != "exit"
-
-
       puts "Welcome to your music library!" #copy from spec
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -33,19 +33,16 @@ attr_accessor :path
       elsif @user_input == "play song"
         play_song
       end
-
-
     end
   end
 #in order, from spec
   def list_songs
-    temp = Song.all.sort{|songA, songB| songA.name <=> songB.name} #sorting lab
+    temp = Song.all.sort{|songA, songB| songA.name <=> songB.name} #sorting lab, refactor with .with_index(offset=1)?
     counter = 1
     temp.each do |song|
       puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       counter += 1
     end
-
   end
 
   def list_artists
@@ -79,8 +76,6 @@ attr_accessor :path
         end
       end
     end
-
-
   end
 
   def list_songs_by_genre
@@ -96,7 +91,6 @@ attr_accessor :path
         end
       end
     end
-
   end
 
   def play_song #how does the user know which number?
@@ -104,19 +98,14 @@ attr_accessor :path
     song_input = gets.strip.to_i
     temp = Song.all.sort{|songA, songB| songA.name <=> songB.name}
     counter = 1
-    while counter <= Song.all.size - 1
+    while counter <= Song.all.size
       temp.each do |song|
         if counter == song_input
           puts "Playing #{song.name} by #{song.artist.name}"
         end
         counter += 1
-
       end
     end
-
   end
-
-
-
 
 end

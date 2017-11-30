@@ -1,12 +1,9 @@
 module Concerns::Findable
 
-  module ClassMethods
-
+  module ClassMethods #not used
   end
 
   module InstanceMethods
-
-
   end
 
   def find_or_create_by_name(name)
@@ -21,10 +18,5 @@ module Concerns::Findable
       song.name == search
     end
   end
-
-
-
-
-
 
 end

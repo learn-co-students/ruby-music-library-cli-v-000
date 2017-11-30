@@ -3,13 +3,16 @@ class Genre
 attr_accessor :name
 attr_reader :songs
 extend Concerns::Findable
+
   def initialize(name)
     @songs = []
     self.name = name
   end
+
   def songs
     @songs
   end
+
   def self.all
     @@all
   end
@@ -27,6 +30,7 @@ extend Concerns::Findable
       name.save
     end
   end
+
   def artists
     temp = []
     self.songs.each do |song|
@@ -35,14 +39,6 @@ extend Concerns::Findable
       end
     end
     temp
-
   end
-
-
-
-
-
-
-
 
 end
