@@ -10,6 +10,20 @@ attr_accessor :name
       self.genre = genre
     end
   end
+  def self.new_from_filename(filename) #filename is artist,name,genre whereas init is name,artist,genre
+    array = filename.split(" - ")
+    array[2] = array[2].chomp(".mp3")
+    array[0] = Artist.find_or_create_by_name(array[0])
+    array[2] = Genre.find_or_create_by_name(array[2])
+    newsong = Song.new(array[1], array[0], array[2])
+  end
+
+  def self.create_from_filename(filename)
+    new_from_filename(filename).tap do |song|
+      song.save
+    end
+  end
+
   def genre
     @genre
   end
