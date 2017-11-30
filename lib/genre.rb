@@ -23,7 +23,7 @@ extend Concerns::Findable
   end
 
   def self.create(name)
-    self.new(name).tap do |name|
+    self.new(name).tap do |name| #per the animals scraping video
       name.save
     end
   end
