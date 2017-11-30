@@ -1,6 +1,8 @@
 class Genre
 @@all = []
-attr_accessor :name, :songs
+attr_accessor :name
+attr_reader :songs
+extend Concerns::Findable
   def initialize(name)
     @songs = []
     self.name = name
@@ -26,8 +28,16 @@ attr_accessor :name, :songs
     end
   end
   def artists
-    songs.collect{ |s| s.artist }.uniq
+    temp = []
+    self.songs.each do |song|
+      if !temp.include?(song.artist)
+        temp << song.artist
+      end
+    end
+    temp
+
   end
+
 
 
 

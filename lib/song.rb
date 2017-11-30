@@ -15,8 +15,25 @@ attr_accessor :name
   end
   def genre=(name)
     @genre = name
-    name.songs << self unless name.songs.include?(self)
+    #name.songs << self unless name.songs.include?(self)
+    if !name.songs.include?(self)
+      name.songs << self
+    end
   end
+
+  def self.find_by_name(search)
+    @@all.find do |song|
+      song.name == search
+    end
+  end
+
+  def self.find_or_create_by_name(name)
+    if find_by_name(name) == nil
+      create(name)
+    else find_by_name(name)
+    end
+  end
+
 
   def artist
     @artist
