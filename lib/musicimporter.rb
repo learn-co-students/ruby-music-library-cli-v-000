@@ -9,9 +9,9 @@ class MusicImporter
     Dir.entries(self.path).select{ |f| f.match(/(\.mp3)$/) }
   end
 
-  def self.import
+  def import
     if !self.files.nil?
-      self.files.each {|filename| Song.new_from_filename(filename)}
+      self.files.each {|filename| Song.create_from_filename(filename)}
     end
   end
 
