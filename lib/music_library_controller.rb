@@ -99,7 +99,21 @@ attr_accessor :path
 
   end
 
-  def play_song
+  def play_song #how does the user know which number?
+    puts "Which song number would you like to play?"
+    song_input = gets.strip.to_i
+    temp = Song.all.sort{|songA, songB| songA.name <=> songB.name}
+    counter = 1
+    while counter <= Song.all.size - 1
+      temp.each do |song|
+        if counter == song_input
+          puts "Playing #{song.name} by #{song.artist.name}"
+        end
+        counter += 1
+
+      end
+    end
+
   end
 
 
