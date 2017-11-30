@@ -4,7 +4,7 @@ attr_accessor :name
   def initialize(name, artist=(nil), genre=(nil))
     self.name = name
     if artist.is_a?(Artist)
-      self.artist = artist
+      self.artist = artist #if artist
     end
     if genre.is_a?(Genre)
       self.genre = genre
@@ -68,7 +68,7 @@ attr_accessor :name
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)

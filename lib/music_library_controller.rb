@@ -66,23 +66,37 @@ attr_accessor :path
     end
   end
 
-  def list_songs_by_artist
+  def list_songs_by_artist #oops, name genre not artist name
     puts "Please enter the name of an artist:"
     artist_input = gets.strip
     counter = 1
-    Artist.all each do |artist|
+    Artist.all.each do |artist|
       if artist.name == artist_input
-        artist.songs.each do |song|
-          puts "#{counter}. #{song.artist.name}"
+        temp = artist.songs.sort{|songA, songB| songA.name <=> songB.name}
+        temp.each do |song|
+          puts "#{counter}. #{song.name} - #{song.genre.name}"
           counter += 1
         end
       end
     end
-      
-    
+
+
   end
 
   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_input = gets.strip
+    counter = 1
+    Genre.all.each do |genre|
+      if genre.name == genre_input
+        temp = genre.songs.sort{|genreA, genreB| genreA.name <=> genreB.name}
+        temp.each do |song|
+          puts "#{counter}. #{song.artist.name} - #{song.name}"
+          counter += 1
+        end
+      end
+    end
+
   end
 
   def play_song
