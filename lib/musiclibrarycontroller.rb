@@ -1,5 +1,4 @@
 class MusicLibraryController
-  extend Concerns::Sortable
 
   def initialize(path = './db/mp3s')
     MusicImporter.new(path).import
@@ -39,6 +38,7 @@ class MusicLibraryController
   def list_songs
     i = 1
     sorted_songs = Song.all.sort_by { |song| song.name }
+
     sorted_songs.each do |song|
       puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       i += 1
