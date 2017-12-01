@@ -31,17 +31,6 @@ class Genre
       new
   end
 
-  # def self.find_or_create_by_name(name)
-  #   found = @@all.find do |genre|
-  #     genre.name == name
-  #   end
-  #   if found
-  #     found
-  #   else
-  #     new = Genre.new(name).save
-  #   end
-  # end
-
   def artists
     artists = []
     self.songs.each do |song|

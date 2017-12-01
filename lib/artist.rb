@@ -43,17 +43,6 @@ class Artist
     @songs
   end
 
-  # def self.find_or_create_by_name(name)
-  #   found = @@all.find do |artist|
-  #     artist.name == name
-  #   end
-  #   if found
-  #     found
-  #   else
-  #     new = Artist.new(name).save
-  #   end
-  # end
-
   def genres
     genres = []
     self.songs.uniq.collect do |song|
@@ -62,10 +51,7 @@ class Artist
     genres.uniq
   end
 
-
 end
-
-
 
 # rspec spec/002_artist_basics_spec.rb
 # rspec spec/004_songs_and_artists_spec.rb
