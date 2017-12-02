@@ -36,33 +36,21 @@ class MusicLibraryController
   end
 
   def list_songs
-    i = 1
-    sorted_songs = Song.all.sort_by { |song| song.name }
-
-    sorted_songs.each do |song|
+    Song.all.sort_by { |song| song.name }.each.with_index(1) do |song, i|
       puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      i += 1
     end
 
   end
 
   def list_artists
-    i = 1
-    sorted_artists = Artist.all.sort_by { |artist| artist.name }
-
-    sorted_artists.each do |artist|
+    Artist.all.sort_by { |artist| artist.name }.each.with_index(1) do |artist, i|
         puts "#{i}. #{artist.name}"
-        i += 1
     end
   end
 
   def list_genres
-    i = 1
-    sorted_genres = Genre.all.sort_by { |genre| genre.name }
-
-    sorted_genres.each do |genre|
+    Genre.all.sort_by { |genre| genre.name }.each.with_index(1) do |genre, i|
         puts "#{i}. #{genre.name}"
-        i += 1
     end
   end
 
@@ -70,13 +58,10 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     user_input = gets.strip
     artist = Artist.find_by_name(user_input)
-    if artist
-      i = 1
-      sorted_songs = artist.songs.sort_by { |song| song.name }
 
-      sorted_songs.each do |song|
+    if artist
+      artist.songs.sort_by { |song| song.name }.each.with_index(1) do |song, i|
         puts "#{i}. #{song.name} - #{song.genre.name}"
-        i += 1
       end
     end
   end
@@ -85,13 +70,10 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
     user_input = gets.strip
     genre = Genre.find_by_name(user_input)
-    if genre
-      i = 1
-      sorted_songs = genre.songs.sort_by { |song| song.name }
 
-      sorted_songs.each do |song|
+    if genre
+      genre.songs.sort_by { |song| song.name }.each.with_index(1) do |song, i|
         puts "#{i}. #{song.artist.name} - #{song.name}"
-        i += 1
       end
     end
   end
@@ -99,12 +81,12 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     user_input = gets.strip.to_i
+
     if (user_input > 0) && (user_input < Song.all.size)
       song = Song.all.sort_by { |song| song.name }[user_input-1]
-      if song
-        puts "Playing #{song.name} by #{song.artist.name}"
-      end
     end
+
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 
 end
