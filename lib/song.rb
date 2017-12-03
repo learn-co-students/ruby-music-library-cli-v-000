@@ -52,9 +52,6 @@ def add_song(song)
   end
 end
 
-
-
-
 def self.new_from_filename(filename)
 artist_name, song_name, genre_name = filename.gsub(".mp3", "").split(" - ")
 
