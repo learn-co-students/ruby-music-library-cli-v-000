@@ -8,7 +8,7 @@ def files
 #            puts path
             Dir.glob("*.mp3")
         end
-        puts "names=#{filenames}"
+         "names=#{filenames}"
         filenames
 
 end
@@ -19,7 +19,6 @@ self.files.each do |filename|
 end
 
 end
-
 
 
 end

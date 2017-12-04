@@ -67,7 +67,7 @@ def self.find_or_create_by_name(name)
     artist = title[0]
     song = title[1]
     genre = title[2].split('.').first
-    new_song = self.create(song)
+    new_song = self.new(song)
 
     new_song.artist = Artist.find_or_create_by_name(artist)
     new_song.genre = Genre.find_or_create_by_name(genre)
