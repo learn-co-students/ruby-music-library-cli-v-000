@@ -1,5 +1,6 @@
 require 'pry'
 class Song
+  extend Concerns::Findable
   attr_accessor :name, :genre, :artist
   attr_reader
 
@@ -48,7 +49,7 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    new_song = filename.chomp(".mp3").split("-")
+    new_song = filename.chomp(".mp3").split(" - ")
     artist = new_song[0].strip
     name = new_song[1].strip
     genre = new_song[2].strip
