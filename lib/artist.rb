@@ -2,7 +2,7 @@ class Artist
  #  extend Memorable::ClassMethods
  # include Memorable::InstanceMethods
  # include Paramable
- # extend Findable
+ extend Concerns::Findable
 
   attr_accessor :name
 
@@ -43,14 +43,14 @@ class Artist
   end
 
   def add_song(song)
-    @songs << song
-    song.artist = self
+    @songs << song unless @songs.include?(song)
+    song.artist = self unless song.artist
   end
 
   def genres
    self.songs.collect do |song|
      song.genre
-   end
+   end.uniq
  end
 
 end
