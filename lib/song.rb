@@ -1,7 +1,4 @@
 class Song
-  # extend Memorable::ClassMethods
-  # include Memorable::InstanceMethods
-  # include Paramable
   extend Concerns::Findable
 
   attr_accessor :name,:artist, :genre
@@ -47,7 +44,7 @@ class Song
   def self.new_from_filename(file_name)
       song = Song.new(file_name.split(" - ")[1])
       song.artist = Artist.find_or_create_by_name(file_name.split(" - ")[0])
-      song.genre = Genre.find_or_create_by_name(file_name.split(" - ")[2].delete".mp3")
+      song.genre = Genre.find_or_create_by_name(file_name.split(" - ")[2].gsub(".mp3",""))
       song.artist.add_song(song)
       song
     end
