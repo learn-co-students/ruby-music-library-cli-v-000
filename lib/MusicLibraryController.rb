@@ -7,18 +7,47 @@ class MusicLibraryController
     MusicImporter.new(path).import
   end
 
+ def greeting
+   puts "To list all of your songs, enter 'list songs'."
+   # songs
+   puts "To list all of the artists in your library, enter 'list artists'."
+   # artists
+   puts "To list all of the genres in your library, enter 'list genres'."
+   # genres
+   puts"To list all of the songs by a particular artist, enter 'list artist'."
+   # list_artists
+   puts"To list all of the songs of a particular genre, enter 'list genre'."
+   # list_genres
+   puts"To play a song, enter 'play song'."
+   # play_song
+   puts"To quit, type 'exit'."
+ end
+
   def call
+    input = ""
+    while input !="exit"
     puts "Welcome to your music library!"
-    puts "To list all of your songs, enter 'list songs'."
-    puts "To list all of the artists in your library, enter 'list artists'."
-    puts "To list all of the genres in your library, enter 'list genres'."
-    puts"To list all of the songs by a particular artist, enter 'list artist'."
-    puts"To list all of the songs of a particular genre, enter 'list genre'."
-    puts"To play a song, enter 'play song'."
-    puts"To quit, type 'exit'."
     puts"What would you like to do?"
-    until "exit"
-      # 4.times{path = gets("a", "b", "c", "exit")}
+    input = gets.strip
+    case input
+    when "list songs"
+      list_songs
+    when "list artists"
+      list_artists
+    when "list genres"
+      list_genres
+    when "list artist"
+      list_songs_by_artist
+    when "list genre"
+      list_songs_by_genre
+    when "play song"
+      play_song
+    # when "exit"
+    #   exit
+     end
+     greeting
+     #refactor puts in a greeting method, make case working, do manually what is test is doing with automation
+    # 4.times{path = gets("a", "b", "c", "exit")}
     end
    end
 
@@ -43,18 +72,41 @@ class MusicLibraryController
      end
    end
 
-  # def list_songs_by_artist
-  #
-  #   puts "Please enter the name of an artist:"
-  #   artist_input= gets.strip
-  #   # ("1. Green Aisles - country")
-  #   artist = Artist.find_by_name(artist_input)
-  #   # binding.pry
-  #   if artist
-  #   artist.songs.each_with_index do|song,index|
-  #      puts "#{index+1}. #{song.artist.name} - #{song.genre.name}"
-  #    end
-  # end
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_input= gets.strip
+    artist = Artist.find_by_name(artist_input)
+
+  if artist
+    artist.songs.reverse.each_with_index do|song,index|
+       puts "#{index+1}. #{song.name} - #{song.genre.name}"
+     end
+   end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_input= gets.strip
+    genre = Genre.find_by_name(genre_input)
+
+  if genre
+    genre.songs.each_with_index do|song,index|
+       puts "#{index+1}. #{song.artist.name} - #{song.name}"
+     end
+   end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_input= gets.strip
+    find_song = Song.find_by_name(song_input)
+
+  if find_song
+    list_songs.each do|song|
+       puts "Playing #{song.name} by #{song.artist.name}"
+     end
+   end
+  end
 
 end
 # CLI
