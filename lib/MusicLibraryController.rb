@@ -42,8 +42,6 @@ class MusicLibraryController
       list_songs_by_genre
     when "play song"
       play_song
-    # when "exit"
-    #   exit
      end
      greeting
      #refactor puts in a greeting method, make case working, do manually what is test is doing with automation
@@ -78,6 +76,7 @@ class MusicLibraryController
     artist = Artist.find_by_name(artist_input)
 
   if artist
+    # binding.pry
     artist.songs.reverse.each_with_index do|song,index|
        puts "#{index+1}. #{song.name} - #{song.genre.name}"
      end
@@ -98,13 +97,10 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    song_input= gets.strip
-    find_song = Song.find_by_name(song_input)
-
-  if find_song
-    list_songs.each do|song|
-       puts "Playing #{song.name} by #{song.artist.name}"
-     end
+    song_input = gets.strip.to_i - 1
+    if song_input.between?(1,10)
+    song = Song.all.sort_by{|song|song.name}[song_input]
+     puts "Playing #{song.name} by #{song.artist.name}" if song
    end
   end
 
