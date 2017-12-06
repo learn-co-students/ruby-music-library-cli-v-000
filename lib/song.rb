@@ -35,7 +35,7 @@ class Song
     artist, song, genre = filename.split(' - ')
     new_song = self.find_or_create_by_name(song)
     new_song.artist = Artist.find_or_create_by_name(artist)
-    new_song.genre = Genre.find_or_create_by_name(genre.delete(".mp3"))
+    new_song.genre = Genre.find_or_create_by_name(genre.split(/.mp3/).join)
     new_song
   end
 
@@ -56,7 +56,6 @@ class Song
   def genre=(genre)
     genre.songs << self unless genre.songs.include?(self)
     @genre = genre
-    # binding.pry
   end
 
 
