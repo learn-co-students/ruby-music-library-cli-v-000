@@ -40,4 +40,41 @@ class MusicLibraryController
      end
   end
 
+  extend Concerns::Findable
+
+  def list_songs_by_artist    #REFACTOR!!!
+    artist = nil
+    until artist != nil
+      puts "Please enter the name of an artist:"
+      artist = gets.strip
+      if Artist.find_by_name(artist)
+        Artist.find_by_name(artist).songs.sort_by! do |song|
+          song.name
+        end.map.with_index(1) do |song, i|
+            puts "#{i}. #{song.name} - #{song.genre.name}"
+        end
+      end
+    end
+  end
+
+  def list_songs_by_genre
+    genre = nil
+    until genre != nil
+      puts "Please enter the name of a genre:"
+      genre = gets.strip
+      if Genre.find_by_name(genre)
+        Genre.find_by_name(genre).songs.sort_by! do |song|
+          song.name
+        end.map.with_index(1) do |song, i|
+            puts "#{i}. #{song.artist.name} - #{song.name}"
+        end
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_number = gets.strip
+  end
+
 end
