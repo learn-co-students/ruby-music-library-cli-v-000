@@ -1,4 +1,7 @@
+require_relative '../lib/concerns/findable'
+
 class Song
+  extend Concerns::Findable
   attr_accessor :name
   @@all = []
 
@@ -44,22 +47,28 @@ class Song
     new
   end
 
-  def self.find_by_name(name)
-    @@all.bsearch{|song| song.name == name}
+  def self.new_from_filename(file_name)
+    file = file_name.split(" - ")
+    artist_name = file[0]
+    song_name = file[1]
+    genre_name = file[2].chop.chop.chop.chop
+    artist = Artist
+    song = Song.find_or_create_by_name(song_name)
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    song.artist = artist
+    song.genre = genre
+    song
   end
 
-  def self.find_or_create_by_name(name)
-    if @@all.any?{|song| song.name == name}
-      self.find_by_name(name)
-    else
-      Song.create(name)
-      self.find_by_name(name)
-    end
+  def self.create_from_filename(file_name)
+    self.new_from_filename(file_name)
   end
 
 end
 
 class Artist
+  extend Concerns::Findable
   attr_accessor :name, :song
   @@all = []
 
@@ -104,6 +113,7 @@ class Artist
 end
 
 class Genre
+  extend Concerns::Findable
   attr_accessor :name
   @@all = []
 
