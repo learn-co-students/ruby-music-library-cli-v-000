@@ -70,7 +70,7 @@ class MusicLibraryController
 
   extend Concerns::Findable
 
-  def list_songs_by_artist    #REFACTOR!!!
+  def list_songs_by_artist
     artist = nil
     until artist != nil
       puts "Please enter the name of an artist:"

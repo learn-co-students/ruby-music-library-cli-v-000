@@ -1,5 +1,7 @@
 require 'pry'
 class Song
+  extend Concerns::Findable
+
   attr_accessor :name, :artist
   attr_reader :genre
   @@all = []
@@ -23,13 +25,6 @@ class Song
  self.new(name).tap {|song| song.save}
   end
 
-  def self.find_by_name(name)
-    self.all.find{|s| s.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
-  end
 
   def self.new_from_filename(filename)
     artist, song, genre = filename.split(' - ')

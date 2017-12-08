@@ -1,4 +1,6 @@
 class Genre
+  extend Concerns::Findable
+
   attr_accessor :name, :songs, :artists
   @@all = []
 
@@ -8,9 +10,6 @@ class Genre
   end
 
   #CLASS METHODS
-  extend Concerns::Findable
-
-
   def self.all
     @@all
   end

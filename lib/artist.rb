@@ -1,5 +1,7 @@
 require 'pry'
 class Artist
+  extend Concerns::Findable
+
   attr_accessor :name
   attr_reader :songs, :genres
   @@all = []
@@ -10,8 +12,6 @@ class Artist
   end
 
 #CLASS METHODS
-extend Concerns::Findable
-
   def self.all
     @@all
   end
