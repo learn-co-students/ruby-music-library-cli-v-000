@@ -25,6 +25,7 @@ class MusicLibraryController
   def list_songs
     Song.all.sort_by! {|s| s.name}.collect.with_index(1) do |s, i|
        puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+       "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
      end
   end
 
@@ -72,9 +73,17 @@ class MusicLibraryController
     end
   end
 
+
   def play_song
     puts "Which song number would you like to play?"
     song_number = gets.strip
+      while song_number != nil
+        chosen = self.list_songs.find {|s| s.include?(song_number)}
+        binding.pry
+        artist, song = chosen.split(' - ')
+        artist.slice!(0, 3)
+        puts "Playing #{song} by #{artist}"
+      end
   end
 
 end
