@@ -1,7 +1,7 @@
 class Genre
   extend Concerns::Findable
 
-  attr_accessor :name, :songs, :artists
+  attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
@@ -24,7 +24,7 @@ class Genre
 
   #INSTANCE METHODS
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def artists

@@ -27,20 +27,22 @@ class Song
 
 
   def self.new_from_filename(filename)
-    artist, song, genre = filename.split(' - ')
-    new_song = self.find_or_create_by_name(song)
-    new_song.artist = Artist.find_or_create_by_name(artist)
-    new_song.genre = Genre.find_or_create_by_name(genre.split(/.mp3/).join)
-    new_song
+    parts = filename.split(" - ")
+    artist_name, song_name, genre_name = parts[0], parts[1], parts[2].gsub(".mp3", "")
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    self.new(song_name, artist, genre)
   end
 
   def self.create_from_filename(filename)
-    self.new_from_filename(filename)
+    new_from_filename(filename).tap{ |s| s.save }
   end
 
   #INSTANCE METHODS
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def artist=(artist)
@@ -49,8 +51,8 @@ class Song
   end
 
   def genre=(genre)
-    genre.songs << self unless genre.songs.include?(self)
     @genre = genre
+    genre.songs << self unless genre.songs.include?(self)
   end
 
 
