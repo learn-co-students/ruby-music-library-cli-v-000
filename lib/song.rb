@@ -44,6 +44,19 @@ class Song
     new
   end
 
+  def self.find_by_name(name)
+    @@all.bsearch{|song| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    if @@all.any?{|song| song.name == name}
+      self.find_by_name(name)
+    else
+      Song.create(name)
+      self.find_by_name(name)
+    end
+  end
+
 end
 
 class Artist
