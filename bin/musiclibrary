@@ -3,3 +3,23 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+puts "Please enter your command:"
+command = gets.strip unless command == "exit"
+
+if command == "list songs"
+  self.list_songs
+elsif command == "list artists"
+  self.list_artists
+elsif command == "list genres"
+  self.list_genres
+elsif command == "list artist"
+  self.list_songs_by_artist
+elsif command == "list genre"
+  self.list_songs_by_genre
+elsif command == "play song"
+  self.play_song
+end
+
+
+  
