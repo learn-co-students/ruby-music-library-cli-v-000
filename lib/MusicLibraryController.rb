@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
   attr_accessor :path, :song, :name
 
@@ -58,33 +60,32 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     artist_name = gets
-    
-    list = []
-    if Song.all.include?{|song| song.artist.name == artist_name}
-      list = Song.all.collect{|song| song.artist.name == artist_name}
-      list.sort_by!{|i| i.name}
+    if Song.all.any?{|i| i.artist.name == artist_name}
       count = 1
-      list.each do |i|
+      Song.all.collect{|i| i.artist.name == artist_name}.sort_by!{|i| i.name}.each do |i|
         puts "#{count}. #{i.name} - #{i.genre.name}"
         count += 1
       end
     end
+
   end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     genre_name = gets
-    list = Song.all.collect{|song| song.genre.name == genre_name}
-    list.sort_by!{|i| i.name}
-    count = 1
-    list.each do |i|
-      puts "#{count}. #{i.artist.name} - #{i.name}"
-      count += 1
-    end
+    puts "genre_name"
   end
+#    binding.pry
+#    count = 1
+#    Song.all.collect{|i| i.genre.name == genre_name}.sort_by!{|i| i.name}.each do |i|
+#      puts "#{count}. #{i.name} - #{i.genre.name}"
+#      count += 1
+#    end
+#  end
 
   def play_song
-
+    self.list_songs
+    puts "Which song number would you like to play?"
   end
 
 

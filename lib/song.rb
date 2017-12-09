@@ -1,4 +1,4 @@
-require_relative '../lib/concerns/findable'
+require_relative '../config/environment'
 
 class Song
   extend Concerns::Findable
@@ -96,7 +96,7 @@ class Artist
   end
 
   def songs
-    @songs.uniq
+    @songs
   end
 
   def add_song(song)
@@ -105,9 +105,8 @@ class Artist
   end
 
   def genres
-    collection = []
-    @songs.each do |song| collection << song.genre end
-    collection.uniq
+    @songs.collect{|s| s.genre}.uniq
+
   end
 
 end
@@ -127,9 +126,7 @@ class Genre
   end
 
   def artists
-    collection = []
-    @songs.each do |song| collection << song.artist end
-    collection.uniq
+    @songs.collect{|s| s.artist}.uniq
   end
 
   def self.all
