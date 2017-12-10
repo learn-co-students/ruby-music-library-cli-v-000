@@ -8,20 +8,34 @@ class MusicLibraryController
 
   def call
     user_input = nil
+    options = ["To list all of your songs, enter 'list songs'.",
+      "To list all of the artists in your library, enter 'list artists'.",
+      "To list all of the genres in your library, enter 'list genres'.",
+      "To list all of the songs by a particular artist, enter 'list artist'.",
+      "To list all of the songs of a particular genre, enter 'list genre'.",
+      "To play a song, enter 'play song'.",
+      "To quit, type 'exit'."]
     puts "Welcome to your music library!"
-    puts "To list all of your songs, enter 'list songs'."
-    puts "To list all of the artists in your library, enter 'list artists'."
-    puts "To list all of the genres in your library, enter 'list genres'."
-    puts "To list all of the songs by a particular artist, enter 'list artist'."
-    puts "To list all of the songs of a particular genre, enter 'list genre'."
-    puts "To play a song, enter 'play song'."
-    puts "To quit, type 'exit'."
+    options.each { | option | puts option }
     while user_input != "exit"
       puts "What would you like to do?"
       user_input = gets.strip
       case user_input
-        when "list_songs"
+        when "list songs"
           self.list_songs
+        when "list artists"
+          self.list_artists
+        when "list genres"
+          self.list_genres
+        when "list artist"
+          self.list_songs_by_artist
+        when "list genre"
+          self.list_songs_by_genre
+        when "play song"
+          self.play_song
+        when "options"
+          options.each { | option | puts option }
+        else
       end
     end
 
@@ -73,7 +87,3 @@ class MusicLibraryController
   end
 
 end
-
-
-# music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
-# music_library_controller
