@@ -19,7 +19,12 @@ class MusicLibraryController
     while user_input != "exit"
       puts "What would you like to do?"
       user_input = gets.strip
+      case user_input
+        when "list_songs"
+          self.list_songs
+      end
     end
+
   end
 
   def list_songs
