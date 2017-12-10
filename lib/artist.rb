@@ -1,6 +1,6 @@
 require 'pry'
 class Artist
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :artist
   @@all = []
 
   def initialize(name)
@@ -27,15 +27,12 @@ class Artist
   end
 
   def add_song(song)
+    song.artist || song.artist= self
     self.songs << song unless self.songs.include?(song)
-    song.artist || song.artist = self
   end
 
-  def self.find_by_name(name)
-    self.all.detect { | song | song.name == name }
+  def genres
+    self.songs.collect { | song | song.genre }.uniq
   end
 
-  def self.find_or_create_by_name(name)
-
-  end
 end
