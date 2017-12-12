@@ -1,4 +1,6 @@
 class Song
+
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
 
   @@all = []
@@ -13,8 +15,6 @@ class Song
     if genre != nil
       self.genre=(genre)
     end
-    # save #when an object is initialized it calls the #save method to save itself into @@all
-    save
   end
 
   def self.all #class reader
@@ -40,24 +40,24 @@ class Song
     @artist.add_song(self)
   end
 
-  def assign_to_artist=(artist)
-    @artist = artist
-  end
-
   def genre=(genre)
     @genre = genre
     @genre.add_song(self)
   end
 
-  def self.find_by_name(name)
-    @@all.find{|song| song.name == name }
+#Thundercat - For Love I Come - dance.mp3"
+  def self.new_from_filename(filename)
+    artist = filename.split(" - ")[0]
+    name = filename.split(" - ")[1]
+    genre = filename.split(" - ")[2].split(".mp3")[0]
+    new_song = Song.find_or_create_by_name(name)
+    new_song.artist = Artist.find_or_create_by_name(artist)
+    new_song.genre = Genre.find_or_create_by_name(genre)
+    new_song
   end
 
-  def self.find_or_create_by_name(name)
-    if find_by_name(name) == nil
-      self.create(name)
-    else
-      find_by_name(name)
-    end
+  def self.create_from_filename(filename)
+    new_from_filename(filename).save
   end
+
 end

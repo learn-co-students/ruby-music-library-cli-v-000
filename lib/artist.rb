@@ -1,6 +1,8 @@
 require 'pry'
 
 class Artist
+
+  extend Concerns::Findable
   attr_accessor :name, :songs
   @@all = []
 
@@ -29,10 +31,13 @@ class Artist
 
   def add_song(song)
     #doesnt add the song to the current artist's collection of songs if it already exists within.
+
     exists = @songs.detect {|x| x == song }
     if exists == nil
       @songs << song  #adds a song object to the songs array within this artist instance.
-      song.assign_to_artist=(self)
+      if song.artist == nil
+        song.artist = self
+      end
     end
   end
 
