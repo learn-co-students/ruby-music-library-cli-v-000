@@ -7,7 +7,6 @@ class MusicLibraryController
   @@files_hash = {}
 
   def initialize(path = "./db/mp3s")
-    @path = path
     new = MusicImporter.new(path)
     new.import
   end
@@ -23,8 +22,24 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-
-    input = gets until input == "exit"
+    while command != "exit"
+      puts "What would you like to do?"
+      command = gets.strip
+      case command
+      when "list songs"
+        songs
+      when "list artists"
+        artists
+      when "list genres"
+        genres
+      when "list artist"
+        list_artists
+      when "list genre"
+        list_genres
+      when "play song"
+        play_song
+      end
+    end
 
   end
 
