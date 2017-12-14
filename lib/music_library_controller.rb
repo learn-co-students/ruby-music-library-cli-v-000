@@ -16,12 +16,25 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    loop do
-      input = gets.chomp
-      if input == "exit"
-        break
+      loop do
+        user_input = gets.chomp
+        case user_input
+        when "exit"
+          break
+        when "list songs"
+          list_songs
+        when "list artists"
+          list_artists
+        when "list genres"
+          list_genres
+        when "list artist"
+          list_songs_by_artist
+        when "list genre"
+          list_songs_by_genre
+        when "play song"
+          play_song
+        end
       end
-    end
   end
 
   def list_songs
@@ -64,7 +77,6 @@ class MusicLibraryController
     end
   end
 
-
   def play_song
     puts "Which song number would you like to play?"
     song_number = gets.chomp.to_i
@@ -74,4 +86,5 @@ class MusicLibraryController
       puts "Playing #{selected_song.name} by #{selected_song.artist.name}"
     end
   end
+
 end
