@@ -14,4 +14,4 @@ require 'pry'
 
 # create def save (instance method) - this method will add Artist instances to the @@all array
 
-# create self.create class method - this will initialize a new song and save the song in the @@all array 
+# create self.create class method - this will initialize a new Artist instance and save the Artist in the @@all array 
