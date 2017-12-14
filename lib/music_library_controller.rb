@@ -36,4 +36,34 @@ def list_artists
   end
 end
 
+def list_genres
+  Genre.all.sort_by(&:name).each_with_index do |genre, index|
+    puts "#{index + 1}. #{genre.name}"
+  end
+end
+
+def list_songs_by_artist
+  puts "Please enter the name of an artist:"
+  artist_entered = gets.chomp
+  existing_artist = Artist.find_by_name(artist_entered)
+  if existing_artist
+    existing_artist.songs.sort_by(&:name).each_with_index do |song, index|
+      puts "#{index + 1}. #{song.name} - #{song.genre.name}" 
+    end
+  end  
+end
+
+def list_songs_by_genre
+  puts "Please enter the name of a genre:"
+  genre_entered = gets.chomp
+  existing_genre = Genre.find_by_name(genre_entered)
+  if existing_genre
+    existing_genre.songs.sort_by(&:name).each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name}" 
+    end
+  end
+end
+
+
+
 end
