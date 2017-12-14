@@ -2,12 +2,15 @@ require 'pry'
 
 # create class Song
 class Song 
+# create attr_accessor for name
+  attr_accessor :name 
+  
 # create initialize method w/argument (name)
   def initialize(name)
   
   end 
 # create attr_accessor for name
-
+  
 # create @@all = [] - class variable 
 
 # create class methods for:
