@@ -8,7 +8,7 @@ class Song
   @@all = []
 # create initialize method w/argument (name)
   def initialize(name)
-  
+    @name = name
   end 
 
 # create class methods for:
@@ -24,9 +24,10 @@ class Song
   end
 
 # create save instance method
-  
-  # - this method will add Song instances to the @@all array
-
+  def save 
+#  # - this method will add Song instances to the @@all array
+    @@all << self 
+  end 
 # create self.create class method - this will initialize a new song and save the song in the @@all array 
 
 end 
