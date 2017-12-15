@@ -28,6 +28,8 @@ class Song
 #  # - this method will add Song instances to the @@all array
     @@all << self 
   end 
-# create self.create class method - this will initialize a new song and save the song in the @@all array 
-
+# create self.create class method 
+  def self.create
+  # - this will initialize a new song and save the song in the @@all array 
+  end 
 end 
