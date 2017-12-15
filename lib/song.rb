@@ -29,7 +29,8 @@ class Song
     @@all << self 
   end 
 # create self.create class method 
-  def self.create
+  def self.create(name)
   # - this will initialize a new song and save the song in the @@all array 
+    @@all << name
   end 
 end 
