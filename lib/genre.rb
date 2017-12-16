@@ -1,7 +1,9 @@
 require 'pry'
 
 # create class Genre 
-class Genre 
+class Genre
+  
+  extend Concerns::Findable
 # create initialize method w/argument (name)
   attr_accessor :name 
 # create @@all = [] - class variable
