@@ -9,7 +9,7 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-    self.save
+    # self.save
   end
 
   def songs
@@ -26,15 +26,20 @@ class Genre
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
     genre = Genre.new(name)
+    genre.save
+    genre
+
+    # Reference - one line
+    # new(name).tap{|g| g.save}
   end
 
   def artists

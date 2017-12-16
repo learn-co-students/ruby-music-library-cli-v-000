@@ -11,7 +11,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    self.save
+    # self.save
   end
 
   def self.all
@@ -19,15 +19,19 @@ class Artist
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
     artist = Artist.new(name)
+    artist.save
+    artist
+
+    # new(name).tap{|a| a.save}
   end
 
   def add_song(song)

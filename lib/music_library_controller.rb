@@ -81,8 +81,4 @@ class MusicLibraryController
     puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 
-  # def self.(list songs)
-  #   self.play_song
-  # end
-
 end
