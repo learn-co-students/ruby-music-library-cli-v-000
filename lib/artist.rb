@@ -30,7 +30,7 @@ class Artist
   end 
 # create self.create class method 
   def self.create(name)
-  # - this will initialize a new song and save the song in the @@all array 
+  # - this will initialize a new artist and save the artist in the @@all array 
     artist = Artist.new(name)
     @@all << artist
     artist
