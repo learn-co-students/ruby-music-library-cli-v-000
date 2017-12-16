@@ -13,10 +13,11 @@ class Artist
     @name = name
     @songs = []
   end 
-
-#  def songs
-#    @songs
-#  end 
+  
+  def add_song(song) # once song instance has been created this method should add the songs to the @songs array
+    @songs << song
+  end 
+   
 # create class methods for:
     # - self.all
   def self.all 

@@ -3,11 +3,11 @@ require 'pry'
 # create class Song
 class Song 
 # create attr_accessor for name
-  attr_accessor :name 
+  attr_accessor :name, :artist 
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
-  def initialize(name)
+  def initialize(name, artist = Artist) # second default argument 
     @name = name
   end 
 
