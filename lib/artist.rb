@@ -5,14 +5,18 @@ class Artist
   
   extend Concerns::Findable
 # create initialize method w/argument (name)
-  attr_accessor :name 
+  attr_accessor :name, :songs 
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
   def initialize(name)
     @name = name
+    @songs = []
   end 
 
+#  def songs
+#    @songs
+#  end 
 # create class methods for:
     # - self.all
   def self.all 
