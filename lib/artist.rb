@@ -2,6 +2,8 @@ require 'pry'
 
 # create class Artist 
 class Artist 
+  
+  extend Concerns::Findable
 # create initialize method w/argument (name)
   attr_accessor :name 
 # create @@all = [] - class variable
