@@ -10,7 +10,8 @@ class Song
 # create initialize method w/argument (name)
   def initialize(name, artist = nil) # second default argument 
     @name = name
-    artist=(artist)
+    @artist = artist
+    self.artist=(artist)
   end 
 
 # create class methods for:
@@ -30,8 +31,8 @@ class Song
   end
   
   def artist=(artist)
-    @artist = artist
-    artist.add_song(self)
+    @artist = artist 
+    add_song(self)
   end 
 # create save instance method
   def save 

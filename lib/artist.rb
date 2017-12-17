@@ -5,7 +5,7 @@ class Artist
   
   extend Concerns::Findable
 # create initialize method w/argument (name)
-  attr_accessor :name, :songs 
+  attr_accessor :name 
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
@@ -20,11 +20,19 @@ class Artist
     @songs << song unless @songs.include?(song) 
     
     song.artist = self unless song.artist
+    song.artist
     # if song does not have an artist - assign song.artist = self
     # if song does have an artist - don't do anything
-    # how can you tell if a song has an artist? - go through the @songs array - song argument
-     
+    # how can you tell if a song has an artist? - go through the @songs array - song argument 
   end 
+  
+  def songs=(songs)
+    @songs = songs
+  end
+  
+  def songs
+    @songs
+  end
    
 # create class methods for:
     # - self.all
