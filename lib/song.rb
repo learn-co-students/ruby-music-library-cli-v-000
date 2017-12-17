@@ -3,7 +3,8 @@ require 'pry'
 # create class Song
 class Song 
 # create attr_accessor for name
-  attr_accessor :name, :artist 
+  attr_accessor :name 
+  attr_reader :artist 
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
@@ -23,7 +24,10 @@ class Song
     # - set @@all to an empty array
     @@all = []
   end
-
+  
+  def artist=(artist)
+    @artist = artist
+    Artist.add_song(artist)
 # create save instance method
   def save 
 #  # - this method will add Song instances to the @@all array
