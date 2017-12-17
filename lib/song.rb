@@ -3,15 +3,14 @@ require 'pry'
 # create class Song
 class Song 
 # create attr_accessor for name
-  attr_accessor :name, :artist 
- 
+  attr_accessor :name
+  
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
   def initialize(name, artist = nil) # second default argument 
     @name = name
-    @artist = artist
-#    artist=(artist)
+    artist=(artist)
   end 
 
 # create class methods for:
@@ -24,6 +23,10 @@ class Song
   def self.destroy_all
     # - set @@all to an empty array
     @@all = []
+  end
+  
+  def artist
+    @artist
   end
   
   def artist=(artist)
