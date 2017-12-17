@@ -9,6 +9,7 @@ class Song
 # create initialize method w/argument (name)
   def initialize(name, artist = Artist) # second default argument 
     @name = name
+    @artist = artist
   end 
 
 # create class methods for:
