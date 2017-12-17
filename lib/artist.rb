@@ -15,10 +15,15 @@ class Artist
   end 
   
   def add_song(song) # once song instance has been created this method should add the songs to the @songs array
-    @songs << song
-      if !song.artist
-          song.artist = self # what is the current artist?
-      end
+    # if the song is not included in @songs - add to @songs array - if not, do nothing
+    
+    @songs << song unless @songs.include?(song) 
+    
+    song.artist = self unless song.artist
+    # if song does not have an artist - assign song.artist = self
+    # if song does have an artist - don't do anything
+    # how can you tell if a song has an artist? - go through the @songs array - song argument
+     
   end 
    
 # create class methods for:
