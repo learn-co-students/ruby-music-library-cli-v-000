@@ -13,7 +13,6 @@ class Artist
   end
 
   def add_song(song)
-    #binding.pry
     if self.songs.include?(song) == false
       @songs <<song
     end

@@ -6,7 +6,7 @@ class MusicImporter
   end
 
   def files
-    @files = Dir[@path+"/*"].map{|file| file.split("./spec/fixtures/mp3s/")[1]}
+    @files = Dir[@path+"/*"].map{|file| file.split("mp3s/")[1]}
   end
 
   def import
