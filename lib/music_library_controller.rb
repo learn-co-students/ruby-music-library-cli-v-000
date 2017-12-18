@@ -31,7 +31,7 @@ class MusicLibraryController
       when "list artist"
         list_songs_by_artist
       when "list genre"
-        list_genre
+        list_songs_by_genre
       when "play song"
         play_song
       end
@@ -39,9 +39,13 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.sort { |songA, songB| songA.name <=> songB.name }.each.with_index(1) do |song, index|
+    sorted_songs.each.with_index(1) do |song, index|
       puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
+  end
+
+  def sorted_songs
+    Song.all.sort { |songA, songB| songA.name <=> songB.name }
   end
 
   def list_artists
@@ -58,7 +62,6 @@ class MusicLibraryController
 
   def list_songs_by_artist
     input = ""
-    input != "exit"
     puts "Please enter the name of an artist:"
     input = gets.strip
     stored = Artist.find_by_name(input)
@@ -66,6 +69,28 @@ class MusicLibraryController
       stored.songs.sort {|a, b| a.name <=> b.name}.map.with_index(1) do |song, index|
         puts "#{index}. #{song.name} - #{song.genre.name}"
       end
+    end
+  end
+
+  def list_songs_by_genre
+    input = ""
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    stored = Genre.find_by_name(input)
+    if stored
+      stored.songs.sort {|a, b| a.name <=> b.name}.map.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    songs_array = sorted_songs
+    input = gets.strip.to_i
+    if input.between?(1, songs_array.length)
+      song = songs_array[input - 1]
+      puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
 
