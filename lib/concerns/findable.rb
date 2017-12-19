@@ -8,10 +8,14 @@ module Concerns
         song.name == name 
       end 
     end 
-    
-    def find_or_create_by_name(name) # class method
+
+    def self.find_or_create_by_name(name)
+      # class method
       # finds an existing instance with the name provided if one exists in @@all array
-    end 
+      # returns a song existence with name if one exists in @@all array
+      self.find_by_name(name) || self.create(name)
+   end 
+  
   end
   
 #  extend Findable::ClassMethods
