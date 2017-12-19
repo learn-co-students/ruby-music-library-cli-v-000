@@ -27,9 +27,10 @@ class Artist
   end 
   
   def genres
-    self.songs.collect do |g|
-      g.genre.uniq 
-    end
+    self.songs.collect do |song|
+      # if artist > 1 song of same genre, do not return genre
+      song.genre
+      end.uniq # you can chain a method onto the end keyword as long as the method has a return value 
   end 
    
 # create class methods for:
