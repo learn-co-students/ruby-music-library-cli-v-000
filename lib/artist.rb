@@ -12,7 +12,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-  end 
+  end
   
   def add_song(song) # once song instance has been created this method should add the songs to the @songs array
     # if the song is not included in @songs - add to @songs array - if not, do nothing
@@ -27,7 +27,7 @@ class Artist
   end 
   
   def genres
-    songs.collect do |g|
+    self.songs.collect do |g|
       g.genres
     end
   end 
