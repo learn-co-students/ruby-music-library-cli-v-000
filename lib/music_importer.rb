@@ -16,7 +16,8 @@ class MusicImporter
 # create files method
   def files 
   # this method will add the MP3 files into the path directory 
-    @files = [] # - set to empty array to store files?
+  # - set to empty array to store files?  
+    mp3_music = Dir.entries(path).reject {|item| item == "." || item  == ".."} # Dir.entries - gets items from Mp3 folder
+      mp3_music
   end 
-  
 end 
