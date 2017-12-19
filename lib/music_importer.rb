@@ -9,12 +9,13 @@ class MusicImporter
   end 
 # create path method - no arguments
   def path # getter method 
+    # - this method will get the path passed through the MusicImporter object
     @path
-  end 
-  # - this method will get the path passed through the MusicImporter object 
+  end
 
 # create files method
+  def files 
   # this method will add the MP3 files into the path directory 
-  
+  end 
   
 end 
