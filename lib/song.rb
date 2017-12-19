@@ -2,6 +2,8 @@ require 'pry'
 
 # create class Song
 class Song 
+  
+  extend Concerns::Findable 
 # create attr_accessor for name
   attr_accessor :name
   attr_reader :genre
