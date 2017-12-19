@@ -6,6 +6,7 @@ module Concerns
       # searches the extended class' @@all array for an instance that matches the provided name 
         @@all.find do |song|
         song.name == name 
+      end 
     end 
     
     def find_or_create_by_name(name) # class method
