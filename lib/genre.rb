@@ -14,6 +14,9 @@ class Genre
     @songs = []
   end 
 
+  def songs 
+    @songs
+  end
 # create class methods for:
     # - self.all
   def self.all 
