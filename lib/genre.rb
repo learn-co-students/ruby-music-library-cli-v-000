@@ -21,6 +21,11 @@ class Genre
   def add_song(song) 
     @songs << song
   end
+  
+  def artists 
+    
+  end 
+  
 # create class methods for:
     # - self.all
   def self.all 
