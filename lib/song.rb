@@ -11,8 +11,8 @@ class Song
 # create initialize method w/argument (name)
   def initialize(name, artist = nil, genre = nil) # second default argument 
     @name = name
-    self.artist=(artist) if artist != nil
-    self.genre=(genre) if genre != nil
+    self.artist=artist if artist != nil
+    self.genre=genre if genre != nil
   end 
 
 # create class methods for:
@@ -29,7 +29,7 @@ class Song
   
   def genre=(genre)
     @genre = genre
-    genre.add_song(self) unless @songs.include?(self)
+    genre.add_song(self) unless genre.songs.include?(self)
   end 
   
   def artist
