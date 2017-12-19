@@ -25,6 +25,10 @@ class Artist
     # if song does have an artist - don't do anything
     # how can you tell if a song has an artist? - go through the @songs array - song argument 
   end 
+  
+  def genres
+    
+  end 
    
 # create class methods for:
     # - self.all
