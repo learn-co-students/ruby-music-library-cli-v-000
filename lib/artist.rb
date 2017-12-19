@@ -27,7 +27,7 @@ class Artist
   end 
   
   def genres
-    
+    @genres
   end 
    
 # create class methods for:
