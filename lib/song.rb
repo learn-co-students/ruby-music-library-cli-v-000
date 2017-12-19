@@ -48,8 +48,8 @@ class Song
     @@all << self 
   end 
   
-  def self.new_from_filename
-    
+  def self.new_from_filename(filename)
+    song = Song.new(filename)
   end 
   
 # create self.create class method 
