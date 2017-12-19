@@ -27,7 +27,9 @@ class Artist
   end 
   
   def genres
-    @genres
+    songs.collect do |g|
+      g.genres
+    end
   end 
    
 # create class methods for:
