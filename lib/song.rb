@@ -3,7 +3,8 @@ require 'pry'
 # create class Song
 class Song 
 # create attr_accessor for name
-  attr_accessor :name, :genre
+  attr_accessor :name
+  attr_reader :genre
   
 # create @@all = [] - class variable
   @@all = []
@@ -25,6 +26,10 @@ class Song
     # - set @@all to an empty array
     @@all = []
   end
+  
+  def genre=(genre)
+    @genre = genre
+  end 
   
   def artist
     @artist
