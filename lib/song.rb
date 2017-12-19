@@ -2,8 +2,7 @@ require 'pry'
 
 # create class Song
 class Song 
-  
-  include Findable 
+ 
 # create attr_accessor for name
   attr_accessor :name
   attr_reader :genre
@@ -53,7 +52,22 @@ class Song
     song = Song.new(name)
     @@all << song
     song
+  end
+   
+  def self.find_by_name(name) # class method
+      # searches the extended class' @@all array for an instance that matches the provided name 
+        @@all.find do |song|
+        song.name == name 
   end 
+  end 
+  
+  def self.find_or_create_by_name(name)
+      # class method
+      # finds an existing instance with the name provided if one exists in @@all array
+      # returns a song existence with name if one exists in @@all array
+      self.find_by_name(name) || self.create(name)
+   end 
+  
 end
 
 
