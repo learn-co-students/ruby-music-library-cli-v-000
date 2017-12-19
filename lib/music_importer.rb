@@ -16,6 +16,7 @@ class MusicImporter
 # create files method
   def files 
   # this method will add the MP3 files into the path directory 
+    @files = [] # - set to empty array to store files?
   end 
   
 end 
