@@ -3,7 +3,7 @@ require 'pry'
 # create class Song
 class Song 
   
-  extend Concerns::Findable 
+  include Findable 
 # create attr_accessor for name
   attr_accessor :name
   attr_reader :genre
@@ -54,12 +54,6 @@ class Song
     @@all << song
     song
   end 
-  
-    def self.find_or_create_by_name(name)
-      # returns a song existence with name if one exists in @@all array
-      self.find_by_name(name) || self.create(name)
-   end 
-  
 end
 
 
