@@ -10,6 +10,7 @@ class Song
 # create initialize method w/argument (name)
   def initialize(name, artist = nil, genre = nil) # second default argument 
     @name = name
+    @genre = genre
     self.artist=artist if artist != nil  
   end 
 
