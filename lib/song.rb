@@ -62,7 +62,6 @@ class Song
     def self.find_or_create_by_name(name)
       # returns a song existence with name if one exists in @@all array
       self.find_by_name(name) || self.create(name)
-     
    end 
   
 end
