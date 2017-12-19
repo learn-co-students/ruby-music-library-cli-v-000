@@ -8,7 +8,7 @@ class Song
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
-  def initialize(name, artist = nil) # second default argument 
+  def initialize(name, artist = nil, genre = nil) # second default argument 
     @name = name
     self.artist=artist if artist != nil  
   end 
