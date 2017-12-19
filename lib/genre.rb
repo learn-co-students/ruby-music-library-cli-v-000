@@ -23,7 +23,9 @@ class Genre
   end
   
   def artists 
-    
+    songs.collect do |song|
+      song.artist
+    end.uniq
   end 
   
 # create class methods for:
