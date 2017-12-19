@@ -28,9 +28,7 @@ class Artist
   
   def genres
     self.songs.collect do |g|
-      if !g.include?(genre)
-        g.genre
-      end
+      g.genre.uniq 
     end
   end 
    
