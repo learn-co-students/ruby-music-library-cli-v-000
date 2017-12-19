@@ -3,15 +3,15 @@ require 'pry'
 # create class Song
 class Song 
 # create attr_accessor for name
-  attr_accessor :name
+  attr_accessor :name, :genre
   
 # create @@all = [] - class variable
   @@all = []
 # create initialize method w/argument (name)
   def initialize(name, artist = nil) # second default argument 
     @name = name
-    @artist = artist
-    self.artist=(artist)
+    self.artist=artist if artist != nil
+     
   end 
 
 # create class methods for:
@@ -29,11 +29,11 @@ class Song
   def artist
     @artist
   end
-  
+
   def artist=(artist)
     @artist = artist 
-    add_song(self)
-  end 
+    artist.add_song(self)
+  end
 # create save instance method
   def save 
 #  # - this method will add Song instances to the @@all array
