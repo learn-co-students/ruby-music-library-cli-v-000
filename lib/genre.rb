@@ -11,6 +11,7 @@ class Genre
 # create initialize method w/argument (name)
   def initialize(name)
     @name = name
+    @songs = []
   end 
 
 # create class methods for:
