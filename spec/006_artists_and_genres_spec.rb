@@ -20,7 +20,7 @@ describe "Associations — Artist and Genre:" do
       it "does not return duplicate genres if the artist has more than one song of a particular genre (artist has many genres through songs)" do
         Song.new("In the Aeroplane Over the Sea", other_artist, genre)
         Song.new("Two-Headed Boy", other_artist, genre)
-
+       
         expect(other_artist.genres).to include(genre)
         expect(other_artist.genres.size).to eq(1)
       end

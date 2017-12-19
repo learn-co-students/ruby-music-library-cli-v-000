@@ -28,7 +28,9 @@ class Artist
   
   def genres
     self.songs.collect do |g|
-      g.genre unless songs.include?(genre)
+      if !g.include?(genre)
+        g.genre
+      end
     end
   end 
    
