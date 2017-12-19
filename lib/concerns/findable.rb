@@ -4,8 +4,7 @@ module Concerns
     
     def find_by_name(name) # class method
       # searches the extended class' @@all array for an instance that matches the provided name 
-        @@all.find do |song|
-        self.name == name 
+        self.find_by_name(name)
       end 
     end 
 
