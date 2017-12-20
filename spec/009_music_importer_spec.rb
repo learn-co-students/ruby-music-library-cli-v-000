@@ -57,7 +57,7 @@ describe "Song" do
   describe ".create_from_filename" do
     it "initializes and saves a song based on the passed-in filename" do
       song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
-     
+      
       expect(Song.all.last.genre.name).to eq("dance")
     end
 
