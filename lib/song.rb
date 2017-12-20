@@ -53,10 +53,9 @@ class Song
     name = filename.split(" - ")[1] #is name
     genre = filename.split(" - ")[2] # is genre
     song = Song.new(name)
-    
     song.artist = Artist.find_or_create_by_name(artist)
-    song.artist.add_song(song)
     song.name = name
+    song.genre = Genre.create(name)
     song
   end 
   
