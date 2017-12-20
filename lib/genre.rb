@@ -46,10 +46,10 @@ class Genre
     @@all << self 
   end 
 # create self.create class method 
-  def self.create(name)
-  # - this will initialize a new genre and save the genre in the @@all array 
-    genre = Genre.new(name)
-    @@all << genre
-    genre
-  end 
+#  def self.create(name)
+#  # - this will initialize a new genre and save the genre in the @@all array 
+#    genre = Genre.new(name)
+#    @@all << genre
+#    genre
+#  end 
 end 
