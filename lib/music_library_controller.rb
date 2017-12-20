@@ -26,8 +26,9 @@ class MusicLibraryController
   # place list_songs method here - this is for song objects which have been created 
     # print out as an ordered list 
     # where are the song objects that have been created ? 
-    
-    self.Song.all.sort_by {|list| list.name}
+    Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" 
+    end
   end 
   
 end 
