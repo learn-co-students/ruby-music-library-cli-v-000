@@ -17,7 +17,7 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
-      user_input = gets
+      user_input = gets.strip
         if user_input == "list songs"
           list_songs
         elsif user_input == "list artists"
@@ -51,7 +51,7 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    user_input = gets
+    user_input = gets.strip
     artist = Artist.find_by_name(user_input)
     artist == nil ? nil :
       artist.songs.sort_by {|songs|songs.name}.each_with_index{|song,index|
@@ -60,7 +60,7 @@ class MusicLibraryController
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    user_input = gets
+    user_input = gets.strip
     genre = Genre.find_by_name(user_input)
     genre == nil ? nil :
       genre.songs.sort_by {|songs|songs.name}.each_with_index{|song,index|
