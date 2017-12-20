@@ -9,6 +9,7 @@ class MusicLibraryController
   end 
   
   def instructions
+    # add puts statements into a separate method 
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -24,11 +25,11 @@ class MusicLibraryController
   def call 
     # this method should determine which method you want to call
     # refactor - each puts statement should be calling the method that the user_input gets 
-    
+    instructions
     # add puts statements into a separate method 
   
-    user_input = gets.chomp # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
-  until user_input == "exit"  
+    user_input = nil # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
+#  until user_input == "exit"  
   end 
   
   def list_songs
