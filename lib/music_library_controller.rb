@@ -7,7 +7,7 @@ class MusicLibraryController
   
   # create call method 
   def call 
-    
+    puts "Welcome to your music library!"
   end 
   
   
