@@ -8,8 +8,7 @@ class MusicLibraryController
     MusicImporter.new(path).import 
   end 
   
-  # create call method 
-  def call 
+  def instructions
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -19,17 +18,26 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+  end 
+  
+  # create call method 
+  def call 
+    # this method should determine which method you want to call
+    # refactor - each puts statement should be calling the method that the user_input gets 
     
-    user_input = gets.chomp until user_input == "exit"  
+    # add puts statements into a separate method 
+  
+    user_input = gets.chomp # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
+  until user_input == "exit"  
   end 
   
   def list_songs
   # place list_songs method here - this is for song objects which have been created 
     # print out as an ordered list 
     # where are the song objects that have been created ? 
-    Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
-      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" 
-    end
+      Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" 
+      end
   end 
     
   def list_artists
@@ -45,13 +53,21 @@ class MusicLibraryController
     
     def list_songs_by_artist
       puts "Please enter the name of an artist:"
-      user_input = gets.chomp
-      Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
-      puts "#{index + 1}. #{song.artist.name} - #{song.genre.name}" 
-    end
+      artist = gets.chomp
+#      self.list_songs
+      binding.pry  
       
+      
+        
+     
+#      song_list = Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
+ # puts "#{index + 1}. #{song.artist.name} - #{song.genre.name}"
+#      puts song_list 
+  
     end 
+  
   end 
+    
     
     
     

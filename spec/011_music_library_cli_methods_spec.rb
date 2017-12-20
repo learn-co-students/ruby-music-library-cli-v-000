@@ -88,7 +88,7 @@ describe "CLI Methods" do
       Song.create_from_filename("Real Estate - Wonder Years - dream pop.mp3")
 
       allow(music_library_controller).to receive(:gets).and_return("Real Estate")
-
+      
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
       expect($stdout).to receive(:puts).with("1. Green Aisles - country")
       expect($stdout).to receive(:puts).with("2. It's Real - hip-hop")
