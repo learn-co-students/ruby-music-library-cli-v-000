@@ -18,9 +18,9 @@ module Concerns
   
     def create(name)
     # - this will initialize a new song and save the song in the @@all array 
-      song = Song.new(name)
-      self.all << song
-      song
+      new_instance = self.new(name)
+      self.all << new_instance
+      new_instance
     end
     
     def create_from_filename(filename)

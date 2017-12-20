@@ -34,13 +34,5 @@ class MusicImporter
     # look into the directory path - and create a song object from files 
    # how do I connect/access song since it is not available in MusicImporter 
   end 
-
-class MusicLibraryController 
-  
-  
-  
-  
-  
-end 
   
 end 
