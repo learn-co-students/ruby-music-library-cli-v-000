@@ -49,6 +49,7 @@ describe "CLI Methods" do
   end
 
   describe "#list_genres" do
+     
     it "prints all genres in the music library in a numbered list (alphabetized by genre name)" do
       expect($stdout).to receive(:puts).with("1. country")
       expect($stdout).to receive(:puts).with("2. dance")
@@ -86,7 +87,7 @@ describe "CLI Methods" do
 
     it "prints all songs by a particular artist in a numbered list (alphabetized by song name)" do
       Song.create_from_filename("Real Estate - Wonder Years - dream pop.mp3")
-
+      
       allow(music_library_controller).to receive(:gets).and_return("Real Estate")
       
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")

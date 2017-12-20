@@ -29,7 +29,7 @@ class MusicLibraryController
     user_input = gets.chomp # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
     # test-expression ? if-true-expression : if-false-expression 
     
-   
+      unless user_input == "exit" 
       if user_input == "list songs"
         list_songs
       elsif user_input == "list artists"
@@ -43,6 +43,7 @@ class MusicLibraryController
       elsif user_input == "play_song"
         play_song
 #    elsif user_input == "exit" - not sure how to evaulate this part  
+      end
       end
 #  until user_input == "exit"  
   end 
@@ -63,14 +64,19 @@ class MusicLibraryController
   end
     
   def list_genres
-    Genre.all.sort_by {|list| list.name}.each_with_index do |genre, index|
-      puts "#{index + 1}. #{genre.name}" 
+    
+    Song.all.sort_by {|list| list.name}.each_with_index do |item, index|
+      puts "#{index + 1}. #{item.genre.name}" 
     end 
   end 
     
     def list_songs_by_artist
       puts "Please enter the name of an artist:"
-      artist = gets.chomp
+      selected_artist = gets.chomp
+      
+      Song.all.sort_by {|list| list.artist.name}.each_with_index do |item, index|
+        puts "#{index + 1}. #{item}" 
+end
 #      self.list_songs
         
 #      song_list = Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
