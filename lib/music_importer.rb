@@ -20,4 +20,9 @@ class MusicImporter
     mp3_music = Dir.entries(path).reject {|item| item == "." || item  == ".."} # Dir.entries - gets items from Mp3 folder
       mp3_music
   end 
+  
+  def import 
+    
+  end 
+  
 end 
