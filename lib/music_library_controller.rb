@@ -1,6 +1,7 @@
 class MusicLibraryController  
   # create initialize method 
  
+  extend Concerns::Findable 
   
   def initialize(path = "./db/mp3s")
     @path = path 
@@ -30,5 +31,37 @@ class MusicLibraryController
       puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" 
     end
   end 
-  
+    
+  def list_artists
+    Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|
+      puts "#{index + 1}. #{song.artist.name}" 
+    end
+  end 
+    
+    
+  end 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 end 
