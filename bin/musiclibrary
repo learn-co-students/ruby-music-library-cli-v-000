@@ -3,3 +3,8 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+class MusicLibraryController
+
+
+end 
