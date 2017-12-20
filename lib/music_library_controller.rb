@@ -20,7 +20,10 @@ class MusicLibraryController
     user_input = gets.chomp until user_input == "exit"  
   end 
   
-  
-  
+  def list_songs
+  # place list_songs method here - this is for song objects which have been created 
+    # print out as an ordered list 
+    # where are the song objects that have been created ? 
+  end 
   
 end 
