@@ -3,6 +3,7 @@ require 'pry'
 # create MusicImporter class 
 class MusicImporter
 
+    extend Concerns::Findable
 # create initialize method w/(file_path) argument
   def initialize(path) 
     @path = path 
@@ -21,8 +22,10 @@ class MusicImporter
       mp3_music
   end 
   
-  def import 
-    
+  def import
+   
+   # do the opposite of the files method - store files into "./spec/fixtures/mp3s"
+    Song.create_from_filename(filename)
   end 
   
 end 
