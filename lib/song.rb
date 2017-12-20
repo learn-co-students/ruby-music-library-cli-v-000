@@ -51,11 +51,11 @@ class Song
   def self.new_from_filename(filename)
     artist = filename.split(" - ")[0] #is artist
     name = filename.split(" - ")[1] #is name
-    genre = filename.split(" - ")[2] # is genre
+    genre = filename.split(" - ")[2].chomp(".mp3") # is genre
     song = Song.new(name)
     song.artist = Artist.find_or_create_by_name(artist)
     song.name = name
-    song.genre = Genre.create(name)
+    song.genre = Genre.create(genre)
     song
   end 
   
