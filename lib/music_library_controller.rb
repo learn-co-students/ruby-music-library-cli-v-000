@@ -28,7 +28,7 @@ class MusicLibraryController
     instructions
     # add puts statements into a separate method 
   
-    user_input = nil # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
+    user_input = gets.chomp # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
 #  until user_input == "exit"  
   end 
   
