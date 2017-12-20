@@ -26,9 +26,24 @@ class MusicLibraryController
     # this method should determine which method you want to call
     # refactor - each puts statement should be calling the method that the user_input gets 
     instructions
-    # add puts statements into a separate method 
-  
     user_input = gets.chomp # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
+    # test-expression ? if-true-expression : if-false-expression 
+    
+   
+      if user_input == "list songs"
+        list_songs
+      elsif user_input == "list artists"
+        list_artists
+      elsif user_input == "list genres"
+        list_genres
+      elsif user_input == "list artist"
+        list_songs_by_artist
+      elsif user_input == "list genre"
+        list_songs_by_genre
+      elsif user_input == "play_song"
+        play_song
+#    elsif user_input == "exit" - not sure how to evaulate this part  
+      end
 #  until user_input == "exit"  
   end 
   
@@ -45,6 +60,7 @@ class MusicLibraryController
     Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|
       puts "#{index + 1}. #{artist.name}" 
     end
+  end
     
   def list_genres
     Genre.all.sort_by {|list| list.name}.each_with_index do |genre, index|
@@ -56,18 +72,14 @@ class MusicLibraryController
       puts "Please enter the name of an artist:"
       artist = gets.chomp
 #      self.list_songs
-      binding.pry  
-      
-      
         
-     
 #      song_list = Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
  # puts "#{index + 1}. #{song.artist.name} - #{song.genre.name}"
 #      puts song_list 
   
     end 
   
-  end 
+   
     
     
     
@@ -90,7 +102,4 @@ class MusicLibraryController
     
     
     
-    
-    
-    
-end 
+  end
