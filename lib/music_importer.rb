@@ -7,6 +7,7 @@ class MusicImporter
 # create initialize method w/(file_path) argument
   def initialize(path) 
     @path = path 
+    @songs = []
   end 
 # create path method - no arguments
   def path # getter method 
@@ -14,6 +15,9 @@ class MusicImporter
     @path
   end
 
+  def add_song(song) 
+    @songs << song
+  end
 # create files method
   def files 
   # this method will add the MP3 files into the path directory 
@@ -23,9 +27,16 @@ class MusicImporter
   end 
   
   def import
-   
-   # do the opposite of the files method - store files into "./spec/fixtures/mp3s"
-    Song.create_from_filename(filename)
+    
+    files.each do |file|
+      Song.create_from_filename
+    end 
+#      Song.
+    # look into the directory path - and create a song object from files 
+   # how do I connect/access song since it is not available in MusicImporter 
+    
+
+ 
   end 
   
 end 
