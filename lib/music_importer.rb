@@ -29,7 +29,7 @@ class MusicImporter
   def import
     
     files.each do |file|
-      Song.create_from_filename
+      Song.create_from_filename(file)
     end 
 #      Song.
     # look into the directory path - and create a song object from files 
