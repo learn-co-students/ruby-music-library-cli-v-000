@@ -74,14 +74,15 @@ class MusicLibraryController
     def list_songs_by_artist
       puts "Please enter the name of an artist:"
       selected_artist = gets.chomp
-#      binding.pry
-#        Song.all.sort_by {|list| list.artist.name}.each_with_index do |item, index|
-#        puts "#{index + 1}. #{item}" 
-      Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|  # - this will return all songs sorted by artist name
+      # what needs to happen in order for expression to run? - check if artist is included in song
+        if Artist.all.include?(selected_artist)
+        
+          Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|  # - this will return all songs sorted by artist name
         artist.songs.each do |song|
           song.name
           puts "#{index + 1}. #{song.name} - #{song.genre.name}"
 #        puts "#{index + 1}. #{artist.songs}" 
+        end 
         end
       end
     end
