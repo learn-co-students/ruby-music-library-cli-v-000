@@ -66,12 +66,13 @@ class MusicLibraryController
   end
     
   def list_genres
+    Song.all.sort_by {|list| list.genre.name}.each_with_index do {|item, index| binding.pry} end
    
-    Song.all.sort_by {|list| list.genre.name}.each_with_index do |item, index|
-     counter = 0
-      counter += 1
-      puts "#{counter}. #{item.genre.name}" 
-    end 
+#    Song.all.sort_by {|list| binding.pry}.each_with_index do |item, index|
+#     counter = 0
+#      counter += 1
+#      puts "#{counter}. #{item.genre.name}" 
+#    end 
   end 
     
     def list_songs_by_artist
