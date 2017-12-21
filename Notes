@@ -1,0 +1,148 @@
+Song
+#artist=
+
+invokes Artist#add_song to add itself to the artist's collection of songs
+
+
+#initialize
+invokes #artist= instead of simply assigning to an @artist instance
+variable to ensure that associations are created upon initialization (FAILED -
+
+#initialize can be invoked with an
+optional third argument, a Genre object to be assigned to the song's
+'genre'property (song belongs to genre)
+
+**add_song is broken ## It's producing strings, not instances ##
+def add_song(song)
+  if song.artist == nil
+    song.artist = self
+    @songs << song
+  else
+    nil
+  end
+  song
+end
+
+- does the song exist as an instance? If not, create it, assign the artist/genre, and scoop up
+- if yes, and it does not have an artist assigned, assign the artist/genre, then scoop up
+- if yes, but already has an artist/genre, just scoop up
+
+
+
+
+#####
+
+Trying to fix add_song
+
+def add_song(song_name_string)
+  # does the song exist as an instance?
+  Song.all.each do |s|
+    #If not, create it, assign the artist/genre, and scoop up
+    if s.name != song_name_string
+      new_song = Song.create(song_name_string)
+      new_song.artist=(self)
+
+    # if yes, but it does not have an artist assigned, assign the artist/genre, then scoop up
+  elsif s.name == song_name && s.artist = nil
+    s.artist=(self)
+
+    # if yes, but already has an artist/genre, just scoop up
+    else
+      @songs << s
+    end
+  end
+end
+
+###
+
+def add_song(song_name)
+  #check to see if song exists in Song.all
+  Song.all.each do |s|
+    #if yes
+    if s.name == song_name
+      #assign artist to song if no artist
+      s.artist == nil ? s.artist = self : nil
+      #add song to artist's collection
+      @songs << s
+      #if no
+    elsif
+      new_song = Song.create(song)
+      new_song.artist = self
+      @songs << new_song
+    end
+  end
+end
+
+##############
+
+def self.find_or_create_by_name(name)
+    if name = self.find_by_name(name).name
+      name
+    else
+      self.create(name)
+    end
+  end
+
+  def self.find_by_name(name)
+    self.all.find do |s|
+      if s.name == "#{name}"
+        s
+      end
+    end
+  end
+  ##<Artist:0x0056416bc039a8 @name="Adele", @songs=[]>
+
+  def self.find_or_create_by_name(name)
+    if name != self.find_by_name(name).name
+      self.create(name)
+    else
+      self.find_by_name(name)
+    end
+  end
+
+  #####
+
+  def find_or_create_by_name(name)
+    object = self.find_by_name(name)
+    if name == object.name
+      object
+    else
+      self.create(name)
+    end
+  end
+
+  ################
+  class MusicImporter
+
+    attr_accessor :path, :files
+
+    def initialize(path)
+      @path = path
+      @files = []
+    end
+
+    def files
+      Dir.new(@path).collect do |file|
+        if file.include?(".mp3")
+          file.split(" - ").collect{|element| element.gsub(".mp3", "")}
+          @files << file
+        end
+      end
+      @files
+    end
+
+    # imports the files into the library by creating songs from a filename
+    # the test checks .all
+    # 1 Iterate over the files and pass info to:
+    # 2 Song.new_by_filename
+    # Adele - Someone Like You - country.mp3
+
+    def import
+      self.files.collect do |filename|
+        Song.new_by_filename(filename)
+      end
+      #Artist.all
+    end
+
+
+  end
