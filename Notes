@@ -135,7 +135,11 @@ def self.find_or_create_by_name(name)
     # the test checks .all
     # 1 Iterate over the files and pass info to:
     # 2 Song.new_by_filename
+<<<<<<< HEAD
     # "Adele - Someone Like You - country.mp3"
+=======
+    # Adele - Someone Like You - country.mp3
+>>>>>>> 5a5eff5de779e4cf7f16a891b0bc4c73d19e7115
 
     def import
       self.files.collect do |filename|
