@@ -75,13 +75,19 @@ class MusicLibraryController
       puts "Please enter the name of an artist:"
       selected_artist = gets.chomp
       # what needs to happen in order for expression to run? - check if artist is included in song
-        if Artist.all.include?(selected_artist)
-        
+        if Artist.all
+          artist_search = Artist.all.sort_by {|list| list.name}.each_with_index do |item|
+            puts "#{item.name}"
+          end 
+          binding.pry# this should search for name property equal to the string the user entered 
+          # if selected_artist == artist's name then run expression below
+          # how will you make selected_artist == artist's name - 
           Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|  # - this will return all songs sorted by artist name
+            # needs to match the artist the user selected 
         artist.songs.each do |song|
           song.name
           puts "#{index + 1}. #{song.name} - #{song.genre.name}"
-#        puts "#{index + 1}. #{artist.songs}" 
+
         end 
         end
       end
