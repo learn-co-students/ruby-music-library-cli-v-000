@@ -7,9 +7,10 @@ class Song
   def initialize(name, artist = nil, genre = nil)
 
     @name = name
+    @artist = artist
+    @genre = genre
 
     if artist != nil
-      @artist = artist
       self.artist=(artist) #artist= method not working
     else
       nil
@@ -20,7 +21,7 @@ class Song
     else
       nil
     end
-
+    @artist
   end
 
   def self.all
@@ -42,9 +43,8 @@ class Song
   end
 
   def artist=(artist) # this must not be producing an artist instance
-    @artist = artist
     if self.artist == artist
-      artist.add_song(self) ## error artist as string not object [add_song can't be called on a string]
+      ##****  artist.add_song(self) ## error artist as string not object [add_song can't be called on a string]
     else
         # this must not be producing an artist instance
       artist.add_song(self) ## error artist as string not object (I think the error is on this line)
