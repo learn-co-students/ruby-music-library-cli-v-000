@@ -42,7 +42,7 @@ class Song
 
   def artist=(artist)
     if self.artist == artist
-      artist.add_song(self) ## error artist as string not object
+      artist.add_song(self) ## error artist as string not object [add_song can't be called on a string]
     else
       @artist = artist
       artist.add_song(self) ## error artist as string not object
@@ -71,10 +71,12 @@ class Song
     end
   end
 
-  def self.new_from_filename(filename)
+  def self.new_from_filename(filename) # filename = "Adele - Someone Like You - country.mp3"
     song_array = filename.split(" - ").collect{|element| element.gsub(".mp3", "")}
-    song_instance = Song.find_or_create_by_name(song_array[1])
-    song_instance.artist = song_array[2] #needs to be an instance of
+      #=> ["Adele", "Someone Like You", "country"]
+    song_instance = Song.find_or_create_by_name(song_array[1]) #needs to create an instance of a song - YES
+      #=>#<Song:0x000000016e5f18 @name="Someone Like You">
+    song_instance.artist = song_array[0] #ERROR: undefined method `add_song' for "country":String/song.rb:48:in `artist='
 
   end
 
