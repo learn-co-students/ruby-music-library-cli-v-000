@@ -72,9 +72,12 @@ class Song
   end
 
   def self.new_from_filename(filename)
+    song_array = filename.split(" - ").collect{|element| element.gsub(".mp3", "")}
+    song_instance = Song.find_or_create_by_name(song_array[1])
+
   end
 
-  
+
 
   #binding.pry
 
