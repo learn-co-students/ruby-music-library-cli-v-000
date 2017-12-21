@@ -38,6 +38,7 @@ class Artist
   end
 
   def add_song(song)
+    @song = song
           #assigns the current artist to the song's 'artist' property
           #does not assign the artist if the song already has an artist
     song.artist == nil ? song.artist=(self) : nil
