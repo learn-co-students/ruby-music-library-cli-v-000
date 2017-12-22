@@ -1,0 +1,81 @@
+#  def find_song(song)
+#    self.songs.find{|s| song == song}
+#  end
+
+  ##
+#  def add_song(song)
+#    if song.genre == self
+#      self.find_song(song) ? nil : @songs << song
+#    else
+#      song.genre = self
+#      self.find_song(song) ? nil : @songs << song
+#    end
+#  end
+
+#  def add_song(song)
+#    if song.genre == nil
+#      song.genre = self
+#      self.find_song(song) == nil ? @songs << song : nil
+#    else
+#      self.find_song(song) == nil ? @songs << song : nil
+#    end
+#    song
+#  end
+
+###
+
+#  def artist=(name)
+    #assign an artist instance to a song
+    #add song to artist's collection of many
+#    @artist = artist
+#    @artist = Artist.find_or_create_by_name(name)
+    #puts @artist.name
+    #@artist.add_song(self) # New
+#  end
+
+
+###############
+
+#  def self.find_by_name(name)
+#    Artist.all.detect {|artist| artist.name == "#{name}"}
+#  end
+
+#  def self.find_or_create_by_name(name)
+#    if artist = self.find_by_name(name)
+#      artist.add_song(@song)
+#    else
+#      Artist.create_by_name(name)
+#    end
+#  end
+
+  def songs
+    @songs
+  end
+
+#  def find_song(song)
+#    self.songs.find{|s| song == song}
+#  end
+
+#  def add_song(song) # songs not adding to artist instance collection
+#    if song.artist != self
+#      song.artist = self
+#      self.find_song(song) == nil ? @songs << song : nil
+#    else
+#      self.find_song(song) == nil ? @songs << song : nil
+#    end
+#  end
+
+#  def add_song(song)
+#    self.songs.detect do |s|
+#      if s == song || song.artist == nil
+#        song.artist = self
+#      #self.find_song(song) == nil ? @songs << song : nil
+#      elsif
+#        s != song
+#        song.artist = self
+#        @songs << song
+#      end
+#    end
+#  end
+
+  ##

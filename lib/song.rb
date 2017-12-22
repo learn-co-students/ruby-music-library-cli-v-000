@@ -14,7 +14,7 @@ class Song
     if @artist == nil
       nil
     else
-      self.artist = artist
+      self.artist=(artist)
     end
 
     if @genre == nil
@@ -43,12 +43,13 @@ class Song
     new_song
   end
 
-  def artist=(artist) # needs to be instance of Artist
+  def artist=(artist) # needs to be instance of Artist, but passing a string
     @artist = artist
     artist.add_song(self)
   end
 
-  def genre=(genre) # needs to be instance of Genre
+
+  def genre=(genre) # needs to be instance of Genre, but passing a string
     @genre = genre
     genre.add_song(self)
   end
@@ -66,18 +67,18 @@ class Song
     end
   end
 
-#####****
 
-#  def self.new_from_filename(filename) # filename = "Adele - Someone Like You - country.mp3"
-#    song_array = filename.split(" - ").collect{|element| element.gsub(".mp3", "")}
-#      #=> ["Adele", "Someone Like You", "country"]
-#    song_instance = Song.find_or_create_by_name(song_array[1]) #needs to create an instance of a song - YES
-#      #=>#<Song:0x000000016e5f18 @name="Someone Like You">
-#    song_instance.artist = song_array[0] #ERROR: undefined method `add_song' for "Adele":String/song.rb:48:in `artist='
+  def self.new_from_filename(filename) # filename = "Adele - Someone Like You - country.mp3"
 
-#  end
+    song_array = filename.split(" - ").collect{|element| element.gsub(".mp3", "")}
+      #=> ["Adele", "Someone Like You", "country"]
+    song_instance = self.find_or_create_by_name(song_array[1]) #needs to create an instance of a song - YES
+      #=>#<Song:0x000000016e5f18 @name="Someone Like You">
+    song_instance.artist = song_array[0] #ERROR: undefined method `add_song' for "Adele":String/song.rb:48:in `artist='
 
-#####****
+  end
+
+
 
 
   #def self.new_from_filename(filename)

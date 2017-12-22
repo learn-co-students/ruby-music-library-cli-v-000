@@ -9,6 +9,8 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
+    @song = song
+    @genre = genre
   end
 
   def self.all
@@ -33,23 +35,18 @@ class Artist
     @songs
   end
 
-  def find_song(song)
-    self.songs.find{|s| song == song}
-  end
-
   def add_song(song)
-    if song.artist == self
-      self.find_song(song) ? nil : @songs << song
-    else
+    if song.artist == nil
       song.artist = self
-      self.find_song(song) ? nil : @songs << song
+        self.songs.detect{|s| s == song} ? nil : @songs << song
+    else
+      self.songs.detect{|s| s == song} ? nil : @songs << song
     end
   end
 
   def genres
-    #iterate over song collection and collect genres without repeating
     collection = []
-    @songs.collect{|s| collection << s.genre}
+    @songs.collect{|a| collection << a.genre}
     collection.uniq
   end
 
