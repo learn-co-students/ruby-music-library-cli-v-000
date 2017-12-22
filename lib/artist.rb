@@ -50,7 +50,4 @@ class Artist
     collection.uniq
   end
 
-
-  #binding.pry
-
 end

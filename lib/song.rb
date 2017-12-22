@@ -5,15 +5,14 @@ class Song
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
-    # invokes #artist= instead of simply assigning to an @artist instance
-      # variable to ensure that associations are created upon initialization
+    # invokes #artist= instead of simply assigning to an @artist instance variable to ensure that associations are created upon initialization
     @name = name
     @artist = artist
     @genre = genre
 
     if @artist == nil
       nil
-    else # if pass in a artist's name as a string
+    else 
       self.artist=(artist)
     end
 
@@ -43,13 +42,13 @@ class Song
     new_song
   end
 
-  def artist=(artist) # needs to be instance of Artist, but passing a string
+  def artist=(artist)
     @artist = artist
-    artist.add_song(self) #ERROR - BROKEN
+    artist.add_song(self)
   end
 
 
-  def genre=(genre) # needs to be instance of Genre, but passing a string
+  def genre=(genre)
     @genre = genre
     genre.add_song(self)
   end
@@ -58,7 +57,6 @@ class Song
     self.all.find{|s| s.name == name}
   end
 
-  #returns (does not recreate) an existing song with the provided name if one exists in @@all
   def self.find_or_create_by_name(name)
     if song = self.find_by_name(name)
       song
@@ -82,8 +80,5 @@ class Song
   def self.create_from_filename(filename)
     self.new_from_filename(filename).save
   end
-
-
-  #binding.pry
 
 end

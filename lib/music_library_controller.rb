@@ -24,10 +24,25 @@ class MusicLibraryController
     end
   end
 
-  #mprints all songs in the music library in a numbered list (alphabetized by song name)
+### CLI Methods ###
+
+  # prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
   end
 
+  def list_artists
+  end
 
+  def list_genres
+  end
+
+  def list_songs_by_artist
+  end
+
+  def list_songs_by_genre
+  end
+
+  def play_song
+  end
 
 end

@@ -33,8 +33,6 @@ class Genre
     @songs
   end
 
-
-
   def add_song(song)
     if song.genre == nil
       song.genre = self
@@ -49,8 +47,5 @@ class Genre
     @songs.collect{|s| collection << s.artist}
     collection.uniq
   end
-
-  #binding.pry
-
 
 end
