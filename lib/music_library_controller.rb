@@ -80,9 +80,8 @@ class MusicLibraryController
       selected_artist = gets.chomp
       name = selected_artist
      
-    if Artist.find_by_name(selected_artist)
-      Artist.find_by_name(selected_artist).songs.each_with_index do |song, index| 
-         puts "#{index + 1}. #{song.name} - #{genre.name}" 
+    if Artist.find_by_name(selected_artist).songs.each_with_index do |song, index| 
+         puts "#{index + 1}. #{song.name} - #{song.genre.name}" 
       end
     end 
 #      artist_search = Artist.all.collect do |item|
