@@ -13,7 +13,7 @@ class Song
 
     if @artist == nil
       nil
-    else
+    else # if pass in a artist's name as a string
       self.artist=(artist)
     end
 
@@ -45,7 +45,7 @@ class Song
 
   def artist=(artist) # needs to be instance of Artist, but passing a string
     @artist = artist
-    artist.add_song(self)
+    artist.add_song(self) #ERROR - BROKEN
   end
 
 
@@ -71,9 +71,9 @@ class Song
   def self.new_from_filename(filename) # filename = "Adele - Someone Like You - country.mp3"
 
     song_array = filename.split(" - ").collect{|element| element.gsub(".mp3", "")}
-      #=> ["Adele", "Someone Like You", "country"]
+              #=> ["Adele", "Someone Like You", "country"]
     song_instance = self.find_or_create_by_name(song_array[1]) #needs to create an instance of a song - YES
-      #=>#<Song:0x000000016e5f18 @name="Someone Like You">
+              #=>#<Song:0x000000016e5f18 @name="Someone Like You" @genre="country">
     song_instance.artist = song_array[0] #ERROR: undefined method `add_song' for "Adele":String/song.rb:48:in `artist='
 
   end
