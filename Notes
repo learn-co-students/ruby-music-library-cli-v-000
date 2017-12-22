@@ -187,3 +187,16 @@ def add_song(song)
     self.find_song(song) ? nil : @songs << song
   end
 end
+
+###
+
+broken version
+
+def add_song(song)
+  song.genre == nil ? song.genre=(self) : nil
+  if song == self.find_song(song)
+    nil
+  else
+    @songs << song
+  end
+end

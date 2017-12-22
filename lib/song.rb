@@ -5,10 +5,23 @@ class Song
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
-
+    # invokes #artist= instead of simply assigning to an @artist instance
+      # variable to ensure that associations are created upon initialization
     @name = name
     @artist = artist
     @genre = genre
+
+    if @artist == nil
+      nil
+    else
+      self.artist = artist
+    end
+
+    if @genre == nil
+      nil
+    else
+      self.genre = genre
+    end
 
   end
 
@@ -30,12 +43,14 @@ class Song
     new_song
   end
 
-  def artist=(artist) # ERROR
+  def artist=(artist) # needs to be instance of Artist
     @artist = artist
+    artist.add_song(self)
   end
 
-  def genre=(genre)
+  def genre=(genre) # needs to be instance of Genre
     @genre = genre
+    genre.add_song(self)
   end
 
   def self.find_by_name(name)

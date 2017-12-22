@@ -37,20 +37,11 @@ class Artist
     self.songs.find{|s| song == song}
   end
 
-
-    # assigns the current artist to the song's 'artist' property
-    # does not assign the artist if the song already has an artist
-    # if it already exists in @songs
-     #does not add the song to the current artist's collection of songs
-    # adds the song to the current artist's 'songs' collection
   def add_song(song)
-    # Does not assign the artist if the song already has an artist
     if song.artist == self
-      # does not add the song to the current artist's collection of songs if it already exists therein
       self.find_song(song) ? nil : @songs << song
     else
       song.artist = self
-      # does not add the song to the current artist's collection of songs if it already exists therein
       self.find_song(song) ? nil : @songs << song
     end
   end

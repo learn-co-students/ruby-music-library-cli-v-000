@@ -37,12 +37,13 @@ class Genre
     self.songs.find{|s| song == song}
   end
 
+  ##
   def add_song(song)
-    song.genre == nil ? song.genre=(self) : nil
-    if song == self.find_song(song)
-      nil
+    if song.genre == self
+      self.find_song(song) ? nil : @songs << song
     else
-      @songs << song
+      song.genre = self
+      self.find_song(song) ? nil : @songs << song
     end
   end
 
