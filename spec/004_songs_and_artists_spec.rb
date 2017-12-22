@@ -55,6 +55,7 @@ describe "Associations — Song and Artist:" do
   context "Artist" do
     describe "#add_song" do
       it "assigns the current artist to the song's 'artist' property (song belongs to artist)" do
+
         artist.add_song(song)
 
         expect(song.artist).to be(artist)
