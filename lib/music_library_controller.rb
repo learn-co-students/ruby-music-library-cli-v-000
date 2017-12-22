@@ -73,7 +73,7 @@ class MusicLibraryController
       puts "Please enter the name of an artist:"
       selected_artist = gets.chomp
       # is there an iterator that sorts the indexes first
-     if Artist.find_by_name(selected_artist) && selected_artist != nil 
+      if Artist.find_by_name(selected_artist) && selected_artist != nil 
       songs = Artist.find_by_name(selected_artist).songs
       songs = songs.sort_by {|song| song.name}
        songs.each_with_index do |item, index|
@@ -85,6 +85,17 @@ class MusicLibraryController
   def list_songs_by_genre
       puts "Please enter the name of a genre:"
       selected_genre = gets.chomp
+     
+      if Genre.find_by_name(selected_genre) && selected_genre != nil 
+       
+      req_genres = Genre.find_by_name(selected_genre).songs
+        
+      req_genres = req_genres.sort_by {|song| song.name}
+       req_genres.each_with_index do |item, index|
+       puts "#{index + 1}. #{item.artist.name} - #{item.name}"
+     end 
+    end 
+    
   end 
     
     
