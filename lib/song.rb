@@ -2,11 +2,25 @@ class Song
 attr_accessor :name #The name property should be readable and writable by the object.
 attr_reader :artist, :genre
 
-      def initialize(name, song = nil, genre = nil) #they can accept a name upon initialization
+
+  @@all = [] #  each class should contain a class variable @@all that is set to an empty array
+
+      def initialize(name, artist = nil, genre = nil) #they can accept a name upon initialization
         @name = name #and set that property correctly
+        self.artist = artist if artist
+        self.genre = genre if genre
       end
 
-      @@all = [] #  each class should contain a class variable @@all that is set to an empty array
+        def artist=(artist)
+          @artist = artist
+          artist.add_song(self)
+        end
+
+        def genre=(genre)
+          @genre = genre
+          genre.songs << self unless genre.songs.include?(self)
+        end
+
 
       def self.all # This class variable should be accessible via the class method .all.
         @@all
@@ -47,7 +61,7 @@ attr_reader :artist, :genre
         def self.create_from_filename(filename) #ame thing as .new_from_filename but also saves the newly-created song to the @@all class variable.
           new_from_filename(filename).tap{ |s| s.save }
         end
-  
+
 
 
 
