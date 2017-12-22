@@ -67,15 +67,16 @@ class Song
     end
   end
 
-
   def self.new_from_filename(filename) # filename = "Adele - Someone Like You - country.mp3"
-
     song_array = filename.split(" - ").collect{|element| element.gsub(".mp3", "")}
               #=> ["Adele", "Someone Like You", "country"]
-    song_instance = self.find_or_create_by_name(song_array[1]) #needs to create an instance of a song - YES
+    song_instance = self.find_or_create_by_name(song_array[1])
               #=>#<Song:0x000000016e5f18 @name="Someone Like You" @genre="country">
-    song_instance.artist = song_array[0] #ERROR: undefined method `add_song' for "Adele":String/song.rb:48:in `artist='
-
+    new_artist_instance = Artist.find_or_create_by_name(song_array[0])
+    song_instance.artist = new_artist_instance
+    new_genre_instance = Genre.find_or_create_by_name(song_array[2])
+    song_instance.genre = new_genre_instance
+    song_instance
   end
 
 
