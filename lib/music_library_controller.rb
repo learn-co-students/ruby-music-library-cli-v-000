@@ -68,60 +68,24 @@ class MusicLibraryController
       puts "#{index + 1}. #{item.name}" 
     end 
   end 
-  
-  def find_by_name(name)
-    Artist.all.find do |item|
-        item.name == name
-    end
-    end 
     
     def list_songs_by_artist
       puts "Please enter the name of an artist:"
       selected_artist = gets.chomp
-      
+      # is there an iterator that sorts the indexes first
      if Artist.find_by_name(selected_artist) && selected_artist != nil 
-    Artist.find_by_name(selected_artist).songs.each_with_index do |song, index| 
-         puts "#{index + 1}. #{song.name} - #{song.genre.name}" 
-      end
+      songs = Artist.find_by_name(selected_artist).songs
+      songs = songs.sort_by {|song| song.name}
+       songs.each_with_index do |item, index|
+       puts "#{index + 1}. #{item.name} - #{item.genre.name}"
+     end 
     end 
-#      artist_search = Artist.all.collect do |item|
-#        item.name
-#      end 
-#        if artist_search.include?(selected_artist)
-        # what needs to happen in order for expression to run? - check if artist is included in song
-          # this should search for name property equal to the string the user entered 
-          # if selected_artist == artist's name then run expression below
-          # how will you make selected_artist == artist's name -
-      # artist search will return an array of artists from all of the artists in the library 
-      # iterate over array and only puts/print the songs by that artist
-      # search through songs array (Song.all) to find songs by artist
-      # only return songs by selected_artists - how can I check for selected artists in a loop when selected artists is a local variable?
-      
-    end
-
-
+  end
+#       Artist.find_by_name(selected_artist).songs.each_with_index do |song, index| 
+#        
+#         if song.artist.name == selected_artist
+#         puts "#{index + 1}. #{song.name} - #{song.genre.name}" 
+#      end
+#    end 
   
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   end

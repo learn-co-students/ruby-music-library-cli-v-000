@@ -12,6 +12,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
+   
   end
   
   def add_song(song) # once song instance has been created this method should add the songs to the @songs array

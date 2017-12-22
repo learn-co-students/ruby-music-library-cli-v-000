@@ -4,9 +4,7 @@ module Concerns
       
     def find_by_name(name) # class method
       # searches the extended class' @@all array for an instance that matches the provided name 
-       self.all.find do |item|
-        item.name == name   
-    end 
+       self.all.detect {|item| item.name == name}     
     end
 
     def find_or_create_by_name(name)
