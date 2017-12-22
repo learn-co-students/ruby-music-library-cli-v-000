@@ -1,7 +1,5 @@
 class MusicLibraryController  
-  # create initialize method 
- 
-  extend Concerns::Findable 
+  # create initialize method  
   
   def initialize(path = "./db/mp3s")
     @path = path 
@@ -71,33 +69,37 @@ class MusicLibraryController
     end 
   end 
   
+  def find_by_name(name)
+    Artist.all.find do |item|
+        item.name == name
+    end
+    end 
+    
     def list_songs_by_artist
-      user_prompt = "Please enter the name of an artist:"
+      puts "Please enter the name of an artist:"
       selected_artist = gets.chomp
-      artist_search = Artist.all.collect do |item|
-        item.name
-      end 
-        if artist_search.include?(selected_artist)
+      name = selected_artist
+     
+    if Artist.find_by_name(selected_artist)
+      Artist.find_by_name(selected_artist).songs.each_with_index do |song, index| 
+         puts "#{index + 1}. #{song.name} - #{genre.name}" 
+      end
+    end 
+#      artist_search = Artist.all.collect do |item|
+#        item.name
+#      end 
+#        if artist_search.include?(selected_artist)
         # what needs to happen in order for expression to run? - check if artist is included in song
           # this should search for name property equal to the string the user entered 
           # if selected_artist == artist's name then run expression below
-          # how will you make selected_artist == artist's name - 
-          Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|  # - this will return all songs sorted by artist name
-            # needs to match the artist the user selected 
-        artist.songs.each do |song|
-          song.name
-          puts "#{index + 1}. #{song.name} - #{song.genre.name}"
-
-        end 
-        end
-      end
+          # how will you make selected_artist == artist's name -
+      # artist search will return an array of artists from all of the artists in the library 
+      # iterate over array and only puts/print the songs by that artist
+      # search through songs array (Song.all) to find songs by artist
+      # only return songs by selected_artists - how can I check for selected artists in a loop when selected artists is a local variable?
+      
     end
-#      self.list_songs
-        
-#      song_list = Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
- # puts "#{index + 1}. #{song.artist.name} - #{song.genre.name}"
-#      puts song_list 
-  
+
 
   
    
