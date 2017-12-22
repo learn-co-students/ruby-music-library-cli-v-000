@@ -53,7 +53,6 @@ class MusicLibraryController
   def list_songs
     counter = 1
     sorted_songs = self.sort_library_by("song")
-    # sorted_songs = Song.all.sort{|a,b| a.name <=> b.name}
     sorted_songs.each do |song|
       puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       counter += 1
@@ -63,7 +62,6 @@ class MusicLibraryController
   def list_artists
     counter = 1
     sorted_artists = self.sort_library_by("artist")
-    # sorted_artists = Artist.all.uniq.sort{|a,b| a.name <=> b.name}
     sorted_artists.each do |artist|
       puts "#{counter}. #{artist.name}"
       counter += 1
@@ -73,7 +71,6 @@ class MusicLibraryController
   def list_genres
     counter = 1
     sorted_genres = self.sort_library_by("genre")
-    # sorted_genres = Genre.all.uniq.sort{|a,b| a.name <=> b.name}
     sorted_genres.each do |genre|
       puts "#{counter}. #{genre.name}"
       counter += 1
