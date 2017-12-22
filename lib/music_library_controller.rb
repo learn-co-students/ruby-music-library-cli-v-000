@@ -81,11 +81,5 @@ class MusicLibraryController
      end 
     end 
   end
-#       Artist.find_by_name(selected_artist).songs.each_with_index do |song, index| 
-#        
-#         if song.artist.name == selected_artist
-#         puts "#{index + 1}. #{song.name} - #{song.genre.name}" 
-#      end
-#    end 
-  
+#
   end
