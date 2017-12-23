@@ -2,8 +2,8 @@
 
 require_relative '../config/environment'
 
-#MusicLibraryController.new.call
+MusicLibraryController.new.call
 
-MusicLibraryController.new("./spec/fixtures/mp3s").call
+#MusicLibraryController.new("./spec/fixtures/mp3s").call
 
 

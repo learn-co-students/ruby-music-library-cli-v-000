@@ -100,20 +100,12 @@ class MusicLibraryController
   def play_song
   
     puts "Which song number would you like to play?"
-    selected_song = gets.chomp
+    selected_song = gets.chomp.to_i
     
-    song = Song.all.sort_by {|one_song| one_song.name}[selected_song.to_i - 1]
-    puts "Playing #{song.name} by #{song.artist.name}" 
-    
-    
-    # list_songs # this returns an array - we should be able to access the index of array and output the string 
-    # how do we figure out how to compare number of user input with the output in list_songs
-    
-#    puts "Playing #{selected_song} by"
-      
-   
+    unless selected_song == nil || selected_song > Song.all.count || selected_song < Song.all.count # is greater than or less than the number of songs in @@all/song directory 
+      song = Song.all.sort_by {|one_song| one_song.name}[selected_song - 1]
+      puts "Playing #{song.name} by #{song.artist.name}" 
   
-#    unless selected_song >
       # as long as the selected song is not greater than or less than the number of songs in @@all/song directory 
     # song number - should show user song numbers/list_songs
     # match user input to song by title, artist etc
