@@ -40,7 +40,7 @@ class MusicLibraryController
           list_songs_by_artist
         elsif user_input == "list genre"
           list_songs_by_genre
-        elsif user_input == "play_song"
+        elsif user_input == "play song"
           play_song
 #    elsif user_input == "exit" - not sure how to evaulate this part  
       end
@@ -52,13 +52,13 @@ class MusicLibraryController
   # place list_songs method here - this is for song objects which have been created 
     # print out as an ordered list 
     # where are the song objects that have been created ? 
-    Song.all.sort_by {|list| list.name}.each_with_index do |song, index|
+    Song.all.sort_by {|one_song| one_song.name}.each_with_index do |song, index|
         puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" 
       end
   end 
     
   def list_artists
-    Artist.all.sort_by {|list| list.name}.each_with_index do |artist, index|
+    Artist.all.sort_by {|one_artist| one_artist.name}.each_with_index do |artist, index|
       puts "#{index + 1}. #{artist.name}" 
     end
   end
@@ -95,13 +95,32 @@ class MusicLibraryController
        puts "#{index + 1}. #{item.artist.name} - #{item.name}"
      end 
     end 
+  end
     
   def play_song
+  
     puts "Which song number would you like to play?"
     selected_song = gets.chomp
+    
+    song = Song.all.sort_by {|one_song| one_song.name}[selected_song.to_i - 1]
+    puts "Playing #{song.name} by #{song.artist.name}" 
+    
+    
+    # list_songs # this returns an array - we should be able to access the index of array and output the string 
+    # how do we figure out how to compare number of user input with the output in list_songs
+    
+#    puts "Playing #{selected_song} by"
+      
+   
+  
+#    unless selected_song >
+      # as long as the selected song is not greater than or less than the number of songs in @@all/song directory 
+    # song number - should show user song numbers/list_songs
+    # match user input to song by title, artist etc
+    # should return "Playing #{song.name} by #{artist.name}"
   end 
     
-  end 
+ 
     
     
     
