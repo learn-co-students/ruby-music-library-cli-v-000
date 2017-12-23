@@ -100,16 +100,21 @@ class MusicLibraryController
   def play_song
   
     puts "Which song number would you like to play?"
-    selected_song = gets.chomp.to_i
+    selected_song = gets.chomp
+ 
+    unless selected_song.to_i > Song.all.count || selected_song.to_i < 1 || selected_song.to_i == nil # is greater than or less than the number of songs in @@all/song directory 
+      song = Song.all.sort_by {|song| song.name
+        }[selected_song.to_i - 1]
     
-    unless selected_song == nil || selected_song > Song.all.count || selected_song < Song.all.count # is greater than or less than the number of songs in @@all/song directory 
-      song = Song.all.sort_by {|one_song| one_song.name}[selected_song - 1]
-      puts "Playing #{song.name} by #{song.artist.name}" 
+    end
+  end
+#      puts "Playing + song.name + by + song.artist.name" 
   
       # as long as the selected song is not greater than or less than the number of songs in @@all/song directory 
     # song number - should show user song numbers/list_songs
     # match user input to song by title, artist etc
     # should return "Playing #{song.name} by #{artist.name}"
+   
   end 
     
  
