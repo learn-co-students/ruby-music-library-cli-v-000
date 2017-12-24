@@ -18,11 +18,12 @@ class MusicImporter
     @files
   end
 
-  # imports the files into the library 
+  # imports the files into the library
   def import
     self.files.collect do |filename|
       Song.create_from_filename(filename)
     end
+    @files
   end
 
 end

@@ -12,7 +12,7 @@ class Song
 
     if @artist == nil
       nil
-    else 
+    else
       self.artist=(artist)
     end
 
