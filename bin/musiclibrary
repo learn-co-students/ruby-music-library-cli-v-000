@@ -2,7 +2,10 @@
 
 require_relative '../config/environment'
 
-MusicLibraryController.new.call
+MusicLibraryController.new(path = "./db/mp3s")
+
+MusicImporter.new(path)
+
 
 #MusicLibraryController.new("./spec/fixtures/mp3s").call
 

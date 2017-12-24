@@ -105,8 +105,8 @@ class MusicLibraryController
     unless selected_song.to_i > Song.all.count || selected_song.to_i < 1 || selected_song.to_i == nil # is greater than or less than the number of songs in @@all/song directory 
       song = Song.all.sort_by {|song| song.name
         }[selected_song.to_i - 1]
+    puts "Playing #{song.name} by #{song.artist.name}" 
     
-    end
   end
 #      puts "Playing + song.name + by + song.artist.name" 
   
