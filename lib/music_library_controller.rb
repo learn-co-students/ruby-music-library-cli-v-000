@@ -35,23 +35,38 @@ class MusicLibraryController
   # prints all songs in the music library in a numbered list (alphabetized by song name) - is not hard-coded
   def list_songs
     integer = 0
-    @song_list = []
-    @music_library.each do |song_file|
-      @song_list << song_file.split(",")
-        #=> ["Zoo Kid - Out Getting Ribs - hip-hop.mp3"]
-    end
     @music_library.collect! do |file|
       file.split(" - ")
-      #=> ["Zoo Kid", "Out Getting Ribs", "hip-hop.mp3"]
+      #=> [["Zoo Kid", "Out Getting Ribs", "hip-hop.mp3"]]
     end
-    song_name_list = @music_library.sort_by{|x| x[1]} # can remove the variable assignment and do .collect instead if works 
-    #=> Wrong Feels Right -- Jesus Fever -- California -- Perth -- Prizewinning
-    song_name_list
-    #=> ["1+1", "212", "A.D.H.D", "Abducted", "All the Sun That Shines", "Amor Fati"]
+    song_name_list = @music_library.sort_by{|x| x[1]}
+      #=> [["Beyonce", "1+1", "house.mp3"], ["Azealia Banks", "212", "hip-hop.mp3"]...]
+    song_name_list.collect do |file|
+      integer += 1
+      puts file.join(" - ").gsub(".mp3", "").insert(0, integer.to_s + ". ")
+      #=> 1. Beyonce - 1+1 - house
+      #   2. Azealia Banks - 212 - hip-hop
+      #   3. Kendrick Lamar - A.D.H.D - rap
+    end
   end
 
   # prints all artists in the music library in a numbered list (alphabetized by artist name) - is not hard-coded
   def list_artists
+    integer = 1
+    @artists = []
+    @music_library.collect! do |song_file|
+      @artists << song_file.split(" - ").join(" - ").gsub(".mp3", "")
+    end
+    final_list = @artists.collect!.sort_by { |x| x.downcase}
+    #=> returns alphabetized ["Artist - Title - genre]
+    final_list.each do |e|
+      puts e.insert(0, integer.to_s + ". ")
+      integer += 1
+      #=> 1. Action Bronson - Larry Csonka - indie
+      #=> 2. Adele - Rolling In the Deep - folk
+      #=> 3. Adele - Someone Like You - country
+      #=> 4. AraabMuzik - Streetz Tonight - folk
+    end
   end
 
   # prints all genres in the music library in a numbered list (alphabetized by genre name) - is not hard-coded

@@ -84,11 +84,6 @@
   # prints all songs in the music library in a numbered list (alphabetized by song name) - is not hard-coded
   def list_songs
     integer = 0
-    @song_list = []
-    @music_library.each do |song_file|
-      @song_list << song_file.split(",")
-      #=> ["Zoo Kid - Out Getting Ribs - hip-hop.mp3"]
-    end
     @music_library.collect do |file|
       integer += 1
       #file.insert(0, integer.to_s + ". ") # inserts the number, but this needs to happen after alphabetized
