@@ -38,18 +38,17 @@ class MusicLibraryController
     @song_list = []
     @music_library.each do |song_file|
       @song_list << song_file.split(",")
-      #=> ["Zoo Kid - Out Getting Ribs - hip-hop.mp3"]
+        #=> ["Zoo Kid - Out Getting Ribs - hip-hop.mp3"]
     end
-    @music_library.collect do |file|
-      integer += 1
-      #file.insert(0, integer.to_s + ". ") # inserts the number, but this needs to happen after alphabetized
-      @song_list = file.split(" - ").collect do |element|
-        element.gsub(".mp3", "")
-      end
-      @song_list #alpha array by itterate element[1]
-      #=>[["1. Cold Cave", "The Great Pan is Dead", "house"], ["2. Bill Callahan", "Riding for the Feeling", "indie"], ["3. Azealia Banks", "212", "hip-hop"], ["4. Real Estate", "Green Aisles", "country"]]
-    end # ends @music_library.collect => ["1. artist", "title", "genre"]
-  end # ends #list_songs
+    @music_library.collect! do |file|
+      file.split(" - ")
+      #=> ["Zoo Kid", "Out Getting Ribs", "hip-hop.mp3"]
+    end
+    song_name_list = @music_library.sort_by{|x| x[1]} # can remove the variable assignment and do .collect instead if works 
+    #=> Wrong Feels Right -- Jesus Fever -- California -- Perth -- Prizewinning
+    song_name_list
+    #=> ["1+1", "212", "A.D.H.D", "Abducted", "All the Sun That Shines", "Amor Fati"]
+  end
 
   # prints all artists in the music library in a numbered list (alphabetized by artist name) - is not hard-coded
   def list_artists
