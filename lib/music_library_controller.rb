@@ -52,21 +52,16 @@ class MusicLibraryController
 
   # prints all artists in the music library in a numbered list (alphabetized by artist name) - is not hard-coded
   def list_artists
-    integer = 1
-    @artists = []
-    @music_library.collect! do |song_file|
-      @artists << song_file.split(" - ").join(" - ").gsub(".mp3", "")
+    integer = 0
+    @music_library.collect! do |file|
+      file.split(" - ")
+      #=> [["Zoo Kid", "Out Getting Ribs", "hip-hop.mp3"]]
     end
-    final_list = @artists.collect!.sort_by { |x| x.downcase}
-    #=> returns alphabetized ["Artist - Title - genre]
-    final_list.each do |e|
-      puts e.insert(0, integer.to_s + ". ")
-      integer += 1
-      #=> 1. Action Bronson - Larry Csonka - indie
-      #=> 2. Adele - Rolling In the Deep - folk
-      #=> 3. Adele - Someone Like You - country
-      #=> 4. AraabMuzik - Streetz Tonight - folk
+    @music_library.collect do |file_element|
+      2.times {file_element.delete_at(1)}
     end
+    @music_library
+      #=> [["Cold Cave"], ["Bill Callahan"], ["Azealia Banks"]...]
   end
 
   # prints all genres in the music library in a numbered list (alphabetized by genre name) - is not hard-coded

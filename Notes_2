@@ -94,3 +94,21 @@
       #=>[["1. Cold Cave", "The Great Pan is Dead", "house"], ["2. Bill Callahan", "Riding for the Feeling", "indie"], ["3. Azealia Banks", "212", "hip-hop"], ["4. Real Estate", "Green Aisles", "country"]]
     end # ends @music_library.collect => ["1. artist", "title", "genre"]
   end # ends #list_songs
+
+  ####################
+
+  integer = 1
+  @artists = []
+  @music_library.collect! do |file|
+    @artists << file.split(" - ")
+  end
+  final_list = @artists.sort_by{|x| x.downcase}
+  #=> returns alphabetized ["Artist - Title - genre] but needed to remove array[1] & array[2] prior to this point
+  final_list.each do |e|
+    puts e.insert(0, integer.to_s + ". ")
+    integer += 1
+    #=> 1. Action Bronson - Larry Csonka - indie
+    #=> 2. Adele - Rolling In the Deep - folk
+    #=> 3. Adele - Someone Like You - country
+    #=> 4. AraabMuzik - Streetz Tonight - folk
+  end
