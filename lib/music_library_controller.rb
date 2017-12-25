@@ -55,13 +55,16 @@ class MusicLibraryController
     integer = 0
     @music_library.collect! do |file|
       file.split(" - ")
-      #=> [["Zoo Kid", "Out Getting Ribs", "hip-hop.mp3"]]
     end
     @music_library.collect do |file_element|
       2.times {file_element.delete_at(1)}
     end
-    @music_library
-      #=> [["Cold Cave"], ["Bill Callahan"], ["Azealia Banks"]...]
+    @music_library.sort_by do |e|
+      e.collect do |f|
+        f.downcase
+        #=> [["Action Bronson"], ["Adele"], ["Adele"], ["AraabMuzik"]...]
+      end
+    end
   end
 
   # prints all genres in the music library in a numbered list (alphabetized by genre name) - is not hard-coded
