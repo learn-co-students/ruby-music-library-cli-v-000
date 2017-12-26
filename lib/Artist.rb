@@ -1,4 +1,6 @@
 class Artist
+    extend Concerns::Findable
+
     attr_accessor :name
 
     @@all = []
@@ -35,5 +37,9 @@ class Artist
         if !song.artist
             song.artist = self
         end
+    end
+
+    def genres
+        (@songs.collect {|song| song.genre}).uniq
     end
 end

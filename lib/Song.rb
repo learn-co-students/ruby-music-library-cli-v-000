@@ -10,6 +10,21 @@ class Song
         self.genre = genre if genre
     end
 
+    def self.new_from_filename(filename)
+        metadata = ((filename.split("."))[0]).split(" - ")
+        self.new(
+            metadata[1], 
+            Artist.find_or_create_by_name(metadata[0]), 
+            Genre.find_or_create_by_name(metadata[2])
+        );
+    end
+
+    def self.create_from_filename(filename)
+        song = self.new_from_filename(filename)
+        song.save
+        song
+    end
+
     def self.create(name)
         song = Song.new(name)
         song.save
@@ -22,6 +37,14 @@ class Song
 
     def self.destroy_all
         @@all.clear
+    end
+
+    def self.find_by_name(name)
+        self.all.detect {|song| name == song.name}
+    end
+
+    def self.find_or_create_by_name(name)
+        self.find_by_name(name) || self.create(name)
     end
 
     def save
