@@ -1,6 +1,8 @@
 class MusicLibraryController
+
     def initialize(path = "./db/mp3s")
-        MusicImporter.new(path).import
+        @music_importer = MusicImporter.new(path)
+        @music_importer.import
     end
 
     def call
@@ -23,7 +25,20 @@ class MusicLibraryController
     def handle_user_input
         user_input = gets
         while ('exit' != user_input)
+            if ('list songs' == user_input)
+                list_songs
+            end
+
             user_input = gets
         end
+    end
+
+    def list_songs
+        filenames = @music_importer.files
+        filenames.map! {|filename| (filename.split('.'))[0] }
+        filenames.map! {|filename| filename.split(' - ')}
+        filenames.sort_by! {|filename| filename[1]}
+        filenames.map! {|filename| filename.join(' - ')}
+        filenames.each_with_index {|filename, index| puts "#{index+1}. #{filename}"}
     end
 end
