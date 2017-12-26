@@ -52,34 +52,31 @@ class MusicLibraryController
   end
 
   # prints all artists in the music library in a numbered list (alphabetized by artist name) - is not hard-coded
-  def list_artists
+  def list_artists #the music_library is composed of songs, so if new artist created without a song...needs to be included!
+
     integer = 1
-    @music_library.collect! do |file|
-      file.split(" - ")
-    end
-    @music_library.collect do |file_element| #what if artist created without song or genre?
-      # if file_element includes indices [1] && [2]
-      2.times {file_element.delete_at(1)}
-      #if file_element includes indices [1]
-      #else file only has [0] = artist, then nil
-    end
-    @music_library.uniq!
-    @artists = @music_library.collect.sort_by do |e|
-      e.collect do |f|
-        f.downcase
-      end
-    end
-    @artists.collect do |e|
-      e.each do |f|
-        puts f.insert(0, integer.to_s + ". ")
-      end
+
+    Artist.all.sort_by!{|artist| artist.name.downcase}
+
+    Artist.all.collect do |artist|
+      puts artist.name.insert(0, integer.to_s + ". ")
       integer += 1
     end
-    #=> => [2, 3, 4, 5, 6, 7, 8, 9...]
+
   end
 
   # prints all genres in the music library in a numbered list (alphabetized by genre name) - is not hard-coded
   def list_genres
+
+    integer = 1
+
+    Genre.all.sort_by!{|genre| genre.name.downcase}
+
+    Genre.all.collect do |genre|
+      puts genre.name.insert(0, integer.to_s + ". ")
+      integer += 1
+    end
+
   end
 
   # prompts the user to enter an artist
@@ -87,6 +84,32 @@ class MusicLibraryController
   # prints all songs by a particular artist in a numbered list (alphabetized by song name)
   # does nothing if no matching artist is found
   def list_songs_by_artist
+
+    puts "Please enter the name of an artist:"
+
+    input = gets.strip.to_s
+
+    Artist.all.each do |artist|
+
+      integer = 1
+
+      if artist.name.include?(input)
+
+        @song_list = artist.songs.collect! do |song|
+          "#{song.name}" + " - " + "#{song.genre.name}"
+        end
+
+        @song_list.sort.collect do |song|
+          puts song.insert(0, integer.to_s + ". ")
+          integer += 1
+        end
+
+      else
+        nil
+      end
+
+    end
+
   end
 
   # prompts the user to enter an genre
@@ -94,6 +117,47 @@ class MusicLibraryController
   # prints all songs by a particular genre in a numbered list (alphabetized by song name)
   # does nothing if no matching genre is found
   def list_songs_by_genre
+
+    puts "Please enter the name of a genre:"
+
+    @song_list = []
+
+    input = gets.strip.to_s
+
+    Genre.all.each do |genre|
+
+      integer = 1
+
+      if genre.name.include?(input)
+
+        genre.songs.collect do |song|
+          @song_list << "#{song.artist.name}" + ", " + "#{song.name}"
+        end
+        # need to combine these two and don't add the hyphen so you don't have to take it away!
+        @song_list.collect! do |song|
+          song.split(", ")
+        end
+
+        @song_list.sort_by!{|song| song[1]}
+        #=> [["Cults", "Abducted"], ["Jacques Greene", "Another Girl"], ["Jamie xx", "Far Nearer"]...]
+
+        @song_list.collect! do |song|
+          song.join(" - ")
+        end
+        #return @song_list
+        #=> [["Cults - Abducted", "Jacques Greene - Another Girl", "Jamie xx - Far Nearer",...]
+
+        @song_list.collect do |song|
+          puts song.insert(0, integer.to_s + ". ")
+          integer += 1
+        end
+
+      else
+        nil
+      end
+
+    end
+
   end
 
   # prompts the user to choose a song from the alphabetized list output by #list_songs
@@ -102,6 +166,20 @@ class MusicLibraryController
   # does not 'puts' anything out if a matching song is not found
   # checks that the user entered a number between 1 and the total number of songs in the library
   def play_song
+
+    puts "Which song number would you like to play?"
+
+    input = gets.strip
+
+    @songs = self.list_songs### need to access songs.all to get artist.name and song.name info?
+    if input.to_i < 1 || input > @songs.size
+      nil
+    else
+      @songs.each do |song_string| # maybe temporarily split to access indices?
+        if song_string.include?(input)
+          puts "Playing '#{song_string.name}' by '#{song.artist.name}'"
+    end
+
   end
 
 end
