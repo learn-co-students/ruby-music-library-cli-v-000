@@ -48,23 +48,34 @@ class MusicLibraryController
       #   2. Azealia Banks - 212 - hip-hop
       #   3. Kendrick Lamar - A.D.H.D - rap
     end
+    #=> => [nil, nil, nil, nil, nil, nil...]
   end
 
   # prints all artists in the music library in a numbered list (alphabetized by artist name) - is not hard-coded
   def list_artists
-    integer = 0
+    integer = 1
     @music_library.collect! do |file|
       file.split(" - ")
     end
-    @music_library.collect do |file_element|
+    @music_library.collect do |file_element| #what if artist created without song or genre?
+      # if file_element includes indices [1] && [2]
       2.times {file_element.delete_at(1)}
+      #if file_element includes indices [1]
+      #else file only has [0] = artist, then nil
     end
-    @music_library.sort_by do |e|
+    @music_library.uniq!
+    @artists = @music_library.collect.sort_by do |e|
       e.collect do |f|
         f.downcase
-        #=> [["Action Bronson"], ["Adele"], ["Adele"], ["AraabMuzik"]...]
       end
     end
+    @artists.collect do |e|
+      e.each do |f|
+        puts f.insert(0, integer.to_s + ". ")
+      end
+      integer += 1
+    end
+    #=> => [2, 3, 4, 5, 6, 7, 8, 9...]
   end
 
   # prints all genres in the music library in a numbered list (alphabetized by genre name) - is not hard-coded
