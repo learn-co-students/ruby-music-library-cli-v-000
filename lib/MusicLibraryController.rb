@@ -25,10 +25,7 @@ class MusicLibraryController
     def handle_user_input
         user_input = gets
         while ('exit' != user_input)
-            if ('list songs' == user_input)
-                list_songs
-            end
-
+            this.send(user_input.gsub(' ', '_'))
             user_input = gets
         end
     end
@@ -40,5 +37,10 @@ class MusicLibraryController
         filenames.sort_by! {|filename| filename[1]}
         filenames.map! {|filename| filename.join(' - ')}
         filenames.each_with_index {|filename, index| puts "#{index+1}. #{filename}"}
+    end
+
+    def list_artists
+        artist_names = Artist.all.map! {|artist| artist.name}
+        artist_names.sort.each_with_index {|name, index| puts "#{index+1}. #{name}"}
     end
 end
