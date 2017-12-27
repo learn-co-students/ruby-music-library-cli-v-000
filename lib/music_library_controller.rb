@@ -27,10 +27,7 @@ class MusicLibraryController
     instructions
     user_input = gets.chomp # need to evaluate what user_input is and determin which method is needed - should set a placeholder (nil)
     # test-expression ? if-true-expression : if-false-expression 
-    while user_input != "exit"
-      instructions
-      user_input = gets.chomp
-        if user_input == "list songs"
+    if user_input == "list songs"
           list_songs
         elsif user_input == "list artists"
           list_artists
@@ -42,8 +39,13 @@ class MusicLibraryController
           list_songs_by_genre
         elsif user_input == "play song"
           play_song
+    end 
+    
+    while user_input != "exit"
+      instructions
+      user_input = gets.chomp
 #    elsif user_input == "exit" - not sure how to evaulate this part  
-      end
+    
     end
 #  until user_input == "exit"  
   end 

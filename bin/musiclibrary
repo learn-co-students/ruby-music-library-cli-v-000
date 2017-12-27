@@ -1,12 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment'
+require_relative '../config/environment.rb'
 
-MusicLibraryController.new(path = "./db/mp3s")
-
-MusicImporter.new(path)
+MusicLibraryController.new(path = "./db/mp3s").call
 
 
-#MusicLibraryController.new("./spec/fixtures/mp3s").call
 
 
