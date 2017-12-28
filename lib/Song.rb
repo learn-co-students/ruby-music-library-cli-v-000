@@ -11,12 +11,15 @@ class Song
     end
 
     def self.new_from_filename(filename)
-        metadata = ((filename.split("."))[0]).split(" - ")
+        metadata = filename.split(" - ")
+        song_name = metadata[1]
+        artist_name = metadata[0]
+        genre_name = (metadata[2].split("."))[0]
         self.new(
-            metadata[1], 
-            Artist.find_or_create_by_name(metadata[0]), 
-            Genre.find_or_create_by_name(metadata[2])
-        );
+            song_name,
+            Artist.find_or_create_by_name(artist_name),
+            Genre.find_or_create_by_name(genre_name)
+        )
     end
 
     def self.create_from_filename(filename)
