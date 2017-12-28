@@ -80,6 +80,13 @@ class MusicLibraryController
     end
   end
 
-  # def play_song
-  # end
+  def play_song
+    puts "Which song number would you like to play?"
+    user_entry = gets.strip.to_i
+    if user_entry >= 1 && user_entry <= Song.all.size
+      songs_list = Song.all.sort { |x, y| x.name <=> y.name }
+      song = songs_list[user_entry -1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
+  end
 end
