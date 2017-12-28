@@ -1,4 +1,7 @@
+require 'pry'
 class MusicLibraryController
+  @@songs_listed = []
+
   attr_accessor :music_importer
 
   def initialize(path='./db/mp3s')
@@ -31,4 +34,52 @@ class MusicLibraryController
       user_entry = gets
     end
   end
+
+  def list_songs
+    songs_listed = Song.all.sort { |x, y| x.name <=> y.name }
+    songs_listed.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_artists
+  artists_list = Artist.all.sort { |x, y| x.name <=> y.name }
+  artists_list.each_with_index do |artist, index|
+      puts "#{index + 1}. #{artist.name}"
+    end
+  end
+
+  def list_genres
+    genres_list = Genre.all.sort { |x, y| x.name <=> y.name }
+    genres_list.each_with_index do |genre, index|
+      puts "#{index + 1}. #{genre.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    name = gets.chomp
+    artist = Artist.find_by_name(name)
+    if artist
+      songs_list = artist.songs.sort { |x, y| x.name <=> y.name }
+      songs_list.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    name = gets.chomp
+    genre = Genre.find_by_name(name)
+    if genre
+      songs_list = genre.songs.sort { |x, y| x.name <=> y.name }
+      songs_list.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+
+  # def play_song
+  # end
 end

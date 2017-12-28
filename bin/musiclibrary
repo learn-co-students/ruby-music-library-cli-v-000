@@ -1,5 +1,2 @@
 #!/usr/bin/env ruby
-
-require_relative '../config/environment'
-
-MusicLibraryController.new.call
+require_relative "../lib/cli_commands.rb"
