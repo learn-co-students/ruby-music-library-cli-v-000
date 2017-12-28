@@ -26,18 +26,23 @@ class MusicLibraryController
         user_input = gets.chomp
         while ('exit' != user_input)
             case user_input
-            when 'list songs', 'list artists', 'list genres'
-                this.send(user_input.gsub(' ', '_'))
+            when 'list songs', 'list artists', 'list genres', 'play song'
+                self.send(user_input.gsub(' ', '_'))
             when 'list artist'
                 list_songs_by_artist
+            when 'list genre'
+                list_songs_by_genre
             end
             user_input = gets.chomp
         end
     end
 
+    def get_alphabetized_song_array
+        alphabetized_songs = Song.all.sort_by {|song| song.name}
+    end
+
     def list_songs
-        songs = Song.all
-        songs.sort_by! {|song| song.name}
+        songs = get_alphabetized_song_array
         songs.each_with_index {|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
     end
 
@@ -61,5 +66,27 @@ class MusicLibraryController
             songs_by_artist.each_with_index {|song, index| puts "#{index+1}. #{song.name} - #{song.genre.name}"}
         end
     end
-  
+      
+    def list_songs_by_genre
+        puts "Please enter the name of a genre:"
+        genre_name = gets.chomp
+        genre = Genre.find_by_name(genre_name)
+        if (genre)
+            songs_by_genre = genre.songs
+            songs_by_genre.sort_by! {|song| song.name}
+            songs_by_genre.each_with_index {|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name}"}
+        end
+    end
+
+    def play_song
+        puts "Which song number would you like to play?"
+        song_number = gets.chomp.to_i
+        if (song_number > 0)
+            songs = get_alphabetized_song_array
+            if (song_number <= songs.length)
+                song = songs[song_number - 1]
+                puts "Playing #{song.name} by #{song.artist.name}"
+            end
+        end
+    end
 end
