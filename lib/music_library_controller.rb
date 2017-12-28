@@ -21,7 +21,7 @@ class MusicLibraryController
     puts "What would you like to do?"
     user_entry = gets
 
-    case user_entry.strip
+    case user_entry.downcase.strip
     when 'list songs'
       list_songs
     when 'list artists'
@@ -34,12 +34,16 @@ class MusicLibraryController
       list_songs_by_genre
     when 'play song'
       play_song
+    when 'exit'
+      exit
     else
+      puts "Invalid entry. Please select from the menu."
     end
 
     if user_entry != "exit"
       call
     end
+
   end
 
 ########## CLI Methods ##########
@@ -51,10 +55,10 @@ class MusicLibraryController
   end
 
   def list_artists
-  artists_list = Artist.all.sort { |x, y| x.name <=> y.name }
-  artists_list.each_with_index do |artist, index|
-      puts "#{index + 1}. #{artist.name}"
-    end
+    artists_list = Artist.all.sort { |x, y| x.name <=> y.name }
+    artists_list.each_with_index do |artist, index|
+        puts "#{index + 1}. #{artist.name}"
+      end
   end
 
   def list_genres
