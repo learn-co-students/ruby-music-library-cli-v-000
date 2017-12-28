@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 require_relative "../lib/music_library_controller.rb"
 
-music_library_controller = MusicLibraryController.new
-music_library_controller.call
+# music_library_controller = MusicLibraryController.new
+# music_library_controller.call
+
+MusicLibraryController.new.call
