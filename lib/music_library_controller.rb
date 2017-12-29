@@ -18,17 +18,43 @@ class MusicLibraryController
       puts "To list all of the songs of a particular genre, enter 'list genre'."
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
+
       input = gets.strip
 
-      if input== "list songs"
-        list_song
+    if input== "list songs"
+        list_songs
+      elsif input== "list artists"
+        list_artists
+      elsif input== "list genres"
+        list_genres
+      elsif input== "list artist"
+        list_songs_by_artist
+      elsif input== "list genre"
+        list_songs_by_genre
+      elsif input== "play song"
+        play_song
       end
     end
   end
 
   def list_songs
-      Song.all.sort.each_with_index {|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+  #  binding.pry
+      Song.all.each.with_index(1) {|song, index| puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
+  def list_artists
+  end
+
+  def list_genres
+  end
+
+  def list_songs_by_artist
+  end
+
+  def list_songs_by_genre
+  end
+
+  def play_song
+  end
 
 end
