@@ -1,5 +1,5 @@
 class MusicLibraryController
-  require "pry"
+require 'pry'
 
   def initialize(path='./db/mp3s')
     file=MusicImporter.new(path)
@@ -38,23 +38,56 @@ class MusicLibraryController
   end
 
   def list_songs
-  #  binding.pry
-      Song.all.each.with_index(1) {|song, index| puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    Song.all.uniq.sort_by {|obj| obj.name}.each.with_index(1) do |song,index|
+      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 
   def list_artists
+    Artist.all.sort_by {|obj| obj.name}.each.with_index(1) do |artist,index|
+      puts "#{index}. #{artist.name}"
+    end
   end
 
   def list_genres
+    Genre.all.sort_by {|obj| obj.name}.each.with_index(1) do |genre,index|
+      puts "#{index}. #{genre.name}"
+    end
   end
 
   def list_songs_by_artist
+    input=""
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+
+    if artist=Artist.all.detect{|artist| artist.name == input}
+      artist.songs.sort_by {|obj| obj.name}.each.with_index(1) do |song,index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end
+    end
   end
 
   def list_songs_by_genre
+    input=""
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+
+    if genre=Genre.all.detect {|genre| genre.name==input}
+      genre.songs.sort_by {|obj| obj.name}.each.with_index(1) do |song,index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
+      end
+    end
   end
 
   def play_song
+    binding.pry
+    input=""
+    puts "Which song number would you like to play?"
+    list_songs
+    input = gets.strip
+    if input >=1 and input <=Song.all.uniq.length
+
+    end
   end
 
 end
