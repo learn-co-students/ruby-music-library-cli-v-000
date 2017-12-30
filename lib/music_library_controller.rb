@@ -93,7 +93,7 @@ class MusicLibraryController
 
     number_input = gets.strip.to_i
 
-    if number_input > 0 && number_input < Song.all.count ##list_songs fixed with Song.all
+    if number_input > 0 && number_input < Song.all.count ## fixed with Song.all instead of list_songs.all
 
       if alpha_song_list[number_input - 1] != nil
         song = alpha_song_list[number_input - 1]
