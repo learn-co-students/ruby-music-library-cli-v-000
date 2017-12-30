@@ -44,7 +44,7 @@ class MusicLibraryController
 
   end
 
-  #Or as a case statement (see nested)
+  #Or as a case statement
 #  def cli_commands(i)
 #    case input
 #       when "list songs"
