@@ -18,32 +18,49 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
-      input = gets.strip
-      cli_commands(input)
+      i = gets.strip
+      cli_commands(i)
     end
 
   end
 
-  def cli_commands(input)
+  def cli_commands(i)
 
-    if input == ("list songs")
+    if i == "list songs"
       list_songs
-    elsif input == ("list artists")
+    elsif i == "list artists"
       list_artists
-    elsif input == ("list genres")
+    elsif i == "list genres"
       list_genres
-    elsif input == ("list artist")
+    elsif i == "list artist"
       list_songs_by_artist
-    elsif input == ("list genre")
+    elsif i == "list genre"
       list_songs_by_genre
-    elsif input == ("play song")
+    elsif i == "play song"
       play_song
-    elsif input == ("exit")
+    elsif i == "exit"
       exit
     end
-    
+
   end
 
+  #Or as a case statement (see nested)
+#  def cli_commands(i)
+#    case input
+#       when "list songs"
+#         list_songs
+#       when "list artists"
+#         list_artists
+#       when "list genres"
+#         list_genres
+#       when "list artist"
+#         list_songs_by_artist
+#       when "list genre"
+#         list_songs_by_genre
+#       when "play song"
+#         play_song
+#       end
+#     end
 
   # prints all songs in the music library in a numbered list (alphabetized by song name) - is not hard-coded
   def alpha_song_list
@@ -73,11 +90,9 @@ class MusicLibraryController
     # does nothing if no matching artist is found
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist_name = gets.strip
+    i = gets.strip
 
-    artist = Artist.find_by_name(artist_name)
-
-    if (artist)
+    if artist = Artist.find_by_name(i)
       artist_songs = artist.songs
       artist_songs.sort_by! {|song| song.name}
       artist_songs.each_with_index {|song, index| puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
@@ -91,10 +106,9 @@ class MusicLibraryController
     # does nothing if no matching genre is found
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    genre_name = gets.strip
-    genre = Genre.find_by_name(genre_name)
+    i = gets.strip
 
-    if (genre)
+    if genre = Genre.find_by_name(i)
       genre_songs = genre.songs
       genre_songs.sort_by! {|song| song.name}
       genre_songs.each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
@@ -110,12 +124,12 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
 
-    number_input = gets.strip.to_i
+    i = gets.strip.to_i
 
-    if number_input > 0 && number_input < Song.all.count ## fixed with Song.all instead of list_songs.all
+    if i > 0 && i < Song.all.count ## fixed with Song.all instead of list_songs.all
 
-      if alpha_song_list[number_input - 1] != nil
-        song = alpha_song_list[number_input - 1]
+      if alpha_song_list[i - 1] != nil
+        song = alpha_song_list[i - 1]
         puts "Playing #{song.name} by #{song.artist.name}"
       end
 
