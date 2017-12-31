@@ -80,13 +80,13 @@ require 'pry'
   end
 
   def play_song
-    binding.pry
     input=""
     puts "Which song number would you like to play?"
-    list_songs
-    input = gets.strip
-    if input >=1 and input <=Song.all.uniq.length
+    input = gets.strip.to_i
 
+    if input >=1 and input <=Song.all.uniq.length
+      song = Song.all.uniq.sort_by {|obj| obj.name} [input - 1]
+      puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
 
