@@ -5,8 +5,8 @@ class Genre
   @@all = []
 
   def initialize(name)
-    @name = name
-    @songs = []
+     @name = name
+     @songs = []
   end
 
   def self.all
@@ -23,24 +23,16 @@ class Genre
 
   def songs
     @songs
-
   end
 
   def self.create(name)
-    created_genre = new(name)
-    @@all << created_genre.save
+    genre = Genre.new(name)
+    genre.save
+    genre
   end
 
   def artists
-    unique = []
-
-    songs.map do |song|
-      if !unique.include?(song.artist)
-        unique << song.artist
-      end
-    end
-    unique
-
+    songs.collect {|song| song.artist}.uniq
   end
 
 end
