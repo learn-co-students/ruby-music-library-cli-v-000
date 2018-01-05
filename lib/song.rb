@@ -1,6 +1,7 @@
 class Song
     
-    attr_accessor :name, :artist, :genre
+    attr_accessor :name
+    attr_reader :artist, :genre
     extend Concerns::Findable
     extend Persistable::ClassMethods
     include Persistable::InstanceMethods

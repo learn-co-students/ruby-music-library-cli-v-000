@@ -18,7 +18,7 @@ module Concerns
     module Listables
     
     def numbered_list
-    list = self.all.sort_by { |object| object.name }
+    list = self.all.sort_by {|object| object.name}
         list.each_with_index do |object, i|
             puts "#{i+1}. #{object.name}"
         end
