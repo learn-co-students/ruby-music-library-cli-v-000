@@ -5,8 +5,6 @@ class Artist
     extend Persistable::ClassMethods
     include Persistable::InstanceMethods
     attr_accessor :name, :song
-    
-     @@all = []
    
     def initialize(name)
        @name = name

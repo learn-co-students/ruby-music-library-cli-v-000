@@ -32,6 +32,10 @@ module Persistable
         def destroy_all
             self.all.clear  
         end 
+        
+        def self.extended(base)
+           base.class_variable_set(:@@all, []) 
+        end
     end
     
     module InstanceMethods
