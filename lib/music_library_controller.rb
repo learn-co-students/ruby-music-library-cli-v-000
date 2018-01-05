@@ -97,7 +97,6 @@ class MusicLibraryController
   	desired_song = gets.strip
     desired_song = desired_song.to_i
   	if desired_song != 0
-  		#puts "#{desired_song}"
   		sorted_songs = Song.all.sort do |a,b|
   			a.name <=> b.name
       end
@@ -106,9 +105,6 @@ class MusicLibraryController
   				puts "Playing #{song.name} by #{song.artist.name}"
   			end
   		end
-  		#if desired_song <= Song.all.count
-  			
-  		#end
     end
   end
 end
