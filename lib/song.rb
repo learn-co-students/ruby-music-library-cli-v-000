@@ -2,6 +2,8 @@ class Song
     
     attr_accessor :name, :artist, :genre
     extend Concerns::Findable
+    extend Persistable::ClassMethods
+    include Persistable::InstanceMethods
     
     @@all = []
     
@@ -21,16 +23,8 @@ class Song
         genre.songs << self unless genre.songs.include?(self)
     end
     
-    def save
-       @@all << self 
-    end
-    
     def self.all
        @@all 
-    end
-    
-    def self.destroy_all
-        @@all = []  
     end
     
     def self.create(song)

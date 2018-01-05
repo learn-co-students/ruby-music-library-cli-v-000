@@ -2,6 +2,8 @@ class Genre
     
     extend Concerns::Findable
     extend Concerns::Listables
+    extend Persistable::ClassMethods
+    include Persistable::InstanceMethods
     attr_accessor :name
     
      @@all = []
@@ -9,10 +11,6 @@ class Genre
     def initialize(name)
        @name = name
        @songs = []
-    end
-    
-    def save
-       @@all << self 
     end
     
     def songs
@@ -25,10 +23,6 @@ class Genre
     
     def self.all
        @@all 
-    end
-    
-    def self.destroy_all
-        @@all = []  
     end
     
     def self.create(song)

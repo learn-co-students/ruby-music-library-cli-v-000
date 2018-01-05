@@ -1,21 +1,21 @@
-module Concerns::Findable
+module Concerns
+    module Findable
     
-    def find_by_name(name)
-        all.find {|s| s.name == name}
-    end
+        def find_by_name(name)
+            all.find {|s| s.name == name}
+        end
 
-    def find_or_create_by_name(name)
-        s = find_by_name(name)
-        if s
-            s
-        else
-            create(name)
+        def find_or_create_by_name(name)
+            s = find_by_name(name)
+            if s
+                s
+            else
+                create(name)
+            end
         end
     end
-
-end
-
-module Concerns::Listables
+    
+    module Listables
     
     def numbered_list
     list = self.all.sort_by { |object| object.name }
@@ -24,4 +24,21 @@ module Concerns::Listables
         end
     end
 
+    end
 end
+
+module Persistable
+    module ClassMethods
+        def destroy_all
+            self.all.clear  
+        end 
+    end
+    
+    module InstanceMethods
+        def save
+            self.class.all << self
+        end
+    
+    end
+end
+
