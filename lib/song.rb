@@ -1,12 +1,12 @@
 class Song
 #==================modules=====================
   extend Concerns::Findable
-  extend Concerns::Persistable::ClassMethods
-  include Concerns::Persistable::Save
+  extend Persistable::ClassMethods
+  include Persistable::Save
 #=================properties===================
   attr_accessor :name, :artist, :genre
   # @@all = []
-  def self.all; @@all end
+  # def self.all; @@all end
 #=================intialize====================
   def initialize(name, artist = nil, genre = nil)
     self.name = name

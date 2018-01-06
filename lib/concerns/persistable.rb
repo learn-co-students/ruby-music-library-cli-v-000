@@ -1,4 +1,4 @@
-module Concerns::Persistable
+module Persistable
   module ClassMethods
     def create(name)
       obj = self.new(name).tap {|o| o.save}
@@ -10,9 +10,7 @@ module Concerns::Persistable
 
     def self.extended(base)
       base.class_variable_set(:@@all, [])
-      # base.class_variable_set(:all, :@@all)
-      # successfully got rid of @all = []
-      # trying to abstract away def self.all .. @@all
+      base.class_variable_get(:@@all)
     end
 
 

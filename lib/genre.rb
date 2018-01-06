@@ -1,13 +1,13 @@
 class Genre
 #==================modules=====================
   extend Concerns::Findable
-  extend Concerns::Persistable::ClassMethods
-  include Concerns::Persistable::InstanceMethods
-  include Concerns::Persistable::Save
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
+  include Persistable::Save
 #=================properties===================
   attr_accessor :name, :songs
   # @@all = []
-  def self.all; @@all end
+  # def self.all; @@all end
 #=================intialize====================
   # def initialize(name)
   #   self.songs = []
