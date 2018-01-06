@@ -9,7 +9,6 @@ class Genre
   def initialize(name)
     @name = name
     @songs =[]
-
   end
 
   def save
@@ -32,6 +31,15 @@ class Genre
     songs.collect.each {|song| song.artist}.uniq
     # returns a collection of artists for all of the genre's songs
   end
+
+    def save
+      @@all << self
+    end
+
+    def self.create(name)
+      new(name).tap { |s| s.save}
+    end
+
 
 
 end

@@ -1,3 +1,4 @@
+
 require 'pry'
 
 class Artist
@@ -12,7 +13,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-
   end
 
   def save
@@ -42,5 +42,10 @@ class Artist
     songs.collect.each {|song| song.genre}.uniq
     # returns a collection of genres for all of the artist's songs
   end
+
+
+    def songs
+      @songs
+    end
 
 end

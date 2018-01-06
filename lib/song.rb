@@ -5,7 +5,6 @@ class Song
   attr_accessor :name
   attr_reader :artist, :genre
 
-
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
@@ -24,15 +23,16 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
+    @artist = artist if true
+    @genre = genre if true
+  end
 
-
-  def self.all
+def self.all
     @@all
   end
 
   def save
     @@all << self
-
   end
 
   def self.destroy_all
@@ -70,4 +70,10 @@ class Song
   def self.create_from_filename(filename)
     new_from_filename(filename).tap{|s| s.save}
   end
+
+
+  def self.create(name)
+    new(name).tap { |s| s.save}
+  end
+
 end
