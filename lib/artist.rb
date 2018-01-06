@@ -1,4 +1,8 @@
+require 'pry'
+
 class Artist
+
+  extend Concerns::Findable
 
   attr_accessor :name, :songs
 
@@ -8,6 +12,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
+
   end
 
   def save
@@ -26,7 +31,16 @@ class Artist
     new(name).tap{|s| s.save}
   end
 
-  def add_song
-    self << song.new(artist)
+  def add_song(song)
+    song.artist = self unless song.artist
+    songs << song unless songs.include?(song)
+    # songs << self
+
   end
+
+  def genres
+    songs.collect.each {|song| song.genre}.uniq
+    # returns a collection of genres for all of the artist's songs
+  end
+
 end
