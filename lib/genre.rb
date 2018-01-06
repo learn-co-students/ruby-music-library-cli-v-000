@@ -1,12 +1,15 @@
 require_relative './concerns/findable.rb'
+require_relative './concerns/persistable.rb'
+require_relative './concerns/nameable.rb'
 
 class Genre
   extend Concerns::Findable
-  attr_accessor :name
-  attr_reader :songs
-  @@all=[]
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
+  extend Nameable::ClassMethods
+  attr_accessor :name, :songs
 
-  def initialize(name)
+  def initialize (name)
     @name = name
     @songs = []
   end
@@ -15,22 +18,7 @@ class Genre
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.create(name)
-    genre = self.new(name)
-    genre.save
-    genre
-  end
-
   def artists
-    songs.collect{|song| song.artist}.uniq
-
+    songs.collect{|song|song.artist}.uniq
   end
 end
