@@ -1,4 +1,4 @@
-module Persistable
+module Concerns::Persistable
   module ClassMethods
     def create(name)
       obj = self.new(name).tap {|o| o.save}
@@ -10,10 +10,11 @@ module Persistable
 
     def self.extended(base)
       base.class_variable_set(:@@all, [])
-      base.class_variable_get(:@@all)
+      # for @@all reader refactoring tried both
+      # base.class_variable_get(:@@all)
+      # and
+      # base.class_variable_set(:all, :@@all)
     end
-
-
   end
 
   module InstanceMethods
