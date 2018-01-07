@@ -5,15 +5,26 @@ class Song
   include Concerns::Persistable::Save
 #=================properties===================
   attr_accessor :name, :artist, :genre
-  # @@all = []
   def self.all; @@all end
-  # come back to this to try to abstract away
 #=================intialize====================
   def initialize(name, artist = nil, genre = nil)
     self.name = name
     self.artist = artist if artist
     self.genre = genre if genre
   end
+#==================class=======================
+  def self.new_from_filename(file)
+		data = file.split(" - ")
+    song_name = data[1]
+    artist = Artist.find_or_create_by_name(data[0])
+		genre = Genre.find_or_create_by_name(data[2].chomp('.mp3'))
+		#Instantiate
+		song = Song.new(song_name, artist, genre)
+	end
+	
+	def self.create_from_filename(file)
+		self.new_from_filename(file).save
+	end
 #=================instance=====================
   def artist=(artist)
     @artist = artist
@@ -26,3 +37,5 @@ class Song
   end
 #==============================================
 end
+
+

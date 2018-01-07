@@ -6,9 +6,7 @@ class Artist
   include Concerns::Persistable::Save
 #=================properties===================
   attr_accessor :name, :songs
-  # @@all = []
   def self.all; @@all end
-  # come back to this to try to abstract away
 #=================instance=====================
   def add_song(song)
     song.artist ||= self

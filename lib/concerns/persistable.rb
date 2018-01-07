@@ -1,5 +1,7 @@
 module Concerns::Persistable
+#==============================================
   module ClassMethods
+#==============================================
     def create(name)
       obj = self.new(name).tap {|o| o.save}
     end
@@ -7,14 +9,15 @@ module Concerns::Persistable
     def destroy_all
       self.all.clear
     end
-
+    # 
     def self.extended(base)
       base.class_variable_set(:@@all, [])
-      # base.class_variable_get(:@@all)
+      # base.class_variable_get(:@@all) ?find out why this didnt work?
     end
   end
-
+#==============================================
   module InstanceMethods
+#==============================================
     def initialize(name)
       self.songs = []
       self.name = name
@@ -26,4 +29,5 @@ module Concerns::Persistable
       self.class.all << self
     end
   end
+#==============================================
 end

@@ -1,6 +1,7 @@
 module Concerns::Findable
+#==============================================
   def find_by_name(name)
-    # self.all.find(&:name)
+    # self.all.find(&:name) ?find out why this didnt work?
     self.all.find {|o| name == o.name}
   end
 
@@ -8,4 +9,5 @@ module Concerns::Findable
     find = self.find_by_name(name)
     find == nil ? self.create(name) : find
   end
+#==============================================
 end
