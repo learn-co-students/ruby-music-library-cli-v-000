@@ -9,31 +9,14 @@ class Genre
   # @@all = []
   def self.all; @@all end
   # come back to this to try to abstract away
-#=================intialize====================
-  # def initialize(name)
-  #   self.songs = []
-  #   self.name = name
-  # end
-#==================class=======================
-  # def self.destroy_all
-  #   self.all.clear
-  # end
 #=================instance=====================
-  # def save
-  #   self.class.all << self
-  # end
-
   def add_song(song)
     song.genre ||= self
     songs << song unless songs.include?(song)
   end
-
+  
   def artists
     self.songs.map(&:artist).uniq
   end
-#=============custom constructor===============
-  # def self.create(name)
-  #   genre = self.new(name).tap {|o| o.save}
-  # end
 #==============================================
 end

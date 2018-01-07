@@ -10,10 +10,7 @@ module Concerns::Persistable
 
     def self.extended(base)
       base.class_variable_set(:@@all, [])
-      # for @@all reader refactoring tried both
       # base.class_variable_get(:@@all)
-      # and
-      # base.class_variable_set(:all, :@@all)
     end
   end
 
