@@ -20,7 +20,8 @@ class MusicLibraryController
       puts "What would you like to do?"
       input = gets.strip
   #================commands====================  
-  # SEE CONCERNS/CLI FOR METHODS
+  # SEE concerns/CLI.rb
+  #============================================
       case input
       when "list songs"
         self.list_songs
@@ -37,8 +38,8 @@ class MusicLibraryController
       else
         "Invalid Entry, Please Try Again"
       end
+#==============================================
     end
   end
-#==============================================
 end
 

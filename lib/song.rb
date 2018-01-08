@@ -2,12 +2,11 @@ class Song
 #==================modules=====================
   extend Concerns::Findable
   extend Concerns::Persistable::ClassMethods
-  include Concerns::Persistable::Save
+  include Concerns::Persistable::InstanceMethods
 #=================properties===================
   attr_accessor :name, :artist, :genre
-  def self.all; @@all end
 #=================intialize====================
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name, artist=nil, genre=nil)
     self.name = name
     self.artist = artist if artist
     self.genre = genre if genre
@@ -15,6 +14,7 @@ class Song
 #==================class=======================
   def self.new_from_filename(file)
 		data = file.split(" - ")
+		#Assign
     song_name = data[1]
     artist = Artist.find_or_create_by_name(data[0])
 		genre = Genre.find_or_create_by_name(data[2].chomp('.mp3'))
@@ -25,7 +25,7 @@ class Song
 	def self.create_from_filename(file)
 		self.new_from_filename(file).save
 	end
-#=================instance=====================
+#==================custom======================
   def artist=(artist)
     @artist = artist
     artist.add_song(self)

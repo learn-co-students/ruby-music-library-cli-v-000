@@ -9,11 +9,15 @@ module Concerns::Persistable
     def destroy_all
       self.all.clear
     end
-    # 
+
     def self.extended(base)
       base.class_variable_set(:@@all, [])
-      # base.class_variable_get(:@@all) ?find out why this didnt work?
     end
+    
+    def all
+      self.class_variable_get(:@@all)
+    end
+#==============================================    
   end
 #==============================================
   module InstanceMethods
@@ -22,12 +26,10 @@ module Concerns::Persistable
       self.songs = []
       self.name = name
     end
-  end
-
-  module Save
+    
     def save
       self.class.all << self
     end
-  end
 #==============================================
-end
+  end
+end 

@@ -1,18 +1,18 @@
 module Concerns::CLI
 #==================songs=======================  
   def list_songs
-  	ol = Song.all.sort{|a,b| a.name <=> b.name}
-  	ol.each_with_index{|o, i| puts "#{i+1}. #{o.artist.name} - #{o.name} - #{o.genre.name}"}
+  	list = Song.all.sort{|a,b| a.name <=> b.name}
+  	list.each_with_index{|s,i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
   end
 #=================artists======================  
   def list_artists
-  	ol = Artist.all.sort{|a,b| a.name <=> b.name}
-  	ol.each_with_index{|o, i| puts "#{i+1}. #{o.name}"}
+  	list = Artist.all.sort{|a,b| a.name <=> b.name}
+  	list.each_with_index{|o,i| puts "#{i+1}. #{o.name}"}
   end
 #=================genres=======================  
   def list_genres
-  	ol = Genre.all.sort{|a,b| a.name <=> b.name}
-  	ol.each_with_index{|o, i| puts "#{i+1}. #{o.name}"}
+  	list = Genre.all.sort{|a,b| a.name <=> b.name}
+  	list.each_with_index{|o,i| puts "#{i+1}. #{o.name}"}
   end
 #================by_artist=====================  
   def list_songs_by_artist
@@ -22,8 +22,8 @@ module Concerns::CLI
   	
   	if artist != nil then
   	#OrderList
-  	ol = artist.songs.sort{|a,b| a.name <=> b.name}
-  	ol.each_with_index{|o, i| puts "#{i+1}. #{o.name} - #{o.genre.name}"} end
+  	list = artist.songs.sort{|a,b| a.name <=> b.name}
+  	list.each_with_index{|o,i| puts "#{i+1}. #{o.name} - #{o.genre.name}"} end
   end
 #================by_genre======================  
   def list_songs_by_genre
@@ -33,8 +33,8 @@ module Concerns::CLI
   	
   	if genre != nil then
   	#OrderList
-  	ol = genre.songs.sort{|a,b| a.name <=> b.name}
-  	ol.each_with_index{|o, i| puts "#{i+1}. #{o.artist.name} - #{o.name}"} end
+  	list = genre.songs.sort{|a,b| a.name <=> b.name}
+  	list.each_with_index{|o,i| puts "#{i+1}. #{o.artist.name} - #{o.name}"} end
   end
 #==================PLAY======================== 
   def play_song
@@ -43,8 +43,8 @@ module Concerns::CLI
 
   	if input != 0 || input <= Song.all.count then
 	  #OrderList
-	  ol = Song.all.sort{|a,b| a.name <=> b.name}
-	  ol.each_with_index{|song, i| puts "Playing #{song.name} by #{song.artist.name}" unless input != i+1} end
+	  list = Song.all.sort{|a,b| a.name <=> b.name}
+	  list.each_with_index{|song, i| puts "Playing #{song.name} by #{song.artist.name}" unless input != i+1} end
   end
 #==============================================
 end

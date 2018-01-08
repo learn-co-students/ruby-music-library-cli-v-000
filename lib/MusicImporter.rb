@@ -4,18 +4,17 @@ class MusicImporter
 #=================intialize====================
   def initialize(path)
     self.path = path
-    @files = []
+    self.files = []
   end
 #=================instance=====================
   def files
   	files = Dir.glob(self.path+"/*.mp3")
   	files.each { |file| @files << file.split(self.path+"/")[1] }
   	@files
-  	# ?find out how to use .tap with this?
 	end
 	
 	def import
-  	self.files.each{|file|Song.create_from_filename(file)}
+  	self.files.each{|file| Song.create_from_filename(file)}
 	end
 #==============================================
 end
