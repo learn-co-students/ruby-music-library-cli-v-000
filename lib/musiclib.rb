@@ -21,7 +21,7 @@ module SongArtists
 end
 
 class Song
-  attr_accessor :name, :artist, :genre
+  attr_accessor :name, :genre
   include SongArtists::InstanceMethods
   extend SongArtists::ClassMethods
 
@@ -36,6 +36,20 @@ class Song
   def self.all
     @@all
   end
+
+  def artist=(artist)
+    @artist = artist
+    @artist.add_song(self)
+  end
+
+  def artist
+    if @artist!=nil
+      @artist
+    else
+      return nil
+    end
+  end
+
 end
 
 #artist class
@@ -67,7 +81,8 @@ end
 
 #Genre class
 class Genre
-  attr_accessor :name, :songs
+  attr_accessor :name
+  attr_reader :songs
   include SongArtists::InstanceMethods
   extend SongArtists::ClassMethods
 
@@ -80,5 +95,11 @@ class Genre
 
   def self.all
     @@all
+  end
+
+  def songs=(song)
+    if !@songs.include?(song)
+      @songs<<song
+    end
   end
 end
