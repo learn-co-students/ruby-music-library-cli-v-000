@@ -1,5 +1,3 @@
-#require 'pry'
-
 class MusicImporter
   attr_accessor :path
 
@@ -8,6 +6,6 @@ class MusicImporter
   end
 
   def files
-    Dir[self.path + "/*.mp3"]#.collect { |file| binding.pry file.scan(/w+ - \w+ - \w+.mp3/)[0] }
+    Dir[self.path + "/*.mp3"].collect { |file| file.split(/\//)[-1] }
   end
 end

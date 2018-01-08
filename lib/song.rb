@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
@@ -44,5 +46,14 @@ class Song
 
   def self.find_or_create_by_name(name)
     find_by_name(name) || self.create(name)
+  end
+
+  def self.create_from_filename(filename)
+    filename_split = filename.split(/ - /)
+#    binding.pry
+    artist = Artist.find_or_create_by_name(filename_split[0])
+    genre = Genre.find_or_create_by_name(filename_split[2].split(/\./)[0])
+    new_song = self.new(filename_split[1], artist, genre)
+    new_song
   end
 end
