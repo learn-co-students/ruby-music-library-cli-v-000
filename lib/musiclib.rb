@@ -27,10 +27,15 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist = self.artist, genre = self.genre)
+  def initialize(name, artist = nil, genre = nil)
+
     @name = name
-    @genre = genre
-    @artist = artist
+    if genre != nil
+      self.genre = genre
+    end
+    if artist != nil
+      self.artist = artist
+    end
   end
 
   def self.all
@@ -55,6 +60,7 @@ class Song
     if !@genre.songs.include?(self)
       @genre.songs<<self
     end
+
   end
 
   def genre
