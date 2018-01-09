@@ -7,7 +7,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    @@all = []
   end
 
   def self.all
@@ -39,6 +38,7 @@ class Artist
     if song.artist == nil
       song.artist = self
     end
+ end
 
     def genres
       unique = []
@@ -50,7 +50,6 @@ class Artist
       end
       unique
     end
-  end
 
   def songs
     @songs
