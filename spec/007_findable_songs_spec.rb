@@ -1,3 +1,5 @@
+require_relative "../models/song.rb"
+
 context "Song" do
   let!(:song) { Song.create("In the Aeroplane Over the Sea") }
 

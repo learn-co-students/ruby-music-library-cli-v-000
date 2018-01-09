@@ -1,4 +1,8 @@
 require "spec_helper"
+require_relative "../models/artist.rb"
+require_relative "../models/song.rb"
+require_relative "../models/genre.rb"
+require_relative "../models/music_library_controller.rb"
 
 describe "CLI Methods" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
