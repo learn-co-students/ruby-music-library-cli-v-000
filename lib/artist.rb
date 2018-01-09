@@ -37,4 +37,12 @@ class Artist
     end
   end
 
+  def genres
+    genres = []
+    self.songs.each do |song|
+      genres << song.genre unless genres.include?(song.genre)
+    end
+    genres
+  end
+
 end
