@@ -9,7 +9,6 @@ class MusicLibraryController
   end
 
   def call
-    begin
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -20,7 +19,23 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
       input = gets
-    end until input == "exit"
+      if input != "exit"
+        if input == "list songs"
+          list_songs
+        elsif input == "list artists"
+          list_artists
+        elsif input == "list genres"
+          list_genres
+        elsif input == "list artist"
+          list_songs_by_artist
+        elsif input == "list genre"
+          list_songs_by_genre
+        elsif input == "play song"
+          play_song
+        else
+          call
+      end
+    end
   end
 
   def list_songs
@@ -46,10 +61,31 @@ class MusicLibraryController
     input = gets
     Artist.all.each do |artist|
         if artist.name == input
-          artist.songs.collect{|song| song.name + song.genre.to_s}.sort{|a, b| a.name <=>b.name}.each_with_index.collect do |name, index|
-          puts "#{index + 1}. #{name} - #{genre}"
+          artist.songs.collect{|song| "#{song.name} - #{song.genre.name}"}.sort.each_with_index.collect do |song, index|
+          puts "#{index + 1}. #{song}"
+          end
         end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets
+    Genre.all.each do |genre|
+      if genre.name == input
+        genre.songs.sort{|a,b|a.name <=> b.name}.each_with_index.collect{|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
       end
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_choice = gets.to_i
+    if (song_choice > 0) && (song_choice <= Song.all.count)
+      list = Song.all.sort{|a, b| a.name <=> b.name}.collect do |song, index|
+        "#{song.name} by #{song.artist.name}"
+       end
+       puts "Playing #{list[(song_choice - 1)]}"
     end
   end
 
