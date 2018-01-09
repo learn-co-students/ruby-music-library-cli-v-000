@@ -18,7 +18,9 @@ class Artist
   end
 
   def self.create(name)
-    Artist.new(name).save
+    new_artist = Artist.new(name)
+    new_artist.save
+    new_artist
   end
 
   def self.destroy_all

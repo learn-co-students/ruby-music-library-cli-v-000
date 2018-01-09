@@ -18,7 +18,9 @@ class Genre
   end
 
   def self.create(name)
-    Genre.new(name).save
+    new_genre = Genre.new(name)
+    new_genre.save
+    new_genre
   end
 
   def self.destroy_all
