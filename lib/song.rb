@@ -39,4 +39,17 @@ class Song
       @genre.songs << self
     end
   end
+
+  def self.find_by_name(name)
+    this = nil
+    @@all.each do |song|
+      this = song unless song.name != name
+    end
+    this
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
+  end
+
 end
