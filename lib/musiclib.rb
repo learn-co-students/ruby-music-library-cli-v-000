@@ -94,6 +94,11 @@ class Artist
       self.songs << song
     end
   end
+
+  def genres
+    genre_array = self.songs.collect {|song| song.genre}
+    genre_array.uniq
+  end
 end
 
 #Genre class
@@ -118,4 +123,9 @@ class Genre
   #     @songs<<song
   #   end
   # end
+
+  def artists
+    artists_array = self.songs.collect{|song|song.artist}
+    artists_array.uniq
+  end
 end
