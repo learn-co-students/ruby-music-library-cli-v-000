@@ -25,6 +25,10 @@ class Song
     new_song
   end
 
+  def artist=(artist)
+    self.artist = artist.add_song(self)
+  end
+
   def self.destroy_all
     self.all.clear
   end
