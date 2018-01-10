@@ -1,4 +1,4 @@
-#Song class
+#SongArtist module
 module SongArtists
   module InstanceMethods
     def save
@@ -20,6 +20,9 @@ module SongArtists
   end
 end
 
+#findable module
+
+#song class
 class Song
   attr_accessor :name
   include SongArtists::InstanceMethods
