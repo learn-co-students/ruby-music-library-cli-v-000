@@ -26,9 +26,12 @@ class Artist
   end
 
   def add_song(song)
-    !(self.songs.include?(song)) ? self.songs << song : self.songs
-    song.artist == nil ? song.artist = self : song.artist
-    binding.pry
+    song.artist = self unless song.artist
+    songs << song unless songs.include?(song)
+
+    # song.artist == nil ? song.artist = self : song.artist
+    # !(self.songs.include?(song)) ? self.songs << song : self.songs
+    # song.artist
   end
 
   def self.destroy_all
