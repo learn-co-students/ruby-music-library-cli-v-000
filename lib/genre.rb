@@ -1,5 +1,7 @@
 class Genre
 
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -38,6 +40,14 @@ class Genre
 
   def songs
     @songs
+  end
+
+  def artists
+    artists = []
+    self.songs.each do |song|
+      artists << song.artist unless artists.include?(song.artist)
+    end
+    artists
   end
 
 end

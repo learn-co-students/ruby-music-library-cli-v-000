@@ -1,6 +1,7 @@
 class Artist
 
-  attr_accessor :name
+  attr_accessor :name, :songs
+  extend Concerns::Findable
 
   @@all = []
 
@@ -14,7 +15,7 @@ class Artist
   end
 
   def self.destroy_all
-    self.all.clear
+    @@all.clear
   end
 
   def save
@@ -27,18 +28,22 @@ class Artist
     artist
   end
 
-  def songs
-    @songs
-  end
-
   def add_song(song)
-    if song.artist == nil
-      song.artist = self
-    end
+    # if song.artist == nil
+    #   song.artist = self
+    # end
+    song.artist = self unless song.artist == self
     if !(self.songs.detect {|s| s == song})
       self.songs << song
     end
+  end
 
+  def genres
+    genres = []
+    self.songs.each do |song|
+      genres << song.genre unless genres.include?(song.genre)
+    end
+    genres
   end
 
 end
