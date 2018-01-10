@@ -28,6 +28,7 @@ class Artist
   def add_song(song)
     !(self.songs.include?(song)) ? self.songs << song : self.songs
     song.artist == nil ? song.artist = self : song.artist
+    binding.pry
   end
 
   def self.destroy_all
