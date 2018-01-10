@@ -26,7 +26,7 @@ class Song
   end
 
   def artist=(artist)
-    self.artist = artist.add_song(self)
+
   end
 
   def self.destroy_all
