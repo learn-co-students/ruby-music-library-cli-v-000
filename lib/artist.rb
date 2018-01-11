@@ -34,6 +34,14 @@ class Artist
     # song.artist
   end
 
+  def genres
+    genres_array = []
+    self.songs.each do |song|
+      genres_array << song.genre
+    end
+    genres_array.uniq
+  end
+
   def self.destroy_all
     self.all.clear
   end

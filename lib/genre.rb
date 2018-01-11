@@ -25,6 +25,14 @@ class Genre
     new_genre
   end
 
+  def artists
+    artists_array = []
+    self.songs.each do |song|
+      artists_array << song.artist
+    end
+    artists_array.uniq
+  end
+
   def self.destroy_all
     self.all.clear
   end
