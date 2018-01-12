@@ -21,12 +21,29 @@ module SongArtists
 end
 
 #findable module
+module Concerns::Findable
+  def find_by_name(name)
+    self.all.detect{|a| a.name == name}
+  end
+
+  def find_or_create_by_name(name)
+    if self.find_by_name(name) == nil
+      new_a = self.create(name)
+    else
+      return self.find_by_name(name)
+    end
+  end
+
+end
+
+
 
 #song class
 class Song
   attr_accessor :name
   include SongArtists::InstanceMethods
   extend SongArtists::ClassMethods
+
 
   @@all = []
 
@@ -47,7 +64,9 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    @artist.add_song(self)
+    if Artist.all.include?(self)
+      @artist.add_song(self)
+    end
   end
 
   def artist
@@ -81,6 +100,15 @@ class Song
     end
   end
 
+  def self.new_from_filename(file_name)
+    string_array = file_name.delete(".mp3")
+    new_string = string_array.split(" - ")
+    new_song = Song.find_or_create_by_name(new_string[1])
+    new_song.artist = Artist.find_or_create_by_name(new_string[0])
+    new_song.genre = Genre.find_or_create_by_name(new_string[2])
+    binding.pry
+  end
+
 end
 
 #artist class
@@ -88,6 +116,7 @@ class Artist
   attr_accessor :name, :songs
   include SongArtists::InstanceMethods
   extend SongArtists::ClassMethods
+  extend Concerns::Findable
 
   def initialize(name)
     @name = name
@@ -120,6 +149,7 @@ class Genre
   attr_accessor :name, :songs
   include SongArtists::InstanceMethods
   extend SongArtists::ClassMethods
+  extend Concerns::Findable
 
   @@all = []
 
@@ -142,4 +172,24 @@ class Genre
     artists_array = self.songs.collect{|song|song.artist}
     artists_array.uniq
   end
+end
+
+#MusicImporter class
+class MusicImporter
+  attr_accessor :path
+
+  def initialize(path)
+    @path = path
+  end
+
+  def files
+    file_name_array = Dir.entries(self.path)
+    file_name_array.collect do |file|
+      if !file.include?(".mp3")
+        file_name_array.delete(file)
+      end
+    end
+    file_name_array
+  end
+
 end
