@@ -2,10 +2,12 @@ require 'pry'
 
 class MusicLibraryController
   attr_accessor :path
+  # attr_reader :sorted_songs
 
   def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
+    # @all_songs = Song.all.sort_by(&:name)
   end
 
 
