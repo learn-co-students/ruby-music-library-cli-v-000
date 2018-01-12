@@ -4,7 +4,7 @@ class Song
 
     def initialize(name, artist = nil)
       @name = name
-      @artist = artist
+      self.artist = artist if artist
     end
 
     def self.all
@@ -25,17 +25,9 @@ class Song
       song
     end
 
-    # def self.new_by_filename(filename)
-    #   file_data = filename.split(" - ")
-    #   song = Song.new(file_data[1])
-    #   song.artist_name = file_data[0]
-    #   song
-    # end
-
-    def artist=(name)
-      # new_artist = Artist.new(name)
-      # self.artist = new_artist
-      # artist.add_song(self)
+    def artist=(artist)
+      @artist = artist
+      artist.add_song(self)
     end
 
 
