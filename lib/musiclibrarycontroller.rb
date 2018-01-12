@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
   attr_accessor :path
 
@@ -9,6 +11,7 @@ class MusicLibraryController
 
   # `each_with_index` and `sort`
   def list_songs
+    
   end
 
   def list_artists
