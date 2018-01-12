@@ -11,22 +11,55 @@ class MusicLibraryController
 
   # `each_with_index` and `sort`
   def list_songs
-    
+    Song.all.sort_by(&:name).each_with_index do |song, index|
+      puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 
   def list_artists
+    Artist.all.sort_by(&:name).each_with_index do |artist, index|
+      puts "#{index+1}. #{artist.name}"
+    end
   end
 
   def list_genres
+    Genre.all.sort_by(&:name).each_with_index do |genre, index|
+      puts "#{index+1}. #{genre.name}"
+    end
   end
 
   def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_input = gets.chomp
+    counter = 1
+    Song.all.sort_by(&:name).each do |song|
+      if song.artist.name == artist_input
+        puts "#{counter}. #{song.name} - #{song.genre.name}"
+        counter += 1
+      end
+    end
   end
 
   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_input = gets.chomp
+    counter = 1
+    Song.all.sort_by(&:name).each do |song|
+      if song.genre.name == genre_input
+        puts "#{counter}. #{song.artist.name} - #{song.name}"
+        counter += 1
+      end
+    end
   end
 
   def play_song
+    puts "Which song number would you like to play?"
+    num_input = gets.chomp.to_i
+    Song.all.sort_by(&:name).each_with_index do |song, index|
+      if (index+1) == num_input
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
+    end
   end
 
   def call
