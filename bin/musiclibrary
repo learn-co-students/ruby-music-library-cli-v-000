@@ -2,4 +2,6 @@
 
 require_relative '../config/environment'
 
+#run "bundle install" before using
+
 MusicLibraryController.new.call
