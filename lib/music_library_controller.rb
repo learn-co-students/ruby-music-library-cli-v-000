@@ -34,7 +34,7 @@ class MusicLibraryController
 
         input = gets.strip
         until input == "exit" do
-
+          call
         end
 
   end
