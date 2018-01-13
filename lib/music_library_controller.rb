@@ -1,6 +1,6 @@
 require 'pry'
 class MusicLibraryController
-  attr_accessor :path
+  attr_accessor :path, :song, :genre, :artist
 
   def initialize(path = './db/mp3s')
     @path = path
@@ -31,5 +31,25 @@ class MusicLibraryController
     end
   end
 
+  def list_songs
+    # Song.all.each.with_index(1) do |song, index|
+    #   puts "#{index}. #{song}"
+    # end
+  end
+
+  def list_artists
+  end
+
+  def list_genres
+  end
+
+  def list_songs_by_artist
+  end
+
+  def list_songs_by_genre
+  end
+
+  def play_song
+  end
 
 end

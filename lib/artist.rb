@@ -50,6 +50,4 @@ class Artist
       genres.uniq
     end
 
-
-
 end
