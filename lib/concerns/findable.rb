@@ -2,7 +2,7 @@ module Concerns
   module Findable
 
     def find_by_name(name)
-      # finds a song instance in @@all by the name property of the song
+      # finds an instance in @@all by the name property of the song
       self.all.detect { |song| song.name == name }
     end
 

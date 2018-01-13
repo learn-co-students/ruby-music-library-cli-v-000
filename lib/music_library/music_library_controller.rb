@@ -27,11 +27,74 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     user_input = gets.strip until user_input = exit
+    
   end
 
-
+  def klass_sort(klass)
+    klass.all.sort { |a, b| a.name <=> b.name }
+  end
 
   def list_songs
-      Song.all.sort { |a, b| a.name <=> b.name }.each_with_index { |song, index| binding.pry; puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" }
-  end 
+    # prints all songs in the music library in a numbered list (alphabetized by song name)
+    # Sorts through the Song class @@all array, sorts that array by name, iterates through the sorted array,
+    # and prints the index (starting at 1) and the songs name.
+      klass_sort(Song).each.with_index(1) { |song, index| puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}" }
+  end
+
+  def list_artists
+    # prints all artists in the music library in a numbered list (alphabetized by artist name)
+    # Sorts through the Artist class @@all array, sorts that array by name, iterates through the sorted array,
+    # and prints the index (starting at 1) and the artist's name.
+    klass_sort(Artist).each_with_index { |artist, index| puts "#{index + 1}. #{artist.name}"}
+  end
+
+  def list_genres
+    # prints all genres in the music library in a numbered list (alphabetized by genre name)
+    # Sorts through the Genre class @@all array, sorts that array by name, and iterates through the sorted array,
+    # and prints the index (starting at 1) and the genre name.
+    klass_sort(Genre).each_with_index { |genre, index| puts "#{index + 1}. #{genre.name}"}
+  end
+
+  def list_songs_by_artist
+    # prompts the user to enter an artist
+    # prints all songs by a particular artist in a numbered list (alphabetized by song name)
+    # does nothing if no matching artist is found
+    # iterates through the songs array of the artist, sorts it by song name, iterates throug the sorted list with each.with_index
+    # starting at index 1 and prints out the index, song name, and genre.
+    puts "Please enter the name of an artist:"
+    user_input = gets.strip
+    if artist = Artist.find_by_name(user_input)
+      artist.songs.sort { |a, b| a.name <=> b.name }.each.with_index(1) { |song, index| puts "#{index}. #{song.name} - #{song.genre.name}" }
+    end #if
+  end #list_songs_by_artist
+
+  def list_songs_by_genre
+    # prompts the user to enter a genre
+    # accepts user input
+    # prints all songs by a particular genre in a numbered list (alphabetized by song name)
+    # does nothing if no matching genre is found
+    # iterates through the songs array of the genre, sorts it by song name, iterates throug the sorted list with each.with_index
+    # starting at index 1 and prints out the index, artist, and song name.
+    puts "Please enter the name of a genre:"
+    user_input = gets.strip
+    if genre = Genre.find_by_name(user_input)
+      genre.songs.sort { |a, b| a.name <=> b.name }.each.with_index(1) { |song, index| puts "#{index}. #{song.artist.name} - #{song.name}" }
+    end
+  end
+
+  def play_song
+    # prompts the user to choose a song from the alphabetized list output by #list_songs
+    # accepts user input
+    # upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
+    # does not 'puts' anything out if a matching song is not found
+    # checks that the user entered a number between 1 and the total number of songs in the library
+    # if the the user input is between one and the total amount of songs, we return the stored array of songs, take the index
+    # with the user input - 1 (to get the song we want), and print out "Playing the song name by the artist"
+    puts "Which song number would you like to play?"
+    user_input = gets.strip
+    if user_input.to_i.between?(1, Song.all.size)
+      find_song = klass_sort(Song)[user_input.to_i - 1]
+      puts "Playing #{find_song.name} by #{find_song.artist.name}"
+    end #if
+  end #play_song
 end
