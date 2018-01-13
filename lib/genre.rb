@@ -34,5 +34,12 @@ class Genre
     song.genre = self if song.genre == nil
   end
 
+  def artists
+    artists = []
+      self.songs.each do |song|
+        artists << song.artist if !artists.include?(song.genre)
+      end
+      artists.uniq
+  end
 
 end
