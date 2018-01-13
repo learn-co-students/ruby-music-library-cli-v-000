@@ -17,6 +17,7 @@ class MusicLibraryController
   def call
     # asks the user for input
     # loops and asks for user input until they type in exit
+
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -26,11 +27,31 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    user_input = gets.strip until user_input = exit
-    
-  end
+
+    user_input = ""
+    until user_input == "exit"
+      user_input = gets.strip
+        if user_input == "list songs"
+          self.list_songs
+        elsif user_input == "list artists"
+          self.list_artists
+        elsif user_input == "list genres"
+          self.list_genres
+        elsif user_input == "list artist"
+          self.list_songs_by_artist
+        elsif user_input == "list genre"
+          self.list_songs_by_genre
+        elsif user_input == "play song"
+          self.play_song
+        end #if
+    end #until
+
+  end #call
 
   def klass_sort(klass)
+    # I use this method in list_songs, list_artists, and list_genres. I kept writing the below code in all of them and decided to break
+    # it out.
+    # I also use in play_song
     klass.all.sort { |a, b| a.name <=> b.name }
   end
 
@@ -45,14 +66,14 @@ class MusicLibraryController
     # prints all artists in the music library in a numbered list (alphabetized by artist name)
     # Sorts through the Artist class @@all array, sorts that array by name, iterates through the sorted array,
     # and prints the index (starting at 1) and the artist's name.
-    klass_sort(Artist).each_with_index { |artist, index| puts "#{index + 1}. #{artist.name}"}
+    klass_sort(Artist).each.with_index(1) { |artist, index| puts "#{index}. #{artist.name}"}
   end
 
   def list_genres
     # prints all genres in the music library in a numbered list (alphabetized by genre name)
     # Sorts through the Genre class @@all array, sorts that array by name, and iterates through the sorted array,
     # and prints the index (starting at 1) and the genre name.
-    klass_sort(Genre).each_with_index { |genre, index| puts "#{index + 1}. #{genre.name}"}
+    klass_sort(Genre).each.with_index(1) { |genre, index| puts "#{index}. #{genre.name}"}
   end
 
   def list_songs_by_artist

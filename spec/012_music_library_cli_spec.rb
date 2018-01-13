@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'pry'
 
 describe "CLI Commands" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
@@ -6,7 +7,7 @@ describe "CLI Commands" do
   describe "'list songs'" do
     it "triggers #list_songs" do
       allow(music_library_controller).to receive(:gets).and_return("list songs", "exit")
-
+      # binding.pry
       expect(music_library_controller).to receive(:list_songs)
 
       capture_puts { music_library_controller.call }
