@@ -27,7 +27,7 @@ class MusicLibraryController
   def selector
     input = gets.strip
     until input == "exit" do
-      selector
+      input = gets.strip
     end
   end
 
