@@ -1,6 +1,7 @@
 require 'pry'
 
 class Genre
+  extend Concerns::Findable
 
   attr_accessor :name, :songs
   @@all = []
@@ -26,6 +27,12 @@ class Genre
     genre = self.new(name)
     genre.save
     genre
+  end
+
+  def artists
+    @songs.map do |instance|
+        instance.artist
+    end.uniq
   end
 
 end
