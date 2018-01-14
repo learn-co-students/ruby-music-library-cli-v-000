@@ -36,7 +36,10 @@ class Artist
   end
 
   def genres
-
+  collection = @songs.map do |instance|
+      instance.genre
+    end
+    collection.uniq
   end
 
 end
