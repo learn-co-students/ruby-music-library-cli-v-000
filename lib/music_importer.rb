@@ -13,4 +13,7 @@ attr_accessor :path
     song_list.map {|song| song.split(/\b\//)[3]}
   end
 
+  def import
+    files.each {|file| Song.create_from_filename(file)}
+  end
 end
