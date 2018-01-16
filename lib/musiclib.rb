@@ -101,12 +101,16 @@ class Song
   end
 
   def self.new_from_filename(file_name)
-    string_array = file_name.delete(".mp3")
+    string_array = file_name.gsub(/.mp3/, '')
     new_string = string_array.split(" - ")
     new_song = Song.find_or_create_by_name(new_string[1])
     new_song.artist = Artist.find_or_create_by_name(new_string[0])
     new_song.genre = Genre.find_or_create_by_name(new_string[2])
-    binding.pry
+    new_song
+  end
+
+  def self.create_from_filename(file_name)
+    self.new_from_filename(file_name)
   end
 
 end
@@ -192,4 +196,9 @@ class MusicImporter
     file_name_array
   end
 
+  def import
+    self.files.collect do |file|
+      Song.create_from_filename(file)
+    end
+  end
 end
