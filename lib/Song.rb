@@ -1,17 +1,15 @@
 require 'pry'
 class Song
     extend Concerns::Findable 
+    extend Persistable::ClassMethods
+    include Persistable::InstanceMethods
     attr_accessor :name, :artist, :genre
-    @@all = []
+    
 
     def initialize(name, artist= nil, genre= nil)
-        @name = name 
+        self.name = name 
         self.artist = artist if artist != nil 
         self.genre = genre if genre != nil 
-    end
-
-    def save
-        @@all << self
     end
 
     def artist=(artist)
@@ -28,12 +26,6 @@ class Song
         @genre
     end
 
-    def self.create(name)
-        song = Song.new(name)
-        song.save
-        song
-    end
-
     def self.new_from_filename(filename)
         data = filename.split(/ - /)
         artist= Artist.find_or_create_by_name(data[0])
@@ -45,11 +37,4 @@ class Song
         new_from_filename(filename).save
     end
 
-    def self.all
-        @@all
-    end
-
-    def self.destroy_all
-        @@all.clear
-    end
 end 

@@ -28,9 +28,8 @@ class MusicLibraryController
         when "play song"
           play_song
         end
+      end
     end
-    end
-
 
     def how_to
         puts "To list all of your songs, enter 'list songs'." 
@@ -61,28 +60,24 @@ class MusicLibraryController
     end
 
     def list_songs_by_artist
-        puts ("Please enter the name of an artist:")
+        puts "Please enter the name of an artist:"
         input = gets.strip
-        Artist.all.each do |artist|
-            if artist.name == input
-                artist.songs.sort{|a, b| a.name <=> b.name}.each_with_index.collect do |song, index|
-                    puts "#{index + 1}. #{song.name} - #{song.genre.name}"
-                end
+        artist = Artist.find_by_name(input)
+            if artist != nil then
+                list = artist.songs.sort{|a, b| a.name <=> b.name}
+                list.each_with_index {|song, index| puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
             end
-        end
     end
 
     def list_songs_by_genre
         puts ("Please enter the name of a genre:")
         input = gets.strip
-        Genre.all.each do |genre|
-            if genre.name == input
-                genre.songs.sort{|a, b| a.name <=> b.name}.each_with_index.collect do |song, index|
-                    puts "#{index + 1}. #{song.artist.name} - #{song.name}"
-                end
+        genre = Genre.find_by_name(input)
+            if genre != nil then 
+                list = genre.songs.sort{|a, b| a.name <=> b.name}
+                list.each_with_index.collect {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
             end
-        end 
-   end
+    end
 
     def play_song
         puts ("Which song number would you like to play?")
