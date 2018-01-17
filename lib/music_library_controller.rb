@@ -33,11 +33,7 @@ class MusicLibraryController
           list_songs_by_genre
         when'play song'
           play_song
-        when 'exit'
-          return  
-        else 
-          return  
-         
+        
         end  
       end 
   end
