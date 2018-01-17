@@ -205,12 +205,12 @@ end
 
 #musiclibrarycontroller class
 class MusicLibraryController
-  attr_accessor :path
+  attr_accessor :path, :files
 
   def initialize(path = "./db/mp3s")
     @path = path
     new_a = MusicImporter.new(path)
-    new_a.import
+    @files = new_a.files
   end
 
   def call
@@ -228,6 +228,15 @@ class MusicLibraryController
     until input == "exit"
       input = gets.strip
     end
-
   end
+
+  def list_songs
+    self.files.collect!.with_index do |song,i|
+      puts "#{i+1}. #{song.gsub(".mp3","")}"
+    end
+  end
+
+  binding.pry
+
+
 end

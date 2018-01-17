@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-def list_songs
+
 
 
 MusicLibraryController.new.call
