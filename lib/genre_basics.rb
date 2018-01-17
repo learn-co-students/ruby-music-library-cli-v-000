@@ -1,35 +1,68 @@
-class Genre
-  extend Concerns::Findable
+require 'pry'
 
-  attr_accessor :name
-  attr_reader :songs
-#is initialized as an empty array
-  @@all = []
-#accepts a name for the new genre
-  def initialize(name)
-    @name = name
-#creates song property set to empty array (genre has many songs)
+
+class Genre
+
+   extend Concerns::Findable
+
+  @all = []
+
+
+  def initialize(g)
+    @name = g
     @songs = []
+    save
   end
-#returns the class variable @@all
+
+  def name
+    @name
+  end
+
+  def name=(g)
+    @name = g
+
+  end
+
+  def songs
+    @songs
+  end
+
   def self.all
     @@all
   end
-#resets the @@all class variable to an empty array
+
   def self.destroy_all
-    @@all.clear
+    @@all = []
   end
-#adds the Genre instance to the @@all class variable
+
   def save
     @@all << self
   end
-#initializes and saves the genre
-  def self.create(name)
-    Genre.new(name).tap { |g| g.save}
+
+  def self.create(g)
+    Genre.new(g)
   end
-#returns a collection of artists for all of the genre's songs (genre has many artists)
+
+def add_genre(song)
+    
+    if !@songs.include?(song)
+      @songs << song
+    end
+
+    if song.genre == nil
+      song.genre = self
+    end
+    
+  end
+
   def artists
-#collects artists through its songs instead of maintaining its own @artists instance variable (genre has many artists through songs)
-    songs.collect{|song| song.artist}.uniq
+    
+    a = @songs.collect do |song|
+      song.artist
+    end
+
+    a.uniq
   end
+
+
 end
