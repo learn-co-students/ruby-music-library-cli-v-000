@@ -1,37 +1,37 @@
 class Artist
-  extend Concerns::Findable
-  extend Concerns::Printable
-
   attr_accessor :name, :songs
+  extend Concerns::Findable
 
-  @@all = [] # holds all of the artists created
+  @@all = []
 
-  # INSTANCE METHODS
-  def initialize(name)
-    @name = name
+  def initialize(n)
+    @name = n
     @songs = []
   end
 
   def save
-   Artist.all << self
+    self.class.all << self
   end
 
-  def add_song(song)
-    self.songs.include?(song) ? return : self.songs << song
-    song.artist == nil ? song.artist = self : return
+  def songs
+    @songs
   end
 
   def genres
-    (@songs.collect do |song|
-      song.genre
-    end).uniq
+    genre_list = []
+    @songs.each do |s|
+      genre_list << s.genre if !(genre_list.include?(s.genre))
+    end
+    return genre_list
   end
 
-  # CLASS METHODS
-  def self.create(name)
-    new_artist = Artist.new(name)
-    new_artist.save
-    new_artist
+  def add_song(s)
+    if s.artist === :unknown
+      s.artist = self
+    end
+    if !(self.songs.include?(s))
+      self.songs << s
+    end
   end
 
   def self.all
@@ -39,6 +39,12 @@ class Artist
   end
 
   def self.destroy_all
-    Artist.all.clear
+    @@all = []
+  end
+
+  def self.create(n)
+    artist = Artist.new(n)
+    self.all << artist
+    artist
   end
 end

@@ -1,48 +1,40 @@
+require 'pry'
+
 class Song
+  attr_accessor :name
+  attr_reader :artist, :genre
+  extend Concerns::Findable
 
-  attr_accessor :name, :artist, :genre
+  @@all = []
 
-  @@all = [] # holds all of the songs created
+  def initialize(n, a = :unknown, g = :unknown)
+    @name = n
+    if a === :unknown
+      @artist = :unknown
+    else
+      self.artist=a
+    end
+    if g === :unknown
+      @genre = :unknown
+    else
+      self.genre=g
+    end
+  end
 
-  # INSTANCE METHODS
-  def initialize(song_name, song_artist = nil, song_genre = nil)
-    @name = song_name
-    song_artist != nil ? self.artist=(song_artist) : return
-    song_genre != nil ? self.genre=(song_genre) : return
+  def artist=(a)
+    @artist = a
+    a.add_song(self)
+  end
+
+  def genre=(g)
+    @genre = g
+    if !(g.songs.include?(self))
+      g.songs << self
+    end
   end
 
   def save
-   @@all << self
-  end
-
-  def artist=(song_artist)
-    @artist = song_artist
-    song_artist.add_song(self)
-  end
-
-  def genre=(song_genre)
-    @genre = song_genre
-    song_genre.add_song(self)
-  end
-
-  # CLASS METHODS
-  def self.create(name)
-    new_song = Song.new(name)
-    new_song.save
-    new_song
-  end
-
-  def self.new_from_filename(filename)
-    file_parts = filename.split(" - ")
-
-    new_artist = Artist.find_or_create_by_name(file_parts[0])
-    new_genre = Genre.find_or_create_by_name(file_parts[2].chomp(".mp3"))
-
-    new_song = Song.new(file_parts[1], new_artist, new_genre)
-  end
-
-  def self.create_from_filename(filename)
-    self.new_from_filename(filename).save
+    self.class.all << self
   end
 
   def self.all
@@ -50,18 +42,19 @@ class Song
   end
 
   def self.destroy_all
-    Song.all.clear
-    puts @@all
+    @@all = []
   end
 
-  def self.find_by_name(name)
-    self.all.detect do |song|
-      song.name == name
-    end
+  # ARTIST, NAME, GENRE.mp3
+  def self.new_from_filename(fn)
+    nfn = fn.split(" - ")
+    artist = Artist.find_or_create_by_name(nfn[0])
+    genre = Genre.find_or_create_by_name(nfn[2].chomp(".mp3"))
+    name = Song.new(nfn[1], artist, genre)
   end
 
-  def self.find_or_create_by_name(name)
-    result = Song.find_by_name(name)
-    result != nil ? result : Song.create(name)
+  def self.create_from_filename(fn)
+    song = self.new_from_filename(fn)
+    song.save
   end
 end
