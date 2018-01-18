@@ -34,20 +34,20 @@ describe "CLI Commands" do
   end
 
   describe "'list artist'" do
-    it "triggers #list_songs_by_artist" do
+    it "triggers #list_artist" do
       allow(music_library_controller).to receive(:gets).and_return("list artist", "exit")
 
-      expect(music_library_controller).to receive(:list_songs_by_artist)
+      expect(music_library_controller).to receive(:list_artist)
 
       capture_puts { music_library_controller.call }
     end
   end
 
   describe "'list genre'" do
-    it "triggers #list_songs_by_genre" do
+    it "triggers #list_genre" do
       allow(music_library_controller).to receive(:gets).and_return("list genre", "exit")
 
-      expect(music_library_controller).to receive(:list_songs_by_genre)
+      expect(music_library_controller).to receive(:list_genre)
 
       capture_puts { music_library_controller.call }
     end

@@ -66,13 +66,13 @@ describe "CLI Methods" do
     end
   end
 
-  describe "#list_songs_by_artist" do
+  describe "#list_artist" do
     it "prompts the user to enter an artist" do
       allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
 
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
 
-      music_library_controller.list_songs_by_artist
+      music_library_controller.list_artist
     end
 
     it "accepts user input" do
@@ -80,7 +80,7 @@ describe "CLI Methods" do
 
       expect(music_library_controller).to receive(:gets)
 
-      music_library_controller.list_songs_by_artist
+      music_library_controller.list_artist
     end
 
     it "prints all songs by a particular artist in a numbered list (alphabetized by song name)" do
@@ -93,7 +93,7 @@ describe "CLI Methods" do
       expect($stdout).to receive(:puts).with("2. It's Real - hip-hop")
       expect($stdout).to receive(:puts).with("3. Wonder Years - dream pop")
 
-      music_library_controller.list_songs_by_artist
+      music_library_controller.list_artist
     end
 
     it "does nothing if no matching artist is found" do
@@ -102,17 +102,17 @@ describe "CLI Methods" do
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
       expect($stdout).to_not receive(:puts)
 
-      music_library_controller.list_songs_by_artist
+      music_library_controller.list_artist
     end
   end
 
-  describe "#list_songs_by_genre" do
+  describe "#list_genre" do
     it "prompts the user to enter a genre" do
       allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
 
       expect($stdout).to receive(:puts).with("Please enter the name of a genre:")
 
-      music_library_controller.list_songs_by_genre
+      music_library_controller.list_genre
     end
 
     it "accepts user input" do
@@ -120,7 +120,7 @@ describe "CLI Methods" do
 
       expect(music_library_controller).to receive(:gets)
 
-      music_library_controller.list_songs_by_genre
+      music_library_controller.list_genre
     end
 
     it "prints all songs by a particular genre in a numbered list (alphabetized by song name)" do
@@ -130,7 +130,7 @@ describe "CLI Methods" do
       expect($stdout).to receive(:puts).with("1. Real Estate - It's Real")
       expect($stdout).to receive(:puts).with("2. Jurassic 5 - What's Golden")
 
-      music_library_controller.list_songs_by_genre
+      music_library_controller.list_genre
     end
 
     it "does nothing if no matching genre is found" do
@@ -139,7 +139,7 @@ describe "CLI Methods" do
       expect($stdout).to receive(:puts).with("Please enter the name of a genre:")
       expect($stdout).to_not receive(:puts)
 
-      music_library_controller.list_songs_by_genre
+      music_library_controller.list_genre
     end
   end
 
