@@ -40,11 +40,7 @@ class Song
     song
   end
 
-<<<<<<< HEAD
-def self.find_by_name(name)
-=======
   def self.find_by_name(name)
->>>>>>> f9e75b1aae5ffd93584ac984c4fd63537eff27c7
     all.detect {|song| song.name == name}   #use double equals!!
   end
 
@@ -52,15 +48,11 @@ def self.find_by_name(name)
     find_by_name(name) || create(name)
   end
 
-<<<<<<< HEAD
-  def self.new_from_filename(file_name) # not done, needs tweaking
-=======
+
   def self.new_from_filename(file_name) # I don't understand how this collaborates with #artist_name
->>>>>>> f9e75b1aae5ffd93584ac984c4fd63537eff27c7
     song = Song.new(file_name.split(" - ")[1])
     song.artist = file_name.split(" - ")[0]
     song
   end
 
 end
-
