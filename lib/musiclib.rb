@@ -194,6 +194,7 @@ class MusicImporter
       end
     end
     file_name_array
+
   end
 
   def import
@@ -205,12 +206,11 @@ end
 
 #musiclibrarycontroller class
 class MusicLibraryController
-  attr_accessor :path, :files
 
   def initialize(path = "./db/mp3s")
-    @path = path
     new_a = MusicImporter.new(path)
-    @files = new_a.files
+    new_a.import
+
   end
 
   def call
@@ -231,12 +231,14 @@ class MusicLibraryController
   end
 
   def list_songs
-    self.files.collect!.with_index do |song,i|
-      puts "#{i+1}. #{song.gsub(".mp3","")}"
+    Song.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
+      puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
+    binding.pry
   end
 
-  binding.pry
+
+
 
 
 end
