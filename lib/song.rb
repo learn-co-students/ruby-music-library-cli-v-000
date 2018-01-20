@@ -1,6 +1,7 @@
 require 'pry'
 
 class Song
+  extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -14,7 +15,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.add_song(self)
+    artist.add_song(self) #why is this causing an error and being considered "undefined"?
   end
 
   def genre=(genre)
@@ -40,19 +41,15 @@ class Song
     song
   end
 
-  def self.find_by_name(name)
-    all.detect {|song| song.name == name}   #use double equals!!
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || create(name)
-  end
-
-
-  def self.new_from_filename(file_name) # I don't understand how this collaborates with #artist_name
-    song = Song.new(file_name.split(" - ")[1])
-    song.artist = file_name.split(" - ")[0]
+  def self.new_from_filename(file_name)
+    song = find_or_create_by_name(file_name.split(" - ")[1]) 
+    song.artist = Artist.find_or_create_by_name(file_name.split(" - ")[0])
+    song.genre = Genre.find_or_create_by_name(file_name.split(" - ")[2].chomp(".mp3"))
     song
+  end
+
+  def self.create_from_filename(file_name)
+    all << new_from_filename(file_name)
   end
 
 end
