@@ -17,20 +17,32 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
 
     puts "What would you like to do?"
-    input = gets.chomp
+    input = nil
     until input == 'exit' do
-        input = gets.chomp
+        input = gets.strip
+        if input == 'list songs'
+          self.list_songs
+        elsif input == 'list artists'
+          self.list_artists
+        elsif input == 'list genres'
+          self.list_genres
+        elsif input == 'list genres'
+          self.list_genres
+        elsif input == 'list artist'
+          self.list_songs_by_artist
+        elsif input == 'list genre'
+          self.list_songs_by_genre
+        elsif input == 'play song'
+          play_song
+        #elsif input == 'exit'
+        end
     end
   end
 
   def list_songs
-    output = ""
     Song.all.sort_by{|song| song.name}.each.with_index do |song, i|
       puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      output += "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-
     end
-    output
   end
 
   def list_artists
@@ -75,13 +87,16 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    song_num = gets.chomp.to_i
+    song_num = gets.strip.to_i
+
 
     if song_num > 0 && song_num <= Song.all.count
-      song = self.list_songs.grep(/#{song_num}./)
-      name = song.split(' - ')[1]
-      artist = song.split(' - ')[0]
-      puts "Playing #{name} by #{artist}"
+      song_chosen = nil
+      self.list_songs.sort_by{|song| song.name}.each.with_index do |song, i|
+        song_chosen = song if i == song_num #.grep(/#{song_num}/)
+      end
+
+      puts "Playing #{song_chosen.name} by #{song_chosen.artist}"
     end
   end
 
