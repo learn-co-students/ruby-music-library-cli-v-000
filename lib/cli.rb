@@ -16,9 +16,10 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
 
-    puts "What would you like to do?"
+
     input = nil
     until input == 'exit' do
+      puts "What would you like to do?"
         input = gets.strip
         if input == 'list songs'
           self.list_songs
@@ -89,14 +90,16 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     song_num = gets.strip.to_i
 
-
     if song_num > 0 && song_num <= Song.all.count
       song_chosen = nil
-      self.list_songs.sort_by{|song| song.name}.each.with_index do |song, i|
-        song_chosen = song if i == song_num #.grep(/#{song_num}/)
+      # self.list_songs.sort_by{|song| song.name}.each.with_index do |song, i|
+      #   song_chosen = song if i == song_num
+      # end
+      Song.all.sort_by{|song| song.name}.each.with_index do |song, i|
+        song_chosen = song if i+1 == song_num
       end
 
-      puts "Playing #{song_chosen.name} by #{song_chosen.artist}"
+      puts "Playing #{song_chosen.name} by #{song_chosen.artist.name}"
     end
   end
 
