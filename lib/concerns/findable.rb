@@ -5,11 +5,7 @@ module Concerns::Findable
   end
 
   def find_or_create_by_name(name)
-    if self.find_by_name(name) == nil
-      new_a = self.create(name)
-    else
-      return self.find_by_name(name)
-    end
+    find_by_name(name) || create(name)
   end
 
 end
@@ -26,7 +22,7 @@ module SongArtists
     def create(name)
       new_instance = self.new(name)
       new_instance.save
-      self.all[0]
+      new_instance
     end
 
     def destroy_all

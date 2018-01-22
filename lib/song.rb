@@ -69,7 +69,6 @@ class Song
     new_song = Song.find_or_create_by_name(new_string[1])
     new_song.artist = Artist.find_or_create_by_name(new_string[0])
     new_song.genre = Genre.find_or_create_by_name(new_string[2])
-    new_song.save
     new_song
   end
 
