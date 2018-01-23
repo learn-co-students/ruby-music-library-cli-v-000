@@ -1,28 +1,28 @@
 require "spec_helper"
 
-describe "Concerns::Findable" do
-  it "defines a module named Concerns::Findable" do
-    expect(defined?(Concerns::Findable)).to be_truthy
-    expect(Concerns::Findable).to_not be_a(Class)
-    expect(Concerns::Findable).to be_a(Module)
+describe "Findable" do
+  it "defines a module named Findable" do
+    expect(defined?(Findable)).to be_truthy
+    expect(Findable).to_not be_a(Class)
+    expect(Findable).to be_a(Module)
   end
 end
 
 describe "Artist" do
-  it "extends the Concerns::Findable module" do
-    artist_extends_concerns_findable = Artist.singleton_class.ancestors.include?(Concerns::Findable)
-    expect(artist_extends_concerns_findable).to be(true)
+  it "extends the Findable module" do
+    artist_extends_findable = Artist.singleton_class.ancestors.include?(Findable)
+    expect(artist_extends_findable).to be(true)
   end
 end
 
 describe "Genre" do
-  it "extends the Concerns::Findable module" do
-    genre_extends_concerns_findable = Genre.singleton_class.ancestors.include?(Concerns::Findable)
-    expect(genre_extends_concerns_findable).to be(true)
+  it "extends the Findable module" do
+    genre_extends_findable = Genre.singleton_class.ancestors.include?(Findable)
+    expect(genre_extends_findable).to be(true)
   end
 end
 
-describe "Concerns::Findable" do
+describe "Findable" do
   let!(:artist) { Artist.create("Slowdive") }
   let!(:genre) { Genre.create("shoegaze") }
 

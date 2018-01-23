@@ -1,7 +1,10 @@
 require 'pry'
 
 class Artist
-  extend Concerns::Findable
+  extend Nameable::ClassMethods
+  extend Findable::ClassMethods
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
   attr_accessor :name, :songs
   @@all = []
 
@@ -11,20 +14,6 @@ class Artist
   end
   def self.all
     @@all
-  end
-  def save
-    @@all << self #self.class.save << self
-
-  end
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def self.create(name)
-    artist = Artist.new(name)
-    artist.save
-    artist
-
   end
 
   def add_song(song)

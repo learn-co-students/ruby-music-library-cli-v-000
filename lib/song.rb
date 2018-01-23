@@ -1,7 +1,10 @@
 require 'pry'
 
 class Song
-  extend Concerns::Findable
+  extend Nameable::ClassMethods
+  extend Findable::ClassMethods
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
   attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
@@ -15,18 +18,13 @@ class Song
   def self.all
     @@all
   end
-  def save
-    @@all << self
-  end
-  def self.destroy_all
-    self.all.clear
-  end
 
-  def self.create(name)
-    song = Song.new(name)
-    song.save
-    song # REVOIR!! basic test: last one.
-  end
+
+  # def self.create(name)
+  #   song = Song.new(name)
+  #   song.save
+  #   song # REVOIR!! basic test: last one.
+  # end
 
   def artist=(artist)
     @artist = artist
@@ -40,10 +38,7 @@ class Song
 
   def self.new_from_filename(filename)
     filename = filename.split(" - ")
-    #binding.pry
     song = Song.new(filename[1])
-    #binding.pry
-
     song.artist = Artist.find_or_create_by_name(filename[0])
     song.genre = Genre.find_or_create_by_name(filename[2].chomp(".mp3"))
     song
@@ -52,8 +47,5 @@ class Song
   def self.create_from_filename(filename)
     self.new_from_filename(filename).save
   end
-
-
-
 
 end
