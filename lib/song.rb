@@ -15,7 +15,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.add_song(self) #why is this causing an error and being considered "undefined"?
+    artist.add_song(self)
   end
 
   def genre=(genre)
@@ -42,14 +42,15 @@ class Song
   end
 
   def self.new_from_filename(file_name)
-    song = find_or_create_by_name(file_name.split(" - ")[1]) 
+    song = find_or_create_by_name(file_name.split(" - ")[1])
     song.artist = Artist.find_or_create_by_name(file_name.split(" - ")[0])
     song.genre = Genre.find_or_create_by_name(file_name.split(" - ")[2].chomp(".mp3"))
     song
   end
 
-  def self.create_from_filename(file_name)
-    all << new_from_filename(file_name)
+    def self.create_from_filename(file_name)
+      new_from_filename(file_name).save
+    # all << new_from_filename(file_name)
   end
 
 end

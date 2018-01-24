@@ -10,7 +10,7 @@ class MusicLibraryController
 
   def initialize (path = "./db/mp3s")
     object = MusicImporter.new(path)
-    object.import
+    songs = object.import
   end
 
   def call
@@ -33,10 +33,9 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.sort {|a,b| a.name <=> b.name}.each.with_index(1) do |s, i|
-      puts "#{i} - #{s.artist.name} - #{s.artist.song} - #{s.artist.genre}"
-    binding.pry
-  end
+    Song.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
+      puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+    end
   end
 
 end
