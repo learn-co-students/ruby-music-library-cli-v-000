@@ -9,8 +9,7 @@ class MusicLibraryController
   attr_reader :path
 
   def initialize (path = "./db/mp3s")
-    object = MusicImporter.new(path)
-    songs = object.import
+    MusicImporter.new(path).import
   end
 
   def call
@@ -28,6 +27,10 @@ class MusicLibraryController
       puts "What would you like to do?"
 
       user_input = gets.strip
+      case user_input
+      when "list songs"
+        list_songs
+      end
 
     end
   end
