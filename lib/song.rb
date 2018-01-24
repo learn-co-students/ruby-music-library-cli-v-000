@@ -1,6 +1,10 @@
+require_relative './concerns.rb'
+
 require 'pry'
 
 class Song
+
+  extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -51,20 +55,21 @@ class Song
     genre.add_song(self)
   end
 
-  def self.find_by_name(name)
-    song_by_name = all.select{|song| song.name == name}
-    song_by_name[0]
+  def self.new_from_filename(filename)
+    filename_array = filename.split(" - ")
+    new_song = find_or_create_by_name(filename_array[1])
+    new_artist = Artist.find_or_create_by_name(filename_array[0])
+    new_genre = Genre.find_or_create_by_name(filename_array[2].gsub(".mp3", ""))
+
+    new_song.artist = new_artist
+    new_song.genre = new_genre
+
+    new_song
   end
 
-  def self.find_or_create_by_name(name)
-    if all.collect{|song| song.name == name}
-      existing_song = find_by_name(name)
-      existing_song
-    else
-      new_song = Song.new(name)
-      new_song
-    end
-    #binding.pry
+  def self.create_from_filename(filename)
+    new_song = new_from_filename(filename)
+    new_song.save
   end
 
 end
