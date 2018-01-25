@@ -87,8 +87,10 @@ class MusicLibraryController
       binding.pry
     list_songs[user_input]
 
-    # check what song matches the input from list_songs method based on what number it is
-    # Puts playing [song] by [artist]
+    ### input will be a number from the alphabetized list
+    ### this number needs to be converted (-1)
+    ### alphabetize Songs list and check that the number is included within the array count
+    ### then iterate through to find the right one and output as puts
   end
 
 end
