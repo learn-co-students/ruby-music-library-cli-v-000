@@ -1,5 +1,7 @@
 class Genre
 
+  extend Concerns::Findable
+
   #accepts a name upon initialization and set that property
   #name property should be readable and writable by object
 
