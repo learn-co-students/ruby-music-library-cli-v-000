@@ -2,7 +2,8 @@ require'pry'
 
 class Artist
   extend Concerns::Findable
-  
+  include Concerns::Saveable
+
   attr_accessor :name, :song, :songs
 
   @@all = []
@@ -23,23 +24,10 @@ class Artist
   end
 
   def genres
-    genres = @songs.collect{|song|song.genre}
-    genres.uniq
+    @songs.collect{|song|song.genre}.uniq
   end
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.create(name)
-    Artist.new(name).tap{|artist| artist.save}
   end
 end

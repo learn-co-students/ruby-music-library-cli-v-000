@@ -1,5 +1,6 @@
 class Genre
   extend Concerns::Findable
+  include Concerns::Saveable
 
   attr_accessor :name, :song, :songs
 
@@ -15,23 +16,10 @@ class Genre
   end
 
   def artists
-    artists = @songs.collect{|song|song.artist}
-    artists.uniq
+    @songs.collect{|song|song.artist}.uniq
   end
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.create(name)
-    Genre.new(name).tap{|genre| genre.save}
   end
 end

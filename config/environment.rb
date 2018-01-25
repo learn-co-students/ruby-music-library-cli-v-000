@@ -14,6 +14,22 @@ module Concerns
         self.find_by_name(name)
       end
     end
+
+    def destroy_all
+      self.all.clear
+    end
+
+    def create(name)
+      #Artist.new(name).tap{|artist| artist.save}
+      self.new(name).save
+    end
+
+  end
+  module Saveable
+    def save
+      self.class.all << self
+      self
+    end
   end
 end
 
