@@ -30,6 +30,16 @@ class MusicLibraryController
       case user_input
       when "list songs"
         list_songs
+      when "list artists"
+        list_artists
+      when "list genres"
+        list_genres
+      when "list artist"
+        list_songs_by_artist
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
       end
 
     end
@@ -79,15 +89,25 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    user_input = gets.strip.to_i
-    # if Song.all.count includes the user_input number then...
-      a = Song.all[user_input -1].artist.name
-      s = Song.all[user_input -1].name
-      puts "Playing #{s} by #{a}"
-      binding.pry
-    list_songs[user_input]
+  #   user_input = gets.strip.to_i
+  #   i = user_input - 1
+  #   if (1..Song.all.count).include?(i) #how does 1.. work? Would count work instead of length?
+  #     #alphabetize
+  #     Song.all.sort{ |a, b| a.name <=> b.name }
+  #     binding.pry
+  #   end
+  #     a = Song.all[user_input -1].artist.name #this is not referring to the sorted Song array from above
+  #     s = Song.all[user_input -1].name
+  #     puts "Playing #{s} by #{a}"
 
-    ### input will be a number from the alphabetized list
+
+      user_input = gets.strip.to_i
+      i = user_input - 1
+      if (1..Song.all.length).include?(user_input) # 1..3 checks if something is between 1 and 3
+        song = Song.all.sort{ |a, b| a.name <=> b.name }[i]
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
+
     ### this number needs to be converted (-1)
     ### alphabetize Songs list and check that the number is included within the array count
     ### then iterate through to find the right one and output as puts
