@@ -34,12 +34,11 @@ describe "Song" do
   describe ".new_from_filename" do
     it "initializes a song based on the passed-in filename" do
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-
       expect(song.name).to eq("For Love I Come")
       expect(song.artist.name).to eq("Thundercat")
       expect(song.genre.name).to eq("dance")
     end
-
+#binding.pry
     it "invokes the appropriate Findable methods so as to avoid duplicating objects" do
       artist = Artist.create("Thundercat")
       genre = Genre.create("dance")
