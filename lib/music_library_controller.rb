@@ -21,37 +21,38 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+
+    acceptable_responses = ["list songs", "list artists", "list genres", "list artist", "list genre", "play song", "exit"]
+
+    input = gets.strip
+    while !acceptable_responses.include?(input)
       input = gets.strip
-    while input != "exit" do
-      if input == "list songs"
-        list_songs
-      elsif input == "list artists"
-        list_artists
-      elsif input == "list genres"
-        list_genres
-      elsif input == "list artist"
-        list_songs_by_artist
-      elsif input == "list genre"
-        list_songs_by_genre
-      elsif input == "play song"
-        play_song
-      else input = gets.strip
-      end
     end
+        if input == "list songs"
+           list_songs
+        elsif input == "list artists"
+           list_artists
+        elsif input == "list genres"
+           list_genres
+        elsif input == "list artist"
+           list_songs_by_artist
+        elsif input == "list genre"
+           list_songs_by_genre
+        elsif input == "play song"
+           play_song
+        elsif input == "exit"
+        end
   end
 
   def list_songs
     counter = 0
-    list_of_songs = []
     alphabetized = []
     alphabetized = Song.all.sort_by {|obj| obj.name}
 
     alphabetized.each do |song_instance|
       counter +=1
       puts "#{counter}. #{song_instance.artist.name} - #{song_instance.name} - #{song_instance.genre.name}"
-      list_of_songs << "#{counter}. #{song_instance.artist.name} - #{song_instance.name} - #{song_instance.genre.name}"
     end
-    list_of_songs
   end
 
   def list_artists
@@ -110,24 +111,17 @@ class MusicLibraryController
   end
 
   def play_song
+    alphabetized = []
     puts "Which song number would you like to play?"
 
     song_number = gets.strip
 
-  if song_number.to_i.between?(1, Song.all.count)
-
-#binding.pry
-#Produces an error because the #list_songs puts output preceeds the method return value
-    # artist_name = list_songs[song_number-1].split(" - ")[0]
-    # song_name = list_songs[song_number-1].split(" - ")[1]
-    # sentence = "Playing #{song_name} by #{artist_name}"
-#Produce the right values but is not coming through #list_songs and hang...
-      artist_name = Song.all[song_number.to_i-1].artist.name
-      song_name = Song.all[song_number.to_i-1].name
+   if song_number.to_i.between?(1, Song.all.count)
+      alphabetized = Song.all.sort_by {|obj| obj.name}
+      artist_name = alphabetized[song_number.to_i-1].artist.name
+      song_name = alphabetized[song_number.to_i-1].name
       sentence = "Playing #{song_name} by #{artist_name}"
-
+      puts sentence
     end
-     puts sentence
   end
-
 end
