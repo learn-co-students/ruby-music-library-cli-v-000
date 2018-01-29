@@ -1,4 +1,5 @@
-require "spec_helper"
+
+ require "spec_helper"
 
 describe "Associations — Song and Artist:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
@@ -94,9 +95,11 @@ describe "Associations — Song and Artist:" do
 
     describe "#initialize" do
       it "invokes #artist= instead of simply assigning to an @artist instance variable to ensure that associations are created upon initialization" do
+
         expect_any_instance_of(Song).to receive(:artist=).with(artist)
 
         Song.new("Two-Headed Boy", artist)
+
       end
     end
   end
