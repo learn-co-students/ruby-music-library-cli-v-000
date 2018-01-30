@@ -1,10 +1,3 @@
-#!/usr/bin/env ruby
-
-require_relative '../config/environment'
-
-MusicLibraryController.new.call
-
-
 class MusicLibraryController
 
 attr_accessor :path, :library, :input
