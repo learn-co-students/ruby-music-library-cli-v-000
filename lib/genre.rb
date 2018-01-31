@@ -17,6 +17,10 @@ class Genre
     @@all << self
   end
 
+  def songs
+    @songs
+  end
+
   def self.destroy_all
     @@all.clear
   end
@@ -28,16 +32,14 @@ class Genre
   end
 
   def artists
-    self.songs.collect do |song|
-      song.artist
-    end
+      @songs.collect {|x| x.artist}.uniq
+      #self.songs.collect {|x| x.artist}.uniq
   end
 
-
-
-
-
-
+  def add_songs(song)
+    @songs << song
+    song.genre = self
+  end
 
 
 end
