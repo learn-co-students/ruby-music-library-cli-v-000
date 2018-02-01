@@ -2,7 +2,9 @@ class Artist
   extend Concerns::Findable
   attr_accessor :name
   attr_reader :artist
+
   @@all = []
+
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -52,12 +54,5 @@ class Artist
     self.all.find {|x| x.name == name} || self.create(name)
     #or returns the first truthey value or the last falsey value. If the first doesnt exist(is falsey) it continues and executes the self.create
   end
-
-
-
-
-
-
-
 
 end
