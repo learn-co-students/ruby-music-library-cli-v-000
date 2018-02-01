@@ -1,4 +1,5 @@
 class Genre
+  extend Concerns::Findable
   attr_accessor :name
   @@all = []
 
@@ -41,5 +42,9 @@ class Genre
     song.genre = self
   end
 
+  def find_or_create_by_name(name)
+    self.all.find {|x| x.name == name} || self.create(name)
+    #or returns the first truthey value or the last falsey value. If the first doesnt exist(is falsey) it continues and executes the self.create
+  end
 
 end

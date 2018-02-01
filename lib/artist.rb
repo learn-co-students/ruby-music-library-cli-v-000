@@ -1,4 +1,5 @@
 class Artist
+  extend Concerns::Findable
   attr_accessor :name
   attr_reader :artist
   @@all = []
@@ -46,6 +47,13 @@ class Artist
     self.songs.collect {|x| x.genre}.uniq
     #@songs.collect {|x| x.genre}.uniq
   end
+
+  def find_or_create_by_name(name)
+    self.all.find {|x| x.name == name} || self.create(name)
+    #or returns the first truthey value or the last falsey value. If the first doesnt exist(is falsey) it continues and executes the self.create
+  end
+
+
 
 
 
