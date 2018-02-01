@@ -33,14 +33,71 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.each_with_index do |song, index|
-      song.sort{|x,y| x.name <=> y.name}
+    songs = Song.all.sort_by{|x| x.name}
+    songs.each_with_index do |song, index|
       value = index + 1
-      puts "#{value}. #{song}"
+      puts "#{value}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       value += 1
-      binding.pry
     end
   end
+
+  def list_artists
+    artists = Artist.all.sort_by{|x| x.name}
+    artists.each_with_index do |artist, index|
+      value = index + 1
+      puts "#{value}. #{artist.name}"
+      value += 1
+    end
+  end
+
+  def list_genres
+    genres = Genre.all.sort_by{|x| x.name}
+    genres.each_with_index do |gen, index|
+      value = index + 1
+      puts "#{value}. #{gen.name}"
+      value += 1
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.chomp
+    artist = Artist.find_by_name(input)
+    song_list = artist.songs.sort_by{|y| y.name} if artist
+    if artist
+      song_list.each_with_index do |song, index|
+          value = index + 1
+          puts "#{value}. #{song.name} - #{song.genre.name}"
+          index += 1
+        end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.chomp
+    genre = Genre.find_by_name(input)
+    genre_list = genre.songs.sort_by{|y| y.name} if genre
+    if genre
+      genre_list.each_with_index do |song, index|
+          value = index + 1
+          puts "#{value}. #{song.artist.name} - #{song.name}"
+          index += 1
+        end
+    end
+  end
+
+def play_song
+  puts "Which song number would you like to play?"
+  input = gets.chomp.to_i
+  max = Song.all.length
+  if ((input <= max ) && (input > 0))
+    songs = Song.all.sort_by{|x| x.name}
+    puts "Playing #{songs[input-1].name} by #{songs[input-1].artist.name}"
+  end
+end
+
+
 
 
 
