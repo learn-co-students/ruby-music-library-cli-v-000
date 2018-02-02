@@ -3,3 +3,6 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+music_library_controller = MusicLibraryController.new("./spec/fixtures/mp3s")
+music_library_controller.list_songs
