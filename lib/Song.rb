@@ -1,5 +1,5 @@
 class Song
-  attr_accessor  :name,:song, :artist
+  attr_accessor  :name
 
   @@all = []
 
@@ -26,19 +26,12 @@ def self.destroy_all
   @@all.clear
 end
 
-def artist=(artist)
-    @artist = artist
-  end
-
-def artist
-  Song.artist = self
-end
-
-
 
 
 
 end
+
+
 
 
 # rspec spec/004_songs_and_artists_spec.rb
