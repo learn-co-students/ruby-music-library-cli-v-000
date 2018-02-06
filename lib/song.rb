@@ -9,7 +9,7 @@ class Song
   def initialize(name,artist=nil)
     @name = name
     @artist = artist
-    self.artist = @artist unless @artist == nil
+    #self.artist = @artist unless @artist == nil
   end
   
   @@all = []
@@ -31,4 +31,10 @@ class Song
     song.save
     song
   end
+  
+  #def artist=(artist_instance)
+    #binding.pry
+   # @artist = artist_instance
+    #self.artist = @artist
+  #end
 end
