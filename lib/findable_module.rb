@@ -1,0 +1,2 @@
+module FindableModule
+end
