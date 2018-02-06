@@ -32,12 +32,6 @@ class Song
     song
   end
   
-  #def artist=(artist_instance)
-    #binding.pry
-   # @artist = artist_instance
-    #self.artist = @artist
-  #end
-  
   def artist=(artist)
     @artist = artist
     @artist.add_song(self)

@@ -30,5 +30,11 @@ class Genre
     genre.save
     genre
   end
+  
+  def artists
+    #binding.pry
+    all_artists = self.songs.collect{|song| song.artist }
+    all_artists.uniq
+  end
 
 end
