@@ -55,4 +55,18 @@ class MusicLibraryController
         puts "#{i + 1}. #{song.name} - #{song.genre.name}"
       }
   end
+  
+  def list_songs_by_genre
+    allchoices = nil
+    while allchoices == nil 
+      puts "Please enter the name of a genre:"
+      choice = gets.strip
+      allchoices = Genre.all.select{|genre| genre.name == choice}
+    end
+    sorted = allchoices.sort_by{|genre| genre.songs.name}
+    binding.pry
+    sorted.each_with_index{|genre,i| 
+        puts "#{i + 1}. #{song.artist.name} - #{song.name}"
+      }
+  end
 end
