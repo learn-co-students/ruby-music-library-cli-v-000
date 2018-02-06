@@ -71,14 +71,21 @@ class MusicLibraryController
   
   def play_song
     sorted = Song.all.sort_by{|song| song.name}
-    songchoice = nil
-    choice = nil
-    while songchoice == nil
-      puts "Which song number would you like to play?"
-      choice = gets.strip
+    puts "Which song number would you like to play?"
+    choice = gets.strip
+    if choice.to_i > 0 && choice.to_i <= sorted.length
       songchoice = sorted[choice.to_i - 1]
-      #if choice.to_i >= 1
+      puts "Playing #{songchoice.name} by #{songchoice.artist.name}"
     end
-     puts "Playing #{songchoice.name} by #{songchoice.artist.name}" unless songchoice == nil
+
+     #puts "Playing #{songchoice.name} by #{songchoice.artist.name}" unless songchoice == nil
+    
+    #songchoice = nil
+    #while songchoice == nil
+     # puts "Which song number would you like to play?"
+      #choice = gets.strip
+      #songchoice = sorted[choice.to_i - 1] #unless choice < 1
+    #end
+     #puts "Playing #{songchoice.name} by #{songchoice.artist.name}" unless songchoice == nil
   end
 end
