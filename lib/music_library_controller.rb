@@ -16,6 +16,19 @@ class MusicLibraryController
     puts "What would you like to do?"
     choice = gets.strip
     until choice == "exit"
+      if choice == "list songs"
+        self.list_songs
+      elsif choice == "list artists"
+        self.list_artists
+      elsif choice == "list genres"
+        self.list_genres
+      elsif choice == "list artist"
+        self.list_songs_by_artist
+      elsif choice == "list genre"
+        self.list_songs_by_genre
+      elsif choice == "play song"
+        self.play_song
+      end
       choice = gets.strip
     end
   end
