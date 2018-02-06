@@ -43,10 +43,13 @@ class MusicLibraryController
   end
   
   def list_songs_by_artist
-    puts "Please enter the name of an artist:"
-    choice = gets.strip
-    allchoices = Song.all.collect{|song| song.artist.name == choice}
-    binding.pry
+    allchoices = nil
+    while allchoices == nil 
+      puts "Please enter the name of an artist:"
+      choice = gets.strip
+      allchoices = Song.all.select{|song| song.artist.name == choice}
+    end
+    #binding.pry
     sorted = allchoices.sort_by{|song| song.name}
     sorted.each_with_index{|song,i| 
         puts "#{i + 1}. #{song.name} - #{song.genre.name}"
