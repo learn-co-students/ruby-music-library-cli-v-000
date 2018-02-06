@@ -63,8 +63,8 @@ class MusicLibraryController
       choice = gets.strip
       allchoices = Genre.all.select{|genre| genre.name == choice}
     end
-    sorted = allchoices.sort_by{|genre| genre.songs.name}
     binding.pry
+    sorted = allchoices.sort_by{|genre| genre.songs.name}
     sorted.each_with_index{|genre,i| 
         puts "#{i + 1}. #{song.artist.name} - #{song.name}"
       }
