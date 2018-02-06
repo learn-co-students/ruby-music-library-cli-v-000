@@ -4,10 +4,11 @@ class Genre
   extend MusicModule::ClassMethods
   include MusicModule::InstanceMethods
   
-   attr_accessor :destroy_all, :create, :name
+   attr_accessor :destroy_all, :create, :name, :songs
   
   def initialize(name)
     @name = name
+    @songs = []
   end
   
   @@all = []

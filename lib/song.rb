@@ -4,12 +4,12 @@ class Song
   extend MusicModule::ClassMethods
   include MusicModule::InstanceMethods
   
-  attr_accessor :destroy_all, :create, :name, :artist
+  attr_accessor :destroy_all, :create, :name, :artist, :genre
   
-  def initialize(name,artist=nil)
+  def initialize(name,artist=nil,genre=nil)
     @name = name
-    @artist = artist
-    #self.artist = @artist unless @artist == nil
+    self.artist = artist unless artist == nil
+    self.genre = genre unless genre == nil
   end
   
   @@all = []
@@ -37,4 +37,15 @@ class Song
    # @artist = artist_instance
     #self.artist = @artist
   #end
+  
+  def artist=(artist)
+    @artist = artist
+    @artist.add_song(self)
+  end
+  
+  def genre=(genre)
+    #binding.pry
+    @genre = genre
+    @genre.songs << self unless @genre.songs.include?(self)
+  end
 end
