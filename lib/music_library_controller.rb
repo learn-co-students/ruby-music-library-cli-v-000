@@ -19,4 +19,10 @@ class MusicLibraryController
       choice = gets.strip
     end
   end
+  
+  def list_songs
+    Song.all.each_with_index{|song,i| 
+      puts "#{i + 1}. #{song.name} - #{song.artist.name} - #{song.genre.name}"
+    }
+  end
 end
