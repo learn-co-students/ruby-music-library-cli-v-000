@@ -12,4 +12,8 @@ class MusicImporter
     @files.delete("..")
     @files
   end
+  
+  def import
+    files.each{|item| Song.create_from_filename(item)}
+  end
 end
