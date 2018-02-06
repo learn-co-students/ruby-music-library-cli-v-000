@@ -49,7 +49,6 @@ class MusicLibraryController
       choice = gets.strip
       allchoices = Song.all.select{|song| song.artist.name == choice}
     end
-    #binding.pry
     sorted = allchoices.sort_by{|song| song.name}
     sorted.each_with_index{|song,i| 
         puts "#{i + 1}. #{song.name} - #{song.genre.name}"
@@ -61,11 +60,11 @@ class MusicLibraryController
     while allchoices == nil 
       puts "Please enter the name of a genre:"
       choice = gets.strip
-      allchoices = Genre.all.select{|genre| genre.name == choice}
+      allchoices = Song.all.select{|song| song.genre.name == choice}
     end
-    binding.pry
-    sorted = allchoices.sort_by{|genre| genre.songs.name}
-    sorted.each_with_index{|genre,i| 
+    #binding.pry
+    sorted = allchoices.sort_by{|song| song.name}
+    sorted.each_with_index{|song,i| 
         puts "#{i + 1}. #{song.artist.name} - #{song.name}"
       }
   end
