@@ -1,5 +1,6 @@
-
 class Song
+  extend Concerns::Findable
+
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -34,20 +35,7 @@ class Song
   end
 
   def self.create(name)
-    song = new(name)
-    song.save
-    song
-
-    # Or, as a one-liner:
-    # new(name).tap{ |s| s.save }
-  end
-
-  def self.find_by_name(name)
-    all.detect{ |s| s.name == name }
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || create(name)
+    new(name).tap{ |s| s.save }
   end
 
   def self.new_from_filename(filename)
