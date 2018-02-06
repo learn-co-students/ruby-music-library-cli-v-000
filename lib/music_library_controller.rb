@@ -70,7 +70,13 @@ class MusicLibraryController
   end
   
   def play_song
-    puts "Which song number would you like to play?"
-    choice = gets.strip
+    sorted = Song.all.sort_by{|song| song.name}
+    songchoice = nil
+    while songchoice == nil
+      puts "Which song number would you like to play?"
+      choice = gets.strip
+      songchoice = sorted[choice.to_i - 1]
+    end
+    puts "Playing #{songchoice.name} by #{songchoice.artist.name}" unless songchoice == nil
   end
 end
