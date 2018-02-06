@@ -1,8 +1,7 @@
-require 'music_module.rb'
+require_relative './findable_module.rb'
 
 class Genre
-  extend MusicModule::ClassMethods
-  include MusicModule::InstanceMethods
+  extend Concerns::Findable
   
    attr_accessor :destroy_all, :create, :name, :songs
   

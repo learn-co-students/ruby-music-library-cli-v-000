@@ -1,8 +1,7 @@
-require 'music_module.rb'
+require_relative './findable_module.rb'
 
 class Song
-  extend MusicModule::ClassMethods
-  include MusicModule::InstanceMethods
+  extend Concerns::Findable
   
   attr_accessor :destroy_all, :create, :name, :artist, :genre
   
@@ -41,5 +40,18 @@ class Song
     #binding.pry
     @genre = genre
     @genre.songs << self unless @genre.songs.include?(self)
+  end
+  
+  def self.find_by_name(name)
+    #binding.pry
+    @@all.detect{|song| song.name == name}
+  end
+  
+  def self.find_or_create_by_name(name)
+    if self.find_by_name(name) == nil
+      self.create(name)
+    else
+      self.find_by_name(name)
+    end
   end
 end
