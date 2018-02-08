@@ -4,7 +4,7 @@ class MusicImporter
     @path = path
   end
   def files
-    Dir["#{path}/*"]
+    Dir["#{path}/*"].map {|x| x.gsub("#{path}/", "")}
     binding.pry
   end
 end
