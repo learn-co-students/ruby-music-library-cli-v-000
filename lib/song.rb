@@ -1,9 +1,21 @@
 class Song
-  attr_accessor :name, :artist
+  extend Concerns::Findable
+  attr_accessor :name
+  attr_reader :artist, :genre
+
   @@all = []
-  def initialize(name, artist = nil)
+  def initialize(name, art = nil, gen = nil)
     @name = name
-    @artist = artist
+    art == nil ? @artist = art : self.artist=(art)
+    gen == nil ? @genre = gen : self.genre=(gen)
+  end
+  def genre=(gen)
+    @genre = gen
+    gen.songs.tap {|g| g << self if !g.include?(self)}
+  end
+  def artist=(art)
+    @artist = art
+    @artist.add_song(self)
   end
   def self.all
     @@all
@@ -13,8 +25,5 @@ class Song
   end
   def save
     @@all << self
-  end
-  def self.create(name)
-    self.new(name).tap {|new_song| new_song.save}
   end
 end
