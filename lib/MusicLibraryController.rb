@@ -22,11 +22,10 @@ class MusicLibraryController
   end
   def list_songs
     a = Song.all.sort {|a, b| a.name <=> b.name}
-    a.uniw
+    a.uniq
     a_names = a.map {|x| x.name}
     a_artists = a.map {|x| x.artist.name}
     a_genres = a.map {|x| x.genre.name}
     a.each_with_index {|x, i| puts "#{i+1}. #{a_artists[i]} - #{a_names[i]} - #{a_genres[i]}"}
-
   end
 end
