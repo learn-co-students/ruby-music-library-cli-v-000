@@ -7,6 +7,7 @@ module Concerns
       self.find_by_name(f_name) == nil ? self.create(f_name) : self.find_by_name(f_name)
     end
     def create(name)
+      binding.pry
       self.new(name).tap {|new_song| new_song.save}
     end
   end
