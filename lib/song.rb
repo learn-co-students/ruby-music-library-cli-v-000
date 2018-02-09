@@ -43,5 +43,9 @@ class Song
   end
   def self.create_from_filename(f_name)
     new_from_filename(f_name).tap {|x| x.save}
+    self.all.map {|x| x if x.name == f_name}[0]
+  end
+  def self.find_or_create_by_name(f_name)
+    self.find_by_name(f_name) == nil ? Song.create(f_name) : self.find_by_name(f_name)
   end
 end
