@@ -1,6 +1,7 @@
 require 'pry'
 
 class Song
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -50,36 +51,18 @@ class Song
     end
   end
 
-  def self.find_by_name(name)
-    self.all.find {|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    if find_by_name(name) == nil
-      create(name)
-    else
-      find_by_name(name)
-    end
-  end
-
   def self.new_from_filename(file)
     song_name = file.split(" - ")[1]
     song_artist = file.split(" - ")[0]
     song_genre = file.split(" - ")[2].chomp(".mp3")
-    song = self.find_or_create_by_name(song_name)
-    song.artist = Artist.find_or_create_by_name(song_artist)
-    song.genre = Genre.find_or_create_by_name(song_genre)
-    #binding.pry
-
+    artist = Artist.find_or_create_by_name(song_artist)
+    genre = Genre.find_or_create_by_name(song_genre)
+    song = self.new(song_name, artist, genre)
   end
 
-  #def self.create_from_filename(file)
-  #  song_name = file.split(" - ")[1]
-  #  self.find_or_create_by_name(song_name)
-  #  song_artist = file.split(" - ")[0]
-  #  Artist.find_or_create_by_name(song_artist)
-  #  song_genre = file.split(" - ")[2].chomp(".mp3")
-  #  Genre.find_or_create_by_name(song_genre)
-  #end
+  def self.create_from_filename(file)
+    song = self.new_from_filename(file)
+    song.save
+  end
 
 end
