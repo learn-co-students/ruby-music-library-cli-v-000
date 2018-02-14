@@ -1,6 +1,7 @@
 # require_relative './song.rb'
 
 class Artist
+  extend Concerns::Findable
 
   @@all = []
 

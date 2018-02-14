@@ -1,5 +1,6 @@
 
 class Genre
+  extend Concerns::Findable
 
   @@all = []
 
@@ -14,7 +15,6 @@ class Genre
   def self.all
     @@all
   end
-
 
 
   def self.destroy_all
