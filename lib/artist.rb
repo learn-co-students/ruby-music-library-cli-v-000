@@ -1,3 +1,5 @@
+# require_relative './song.rb'
+
 class Artist
 
   @@all = []
@@ -28,10 +30,13 @@ class Artist
     artist
   end
 
-  def add_song
-    @songs << self.song
+  def add_song(song)
+    song.artist = self if song.artist == nil
+    @songs << song if !@songs.include? song
   end
 
-
+  def genres
+    self.songs.collect{|song| song.genre}.uniq
+  end
 
 end
