@@ -25,14 +25,47 @@ class MusicLibraryController
     end
 
     def list_songs
-      songs = Song.all.each {|song| song.name}
-      songs.sort {|a, b| a.name <=> b.name}
-
+      #binding.pry
+      Song.all.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
     end
 
+    def list_artists
+      #binding.pry
+      Artist.all.sort {|a, b| a.name <=> b.name}.each_with_index {|artist, index| puts "#{index + 1}. #{artist.name}"}
+    end
 
+    def list_genres
+      Genre.all.sort {|a, b| a.name <=> b.name}.each_with_index {|genre, index| puts "#{index + 1}. #{genre.name}"}
+    end
 
+    def list_songs_by_artist
+      puts "Please enter the name of an artist:"
+      input = gets.strip
+      #binding.pry
+      Artist.all.detect do |a|
+        if a.name == input
+          a.songs.sort {|a, b| a.name <=> b.name}.each_with_index {|s, index| puts "#{index + 1}. #{s.name} - #{s.genre.name}"}
+      end
+    end
   end
+
+   def list_songs_by_genre
+  #   #binding.pry
+     puts "Please enter the name of a genre:"
+     input = gets.strip
+     Genre.all.detect do |g|
+       if g.name == input
+         g.songs.sort {|a, b| a.name <=> b.name}.each_with_index {|s, index| puts "#{index +1}. #{s.artist.name} - #{s.name}"}
+       end
+     end
+   end
+
+
+
+
+
+
+end
 
 
 end
