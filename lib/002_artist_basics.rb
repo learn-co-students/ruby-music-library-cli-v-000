@@ -27,8 +27,9 @@ class Artist
     artist
   end
 
-  def add_song
-    
+  def add_song(song)
+    song.artist = self if song.artist == nil
+    songs << song unless songs.include?(song)
   end
 
 end
