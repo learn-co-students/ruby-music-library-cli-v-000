@@ -32,4 +32,12 @@ class Artist
     songs << song unless songs.include?(song)
   end
 
+  def genres
+    genres_all = []
+    @songs.each do |song|
+      genres_all << song.genre
+    end
+    genres_all.uniq
+  end
+
 end
