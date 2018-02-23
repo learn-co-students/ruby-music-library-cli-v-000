@@ -1,31 +1,20 @@
 class Artist
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
 
-  attr_accessor :name, :songs, :genres
+  attr_accessor :name, :songs
 
   @@all = []
 
-  def initialize(name)
-    @name = name
-    @songs = []
-  end
 
   def self.all
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def self.create(name)
-    artist = Artist.new(name)
-    artist.save
-    artist
-  end
-
-  def save
-    @@all << self
+  def initialize(name)
+   @name = name
+   @songs = []
   end
 
   def songs
@@ -33,12 +22,12 @@ class Artist
   end
 
   def add_song(song)
+    self.songs << song unless self.songs.include?(song)
     song.artist = self unless song.artist == self
-    @songs << song unless self.songs.detect{|song_object| song_object == song}
   end
 
   def genres
     self.songs.collect{|song| song.genre}.uniq
   end
 
-end
+end 

@@ -1,44 +1,33 @@
 class Genre
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
 
-  attr_accessor :name, :songs, :artists
+  attr_accessor :name, :songs
 
   @@all = []
 
-  def initialize(name)
-    @name = name
-    @songs = []
-  end
 
   def self.all
-    @@all
+   @@all
   end
 
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def self.create(name)
-    genre = Genre.new(name)
-    genre.save
-    genre
-  end
-
-  def save
-    @@all << self
-  end
-
-  def add_song(song)
-    song.genre = self unless song.genre == self
-    @songs << song unless self.songs.detect{|song_object| song_object == song}
+  def initialize(name)
+   @name = name
+   @songs = []
   end
 
   def songs
     @songs
   end
 
+  def add_song(song)
+    self.songs << song unless self.songs.include?(song)
+    song.genre = self unless song.genre == self
+  end
+
   def artists
     self.songs.collect{|song| song.artist}.uniq
   end
 
-end
+end 
