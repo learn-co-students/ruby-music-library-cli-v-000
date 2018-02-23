@@ -5,5 +5,6 @@ module Concerns::Findable
 
   def find_or_create_by_name(name)
     find_by_name(name) || create(name)
+    #binding.pry
   end
 end
