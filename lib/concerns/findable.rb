@@ -5,11 +5,10 @@ module Concerns::Findable
   end
   
   def find_or_create_by_name (name)
-    song = find_by_name(name)
-    if song == nil
-      song.create(name)
+    if find_by_name(name) == nil
+      create(name)
     else
-      song
+      find_by_name(name)
     end
   end
   
