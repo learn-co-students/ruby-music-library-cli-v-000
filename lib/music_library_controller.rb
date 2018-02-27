@@ -73,7 +73,7 @@ class MusicLibraryController
     song_num = gets.strip.to_i
     song = Song.all.sort {|a, b| a.name <=> b.name}[song_num]
     puts "Playing #{song.name} by #{song.artist.name}" if song#.name == Song.all[song_num]
-
+    binding.pry
 
   end
 end
