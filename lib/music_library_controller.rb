@@ -1,9 +1,11 @@
+require 'pry'
+
 class MusicLibraryController
   attr_accessor :path, :files
   
   def initialize(path ='./db/mp3s')
     @path = path
-    MusicImporter.new(path).import
+    @files = MusicImporter.new(path).import
   end
   
   def call
@@ -24,10 +26,62 @@ class MusicLibraryController
     
     while input != "exit"
       input = gets.strip
-    
     end
   end
   
+  def list_songs
+    list = []
+    Song.all.each {|file| list << file}
+    uni = list.uniq { |file| file.name }
+    list = uni.sort_by {|file| file.name }
+    list.each_with_index do |file, index| 
+      puts "#{index + 1}. #{file.artist.name} - #{file.name} - #{file.genre.name}"
+    end
+  end
   
+  def list_artists
+    list = []
+    Artist.all.collect {|file| list << file.name}
+    list.sort.each_with_index do |file, index| 
+      puts "#{index + 1}. #{file}"
+    end
+  end
   
+  def list_genres
+    list = []
+    Genre.all.collect {|file| list << file.name}
+    list.sort.each_with_index do |file, index| 
+      puts "#{index + 1}. #{file}"
+    end
+  end
+  
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    
+    list = []
+    Artist.all.each {|file| list << file}
+    list.each_with_index do |file, index|
+      if file.name == input
+        puts "#{index + 1}. #{file.name} - #{file.genre}"
+      end
+    end
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    gen = {}
+    Genre.all.each do |file|
+      if file.name == input
+        
+  end
+  
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip
+    
+    
+  end
+    
 end

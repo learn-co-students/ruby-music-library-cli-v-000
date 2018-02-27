@@ -50,6 +50,9 @@ class Song
     artist = Artist.find_or_create_by_name(a)
     genre = Genre.find_or_create_by_name(g)
     song = self.new(n, artist, genre)
+    song.save
+    song
+
   end
   
   def self.create_from_filename(file)
