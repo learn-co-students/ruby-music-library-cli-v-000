@@ -26,12 +26,40 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     user_input = gets.strip
+
+    case user_input
+
+    when 'list songs'
+      list_songs
+
+    when 'list artists'
+      list_artists
+
+    when 'list genres'
+      list_genres
+
+    when 'list artist'
+      list_songs_by_artist
+
+    when 'list genre'
+      list_songs_by_genre
+
+    when 'play song'
+        play_song
+
   end
   end
+  end
+#CLI Commands------
+
+
+#---------
 
   def list_songs
      sorted_songs = Song.all.sort {|a, b| a.name <=> b.name}
      sorted_songs.each.with_index(1) {|song, num| puts "#{num}. #{song.artist.name.gsub("./spec/fixtures/other_mp3s/", "")} - #{song.name} - #{song.genre.name}"}
+
+
   end
 
 
@@ -71,9 +99,10 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     song_num = gets.strip.to_i
-    song = Song.all.sort {|a, b| a.name <=> b.name}[song_num]
-    puts "Playing #{song.name} by #{song.artist.name}" if song#.name == Song.all[song_num]
-    binding.pry
+    if (1...Song.all.length).include?(song_num)
 
+      song = Song.all.sort {|a, b| a.name <=> b.name}[song_num - 1]
+      puts "Playing #{song.name} by #{song.artist.name}" if song
+    end
   end
 end
