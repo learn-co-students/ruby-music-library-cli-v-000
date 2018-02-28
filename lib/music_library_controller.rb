@@ -59,11 +59,17 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     input = gets.strip
     
-    list = []
-    Artist.all.each {|file| list << file}
-    list.each_with_index do |file, index|
-      if file.name == input
-        puts "#{index + 1}. #{file.name} - #{file.genre}"
+    chosen = Artist
+    alpha = []
+    
+    Artist.all.each do |file|
+      if input == file.name
+        chosen = file   #type: Artist
+        alpha = chosen.songs.sort_by {|file| file.name } #type array
+        
+        alpha.each_with_index do |file, index| 
+          puts "#{index + 1}. #{file.name} - #{file.genre.name}"
+        end
       end
     end
   end
@@ -71,10 +77,21 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     input = gets.strip
-    gen = {}
+ 
+    chosen = Genre
+    alpha = []
+    
     Genre.all.each do |file|
-      if file.name == input
+      if input == file.name
+        chosen = file   #type: Genre
+        alpha = chosen.songs.sort_by {|file| file.name } #type array
         
+        alpha.each_with_index do |file, index| 
+          puts "#{index + 1}. #{file.artist.name} - #{file.name}"
+        end
+      end
+    end  
+ 
   end
   
   def play_song
