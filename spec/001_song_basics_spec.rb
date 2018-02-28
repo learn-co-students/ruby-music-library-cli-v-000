@@ -31,7 +31,7 @@ describe "Song" do
 
   describe "@@all" do
     it "is initialized as an empty array" do
-      binding.pry
+      # binding.pry
       all = Song.class_variable_get(:@@all)
 
       expect(all).to match_array([])
