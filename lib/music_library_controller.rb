@@ -97,8 +97,17 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     input = gets.strip
+    list_songs
     
+    list = []
+    Song.all.each {|file| list << file}
+    uni = list.uniq { |file| file.name }
+    list = uni.sort_by {|file| file.name }
     
+    if input > 0 && input < list.length
+      song = list[input+1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
   end
     
 end
