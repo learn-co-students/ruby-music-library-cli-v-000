@@ -5,6 +5,7 @@ class Artist
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -24,5 +25,5 @@ class Artist
       song.save
       song
   end
-  
+
 end
