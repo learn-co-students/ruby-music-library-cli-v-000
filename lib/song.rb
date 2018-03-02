@@ -47,7 +47,7 @@ class Song
   def self.find_or_create_by_name(name)
     find_by_name(name) == nil ? create(name) : find_by_name(name)
   end
-
+  
   def self.new_from_filename(file_name)
     file = file_name.chomp(".mp3").split(" - ")
     song = Song.new(file[1])
@@ -60,5 +60,4 @@ class Song
   def self.create_from_filename(file_name)
     self.new_from_filename(file_name)
   end
-
 end
