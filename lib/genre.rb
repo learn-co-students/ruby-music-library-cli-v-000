@@ -2,12 +2,13 @@ require 'pry'
 
 class Genre
 
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.all
@@ -24,6 +25,11 @@ class Genre
 
   def self.create(name)
     new(name).tap{|a| a.save}
+  end
+
+  def add_song(song)
+    song.genre = self unless song.genre == self
+    @songs << song unless @songs.include?(song)
   end
 
 end
