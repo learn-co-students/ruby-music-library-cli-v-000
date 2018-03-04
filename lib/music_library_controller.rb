@@ -3,6 +3,7 @@ require 'pry'
 class MusicLibraryController
   extend Concerns::Findable
   include Concerns::Findable
+  attr_accessor :size
 
   def initialize(path = "./db/mp3s")
     music_importer = MusicImporter.new(path)
@@ -34,6 +35,7 @@ class MusicLibraryController
       puts "#{count}. #{song.artist.name} - #{song.name} - #{song.genre}"
       count += 1
     end
+    @size = song_list.size
   end
 
   def list_artists
@@ -72,9 +74,21 @@ class MusicLibraryController
     genre_instance = Genre.find_or_create_by_name(genre_selected)
     count = 1
     genres_song_list = genre_instance.songs.sort { |a, b|  a.name <=> b.name }
-    artists_song_list.each do |song|
-      puts "#{count}. #{song.name} - #{song.genre}"
+    genres_song_list.each do |genre|
+      puts "#{count}. #{genre.artist.name} - #{genre.name}"
       count += 1
+
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    song_no = gets.strip.to_i
+    song_list = Song.all.sort { |a, b|  a.name <=> b.name }
+    size = song_list.size
+    song_instance = song_list[song_no - 1]
+    if song_instance != nil && (song_no > 0 && song_no <= size)
+      puts "Playing #{song_instance.name} by #{song_instance.artist.name}"
     end
   end
 end

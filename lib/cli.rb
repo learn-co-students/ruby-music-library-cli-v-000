@@ -1,6 +1,6 @@
 # class CLI
 #
-#   def list_songs
+#   def call
 #
 #   end
 # end
