@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
 
   attr_accessor :name
@@ -21,7 +23,7 @@ class Song
   end
 
   def self.create(name)
-    @@all << self
+    new(name).tap{|a| a.save}
   end
 
 end
