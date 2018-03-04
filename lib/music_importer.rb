@@ -1,25 +1,22 @@
 class MusicImporter
   attr_accessor :path
 
+  # path = './db/mp3s'
   def initialize(path)
     @path = path
   end
 
   def files
-    files = []
-    Dir.new(self.path).each do |file|
-      if file.include?(".mp3")
-        files << file
-      end
+    @files = Dir.entries(@path)
+    @files.delete_if do |file|
+      file == "." || file == ".."
     end
-    files
   end
 
   def import
-    files.each do |song|
-      Song.create_from_filename(song)
+    files.each do |file|
+      Song.create_from_filename(file)
     end
   end
-
 
 end
