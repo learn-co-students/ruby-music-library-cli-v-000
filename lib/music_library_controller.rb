@@ -23,9 +23,28 @@ class MusicLibraryController
     user_input = gets.strip
     while user_input != "exit"
       puts "What would you like to do?"
-      user_input = gets.strip
+  #   if user_input == "list songs'
+  #     list_songs
+  #   elsif user_input == 'list artists'
+  #     list_artists
+  #   elsif user_input == 'list genres'
+  #     list_genres
+  #   elsif user_input == 'list artists'
+  #     list_artists
+  #   elsif user_input == 'list genres'
+  #     list_genres
+  #   elsif user_input == 'list artist'
+  #     list_songs_by_artist
+  #   elsif user_input == 'list genre'
+  #     list_songs_by_genre
+  #   elsif user_input == 'play song'
+  #     play_song
+  #   elsif user_input == 'exit'
+  #     return "exit"
+  #   else
+  #     puts "What would you like to do?"
+      end
     end
-    "exit"
   end
 
   def list_songs
@@ -77,7 +96,6 @@ class MusicLibraryController
     genres_song_list.each do |genre|
       puts "#{count}. #{genre.artist.name} - #{genre.name}"
       count += 1
-
     end
   end
 
