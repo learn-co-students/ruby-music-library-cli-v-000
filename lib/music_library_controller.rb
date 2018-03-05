@@ -21,30 +21,28 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     user_input = gets.strip
-    while user_input != "exit"
-      puts "What would you like to do?"
-  #   if user_input == "list songs'
-  #     list_songs
-  #   elsif user_input == 'list artists'
-  #     list_artists
-  #   elsif user_input == 'list genres'
-  #     list_genres
-  #   elsif user_input == 'list artists'
-  #     list_artists
-  #   elsif user_input == 'list genres'
-  #     list_genres
-  #   elsif user_input == 'list artist'
-  #     list_songs_by_artist
-  #   elsif user_input == 'list genre'
-  #     list_songs_by_genre
-  #   elsif user_input == 'play song'
-  #     play_song
-  #   elsif user_input == 'exit'
-  #     return "exit"
-  #   else
-  #     puts "What would you like to do?"
+    case user_input
+      when "exit"
+        "exit"
+      when "list songs'
+        list_songs
+      when 'list artists'
+        list_artists
+      when 'list genres'
+        list_genres
+      when 'list artists'
+        list_artists
+      when 'list genres'
+        list_genres
+      when 'list artist'
+        list_songs_by_artist
+      when 'list genre'
+        list_songs_by_genre
+      when 'play song'
+        play_song
+      else
+        puts "What would you like to do?"
       end
-    end
   end
 
   def list_songs
