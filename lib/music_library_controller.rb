@@ -1,5 +1,3 @@
-require 'pry'
-
 class MusicLibraryController
   extend Concerns::Findable
   include Concerns::Findable
@@ -21,15 +19,12 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     user_input = gets.strip
+
     case user_input
-      when "exit"
+      when 'exit'
         "exit"
-      when "list songs'
+      when 'list songs'
         list_songs
-      when 'list artists'
-        list_artists
-      when 'list genres'
-        list_genres
       when 'list artists'
         list_artists
       when 'list genres'
@@ -41,8 +36,8 @@ class MusicLibraryController
       when 'play song'
         play_song
       else
-        puts "What would you like to do?"
-      end
+        call
+    end
   end
 
   def list_songs
