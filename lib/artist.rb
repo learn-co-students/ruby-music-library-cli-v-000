@@ -1,13 +1,16 @@
+require 'pry'
+
+
 class Artist
     extend Concerns::Findable
 
     attr_accessor :name, :songs
-
     @@all = []
 
     def initialize(name)
         @name = name
         @songs = []
+        @@all = []
     end
 
     def self.all
@@ -31,6 +34,7 @@ class Artist
     def add_song(song)
           if song.artist == nil
             song.artist = self
+            #binding.pry
           end
           if !self.songs.include?(song)
               @songs << song
@@ -40,7 +44,4 @@ class Artist
     def genres
         self.songs.collect{|s| s.genre}.uniq
     end
-
-
-
 end
