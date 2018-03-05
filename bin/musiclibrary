@@ -3,8 +3,3 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
-<<<<<<< HEAD
-=======
-
-# MusicLibraryController.new(x = "./db/mp3s/")
->>>>>>> 1464bb3740d299b1c2439b31c818382a475e2e1c
