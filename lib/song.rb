@@ -28,12 +28,6 @@ class Song
         @@all << self
     end
 
-    def self.create(name)
-        song = self.new(name) # This might be a issue "self" or "Class"
-        song.save
-        song
-    end
-
     def artist=(artist)
          @artist = artist
          @artist.add_song(self)
@@ -52,6 +46,22 @@ class Song
 
     def genre
         @genre
+    end
+
+    def self.create(name)
+        song = self.new(name) # This might be a issue "self" or "Class"
+        song.save
+        song
+    end
+
+    def self.find_by_name(name_of_song)
+        self.all.find do |s|
+          s.name == name_of_song
+        end
+    end
+
+    def self.find_or_create_by_name(name)
+         self.find_by_name(name) || self.create(name)
     end
 
 end
