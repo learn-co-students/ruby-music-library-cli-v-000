@@ -1,4 +1,4 @@
-class Artist
+class Genre
     attr_accessor :name
     @@all = []
 
@@ -19,9 +19,9 @@ class Artist
     end
 
     def self.create(name)
-      artist = Artist.new(name)
-      artist.save
-      artist
+      genre = Genre.new(name)
+      genre.save
+      genre
     end
 
   end
