@@ -1,4 +1,5 @@
 require 'pry'
+require_relative './concerns.rb'
 
 
 class Genre

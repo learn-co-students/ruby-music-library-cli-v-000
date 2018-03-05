@@ -48,7 +48,6 @@ class Song
         @genre
     end
 
-<<<<<<< HEAD
     def self.create(name)
         song = self.new(name) # This might be a issue "self" or "Class"
         song.save
@@ -58,13 +57,6 @@ class Song
     def self.find_by_name(name_of_song)
         self.all.find do |s|
           s.name == name_of_song
-=======
-    def self.find_by_name(name_of_song)
-        all.collect do |s|
-          s.name = name_of_song
-          s
-          binding.pry
->>>>>>> 78f9a026b64b29823cb75a7b66591f1bea702c2f
         end
     end
 
