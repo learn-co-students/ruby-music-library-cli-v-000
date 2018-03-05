@@ -22,7 +22,7 @@ class Artist
     end
 
     def self.create(name)
-        artist = self.new(name) # Keep an eye on this one "self"
+        artist = self.new(name) # This might be a issue "self" or "Class"
         artist.save
         artist
     end
@@ -30,6 +30,7 @@ class Artist
     def add_song(song)
           if song.artist == nil
             song.artist = self
+            #binding.pry
           end
           if !self.songs.include?(song)
               @songs << song
