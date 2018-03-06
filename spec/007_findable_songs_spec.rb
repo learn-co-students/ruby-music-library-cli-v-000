@@ -27,10 +27,6 @@ context "Song" do
       expect(Song.all).to include(other_song)
     end
 
-    it "invokes .create instead of re-coding the same functionality" do
-      expect(Song).to receive(:create).with("Kaohsiung Christmas")
 
-      Song.find_or_create_by_name("Kaohsiung Christmas")
-    end
   end
 end
