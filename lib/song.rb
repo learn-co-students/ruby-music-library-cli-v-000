@@ -41,7 +41,6 @@ class Song
     def genre=(genre)
          @genre = genre
          @genre.add_song(self)
-         #binding.pry
     end
 
     def genre
@@ -49,7 +48,7 @@ class Song
     end
 
     def self.create(name)
-        song = self.new(name) # This might be a issue "self" or "Class"
+        song = self.new(name)
         song.save
         song
     end
@@ -63,5 +62,16 @@ class Song
     def self.find_or_create_by_name(name)
          self.find_by_name(name) || self.create(name)
     end
+
+    def self.new_from_filename(file_name)
+        file = file_name.split(" - ")
+            #binding.pry
+            song = self.new(file[1])
+            binding.pry
+            song.artist=(file[0])
+            song.genre=(file[2].gsub('.mp3', ''))
+            binding.pry
+            song
+        end
 
 end
