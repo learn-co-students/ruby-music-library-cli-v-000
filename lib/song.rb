@@ -30,7 +30,7 @@ class Song
 
     def artist=(artist)
          @artist = artist
-         binding.pry
+         #binding.pry
          @artist.add_song(self)
          #binding.pry
     end
@@ -69,8 +69,10 @@ class Song
             #binding.pry
             song = self.new(file[1])
             #binding.pry
-            song.artist=(file[0])
-            song.genre=(file[2].gsub('.mp3', ''))
+            artist = Artist.find_or_create_by_name(file[0])
+            genre = Genre.find_or_create_by_name(file[2].gsub('.mp3', ''))
+            song.artist=(artist)
+            song.genre=(genre)
             #binding.pry
             song
         end
