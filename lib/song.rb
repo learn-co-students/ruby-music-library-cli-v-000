@@ -9,6 +9,10 @@ class Song
     @artist = artist
   end
 
+  def artist
+    self.add_song(song)
+  end 
+
   def self.all
     @@all
   end
