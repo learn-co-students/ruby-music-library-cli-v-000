@@ -35,21 +35,77 @@ class MusicLibraryController
             count +=1
             #binding.pry
         end
+
     end
 
     def list_artists
-        sort_array = Song.all.collect.sort{|x,y| x.artist.name <=> y.artist.name}
-        final_array = sort_array.collect do |song|
-             song.artist.name
-        end.uniq
+        artist_array = Artist.all.collect do |artist|
+            artist.name
+        end
+        artist_sort = artist_array.sort.uniq
 
         count = 1
-        final_array.each do |artist|
+        artist_sort.each do |artist|
             puts "#{count}. #{artist}"
-             count += 1
-         end
+            count +=1
+        end
+    end
 
-        binding.pry
+    def list_genres
 
+        genre_array = Song.all.collect do |song|
+            song.genre.name
+        end
+        genre_sort = genre_array.sort.uniq
+
+        count = 1
+        #binding.pry
+        genre_sort.each do |genre|
+            puts "#{count}. #{genre}"
+            count +=1
+        end
+    end
+
+
+    def list_songs_by_artist
+        puts "Please enter the name of an artist:"
+        input = gets
+        art = Artist.find_by_name(input)
+        if art != nil
+            count = 1
+            array_songs = art.songs.collect do |s|
+                 "#{s.name} - #{s.genre.name}"
+            end
+            final = array_songs.sort
+            final.each do |song|
+                 puts "#{count}. #{song}"
+                count += 1
+            end
+        end
+    end
+
+
+    def list_songs_by_genre
+        puts "Please enter the name of a genre:"
+        input = gets
+        genre = Genre.find_by_name(input)
+        if genre != nil
+            count = 1
+            array_songs = genre.songs.collect do |s|
+                 "#{s.artist.name} - #{s.name}"
+            end
+            #binding.pry
+            # final = array_songs.sort
+            array_songs.each do |song|
+                 puts "#{count}. #{song}"
+                count += 1
+            end
+        end
+    end
+
+    def play_song
+        puts "Which song number would you like to play?"
+        self.list_songs
+        input = gets
     end
 end

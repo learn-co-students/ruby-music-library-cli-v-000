@@ -1,8 +1,6 @@
 require 'pry'
 require_relative './concerns.rb'
 
-
-
 class Artist
     extend Concerns::Findable
 
@@ -12,7 +10,6 @@ class Artist
     def initialize(name)
         @name = name
         @songs = []
-        @@all = []
     end
 
     def self.all
