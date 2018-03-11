@@ -24,8 +24,18 @@ class MusicLibraryController
     end
 
     def list_songs
-        Song.all
-        binding.pry
+        arr = Song.all.sort_by{|song| song.name}
+        arr.each_with_index do |song, idx|
+          puts "#{idx + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+        end
+    end
+
+    def list_artists
+        arr = Artist.all.sort_by{|artist| artist.name}.uniq
+        # binding.pry
+        arr.uniq.each_with_index do |artist, idx|
+          puts "#{idx + 1}. #{artist.name}"# - #{arr[idx].name} - #{arr[idx].genre.name}"
+        end
     end
 
 
