@@ -1,0 +1,25 @@
+
+[1mFrom:[0m /home/verokim85/ruby-music-library-cli-v-000/lib/MusicLibraryController.rb @ line 25 MusicLibraryController#call:
+
+    [1;34m10[0m:   [32mdef[0m [1;34mcall[0m
+    [1;34m11[0m: 
+    [1;34m12[0m:     counter = [1;34m0[0m
+    [1;34m13[0m: 
+    [1;34m14[0m:     loop [32mdo[0m
+    [1;34m15[0m: 
+    [1;34m16[0m:     puts [31m[1;31m"[0m[31mWelcome to your music library![1;31m"[0m[31m[0m
+    [1;34m17[0m:     puts [31m[1;31m"[0m[31mTo list all of your songs, enter 'list songs'.[1;31m"[0m[31m[0m
+    [1;34m18[0m:     puts [31m[1;31m"[0m[31mTo list all of the artists in your library, enter 'list artists'.[1;31m"[0m[31m[0m
+    [1;34m19[0m:     puts [31m[1;31m"[0m[31mTo list all of the genres in your library, enter 'list genres'.[1;31m"[0m[31m[0m
+    [1;34m20[0m:     puts [31m[1;31m"[0m[31mTo list all of the songs by a particular artist, enter 'list artist'.[1;31m"[0m[31m[0m
+    [1;34m21[0m:     puts [31m[1;31m"[0m[31mTo list all of the songs of a particular genre, enter 'list genre'.[1;31m"[0m[31m[0m
+    [1;34m22[0m:     puts [31m[1;31m"[0m[31mTo play a song, enter 'play song'.[1;31m"[0m[31m[0m
+    [1;34m23[0m:     puts [31m[1;31m"[0m[31mTo quit, type 'exit'.[1;31m"[0m[31m[0m
+    [1;34m24[0m:     puts [31m[1;31m"[0m[31mWhat would you like to do?[1;31m"[0m[31m[0m
+ => [1;34m25[0m:     binding.pry
+    [1;34m26[0m:       input = gets.strip!
+    [1;34m27[0m:         [32mbreak[0m [32mif[0m input == [31m[1;31m'[0m[31mexit[1;31m'[0m[31m[0m
+    [1;34m28[0m:     counter += [1;34m1[0m
+    [1;34m29[0m:   [32mend[0m
+    [1;34m30[0m: [32mend[0m
+
