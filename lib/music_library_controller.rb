@@ -21,17 +21,37 @@ class MusicLibraryController
 
         puts  "What would you like to do?"
         input = gets
-        until input == 'exit'
-            puts  "What would you like to do?"
+         until input == "exit" || input == "list songs" || input == "list artists" || input == "list genres" || input == "list artist" || input == "list genre" || input == "play song"
+             puts  "What would you like to do?"
             input = gets
+         end
+
+         if input == "list songs"
+             self.list_songs
+
+         elsif input == "list artists"
+             self.list_artists
+
+         elsif input == "list genres"
+             self.list_genres
+
+         elsif input == "list artist"
+             self.list_songs_by_artist
+
+         elsif input == "list genre"
+             self.list_songs_by_genre
+
+        elsif input == "play song"
+            self.play_song
         end
+        #binding.pry
     end
 
     def list_songs
         song_sort_array = Song.all.collect.sort{|x,y| x.name <=> y.name}
         count = 1
         song_sort_array.each do |song|
-            puts "#{count}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+             puts "#{count}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
             count +=1
             #binding.pry
         end
@@ -105,7 +125,15 @@ class MusicLibraryController
 
     def play_song
         puts "Which song number would you like to play?"
-        self.list_songs
-        input = gets
-    end
+        input = gets.to_i
+        number = input
+           #binding.pry
+         if number >= 1 && number < Song.all.length
+             index_num = number -1
+            s_arr = Song.all.collect.sort{|x,y| x.name <=> y.name}
+
+                puts "Playing #{s_arr[index_num].name} by #{s_arr[index_num].artist.name}"
+
+            end
+        end
 end
