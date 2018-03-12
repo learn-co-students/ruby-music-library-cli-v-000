@@ -20,11 +20,7 @@ class Artist
       if @songs.include?(song) == false
         @songs << song
       end
-      # song.artist = self unless song.artist == self
-      # @songs << song unless @songs.include?(self)
     end
-
-
 
     def self.all
       @@all
@@ -42,6 +38,10 @@ class Artist
       artist = Artist.new(name)
       artist.save
       artist
+    end
+
+    def genres
+      self.songs.collect {|song| song.genre}.uniq
     end
 
   end

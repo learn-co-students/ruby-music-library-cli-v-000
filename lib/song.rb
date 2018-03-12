@@ -9,7 +9,9 @@ class Song
     if artist
       self.artist=(artist)
     end
-    @genre = genre
+    if genre
+      self.genre=(genre)
+    end
   end
 
   def artist=(artist)
@@ -27,8 +29,9 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    @songs
-    binding.pry
+    if genre.songs.include?(self) == false
+      genre.songs << self
+    end
   end
 
   def self.all
@@ -47,6 +50,14 @@ class Song
     song = Song.new(name)
     song.save
     song
+  end
+
+  def self.find_by_name(name)
+    @@all.detect {|song| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) ? self.find_by_name(name) : self.create(name) 
   end
 
 end
