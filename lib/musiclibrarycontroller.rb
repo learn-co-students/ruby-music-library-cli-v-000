@@ -8,6 +8,8 @@ class MusicLibraryController
   end
 
   def call
+    input = ""
+    while input != "exit"
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -17,10 +19,8 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
-      # input = ""
+
       input = gets.strip
-      unless input == "exit"
-        call
         if input == 'list songs'
           list_songs
         elsif input == 'list artists'
@@ -85,22 +85,26 @@ class MusicLibraryController
       end
     end
 
-    # def input_to_index(input)
-    #   input.to_i - 1
-    # end
-
     def play_song
       puts "Which song number would you like to play?"
       input = gets.strip
       index = input.to_i - 1
-      arr = Song.all.sort_by{|song| song.name}
 
-      if (1..arr.length).include?(index)
-        puts "Playing #{arr[index].name} by #{arr[index].artist.name}"
-      # else
-      #   puts nil
+      if (1..Song.all.length).include?(index)
+        song = Song.all.sort_by{|song| song.name}[index]
       end
-      # binding.pry
+      # arr = Song.all.sort_by{|song| song.name}
+      if song!=nil
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
+
+
+      #
+      # if (1..arr.length).include?(index)
+      #   puts "Playing #{arr[index].name} by #{arr[index].artist.name}"
+      # # else
+      # #   puts nil
+      # end
 
     end
 
