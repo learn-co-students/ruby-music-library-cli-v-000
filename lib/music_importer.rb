@@ -8,10 +8,8 @@ class MusicImporter
   end
 
   def files
+    Dir.glob("#{path}/*.mp3").collect {|file| file.gsub("#{path}/", "")}
     binding.pry
-    Dir.entries(path)
-    #   #it "loads all the MP3 files in the path directory" do
   end
-
 
 end
