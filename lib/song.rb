@@ -39,7 +39,7 @@ class Song
   end
 
   def self.destroy_all
-    @@all = []
+    @@all.clear
   end
 
   def save
@@ -59,5 +59,14 @@ class Song
   def self.find_or_create_by_name(name)
     self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
   end
+
+  def self.new_from_filename(filename)
+    song = self.new
+    (song.name = filename.split(" - ")[1], artist.name = filename.split(" - ")[0], genre.name = filename.split(" - ")[2])
+      # song.name = filename.split(" - ")[1]
+      # filename.split(" - ")[0] = Artist.new
+      # filename.split(" - ")[2] = Genre.new
+      # song
+    end
 
 end
