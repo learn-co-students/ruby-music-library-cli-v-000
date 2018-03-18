@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe "Associations — Song and Genre:" do
+puts describe "Associations — Song and Genre:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
   let(:genre) { Genre.new("indie rock") }
 
-  context "Genre" do
+puts   context "Genre" do
     describe "#initialize" do
       it "creates a 'songs' property set to an empty array (genre has many songs)" do
         expect(genre.instance_variable_defined?(:@songs)).to be(true)
@@ -12,7 +12,7 @@ describe "Associations — Song and Genre:" do
       end
     end
 
-    describe "#songs" do
+    puts describe "#songs" do
       it "returns the genre's 'songs' collection (genre has many songs)" do
         expect(genre.songs).to eq([])
 
@@ -23,7 +23,7 @@ describe "Associations — Song and Genre:" do
     end
   end
 
-  context "Song" do
+  puts context "Song" do
     describe "#initialize" do
       it "can be invoked with an optional third argument, a Genre object to be assigned to the song's 'genre' property (song belongs to genre)" do
         artist = Artist.new("Neutral Milk Hotel")

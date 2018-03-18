@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Associations — Song and Artist:" do
+puts describe "Associations — Song and Artist:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
   let(:artist) { Artist.new("Neutral Milk Hotel") }
 
@@ -12,7 +12,7 @@ describe "Associations — Song and Artist:" do
       end
     end
 
-    describe "#songs" do
+  puts   describe "#songs" do
       it "returns the artist's 'songs' collection (artist has many songs)" do
         expect(artist.songs).to eq([])
 
@@ -23,7 +23,7 @@ describe "Associations — Song and Artist:" do
     end
   end
 
-  context "Song" do
+  puts context "Song" do
     describe "#initialize" do
       it "can be invoked with an optional second argument, an Artist object to be assigned to the song's 'artist' property (song belongs to artist)" do
         song_with_artist = Song.new("Two-Headed Boy", artist)
@@ -33,7 +33,7 @@ describe "Associations — Song and Artist:" do
       end
     end
 
-    describe "#artist" do
+  puts   describe "#artist" do
       it "returns the artist of the song (song belongs to artist)" do
         song.instance_variable_set(:@artist, artist)
 
@@ -41,7 +41,7 @@ describe "Associations — Song and Artist:" do
       end
     end
 
-    describe "#artist=" do
+    puts describe "#artist=" do
       it "assigns an artist to the song (song belongs to artist)" do
         song.artist = artist
 
@@ -52,7 +52,7 @@ describe "Associations — Song and Artist:" do
     end
   end
 
-  context "Artist" do
+puts   context "Artist" do
     describe "#add_song" do
       it "assigns the current artist to the song's 'artist' property (song belongs to artist)" do
         artist.add_song(song)
@@ -83,7 +83,7 @@ describe "Associations — Song and Artist:" do
     end
   end
 
-  context "Song" do
+  puts context "Song" do
     describe "#artist=" do
       it "invokes Artist#add_song to add itself to the artist's collection of songs (artist has many songs)" do
         expect(artist).to receive(:add_song)
@@ -92,7 +92,7 @@ describe "Associations — Song and Artist:" do
       end
     end
 
-    describe "#initialize" do
+    puts describe "#initialize" do
       it "invokes #artist= instead of simply assigning to an @artist instance variable to ensure that associations are created upon initialization" do
         expect_any_instance_of(Song).to receive(:artist=).with(artist)
 

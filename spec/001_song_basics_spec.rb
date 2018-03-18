@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe "Song" do
+puts describe "Song" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
 
-  describe "#initialize" do
+  puts describe "#initialize" do
     it "accepts a name for the new song" do
       new_song = Song.new("Alison")
 
@@ -13,13 +13,13 @@ describe "Song" do
     end
   end
 
-  describe "#name" do
+  puts describe "#name" do
     it "retrieves the name of a song" do
       expect(song.name).to eq("In the Aeroplane Over the Sea")
     end
   end
 
-  describe "#name=" do
+  puts describe "#name=" do
     it "can set the name of a song" do
       song.name = "Jump Around"
 

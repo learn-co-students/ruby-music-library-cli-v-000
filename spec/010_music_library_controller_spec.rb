@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "MusicLibraryController" do
+puts describe "MusicLibraryController" do
   describe "#initialize" do
     it "accepts one argument, the path to the MP3 files to be imported" do
       expect{ MusicLibraryController.new("./spec/fixtures/mp3s") }.to_not raise_error
@@ -28,7 +28,7 @@ describe "MusicLibraryController" do
     end
   end
 
-  describe "#call" do
+  puts describe "#call" do
     let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
 
     it "welcomes the user" do
@@ -47,7 +47,7 @@ describe "MusicLibraryController" do
       music_library_controller.call
     end
 
-    it "asks the user for input" do
+    puts it "asks the user for input" do
       allow(music_library_controller).to receive(:gets).and_return("exit")
 
       expect(music_library_controller).to receive(:gets)
@@ -55,7 +55,7 @@ describe "MusicLibraryController" do
       capture_puts { music_library_controller.call }
     end
 
-    it "loops and asks for user input until they type in exit" do
+    puts it "loops and asks for user input until they type in exit" do
       allow(music_library_controller).to receive(:gets).and_return("a", "b", "c", "exit")
 
       expect(music_library_controller).to receive(:gets).exactly(4).times
