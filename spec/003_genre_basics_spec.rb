@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe "Genre" do
+puts describe "Genre" do
   let(:genre) { Genre.new("indie rock") }
 
-  describe "#initialize" do
+  puts describe "#initialize" do
     it "accepts a name for the new genre" do
       new_genre = Genre.new("shoegaze")
 
@@ -13,13 +13,13 @@ describe "Genre" do
     end
   end
 
-  describe "#name" do
+  puts describe "#name" do
     it "retrieves the name of a genre" do
       expect(genre.name).to eq("indie rock")
     end
   end
 
-  describe "#name=" do
+  puts describe "#name=" do
     it "can set the name of a genre" do
       genre.name = "classics"
 

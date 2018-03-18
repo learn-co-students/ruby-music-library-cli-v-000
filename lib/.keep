@@ -1,0 +1,5 @@
+class keep
+  def initialize
+    puts "This object was initialized!"
+  end
+end

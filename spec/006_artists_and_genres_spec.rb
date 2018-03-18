@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe "Associations — Artist and Genre:" do
+puts describe "Associations — Artist and Genre:" do
   let(:genre) { Genre.new("indie rock") }
   let(:other_genre) { Genre.new("electro pop") }
   let(:artist) { Artist.new("The Magnetic Fields") }
   let(:other_artist) { Artist.new("Neutral Milk Hotel") }
 
-  context "Artist" do
+  puts context "Artist" do
     describe "#genres" do
       it "returns a collection of genres for all of the artist's songs (artist has many genres through songs)" do
         Song.new("The Luckiest Guy on the Lower East Side", artist, genre)
@@ -33,7 +33,7 @@ describe "Associations — Artist and Genre:" do
     end
   end
 
-  context "Genre" do
+  puts context "Genre" do
     describe "#artists" do
       it "returns a collection of artists for all of the genre's songs (genre has many artists through songs)" do
         Song.new("The Luckiest Guy on the Lower East Side", artist, genre)
@@ -44,7 +44,7 @@ describe "Associations — Artist and Genre:" do
         expect(genre.artists.size).to be(2)
       end
 
-      it "does not return duplicate artists if the genre has more than one song by a particular artist (genre has many artists through songs)" do
+      puts it "does not return duplicate artists if the genre has more than one song by a particular artist (genre has many artists through songs)" do
         Song.new("In the Aeroplane Over the Sea", other_artist, genre)
         Song.new("Two-Headed Boy", other_artist, genre)
 

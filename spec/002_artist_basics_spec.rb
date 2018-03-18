@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe "Artist" do
+puts describe "Artist" do
   let(:artist) { Artist.new("Neutral Milk Hotel") }
 
-  describe "#initialize" do
+  puts describe "#initialize" do
     it "accepts a name for the new artist" do
       new_artist = Artist.new("Slowdive")
 
@@ -13,13 +13,13 @@ describe "Artist" do
     end
   end
 
-  describe "#name" do
+  puts describe "#name" do
     it "retrieves the name of an artist" do
       expect(artist.name).to eq("Neutral Milk Hotel")
     end
   end
 
-  describe "#name=" do
+puts   describe "#name=" do
     it "can set the name of an artist" do
       artist.name = "Jeff Mangum"
 
@@ -29,7 +29,7 @@ describe "Artist" do
     end
   end
 
-  describe "@@all" do
+  puts describe "@@all" do
     it "is initialized as an empty array" do
       all = Artist.class_variable_get(:@@all)
 

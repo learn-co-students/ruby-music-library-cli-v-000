@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "CLI Commands" do
+puts describe "CLI Commands" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
 
   describe "'list songs'" do
@@ -13,7 +13,7 @@ describe "CLI Commands" do
     end
   end
 
-  describe "'list artists'" do
+  puts describe "'list artists'" do
     it "triggers #list_artists" do
       allow(music_library_controller).to receive(:gets).and_return("list artists", "exit")
 
@@ -23,7 +23,7 @@ describe "CLI Commands" do
     end
   end
 
-  describe "'list genres'" do
+  puts describe "'list genres'" do
     it "triggers #list_genres" do
       allow(music_library_controller).to receive(:gets).and_return("list genres", "exit")
 
@@ -33,7 +33,7 @@ describe "CLI Commands" do
     end
   end
 
-  describe "'list artist'" do
+  puts describe "'list artist'" do
     it "triggers #list_songs_by_artist" do
       allow(music_library_controller).to receive(:gets).and_return("list artist", "exit")
 
@@ -43,7 +43,7 @@ describe "CLI Commands" do
     end
   end
 
-  describe "'list genre'" do
+  puts describe "'list genre'" do
     it "triggers #list_songs_by_genre" do
       allow(music_library_controller).to receive(:gets).and_return("list genre", "exit")
 
@@ -53,7 +53,7 @@ describe "CLI Commands" do
     end
   end
 
-  describe "'play song'" do
+  puts describe "'play song'" do
     it "triggers #play_song" do
       allow(music_library_controller).to receive(:gets).and_return("play song", "2", "exit")
 
