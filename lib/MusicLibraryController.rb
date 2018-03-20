@@ -35,4 +35,9 @@ class MusicLibraryController
       end
     end
   end
+
+  def list_songs
+    importer.import.songs
+  end
+
 end
