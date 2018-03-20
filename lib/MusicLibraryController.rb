@@ -37,7 +37,13 @@ class MusicLibraryController
   end
 
   def list_songs
-    importer.import.songs
+    Song.all.each do |song|
+      song_array = song.sort_by!(song.artist)
+      song_array.each_with_index |song, index|
+      string = "#{index} #{ song.artist.name } - #{ song.name } - #{ song.genre.name }"
+      puts string
+      end
+    end
   end
 
 end
