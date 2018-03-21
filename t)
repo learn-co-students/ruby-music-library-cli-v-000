@@ -1,0 +1,46 @@
+=> [32m#<RSpec::Mocks::AnyInstance::FluentInterfaceProxy:0x000000014eb898[0m
+ @targets[32m=[0m
+  [[32m#<RSpec::Mocks::AnyInstance::PositiveExpectationChain:0x000000014fd520[0m
+    @argument_list_matcher[32m=[0m
+     [32m#<RSpec::Mocks::ArgumentListMatcher:0x000000014eb6b8[0m
+      @expected_args[32m=[0m
+       [[32m#<Artist:0x000000010c9e68[0m @name[32m=[0m[31m[1;31m"[0m[31mNeutral Milk Hotel[1;31m"[0m[31m[0m, @songs[32m=[0m[][32m>[0m][32m>[0m,
+    @expectation_args[32m=[0m[[33m:artist=[0m],
+    @expectation_block[32m=[0m[1;36mnil[0m,
+    @expectation_fulfilled[32m=[0m[1;36mfalse[0m,
+    @messages[32m=[0m
+     [[[[33m:with[0m,
+        [32m#<Artist:0x000000010c9e68[0m @name[32m=[0m[31m[1;31m"[0m[31mNeutral Milk Hotel[1;31m"[0m[31m[0m, @songs[32m=[0m[][32m>[0m],
+       [1;36mnil[0m]],
+    @recorder[32m=[0m
+     [32m#<RSpec::Mocks::AnyInstance::Recorder:0x0000000102f598[0m
+      @backed_up_method_owner[32m=[0m{[33m:artist=[0m=>[1;34;4mSong[0m},
+      @expectation_set[32m=[0m[1;36mtrue[0m,
+      @klass[32m=[0m[1;34;4mSong[0m,
+      @message_chains[32m=[0m
+       [32m#<RSpec::Mocks::AnyInstance::MessageChains:0x0000000102f4a8[0m
+        @chains_by_method_name[32m=[0m
+         {[33m:artist=[0m=>
+           [[32m#<RSpec::Mocks::AnyInstance::PositiveExpectationChain:0x0000000102b650[0m
+             @argument_list_matcher[32m=[0m
+              [32m#<RSpec::Mocks::ArgumentListMatcher:0x0000000102b2b8[0m
+               @expected_args[32m=[0m
+                [[32m#<Artist:0x000000010c9e68[0m
+                  @name[32m=[0m[31m[1;31m"[0m[31mNeutral Milk Hotel[1;31m"[0m[31m[0m,
+                  @songs[32m=[0m[][32m>[0m][32m>[0m,
+             @expectation_args[32m=[0m[[33m:artist=[0m],
+             @expectation_block[32m=[0m[1;36mnil[0m,
+             @expectation_fulfilled[32m=[0m[1;36mfalse[0m,
+             @messages[32m=[0m
+              [[[[33m:with[0m,
+                 [32m#<Artist:0x000000010c9e68[0m
+                  @name[32m=[0m[31m[1;31m"[0m[31mNeutral Milk Hotel[1;31m"[0m[31m[0m,
+                  @songs[32m=[0m[][32m>[0m],
+                [1;36mnil[0m]],
+             @recorder[32m=[0m
+              [32m#<RSpec::Mocks::AnyInstance::Recorder:0x0000000102f598[0m ...[32m>[0m[32m>[0m,
+            [32m#<RSpec::Mocks::AnyInstance::PositiveExpectationChain:0x000000014fd520[0m
+             ...[32m>[0m]}[32m>[0m,
+      @observed_methods[32m=[0m[[33m:artist=[0m],
+      @played_methods[32m=[0m{},
+      @stubs[32m=[0m{}[32m>[0m[32m>[0m][32m>[0m
