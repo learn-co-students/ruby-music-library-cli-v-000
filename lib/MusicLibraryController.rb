@@ -37,13 +37,19 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.each do |song|
-      song_array = song.sort_by!(song.artist)
-      song_array.each_with_index |song, index|
-      string = "#{index} #{ song.artist.name } - #{ song.name } - #{ song.genre.name }"
-      puts string
-      end
+    song_array = Song.all.sort! {|x,y| x.name <=> y.name}
+    song_array.each.with_index do |song, index|
+      song_string = "#{index}. #{ song.artist.name } - #{ song.name } - #{ song.genre.name }"
+      puts song_string
     end
   end
+    # Song.all.each do |song|
+    #   binding.pry
+    #   song_array = song.sort_by!{}
+    #   song_array.each_with_index do |song, index|
+    #   string = "#{index}. #{ song.name } - #{ song.artist.name } - #{ song.genre.name }"
+    #   puts string
+    #   end
+
 
 end
