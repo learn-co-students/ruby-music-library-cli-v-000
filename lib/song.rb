@@ -20,6 +20,14 @@ class Song
     @genre.add_song(self) if genre
   end
 
+  def self.find_by_name(name)
+    self.all.detect{|song| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
+  end
+
   def self.all
     @@all
   end
@@ -36,3 +44,4 @@ class Song
     self.new(name)
   end
 end
+# binding.pry
