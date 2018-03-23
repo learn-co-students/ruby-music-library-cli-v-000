@@ -1,11 +1,13 @@
 class Song
+  extend Concerns::Findable
+  # extend Concerns::Allable::ClassMethods
+  # include Concerns::Allable::InstanceMethods
   attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
 
   def initialize(name, artist=nil, genre=nil)
     @name = name
-    # binding.pry if artist
     self.artist = artist if artist
     self.genre = genre
     self.save
@@ -23,14 +25,6 @@ class Song
     @genre.add_song(self) if genre
   end
 
-  def self.find_by_name(name)
-    self.all.detect{|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || create(name)
-  end
-
   def self.new_from_filename(filename)
     split_path = filename.split(/ - |\./).collect{ |i| i.strip}
     song = Song.new(split_path[1], split_path[0], split_path[2])
@@ -44,6 +38,10 @@ class Song
     @@all.sort{|a, b| a.name <=> b.name}
   end
 
+  def self.all=(array)
+    @@all = array
+  end
+
   def self.destroy_all
     @@all = []
   end
@@ -51,9 +49,4 @@ class Song
   def save
     @@all << self
   end
-
-  def self.create(name)
-    self.new(name)
-  end
 end
-# binding.pry
