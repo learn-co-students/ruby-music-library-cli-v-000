@@ -31,8 +31,4 @@ class Genre
   def self.destroy_all
     @@all = []
   end
-
-  def self.create(name)
-    self.new(name)
-  end
 end
