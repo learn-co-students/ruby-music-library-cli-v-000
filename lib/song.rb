@@ -15,6 +15,7 @@ class Song
     if genre
       self.genre=(genre)
     end
+    self.save
   end
 
   def artist=(artist)
@@ -56,11 +57,16 @@ class Song
   end
 
   def self.find_by_name(name)
-    @@all.detect {|song| song.name == name}
+    all.detect {|song| song.name == name}
   end
 
   def self.find_or_create_by_name(name)
-    self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
+    # self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
+    if find_by_name(name)
+      find_by_name(name)
+    else
+      create(name)
+    end
   end
 
   def self.create_from_filename(filename)
@@ -72,10 +78,12 @@ class Song
   def self.new_from_filename(filename)
       parts = filename.split(" - ")
       song_name = self.find_or_create_by_name(parts[1])
+      binding.pry
       artist = Artist.find_or_create_by_name(parts[0])
       genre = Genre.find_or_create_by_name(parts[2].delete ".mp3")
       song = Song.new(song_name, artist, genre)
-      song.name
+      song
+      #binding.pry
     end
 
 end
