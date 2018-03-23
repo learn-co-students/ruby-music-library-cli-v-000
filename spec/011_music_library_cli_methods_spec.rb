@@ -164,7 +164,7 @@ describe "CLI Methods" do
 
     it "upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs" do
       allow(music_library_controller).to receive(:gets).and_return("4")
-
+      # binding.pry
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
       expect($stdout).to receive(:puts).with("Playing Larry Csonka by Action Bronson")
 

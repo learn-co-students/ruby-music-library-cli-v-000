@@ -32,7 +32,7 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    split_path = filename.split(/-|\./).collect{ |i| i.strip}
+    split_path = filename.split(/ - |\./).collect{ |i| i.strip}
     song = Song.new(split_path[1], split_path[0], split_path[2])
   end
 
@@ -41,7 +41,7 @@ class Song
   end
 
   def self.all
-    @@all
+    @@all.sort{|a, b| a.name <=> b.name}
   end
 
   def self.destroy_all

@@ -1,6 +1,7 @@
 class Artist
   extend Concerns::Findable
-  attr_accessor :name, :songs#, :artist
+  attr_accessor :name, :songs
+  attr_writer
   @@all = []
 
   def initialize(name)
@@ -24,8 +25,12 @@ class Artist
     end.uniq
   end
 
+  def sorted_songs
+    @songs.sort{|a, b| a.name <=> b.name}
+  end
+
   def self.all
-    @@all
+    @@all.sort{|a, b| a.name <=> b.name}
   end
 
   def self.destroy_all
