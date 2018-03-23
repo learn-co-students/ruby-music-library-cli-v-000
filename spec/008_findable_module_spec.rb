@@ -25,7 +25,7 @@ end
 describe "Concerns::Findable" do
   let!(:artist) { Artist.create("Slowdive") }
   let!(:genre) { Genre.create("shoegaze") }
-  # binding.pry
+
   describe ".find_by_name" do
     it "is added as a class method to classes that extend the module" do
       expect(Artist).to respond_to(:find_by_name)
