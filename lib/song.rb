@@ -46,11 +46,14 @@ class Song
     mp3_array = []
     mp3_array = file.split(".")
     artist_name, song_name, genre_name = mp3_array[0].split(" - ")
-    song = self.new(artist_name)
     artist = Artist.find_or_create_by_name(artist_name)
-    artist.add_song(song)
     genre = Genre.find_or_create_by_name(genre_name)
-    genre.add_song(song)
+    song = self.new(song_name, artist, genre)
+  end
+
+  def self.create_from_filename(file)
+    song = new_from_filename(file)
+    song.save
   end
 
 end
