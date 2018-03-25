@@ -90,13 +90,14 @@ class MusicLibraryController
       puts "Please enter the name of an artist:"
       input = gets.strip
 
-      sorted_by_song = Song.all.sort do |a, b|
-        a.name <=> b.name
-      end
+      artist = Artist.find_by_name(input)
+        if artist
+          sorted_by_artist = artist.sort do |a, b|
+            a.songs.name <=> b.songs.name
+        end
 
-        sorted_by_song.each_with_index do |song, i|
-          if input == song.artist.name
-            puts "#{i}. #{song.name} - #{song.genre.name}"
+        sorted_by_artist.each_with_index do |artist, i|
+            puts "#{i}. #{artist.songs.name} - #{artist.genre.name}"
           end
         end
 
