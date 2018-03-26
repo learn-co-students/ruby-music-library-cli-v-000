@@ -1,8 +1,8 @@
 class Song
   extend Concerns::Findable
-  # extend Concerns::Allable::ClassMethods
-  # include Concerns::Allable::InstanceMethods
-  attr_accessor :name
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethodsattr_accessor :name
+
   attr_reader :artist, :genre
   @@all = []
 
