@@ -34,6 +34,15 @@ class Song
     self.new_from_filename(filename)
   end
 
+  def self.new_from_filename(filename)
+    split_path = filename.split(/ - |\./).collect{ |i| i.strip}
+    song = Song.new(split_path[1], split_path[0], split_path[2])
+  end
+
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename)
+  end
+
   def self.all
     @@all.sort{|a, b| a.name <=> b.name}
   end
