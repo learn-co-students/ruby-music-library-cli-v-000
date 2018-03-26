@@ -56,7 +56,7 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     if result = Artist.find_by_name(gets)
-      result.sorted_songs.each_with_index do |o, i|
+      result.songs.each_with_index do |o, i|
         puts "#{i+1}. #{o.name} - #{o.genre.name}"
       end
     end
@@ -65,7 +65,7 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     if result = Genre.find_by_name(gets)
-      result.sorted_songs.each_with_index do |o, i|
+      result.songs.each_with_index do |o, i|
         puts "#{i+1}. #{o.artist.name} - #{o.name}"
       end
     end
