@@ -2,20 +2,18 @@ require 'pry'
 
 class Song
 
-  extend Concerns::Findable
-
   attr_accessor :name
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    if artist
+    if artist != nil
       self.artist=(artist)
     end
-    if genre
+    if genre != nil
       self.genre=(genre)
     end
-    self.save
+    save
   end
 
   def artist=(artist)
@@ -52,8 +50,8 @@ class Song
 
   def self.create(name)
     song = Song.new(name)
-    song.save
-    song
+    #song.save
+    #song
   end
 
   def self.find_by_name(name)
@@ -69,21 +67,28 @@ class Song
     end
   end
 
-  def self.create_from_filename(filename)
-      song = self.new_from_filename(filename)
-      @@all << song
-      song
-  end
-
   def self.new_from_filename(filename)
-      parts = filename.split(" - ")
-      song_name = self.find_or_create_by_name(parts[1])
-      binding.pry
-      artist = Artist.find_or_create_by_name(parts[0])
-      genre = Genre.find_or_create_by_name(parts[2].delete ".mp3")
-      song = Song.new(song_name, artist, genre)
-      song
-      #binding.pry
+    parts = filename.split(" - ")
+		artist_name = parts[0]
+		song_name = parts[1]
+		genre_name = parts[2].gsub(".mp3", "")
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    new(song_name, artist, genre)
+      # parts = filename.split(" - ")
+      # song_name = self.find_or_create_by_name(parts[1])
+      # artist = Artist.find_or_create_by_name(parts[0])
+      # genre = Genre.find_or_create_by_name(parts[2].delete ".mp3")
+      # song = Song.new(song_name, artist, genre)
+      # song.name
+      # I don't know why this doesn't work, but it doesn't.  Maybe someone can explain to me why this is buggy?
+      
+    end
+
+    def self.create_from_filename(filename)
+        Song.new_from_filename(filename)
     end
 
 end
