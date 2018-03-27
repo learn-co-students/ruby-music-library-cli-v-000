@@ -36,7 +36,10 @@ require 'pry'
   end
 
   def self.create(name) #1/3
-    Song.new(name).tap {|song| song.save}
+    # Song.new(name).tap {|song| song.save}
+    song = self.new(name)
+    song.save
+    song
   end
 
   def self.find_by_name(name) #2/3
