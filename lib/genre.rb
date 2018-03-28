@@ -1,7 +1,7 @@
 class Genre
-  attr_accessor :name
-  attr_accessor :songs
-  # attr_accessor :artists
+  extend Concerns::Findable
+
+  attr_accessor :name, :songs
 
   @@all = []
 
@@ -26,9 +26,13 @@ class Genre
     self.new(name).tap {|genre| genre.save}
   end
 
+  def add_song(song)
+   song.genre = self if song.genre == nil
+   @songs << song if @songs.include?(song) == false
+  end
+
   def artists
-    artist_array = @songs.map {|song| song.artist }
-    artist_array.uniq
+   artist_collection = @songs.collect {|song| song.artist }.uniq
   end
 
 end
