@@ -28,19 +28,20 @@ class MusicLibraryController
       "Please enter input:"
       user_input = gets.strip
 
-      if user_input == "list songs"
+      case user_input
+      when "list songs"
         list_songs
-      elsif user_input == "list artists"
+      when "list artists"
         list_artists
-      elsif user_input == "list genres"
+      when "list genres"
         list_genres
-      elsif user_input == "list artist"
+      when "list artist"
         list_songs_by_artist
-      elsif user_input == "list genre"
+      when "list genre"
         list_songs_by_genre
-      elsif user_input == "play song"
+      when "play song"
         play_song
-      end # if-statements
+      end # cases
     end # while
   end # call
 
