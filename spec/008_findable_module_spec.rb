@@ -8,6 +8,12 @@ describe "Concerns::Findable" do
   end
 end
 
+# describe "Artist" do
+#   it "extends the Concerns::Findable module" do
+#     artist_extends_concerns_findable = Artist.singleton_class.ancestors.include?(Concerns::Findable)
+#     expect(artist_extends_concerns_findable).to be(true)
+#   end
+# end
 describe "Artist" do
   it "extends the Concerns::Findable module" do
     artist_extends_concerns_findable = Artist.singleton_class.ancestors.include?(Concerns::Findable)
