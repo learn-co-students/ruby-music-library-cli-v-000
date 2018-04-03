@@ -10,8 +10,7 @@ class MusicImporter
   end
 
   def import
-    bing = files
-    binding.pry
+    files.each {|file| Song.new_from_filename(file)} 
   end
 
 end
