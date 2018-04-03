@@ -1,6 +1,5 @@
 class Artist
-  attr_accessor :name, :artist
-  attr_reader :genre
+  attr_accessor :name, :artist, :genres
   @@all = []
 
   #constructors
@@ -39,6 +38,10 @@ class Artist
 
   def save
     @@all << self
+  end
+
+  def genres
+    @songs.collect {|song| song.genre}.uniq
   end
 
 end
