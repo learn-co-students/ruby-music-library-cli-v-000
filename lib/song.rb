@@ -1,29 +1,44 @@
 class Song
-attr_accessor :name, :genre
-attr_reader :artist
+attr_accessor :name, :genre, :artist
+extend Concerns::Findable
 @@all = []
 
-  # Constructors
+# Constructors
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name)
     @name = name
+=begin
     if genre
       self.genre=(genre)
     end
     if artist
       self.artist=(artist)
     end
+=end
+  end
+
+  def self.new_from_filename(file_name)
+    file_info = file_name.split(" - ")
+    new_song = self.new(file_info[1])
+    new_song.artist = file_info[0]
+    new_song.genre = file_info[2].gsub(".mp3", "")
+    new_song
+  end
+
+  def self.create_from_filename(file_name)
+    new_song = self.new_from_filename(file_name)
+    new_song.save
   end
 
   # Custom Setters
 
   def artist=(artist)
-    @artist = artist
+    @artist = Artist.find_or_create_by_name(artist)
     @artist.add_song(self)
   end
 
   def genre=(genre)
-    @genre = genre
+    @genre = Genre.find_or_create_by_name(genre)
     @genre.songs << self if !@genre.songs.include?(self)
   end
 
