@@ -23,15 +23,15 @@ class MusicLibraryController
       input = gets.strip
     case input
     when "list songs"
-      songs
+      list_songs
     when "list artists"
-      artists
+      list_artists
     when "list genres"
-      genres
+      list_genres
     when "list artist"
-      list_artist
+      list_songs_by_artist
     when "list genre"
-      genre
+      list_songs_by_genre
     when "play song"
       play_song
     end #end case
