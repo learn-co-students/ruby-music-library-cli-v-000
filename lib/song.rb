@@ -5,14 +5,16 @@ extend Concerns::Findable
 
 # Constructors
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name)
     @name = name
+=begin
     if genre
       self.genre=(genre)
     end
     if artist
       self.artist=(artist)
     end
+=end
   end
 
   def self.new_from_filename(file_name)
@@ -67,7 +69,7 @@ extend Concerns::Findable
   #Instance Methods
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
 end

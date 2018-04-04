@@ -18,19 +18,32 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    @input = gets.chomp
+    input = gets.chomp
 
-    until @input = exit
-      puts "What would you like to do?"
+    if input != "exit"
+      if input == "list songs"
+        list_songs
+      elsif input == "list artists"
+        list_artists
+      elsif input == "list genres"
+        list_genres
+      elsif input == "list artist"
+        list_songs_by_artist
+      elsif input == "list genre"
+        list_songs_by_genre
+      elsif input == "play song"
+        play_song
+      end
+      call
     end
 
   end
 
   def list_songs
-    Song.all.sort {|a,b| a.name <=> b.name}.each_with_index do |song, i|
-      puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    songs = Song.all.sort {|a,b| a.name <=> b.name}
+    songs.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
-    binding.pry
   end
 
   def list_artists
@@ -65,7 +78,11 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.strip
+    input = gets.strip.to_i
+    if input > 0 && input < Song.all.length
+      song = Song.all.sort {|a,b| a.name <=> b.name}[input - 1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
   end
 
 end
