@@ -1,7 +1,10 @@
 require "genre"
 require "song"
+require_relative './concerns/concerns.rb'
 
 class Artist
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -30,7 +33,12 @@ class Artist
   end
 
   def add_song(song)
+    # binding.pry
     song.artist = self if !song.artist
     @songs << song if !songs.include?(song)
+  end
+
+  def genres
+    songs.map { |song| song.genre }.uniq
   end
 end
