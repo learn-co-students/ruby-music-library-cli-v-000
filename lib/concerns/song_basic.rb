@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
   attr_accessor :name
  
@@ -20,9 +22,9 @@ class Song
     @@all << self
   end  
   
-  def self.create
-    song = self.new
-  
+  def self.create(song)
+    song = self.new(song)
+    song.save
   end
   
 end
