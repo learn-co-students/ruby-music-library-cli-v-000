@@ -1,8 +1,8 @@
-class Song
-  attr_accessor :name
- 
-  @@all= []
-  
+class Artist
+    attr_accessor :name
+    
+    @@all =[]
+    
   def initialize(name)
     @name = name
     # @@all =[]
@@ -14,16 +14,16 @@ class Song
   
   def self.destroy_all
     @@all.clear
-  end
+  end  
   
   def save
     @@all << self
     self
-  end  
+  end
   
-  def self.create(song)
-    song = self.new(song)
-    song.save
+  def self.create(name)
+    artist = self.new(name)
+    artist.save
   end
   
 end
