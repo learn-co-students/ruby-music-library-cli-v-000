@@ -1,5 +1,6 @@
 require "genre"
 require "song"
+
 require_relative './concerns/concerns.rb'
 
 class Artist

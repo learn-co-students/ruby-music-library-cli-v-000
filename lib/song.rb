@@ -48,11 +48,8 @@ class Song
     genre.songs << self if !genre.songs.include?(self)
   end
 
-  # def self.find_by_name(words)
-  #   all.find { |song| song.name == words }
-  # end
-  #
-  # def self.find_or_create_by_name(words)
-  #   self.find_by_name(words) ? self.find_by_name(words) : self.create(words)
-  # end
+  def self.new_from_filename(filename)
+
+  end
+
 end
