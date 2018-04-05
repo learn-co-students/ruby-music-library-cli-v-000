@@ -8,6 +8,13 @@ class Artist
     @songs = []
   end
   
+  def genres 
+   array = self.songs.map do |song|
+      song.genre
+    end
+    array.uniq
+  end
+  
   def songs 
     @songs
   end

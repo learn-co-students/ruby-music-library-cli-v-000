@@ -6,6 +6,14 @@ class Genre
   def initialize(name)
     @name = name 
     @songs = []
+    
+  end
+  
+  def artists
+   array = self.songs.map do |song|
+      song.artist 
+    end 
+    array.uniq
   end
   
   def songs 
