@@ -23,7 +23,7 @@ class Genre
   def artists
     @songs.collect do |song|
       song.artist
-    end
+    end.uniq
   end
 
 
