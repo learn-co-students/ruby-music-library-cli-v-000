@@ -1,4 +1,4 @@
-
+require "pry"
 class Song 
   
   attr_accessor :name
@@ -44,6 +44,23 @@ class Song
     song = self.new(name)
     song.save
     song
+  end
+  
+  def self.find_by_name(name)
+    array = self.all.detect do |songs|
+      songs.name == name
+      songs
+    end
+  end
+  
+  def self.find_or_create_by_name(name)
+    song = self.find_by_name(name) 
+       if song == self 
+        song
+    else
+      self.create(song)
+   end
+   binding.pry
   end
   
   
