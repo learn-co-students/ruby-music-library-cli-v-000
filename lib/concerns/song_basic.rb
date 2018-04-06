@@ -1,5 +1,5 @@
 class Song
-  attr_accessor :name
+  attr_accessor :name, :artist
  
   @@all= []
   
@@ -26,4 +26,8 @@ class Song
     song.save
   end
   
+  def song_with_artist(name, artist)
+    song = self.new(name)
+    artist = Artis.new(artist)
+  end
 end
