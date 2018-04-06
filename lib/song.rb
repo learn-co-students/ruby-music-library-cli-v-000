@@ -50,10 +50,10 @@ class Song
   
   def self.new_from_filename(file)
    file_split = file.split('-')
-    @artist = file_split[0].chomp
-    @song =  file_split[1] .chomp
-    song = self.new(song)
-    binding.pry
+    @artist = file_split[0].strip
+    @song =  file_split[1].strip
+    song = self.new(@song)
+   
   end  
   
 end
