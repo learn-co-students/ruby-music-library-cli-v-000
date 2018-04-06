@@ -52,8 +52,16 @@ class Song
    file_split = file.split('-')
     @artist = file_split[0].strip
     @song =  file_split[1].strip
+    @genre = file_split[2].split('.')[0].strip
     song = self.new(@song)
-   
+    artist = Artist.find_or_create_by_name(@artist)
+    song.artist = artist
+    genre = Genre.find_or_create_by_name(@genre)
+    song.genre = genre
+    song
   end  
   
+  def self.create_from_filename(file)
+      @@all << new_from_filename(file)
+  end
 end

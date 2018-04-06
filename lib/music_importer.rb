@@ -8,10 +8,12 @@ class MusicImporter
     
     def files
       Dir.glob("#{path}/*.mp3").map do |file|
-      # binding.pry
-      file.gsub("./spec/fixtures/mp3s/",'')
-     end
-    
+        file.gsub("./spec/fixtures/mp3s/",'')
+      end
     end  
     
+    def import
+      # binding.pry
+      Song.create_from_filename(file)
+    end
 end
