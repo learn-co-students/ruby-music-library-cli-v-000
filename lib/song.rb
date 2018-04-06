@@ -1,6 +1,7 @@
 require 'pry'
 
 class Song
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
   
  
@@ -47,10 +48,7 @@ class Song
     end
   end 
   
-  def self.find_by_name(song)
-    # binding.pry
-    @@all.find {|songs| songs.name == song}
-  end
+  
   
   def self.find_or_create_by_name(song)
      if find_by_name(song)
@@ -60,7 +58,9 @@ class Song
     end
   end  
   
-  
+    # def self.find_by_name(name)
+    #     @@all.find {|a| a.name == name}
+    #   end
   
   
 end
