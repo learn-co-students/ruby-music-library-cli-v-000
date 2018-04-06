@@ -8,8 +8,8 @@ class MusicImporter
     
     def files
       Dir.glob("#{path}/*.mp3").map do |file|
-      binding.pry
-      file.remove("./spec/fixtures/mp3s/")
+      # binding.pry
+      file.gsub("./spec/fixtures/mp3s/",'')
      end
     
     end  

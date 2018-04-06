@@ -48,19 +48,12 @@ class Song
     end
   end 
   
-  
-  
-  def self.find_or_create_by_name(song)
-     if find_by_name(song)
-      find_by_name(song)
-    else 
-      create(song)
-    end
+  def self.new_from_filename(file)
+   file_split = file.split('-')
+    @artist = file_split[0].chomp
+    @song =  file_split[1] .chomp
+    song = self.new(song)
+    binding.pry
   end  
-  
-    # def self.find_by_name(name)
-    #     @@all.find {|a| a.name == name}
-    #   end
-  
   
 end
