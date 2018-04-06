@@ -1,5 +1,5 @@
 require_relative '../config/environment'
-require 'pry'
+
 class MusicLibraryController
 
   extend Concerns::Findable
