@@ -5,16 +5,15 @@ class MusicLibraryController
   extend Concerns::Findable
   include CLI_Methods
 
-  def initialize(path="./db/mp3s")
+  def initialize(path="./db/mp3s") #importing these songs by default unless another path is specified
     music_importer = MusicImporter.new(path)
     music_importer.import
   end
 
-  def call
+  def call #starts the CLI applicaton when called on an instance of MusicLibraryController in the bin file
     input = nil
 
-
-    while input != "exit"
+    while input != "exit" #if user didn't type exit, puts out this oldschool main menu
 
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
@@ -26,9 +25,9 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
 
-      input = gets.strip
+      input = gets.strip #what do you want, user?
 
-      case input
+      case input #ok, if you typed in one of the following...
       when "list songs"
         list_songs
       when "list artists"

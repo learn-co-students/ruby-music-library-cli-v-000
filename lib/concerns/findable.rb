@@ -8,5 +8,9 @@ module Concerns::Findable
     find_by_name(name) || create(name)
   end
 
+  def destroy_all #clears the array
+    all.clear
+  end
+
 
 end

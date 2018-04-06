@@ -13,24 +13,24 @@ class Genre
     @songs = []
   end
 
-  def add_song(song)
+  def add_song(song) #adds song to genre's song array and associates self as song's genre IF song is an instance of the Song class
     if !song.is_a?(Song)
-      # begin
+      begin
         raise SongTypeError
-      # rescue SongTypeError => error
-      #   puts error.message
-      # end
+      rescue SongTypeError => error
+        puts error.message
+      end
     else
       songs << song
       song.genre = self if song.genre != self
     end
   end
 
-  def save
+  def save #saves self to array of all genres
     self.class.all << self
   end
 
-  def artists
+  def artists #returns array of artists associatd to songs in the genre's song array
     self.songs.collect {|song| song.artist}.uniq
   end
 
@@ -40,12 +40,7 @@ class Genre
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
-
-  def self.create(name)
+  def self.create(name) #creates AND saves genre
     Genre.new(name).tap {|new_instance| new_instance.save}
   end
 

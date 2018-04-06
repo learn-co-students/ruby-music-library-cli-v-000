@@ -14,23 +14,23 @@ class Artist
   end
 
   def add_song(song)
-    if !song.is_a?(Song)
+    if !song.is_a?(Song) #prompts user with error is the song is not an instance of the Song class
       # begin
         raise SongTypeError
       # rescue SongTypeError => error
       #   puts error.message
       # end
     else
-      songs << song unless songs.include?(song)
-      song.artist = self unless song.artist == self
+      songs << song unless songs.include?(song) #adds song to artist's song array unless it's already in there
+      song.artist = self unless song.artist == self #associates the song with this artist unless the association is already there
     end
   end
 
-  def save
+  def save #save artist to the class array of artists
     self.class.all << self
   end
 
-  def genres
+  def genres #returns an array of all the unique genres associated to the songs in the artist's song array
     self.songs.collect {|song| song.genre}.uniq
   end
 
@@ -40,12 +40,7 @@ class Artist
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
-
-  def self.create(name)
+  def self.create(name) #creates AND saves new artist instance
     Artist.new(name).tap {|new_instance| new_instance.save}
   end
 
