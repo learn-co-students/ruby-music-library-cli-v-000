@@ -26,8 +26,10 @@ class Song
     song.save
   end
   
-  def song_with_artist(name, artist)
-    song = self.new(name)
-    artist = Artis.new(artist)
+  def song_with_artist(song,artist)
+    binding.pry
+    @artist = artist
+    song = self.new(name) 
+    song.artist = Artist.new(artist)
   end
 end
