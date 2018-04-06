@@ -26,4 +26,17 @@ class Artist
     artist.save
   end
   
+  def add_song(song)
+    if !song.artist 
+      song.artist = self
+      @songs << song
+    end
+  end  
+  
+  def self.genres
+    @songs.map do |song|
+      binding.pry
+      song.genre
+    end
+  end  
 end
