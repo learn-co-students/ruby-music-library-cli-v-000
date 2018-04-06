@@ -49,10 +49,11 @@ class Song
   end 
   
   def self.new_from_filename(file)
-   file_split = file.split('-')
+   file_split = file.split(' - ')
     @artist = file_split[0].strip
     @song =  file_split[1].strip
     @genre = file_split[2].split('.')[0].strip
+    
     song = self.new(@song)
     artist = Artist.find_or_create_by_name(@artist)
     song.artist = artist
