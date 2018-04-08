@@ -1,10 +1,11 @@
 require 'pry'
 
 class MusicLibraryController
-  attr_reader :songs
+  attr_reader :songs, :options
 
   def initialize(path = './db/mp3s')
     @songs = MusicImporter.new(path).import
+    @options = ["list songs", "list artists", "list genres", "list artist", "list genre", "play song", "exit"]
   end
 
   def call
@@ -16,10 +17,25 @@ class MusicLibraryController
     puts "To list all of the songs of a particular genre, enter 'list genre'."
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
+    input = ""
     loop do
       puts "What would you like to do?"
       input = gets.strip
-      break if input == "exit"
+      break if options.include?(input)
+    end
+    case input
+    when 'list songs'
+      list_songs
+    when 'list artists'
+      list_artists
+    when 'list genres'
+      list_genres
+    when 'list artist'
+      list_songs_by_artist
+    when 'list genre'
+      list_songs_by_genre
+    when 'play song'
+      play_song
     end
   end
 
