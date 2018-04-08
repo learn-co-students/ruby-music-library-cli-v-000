@@ -6,8 +6,8 @@ require_relative './concerns/concerns.rb'
 class Song
   extend Concerns::Findable
 
-  attr_reader :artist, :genre
-  attr_accessor :name
+  attr_reader :artist, :genre, :filename
+  attr_accessor :name, :number
 
   @@all = []
 
@@ -38,7 +38,6 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    # binding.pry
     @artist.add_song(self)
     @artist
   end
@@ -49,7 +48,18 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    file_array = filename.split(/ ?[&.] ?/)
+    file_array = filename.split(/ - /).map { |section| section.strip }
+    file_array[-1].slice!(".mp3")
+    song = Song.find_or_create_by_name(file_array[1])
+    song.artist = Artist.find_or_create_by_name(file_array[0])
+    song.genre = Genre.find_or_create_by_name(file_array[2])
+    song
+  end
+
+  def self.create_from_filename(filename)
+    song = Song.new_from_filename(filename)
+    song.save
+    song
   end
 
 end

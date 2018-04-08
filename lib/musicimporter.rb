@@ -10,4 +10,8 @@ class MusicImporter
     Dir.foreach(path) { |file| files << file if file.include?(".mp3") }
     files
   end
+
+  def import
+    files.map { |file| Song.create_from_filename(file) }
+  end
 end
