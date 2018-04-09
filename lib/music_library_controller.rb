@@ -33,6 +33,7 @@ end
 def list_songs
     array = []
     array_two = []
+    counter = 1
     Song.all.map do |song|
     array << song.name
     end
@@ -42,11 +43,12 @@ def list_songs
     sorted.map do |name|
      array_two << Song.find_by_name(name)
   end
-  counter = 1
+  while counter <= array_two.length
   array_two.map do |song_list|
    puts "#{counter}. #{song_list.artist.name} - #{song_list.name} - #{song_list.genre.name}"
    counter += 1
   end
+end
 end
  
 def list_artists
@@ -88,10 +90,59 @@ end
 end
 
 def list_songs_by_artist
-puts "Please enter the name of an artist:"
-retrieve = gets.chomp
-
-
+  array = []
+  array_two = []
+  counter = 1
+  puts "Please enter the name of an artist:"
+  retrieve = gets.chomp
+   artist = Artist.find_by_name(retrieve)
+   if artist != nil
+ artist.songs.map do |songs|
+    array << songs.name
+    array.sort!
+  end 
+  array.map do |name|
+   array_two << Song.find_by_name(name)
+  end
+  array_two.map do |list|
+   puts "#{counter}. #{list.name} - #{list.genre.name}"
+  counter += 1
+  end
 end
+end
+
+def list_songs_by_genre
+  array = []
+  array_two = []
+  counter = 1
+  puts "Please enter the name of a genre:"
+  retrieve = gets.chomp
+   genre = Genre.find_by_name(retrieve)
+   if genre != nil
+ genre.songs.map do |genres|
+    array << genres.name
+    array.sort!
+  end 
+  array.map do |name|
+   array_two << Song.find_by_name(name)
+  end
+  array_two.map do |list|
+   puts "#{counter}. #{list.artist.name} - #{list.name}"
+  counter += 1
+  end
+end
+end
+
+
+  def play_song
+   puts "Which song number would you like to play?"
+    retrieve = gets.chomp
+     # puts "Playing"
+ # end
+end
+
+ 
+
+
 
 end
