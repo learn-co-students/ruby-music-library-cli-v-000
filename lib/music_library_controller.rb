@@ -136,13 +136,20 @@ end
 
   def play_song
    puts "Which song number would you like to play?"
-    retrieve = gets.chomp
-     # puts "Playing"
- # end
+    retrieve = gets.chomp.to_i
+    if retrieve > 0 && retrieve <= Song.all.length
+     sorted = Song.all.map do |songs|
+       songs.name
+      end 
+     sorted_artist = Song.all.map do |songs|
+       songs.artist.name
+     end 
+     puts Playing #{sorted.sort[retrieve-1]} by #{sorted_artist.sort[retrieve-2]
+     
+     
+    end
+  end
+
+
 end
 
- 
-
-
-
-end
