@@ -9,6 +9,8 @@ class MusicLibraryController
   end
 
 def call
+  input = ""
+  until input == 'exit'
   puts "Welcome to your music library!"
   puts "To list all of your songs, enter 'list songs'."
   puts "To list all of the artists in your library, enter 'list artists'."
@@ -18,15 +20,22 @@ def call
    puts "To play a song, enter 'play song'."
    puts "To quit, type 'exit'."
     puts "What would you like to do?"
-   until gets.chomp == "exit"
-   puts "To list all of your songs, enter 'list songs'."
-  puts "To list all of the artists in your library, enter 'list artists'."
-  puts "To list all of the genres in your library, enter 'list genres'."
- puts "To list all of the songs by a particular artist, enter 'list artist'."
-  puts "To list all of the songs of a particular genre, enter 'list genre'."
-   puts "To play a song, enter 'play song'."
-   puts "To quit, type 'exit'."
-    puts "What would you like to do?"
+
+  input = gets.chomp
+   case input
+   when 'list songs'
+     self.list_songs 
+   when 'list artists'
+    self.list_artists
+     when 'list genres'
+      self.list_genres
+      when 'list artist'
+        self.list_songs_by_artist
+        when 'list genre'
+         self.list_songs_by_genre
+          when 'play song'
+          self.play_song
+  end
 end
 end
 
@@ -138,18 +147,12 @@ end
    puts "Which song number would you like to play?"
     retrieve = gets.chomp.to_i
     if retrieve > 0 && retrieve <= Song.all.length
-     sorted = Song.all.map do |songs|
+     song_names = Song.all.map do |songs|
        songs.name
-      end 
-     sorted_artist = Song.all.map do |songs|
-       songs.artist.name
      end 
-     puts Playing #{sorted.sort[retrieve-1]} by #{sorted_artist.sort[retrieve-2]
-     
-     
+     puts "Playing #{song_names.sort[retrieve-1]} by #{Song.find_by_name(song_names.sort[retrieve-1]).artist.name}"
     end
   end
-
 
 end
 
