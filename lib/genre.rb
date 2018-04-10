@@ -1,12 +1,15 @@
+
 require 'pry'
 
 class Genre
 
-extend Concerns::Findable
+  extend Concerns::Findable
+
 
   attr_accessor :name, :songs
 
   @@all = []
+
 
   def initialize(name, song = nil, artist = nil)
     @name = name
@@ -20,7 +23,7 @@ extend Concerns::Findable
   end
 
   def save
-    @@all << self
+    self.class.all << self #self.class.all is the same as @@all
   end
 
   def self.create(name)
@@ -33,8 +36,10 @@ extend Concerns::Findable
     @@all.clear
   end
 
+
   def songs
     @songs
+      # returns the genre's 'songs' collection (genre has many songs)
   end
 
 # Associations — Artist and Genre: Genre #artists returns a collection of artists for all of the genre's songs (genre has many arti
@@ -42,9 +47,12 @@ extend Concerns::Findable
 
   def artists
     songs.collect {|song| song.artist }.uniq
-      # returns a collection of artists for all of the genre's songs (genre has many artists through songs)
-      # does not return duplicate artists if the genre has more than one song by a particular artist (genre has many artists through songs)
-      # collects artists through its songs instead of maintaining its own @artists instance variable (genre has many artists through songs)
+      # returns a collection of artists for all of the genre's songs
+      # => (genre has many artists through songs)
+      # does not return duplicate artists if the genre has more than one song by a particular artist
+      # => (genre has many artists through songs)
+      # collects artists through its songs instead of maintaining its own @artists instance variable
+      # => (genre has many artists through songs)
   end
 
   end

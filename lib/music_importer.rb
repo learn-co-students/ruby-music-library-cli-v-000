@@ -1,11 +1,11 @@
 class MusicImporter
 
 attr_accessor :path
+    # retrieves the path provided to the MusicImporter object
 
 def initialize(path)
   @path = path
       #accepts a file path to parse MP3 files from
-      #retrieves the path provided to the MusicImporter object
 end
 
 def files
@@ -16,6 +16,7 @@ end
 
 def import
     files.each{|file| Song.create_from_filename(file) }
+      # imports the files into the library by invoking Song.create_from_filename
     end
 
 

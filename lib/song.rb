@@ -2,8 +2,8 @@ class Song
 
 
 
-attr_accessor :name, :artist
-attr_reader  :genre
+attr_accessor :name
+attr_reader  :genre, :artist
 
 @@all = []
 
@@ -14,8 +14,13 @@ def initialize(name, artist = nil, genre = nil)
   # invokes #genre= instead of simply assigning to a @genre instance variable to ensure that associations are created upon initialization
 end
 
+def artist=(artist)
+  @artist = artist
+  artist.add_song(self)
+end
+
 def save
-  @@all << self
+  self.class.all << self
 end
 
 def self.all
@@ -30,13 +35,9 @@ def self.create(name)
 end
 
 def self.destroy_all
-  @@all.clear
+  all.clear
 end
 
-def artist=(artist)
-  @artist = artist
-  artist.add_song(self)
-end
 
 def genre=(genre)
   @genre = genre
@@ -59,10 +60,12 @@ def self.find_or_create_by_name(name)
     #  invokes .create instead of re-coding the same functionality
 end
 
-def self.new_from_filename(file)
-  song = self.new(file.split(" - ")[1])
-  song.artist = file.split(" - ")[0]
-  song
+def self.new_from_filename(filename)
+  file = filename.split(" - ")
+  artist_name, song_name, genre_name = file[0], file[1], file[2].gsub(".mp3", "")
+  artist = Artist.find_or_create_by_name(artist_name)
+  genre = Genre.find_or_create_by_name(genre_name)
+  new(song_name, artist, genre)
 end
 
 def self.create_from_filename(file)
