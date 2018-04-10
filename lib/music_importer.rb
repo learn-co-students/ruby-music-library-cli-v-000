@@ -12,6 +12,7 @@ class MusicImporter
      @filenames = Dir.entries(path).select{|file| file.include?(".mp3")}
    end
 
+
    def import
       files
       @filenames.each{|song| Song.create_from_filename(song)}

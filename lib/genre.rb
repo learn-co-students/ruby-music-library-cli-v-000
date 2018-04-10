@@ -1,10 +1,16 @@
 class Genre
   attr_accessor :name
-  attr_reader :artist, :song
+  attr_reader :artist, :song, :songs
 
   extend Concerns::Findable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethod
 
   @@all = []
+
+  def self.all
+    @@all
+  end
 
   def initialize(name)
     @name = name
@@ -16,33 +22,10 @@ class Genre
     song.genre = self unless song.genre
   end
 
-  def songs
-    @songs
-  end
-
   def artists
     @songs.collect do |song|
       song.artist
     end.uniq
-  end
-
-
-  def self.all
-    @@all
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def self.create(name)
-    genre = Genre.new(name)
-    genre.save
-    genre
   end
 
 end
