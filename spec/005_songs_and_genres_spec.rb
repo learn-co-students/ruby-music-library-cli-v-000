@@ -45,13 +45,12 @@ describe "Associations — Song and Genre:" do
     describe "#genre=" do
       it "assigns a genre to the song (song belongs to genre)" do
         song.genre = genre
-
+        #binding.pry
         expect(song.genre).to be(genre)
       end
 
       it "adds the song to the genre's collection of songs (genre has many songs)" do
         song.genre = genre
-
         expect(genre.songs).to include(song)
       end
 
