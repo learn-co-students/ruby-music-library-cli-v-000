@@ -28,16 +28,16 @@ def initialize(name)
     def add_song(song)
       if song.artist != self
         song.artist = self
+      end
       if !@songs.include?(song)
           @songs << song
         end
     end
-  end
+
 
   def genres
-    @genres = []
-    self.songs.each do |song|
-      @genres << song.genre
-    end
+    self.songs.collect do |song|
+      song.genre
+    end.uniq
   end
 end
