@@ -32,6 +32,7 @@ describe "Associations — Song and Artist:" do
         expect(song_with_artist.instance_variable_get(:@artist)).to be(artist)
       end
     end
+  end
 
     describe "#artist" do
       it "returns the artist of the song (song belongs to artist)" do
@@ -50,7 +51,7 @@ describe "Associations — Song and Artist:" do
         expect(assigned_artist).to be(artist)
       end
     end
-  end
+
 
   context "Artist" do
     describe "#add_song" do
@@ -76,8 +77,8 @@ describe "Associations — Song and Artist:" do
 
       it "does not add the song to the current artist's collection of songs if it already exists therein" do
         2.times { artist.add_song(song) }
-
         expect(artist.songs).to include(song)
+        #binding.pry
         expect(artist.songs.size).to be(1)
       end
     end
