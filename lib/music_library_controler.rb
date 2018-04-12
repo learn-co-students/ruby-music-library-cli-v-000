@@ -78,28 +78,18 @@ class MusicLibraryController
   end
 
   def play_song
-    #input = ""
-    #while input < 1 && input > 5
-      #list_songs
+
       puts "Which song number would you like to play?"
-      input = gets.strip
-      case input
-      when "1"
-        "Playing song 1"
-      when "2"
-        "Playing song 2"
-      when "3"
-        "Playing song 3"
-      when "4"
-        "Playing song 4"
-      when "5"
-        "Playing song 5"
-      end
-    #end
+      input = gets.strip.to_i
 
-
-
-
+      songs_alphabetized = Song.all.sort_by &:name
+      if input >= 1 && input <= Song.all.count
+        songs_alphabetized.each_with_index do |val,index|
+         if (index + 1) == input
+         puts "Playing #{val.name} by #{val.artist.name}"
+         end
+        end
+     end
   end
 
 end
