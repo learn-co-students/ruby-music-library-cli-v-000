@@ -28,4 +28,8 @@ class Genre
     genre
   end
 
+  def artists
+    songs.collect(&:artist).uniq
+  end
+
 end
