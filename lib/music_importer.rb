@@ -1,3 +1,5 @@
+require "pry"
+
 class MusicImporter
 
   attr_reader :path
@@ -9,6 +11,11 @@ class MusicImporter
   def files
     @files = Dir.entries(@path)
     @files.delete_if {|file| file == "." || file == ".."}
+  end
+
+  def import
+    # binding.pry
+    files.each {|file| Song.create_from_filename(file)}
   end
 
 end
