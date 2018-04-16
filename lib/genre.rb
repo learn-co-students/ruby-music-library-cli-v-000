@@ -1,20 +1,32 @@
-class Genre
+require 'pry'
 
-  attr_accessor :name, :artist, :song
-  @songs = []
+class Genre
+  extend Concerns::Findable
+  attr_accessor :name
   @@all = []
+  @songs = []
 
   def initialize(name)
     @name = name
-    save
+    @songs = []
+    @@all << self
   end
 
-  def name
-    @name
+  def add_song(song)
+    @songs << song
   end
 
-  def name=(name)
-    @name = name
+  def songs
+    @songs
+  end
+
+  def artists
+    songs.collect {|s|s.artist}.uniq
+  end
+
+
+  def self.destroy_all
+    @@all.clear
   end
 
   def self.all
@@ -22,7 +34,7 @@ class Genre
   end
 
   def self.destroy_all
-    @@all.clear
+    @@all = []
   end
 
   def save
@@ -30,6 +42,7 @@ class Genre
   end
 
   def self.create(name)
-    self.new(name)
+    new(name).tap {|n|n.save}
   end
+
 end
