@@ -23,25 +23,44 @@ class MusicLibraryController
   end
 
   def list_songs
-    binding.pry
-    Song.all.each_with_index(1) do |song, index|
-      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    Song.all.sort_by(&:name).each_with_index do |song, index|
+      puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
+    Artist.all.sort_by(&:name).each_with_index do |art, index|
+      puts "#{index+1}. #{art.name}"
+    end
   end
 
   def list_genres
+    Genre.all.sort_by(&:name).each_with_index do |genre, index|
+      puts "#{index+1}. #{genre.name}"
+    end
   end
 
   def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    user = gets.chomp
+    if artist = Artist.find_by_name(user)
+      artist.songs.sort_by(&:name).each_with_index do |song, index|
+        puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
+end
 
   def list_songs_by_genre
+    user = gets.chomp
+    if genre = Genre.find_by_name(user)
+      genre.songs.sort_by(&:name).each_with_index do |song, index|
+        puts "#{index+1}. #{song.genre.name} - #{song.name} - #{song.artist.name}"
+    end
   end
+end
 
   def play_song
+    puts "Which song number would you like to play?"
   end
 
 end
