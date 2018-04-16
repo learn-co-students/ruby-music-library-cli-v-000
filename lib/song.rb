@@ -27,6 +27,12 @@ class Song
     all.clear
   end
 
+#  def self.create(name)
+#    song = new(name)
+#    song.save
+#    song
+#  end
+
   def save
     self.class.all << self
   end

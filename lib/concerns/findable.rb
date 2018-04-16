@@ -5,10 +5,10 @@ module Concerns::Findable
     end
 
     def create(name)
-    o = self.new
-    o.name = name
-    self.all << o
-  end
+      o = new(name)
+      self.all << o
+      o
+    end
 
   def find_or_create_by_name(name)
     find_by_name(name) || create(name)
