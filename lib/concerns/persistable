@@ -1,0 +1,17 @@
+module Persistable
+  module  InstanceMethods
+    def save               # Instance method
+      self.class.all << self
+    end
+  end
+
+  module ClassMethods
+    def self.reset.all     # Class method
+      self.all.clear
+    end
+
+    def self.count          # Class method
+      self.all.size
+    end
+  end
+end
