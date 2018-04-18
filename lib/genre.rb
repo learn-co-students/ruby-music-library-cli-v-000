@@ -6,14 +6,10 @@ class Genre
 
   @@all = []
 
-=begin
-  def self.all
-    @@all
-  end
+  def initialize(name)
+    super(name)
+    @songs = []
 
-  def self.destroy_all
-      self.all.clear
   end
-=end
 
 end
