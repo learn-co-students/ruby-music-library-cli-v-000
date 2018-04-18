@@ -30,8 +30,10 @@ class Song
     artist_name = arr[0].strip
     song_name = arr[1].strip
 
-    self.create(song_name)
-
+    genre = Genre.find_or_create_by_name(genre_name)
+    artist = Artist.find_or_create_by_name(artist_name)
+    song = Song.new(song_name, artist, genre)
+    song
   end
 
   def initialize(name, artist = nil, genre = nil)
