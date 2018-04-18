@@ -1,7 +1,8 @@
 require_relative "./music_module.rb"
+require_relative "./Concerns::Findable.rb"
 
 class Artist
-  extend Music::C_Methods
+  extend Music::C_Methods, Concerns::Findable
   include Music::I_Methods
 
   attr_reader :songs
