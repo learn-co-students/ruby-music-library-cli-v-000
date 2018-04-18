@@ -14,6 +14,10 @@ class Genre
   end
 
   def add_song(song)
+    if @songs.include?(song)
+      return nil
+    end
+
     @songs << song
   end
 
