@@ -4,8 +4,7 @@ class Song
   extend Music::C_Methods
   include Music::I_Methods
 
-  attr_accessor :genre
-  attr_reader :artist
+  attr_reader :artist, :genre
 
   @@all = []
 
@@ -21,4 +20,8 @@ class Song
     artist.add_song(self)
   end
 
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
+  end
 end
