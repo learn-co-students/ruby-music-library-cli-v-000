@@ -11,7 +11,7 @@ class Song
   def initialize(name, artist = nil)
     super(name)
 
-    artist = artist if !!artist
+    artist=(artist) if !!artist
   end
 
   def artist=(artist)
