@@ -24,11 +24,11 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    arr = file_name.split(" - ")
+    arr = filename.split(' - ')
 
-    genre_name = arr[2].splice(0, length(arr[2]-4))
-    artist_name = arr[0]
-    song_name = arr[1]
+    genre_name = arr[2].splice(0, (arr[2].length - 4)).strip
+    artist_name = arr[0].strip
+    song_name = arr[1].strip
 
     self.create(song_name)
 
