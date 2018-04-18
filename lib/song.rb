@@ -4,13 +4,15 @@ class Song
   extend Music::C_Methods
   include Music::I_Methods
 
+  attr_accessor :genre
   attr_reader :artist
 
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     super(name)
 
+    self.genre = genre if !! genre
     self.artist = artist if !!artist
   end
 
