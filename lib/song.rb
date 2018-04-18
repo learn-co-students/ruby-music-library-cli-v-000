@@ -4,23 +4,19 @@ class Song
   extend Music::C_Methods
   include Music::I_Methods
 
-  attr_accessor :artist
-  
+  attr_reader :artist
+
   @@all = []
-
-=begin
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-      self.all.clear
-  end
-=end
 
   def initialize(name, artist = nil)
     super(name)
-    @artist = artist if !!artist
+
+    artist = artist if !!artist
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
   end
 
 end
