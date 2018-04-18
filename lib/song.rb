@@ -8,6 +8,11 @@ class Song
 
   @@all = []
 
+  def self.find_by_name(name)
+    rtn = @@all.detect { |e| e.name == name}
+    rtn
+  end
+
   def initialize(name, artist = nil, genre = nil)
     super(name)
 
