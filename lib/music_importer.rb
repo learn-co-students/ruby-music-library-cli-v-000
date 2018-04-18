@@ -6,8 +6,10 @@ class MusicImporter
   end
 
   def files
-    Dir.glob(self.path.strip + '/*.mp3') do |rb_file|
-      # do work on files ending in .rb in the desired directory
+    rtn = []
+    Dir.glob(self.path.strip + '/*.mp3') do |file|
+      rtn << file
     end
+    rtn
   end
 end
