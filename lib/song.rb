@@ -19,7 +19,7 @@ class Song
     if !!rtn
       return rtn
     else
-      Song.new(name)
+      self.create(name)
     end
   end
 
