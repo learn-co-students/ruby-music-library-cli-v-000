@@ -14,6 +14,16 @@ class Song
     rtn
   end
 
+  def self.find_or_create_by_name(name)
+    arr = self.all
+    rtn = arr.detect { |e| e.name == name}
+    if !!rtn
+      return rtn
+    else
+      Song.new(name)
+    end
+  end
+
   def initialize(name, artist = nil, genre = nil)
     super(name)
 
