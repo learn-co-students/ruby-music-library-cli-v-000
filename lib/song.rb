@@ -9,7 +9,8 @@ class Song
   @@all = []
 
   def self.find_by_name(name)
-    rtn = @@all.detect { |e| e.name == name}
+    arr = self.all
+    rtn = arr.detect { |e| e.name == name}
     rtn
   end
 
