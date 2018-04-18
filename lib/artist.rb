@@ -16,6 +16,11 @@ class Artist
       self.all.clear
   end
 
+  def initialize(name)
+    super(name)
+    @songs = []
+  end
+
   def add_song(song)
     song.artist = self if !!!song.artist
 
@@ -26,8 +31,9 @@ class Artist
     @songs << song
   end
 
-  def initialize(name)
-    super(name)
-    @songs = []
+  def genres
+    ret = songs.collect { |e| e.genre}
+    ret = ret.uniq
+    ret
   end
 end

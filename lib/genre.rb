@@ -21,9 +21,5 @@ class Genre
     @songs << song
   end
 
-  def genres
-    ret = songs.collect { |e| e.genre}
-    ret = ret.uniq
-    ret
-  end
+  
 end
