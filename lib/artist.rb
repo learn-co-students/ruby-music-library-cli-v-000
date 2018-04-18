@@ -9,6 +9,7 @@ class Artist
 
   @@all = []
 
+=begin
   def self.all
     @@all
   end
@@ -16,6 +17,7 @@ class Artist
   def self.destroy_all
       self.all.clear
   end
+=end
 
   def initialize(name)
     super(name)
