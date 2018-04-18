@@ -55,14 +55,44 @@ def initialize(path = './db/mp3s')
 end
 
   def list_genres
+    genres = Genre.all.sort do |a, b|
+      a.name <=> b.name
   end
+  genres.each.with_index(1) do |genre, index|
+    puts "#{index}. #{genre.name}"
+  end
+end
 
   def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+      input = gets.strip
+    if artist = Artist.find_by_name(input)
+      artist.songs.sort_by{|song|song.name}.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end
+    end
+      #if artist exists, then print all song names by a particular artist alphabetized by song name
   end
 
   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    if genre = Genre.find_by_name(input)
+      genre.songs.sort_by{|song|song.name}.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
+      end
+    end
   end
 
   def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+    if input > 0 && input < Song.all.length
+    songs = Song.all.sort do |a, b|
+          a.name <=> b.name
+        end
+        song = songs[input - 1]
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
   end
 end
