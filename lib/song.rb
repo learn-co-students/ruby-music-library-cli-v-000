@@ -26,7 +26,7 @@ class Song
   def self.new_from_filename(filename)
     arr = filename.split(' - ')
 
-    genre_name = arr[2].splice(0, (arr[2].length - 4)).strip
+    genre_name = arr[2].slice(0, (arr[2].length - 4)).strip
     artist_name = arr[0].strip
     song_name = arr[1].strip
 
