@@ -23,6 +23,17 @@ class Song
     end
   end
 
+  def new_from_file_name(file_name)
+    arr = file_name.split(" - ")
+
+    genre_name = arr[2].splice(0, length(arr[2]-4))
+    artist_name = arr[0]
+    song_name = arr[1]
+    
+    self.create(song_name)
+
+  end
+
   def initialize(name, artist = nil, genre = nil)
     super(name)
 
