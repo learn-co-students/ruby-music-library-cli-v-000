@@ -24,8 +24,9 @@ class MusicLibraryController
     arr.sort! {|x, y| x.name <=> y.name}
 
     arr.each_with_index do |e, i|
+      str_ = e.class
       str = "#{i+1}. #{e.artist.name} - #{e.name} - #{e.genre.name}"
-      puts str
+      puts str_
     end
   end
 
