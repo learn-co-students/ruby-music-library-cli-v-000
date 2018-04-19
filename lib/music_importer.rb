@@ -10,9 +10,11 @@ class MusicImporter
     rtn = []
     Dir.glob(self.path.strip + '/*.mp3') do |file|
       file_parts = file.split("/")
-      rtn << file_parts[file_parts.size - 1]
+      rtn << file_parts[file_parts.size - 1].strip
     end
-    rtn
+    puts rtn
+    puts "----"
+    rtn.uniq!
   end
 
   def import
