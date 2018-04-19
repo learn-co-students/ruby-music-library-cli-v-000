@@ -1,9 +1,9 @@
-require_relative "./music_module.rb"
-require_relative "./Concerns::Findable.rb"
+require_relative "../config/environment.rb"
+#require_relative "./music_base.rb"
+#require_relative "./Concerns::Findable.rb"
 
-class Genre
-  extend Music::C_Methods, Concerns::Findable
-  include Music::I_Methods
+class Genre < Music
+  extend Concerns::Findable
 
   attr_reader :songs
 

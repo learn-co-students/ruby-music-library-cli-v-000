@@ -1,8 +1,10 @@
-require_relative "./music_module.rb"
+require_relative "../config/environment.rb"
+#require_relative "./music_base.rb"
+#require_relative "./Concerns::Findable.rb"
 
-class Song
-  extend Music::C_Methods
-  include Music::I_Methods
+class Song < Music
+#  extend Music::C_Methods
+#  include Music::I_Methods
 
   attr_reader :artist, :genre
 
