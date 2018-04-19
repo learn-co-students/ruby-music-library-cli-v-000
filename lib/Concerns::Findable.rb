@@ -6,11 +6,11 @@ module Concerns::Findable
   end
 
   def find_or_create_by_name(name)
-    rtn = self.class.find_by_name(name)
+    rtn = self.class.self.find_by_name(name)
     if !!rtn
       return rtn
     else
-      self.class.create(name)
+      self.class.self.create(name)
     end
   end
 end
