@@ -1,9 +1,10 @@
 
 class MusicLibraryController
-  #attr_reader :music_importer
+  attr_reader :music_importer
 
   def initialize(path_ = "./db/mp3s") # = "./db/mp3s")
     self.music_importer = MusicImporter.new(path_)
+    self.music_importer.import
   end
 
   def call
@@ -11,6 +12,6 @@ class MusicLibraryController
   end
 
   private
-  attr_accessor :music_importer
+  #attr_accessor :music_importer
 
 end
