@@ -45,7 +45,7 @@ class Song < Music
   def initialize(name, artist = nil, genre = nil)
     super(name)
 
-    self.genre = genre if !! genre
+    self.genre = genre if !!genre
     self.artist = artist if !!artist
   end
 

@@ -32,6 +32,7 @@ class MusicLibraryController
 
   def list_artists
     arr = Artist.all
+    puts arr
     print_list_std(arr)
   end
 
