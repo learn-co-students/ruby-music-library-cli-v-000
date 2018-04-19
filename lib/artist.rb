@@ -7,10 +7,10 @@ class Artist < Music
 
   attr_reader :songs
 
-  @@all = []
+  #@@all = []
 
   def initialize(name)
-    super(name)
+    super
     @songs = []
   end
 
