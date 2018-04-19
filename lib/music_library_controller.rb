@@ -8,7 +8,7 @@ class MusicLibraryController
   end
 
   def call
-    #Do something
+    puts "Welcome to your music library!"
   end
 
   private
