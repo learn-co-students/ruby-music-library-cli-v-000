@@ -13,4 +13,11 @@ class MusicImporter
     end
     rtn
   end
+
+  def import
+    files_ = files
+    files_.each do |e|
+      Song.create_from_filename(e)
+    end
+  end
 end
