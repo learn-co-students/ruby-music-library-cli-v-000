@@ -12,15 +12,14 @@ class MusicImporter
       file_parts = file.split("/")
       rtn << file_parts[file_parts.size - 1].strip
     end
-    puts rtn
-    puts "----"
-    rtn.uniq!
+
+    rtn
   end
 
   def import
     files_ = self.files
+    puts files_
     files_.each do |e|
-      puts e
       Song.create_from_filename(e)
     end
   end
