@@ -3,7 +3,6 @@ class MusicImporter
 
   def initialize(path)
     self.path = path
-    #self.import
   end
 
   def files
