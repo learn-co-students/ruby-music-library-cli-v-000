@@ -12,9 +12,20 @@ class MusicLibraryController
     resp = gets.strip.upcase
 
     while (resp != "EXIT") do
-      
+
       print_msg
       resp = gets.strip.upcase
+    end
+  end
+
+  def list_songs
+    arr = Song.all
+
+    arr.sort! {x.name < y.name}
+
+    arr.each_with_index do |e, i|
+      str = "{i+1}. {e.artist} - {e.name} - {e.genre}"
+      puts str
     end
   end
 
