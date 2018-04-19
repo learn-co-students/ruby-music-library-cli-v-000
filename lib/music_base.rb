@@ -22,10 +22,18 @@ class Music
   end
 
   def save
+=begin
     if self.class.all.include?(self)
       return nil
     end
 
     self.class.all << self
   end
+=end
+  if self.all.include?(self)
+    return nil
+  end
+
+  self.all << self
+end
 end
