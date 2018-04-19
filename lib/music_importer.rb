@@ -18,6 +18,7 @@ class MusicImporter
   def import
     files_ = self.files
     files_.each do |e|
+      puts e
       Song.create_from_filename(e)
     end
   end
