@@ -21,7 +21,7 @@ class MusicLibraryController
   def list_songs
     arr = Song.all
 
-    arr.sort! {|x, y| x.name =< y.name}
+    arr.sort! {|x, y| x.name <=> y.name}
 
     arr.each_with_index do |e, i|
       str = "{i+1}. {e.artist} - {e.name} - {e.genre}"
