@@ -10,7 +10,7 @@ class Genre < Music
   @@all = []
 
   def initialize(name)
-    super(name)
+    super
     @songs = []
   end
 
