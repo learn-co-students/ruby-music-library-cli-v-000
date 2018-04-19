@@ -16,7 +16,6 @@ class Music
     s
   end
 
-
   def initialize(name)
     @name = name
     save

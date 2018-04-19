@@ -1,4 +1,4 @@
-module Music
+module Music_Common
   module C_Methods
     @@all = []
 

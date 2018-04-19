@@ -20,16 +20,24 @@ class MusicLibraryController
 
   def list_songs
     arr = Song.all
-    puts arr
-
 
     arr.sort! {|x, y| x.name <=> y.name}
 
     arr.each_with_index do |e, i|
-      str_ = e.class
-      #str = "#{i+1}. #{e.artist.name} - #{e.name} - #{e.genre.name}"
-      puts str_
+      #str_ = e.class
+      str = "#{i+1}. #{e.artist.name} - #{e.name} - #{e.genre.name}"
+      puts str
     end
+  end
+
+  def list_artists
+    arr = Artist.all
+    print_list_std(arr)
+  end
+
+  def list_genres
+    arr = Genre.all
+    print_list_std(arr)    
   end
 
   private
@@ -44,5 +52,15 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+  end
+
+  def print_list_std(arr)
+    arr.sort! {|x, y| x.name <=> y.name}
+
+    arr.each_with_index do |e, i|
+      #str_ = e.class
+      str = "#{i+1}. #{e.name}"
+      puts str
+    end
   end
 end

@@ -1,5 +1,6 @@
-require_relative "./music_base.rb"
-require_relative "./Concerns::Findable.rb"
+require_relative "../config/environment.rb"
+#require_relative "./music_base.rb"
+#require_relative "./Concerns::Findable.rb"
 
 class Artist < Music
   extend Concerns::Findable
