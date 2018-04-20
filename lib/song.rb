@@ -5,8 +5,8 @@ require_relative "../config/environment.rb"
 class Song #< Music
 #  extend Music::C_Methods
 #  include Music::I_Methods
-
-  attr_reader :artist, :genre, :name
+  attr_accessor :name
+  attr_reader :artist, :genre
 
   @@all = []
 

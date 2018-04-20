@@ -2,9 +2,10 @@ require_relative "../config/environment.rb"
 #require_relative "./music_base.rb"
 #require_relative "./Concerns::Findable.rb"
 
-class Genre < Music
+class Genre # < Music
   extend Concerns::Findable
 
+  attr_accessor :name
   attr_reader :songs
 
   @@all = []
@@ -13,9 +14,27 @@ class Genre < Music
     @@all
   end
 
+  def self.destroy_all
+      self.all.clear
+  end
+
+  def self.create(name)
+    s = self.new(name)
+    s
+  end
+
+  def save
+    if self.class.all.include?(self)
+      return nil
+    end
+
+    self.class.all << self
+  end
+
   def initialize(name)
-    super
+    @name = name
     @songs = []
+    save
   end
 
   def add_song(song)
