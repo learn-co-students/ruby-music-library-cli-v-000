@@ -2,7 +2,7 @@ require_relative "../config/environment.rb"
 #require_relative "./music_base.rb"
 #require_relative "./Concerns::Findable.rb"
 
-class Song < Music
+class Song #< Music
 #  extend Music::C_Methods
 #  include Music::I_Methods
 
@@ -12,6 +12,23 @@ class Song < Music
 
   def self.all
     @@all
+  end
+
+  def self.destroy_all
+      self.all.clear
+  end
+
+  def self.create(name)
+    s = self.new(name)
+    s
+  end
+
+  def save
+    if self.class.all.include?(self)
+      return nil
+    end
+
+    self.class.all << self
   end
 
   def self.find_by_name(name)
@@ -47,10 +64,10 @@ class Song < Music
   end
 
   def initialize(name, artist = nil, genre = nil)
-    super(name)
-
+    @name = name
     self.genre = genre if !!genre
     self.artist = artist if !!artist
+    save
   end
 
   def artist=(artist)

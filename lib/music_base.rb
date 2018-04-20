@@ -30,10 +30,10 @@ class Music
     self.class.all << self
   end
 =end
-  if self.all.include?(self)
+  if self.class.all.include?(self)
     return nil
   end
 
-  self.all << self
+  self.class.all << self
 end
 end
