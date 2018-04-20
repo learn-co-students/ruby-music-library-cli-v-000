@@ -87,7 +87,10 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     inp = gets.strip
 
-    song_ = Song.all[inp.to_i - 1]
+    arr = Song.all
+    arr.sort! {|x, y| x.name <=> y.name}
+
+    song_ = arr[inp.to_i - 1]
     puts "Playing #{song_.name} by #{song_.artist.name}"
 
   end
