@@ -1,3 +1,4 @@
+require pry
 
 class MusicLibraryController
   attr_accessor :music_importer
@@ -71,6 +72,7 @@ class MusicLibraryController
       trim_arr << e if (e.genre.name.strip == inp)
     end
 
+    binding.pry
     puts trim_arr
 
     trim_arr.each_with_index do |e, i|
