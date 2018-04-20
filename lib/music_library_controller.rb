@@ -87,6 +87,8 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     inp = gets.strip
 
+    song_ = arr[inp.to_i - 1].name
+    puts "Playing #{song_.name} by #{song_.artist.name}"
 
   end
 
