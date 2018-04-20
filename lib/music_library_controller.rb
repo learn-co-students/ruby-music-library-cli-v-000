@@ -89,13 +89,15 @@ class MusicLibraryController
 
     arr = Song.all
 
+    inp = inp.to_i
+
     if inp < 1 || inp > arr.size
       rerturn nil
     end
 
     arr.sort! {|x, y| x.name <=> y.name}
 
-    song_ = arr[inp.to_i - 1]
+    song_ = arr[inp - 1]
     puts "Playing #{song_.name} by #{song_.artist.name}"
 
   end
