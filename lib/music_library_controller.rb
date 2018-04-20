@@ -60,7 +60,7 @@ class MusicLibraryController
   end
 
   def list_songs_by_genre
-    puts "Please enter the name of an genre:"
+    puts "Please enter the name of a genre:"
     inp = gets.strip
     arr = Song.all
 
