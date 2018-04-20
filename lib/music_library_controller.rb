@@ -9,13 +9,24 @@ class MusicLibraryController
   end
 
   def call
-    print_msg
-    resp = gets.strip.upcase
-
+    resp = ""
     while (resp != "EXIT") do
 
       print_msg
       resp = gets.strip.upcase
+
+    case resp
+      when "LIST SONGS"
+        list_songs
+      when "LIST ARTISTS"
+        list_artists
+      when "LIST GENRES"
+        list_genres
+      when "LIST SONGS BY ARTIST"
+        list_songs_by_artist
+      when "LIST SONGS BY GENRE"
+        list_songs_by_genre
+      end
     end
   end
 
@@ -92,7 +103,7 @@ class MusicLibraryController
     inp = inp.to_i
 
     if inp < 1 || inp > arr.size
-      rerturn nil
+      return nil
     end
 
     arr.sort! {|x, y| x.name <=> y.name}
