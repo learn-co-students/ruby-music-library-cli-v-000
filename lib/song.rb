@@ -6,7 +6,7 @@ class Song #< Music
 #  extend Music::C_Methods
 #  include Music::I_Methods
 
-  attr_reader :artist, :genre
+  attr_reader :artist, :genre, :name
 
   @@all = []
 
