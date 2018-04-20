@@ -40,6 +40,10 @@ class MusicLibraryController
     print_list_std(arr)
   end
 
+  def list_songs_by_artist
+    
+  end
+
   private
   #attr_accessor :music_importer
   def print_msg
