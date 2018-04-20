@@ -32,14 +32,13 @@ class MusicLibraryController
 
   def list_artists
     arr = Artist.all
-    puts arr
     print_list_std(arr)
   end
 
-  #def list_genres
-  #  arr = Genre.all
-  #  print_list_std(arr)
-  #end
+  def list_genres
+    arr = Genre.all
+    print_list_std(arr)
+  end
 
   private
   #attr_accessor :music_importer
