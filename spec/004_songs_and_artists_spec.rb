@@ -32,7 +32,7 @@ describe "Associations — Song and Artist:" do
         expect(song_with_artist.instance_variable_get(:@artist)).to be(artist)
       end
     end
-
+end
     describe "#artist" do
       it "returns the artist of the song (song belongs to artist)" do
         song.instance_variable_set(:@artist, artist)
@@ -50,7 +50,7 @@ describe "Associations — Song and Artist:" do
         expect(assigned_artist).to be(artist)
       end
     end
-  end
+  
 
   context "Artist" do
     describe "#add_song" do
