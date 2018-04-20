@@ -76,7 +76,7 @@ class MusicLibraryController
     #puts trim_arr
 
     trim_arr.each_with_index do |e, i|
-      str = "#{i+1}. #{e.name} - #{e.artist.name}"
+      str = "#{i+1}. #{e.artist.name} - #{e.name}"
       puts str
     end
 
