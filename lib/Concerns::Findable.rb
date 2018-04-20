@@ -1,7 +1,7 @@
 module Concerns
   module Findable
 
-    @@all = []
+    # @@all = []
 
     #def all
   #    @@all
