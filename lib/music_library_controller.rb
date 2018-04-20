@@ -56,7 +56,26 @@ class MusicLibraryController
       str = "#{i+1}. #{e.name} - #{e.genre.name}"
       puts str
     end
-    
+
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of an genre:"
+    inp = gets.strip
+    arr = Song.all
+
+    arr.sort! {|x, y| x.name <=> y.name}
+
+    trim_arr = []
+    arr.each do |e|
+      trim_arr << e if (e.genre.name.strip == inp)
+    end
+
+    trim_arr.each_with_index do |e, i|
+      str = "#{i+1}. #{e.name} - #{e.artist.name}"
+      puts str
+    end
+
   end
 
   private
