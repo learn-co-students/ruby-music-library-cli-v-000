@@ -1,12 +1,6 @@
 module Concerns
   module Findable
 
-    # @@all = []
-
-    #def all
-  #    @@all
-  #  end
-
     def find_by_name(name)
       arr = self.all
       rtn = arr.detect { |e| e.name == name}

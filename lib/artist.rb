@@ -23,9 +23,6 @@ class Artist # < Music
     s
   end
 
-  def initialize(name)
-  end
-
   def save
     if self.class.all.include?(self)
       return nil
