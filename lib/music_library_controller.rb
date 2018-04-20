@@ -88,6 +88,11 @@ class MusicLibraryController
     inp = gets.strip
 
     arr = Song.all
+
+    if inp < 1 || inp > arr.size
+      rerturn nil
+    end
+
     arr.sort! {|x, y| x.name <=> y.name}
 
     song_ = arr[inp.to_i - 1]
