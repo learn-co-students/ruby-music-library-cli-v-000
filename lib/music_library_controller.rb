@@ -72,8 +72,8 @@ class MusicLibraryController
       trim_arr << e if (e.genre.name.strip == inp)
     end
 
-    binding.pry
-    puts trim_arr
+    #binding.pry
+    #puts trim_arr
 
     trim_arr.each_with_index do |e, i|
       str = "#{i+1}. #{e.name} - #{e.artist.name}"
