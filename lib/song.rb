@@ -56,11 +56,26 @@ attr_reader :genre, :artist
     end
 
   def self.find_or_create_by_name(name)
-    if self.find_by_name(name) != nil 
+    if self.find_by_name(name) != nil
           return self.find_by_name(name)
         else
           self.create(name)
   end
 end
+
+def self.new_from_filename(name)
+
+  artist, song, genre = name.split(' - ')
+  fixed_name = genre.gsub('.mp3','')
+  artist = Artist.find_or_create_by_name(artist)
+  
+  genre = Genre.find_or_create_by_name(fixed_name)
+  new(song, artist, genre)
+end
+
+  def self.create_from_filename(name)
+     new_from_filename(name).save
+  end
+
 
 end

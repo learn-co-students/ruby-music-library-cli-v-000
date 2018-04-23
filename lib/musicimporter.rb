@@ -2,15 +2,22 @@ require 'pry'
 
 class MusicImporter
 
-  attr_reader :path, :directory
+  attr_reader :path
 
   def initialize(path)
     @path = path
-    @directory = []
   end
 
-  def files
-    @directory << path
+  def files #collaborting objects lab
+    Dir.glob("#{path}/*").map{ |file| file.gsub("#{path}/", '') }
+  end
+
+  def import
+    files.each do |file|
+    
+      Song.create_from_filename(file)
+
+    end
   end
 
 
