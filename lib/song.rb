@@ -8,12 +8,9 @@ attr_reader :genre, :artist
 
   def initialize (name, artist= nil, genre= nil)
     @name = name
-  #  artist?(!nil)
-  #    self.artist if artist
-
-
    if artist != nil
     self.artist = artist
+
   end
   if genre != nil
     self.genre = genre
@@ -51,10 +48,19 @@ attr_reader :genre, :artist
    artist.add_song(self)
   end
 
-  def find_by_name(song)
-  #  @@all.find do |song| == song
-  #    puts song
-  #  end
+
+  def self.find_by_name(name)
+    @@all.find do |element|
+      element.name == name
+     end
+    end
+
+  def self.find_or_create_by_name(name)
+    if self.find_by_name(name) != nil 
+          return self.find_by_name(name)
+        else
+          self.create(name)
   end
+end
 
 end
