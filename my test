@@ -1,6 +1,6 @@
 rspec spec/001_song_basics_spec.rb #good
-rspec spec/002_artist_basics_spec.rb
-rspec spec/003_genre_basics_spec.rb
+rspec spec/002_artist_basics_spec.rb #good
+rspec spec/003_genre_basics_spec.rb #good
 
 rspec spec/004_songs_and_artists_spec.rb
 rspec spec/005_songs_and_genres_spec.rb
@@ -14,3 +14,13 @@ rspec spec/009_music_importer_spec.rb
 rspec spec/010_music_library_controller_spec.rb
 rspec spec/011_music_library_cli_methods_spec.rb
 rspec spec/012_music_library_cli_spec.rb
+
+
+
+#!/usr/bin/env ruby
+
+#require_relative "../lib/genre.rb"
+#require_relative "../lib/artist.rb"
+
+puts Genre.metadata
+puts Artist.metadata
