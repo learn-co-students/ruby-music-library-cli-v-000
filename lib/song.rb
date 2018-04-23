@@ -52,17 +52,15 @@ class Song
     song
   end
 
-  def find_by_name(name)
-    @@all.find do |song|
-      song.name == name
-    end
+  def self.find_by_name(name)
+    @@all.detect {|song| song.name == name}
   end
 
-  def self.find_or_create_by_name(name)
-    if find_by_name(name) 
-      return find_by_name(name)
-    else
-      create_by_name(name)
-    end
-  end
+  # def self.find_or_create_by_name(name)
+  #   if find_by_name(name) 
+  #     return find_by_name(name)
+  #   else
+  #     create_by_name(name)
+  #   end
+  # end
 end
