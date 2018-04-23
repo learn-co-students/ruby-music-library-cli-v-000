@@ -1,13 +1,22 @@
 require "pry"
 class Song 
-  attr_accessor :name    
+  attr_accessor :name, :genre, :artist    
   @@all = []
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    #@artist = artist
     self.artist=(artist) if artist
-
+    self.genre=(genre) if genre
+    save
+  end
+  
+  def genre
+    @genre
+  end
+  
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
   end
 
   def self.all
@@ -28,7 +37,7 @@ class Song
   end
   
   def save
-    self.class.all << self
+    @@all << self
   end
   
   def self.create(name)
@@ -43,7 +52,7 @@ class Song
     song
   end
 
-  def self.find_by_name(name)
+  def find_by_name(name)
     @@all.find do |song|
       song.name == name
     end

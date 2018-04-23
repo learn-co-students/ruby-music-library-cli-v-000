@@ -1,5 +1,5 @@
 class Artist 
-  attr_accessor :name, :song
+  attr_accessor :name, :song,:genre 
   @@all = []
   def initialize(name)
     @name = name
@@ -14,7 +14,13 @@ class Artist
   end
   
   def save
-    self.class.all << self
+    @@all << self
+  end
+  
+  def genres
+    @songs.map do |song|
+      song.genre
+    end.uniq
   end
   
   def self.create(name)
@@ -27,13 +33,13 @@ class Artist
   end
   
   def add_song(song)
-    if song.artist != self
-      song.artist = self
-        @songs << song
-    else 
-      song.artist
+    self.songs.include?(song)
+      if song.artist != self 
+        song.artist = self 
+      end
+      if !@songs.include?(song)
+        @songs << (song)
+       end
     end
-  end
- 
     
 end
