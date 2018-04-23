@@ -1,9 +1,9 @@
-module Lib
+
 module Concerns::Findable
 
     def self.find_by_name(name)
       @@all.find do |element|
-        element.name == name
+        element.self == name
        end
       end
 
@@ -14,5 +14,4 @@ module Concerns::Findable
             self.create(name)
           end
         end
-    end
     end

@@ -2,8 +2,15 @@ require 'pry'
 
 class MusicImporter
 
-  def initialize(file_path)
-    @file_path = file_path
+  attr_reader :path, :directory
+
+  def initialize(path)
+    @path = path
+    @directory = []
+  end
+
+  def files
+    @directory << path
   end
 
 
