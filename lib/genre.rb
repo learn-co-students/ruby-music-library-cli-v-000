@@ -23,7 +23,7 @@ class Genre extend Concerns::Findable
   end
   
   def self.create(name)
-    genre = self.new name
+    genre = self.new(name)
     genre.save
     genre
   end 

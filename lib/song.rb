@@ -29,7 +29,7 @@ class Song
   
   def artist=(artist)
     @artist = artist
-    #artist.add_song(self)
+    artist.add_song(self)
   end
   
   def self.destroy_all
@@ -54,7 +54,7 @@ class Song
 
   def self.new_from_filename(filename)
     name = filename.split(" - ")
-    binding.pry
+    #binding.pry
     song_name = name[1]
     song = self.find_or_create_by_name(song_name)
     song
