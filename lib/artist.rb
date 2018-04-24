@@ -27,11 +27,7 @@ class Artist extend Concerns::Findable
   def self.create(name)
     artist = self.new name
     artist.save
-<<<<<<< HEAD
-    artist
-=======
->>>>>>> e4f44d509a6696b52e156350566c707e71938ae4
-  end 
+  end
   
   def songs
     @songs
