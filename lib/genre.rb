@@ -1,4 +1,4 @@
-require 'pry'
+
 class Genre
   extend Concerns::Findable
 

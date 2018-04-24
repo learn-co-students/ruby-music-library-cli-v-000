@@ -1,6 +1,6 @@
-require 'pry'
+
 class Song
-  extend Concerns::Findable
+#  extend Concerns::Findable  #not required here
   attr_accessor :name, :artist, :genre
 
   @@all = []
@@ -38,7 +38,7 @@ class Song
 
   def self.create (name)
     song = Song.new(name)
-    song.save
+  # song.save
     song
   end
 
@@ -49,14 +49,14 @@ class Song
   def self.find_by_name(name)
 		@@all.each do |song|
 			if song.name == name
-				return song
+				return song #must use return
 			end
 		end
 	end
 
   def self.find_or_create_by_name(name)
- song=Song.find_by_name(name)
-    if @@all.include?(song)
+ song=self.find_by_name(name)
+    if @@all.include? song
        song
     else
    self.create(name)

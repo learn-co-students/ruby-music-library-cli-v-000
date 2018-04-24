@@ -6,8 +6,8 @@ class MusicLibraryController
  end
 
  def library(klass = Song)
-   sorted_library = klass.all.collect{|object|object if object.class == klass }
-   sorted_library = sorted_library.delete_if {|object|object==nil}
+   sorted_library = klass.all.collect{|obj|obj if obj.class == klass }
+   sorted_library = sorted_library.delete_if {|obj|obj==nil}
    sorted_library.uniq
  end
 
@@ -26,14 +26,14 @@ class MusicLibraryController
  end
 
  def list_artists
-   sorted_library = self.library(Artist).sort_by {|object|object.name}
-   artists = sorted_library.collect {|object|"#{object.name}"}.uniq
+   sorted_library = self.library(Artist).sort_by {|obj|obj.name}
+   artists = sorted_library.map {|obj|"#{obj.name}"}.uniq
    artists.each {|artist| puts "#{artists.index(artist) + 1}. #{artist}"}
  end
 
  def list_genres
    sorted_library = self.library.sort_by {|song|song.genre.name}
-   genres = sorted_library.collect {|song|"#{song.genre.name}"}.uniq
+   genres = sorted_library.map {|song|"#{song.genre.name}"}.uniq
    genres.each {|genre| puts "#{genres.index(genre) + 1}. #{genre}"}
  end
 
@@ -51,7 +51,6 @@ class MusicLibraryController
  end
 
  def name_extractor(filename)
-   #Returns an array, first value is artist, second is song, third is genre
    file_bits = filename.gsub(/(\.mp3)/,'')
    file_bits = file_bits.split(" - ")
  end
@@ -73,7 +72,7 @@ class MusicLibraryController
    puts "Which song number would you like to play?"
    song_names = self.song_array
    user_input = gets.chomp.to_i
-   if user_input > 0 && user_input <= self.library.size
+   if user_input > 0 && user_input <= self.library.length
      chosen_input = song_names[user_input - 1]
      chosen_input = name_extractor(chosen_input)[1]
      song = Song.find_by_name(chosen_input)
