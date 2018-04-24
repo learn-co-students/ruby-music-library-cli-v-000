@@ -25,6 +25,7 @@ class Genre extend Concerns::Findable
   def self.create(name)
     genre = self.new name
     genre.save
+    genre
   end 
   
   def artists
