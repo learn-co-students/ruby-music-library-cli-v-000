@@ -1,3 +1,4 @@
+require "pry"
 class MusicLibraryController
   attr_accessor :path, :MusicImporter
   
@@ -21,5 +22,10 @@ class MusicLibraryController
       puts "What would you like to do?"
       input = gets
     end
+  end
+  
+  def list_songs
+    sorted_songs = Song.all.sort! {|x,y| x.name <=> y.name}
+    sorted_songs.each_with_index {|val,index| puts "#{index+1}. #{val.artist.name} - #{val.name} - #{val.genre.name}"}
   end
 end
