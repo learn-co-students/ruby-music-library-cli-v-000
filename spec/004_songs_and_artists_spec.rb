@@ -25,7 +25,7 @@ describe "Associations — Song and Artist:" do
 
   context "Song" do
     describe "#initialize" do
-      it "can be invoked with an optional second argument, an Artist object to be assigned to the song's 'artist' property (song belongs to artist)" do
+      it "can be invoked with  an optional second argument, an Artist object to be assigned to the song's 'artist' property (song belongs to artist)" do
         song_with_artist = Song.new("Two-Headed Boy", artist)
 
         expect(song_with_artist.instance_variable_defined?(:@artist)).to be(true)
