@@ -5,3 +5,4 @@ module Concerns
 end
 
 require_all 'lib'
+require 'pry'
