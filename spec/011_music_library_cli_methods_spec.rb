@@ -172,6 +172,7 @@ describe "CLI Methods" do
     end
 
     it "does not 'puts' anything out if a matching song is not found" do
+    
       allow(music_library_controller).to receive(:gets).and_return("6")
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
