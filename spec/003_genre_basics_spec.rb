@@ -1,4 +1,5 @@
 require "spec_helper"
+require_relative "../lib/genre-basics.rb"
 
 describe "Genre" do
   let(:genre) { Genre.new("indie rock") }

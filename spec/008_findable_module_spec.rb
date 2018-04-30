@@ -1,4 +1,5 @@
 require "spec_helper"
+require_relative "../config/environment.rb"
 
 describe "Concerns::Findable" do
   it "defines a module named Concerns::Findable" do
