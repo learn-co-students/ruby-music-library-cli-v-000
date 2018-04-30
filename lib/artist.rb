@@ -1,5 +1,7 @@
 class Artist
   
+  extend Concerns::Findable
+  
   require 'pry'
   
   attr_accessor :name, :song, :genre
