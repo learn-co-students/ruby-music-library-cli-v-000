@@ -9,6 +9,6 @@ module Concerns::Findable
     end
   
     def sorted
-      self.all.sort_by {|s| s.name}
+      self.all.uniq.sort_by {|s| s.name}
     end
 end
