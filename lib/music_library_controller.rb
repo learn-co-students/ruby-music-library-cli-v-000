@@ -1,4 +1,5 @@
 class MusicLibraryController
+
   def initialize(path = "./db/mp3s")
     MusicImporter.new(path).import
   end
@@ -37,20 +38,20 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
-      puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+    Song.all.sort {|a, b| a.name <=> b.name }.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    Artist.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |a, i|
-      puts "#{i}. #{a.name}"
+    Artist.all.sort {|a, b| a.name <=> b.name }.each_with_index do |artist, index|
+      puts "#{index + 1}. #{artist.name}"
     end
   end
 
   def list_genres
-    Genre.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |g, i|
-      puts "#{i}. #{g.name}"
+    Genre.all.sort {|a, b| a.name <=> b.name }.each_with_index do |genre, index|
+      puts "#{index + 1}. #{genre.name}"
     end
   end
 
@@ -59,8 +60,8 @@ class MusicLibraryController
     input = gets.strip
 
     if artist = Artist.find_by_name(input)
-      artist.songs.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
-        puts "#{i}. #{s.name} - #{s.genre.name}"
+      artist.songs.sort {|a, b| a.name <=> b.name }.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.name} - #{song.genre.name}"
       end
     end
   end
@@ -70,18 +71,18 @@ class MusicLibraryController
     input = gets.strip
 
     if genre = Genre.find_by_name(input)
-      genre.songs.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i|
-        puts "#{i}. #{s.artist.name} - #{s.name}"
+      genre.songs.sort {|a, b| a.name <=> b.name }.each_with_index do |song, index|
+        puts "#{index + 1}. #{song.artist.name} - #{song.name}"
       end
     end
   end
 
   def play_song
     puts "Which song number would you like to play?"
-
     input = gets.strip.to_i
+
     if (1..Song.all.length).include?(input)
-      song = Song.all.sort{ |a, b| a.name <=> b.name }[input - 1]
+     song = Song.all.sort{ |a, b| a.name <=> b.name }[input - 1]
     end
 
     puts "Playing #{song.name} by #{song.artist.name}" if song

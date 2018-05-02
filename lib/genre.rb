@@ -16,7 +16,7 @@ class Genre
   end
 
   def self.destroy_all
-    all.clear
+    @@all.clear
   end
 
   def save
@@ -24,15 +24,15 @@ class Genre
   end
 
   def self.create(name)
-    genre = new(name)
+    genre = Genre.new(name)
     genre.save
     genre
-
-    # Or, as a one-liner:
-    # new(name).tap{ |g| g.save }
   end
 
   def artists
-    songs.collect{ |s| s.artist }.uniq
+    @songs.collect do |song|
+      song.artist
+    end.uniq
   end
+
 end
