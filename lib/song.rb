@@ -1,15 +1,26 @@
 class Song
 
-  attr_accessor :name, :artist_name, :artist, :genre
+  extend Concerns::Findable
+
+  attr_accessor :name, :artist, :genre
 
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def artist=(artist)
     @artist = artist
+    Artist.new(artist)
+    @artist.add_song(self)
+  end
+
+  def genre=(genre)
+    genre.songs << self if !genre.songs.include?(self)
+    @genre = genre
   end
 
   def save
@@ -26,19 +37,19 @@ class Song
     @@all
   end
 
-  def self.find_by_name(name)
-    @@all.detect{|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    search = self.find_by_name(name)
-    if !search
-      self.create(name)
-    else
-      search
-    end
-
-  end
+  # def self.find_by_name(name)
+  #   @@all.detect{|song| song.name == name}
+  # end
+  #
+  # def self.find_or_create_by_name(name)
+  #   search = self.find_by_name(name)
+  #   if !search
+  #     self.create(name)
+  #   else
+  #     search
+  #   end
+  #
+  # end
 
   def self.new_from_filename(filename)
     noext =  File.basename(filename, ".*").split(" - ")
