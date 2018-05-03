@@ -1,4 +1,6 @@
 require "spec_helper"
+require_relative '../lib/artist.rb'
+
 
 describe "Artist" do
   let(:artist) { Artist.new("Neutral Milk Hotel") }
