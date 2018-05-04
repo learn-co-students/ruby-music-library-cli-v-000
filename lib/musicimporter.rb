@@ -19,11 +19,4 @@ class MusicImporter
     self.files.each{|file| Song.create_from_filename(file)}
   end
 
-  # def import
-  #   @songs.each do |song|
-  #     Song.create_from_filename(song)
-  #   end
-  # end
-
-
 end
