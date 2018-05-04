@@ -28,7 +28,7 @@ class Song
   end
 
   def self.create(name)
-    song = self.new(name)
+    song = Song.new(name)
     song.save
     song
   end
@@ -40,15 +40,15 @@ class Song
   def self.new_from_filename(filename)
     @filename = filename
     file = File.basename(@filename, ".mp3").split(" - ")
-    #file = @filename.chomp(".mp3").split(" - ")
     song = Song.find_or_create_by_name(file[1])
+    song.artist = Artist.find_or_create_by_name(file[0])
+    song.genre = Genre.find_or_create_by_name(file[2])
     song
   end
 
   def self.create_from_filename(filename)
     @filename = filename
     song = Song.new_from_filename(@filename)
-    song.save
     song
   end
 

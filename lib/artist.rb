@@ -38,4 +38,5 @@ class Artist
     self.all.clear
   end
 
+
 end
