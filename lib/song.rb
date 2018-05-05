@@ -49,7 +49,7 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    if genre.class == String                    #    "dance"
+    if genre.class == String
       genre_search_result = Genre.all.detect {|saved_genre_instance| saved_genre_instance.name == @genre}
       if genre_search_result != nil
         @genre = genre_search_result
@@ -70,13 +70,19 @@ class Song
 
 
   def self.new_from_filename(file_name)
-    song_info = file_name.split(" - ")
+    song_info = file_name.split(".mp3")[0].split(" - ")
     @artist = song_info[0]
     @name = song_info[1]
     @genre = song_info[2].split(".")[0]
-    song_instance = self.new(@name, @artist, @genre)
-    #binding.pry
-  
+    song_instance = self.new(@name)
+    song_instance.artist = Artist.find_or_create_by_name(@artist)
+    song_instance.genre = Genre.find_or_create_by_name(@genre)
+    song_instance
+  end
+
+  def self.create_from_filename(file_name)
+    song_instance = self.new_from_filename(file_name)
+    self.all << song_instance
   end
 
 end
