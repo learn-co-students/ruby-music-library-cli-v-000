@@ -1,12 +1,10 @@
 class Song
   attr_accessor :name
-  attr_accessor :artist, :genre
+  attr_reader :artist, :genre
   @@all = []
 
-  def initialize(name, artist=nil, genre=nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist      # optional second argument assigned to the song's artist property
-    @genre = genre
     self.artist = artist if artist
     self.genre = genre if genre
   end
@@ -15,15 +13,15 @@ class Song
     @@all
   end
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
-  def self.create(name)   #initializes and saves the song
+  def self.create(name)
     song = new(name)
     song.save
     song
   end
   def self.find_by_name(name)
-    all.detect { |s| s.name = name }
+    all.detect{ |s| s.name == name }
   end
   def self.find_or_create_by_name(name)
     find_by_name(name) || create(name)
@@ -45,11 +43,11 @@ class Song
   end
   def genre=(genre)
     @genre = genre
-    genre.add_song(self)
+    genre.songs << self unless genre.songs.include?(self)
   end
 
-  def save                # adds the Song instance to the @@all class variable
-    @@all << self
+  def save
+    self.class.all << self
   end
 
 end

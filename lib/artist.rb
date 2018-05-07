@@ -17,9 +17,7 @@ class Artist
     @@all.clear
   end
   def self.create(name)   # initializes and saves the artist
-    artist = new(name)
-    artist.save
-    artist
+    new(name).tap{ |a| a.save }
   end
 
   def save                # adds the Artist instance to the @@all class variable
