@@ -6,6 +6,7 @@ You're going to be implementing a Music Library domain composed of 3 main models
 This is a complex lab with many parts, so go slowly. Take time to understand what you're building holistically before starting. Read this entire README before jumping in. As you go from spec to spec, we recommend doing them in numbered order.
 
 This is a test line from Sophia
+Another test line
 ## Instructions
 
 ## `Song`, `Artist`, and `Genre` basics
