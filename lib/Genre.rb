@@ -1,6 +1,6 @@
 class Genre
   
-  attr_accessor :songs 
+  attr_accessor :songs , :artists
   
   @@all = []
   
@@ -46,5 +46,8 @@ class Genre
     song_instance.genre = self if song_instance.genre != self
   end 
   
+  def artists 
+    @songs.map{|song| song.artist}.uniq
+  end 
   
 end 
