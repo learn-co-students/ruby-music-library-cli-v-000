@@ -62,6 +62,38 @@ class Song
     @genre
   end 
   
+  def self.find_by_name(song_name) 
+    @@all.detect{|song_names| song_names.name == song_name}
+  end 
+  
+  
+  def self.find_or_create_by_name(song_name) 
+    self.find_by_name(song_name) || self.create(song_name) 
+  end 
+  
+  def self.new_from_filename(filename)
+    arr1 = []
+    arr2 = []
+    arr1 = filename.split(" - ")
+    artist_name_file = arr1[0]
+    song_name = arr1[1]
+    arr2 = arr1[2].split(".")
+    genre_name = arr2[0]
+ 
+    artist_instance = Artist.find_or_create_by_name(artist_name_file)
+    genre_instance = Genre.find_or_create_by_name(genre_name)
+    
+    new_song = self.new(song_name, artist_instance, genre_instance)
+    new_song
+  end 
+  
+
+   def self.create_from_filename(filename)
+    new_song = new_from_filename(filename)
+    new_song.save
+    new_song
+   end 
+
   
   
 end 
