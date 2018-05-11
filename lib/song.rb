@@ -27,7 +27,7 @@ class Song
   end
 
   def self.create(name)
-    new(name).tap{ |s| }
+    new(name)
   end
 
   def artist=(artist)

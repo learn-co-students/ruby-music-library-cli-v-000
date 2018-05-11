@@ -8,7 +8,7 @@ class Genre
 
   def initialize(name)
     @name = name
-    @@all << self
+    self.save
     @songs = Array.new
   end
 
@@ -21,11 +21,11 @@ class Genre
   end
 
   def self.create(name)
-    self.new(name)
+    new(name)
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def add_song(song)
