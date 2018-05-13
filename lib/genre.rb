@@ -31,4 +31,13 @@ class Genre
     song.genre = self if !song.genre
   end
 
+  def artists
+    @songs.collect do |song|
+      song.artist
+    end.uniq
+  end
+
+  extend Findable::ClassMethods
+
+
   end

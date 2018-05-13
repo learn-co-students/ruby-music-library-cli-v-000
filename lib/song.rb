@@ -33,8 +33,24 @@ def save
 end
 
 def self.create(name)
-  @@all << self.new(name)
-  self
+  song = self.new(name)
+  @@all << song
+  song
+end
+
+def self.find_by_name(name)
+    @@all.detect {|a| a.name == name}
+  end
+
+def self.find_or_create_by_name(name)
+end
+
+def self.find_or_create_by_name(name)
+  if self.find_by_name(name)
+    self.find_by_name(name)
+else
+  self.create(name)
+end
 end
 
 end

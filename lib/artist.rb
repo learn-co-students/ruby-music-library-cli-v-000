@@ -39,4 +39,6 @@ def genres
   end.uniq
 end
 
+extend Findable::ClassMethods
+
   end
