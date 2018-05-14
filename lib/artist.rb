@@ -11,10 +11,10 @@ class Artist
       @songs = [ ]
        #peter.song = ("pit")  How to attribute song to the artist after the artist is create.
     end
-
-    def artist
-      @artist
-    end
+    #
+    # def artist
+    #   @artist
+    # end
 
     def save
       @@all << self  # refers to the class artist to save the songs when created
@@ -24,10 +24,11 @@ class Artist
       @@all
     end
 
-    def add_artist(artist)
-      @artist << artist
-
-    end
+    # def add_artist(artist)
+    #   binding.pry
+    #   @artist << artist
+    #
+    # end
 
     def self.destroy_all
           @@all.clear
@@ -40,7 +41,9 @@ class Artist
     end
 
     def add_song(song)
+      # self refer to the class it self.
       song.artist = self if song.artist != self
+      #@song is in the attr_accessor
       @songs << song unless @songs.include?(song)  #unless song included in our collection.x
     end
 

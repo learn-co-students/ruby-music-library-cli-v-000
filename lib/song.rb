@@ -27,15 +27,16 @@ class Song
 
     end
 
-    def self.create(name)
+    def self.create(name) # create a new song
          song = Song.new(name)
          song.save
          song
     end
 
-    def artist=(artist)
-       @artist = artist
-       artist.add_song(self)
+    def artist=(artist)  #manual assign song
+       @artist = artist  #artist is in attr_accessor
+       artist.add_song(self)  #manually add artist to song
+
     end
 
     def genre=(genre)
@@ -75,7 +76,6 @@ class Song
              artist = Artist.find_or_create_by_name(art_name)
              genre = Genre.find_or_create_by_name(genre_name)
              new_song = self.new(song_name, artist, genre)
-             #new_song.save  #use out save method.
              new_song
        end
 
