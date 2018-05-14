@@ -1,6 +1,6 @@
-require "pry"
-
 class Artist
+
+  extend Concerns::Findable
 
   attr_accessor :name, :songs
 
@@ -24,8 +24,9 @@ class Artist
   end
 
   def self.create(name)
-    @@all << self.new(name)
-    self
+    artist = self.new(name)
+    @@all << artist
+    artist
   end
 
 def add_song(song)
@@ -39,6 +40,4 @@ def genres
   end.uniq
 end
 
-extend Findable::ClassMethods
-
-  end
+end

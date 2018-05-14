@@ -1,5 +1,7 @@
 class Genre
 
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -22,8 +24,9 @@ class Genre
   end
 
   def self.create(name)
-    @@all << self.new(name)
-    self
+    genre = self.new(name)
+    @@all << genre
+    genre
   end
 
   def add_song(song)
@@ -36,8 +39,6 @@ class Genre
       song.artist
     end.uniq
   end
-
-  extend Findable::ClassMethods
 
 
   end
