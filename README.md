@@ -98,9 +98,9 @@ In addition, add the following pair of methods to your `Song` class:
   * `.create_from_filename`, which does the same thing as `.new_from_filename` but also saves the newly-created song to the `@@all` class variable.
 
 ## It's CLI time!
-Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CLI so that users can actually interact with our code.
-  * Upon initialization, the CLI should accept an optional path to the library of MP3 files, defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
-  * Add a `#call` method that starts the CLI and prompts the user for input. Read the tests carefully for specifics.
+Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CLI so that users can actually interact with our code. Create a `MusicLibraryController` class that:
+  * Upon initialization, accepts an optional path to the library of MP3 files, defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
+  * Has a `#call` method that starts the CLI and prompts the user for input. Read the tests carefully for specifics.
 
 Have fun!
 
