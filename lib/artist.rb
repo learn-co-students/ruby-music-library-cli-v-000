@@ -1,3 +1,4 @@
+require "pry"
 class Artist
   attr_accessor :name, :songs
 
@@ -38,6 +39,13 @@ class Artist
     if !song.artist
       song.artist = self
     end
+  end
+
+  def genres
+
+      self.songs.collect {|artist| artist.genre }.uniq
+
+    #binding.pry
   end
 
 end

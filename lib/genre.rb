@@ -1,3 +1,4 @@
+require "pry"
 class Genre
   attr_accessor :name, :songs
 
@@ -34,5 +35,10 @@ class Genre
     genre = self.new(name)
     genre.save
     genre
+  end
+
+  def artists
+    self.songs.collect {|genre| genre.artist}.uniq
+      #binding.pry
   end
 end
