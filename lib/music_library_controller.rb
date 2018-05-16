@@ -1,12 +1,11 @@
 require "pry"
-<<<<<<< HEAD
 
 
 class MusicLibraryController
   attr_accessor :path
 
   def initialize(path='./db/mp3s')
-    MusicImporter.new(path).import
+    @filenames = MusicImporter.new(path).import
     @path = path
   end
 
@@ -30,14 +29,33 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
   end
-=======
-require_relative './music_importer.rb'
 
-class MusicLibraryController < MusicImporter
-  attr_accessor :path
-
-  def initialize(MusicImporter(path))
-    @path = path
+  def list_songs
+    binding.pry
   end
->>>>>>> 77ffc05dc482d04d800e7747db7dc4c967b1d0b8
+
+  def list_artists
+
+  end
+
+  def list_genres
+
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    puts "{list_artists}"
+    input = gets.chomp
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.chomp
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.chomp
+  end
+
 end
