@@ -8,6 +8,8 @@ class MusicLibraryController
   end
 
   def call
+    answer = ""
+    while answer != 'exit'
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -18,20 +20,19 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
       answer = gets
-      if answer == 'list songs'
-        list_songs
-      elsif answer == 'list artists'
-        list_artists
-      elsif answer == 'list genres'
-        list_genres
-      elsif answer == 'list artist'
-        list_songs_by_artist
-      elsif answer == 'list genre'
-        list_songs_by_genre
-      elsif answer == 'play song'
-        play_song
-      else
-
+        if answer == 'list songs'
+          list_songs
+        elsif answer == 'list artists'
+          list_artists
+        elsif answer == 'list genres'
+          list_genres
+        elsif answer == 'list artist'
+          list_songs_by_artist
+        elsif answer == 'list genre'
+          list_songs_by_genre
+        elsif answer == 'play song'
+          play_song
+      end
     end
   end
 
