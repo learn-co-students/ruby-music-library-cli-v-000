@@ -44,8 +44,10 @@ class MusicLibraryController
   end
 
   def list_songs
-    files_sorted =@filenames.sort {|x, y| x.split(" - ")[1] <=> y.split(" - ")[1]}
-    files_sorted.each_with_index {|f, index| puts "#{index + 1}. #{f.gsub(".mp3", "")}"}
+    list = Song.all.sort {|x, y| x.name <=> y.name}.uniq
+    list.each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    #files_sorted =@filenames.sort {|x, y| x.split(" - ")[1] <=> y.split(" - ")[1]}
+    #files_sorted.each_with_index {|f, index| puts "#{index + 1}. #{f.gsub(".mp3", "")}"}
   end
 
   def list_artists
@@ -84,8 +86,12 @@ class MusicLibraryController
   def play_song
     #binding.pry
     puts "Which song number would you like to play?"
-    input = gets.chomp
-
+    input = gets.chomp.to_i
+    songs = Song.all.uniq.sort {|a, b| a.name <=> b.name}
+    if (1..songs.length).include?(input)
+      song = songs[input - 1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
   end
 
 
