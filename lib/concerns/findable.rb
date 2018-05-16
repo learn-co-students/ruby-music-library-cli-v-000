@@ -9,8 +9,6 @@ module Concerns
     def destroy_all 
     all.clear
     end 
-    
-
   end
   
   module InstanceMethods 
@@ -33,13 +31,13 @@ module Concerns
       self.new(name).tap {|i| i.save}
     end
     
-    #def find_by_name(name)
-    #  all.detect {|i| i.name = name}
-    #end
+    def find_by_name(name)
+      all.detect {|i| i.name = name}
+    end
     
-    #def find_or_create_by_name(name)
-    #  find_by_name(name) || create(name) #if find_by_name returns a truthy object, it will do that. Else it will create. 
-    #end
+    def find_or_create_by_name(name)
+      find_by_name(name) || create(name) 
+    end
 
   end 
 end 
