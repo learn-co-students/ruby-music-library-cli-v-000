@@ -49,13 +49,8 @@ class Song
   end
 
   def self.create_from_filename(name)
-    parse_song = name.split(" - ")[1]
-    parse_artist = name.split(" - ")[0]
-    parse_genre = name.split(" - ")[2].gsub(".mp3", "")
-    artist = Artist.find_or_create_by_name(parse_artist)
-    genre = Genre.find_or_create_by_name(parse_genre)
-    self.create(parse_song, artist, genre)
-
+    song = self.new_from_filename(name)
+    song.save
   end
 
 end
