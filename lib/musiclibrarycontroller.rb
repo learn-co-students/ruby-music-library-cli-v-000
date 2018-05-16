@@ -4,11 +4,12 @@ class MusicLibraryController
   attr_accessor :path
 
   def initialize(path='./db/mp3s')
-    music_importer = MusicImporter.new(path)
-    music_importer.import
+   MusicImporter.new(path).import
   end
 
   def call
+
+    while answer != 'exit'
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -29,10 +30,8 @@ class MusicLibraryController
         list_songs_by_artist
       elsif answer == 'list genre'
         list_songs_by_genre
-      elsif answer == 'play song'
+      else answer == 'play song'
         play_song
-      else
-        loop until answer == 'exit'
     end
   end
 
