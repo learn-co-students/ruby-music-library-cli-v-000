@@ -4,7 +4,8 @@ require_relative './music_importer.rb'
 class MusicLibraryController < MusicImporter
   attr_accessor :path
 
-  def initialize(path='hi')
+  def initialize(path='./db/mp3s')
+    MusicImporter.new('./db/mp3s')
     @path = path
   end
 
