@@ -14,7 +14,6 @@ class Song
   
   def initialize(name, artist = nil, genre = nil)
     super 
-    @name = name
     if artist != nil
       self.artist=(artist)
     end

@@ -32,7 +32,7 @@ module Concerns
     end
     
     def find_by_name(name)
-      all.detect {|i| i.name = name}
+      all.detect {|i| i.name == name}
     end
     
     def find_or_create_by_name(name)
@@ -54,10 +54,12 @@ end
 #    rspec spec/004_songs_and_artists_spec.rb
 #    rspec spec/005_songs_and_genres_spec.rb
 #    rspec spec/006_artists_and_genres_spec.rb
+#    rspec spec/007_findable_songs_spec.rb
+#    rspec spec/008_findable_module_spec.rb
+
 
 # IN PROGRESS
-# 1 #    rspec spec/007_findable_songs_spec.rb
-# 1 #    rspec spec/008_findable_module_spec.rb
+
 
 # AHEAD
 # 9 #    rspec spec/009_music_importer_spec.rb
