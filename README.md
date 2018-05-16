@@ -12,6 +12,7 @@ The first thing to do is get the basics of the main models working. Each model h
 
 The requirements for each model are that they can accept a `name` upon initialization and set that property correctly. The `name` property should be readable and writable by the object.
 
+
 ```ruby
 Song.new("Blank Space").name #=> "Blank Space"`
 ```
