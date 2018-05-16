@@ -1,4 +1,5 @@
 require "pry"
+<<<<<<< HEAD
 
 
 class MusicLibraryController
@@ -29,4 +30,14 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
   end
+=======
+require_relative './music_importer.rb'
+
+class MusicLibraryController < MusicImporter
+  attr_accessor :path
+
+  def initialize(MusicImporter(path))
+    @path = path
+  end
+>>>>>>> 77ffc05dc482d04d800e7747db7dc4c967b1d0b8
 end
