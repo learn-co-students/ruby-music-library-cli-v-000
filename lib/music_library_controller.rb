@@ -26,6 +26,18 @@ class MusicLibraryController
     input = gets
     end
   end
+  
+  def list_songs
+    list = []
+    count = 1
+    az = Song.all.sort_by {|obj| obj.name}
+    az.each {|obj| 
+      a = obj.artist.name
+      s = obj.name
+      g = obj.genre.name 
+      puts "#{count}. #{a} - #{s} - #{g}"
+      count += 1}
+  end 
 end
 
 #  learn --fail-fast
