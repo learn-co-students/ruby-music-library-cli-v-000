@@ -45,7 +45,7 @@ class Song
   end 
   
   def self.create_from_filename(file)
-    new_from_filename(file)
+    new_from_filename(file).save
   end 
   
 end
@@ -61,13 +61,15 @@ end
 #    rspec spec/006_artists_and_genres_spec.rb
 #    rspec spec/007_findable_songs_spec.rb
 #    rspec spec/008_findable_module_spec.rb
+#    rspec spec/009_music_importer_spec.rb
+
 
 # IN PROGRESS
-# 2 #    rspec spec/009_music_importer_spec.rb
+# 7 #    rspec spec/010_music_library_controller_spec.rb
 
 # AHEAD
 
-#    rspec spec/010_music_library_controller_spec.rb
+
 #    rspec spec/011_music_library_cli_methods_spec.rb
 #    rspec spec/011_music_library_cli_spec.rb
 
