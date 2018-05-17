@@ -77,28 +77,17 @@ class MusicLibraryController
     end 
   end
   
- # def collect_by_number(input)
- #   count = input
- #   title = list_songs[count].split(" - ")[1]
-  #  binding.pry
- #   title
- # end
-  
-
-    #t = collect_by_number
-    #n = Song.find_by_name(t)
-   # a = Song.find_by_name(t)
-    #puts "Playing #{n} by #{a}"
-
-  
   def play_song 
     puts "Which song number would you like to play?"
     list_songs
     input = gets
     integer = input.to_i
-    n = list_songs.length
+    n = Song.all.size
     if (1..n) === integer
-      puts "message"
+      integer -= 1 
+      title = list_songs[integer]
+      song = Song.find_by_name(title)
+      puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
 end
@@ -115,10 +104,10 @@ end
 #    rspec spec/007_findable_songs_spec.rb
 #    rspec spec/008_findable_module_spec.rb
 #    rspec spec/009_music_importer_spec.rb
-
+#    rspec spec/010_music_library_controller_spec.rb
 
 # IN PROGRESS
-# 3 #    rspec spec/010_music_library_controller_spec.rb
+
 
 # AHEAD
 
