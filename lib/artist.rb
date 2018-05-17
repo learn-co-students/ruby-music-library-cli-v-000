@@ -7,7 +7,7 @@ class Artist
   extend Concerns::Findable
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
-  attr_accessor :name, :songs
+  attr_accessor :name, :genre
   @@all = []
   def initialize(name)
     super 

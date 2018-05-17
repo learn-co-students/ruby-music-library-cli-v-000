@@ -8,7 +8,7 @@ class Genre
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
   
-  attr_accessor :name
+  attr_accessor :name, :song
   
   @@all = []
   

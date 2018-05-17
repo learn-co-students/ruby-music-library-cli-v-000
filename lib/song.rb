@@ -7,13 +7,12 @@ class Song
   extend Concerns::Findable
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
-  
   attr_accessor :name, :artist, :genre
   
   @@all = []
   
   def initialize(name, artist = nil, genre = nil)
-    super 
+    super
     if artist != nil
       self.artist=(artist)
     end
@@ -43,15 +42,16 @@ class Song
     a = file.split(" - ")[0]
     s = file.split(" - ")[1]
     g = file.split(" - ")[2].chomp(".mp3")
-    
-    artist = Artist.find_or_create_by_name(a)
-    genre = Genre.find_or_create_by_name(g)
     song = Song.find_or_create_by_name(s)
+    artist = Artist.create(a)
+    genre = Genre.create(g)
     song.artist = artist
-    song.genre = grene
-    
-    
-    binding.pry
+    song.genre = genre
+    #binding.pry
+  end 
+  
+  def self.create_from_filename(file)
+    new_from_filename(file)
   end 
   
 end
@@ -69,7 +69,7 @@ end
 #    rspec spec/008_findable_module_spec.rb
 
 # IN PROGRESS
-# 5 #    rspec spec/009_music_importer_spec.rb
+# 4 #    rspec spec/009_music_importer_spec.rb
 
 # AHEAD
 
