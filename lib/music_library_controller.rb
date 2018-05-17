@@ -4,6 +4,7 @@ Bundler.require
 require_all 'lib'
 
 class MusicLibraryController 
+  attr_accessor :input
   
   def initialize(path = './db/mp3s')
     new_import = MusicImporter.new(path) 
@@ -27,16 +28,11 @@ class MusicLibraryController
   end
   
   def list_songs
-    list = []
     count = 1
     az = Song.all.sort_by {|obj| obj.name}
     az.each {|obj| 
-      a = obj.artist.name
-      s = obj.name
-      g = obj.genre.name 
-      list << "#{count}. #{a} - #{s} - #{g}"
+      puts "#{count}. #{obj.artist.name} - #{obj.name} - #{obj.genre.name}"
       count += 1}
-      list.each {|x| puts "#{x}"}
   end 
   
   def list_artists
@@ -81,18 +77,29 @@ class MusicLibraryController
     end 
   end
   
+ # def collect_by_number(input)
+ #   count = input
+ #   title = list_songs[count].split(" - ")[1]
+  #  binding.pry
+ #   title
+ # end
+  
+
+    #t = collect_by_number
+    #n = Song.find_by_name(t)
+   # a = Song.find_by_name(t)
+    #puts "Playing #{n} by #{a}"
+
+  
   def play_song 
     puts "Which song number would you like to play?"
+    list_songs
     input = gets
-    ip = input.to_i
-    ix = ip - 1
-    n = list_songs.size
-    t = list_songs[ix].split(" - ")[1]
-    binding.pry
-    if (1..n) === i
-      song = Song.find_by_name(t)
-      puts "Playing #{song.name} by #{song.artist.name}"
-    end 
+    integer = input.to_i
+    n = list_songs.length
+    if (1..n) === integer
+      puts "message"
+    end
   end
 end
 
