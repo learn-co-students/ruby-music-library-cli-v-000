@@ -7,7 +7,6 @@ class MusicLibraryController
   
   def initialize(path = './db/mp3s')
     new_import = MusicImporter.new(path) 
-    #binding.pry
     new_import.import
   end
   
@@ -28,14 +27,16 @@ class MusicLibraryController
   end
   
   def list_songs
+    list = []
     count = 1
     az = Song.all.sort_by {|obj| obj.name}
     az.each {|obj| 
       a = obj.artist.name
       s = obj.name
       g = obj.genre.name 
-      puts "#{count}. #{a} - #{s} - #{g}"
+      list << "#{count}. #{a} - #{s} - #{g}"
       count += 1}
+      list.each {|x| puts "#{x}"}
   end 
   
   def list_artists
@@ -77,6 +78,20 @@ class MusicLibraryController
       az = g.songs.sort_by {|obj| obj.name}
       az.each {|obj| puts "#{count}. #{obj.artist.name} - #{obj.name}"
         count += 1}
+    end 
+  end
+  
+  def play_song 
+    puts "Which song number would you like to play?"
+    input = gets
+    ip = input.to_i
+    ix = ip - 1
+    n = list_songs.size
+    t = list_songs[ix].split(" - ")[1]
+    binding.pry
+    if (1..n) === i
+      song = Song.find_by_name(t)
+      puts "Playing #{song.name} by #{song.artist.name}"
     end 
   end
 end
