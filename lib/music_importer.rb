@@ -4,11 +4,11 @@ Bundler.require
 require_all 'lib'
 
 class MusicImporter
-  extend Concerns::Findable
-  extend Concerns::ClassMethods
-  include Concerns::InstanceMethods
+  #extend Concerns::Findable
+  #extend Concerns::ClassMethods
+  #include Concerns::InstanceMethods
   
-  attr_accessor :path
+  attr_accessor :path, :song, :genre, :artist
   
   def initialize(path)
     @path = path
@@ -22,9 +22,6 @@ class MusicImporter
     files.each {|file| 
       Song.create_from_filename(file)}
   end 
-    #array = @email.split(/[\s,]/).reject(&:empty?)
-    #array.each {|e| all << e}
-    #all.uniq
 end
 
 
@@ -36,7 +33,7 @@ end
 #    rspec spec/003_genre_basics_spec.rb
 #    rspec spec/004_songs_and_artists_spec.rb
 #    rspec spec/005_songs_and_genres_spec.rb
-#    rspec spec/006_artist_and_genres_spec.rb
+#    rspec spec/006_artists_and_genres_spec.rb
 #    rspec spec/007_findable_songs_spec.rb
 #    rspec spec/008_findable_module_spec.rb
 

@@ -7,12 +7,13 @@ class Song
   extend Concerns::Findable
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
-  attr_accessor :name, :artist, :genre
+  attr_accessor :name
+  attr_reader :artist, :genre
   
   @@all = []
   
   def initialize(name, artist = nil, genre = nil)
-    super
+    @name = name 
     if artist != nil
       self.artist=(artist)
     end
@@ -28,26 +29,19 @@ class Song
     @artist = artist
     artist.add_song(self)
   end
-  
+    
   def genre=(genre)
     @genre = genre
     genre.songs << self if !genre.songs.include?(self)
-  end
-  
-  def genre 
-    @genre 
   end
   
   def self.new_from_filename(file)
     a = file.split(" - ")[0]
     s = file.split(" - ")[1]
     g = file.split(" - ")[2].chomp(".mp3")
-    song = Song.find_or_create_by_name(s)
-    artist = Artist.create(a)
-    genre = Genre.create(g)
-    song.artist = artist
-    song.genre = genre
-    #binding.pry
+    ai = Artist.find_or_create_by_name(a)
+    gi = Genre.find_or_create_by_name(g)
+    Song.new(s, ai, gi)
   end 
   
   def self.create_from_filename(file)
@@ -64,12 +58,12 @@ end
 #    rspec spec/003_genre_basics_spec.rb
 #    rspec spec/004_songs_and_artists_spec.rb
 #    rspec spec/005_songs_and_genres_spec.rb
-#    rspec spec/006_artist_and_genres_spec.rb
+#    rspec spec/006_artists_and_genres_spec.rb
 #    rspec spec/007_findable_songs_spec.rb
 #    rspec spec/008_findable_module_spec.rb
 
 # IN PROGRESS
-# 4 #    rspec spec/009_music_importer_spec.rb
+# 2 #    rspec spec/009_music_importer_spec.rb
 
 # AHEAD
 

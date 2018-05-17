@@ -8,12 +8,12 @@ class Genre
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
   
-  attr_accessor :name, :song
+  attr_accessor :name, :song, :artist
   
   @@all = []
   
   def initialize(name)
-    super
+    @name = name
     @songs = [] 
   end 
   

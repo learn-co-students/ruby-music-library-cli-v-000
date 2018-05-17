@@ -12,9 +12,6 @@ module Concerns
   end
   
   module InstanceMethods 
-    def initialize(name, artist = nil, genre = nil)
-    @name = name
-    end
     
     def save
     self.class.all << self 
@@ -23,6 +20,7 @@ module Concerns
     def songs 
     @songs 
     end
+    
   end
   
   module Findable
@@ -53,7 +51,7 @@ end
 #    rspec spec/003_genre_basics_spec.rb
 #    rspec spec/004_songs_and_artists_spec.rb
 #    rspec spec/005_songs_and_genres_spec.rb
-#    rspec spec/006_artist_and_genres_spec.rb
+#    rspec spec/006_artists_and_genres_spec.rb
 #    rspec spec/007_findable_songs_spec.rb
 #    rspec spec/008_findable_module_spec.rb
 
