@@ -3,30 +3,30 @@ require 'pry'
 Bundler.require
 require_all 'lib'
 
-class Artist
+class MusicImporter
   extend Concerns::Findable
   extend Concerns::ClassMethods
   include Concerns::InstanceMethods
-  attr_accessor :name, :songs
-  @@all = []
-  def initialize(name)
-    super 
-    @songs = []
-  end
-  def self.all 
-    @@all 
-  end 
-  def add_song(song)
-    @songs << song if !@songs.include?(song)
-    song.artist = self if song.artist == nil
-  end
-  def genres
-    genres = []
-  @songs.each {|song| genres << song.genre if !genres.include?(song.genre)}
-  genres
+  
+  attr_accessor :path
+  
+  def initialize(path)
+    @path = path
   end
   
+  def files
+    Dir.entries(@path).select {|f| !File.directory? f}
+  end 
+  
+  def import 
+    files.each {|file| 
+      Song.create_from_filename(file)}
+  end 
+    #array = @email.split(/[\s,]/).reject(&:empty?)
+    #array.each {|e| all << e}
+    #all.uniq
 end
+
 
 # learn --fail-fast
 
@@ -41,11 +41,10 @@ end
 #    rspec spec/008_findable_module_spec.rb
 
 # IN PROGRESS
-
+# 9 #    rspec spec/009_music_importer_spec.rb
 
 # AHEAD
-#    rspec spec/009_music_importer_spec.rb
+
 #    rspec spec/010_music_library_controller_spec.rb
 #    rspec spec/011_music_library_cli_methods_spec.rb
 #    rspec spec/011_music_library_cli_spec.rb
-

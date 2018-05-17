@@ -39,17 +39,20 @@ class Song
     @genre 
   end
   
-  #def self.create(name)
-  #  new(name).tap {|i| i.save}
-  #end
+  def self.new_from_filename(file)
+    a = file.split(" - ")[0]
+    s = file.split(" - ")[1]
+    g = file.split(" - ")[2].chomp(".mp3")
     
-  #def self.find_by_name(name)
-  #  @@all.detect {|i| i.name = name}
-  #end
-  
-  #def self.find_or_create_by_name(name)
-  #  find_by_name(name) || create(name)
-  #end
+    artist = Artist.find_or_create_by_name(a)
+    genre = Genre.find_or_create_by_name(g)
+    song = Song.find_or_create_by_name(s)
+    song.artist = artist
+    song.genre = grene
+    
+    
+    binding.pry
+  end 
   
 end
 
@@ -62,13 +65,14 @@ end
 #    rspec spec/004_songs_and_artists_spec.rb
 #    rspec spec/005_songs_and_genres_spec.rb
 #    rspec spec/006_artist_and_genres_spec.rb
+#    rspec spec/007_findable_songs_spec.rb
+#    rspec spec/008_findable_module_spec.rb
 
 # IN PROGRESS
-# 1 #    rspec spec/007_findable_songs_spec.rb
-# 1 #    rspec spec/008_findable_module_spec.rb
+# 5 #    rspec spec/009_music_importer_spec.rb
 
 # AHEAD
-#    rspec spec/009_music_importer_spec.rb
+
 #    rspec spec/010_music_library_controller_spec.rb
 #    rspec spec/011_music_library_cli_methods_spec.rb
 #    rspec spec/011_music_library_cli_spec.rb
