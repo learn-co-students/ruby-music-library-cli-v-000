@@ -107,10 +107,7 @@ end
 #    rspec spec/010_music_library_controller_spec.rb
 
 # IN PROGRESS
-
+# 3 #    rspec spec/011_music_library_cli_methods_spec.rb
 
 # AHEAD
-
-
-#    rspec spec/011_music_library_cli_methods_spec.rb
-#    rspec spec/011_music_library_cli_spec.rb
+#    rspec spec/012_music_library_cli_spec.rb
