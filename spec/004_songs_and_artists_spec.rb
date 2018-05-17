@@ -1,4 +1,5 @@
 require "spec_helper"
+require "pry"
 
 describe "Associations — Song and Artist:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
@@ -86,7 +87,7 @@ describe "Associations — Song and Artist:" do
   context "Song" do
     describe "#artist=" do
       it "invokes Artist#add_song to add itself to the artist's collection of songs (artist has many songs)" do
-        expect(artist).to receive(:add_song)
+          expect(artist).to receive(:add_song)
 
         song.artist = artist
       end
