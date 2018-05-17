@@ -28,7 +28,6 @@ class MusicLibraryController
   end
   
   def list_songs
-    list = []
     count = 1
     az = Song.all.sort_by {|obj| obj.name}
     az.each {|obj| 
@@ -36,6 +35,15 @@ class MusicLibraryController
       s = obj.name
       g = obj.genre.name 
       puts "#{count}. #{a} - #{s} - #{g}"
+      count += 1}
+  end 
+  
+  def list_artists
+    count = 1
+    az = Artist.all.sort_by {|obj| obj.name}
+    az.each {|obj| 
+      a = obj.name
+      puts "#{count}. #{a}"
       count += 1}
   end 
 end
