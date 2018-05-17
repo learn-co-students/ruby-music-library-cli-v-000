@@ -29,9 +29,8 @@ class MusicLibraryController
   
   def list_songs
     count = 1
-    az = Song.all.sort_by {|obj| obj.name}
-    az.each {|obj| 
-      puts "#{count}. #{obj.artist.name} - #{obj.name} - #{obj.genre.name}"
+    az = Song.all.sort_by {|s| s.name}
+    az.each {|obj| puts "#{count}. #{obj.artist.name} - #{obj.name} - #{obj.genre.name}"
       count += 1}
   end 
   
@@ -81,14 +80,12 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     list_songs
     input = gets
-    integer = input.to_i
-    n = Song.all.size
-    if (1..n) === integer
-      integer -= 1 
-      title = list_songs[integer]
-      song = Song.find_by_name(title)
+    num = input.to_i
+    i = num - 1 
+    array = Song.all.sort_by {|s| s.name}
+    title = array[i].name
+    song = Song.find_by_name(title)
       puts "Playing #{song.name} by #{song.artist.name}"
-    end
   end
 end
 
