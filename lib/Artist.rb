@@ -35,10 +35,12 @@ class Artist
     
   def add_song(song)
     if song.artist
+
       # binding.pry
     else
       song.artist = self
       @@songs << song
+
     end 
   end 
   
