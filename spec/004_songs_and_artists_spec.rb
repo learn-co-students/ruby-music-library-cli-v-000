@@ -1,4 +1,4 @@
-require "spec_helper"
+ferequire "spec_helper"
 
 describe "Associations — Song and Artist:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
