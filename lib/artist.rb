@@ -14,12 +14,11 @@ include Memorable::InstanceMethods
     a = self.new(name) 
     a.save
     a
-  end
+  end 
  
   def initialize(name)
     @name = name
     @songs = []
-    save
   end
   
   def self.all

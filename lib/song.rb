@@ -14,7 +14,6 @@ attr_reader :genre
     @name = name
     self.artist = artist if artist 
     self.genre = genre if genre
-    save
   end 
   
   def self.all 
@@ -31,18 +30,24 @@ attr_reader :genre
      @artist.add_song(self)
   end
   
-  # def self.find_by_name(name) 
-  #   self.all.detect {|a| a.name == name}
-  # end 
+  def self.create(name)
+   song = new(name)
+   song.save
+   song
+  end
   
-  # def self.find_or_create_by_name(name)
-  #   x = self.find_by_name(name)
-  #   if x == nil 
-  #     self.create(name)
-  #   else
-  #     x
-  #   end
-  # end
+  def self.find_by_name(name) 
+    self.all.detect {|a| a.name == name}
+  end 
+  
+  def self.find_or_create_by_name(name)
+    x = self.find_by_name(name)
+    if x == nil 
+      self.create(name)
+    else
+      x
+    end
+  end
   
   # def alphabetical
   #   self.all.sort_by{|s| s.name}
