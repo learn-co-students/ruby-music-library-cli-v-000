@@ -1,8 +1,3 @@
-require 'bundler'
-require 'pry'
-Bundler.require
-require_all 'lib'
-
 class MusicImporter
   #extend Concerns::Findable
   #extend Concerns::ClassMethods

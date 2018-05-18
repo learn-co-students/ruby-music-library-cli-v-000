@@ -1,8 +1,3 @@
-require 'bundler'
-require 'pry'
-Bundler.require
-require_all 'lib'
-
 class MusicLibraryController 
   attr_accessor :input
   
