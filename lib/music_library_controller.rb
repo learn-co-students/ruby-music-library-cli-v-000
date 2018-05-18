@@ -85,6 +85,15 @@ class MusicLibraryController
       puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
+  
+  def method_picker(input)
+    a = input.downcase
+    answer = case a
+  
+    when "list songs"
+      list_songs
+    end
+  end
 end
 
 #  learn --fail-fast
@@ -100,9 +109,7 @@ end
 #    rspec spec/008_findable_module_spec.rb
 #    rspec spec/009_music_importer_spec.rb
 #    rspec spec/010_music_library_controller_spec.rb
-
+#    rspec spec/011_music_library_cli_methods_spec.rb
 # IN PROGRESS
-# 3 #    rspec spec/011_music_library_cli_methods_spec.rb
 
-# AHEAD
 #    rspec spec/012_music_library_cli_spec.rb
