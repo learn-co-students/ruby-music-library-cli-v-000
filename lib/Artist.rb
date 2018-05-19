@@ -1,5 +1,8 @@
 require 'pry'
-class Artist
+
+class Artist 
+  extend Concerns::Findable
+
   
   #CLASS VARIABLES 
   
