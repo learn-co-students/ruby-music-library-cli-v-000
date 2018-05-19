@@ -4,6 +4,7 @@ class Genre
   def initialize(name)
     @name = name
     @@all << self
+    @songs = []
   end 
   def self.all
     @@all
@@ -16,7 +17,21 @@ class Genre
   end 
   def self.create(genre_name)
     genre = Genre.new(genre_name)
+    genre.save 
+    genre
   end 
+  def songs
+    @songs
+  end 
+  def artists 
+    artist_collection = self.songs.collect do |song|
+      song.artist
+    end 
+    artist_collection.uniq
+  end 
+  
+    
+  
     
   
 
