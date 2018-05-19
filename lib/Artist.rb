@@ -3,7 +3,6 @@ require 'pry'
 class Artist 
   extend Concerns::Findable
 
-  
   #CLASS VARIABLES 
   
   @@all = []
