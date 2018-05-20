@@ -28,12 +28,22 @@ class MusicLibraryController
     end 
   end 
   def list_artists
-    artists = Artist.all.collect.sort {|a,b|
+    artists = Artist.all.sort {|a,b|
     a.name <=> b.name}
     
     artists.each_with_index do |artist,i|
       puts "#{i+1}. #{artist.name}"
     end 
+  end 
+  def list_genres
+    genres = Genre.all.sort {|a,b|
+    a.name <=> b.name}
+    
+    artists.each_with_index do |artist,i|
+      puts "#{i+1}. #{artist.name}"
+    end 
+  end 
+  
   end 
       
     
