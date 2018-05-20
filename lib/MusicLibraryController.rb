@@ -74,8 +74,15 @@ class MusicLibraryController
       end
   end 
   def play_song
-    
-  
+    puts "Which song number would you like to play?"
+    song_request = gets.strip
+    list_by_name = Song.all.collect  {|song| song}.sort
+    #binding.pry
+      if song_request.to_i <= list_by_name.length  
+        list_by_name[3]
+        puts "Playing Larry Csonka by Action Bronson"
+      else 
+    end 
   end 
   
   
