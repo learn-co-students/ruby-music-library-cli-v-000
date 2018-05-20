@@ -1,7 +1,11 @@
 require 'pry'
 
 class Artist 
+
   extend Concerns::Findable
+
+  # extend Concerns::Findable
+
 
   #CLASS VARIABLES 
   

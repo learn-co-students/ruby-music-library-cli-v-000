@@ -15,9 +15,28 @@ class MusicLibraryController
     puts "What would you like to do?"
     input = gets.strip until input == "exit"
   end
+  
   def list_songs
-    Song.all.each do |song| 
-      print song 
+    
+    songs = Song.all.collect.sort {|a,b|
+    a.name <=> b.name
+      
+    }
+  #binding.pry
+    songs.each_with_index do |song, i| 
+      puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}" 
     end 
   end 
+  def list_artists
+    artists = Artist.all.collect.sort {|a,b|
+    a.name <=> b.name}
+    
+    artists.each_with_index do |artist,i|
+      puts "#{i+1}. #{artist.name}"
+    end 
+  end 
+      
+    
+  
+    
 end 

@@ -1,7 +1,12 @@
 class Genre 
 
+
   extend Concerns::Findable
 
+  # extend Concerns::Findable
+
+
+  extend Concerns::Findable
   # extend Concerns::Findable
 
   @@all = []
