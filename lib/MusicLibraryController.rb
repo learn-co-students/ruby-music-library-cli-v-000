@@ -16,5 +16,8 @@ class MusicLibraryController
     input = gets.strip until input == "exit"
   end
   def list_songs
+    Songs.all.each do |song| 
+      print song 
+    end 
   end 
 end 
