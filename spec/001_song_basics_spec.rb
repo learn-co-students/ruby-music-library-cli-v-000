@@ -65,11 +65,12 @@ describe "Song" do
     end
   end
 
-  describe ".create" do
-    it "initializes and saves the song" do
+   describe ".create" do
+     it "initializes and saves the song" do
       created_song = Song.create("Kaohsiung Christmas")
 
-      expect(Song.all).to include(created_song)
+     expect(Song.all).to include(created_song)
+
     end
   end
 end
