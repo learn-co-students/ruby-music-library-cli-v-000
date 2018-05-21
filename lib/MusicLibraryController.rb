@@ -78,11 +78,12 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     song_request = gets.strip
-    list_by_name = Song.all.collect {|song| song.name}.sort
-    song = Song.all.detect {|song |song.name == list_by_name[song_request.to_i - 1]}
-    
-    # song = find_by_name(list_by_name[song_request.to_i - 1 ])
-    # binding.pry
+     if song_request.to_i > = 1 && song_request.to_i <= Song.all.length  
+      
+      list_by_name = Song.all.collect {|song| song.name}.sort
+      song = Song.all.detect {|song |song.name == list_by_name[song_request.to_i - 1]}
+    else 
+    end 
     if song 
         puts "Playing #{song.name} by #{song.artist.name}"
     else 
