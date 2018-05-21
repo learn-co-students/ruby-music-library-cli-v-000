@@ -116,6 +116,6 @@ class MusicLibraryController
 
 #issues with this lesson
 # does not accept case statement instead requires a long string of ongoing elsif statements
-# requires use of a function that outputs without outputting the data is outputs, WTF?
+# requires use of a function that outputs without outputting the data is outputs, 
 # "CLI Methods #play_song upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs"
 end
