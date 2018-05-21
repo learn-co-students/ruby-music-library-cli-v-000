@@ -9,27 +9,10 @@ class MusicLibraryController
   end
   
   def list_songs
-   reorderedSongs = []
-    @mp3s.each do |mp3|
-      songInfo = mp3.split(" - ")
-      artist_name = songInfo[0]
-      song_name = songInfo[1]
-      genre_name = songInfo[2].gsub!(/.mp3/,"")
-      reorderedSongs << [song_name, artist_name, genre_name]
-    end
-    reorderedSongs.sort.each_with_index do |song, index|
-      puts "#{index+1}. #{song[1]} - #{song[0]} - #{song[2]}"
-    end
-    '''
-    #binding.pry
-    Song.all.sort_by! {|song|song.name}
-    Song.all.uniq
-    #binding.pry    
-    Song.all.each_with_index do |song, index| 
-      binding.pry
+    reorderedSongs = Song.all.sort {|a,b| a.name <=> b.name}
+    reorderedSongs.each_with_index do |song,index|
       puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
-    '''
   end
   
   def list_artists
@@ -74,21 +57,10 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-    songNumIndex = gets.strip
-    songInt = songNumIndex.to_i
-    #sortedSongs = Song.all.sort_by! {|song| song.name}
-    #sortedSongs.uniq.each do |song|
-    reorderedSongs = []
-    @mp3s.each do |mp3|
-      songInfo = mp3.split(" - ")
-      artist_name = songInfo[0]
-      song_name = songInfo[1]
-      genre_name = songInfo[2].gsub!(/.mp3/,"")
-      reorderedSongs << [song_name, artist_name, genre_name]
-    end
-    reorderedSongs.sort!
-    if songInt-1 < reorderedSongs.length && songInt >= 1 && songInt <= 100
-      puts "Playing #{reorderedSongs[songInt-1][0]} by #{reorderedSongs[songInt-1][1]}"
+    songNumIndex = gets.strip.to_i
+    reorderedSongs = Song.all.sort {|a,b| a.name <=> b.name}
+    if songNumIndex-1 < reorderedSongs.length && songNumIndex >= 1 && songNumIndex <= 100
+      puts "Playing #{reorderedSongs[songNumIndex-1].name} by #{reorderedSongs[songNumIndex-1].artist.name}"
     end
   end
 
@@ -105,17 +77,18 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
       userInput = gets.strip
-      if userInput == "list songs"
+      case userInput
+      when "list songs"
         list_songs
-      elsif userInput == "list artists"
+      when "list artists"
         list_artists
-      elsif userInput == "list genres"
+      when "list genres"
         list_genres
-      elsif userInput == "list artist"
+      when "list artist"
         list_songs_by_artist
-      elsif userInput == "list genre"
+      when "list genre"
         list_songs_by_genre
-      elsif userInput == "play song"
+      when"play song"
         play_song
       end
     end
