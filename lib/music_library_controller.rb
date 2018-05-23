@@ -57,20 +57,7 @@ class MusicLibraryController
 			puts "#{index + 1}. #{artist.name}"
 		end
 	end
-=begin
-	def list_songs
-    	Song.all.sort_by{|s| s.name}.each_with_index |song, index|
-			puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    	end
-	end
-
-	def list_songs
-    	sorted = Song.all.sort_by {|obj| obj.name}
-    	sorted.each_with_index do |song, index|
-      		puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    	end
-	end
-=end
+	
 	def list_genres
 		genres_array = Genre.all.sort_by{|genre| genre.name }
 		genres_array.each_with_index do |genre, index|
@@ -116,6 +103,6 @@ class MusicLibraryController
 
 #issues with this lesson
 # does not accept case statement instead requires a long string of ongoing elsif statements
-# requires use of a function that outputs without outputting the data is outputs, 
+# requires use of a function that outputs without outputting the data is outputs,
 # "CLI Methods #play_song upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs"
 end
