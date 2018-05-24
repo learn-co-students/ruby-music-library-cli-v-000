@@ -1,23 +1,23 @@
 class MusicImporter
 
   attr_accessor :path
-
+  
   def initialize(path)
     @path = path
   end
 
   def files
-    @@all = []
+    @songs = []
     Dir.foreach(@path) do |song|
       if song.include?(".mp3")
-        @@all << song
+        @songs << song
       end
     end
-    @@all.uniq
+    @songs.uniq
  end
 
  def import
-   @@all.each do |file|
+   files.each do |file|
      Song.create_from_filename(file)
    end
  end
