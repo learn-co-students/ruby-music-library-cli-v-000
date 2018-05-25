@@ -1,5 +1,5 @@
 class Artist
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :genre
   
   @@all = []
   
@@ -28,6 +28,12 @@ class Artist
   def add_song(song)
     song.artist = self unless song.artist == self  
     @songs << song unless @songs.include?(song) 
+  end
+  
+  def genres
+    self.songs.collect do |song|
+      song.genre
+    end.uniq
   end
   
 end
