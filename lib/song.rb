@@ -34,7 +34,6 @@ class Song
   
   def self.create(name)
     self.new(name)
-    #self.new(name).tap {|s| s.save}
   end
   
   def self.find_by_name(name)
