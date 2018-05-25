@@ -1,5 +1,5 @@
 require "spec_helper"
-
+require 'pry'
 describe "Associations — Song and Artist:" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
   let(:artist) { Artist.new("Neutral Milk Hotel") }
@@ -29,6 +29,7 @@ describe "Associations — Song and Artist:" do
         song_with_artist = Song.new("Two-Headed Boy", artist)
 
         expect(song_with_artist.instance_variable_defined?(:@artist)).to be(true)
+
         expect(song_with_artist.instance_variable_get(:@artist)).to be(artist)
       end
     end
@@ -43,6 +44,7 @@ describe "Associations — Song and Artist:" do
 
     describe "#artist=" do
       it "assigns an artist to the song (song belongs to artist)" do
+
         song.artist = artist
 
         assigned_artist = song.instance_variable_get(:@artist)

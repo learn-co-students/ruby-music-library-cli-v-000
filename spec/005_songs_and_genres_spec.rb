@@ -57,7 +57,7 @@ describe "Associations — Song and Genre:" do
 
       it "does not add the song to the genre's collection of songs if it already exists therein" do
         2.times { song.genre = genre }
-
+        
         expect(genre.songs).to include(song)
         expect(genre.songs.size).to be(1)
       end

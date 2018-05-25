@@ -36,6 +36,7 @@ describe "Song" do
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
 
       expect(song.name).to eq("For Love I Come")
+    
       expect(song.artist.name).to eq("Thundercat")
       expect(song.genre.name).to eq("dance")
     end

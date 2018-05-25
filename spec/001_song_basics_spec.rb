@@ -44,6 +44,7 @@ describe "Song" do
       Song.class_variable_set(:@@all, [song])
 
       expect(Song.all).to match_array([song])
+
     end
   end
 
@@ -62,6 +63,7 @@ describe "Song" do
       song.save
 
       expect(Song.all).to include(song)
+
     end
   end
 
@@ -70,6 +72,7 @@ describe "Song" do
       created_song = Song.create("Kaohsiung Christmas")
 
       expect(Song.all).to include(created_song)
+      
     end
   end
 end
