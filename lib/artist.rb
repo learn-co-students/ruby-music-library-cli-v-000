@@ -21,9 +21,14 @@ class Artist
   # INSTANCE VARIABLES AND METHODS
   def initialize(name)
     @name = name
+    @songs = Array.new
   end
 
   def save
     @@all << self
+  end
+
+  def songs
+    @songs
   end
 end
