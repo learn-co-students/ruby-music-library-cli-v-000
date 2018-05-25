@@ -4,6 +4,7 @@ context "Song" do
   describe ".find_by_name" do
     it "finds a song instance in @@all by the name property of the song" do
       expect(Song.find_by_name("In the Aeroplane Over the Sea")).to be(song)
+
     end
   end
 
