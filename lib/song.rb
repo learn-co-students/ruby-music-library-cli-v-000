@@ -1,5 +1,5 @@
 class Song
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
 
   # CLASS VARIABLES AND METHODS
   @@all = Array.new
@@ -19,10 +19,14 @@ class Song
   end
 
   # INSTANCE VARIABLES AND METHODS
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     if !(artist.nil?)
       self.artist=(artist)
+    end
+
+    if !(genre.nil?)
+      self.genre=(genre)
     end
   end
 
@@ -33,5 +37,10 @@ class Song
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
   end
 end
