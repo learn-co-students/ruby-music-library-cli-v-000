@@ -4,7 +4,7 @@ module Concerns::Findable
   end 
   
   def find_or_create_by_name(title)
-    find_by_name(title) ? find_by_name(title) : create(title)
+    find_by_name(title) ? find_by_name(title) : self.create(title)
   end
   
 end
