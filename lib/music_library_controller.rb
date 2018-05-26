@@ -1,4 +1,5 @@
 require 'pry'
+require 'pp'
 class MusicLibraryController
   def initialize(path = './db/mp3s')
     music_importer = MusicImporter.new(path)
@@ -20,6 +21,26 @@ class MusicLibraryController
       puts "What would you like to do?"
 
       input = gets.strip
+    end
+  end
+
+  # CLI Methods
+  def list_songs
+    songs_obj = (Song.all).sort_by {|obj| obj.name}
+    songs_array = Array.new
+    obj_count = 1
+
+    songs_obj.each do |song|
+      # binding.pry
+      artist = song.artist.name
+      genre = song.genre.name
+      song_name = song.name
+      songs_array << "#{obj_count}. #{artist} - #{song_name} - #{genre}"
+      obj_count += 1
+    end
+
+    songs_array.each do |song|
+      puts song
     end
   end
 end

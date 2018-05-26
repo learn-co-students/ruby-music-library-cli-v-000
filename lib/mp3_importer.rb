@@ -1,5 +1,3 @@
-require 'pry'
-
 class MusicImporter
   attr_reader :path
 
