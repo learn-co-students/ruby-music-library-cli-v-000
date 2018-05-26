@@ -11,7 +11,7 @@ class MusicImporter
   def files
     @files = Dir.glob(@path + "/*.mp3").collect do |song|
         song_array = song.split("/")
-        song_array[-1].chomp(".mp3")
+        song_array[-1]
     end
    end
   
