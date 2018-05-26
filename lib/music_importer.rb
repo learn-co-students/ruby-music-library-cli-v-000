@@ -9,9 +9,11 @@ class MusicImporter
   end
   
   def files
-    @files = Dir.glob(@path + "/*.mp3")
-    @files.each{|song| song.slice!(0, 21)}
-  end
+    @files = Dir.glob(@path + "/*.mp3").collect do |song|
+        song_array = song.split("/")
+        song_array[-1].chomp(".mp3")
+    end
+   end
   
   def import 
     files = self.files
