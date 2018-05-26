@@ -10,7 +10,6 @@ class MusicImporter
   def files
     @files = Dir.glob("#{@path}/*.mp3")
     @all_files = @files.collect { |file| file.split("/")[4] }
-    # binding.pry
   end
 
   def import
