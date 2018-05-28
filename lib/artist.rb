@@ -1,5 +1,6 @@
 class Artist
   attr_accessor :name
+  extend Concerns::Findable
   @@all = []
   def initialize(name)
     @name = name
