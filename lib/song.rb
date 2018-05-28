@@ -7,8 +7,8 @@ class Song
     @name = name
     self.artist = artist if artist
     self.genre = genre if genre
-    @@all = []
   end
+
   def artist=(artist)
      @artist = artist
      artist.add_song(self)
