@@ -22,10 +22,9 @@ class Genre
     @@all << self
   end
   
-  def self.create(name)
-    self.new(name).save
-    self
-  end
+  def self.create(genre)
+    self.new(genre).tap {|g| g.save}
+  end 
     
   def artists
     songs.map {|song| song.artist}.uniq

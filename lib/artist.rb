@@ -22,10 +22,9 @@ class Artist
     @@all << self
   end
   
-  def self.create(name)
-    self.new(name).save
-    self
-  end
+  def self.create(artist)
+    self.new(artist).tap {|a| a.save}
+  end 
     
   def add_song(song)
     @songs << song unless @songs.include?(song)
