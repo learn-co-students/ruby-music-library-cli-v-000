@@ -1,6 +1,5 @@
 class Artist
-  attr_accessor :songs
-  attr_reader :name, :genre
+  attr_accessor :songs, :name, :genre
   @@all = []
   
   def initialize(name)
@@ -21,13 +20,25 @@ class Artist
     self.Artist << Artist
     song.artist = self
   end
-
-  def genres
-   songs.map { |s| s.genre }
-  end
   
   def self.all 
     @@all
+  end
+  
+  def self.reset 
+    @@all.clear
+  end
+  
+  def save 
+    @@all << self
+  end
+  
+  def self.count
+    @@all.size 
+  end
+  
+  def self.find_by_name(name)
+    @@all.detect{|artist| artist.name = name}
   end
 
 end
