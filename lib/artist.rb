@@ -38,5 +38,4 @@ class Artist
    song.artist = self unless song.artist
    songs << song unless songs.include?(song)
  end
-
 end
