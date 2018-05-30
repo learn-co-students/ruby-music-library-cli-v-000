@@ -89,17 +89,18 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     input = gets.strip
+    #binding.pry
+    song = Song.all.sort {|a,b| a.name <=> b.name}.uniq
+    song.each_with_index do |s, i|
+      if input.to_i == i+1
 
-# "checks that the user entered a number
-# between 1 and the total number of songs in the library"
-# upon receiving valid input 'plays' the matching song from
-# the alphabetized list output by #list_songs
-
-    if input.to_i.between?(1, list_songs.size)
-      list_songs.detect do |s|
-      puts "#{s.name} by #{s.artist.name}"
+        puts "Playing #{s.name} by #{s.artist.name}"
       end
     end
   end
+  # "checks that the user entered a number
+  # between 1 and the total number of songs in the library"
+  # upon receiving valid input 'plays' the matching song from
+  # the alphabetized list output by #list_songs
 
 end
