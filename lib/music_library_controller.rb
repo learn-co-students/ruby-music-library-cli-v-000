@@ -92,9 +92,13 @@ class MusicLibraryController
 
 # "checks that the user entered a number
 # between 1 and the total number of songs in the library"
-    if input == (1..list_songs.size)
-      #list_songs.detect {|i| i.length[0]}
-      puts "#{song.name} by #{artist.name}"
+# upon receiving valid input 'plays' the matching song from
+# the alphabetized list output by #list_songs
+
+    if input.to_i.between?(1, list_songs.size)
+      list_songs.detect do |s|
+      puts "#{s.name} by #{s.artist.name}"
+      end
     end
   end
 
