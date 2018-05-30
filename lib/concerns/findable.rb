@@ -1,13 +1,5 @@
 module Concerns::Findable
-
-  def all
-    @all = []
-  end
-
-  def destroy_all
-    @all.clear
-  end
-
+  
   def create(name)
     x = self.new(name)
     x.save
