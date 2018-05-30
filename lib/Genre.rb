@@ -9,8 +9,8 @@ class Genre
   end
   
   def add_song(song)
-    @songs << song unless @songs.include?(song)
-    song.genre = self unless song.genre
+    @songs << song unless @songs.include?(self)
+    genre.songs.include?(self)
   end
   
   def self.all 
