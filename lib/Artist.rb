@@ -23,7 +23,7 @@ class Artist
   end
   
   def self.find_by_name(artist_name)
-    self.all.detect{|artist| self.artist}
+    self.all.detect{|artist| artist.name==artist_name}
   end
   
   def genres 
