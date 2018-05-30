@@ -22,11 +22,11 @@ class Artist
   end
   
   def self.find_by_name(artist_name)
-    self.all.detect{|artist| artist.name == artist_name}
+    self.all.detect{|artist| self.artist}
   end
   
-  def self.fin_by_name(genre)
-    self.all.detect{|songs| genre == genre}
+  def genres
+    song.collect{|song| self.genre}
   end
 
   def self.find_or_create_by_name(artist_name)
