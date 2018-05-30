@@ -46,7 +46,7 @@ class MusicLibraryController
   # CLI Methods
 
   def sorted_songs
-    sorted_songs = Song.all.sort_by { |song| song.name }
+    Song.all.sort_by { |song| song.name }
   end
 
   def list_songs
