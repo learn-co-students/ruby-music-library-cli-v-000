@@ -5,7 +5,7 @@ class Song
 
   attr_accessor :name
   attr_reader :artist, :genre
-  @@all = []
+  # @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -23,13 +23,13 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
+  # def self.all
+  #   @@all
+  # end
+  #
+  # def self.destroy_all
+  #   @@all.clear
+  # end
 
   def save
     @@all << self
