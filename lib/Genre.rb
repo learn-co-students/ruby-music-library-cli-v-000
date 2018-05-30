@@ -8,9 +8,9 @@ class Genre
     @songs = []
   end
   
-  def add_Song(song)
+  def add_song(song)
     @songs << song unless @songs.include?(song)
-    song.artist = self unless song.artist
+    song.genre = self unless song.genre
   end
   
   def self.all 
@@ -21,12 +21,12 @@ class Genre
     @@all = []
   end
   
-  def self.find_by_name(artist_name)
-    self.all.detect{|artist| artist.name == artist_name}
+  def self.find_by_name(genre_name)
+    self.all.detect{|genre| genre.name == genre_name}
   end
 
-  def self.find_or_create_by_name(artist_name)
-    self.find_by_name(artist_name) || self.new(artist_name)
+  def self.find_or_create_by_name(genre_name)
+    self.find_by_name(genre_name) || self.new(genre_name)
   end
   
   def save
@@ -34,9 +34,9 @@ class Genre
   end
   
   def self.create(name)
-    artist = Artist.new(name)
-    artist.save
-    artist
+    genre = Genre.new(name)
+    genre.save
+    genre
   end
 end
 
