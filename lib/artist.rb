@@ -39,20 +39,6 @@ class Artist
     collection.uniq
   end
 
-  # def add_song(song)
-  #   if song.artist
-  #     song.artist
-  #   end
-  #
-  #   if !song.artist
-  #     song.artist = self
-  #   end
-  #
-  #   if !songs.include?(song)
-  #     songs << song
-  #   end
-  # end
-
   def add_song(song)
     song.artist = self unless song.artist
     self.songs << song unless self.songs.include?(song)
