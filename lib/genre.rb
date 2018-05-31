@@ -38,6 +38,4 @@ class Genre
     collection = self.songs.collect {|song| song.artist}
     collection.uniq
   end
-
-
 end

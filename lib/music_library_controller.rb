@@ -4,7 +4,6 @@ class MusicLibraryController
   def initialize(path="./db/mp3s")
     importer = MusicImporter.new(path)
     importer.import
-
   end
 
   # Instance Method(s)
@@ -88,6 +87,4 @@ class MusicLibraryController
       end
     }
   end
-
-
 end

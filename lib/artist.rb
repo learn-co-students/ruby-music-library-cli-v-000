@@ -43,5 +43,4 @@ class Artist
     song.artist = self unless song.artist
     self.songs << song unless self.songs.include?(song)
   end
-
 end
