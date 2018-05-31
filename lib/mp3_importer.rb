@@ -1,3 +1,4 @@
+require 'pry'
 class MusicImporter
   attr_reader :path
 
@@ -6,8 +7,10 @@ class MusicImporter
   end
 
   def files
+
     @files = Dir.glob("#{@path}/*.mp3")
-    @all_files = @files.collect { |file| file.split("/")[4] }
+    @all_files = @files.collect { |file| file.split("/").last }
+
   end
 
   def import
