@@ -61,7 +61,6 @@ class Song
      fishwings=empty_variable.split(" - ")
      artist = Artist.find_or_create_by_name(fishwings[0])
      genre = Genre.find_or_create_by_name(fishwings[2].split(".")[0])
-     
      new(fishwings[1], artist, genre)
    end
      
