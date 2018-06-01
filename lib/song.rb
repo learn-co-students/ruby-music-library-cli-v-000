@@ -3,29 +3,15 @@ class Song
   extend Common::ClassMethods
   include Common::InstanceMethods
 
-  attr_accessor :name
+  attr_accessor :name, :artist
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = nil)
     self.name = name
+    @artist = artist unless artist
   end
 
   def self.all
     @@all
   end
-=begin
-  def save
-    self.class.all << self
-  end
-
-  def self.destroy_all
-    all.clear
-  end
-
-  def self.create(name)
-    newy = self.new(name)
-    newy.save
-    newy
-  end
-=end
 end
