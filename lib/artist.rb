@@ -1,6 +1,9 @@
 require 'pry'
+require_relative './concerns_module.rb'
 
 class Artist
+  extend Concerns::Findable
+
   attr_accessor :name, :songs
 
   @@all = []
@@ -40,7 +43,7 @@ class Artist
 
   def self.create(name)
     artist = self.new(name)
-    @@all << artist
+    artist.save
     artist
   end
 
