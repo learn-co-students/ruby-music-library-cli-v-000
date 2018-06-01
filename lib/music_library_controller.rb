@@ -22,9 +22,25 @@ class MusicLibraryController
   end
   
   def list_songs
-    # alphabetize
-    Song.all.each_with_index { |song, index| 
+    alphabetized = Song.all.sort_by { |song| song.name }
+    alphabetized.each_with_index { |song, index| 
       puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     }
   end
+  
+  def list_artists
+    sorted = Artist.all.sort_by { |band| band.name }.uniq
+    sorted.each_with_index { |musician, index|
+      puts "#{index + 1}. #{musician.name}"
+    }
+  end
+  
+  def list_genres
+    organized = Genre.all.sort_by { |type| type.name }.uniq
+    organized.each_with_index { |style, index| 
+      puts "#{index + 1}. #{style.name}"
+    }
+  end
 end
+
+
