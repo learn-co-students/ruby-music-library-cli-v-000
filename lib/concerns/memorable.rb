@@ -3,6 +3,7 @@ module Memorable
     def destroy_all
       self.all.clear
     end
+  end
 
 
   #   def split_filename(filename)
