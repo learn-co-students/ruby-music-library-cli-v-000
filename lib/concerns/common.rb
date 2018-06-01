@@ -16,5 +16,10 @@ module Common
       fresh.save
       fresh
     end
+    
+    def create(name)
+      thing = new(name)
+      thing
+    end
   end
 end

@@ -24,9 +24,4 @@ class Artist
   def genres
     songs.collect { |song| song.genre }.uniq
   end
-  
-  def self.create(name)
-    artist = new(name)
-    artist
-  end
 end
