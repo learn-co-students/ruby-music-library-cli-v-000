@@ -29,23 +29,18 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
+
   def self.new_from_filename(filename)
   	art, sng, raw_gnr = filename.split(" - ")
   	gnr = raw_gnr.gsub(".mp3","")
   	artist = Artist.find_or_create_by_name(art)
   	genre = Genre.find_or_create_by_name(gnr)
   	song = self.new(sng, artist, genre)
+  	song
   end
 
-  def self.create_from_filename(file_name)
-    song = split_filename(file_name)
-    artist = Artist.find_or_create_by_name(song[0])
-    genre = Genre.find_or_create_by_name(song[2])
-
-    self.create(song[1]).tap do |song|
-      song.artist = artist
-      song.genre = genre
-    end
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).save
   end
 
 end

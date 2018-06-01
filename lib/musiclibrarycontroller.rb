@@ -90,7 +90,7 @@ end
 		"Which song number would you like to play?"
 		song_num = gets.strip.to_i
 		if (1..Song.all.length).include?(song_num)
-			song = Song.all(song_num)
+			song = Song.all[song_num-1]
 			puts "Playing #{song.name} by #{song.artist}" if song
 		end
 	end
