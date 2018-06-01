@@ -5,8 +5,7 @@ class Song
   @@all = []
   
   def initialize(name, artist=nil, genre=nil)
-    @name = name
-    @genre = genre
+    self.name = name
     self.artist = artist if artist
     self.genre = genre if genre
   end
@@ -47,6 +46,26 @@ class Song
     song
   end
   
-  def self.new_from_filename
+  def self.create(new_from_filename)
+     song = self.new(new_from_filename)
+     song.save
+     song
   end
-end
+  
+   def self.create_from_filename(filename) 
+     neb = new_from_filename(filename)
+     neb.save
+   end
+   
+   def self.new_from_filename(empty_variable)
+     fishwings=empty_variable.split(" - ")
+     artist = Artist.find_or_create_by_name(fishwings[0])
+     genre = Genre.find_or_create_by_name(fishwings[2].split(".")[0])
+     
+     new(fishwings[1], artist, genre)
+   end
+     
+  
+end  
+  
+  
