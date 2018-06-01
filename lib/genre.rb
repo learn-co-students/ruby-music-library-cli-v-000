@@ -9,6 +9,7 @@ class Genre
   def initialize(name)
     self.name = name
     self.songs = []
+    save
   end
 
   def self.all
