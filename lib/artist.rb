@@ -17,6 +17,6 @@ class Artist
   
   def add_song(song)
     song.artist = self unless song.artist
-    self.class.all << song unless self.class.all.include? song
+    songs << song unless songs.include?(song)
   end
 end
