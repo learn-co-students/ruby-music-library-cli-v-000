@@ -11,6 +11,7 @@ class Song
     self.name = name
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
+    save
   end
 
   def self.all
@@ -24,5 +25,18 @@ class Song
   def genre=(genre)
     self.instance_variable_set(:@genre, genre) unless self.genre
     genre.songs << self unless genre.songs.include?(self)
+  end
+  
+  def self.find_by_name(name)
+    all.detect { |song| song.name == name }
+  end
+  
+  def self.create(name)
+    song = new(name)
+    song
+  end
+
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
   end
 end

@@ -1,6 +1,6 @@
 
 class Artist
-  extend Common::ClassMethods
+  extend Common::ClassMethods, Concerns::Findable
   include Common::InstanceMethods
 
   attr_accessor :name, :songs
@@ -22,5 +22,10 @@ class Artist
   
   def genres
     songs.collect { |song| song.genre }.uniq
+  end
+  
+  def self.create(name)
+    artist = new(name)
+    artist
   end
 end
