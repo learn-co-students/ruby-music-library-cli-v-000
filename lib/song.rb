@@ -1,63 +1,33 @@
 
+class Song
+  extend Concerns::Findable
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
 
-
-
-class Song 
-	extend Concerns::Findable
-	extend Memorable::ClassMethods
-	include Memorable::InstanceMethods
-
-  
   attr_accessor :name
   attr_reader :artist, :genre
 
-  
-  @@all = [] 
-  
-  def self.all 
-    @@all
-  end 
-  
-  # def self.destroy_all
-  #   all.clear
-  # end
-  
-  def initialize(name, artist=nil, genre=nil)
-    @name = name 
-    @artist=(artist) if artist
-    @genre=(genre) if genre 
+  @@all = []
+
+  def initialize(name, artist = nil, genre = nil)
+    @name = name
+    self.artist=(artist) if artist
+    self.genre=(genre) if genre
   end
 
-  
-  def save
-  	@@all << self
+  def self.all
+    @@all
   end
-  
-  # def self.create(name)
-  # 	created_song = Song.new(name)
-  # 	created_song.save
-  # 	created_song
-  # end
 
   def artist=(artist)
-  	self.artist = artist
-  	artist.add_song(self) unless artist.songs.include?(self)
+    @artist = artist
+    artist.add_song(self)
   end
 
-   def genre=(genre)
-  	self.genre = genre
-  	genre.songs << self unless genre.songs.include?(self)
+  def genre=(genre)
+    @genre = genre
+    genre.songs << self unless genre.songs.include?(self)
   end
-
-  # def self.find_by_name(name)
-  # 	@@all.detect?{|song| song.name == name}
-  # end
-
-  # def self.find_or_create_by_name(name)
-  # 	if not self.find_by_name
-  # 		self.create(name)
-  # 	end
-  # end
 
   def self.new_from_filename(filename)
   	art, sng, raw_gnr = filename.split(" - ")
@@ -67,14 +37,17 @@ class Song
   	song = self.new(sng, artist, genre)
   end
 
-  def self.create_from_filename(filename)
-  	new_from_filename(name).save
+  def self.create_from_filename(file_name)
+    song = split_filename(file_name)
+    artist = Artist.find_or_create_by_name(song[0])
+    genre = Genre.find_or_create_by_name(song[2])
+
+    self.create(song[1]).tap do |song|
+      song.artist = artist
+      song.genre = genre
+    end
   end
 
-
-  	
 end
-  
-
 
 

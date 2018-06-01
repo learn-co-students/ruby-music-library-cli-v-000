@@ -17,7 +17,5 @@ module Concerns::Findable
 				object.save
 			end
 		end
-    
-  # end
 
 end
