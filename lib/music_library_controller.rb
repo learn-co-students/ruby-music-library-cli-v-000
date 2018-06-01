@@ -3,7 +3,6 @@ class MusicLibraryController
   def initialize(path = './db/mp3s')
     new_songs = MusicImporter.new(path)
     new_songs.import
-    new_songs
   end
   
   def call
@@ -20,5 +19,12 @@ class MusicLibraryController
     until input == exit
       input = gets.strip
     end
+  end
+  
+  def list_songs
+    # alphabetize
+    Song.all.each_with_index { |song, index| 
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    }
   end
 end
