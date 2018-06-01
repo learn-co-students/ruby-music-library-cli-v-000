@@ -1,8 +1,6 @@
 
 class Artist
   extend Concerns::Findable
-  extend Memorable::ClassMethods
-  include Memorable::InstanceMethods
 
   attr_accessor :name, :songs
 
@@ -16,6 +14,14 @@ class Artist
   def self.all
     @@all
   end
+  
+    def save
+      self.class.all << self
+    end
+  
+    def destroy_all
+      self.all.clear
+    end
 
   def add_song(song)
     @songs << song unless songs.include?(song)
