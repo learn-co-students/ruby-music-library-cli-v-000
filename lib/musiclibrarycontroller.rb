@@ -25,20 +25,19 @@ class MusicLibraryController
 			input = gets.strip
 			
   		case input
-  	  when input == "list songs"
+  	  when  "list songs"
   	    list_songs
-  	  when input == 'list artists'
+  	  when  'list artists'
   	    list_artists
-  	   when input == 'list genres'
+  	   when  'list genres'
   	     list_genres
-  	   when input == 'list artist'
+  	   when 'list artist'
   	     list_songs_by_artist
-  	   when input == 'list genre'
+  	   when  'list genre'
   	     list_songs_by_genre
-  	   when input == 'play song'
+  	   when  'play song'
   	     play_song
-  	   else
-  	     call
+
   	end
   end
 end
@@ -87,7 +86,7 @@ end
 
 
 	def play_song
-		"Which song number would you like to play?"
+		puts "Which song number would you like to play?"
 		song_num = gets.strip.to_i
 		if (1..Song.all.length).include?(song_num)
 			song = Song.all[song_num-1]
