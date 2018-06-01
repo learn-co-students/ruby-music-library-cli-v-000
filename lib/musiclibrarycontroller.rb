@@ -48,7 +48,6 @@ end
 
 
 	def list_songs
-	  @songs_sorted
 		Song.all.sort_by(&:name).each.with_index(1) do |song,ix|
 			puts "#{ix}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
 		end
@@ -70,7 +69,7 @@ end
 		puts "Please enter the name of an artist:"
 		get_artist = gets.strip
 		if artist = Artist.find_by_name(get_artist)
-			artist.all.sort_by(&:name).each.with_index(1) do |artist,ix|
+			artist.songs.sort_by(&:name).each.with_index(1) do |song,ix|
 				puts "#{ix}. #{song.name} - #{song.genre.name}"
 			end
 		end
@@ -80,7 +79,7 @@ end
 		puts "Please enter the name of a genre:"
 		get_genre = gets.strip
 		if genre = Genre.find_by_name(get_genre)
-			genre.all.sort_by(&:name).each.with_index(1) do |genre,ix|
+			genre.songs.sort_by(&:name).each.with_index(1) do |song,ix|
 				puts "#{ix}. #{song.artist.name} - #{song.name}"
 			end
 		end
@@ -92,8 +91,9 @@ end
 		song_num = gets.strip.to_i
 		if (1..Song.all.length).include?(song_num)
 		  
-			song = Song.all[song_num -1]
-			puts "Playing #{song.name} by #{song.artist}" if song
+			songs = Song.all.sort_by(&:name)
+			song = songs[song_num -1]
+			puts "Playing #{song.name} by #{song.artist.name}" if song
 		end
 	end
 
