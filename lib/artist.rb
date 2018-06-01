@@ -1,6 +1,8 @@
 
 class Artist
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
 
   attr_accessor :name, :songs
 
@@ -15,13 +17,13 @@ class Artist
     @@all
   end
   
-    def save
-      self.class.all << self
-    end
+    # def save
+    #   self.class.all << self
+    # end
   
-    def destroy_all
-      self.all.clear
-    end
+    # def destroy_all
+    #   self.all.clear
+    # end
 
   def add_song(song)
     @songs << song unless songs.include?(song)

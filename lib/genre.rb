@@ -2,6 +2,8 @@
 
 class Genre
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
 
   attr_accessor :name, :songs
 
@@ -16,13 +18,13 @@ class Genre
     @@all
   end
   
-    def save
-      self.class.all << self
-    end
+    # def save
+    #   self.class.all << self
+    # end
   
-    def destroy_all
-      self.all.clear
-    end
+    # def destroy_all
+    #   self.all.clear
+    # end
 
   def artists
     self.songs.collect {|song| song.artist}.uniq
