@@ -16,14 +16,6 @@ class Artist
   def self.all
     @@all
   end
-  
-    # def save
-    #   self.class.all << self
-    # end
-  
-    # def destroy_all
-    #   self.all.clear
-    # end
 
   def add_song(song)
     @songs << song unless songs.include?(song)

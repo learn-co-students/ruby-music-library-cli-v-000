@@ -18,14 +18,6 @@ class Genre
     @@all
   end
   
-    # def save
-    #   self.class.all << self
-    # end
-  
-    # def destroy_all
-    #   self.all.clear
-    # end
-
   def artists
     self.songs.collect {|song| song.artist}.uniq
   end

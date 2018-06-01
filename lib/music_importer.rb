@@ -9,7 +9,7 @@ class MusicImporter
 	end
 
 	def files
-		raw = Dir.glob("#{@path}/*.mp3").collect{|file| file.gsub("#{path}/", "")}
+		Dir.glob("#{@path}/*.mp3").collect{|file| file.gsub("#{path}/", "")}
 	end
 
 	def import
