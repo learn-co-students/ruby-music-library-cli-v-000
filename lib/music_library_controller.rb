@@ -1,8 +1,7 @@
 
 class MusicLibraryController
   def initialize(path = './db/mp3s')
-    new_songs = MusicImporter.new(path)
-    new_songs.import
+    MusicImporter.new(path).import
   end
   
   def call
@@ -37,25 +36,19 @@ class MusicLibraryController
   end
   
   def list_songs
-    alphabetized = Song.all.sort_by { |song| song.name }
-    
-    alphabetized.each_with_index { |song, index| 
+    Song.all.sort_by { |song| song.name }.each_with_index { |song, index| 
       puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     }
   end
   
   def list_artists
-    sorted = Artist.all.sort_by { |band| band.name }.uniq
-    
-    sorted.each_with_index { |musician, index|
+    Artist.all.sort_by { |band| band.name }.uniq.each_with_index { |musician, index|
       puts "#{index + 1}. #{musician.name}"
     }
   end
   
   def list_genres
-    organized = Genre.all.sort_by { |type| type.name }.uniq
-    
-    organized.each_with_index { |style, index| 
+    Genre.all.sort_by { |type| type.name }.uniq.each_with_index { |style, index| 
       puts "#{index + 1}. #{style.name}"
     }
   end
@@ -63,12 +56,9 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     answer = gets.strip
-    music_group = Artist.find_by_name(answer)
-    
-    if music_group != nil
-      song_list = music_group.songs.sort_by { |song| song.name }
-      
-      song_list.each_with_index { |song, index|
+
+    if music_group = Artist.find_by_name(answer)
+      music_group.songs.sort_by { |song| song.name }.each_with_index { |song, index|
         puts "#{index + 1}. #{song.name} - #{song.genre.name}"
       }
     end
@@ -77,12 +67,9 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     user_response = gets.strip
-    result = Genre.find_by_name(user_response)
-    
-    if result != nil
-      song_list = result.songs.sort_by { |song| song.name }
-      
-      song_list.each_with_index { |song, index|
+
+    if result = Genre.find_by_name(user_response)
+      result.songs.sort_by { |song| song.name }.each_with_index { |song, index|
         puts "#{index + 1}. #{song.artist.name} - #{song.name}"
       }
     end
