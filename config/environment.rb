@@ -1,5 +1,5 @@
 require 'bundler'
-require 'pry'
+# require 'pry'
 Bundler.require
 
 module Concerns
