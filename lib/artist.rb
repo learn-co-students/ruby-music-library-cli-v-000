@@ -9,7 +9,6 @@ class Artist
   def initialize(name)
     self.name = name
     self.songs = []
-    save
   end
 
   def self.all
@@ -17,7 +16,7 @@ class Artist
   end
   
   def add_song(song)
-    song.instance_variable_set(:@artist, self) unless song.artist
+    song.artist = self unless song.artist
     songs << song unless songs.include?(song)
   end
   

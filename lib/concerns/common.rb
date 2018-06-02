@@ -12,8 +12,7 @@ module Common
     end
 
     def create(name)
-      fresh = self.new(name)
-      fresh
+      new(name).tap { |thing| thing.save }
     end
   end
 end

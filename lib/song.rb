@@ -11,7 +11,6 @@ class Song
     self.name = name
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
-    save
   end
 
   def self.all
@@ -19,7 +18,8 @@ class Song
   end
   
   def artist=(artist)
-    artist.add_song(self) if self.artist == nil
+    self.artist = artist
+    artist.add_song(self)
   end
   
   def genre=(genre)
@@ -40,7 +40,6 @@ class Song
     musician = Artist.find_or_create_by_name(band)
     type = Genre.find_or_create_by_name(style[0...-4])
     new_song = self.new(title, musician, type)
-    all.pop
     new_song
   end
   
