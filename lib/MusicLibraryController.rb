@@ -32,6 +32,18 @@ end
       num+=1
     end
   end  
+  
+  def artist
+  end
+  
+  def list_artists
+    moron=Artist.all.sort_by { |artist| artist.name }
+    num=1 
+    moron.each do |retard|
+      puts "#{num}. #{retard.artist.name} - #{retard.name} - #{retard.genre.name}"
+      num += 1
+    end
+  end
 end
 
   
