@@ -1,11 +1,5 @@
 module Concerns::Findable
 
-  def create(name)
-    x = self.new(name)
-    x.save
-    x
-  end
-
   def find_by_name(name)
     self.all.detect { |x| x.name == name }
   end

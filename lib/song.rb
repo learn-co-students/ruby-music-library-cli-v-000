@@ -2,6 +2,9 @@ require 'pry'
 
 class Song
   extend Concerns::Findable
+  extend Concerns::Nameable::ClassMethods
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -25,14 +28,6 @@ class Song
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def save
-    @@all << self
   end
 
   def self.new_from_filename(filename)
