@@ -25,7 +25,12 @@ class MusicLibraryController
 end
 
   def list_songs
-    Song.all.each{|song|puts song.name}
+    garbage=Song.all.sort_by { |song| song.name.downcase }
+    num=1 
+    garbage.each do |trash| 
+      puts "#{num}. #{trash.artist.name} - #{trash.name} - #{trash.genre.name}"
+      num+=1
+    end
   end  
 end
 
