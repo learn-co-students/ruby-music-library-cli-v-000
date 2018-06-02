@@ -1,6 +1,4 @@
 class Song
-  extend FindByName
-  
   attr_accessor :name
   
   attr_reader :artist, :genre
@@ -53,4 +51,18 @@ class Song
     end
   end
   
+  def self.new_from_filename(filename)
+    song_elements = filename.gsub(".mp3", "").split(" - ")
+    song_name = song_elements[1]
+    artist_name = song_elements[0]
+    genre_name = song_elements[2]
+    song = self.find_or_create_by_name(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(genre_name)
+    song
+  end
+  
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).save
+  end
 end
