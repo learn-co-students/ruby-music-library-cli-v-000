@@ -10,9 +10,8 @@ class MusicLibraryController
     input = " "
     while input != "exit"
     input = gets.strip
-    user.imput
-    begin
     puts "Welcome to your music library!"
+    begin
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
     puts "To list all of the genres in your library, enter 'list genres'."
@@ -24,4 +23,10 @@ class MusicLibraryController
     end 
   end
 end
+
+  def list_songs
+    Song.all.each{|song|puts song.name}
+  end  
 end
+
+  
