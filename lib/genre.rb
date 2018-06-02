@@ -3,12 +3,13 @@ class Genre
   extend Common::ClassMethods, Concerns::Findable
   include Common::InstanceMethods
 
-  attr_accessor :name, :songs
+  attr_accessor :name
+  attr_reader :songs
   @@all = []
 
   def initialize(name)
     self.name = name
-    self.songs = []
+    @songs = []
   end
 
   def self.all
