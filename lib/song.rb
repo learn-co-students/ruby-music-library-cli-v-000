@@ -23,7 +23,7 @@ class Song
   end
   
   def genre=(genre)
-    self.instance_variable_set(:@genre, genre) unless self.genre
+    @genre = genre
     genre.songs << self unless genre.songs.include?(self)
   end
   
@@ -39,13 +39,10 @@ class Song
     band, title, style = file_name.split(' - ')
     musician = Artist.find_or_create_by_name(band)
     type = Genre.find_or_create_by_name(style[0...-4])
-    new_song = self.new(title, musician, type)
-    new_song
+    new(title, musician, type)
   end
   
   def self.create_from_filename(filename)
-    music = new_from_filename(filename)
-    music.save
-    music
+    new_from_filename(filename).tap { |music| music.save }
   end
 end
