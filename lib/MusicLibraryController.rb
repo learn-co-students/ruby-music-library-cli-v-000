@@ -33,15 +33,21 @@ end
     end
   end  
   
-  def artist
-  end
-  
   def list_artists
-    moron=Artist.all.sort_by { |artist| artist.name }
+    moron=Artist.all.sort_by { |artist| artist.name.downcase }
     num=1 
     moron.each do |retard|
       puts "#{num}. #{retard.artist.name} - #{retard.name} - #{retard.genre.name}"
-      num += 1
+      num+=1
+    end
+  end
+  
+  def list_genres
+    damn=Genre.all.sorty_by { |genre| genre.name.downcase }
+    num=1 
+    damn.each do |butt|
+      puts "#{num}. #{butt.artist.name} - #{butt.name}"
+      num+=1
     end
   end
 end
