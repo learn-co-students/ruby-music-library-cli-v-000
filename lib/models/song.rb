@@ -1,14 +1,13 @@
-require 'pry'
-require_relative './concerns_module.rb'
+require_relative '../concerns/concerns.rb'
 
 class Song
   extend Concerns::Findable
-  # include Concerns::InstanceMethods
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
+  extend Concerns::Nameable
 
   attr_accessor :name
   attr_reader :artist, :genre
-
-  @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -22,15 +21,15 @@ class Song
     artist.add_song(self)
   end
 
-  def artist
-    @artist
-  end
-
   def genre=(genre)
     if !genre.songs.include?(self)
       genre.songs << self
     end
     @genre = genre
+  end
+
+  def self.all
+    @@all
   end
 
   def self.new_from_filename(filename)
@@ -44,38 +43,8 @@ class Song
     song.genre = Genre.find_or_create_by_name(genre)
     song
   end
-
+  
   def self.create_from_filename(filename)
-    self.new_from_filename(filename).save
-  end
-  
-  def self.all
-    @@all
-  end
-  
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def save
-    @@all << self if !@@all.include?(self)
-  end
-
-  def self.create(name)
-    song = self.new(name)
-    song.save
-    song
-  end
-
-  def self.find_by_name(name)
-    self.all.find {|song| song.name == name}
-  end
-
-  def self.find_or_create_by_name(name)
-    if self.find_by_name(name)
-      self.find_by_name(name)
-    else
-      self.create(name)
-    end
-  end
+    self.new_from_filename(filename)
+  end  
 end
