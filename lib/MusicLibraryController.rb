@@ -51,6 +51,26 @@ end
       num+=1
     end
   end
+  
+ # def user_input	 
+    case user_input
+     when "list songs"	     
+       self.list_songs	       
+-    when "list_artists"	
+       self.list_artists	     
+-    when "list_genres"	
+       self.list_genres	       
+     when "list artist"	     
+       self.list_songs_by_artist	       
+     when "list genre"	    
+       self.list_songs_by_genre	      
+     when "play song"	     
+-      self.play	      
+     when "exit"	   
+       'exit'	       
+     else
+    end
+  end
 end
 
   
