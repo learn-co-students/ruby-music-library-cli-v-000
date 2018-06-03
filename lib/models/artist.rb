@@ -20,12 +20,12 @@ class Artist
       song.artist = self
     end
     
-    if !self.songs.include?(song)
-      self.songs << song
+    if !songs.include?(song)
+      songs << song
     end
   end
   
   def genres
-    self.songs.collect {|song| song.genre}.uniq
+    songs.collect {|song| song.genre}.uniq
   end
 end

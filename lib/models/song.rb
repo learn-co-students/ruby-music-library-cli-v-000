@@ -12,7 +12,6 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.send("artist=", artist) if artist
-    @genre = genre
     self.send("genre=", genre) if genre
   end
 
@@ -22,10 +21,8 @@ class Song
   end
 
   def genre=(genre)
-    if !genre.songs.include?(self)
-      genre.songs << self
-    end
     @genre = genre
+    genre.songs << self unless genre.songs.include?(self)
   end
 
   def self.all
@@ -34,17 +31,15 @@ class Song
 
   def self.new_from_filename(filename)
     array = filename.gsub(".mp3", "").split(" - ")
-    artist = array[0]
-    name = array[1]
-    genre = array[2]
+    artist_name, song_name, genre_name = array[0], array[1], array[2]
 
-    song = Song.find_or_create_by_name(name)
-    song.artist = Artist.find_or_create_by_name(artist)
-    song.genre = Genre.find_or_create_by_name(genre)
-    song
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    new(song_name, artist, genre)
   end
   
   def self.create_from_filename(filename)
-    self.new_from_filename(filename)
+    new_from_filename(filename).tap {|s| s.save}
   end  
 end

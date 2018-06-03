@@ -18,41 +18,39 @@ class MusicLibraryController
     puts "To quit, type \'exit\'."
     puts "What would you like to do?"
 
-    loop do
-      input = gets.chomp
-
-      case input
+    case gets.chomp
       when "list songs"
-        self.list_songs
-        self.reprompt
+        list_songs
+        reprompt
       when "list artists"
-        self.list_artists
-        self.reprompt
+        list_artists
+        reprompt
       when "list genres"
-        self.list_genres
-        self.reprompt
+        list_genres
+        reprompt
       when "list artist"
-        self.list_songs_by_artist
-        self.reprompt
+        list_songs_by_artist
+        reprompt
       when "list genre"
-        self.list_songs_by_genre               self.reprompt
+        list_songs_by_genre           reprompt
       when "play song"
-        self.play_song
-        self.reprompt
+        play_song
+        reprompt
       when "exit"
-        break
-      end
+        return
+      else
+        puts "Please enter valid input."
+        reprompt
     end
   end
 
   def reprompt
-    sleep 2
-    self.call
+    # sleep 2
+    call
   end
 
   def list_songs
     song_array = Song.all.sort_by {|s| s.name}
-    # puts song_array
     song_array.each_with_index do |s, i|
       puts "#{i + 1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end

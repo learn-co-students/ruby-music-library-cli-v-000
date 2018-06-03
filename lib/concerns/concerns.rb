@@ -2,24 +2,18 @@ module Concerns
   # class method
   module Nameable
     def create(name)
-      self.new(name).tap do |o|
-        o.save
-      end
+      new(name).tap {|o| o.save}
     end
   end
     
   # class methods
   module Findable
     def find_by_name(name)
-      self.all.find {|i| i.name == name}
+      all.find {|i| i.name == name}
     end
 
     def find_or_create_by_name(name)
-      if find_by_name(name)
-        find_by_name(name)
-      else
-        self.create(name)
-      end
+      find_by_name(name) || create(name)
     end
   end
     
@@ -36,7 +30,7 @@ module Concerns
       end
 
       def destroy_all
-        self.all.clear
+        all.clear
       end
     end
   end
