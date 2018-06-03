@@ -1,5 +1,6 @@
 require "spec_helper"
 
+
 describe "Genre" do
   let(:genre) { Genre.new("indie rock") }
 
