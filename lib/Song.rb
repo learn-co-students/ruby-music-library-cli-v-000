@@ -64,7 +64,15 @@ class Song
      new(fishwings[1], artist, genre)
    end
      
-  
+    def list_artist
+    puts "Enter artist"
+    specific_artist = gets.chomp
+    if Artist.find_by_name(artist) != nil
+      Artist.find_by_name(artist).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    else
+      puts "Artist does not exist"
+    end
+  end
 end  
   
   

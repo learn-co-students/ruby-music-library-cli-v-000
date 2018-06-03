@@ -62,6 +62,16 @@ end
       song = Song.find_by_name(chosen_input)
       puts "Playing #{song.name} by #{song.artist.name}" unless song == nil
    end
+   
+   def list_songs_by_artist
+     puts "Which artist do you want?"
+#     song_names = self.artist_array
+     user_input = gets.chomp 
+     artist = artist.find_by_name(user_input)
+     artist.songs each do |song|
+       puts "#{song.name}"
+      end
+   end
 end
 end
 

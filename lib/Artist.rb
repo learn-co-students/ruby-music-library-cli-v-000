@@ -32,6 +32,10 @@ class Artist
     @@all << self
   end
   
+  def find_by_name(name)
+    @@all.select { |artist| artist.name == name}
+  end
+
   def self.create(name)
     artist = new(name)
     artist.save
