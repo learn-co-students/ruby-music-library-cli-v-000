@@ -26,7 +26,7 @@ class Genre
   end
 
   def self.find_or_create_by_name(genre_name)
-    self.find_by_name(genre_name) || self.new(genre_name)
+    self.find_by_name(genre_name) || self.create(genre_name)
   end
   
   def save

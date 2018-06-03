@@ -37,16 +37,17 @@ end
     moron=Artist.all.sort_by { |artist| artist.name.downcase }
     num=1 
     moron.each do |retard|
-      puts "#{num}. #{retard.artist.name} - #{retard.name} - #{retard.genre.name}"
+      puts "#{num}. #{retard.name}"
       num+=1
     end
   end
   
   def list_genres
-    damn=Genre.all.sorty_by { |genre| genre.name.downcase }
+    damn=Genre.all.sort_by { |genre| genre.name.downcase }
     num=1 
+ #   binding.pry
     damn.each do |butt|
-      puts "#{num}. #{butt.artist.name} - #{butt.name}"
+      puts "#{num}. #{butt.name}"
       num+=1
     end
   end
