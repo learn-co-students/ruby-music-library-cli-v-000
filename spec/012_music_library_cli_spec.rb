@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'pry'
 
 describe "MusicLibraryController - CLI Commands" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
@@ -62,4 +63,5 @@ describe "MusicLibraryController - CLI Commands" do
       capture_puts { music_library_controller.call }
     end
   end
+  
 end
