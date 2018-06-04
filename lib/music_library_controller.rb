@@ -1,4 +1,4 @@
-  require "pry"
+#  require "pry"
 
 class MusicLibraryController
   def initialize(library_path = './db/mp3s')
@@ -30,12 +30,15 @@ class MusicLibraryController
       artist.all.each { |artist| }
         puts "#{artist.song.name}"
   end
-  
+ 
   def find_by_name(user_input)
-    find=Artist.all { |artist| artist.name.downcase }
+    find=Artist.all { |artist| Artist.name.downcase }
     user_input=gets.strip
   end
 
+  def find_by_name(name)
+    @@all.select { |artist| artist.name == name}
+  end
   
   def list_songs
     garbage=Song.all.sort_by { |song| song.name.downcase }
