@@ -64,15 +64,26 @@ end
    end
    
    def list_songs_by_artist
+
      puts "Which artist do you want?"
 #     song_names = self.artist_array
-     user_input = gets.chomp 
+     user_input = gets.chomp.to_i
      artist = artist.find_by_name(user_input)
      artist.songs each do |song|
        puts "#{song.name}"
       end
+
+     puts "Which song do you want?"
+     song_names = self.song_array
+     user_input = gets.chomp.to_i
+
+   end
+   
+   def list_artists
+     puts "Please enter an artist."
+     artist_names = artist.artist_array
+     user_input = gets.chomp.to_i
    end
 end
 end
-
   

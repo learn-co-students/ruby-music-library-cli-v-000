@@ -73,6 +73,11 @@ class Song
       puts "Artist does not exist"
     end
   end
-end  
+
+    def play_song
+     song = Song.all[gets.to_i - 1]
+     puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+   end
+  end  
   
   
