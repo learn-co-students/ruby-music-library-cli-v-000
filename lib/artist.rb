@@ -30,10 +30,23 @@ class Artist
     @songs
   end
 
-  def add_song(**args)
-    if args.include?(song) && song.artist == nil
-      song.artist = self
-      @songs << song
+  def add_song(song)
+    if (song.class == Song)
+      if song.artist == nil
+        song.artist = self
+      end
+      unless @songs.include?(song)
+        @songs << song
+      end
     end
   end
+
+  def genres
+    genres = []
+    @songs.select do |song|
+      genres << song.genre unless genres.include?(song.genre)
+    end
+    genres
+  end
+
 end
