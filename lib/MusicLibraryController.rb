@@ -1,4 +1,4 @@
-require "pry"
+  require "pry"
 
 class MusicLibraryController
   def initialize(library_path = './db/mp3s')
@@ -45,7 +45,7 @@ end
   def list_genres
     damn=Genre.all.sort_by { |genre| genre.name.downcase }
     num=1 
- #   binding.pry
+#    binding.pry
     damn.each do |butt|
       puts "#{num}. #{butt.name}"
       num+=1
@@ -64,26 +64,13 @@ end
    end
    
    def list_songs_by_artist
-
-     puts "Which artist do you want?"
-#     song_names = self.artist_array
-     user_input = gets.chomp.to_i
-     artist = artist.find_by_name(user_input)
-     artist.songs each do |song|
-       puts "#{song.name}"
-      end
-
-     puts "Which song do you want?"
-     song_names = self.song_array
-     user_input = gets.chomp.to_i
-
-   end
-   
-   def list_artists
-     puts "Please enter an artist."
-     artist_names = artist.artist_array
-     user_input = gets.chomp.to_i
-   end
-end
+    puts "Which artist do you want?"
+     user_input = gets.chomp
+      artist = artist.find_by_name(user_input)
+      artist.songs each do |song|
+        puts "#{artist.song.name}"
+        end
+     end
+  end
 end
   
