@@ -27,13 +27,13 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
      user_input = gets.chomp
       artist = artist.find_by_name(user_input)
-      artist.songs each do |song|
+      artist.all.each { |artist| }
         puts "#{artist.song.name}"
-     end
   end
   
-  def find_by_name
+  def find_by_name(user_input)
     find=Artist.all { |artist| artist.name.downcase }
+    user_input=gets.strip
   end
 
   
