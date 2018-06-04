@@ -8,12 +8,11 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-  #  @@all << self
     if artist != nil
-      self.artist = artist
+      self.artist=(artist)
     end
     if genre != nil
-      self.genre = genre
+      self.genre=(genre)
     end
   end
 
@@ -25,7 +24,7 @@ class Song
   def genre=(genre)
     @genre = genre
     genre.add_song(self)
-  end   
+  end
 
   def self.all
     @@all
@@ -42,6 +41,17 @@ class Song
   #Custom Constructor
   def self.create(new_song)
     n = Song.new(new_song)
+    n.save
+    n
   end
  # binding.pry
+
+  def self.find_by_name(name)
+    @@all.detect {|song| song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
+  #  binding.pry  
+  end
 end
