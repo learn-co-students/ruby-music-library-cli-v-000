@@ -31,6 +31,10 @@ class MusicLibraryController
         puts "#{artist.song.name}"
      end
   end
+  
+  def find_by_name
+    find=Artist.all { |artist| artist.name.downcase }
+  end
 
   
   def list_songs
