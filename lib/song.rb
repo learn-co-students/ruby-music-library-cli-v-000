@@ -5,11 +5,12 @@ class Song
   @@all = []
 
   def initialize(name, artist = nil)
-    self.name = name
-    if artist != nil
-      self.artist = artist
-      artist.add_song(self)
-    end
+    @name = name
+    artist.add_song(artist)
+    # if artist != nil
+    #   @artist = Artist.new(artist)
+    #   artist.add_song(self)
+    # end
   end
 
   def self.all
@@ -25,12 +26,8 @@ class Song
   end
 
   def self.create(name)
-    @@all << Song.new(name)
-    @@all
-  end
-
-  def artist
-    self.artist
+    Song.new(name).save
+    @@all.last
   end
 
 end

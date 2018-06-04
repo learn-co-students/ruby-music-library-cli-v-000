@@ -5,7 +5,7 @@ class Genre
   @@all = []
 
   def initialize(name)
-    self.name = name
+    @name = name
   end
 
   def self.all
@@ -22,6 +22,7 @@ class Genre
 
   def self.create(name)
     Genre.new(name).save
+    @@all.last
   end
 
 end
