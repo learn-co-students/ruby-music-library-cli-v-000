@@ -11,7 +11,6 @@ class MusicLibraryController
     while input != "exit"
     input = gets.strip
     puts "Welcome to your music library!"
-    begin
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
     puts "To list all of the genres in your library, enter 'list genres'."
@@ -22,8 +21,18 @@ class MusicLibraryController
     puts "What would you like to do?"
     end 
   end
-end
 
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+     user_input = gets.chomp
+      artist = artist.find_by_name(user_input)
+      artist.songs each do |song|
+        puts "#{artist.song.name}"
+     end
+  end
+
+  
   def list_songs
     garbage=Song.all.sort_by { |song| song.name.downcase }
     num=1 
@@ -61,16 +70,7 @@ end
       chosen_input = name_extractor(chosen_input)[1]
       song = Song.find_by_name(chosen_input)
       puts "Playing #{song.name} by #{song.artist.name}" unless song == nil
+    end
    end
-   
-   def list_songs_by_artist
-    puts "Which artist do you want?"
-     user_input = gets.chomp
-      artist = artist.find_by_name(user_input)
-      artist.songs each do |song|
-        puts "#{artist.song.name}"
-        end
-     end
-  end
+
 end
-  
