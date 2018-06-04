@@ -16,13 +16,11 @@ class Song
   end
 
   def artist=(artist)
-    # do I need an option to create a new artist if one doesn't already exist?
     @artist = artist
     artist.add_song(self)
   end
 
   def genre=(genre)
-    # do I need to account for creating a new genre if one doesn't already exist?
     @genre = genre
     if !genre.songs.include?(self)
       genre.songs << self
@@ -37,12 +35,6 @@ class Song
   def save
     @@all << self
   end
-
-#  def self.create(name)
-#    song = Song.new(name)
-#    song.save
-#    song
-#  end
 
   def self.destroy_all
     @@all.clear
