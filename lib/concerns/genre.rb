@@ -22,7 +22,7 @@ class Genre
 
   def save
     #new_name = Genre.name
-    @@all << self 
+    @@all << self
   end
 
   #Custom Constructor
@@ -31,11 +31,11 @@ class Genre
     n
   end
 
-  def add_song(song)
-    @songs << song unless @songs.include?(song)
-    song.genre = self unless song.genre
-  end
- # binding.pry
+  # def add_song(song)
+  #   @songs << song unless @songs.include?(song)
+  #   song.genre = self unless song.genre
+  # end
+ 
 
   def artists
     @songs.collect {|song| song.artist}.uniq
