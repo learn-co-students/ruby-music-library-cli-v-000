@@ -51,6 +51,7 @@ class Song
     unless self.find_by_name(name)
       self.create(name)
     end
+    @@all.last
   end
 
 end
