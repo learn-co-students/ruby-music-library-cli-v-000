@@ -1,4 +1,6 @@
 class Artist
+  # include Concerns::Findable
+  include Concerns::Findable
   extend Concerns::Findable
 
   attr_accessor :name, :songs
@@ -47,5 +49,9 @@ class Artist
     end
     genres
   end
+
+  # def self.find_by_name(name)
+  #   super
+  # end
 
 end
