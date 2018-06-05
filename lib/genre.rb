@@ -39,8 +39,4 @@ class Genre
     artists
   end
 
-  # def self.find_by_name(name)
-  #   super
-  # end
-
 end

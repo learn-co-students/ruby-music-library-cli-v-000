@@ -54,4 +54,15 @@ class Song
     @@all.last
   end
 
+  def self.new_from_filename(file_name)
+    file_name = file_name.chomp!(".mp3")
+    file_name = file_name.split(" - ")
+    name = file_name[1]
+    genre = file_name[2]
+    artist = file_name[0]
+    song = Song.new(name)
+    song.artist = Artist.new(artist)
+    song.genre = Genre.new(genre)
+    song
+  end
 end
