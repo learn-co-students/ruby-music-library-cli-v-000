@@ -9,7 +9,7 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-    @@all << self
+  #  @@all << self
   end
 
   def self.all
@@ -21,13 +21,14 @@ class Genre
   end
 
   def save
-    new_name = Genre.name
-    @@all << new_name
+    #new_name = Genre.name
+    @@all << self 
   end
 
   #Custom Constructor
   def self.create(new_genre)
-    n = Genre.new(new_genre)
+    n = Genre.new(new_genre).tap{|g| g.save}
+    n
   end
 
   def add_song(song)
