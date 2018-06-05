@@ -31,9 +31,8 @@ class Artist
   end
 
   def add_song(song)
-    # binding.pry
     if song.artist == nil
-      # song.artist = self
+      song.instance_variable_set(:@artist, self)
       unless @songs.include?(song)
         @songs << song
       end
