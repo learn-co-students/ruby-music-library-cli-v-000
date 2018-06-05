@@ -8,6 +8,7 @@ attr_accessor :name, :artist
 def initialize(name, artist = nil)
 @name = name
 @artist = artist
+# self.artist.add_song(song)
 end
 
 def self.all
@@ -27,6 +28,12 @@ song = Song.new(self)
 song.save
 song
 end
+
+def artist=(artist)
+  @artist = artist
+  artist.add_song(self)
+end
+
 
 
 
