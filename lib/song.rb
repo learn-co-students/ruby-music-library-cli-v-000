@@ -11,8 +11,8 @@ class Song
   end
 
   def artist=(artist)
-    @artist = artist
     artist.add_song(self)
+    @artist = artist
   end
 
   def genre=(genre)
@@ -48,7 +48,6 @@ class Song
   end
 
   def self.find_or_create_by_name(name)
-    binding.pry
     unless self.find_by_name(name)
       self.create(name)
     end
