@@ -41,7 +41,7 @@ class MusicLibraryController
       if artist != nil
       num=1 
       artist.songs.sort_by{ |song| song.name.downcase }.each { |song| 
-          puts "#{num} - #{song.name} - #{song.genre}" 
+          puts "#{num}. #{song.name} - #{song.genre.name}" 
         num+=1 } 
     end
   end
