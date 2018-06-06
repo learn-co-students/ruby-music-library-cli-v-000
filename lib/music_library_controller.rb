@@ -36,16 +36,20 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-     user_input = gets.chomp
-      artist = artist.find_by_name(user_input)
-      artist.all.each { |artist| }
-      puts "#{artist.song.name}"
+     user_input = gets.strip
+      artist = Artist.find_by_name(user_input)
+      if artist != nil
+      num=1 
+      artist.songs.sort_by{ |song| song.name.downcase }.each { |song| 
+          puts "#{num} - #{song.name} - #{song.genre}" 
+        num+=1 } 
+    end
   end
  
-  def find_by_name(artist)
-    find=Artist.all { |artist| Artist.name.downcase }
-    artist=gets.strip
-  end
+#  def find_by_name(artist)
+#    find=Artist.all { |artist| Artist.name.downcase }
+#    artist=gets.strip
+#  end
 
   def list_songs
     garbage=Song.all.sort_by { |song| song.name.downcase }
