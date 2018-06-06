@@ -45,6 +45,18 @@ class MusicLibraryController
         num+=1 } 
     end
   end
+  
+   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+     user_input = gets.strip
+      genre = Genre.find_by_name(user_input)
+      if genre != nil
+      num=1 
+      genre.songs.sort_by{ |song| song.name.downcase }.each { |song| 
+          puts "#{num}. #{song.name} - #{song.genre.name}" 
+        num+=1 } 
+    end
+  end
  
 #  def find_by_name(artist)
 #    find=Artist.all { |artist| Artist.name.downcase }
