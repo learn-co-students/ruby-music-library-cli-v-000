@@ -1,6 +1,7 @@
 require 'pry'
 
 class Genre
+  extend Concerns::Findable
 attr_accessor :name, :song, :songs, :artist
 
 @@all = []
@@ -23,7 +24,7 @@ def save
 end
 
 def self.create(name)
-genre = Genre.new(self)
+genre = Genre.new(name)
 genre.save
 genre
 end
