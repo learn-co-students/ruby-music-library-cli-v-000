@@ -9,7 +9,6 @@ class MusicLibraryController
   def call 
     input = " "
     while input != "exit"
-    input = gets.strip
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -19,21 +18,33 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+    input = gets.strip
+    case input
+      when "list_artists"
+        list_artists
+      when "list_artist"
+        list_artist
+      when "list_genres"
+        list_genres
+      when "list_genre"
+        list_genre
+      when "list_songs"
+        list_songs
+      end
     end 
   end
-
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
      user_input = gets.chomp
       artist = artist.find_by_name(user_input)
       artist.all.each { |artist| }
-        puts "#{artist.song.name}"
+      puts "#{artist.song.name}"
   end
  
-  def find_by_name(user_input)
+  def find_by_name(artist)
     find=Artist.all { |artist| Artist.name.downcase }
-    user_input=gets.strip
+    artist=gets.strip
   end
 
   def find_by_name(name)
@@ -44,7 +55,7 @@ class MusicLibraryController
     garbage=Song.all.sort_by { |song| song.name.downcase }
     num=1 
     garbage.each do |trash| 
-      puts "#{num}. #{trash.artist.name} - #{trash.name} - #{trash.genre.name}"
+            puts "#{num}. #{trash.artist.name} - #{trash.name} - #{trash.genre.name}"
       num+=1
     end
   end  
@@ -79,5 +90,4 @@ class MusicLibraryController
       puts "Playing #{song.name} by #{song.artist.name}" unless song == nil
     end
    end
-
 end
