@@ -31,9 +31,10 @@ class Artist
   def save
     @@all << self
   end
-  
-  def find_by_name(name)
-    @@all.select { |artist| artist.name == name}
+ 
+  def self.find_by_name(artist)
+    artist=gets.strip
+    find=Artist.all { |artist| Artist.name.downcase }
   end
 
   def self.create(name)

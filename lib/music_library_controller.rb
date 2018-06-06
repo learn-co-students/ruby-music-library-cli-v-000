@@ -47,10 +47,6 @@ class MusicLibraryController
     artist=gets.strip
   end
 
-  def find_by_name(name)
-    @@all.select { |artist| artist.name == name}
-  end
-  
   def list_songs
     garbage=Song.all.sort_by { |song| song.name.downcase }
     num=1 
