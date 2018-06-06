@@ -71,7 +71,7 @@ describe "MusicLibraryController - CLI Methods" do
       allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
 
       expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
-
+# binding.pry
       music_library_controller.list_songs_by_artist
     end
 
