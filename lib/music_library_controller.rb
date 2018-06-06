@@ -20,16 +20,18 @@ class MusicLibraryController
     puts "What would you like to do?"
     input = gets.strip
     case input
-      when "list_artists"
+      when "list artists"
         list_artists
-      when "list_artist"
-        list_artist
-      when "list_genres"
+      when "list artist"
+        list_songs_by_artist
+      when "list genres"
         list_genres
-      when "list_genre"
-        list_genre
-      when "list_songs"
+      when "list genre"
+        list_songs_by_genre
+      when "list songs"
         list_songs
+      when "play song"
+        play_song
       end
     end 
   end
@@ -52,8 +54,8 @@ class MusicLibraryController
       genre = Genre.find_by_name(user_input)
       if genre != nil
       num=1 
-      genre.songs.sort_by{ |song| song.name.downcase }.each { |song| 
-          puts "#{num}. #{song.name} - #{song.genre.name}" 
+      genre.songs.sort_by{ |song| genre.name.downcase }.each { |song| 
+          puts "#{num}. #{song.artist.name} - #{song.name}" 
         num+=1 } 
     end
   end
@@ -93,12 +95,11 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-    song_names = self.song_array
+    song_names = Song.all
     user_input = gets.chomp.to_i
-    if user_input > 0 && user_input <= self.library.size
-      chosen_input = song_names[user_input - 1]
-      chosen_input = name_extractor(chosen_input)[1]
-      song = Song.find_by_name(chosen_input)
+    if user_input > 0 && user_input <= Song.all.size
+      chosen_input = song_names.sort_by  { |song| song.name.downcase }[user_input - 1]
+      song = Song.find_by_name(chosen_input.name)
       puts "Playing #{song.name} by #{song.artist.name}" unless song == nil
     end
    end
