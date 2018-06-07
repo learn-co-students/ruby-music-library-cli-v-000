@@ -33,7 +33,12 @@ class MusicLibraryController
   end
 
   def list_songs
-
+    # I need to conditions for this sort - 
+    # first by name and then by artist
+    sorted_list = Song.all.each.sort {|a,b| a.name <=> b.name}
+    sorted_list.each_with_index do |s, i|
+      puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+    end
   end
 
   def list_artists
