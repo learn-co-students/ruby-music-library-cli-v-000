@@ -20,6 +20,20 @@ class MusicLibraryController
       puts "What would you like to do?"
 
       user = gets.strip
+      case user
+      when "list songs"
+        list_songs
+      when "list artists"
+        list_artists
+      when "list genres"
+        list_genres
+      when "list artist"
+        list_songs_by_artist
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
+      end
     end
   end
 
@@ -46,7 +60,6 @@ end
     user = gets.strip
 
     if artist = Artist.find_by_name(user)
-
       artist.songs.sort_by(&:name).each.with_index(1) do |song, index|
         puts "#{index}. #{song.name} - #{song.genre.name}"
     end
@@ -58,7 +71,7 @@ end
     user = gets.strip
 
     if genre = Genre.find_by_name(user)
-      genre.songs.sort_by(&:name).each.with_index(1) do |genre, index|
+      genre.songs.sort_by(&:name).each.with_index(1) do |song, index|
         puts "#{index}. #{song.artist.name} - #{song.name}"
     end
   end
@@ -70,6 +83,6 @@ end
     if (1..Song.all.length).include?(user)
       song = Song.all.sort_by(&:name)[user - 1]
     end
-    puts "Playing #{song.name} by #{song.artist.name}" if song
+      puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 end

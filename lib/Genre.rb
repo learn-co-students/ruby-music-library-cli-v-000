@@ -10,7 +10,6 @@ class Genre
 
   def initialize(name)
     @name = name
-    @@all << self
     @songs = []
   end
 
@@ -36,8 +35,12 @@ class Genre
     @songs
   end
 
+  def add_song(song)
+    @songs << song unless @songs.include?(song)
+    song.genre = self if song.genre != self
+  end
+
   def artists
-songs.map(&:artist).uniq
-    # Song.all.collect {|genre| genre.artist}.uniq
+    songs.collect(&:artist).uniq
   end
 end
