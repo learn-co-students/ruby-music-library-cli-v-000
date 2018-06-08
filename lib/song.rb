@@ -1,5 +1,7 @@
 class Song
 
+  extend Concerns::Findable
+
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -53,4 +55,5 @@ class Song
       genre.songs << self;
     end
   end
+
 end

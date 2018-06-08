@@ -2,6 +2,8 @@ class Artist
 
   attr_accessor :name, :songs, :genres
 
+  extend Concerns::Findable
+
   @@all = [];
 
   def initialize(name)
@@ -38,6 +40,10 @@ class Artist
     if !@songs.include?(song)
       @songs << song;
     end
+  end
+
+  def genres
+    @songs.map {|song| song.genre}.uniq;
   end
 
 end
