@@ -50,8 +50,12 @@ class Artist
     genres
   end
 
-  # def self.find_by_name(name)
-  #   super
-  # end
+  def self.names
+    names = []
+    self.all.select do |artist|
+      names << artist.name
+    end
+    names
+  end
 
 end
