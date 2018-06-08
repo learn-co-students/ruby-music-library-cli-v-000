@@ -16,6 +16,26 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.chomp()
+    case input
+    when "list songs"
+      list_songs
+    when "list artists"
+      list_artists
+    when "list genres"
+      list_genres
+    when "list artist"
+      list_songs_by_artist
+    when "list genre"
+      list_songs_by_genre
+    when "play song"
+      play_song
+    end
+
+
+
+
+
+
 until input == "exit"
   input = gets.chomp()
 end
@@ -65,9 +85,9 @@ end
 def play_song
   puts "Which song number would you like to play?"
   user_input = gets.strip.to_i
-  # binding.pry
   if user_input >= 1 && user_input < Song.all.size
-    puts "Playing #{list_songs[user_input.to_i - 1].name} by #{list_songs[user_input.to_i - 1].artist.name}"
+    sorted_list = Song.sort_by_name
+    puts "Playing #{sorted_list[user_input.to_i - 1].name} by #{sorted_list[user_input.to_i - 1].artist.name}"
   end
 end
 
