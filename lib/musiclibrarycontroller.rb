@@ -9,7 +9,7 @@ require_all 'lib'
 
 class MusicLibraryController
 
-  attr_accessor :user_input
+  attr_accessor :user_input, :sorted_songs, :sorted_artists, :sorted_genres
 
   def initialize(path = "./db/mp3s")
     MusicImporter.new(path).import
@@ -42,44 +42,46 @@ class MusicLibraryController
   end
 
   def list_songs
-    sorted_list = Song.all.sort {|a,b| a.name <=> b.name}
+    @sorted_songs = Song.all.sort {|a,b| a.name <=> b.name}
 
-    sorted_list.each_with_index do |s, i|
+    @sorted_songs.each_with_index do |s, i|
       puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
 
-    sorted_list
+    @sorted_songs
   end
 
   def list_artists
-    sorted_list = Artist.all.sort {|a,b| a.name <=> b.name}
+    @sorted_artists = Artist.all.sort {|a,b| a.name <=> b.name}
 
-    sorted_list.each_with_index do |s, i|
+    @sorted_artists.each_with_index do |s, i|
       puts "#{i+1}. #{s.name}"
     end
 
-    sorted_list
+    @sorted_artists
   end
 
   def list_genres
-    sorted_list = Genre.all.sort {|a,b| a.name <=> b.name}
+    @sorted_genres = Genre.all.sort {|a,b| a.name <=> b.name}
 
-    sorted_list.each_with_index do |s, i|
+    @sorted_genres.each_with_index do |s, i|
       puts "#{i+1}. #{s.name}"
     end
 
-    sorted_list
+    @sorted_genres
   end
 
   def list_by_artist
     puts "Please enter the name of an artist:"
-    binding.pry
-    artist = gets.strip.capitalize
-    if Artist.names.include?(artist)
+    artist_input = gets.strip
+    if Artist.names.include?(artist_input)
       # sort first!
+      artist = Artist.all.detect do |artist|
+        artist.name == artist_input
+      end
       sorted_songs = artist.songs.sort {|a,b| a.name <=> b.name }
       sorted_songs.each_with_index do |a,i|
-        puts "#{i}. #{a.name}"
+        puts "#{i+1}. #{a.name} - #{a.genre.name}"
       end
     end
   end
