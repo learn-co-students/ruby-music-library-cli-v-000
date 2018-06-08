@@ -8,7 +8,7 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name;
     if artist
-      @artist = artist;
+      self.artist = artist;
     end
     if genre
       @genre = genre
@@ -39,6 +39,7 @@ class Song
 
   def artist=(artist)
     @artist = artist;
+    self.artist.add_song(self);
   end
 
   def genre
