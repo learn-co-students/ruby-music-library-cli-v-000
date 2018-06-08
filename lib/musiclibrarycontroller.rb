@@ -1,3 +1,12 @@
+require 'bundler'
+Bundler.require
+
+module Concerns
+end
+
+require_all 'lib'
+
+
 class MusicLibraryController
 
   attr_accessor :user_input
@@ -33,11 +42,14 @@ class MusicLibraryController
   end
 
   def list_songs
-    # I need to conditions for this sort - 
+    # I need two conditions for this sort -
     # first by name and then by artist
-    sorted_list = Song.all.each.sort {|a,b| a.name <=> b.name}
+    # sorted_list = Song.all.sort_by {|a| [a.name, a.artist.name]}
+    # binding.pry
+    sorted_list = Song.all
     sorted_list.each_with_index do |s, i|
-      puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+      puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"
+      # puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
   end
 
@@ -66,3 +78,5 @@ class MusicLibraryController
   end
 
 end
+
+MusicLibraryController.new("./spec/fixtures/mp3s").list_songs
