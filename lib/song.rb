@@ -14,7 +14,7 @@ class Song
     end
     if genre
       self.genre = genre;
-      @artist = artist;
+      #@artist = artist;
     end
   end
 
@@ -54,6 +54,24 @@ class Song
     if !genre.songs.include?(self)
       genre.songs << self;
     end
+  end
+
+  def self.new_from_filename(file)
+    parsed_file = file.split(" - ");
+    artist_name = parsed_file[0];
+    song_name = parsed_file[1];
+    genre = parsed_file[2].split(".")[0];
+
+    song = self.new(song_name);#, artist_name, genre
+    song.artist = Artist.find_or_create_by_name(artist_name);
+    song.genre = Genre.find_or_create_by_name(genre);
+    song;
+  end
+
+  def self.create_from_filename(file)
+    song = self.new_from_filename(file);
+    song.save;
+    song;
   end
 
 end
