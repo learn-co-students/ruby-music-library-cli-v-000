@@ -75,7 +75,8 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     artist_input = gets.strip
     if Artist.names.include?(artist_input)
-      # sort first!
+      # the artist variable holds the Artist object that is referred to by the artist_input string,
+      # so the next few steps allow me to access the Artist object's self, its songs, and its song's genres
       artist = Artist.all.detect do |artist|
         artist.name == artist_input
       end
