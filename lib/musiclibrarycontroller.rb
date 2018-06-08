@@ -42,33 +42,33 @@ class MusicLibraryController
   end
 
   def list_songs
+    sorted_list = Song.all.sort {|a,b| a.name <=> b.name}
 
-# Thundercat - For Love I Come - dance.mp3
-# Real Estate - Green Aisles - country.mp3
-# Real Estate(getting Thundercat) - It's Real - hip-hop.mp3
-# Action Bronson - Larry Csonka - indie.mp3
-# Jurassic 5 - What's Golden - hip-hop.mp3
-
-# why am I getting Thundercat instead of Real Estate?
-# What is the artist of the song object It's Real?
-
-    sorted_list = Song.all.sort do |a,b|
-      a.name <=> b.name
-    end
-    # binding.pry
     sorted_list.each_with_index do |s, i|
-      # binding.pry
       puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
+
     sorted_list
   end
 
   def list_artists
+    sorted_list = Artist.all.sort {|a,b| a.name <=> b.name}
 
+    sorted_list.each_with_index do |s, i|
+      puts "#{i+1}. #{s.name}"
+    end
+
+    sorted_list
   end
 
   def list_genres
+    sorted_list = Genre.all.sort {|a,b| a.name <=> b.name}
 
+    sorted_list.each_with_index do |s, i|
+      puts "#{i+1}. #{s.name}"
+    end
+
+    sorted_list
   end
 
   def list_artist
