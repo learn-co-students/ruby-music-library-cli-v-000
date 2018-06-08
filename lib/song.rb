@@ -12,6 +12,7 @@ class Song
     end
     if genre
       self.genre = genre;
+      @artist = artist;
     end
   end
 
@@ -52,5 +53,4 @@ class Song
       genre.songs << self;
     end
   end
-
 end
