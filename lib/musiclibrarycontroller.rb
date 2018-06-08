@@ -42,14 +42,23 @@ class MusicLibraryController
   end
 
   def list_songs
-    # I need two conditions for this sort -
-    # first by name and then by artist
-    # sorted_list = Song.all.sort_by {|a| [a.name, a.artist.name]}
+
+# Thundercat - For Love I Come - dance.mp3
+# Real Estate - Green Aisles - country.mp3
+# Real Estate(getting Thundercat) - It's Real - hip-hop.mp3
+# Action Bronson - Larry Csonka - indie.mp3
+# Jurassic 5 - What's Golden - hip-hop.mp3
+
+# why am I getting Thundercat instead of Real Estate?
+# What is the artist of the song object It's Real?
+
+    sorted_list = Song.all.sort do |a,b|
+      a.name <=> b.name
+    end
     # binding.pry
-    sorted_list = Song.all
     sorted_list.each_with_index do |s, i|
-      puts "#{s.artist.name} - #{s.name} - #{s.genre.name}"
-      # puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+      # binding.pry
+      puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
     end
   end
 
