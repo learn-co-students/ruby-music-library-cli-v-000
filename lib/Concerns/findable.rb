@@ -12,4 +12,8 @@ module Concerns::Findable
     end
   end
 
+  def sort_by_name
+    self.all.sort_by{|object| object.name}
+  end
+
 end
