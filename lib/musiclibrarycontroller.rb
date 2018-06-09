@@ -108,14 +108,15 @@ class MusicLibraryController
     user_input = gets.strip
 
     if (Integer(user_input) rescue nil) == nil
-      binding.pry
+      # binding.pry
       puts user_input
     else
+      # binding.pry
       list_songs
       selected_song = nil
-      self.sorted_songs.each_with_index do |song,index|
+      @sorted_songs.each_with_index do |song,index|
         # binding.pry
-        if index == (user_input - 1)
+        if index == (user_input.to_i - 1)
           selected_song = song
         end
       end

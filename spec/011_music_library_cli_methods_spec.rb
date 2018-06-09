@@ -166,6 +166,7 @@ describe "MusicLibraryController - CLI Methods" do
       allow(music_library_controller).to receive(:gets).and_return("4")
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
+      expect($stdout).to receive(:puts).exactly(5).times
       expect($stdout).to receive(:puts).with("Playing Larry Csonka by Action Bronson")
 
       music_library_controller.play_song
