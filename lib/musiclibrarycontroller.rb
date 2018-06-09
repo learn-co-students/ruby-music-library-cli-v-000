@@ -88,7 +88,19 @@ class MusicLibraryController
   end
 
   def list_by_genre
-
+    puts "Please enter the name of a genre:"
+    genre_input = gets.strip
+    if Genre.names.include?(genre_input)
+      # the genre variable holds the Genre object that is referred to by the artist_input string,
+      # so the next few steps allow me to access the Artist object's self, its songs, and its song's genres
+      genre = Genre.all.detect do |genre|
+        genre.name == genre_input
+      end
+      sorted_songs = genre.songs.sort {|a,b| a.name <=> b.name }
+      sorted_songs.each_with_index do |a,i|
+        puts "#{i+1}. #{a.name} - #{a.genre.name}"
+      end
+    end
   end
 
   def play_song

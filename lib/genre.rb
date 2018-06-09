@@ -39,4 +39,12 @@ class Genre
     artists
   end
 
+  def self.names
+    names = []
+    self.all.select do |genre|
+      names << genre.name
+    end
+    names
+  end
+
 end
