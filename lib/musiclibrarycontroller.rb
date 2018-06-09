@@ -108,6 +108,7 @@ class MusicLibraryController
     user_input = gets.strip
 
     if (Integer(user_input) rescue nil) == nil
+      binding.pry
       puts user_input
     else
       list_songs
