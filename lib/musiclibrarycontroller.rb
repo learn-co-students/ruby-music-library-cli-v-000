@@ -104,7 +104,22 @@ class MusicLibraryController
   end
 
   def play_song
+    puts "Which song number would you like to play?"
+    user_input = gets.strip
 
+    if (Integer(user_input) rescue nil) == nil
+      puts user_input
+    else
+      list_songs
+      selected_song = nil
+      self.sorted_songs.each_with_index do |song,index|
+        # binding.pry
+        if index == (user_input - 1)
+          selected_song = song
+        end
+      end
+      puts "Playing #{selected_song.name} by #{selected_song.artist.name}"
+    end
   end
 
   def exit
