@@ -35,19 +35,19 @@ class MusicLibraryController
     user_input = gets.strip
     # binding.pry
     case user_input
-    when user_input = "list songs"
+    when "list songs"
       self.list_songs
-    when user_input = "list artists"
+    when "list artists"
       self.list_artists
-    when user_input = "list genres"
+    when "list genres"
       self.list_genres
-    when user_input = "list by artist"
+    when "list by artist"
       self.list_by_artist
-    when user_input = "list by genre"
+    when "list by genre"
       self.list_by_genre
-    when user_input = "play song"
+    when "play song"
       self.play_song
-    when user_input = "exit"
+    when "exit"
       exit
     else
       self.call
