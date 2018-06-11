@@ -9,20 +9,20 @@ require_all 'lib'
 
 class MusicLibraryController
 
-  attr_accessor :user_input, :sorted_songs, :sorted_artists, :sorted_genres
+  attr_accessor :sorted_songs, :sorted_artists, :sorted_genres
 
   def initialize(path = "./db/mp3s")
     MusicImporter.new(path).import
   end
 
   def call
-    options = ['list songs',
-      'list artists',
-      'list genres',
-      'list artist',
-      'list genre',
-      'play song',
-      'exit']
+    options = ["list songs",
+      "list artists",
+      "list genres",
+      "list artist",
+      "list genre",
+      "play song",
+      "exit"]
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -32,13 +32,29 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    @user_input = gets.strip
-    case
-    when options.include?(@user_input)
-      self.user_input.gsub(" ","_")
+    user_input = gets.strip
+    # binding.pry
+    case user_input
+    when user_input = "list songs"
+      self.list_songs
+    when user_input = "list artists"
+      self.list_artists
+    when user_input = "list genres"
+      self.list_genres
+    when user_input = "list by artist"
+      self.list_by_artist
+    when user_input = "list by genre"
+      self.list_by_genre
+    when user_input = "play song"
+      self.play_song
+    when user_input = "exit"
+      exit
     else
       self.call
     end
+    # if options.include?(user_input)
+    #   user_input = user_input.gsub(" ","_")
+    #   self.user_input
   end
 
   def list_songs
@@ -126,10 +142,6 @@ class MusicLibraryController
         nil
       end
     end
-  end
-
-  def exit
-
   end
 
 end
