@@ -114,13 +114,17 @@ class MusicLibraryController
       # binding.pry
       list_songs
       selected_song = nil
-      @sorted_songs.each_with_index do |song,index|
-        # binding.pry
-        if index == (user_input.to_i - 1)
-          selected_song = song
+      # binding.pry
+      if user_input.to_i.between?(1, @sorted_songs.count)
+        @sorted_songs.each_with_index do |song,index|
+          if index == (user_input.to_i - 1)
+            selected_song = song
+          end
         end
+        puts "Playing #{selected_song.name} by #{selected_song.artist.name}"
+      else
+        nil
       end
-      puts "Playing #{selected_song.name} by #{selected_song.artist.name}"
     end
   end
 
