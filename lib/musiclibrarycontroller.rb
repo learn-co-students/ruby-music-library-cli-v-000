@@ -68,6 +68,25 @@ end
 def list_songs_by_genre
   puts "Please enter the name of a genre:"
     input = gets.strip
+    genre = Genre.find_by_name(input)
+    if genre
+      genre_songs = genre.songs
+      sorted_songs = genre_songs.sort_by{|song| song.name}
+      sorted_songs.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
+      end
+    end
 end
+
+def play_song
+  puts "Which song number would you like to play?"
+  input = gets.strip
+  song = Song.find_by_name(input)
+  if song
+    puts "Playing #{song.name} by #{song.artist.name}"
+end
+end
+
+
 
 end
