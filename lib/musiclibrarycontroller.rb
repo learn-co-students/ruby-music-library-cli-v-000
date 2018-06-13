@@ -21,6 +21,19 @@ puts "To quit, type 'exit'."
 puts "What would you like to do?"
 
 input = gets.strip
+if input == 'list songs'
+  list_songs
+elsif input == 'list artists'
+  list_artists
+elsif input == "list genres"
+  list_genres
+elsif input == 'list artist'
+  list_songs_by_artist
+elsif input == 'list genre'
+  list_songs_by_genre
+elsif input == 'play song'
+  play_song
+end
 until input == "exit" do
   puts "What would you like to do?"
   input = gets.strip
@@ -80,13 +93,15 @@ end
 
 def play_song
   puts "Which song number would you like to play?"
-  input = gets.strip
-  song = Song.find_by_name(input)
-  if song
-    puts "Playing #{song.name} by #{song.artist.name}"
+  input = gets.strip.to_i
+  if input.between?(1, Song.all.length)
+  sorted_song = Song.all.sort{|a, b| a.name <=> b.name}[input - 1]
+  puts "Playing #{sorted_song.name} by #{sorted_song.artist.name}"
+  end
 end
-end
 
 
 
+
+#'list_songs' == list_songs
 end
