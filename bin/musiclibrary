@@ -3,39 +3,3 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
-
-module MusicLibrary
-  module ClassMethods
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
-  module InstanceMethods
-
-  def save
-    @@all << self
-  end
-
-  def create(song)
-    song = self.new
-    self.all << song
-  end
-end
-
-class Song
-  extend MusicLibrary::ClassMethods
-  include MusicLibrary::InstanceMethods
-
-  attr_accessor :name 
-
-  def initialize(name)
-    @name = name
-    @@all = []
-  end
-
-end
