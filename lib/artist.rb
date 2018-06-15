@@ -41,7 +41,9 @@ class Artist
 
   def genres
     @songs.collect do |song|
+      if !song.genre.include?(song.genre)
         song.genre
+      end 
     end
   end
 
