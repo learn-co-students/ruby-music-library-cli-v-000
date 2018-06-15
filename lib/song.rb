@@ -3,14 +3,20 @@ require 'pry'
 class Song
 
 
-attr_accessor :name, :artist
+attr_accessor :name, :artist, :genre
 
 
 @@all = []
 
-def initialize(name, artist = nil)
+def initialize(name, artist = nil, genre = nil)
   @name = name
-  @artist = artist 
+  @songs = []
+  if artist != nil
+    self.artist = artist
+  else
+  end
+  @songs << genre 
+  @genre = genre
 end
 
 def self.all
@@ -29,6 +35,11 @@ def self.create(name)
   song = Song.new(name)
   song.save
   song
+end
+
+def artist=(artist)
+  @artist = artist
+  artist.add_song(self)
 end
 
 end

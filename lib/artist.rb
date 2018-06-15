@@ -1,3 +1,5 @@
+require 'pry'
+
 class Artist
 
   attr_accessor :name
@@ -32,9 +34,12 @@ class Artist
     @songs
   end
 
-  def add_song(name)
-    @songs << name 
+  def add_song(song)
+    song.artist = self unless song.artist
+    @songs << song unless @songs.include?(song)
   end
+
+  
 
 
 end
