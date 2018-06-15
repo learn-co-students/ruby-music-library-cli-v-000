@@ -1,5 +1,5 @@
 class Song
-  extend Concerns::Findable 
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
 
   @@all = []
@@ -22,7 +22,7 @@ class Song
     @@all << self
   end
 
-  def self.create(name)
+  def self.create(name, artist = nil, genre = nil)
     new(name).tap{|s| s.save}
   end
 
@@ -45,18 +45,14 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    row = filename
-
-    data = row.split(" - ")
+    data = filename.split(" - ")
     artist_name = data[0]
     song_name = data[1]
     song_genre = data[2].chomp(".mp3")
 
-    song = self.new
-    song.name = song_name
-    song.artist = artist_name
-    song.genre = song_genre
-    self.new(song_name,song_artist,song_genre)
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name,artist,genre)
   end
 
 end
