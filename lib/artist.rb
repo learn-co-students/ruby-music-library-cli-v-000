@@ -40,11 +40,10 @@ class Artist
   end
 
   def genres
-    @songs.collect do |song|
-      if !song.genre.include?(song.genre)
-        song.genre
-      end 
+    genres = @songs.collect do |song|
+      song.genre
     end
+    genres.uniq
   end
 
 
