@@ -15,7 +15,6 @@ def initialize(name, artist = nil, genre = nil)
     self.artist = artist
   else
   end
-  @songs << genre 
   @genre = genre
 end
 
