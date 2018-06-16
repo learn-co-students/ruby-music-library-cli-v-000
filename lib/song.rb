@@ -75,6 +75,8 @@ def self.new_from_filename(name)
 end
 
 def self.create_from_filename(name)
+  new_song = self.new_from_filename(name)
+  @@all << new_song
 end
 
 end
