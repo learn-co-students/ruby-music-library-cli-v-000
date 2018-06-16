@@ -34,23 +34,23 @@ class MusicLibraryController
   # CLI Methods
   def list_songs
     sorted_songs = Song.all.sort_by {|song| song.name}
-    sorted_songs.each_with_index {|song, index|
-      puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    }
+    sorted_songs.each.with_index(1) do |song, index|
+      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 
   def list_artists
     sorted_artists = Artist.all.sort_by {|artist| artist.name}.uniq
-    sorted_artists.each_with_index {|artist, index|
-      puts "#{index+1}. #{artist.name}"
-    }
+    sorted_artists.each.with_index(1) do |artist, index|
+      puts "#{index}. #{artist.name}"
+    end
   end
 
   def list_genres
     sorted_genres = Genre.all.sort_by {|genre| genre.name}.uniq
-    sorted_genres.each_with_index {|genre, index|
-      puts "#{index+1}. #{genre.name}"
-    }
+    sorted_genres.each.with_index(1) do |genre, index|
+      puts "#{index}. #{genre.name}"
+    end
   end
 
   def list_songs_by_artist
@@ -59,9 +59,9 @@ class MusicLibraryController
     result = Artist.find_by_name(artist_req)
     if result
       sorted = result.songs.sort_by {|song| song.name}
-      sorted.each_with_index {|song, index|
-        puts "#{index+1}. #{song.name} - #{song.genre.name}"
-      }
+      sorted.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end
     end
   end
 
@@ -71,9 +71,9 @@ class MusicLibraryController
     result = Genre.find_by_name(genre_req)
     if result
       sorted = result.songs.sort_by {|song| song.name}
-      sorted.each_with_index {|song, index|
-        puts "#{index+1}. #{song.artist.name} - #{song.name}"
-      }
+      sorted.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
+      end
     end
   end
 
@@ -81,10 +81,10 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     selected_song_number = gets.chomp.to_i
     sorted = Song.all.sort_by {|song| song.name}
-    sorted.each_with_index {|song, song_number|
-      if song_number+1 == selected_song_number
+    sorted.each.with_index(1) do |song, song_number|
+      if song_number == selected_song_number
         puts "Playing #{song.name} by #{song.artist.name}"
       end
-    }
+    end
   end
 end
