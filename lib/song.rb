@@ -62,4 +62,9 @@ def self.find_or_create_by_name(song)
   end
 end
 
+def self.new_from_filename(name)
+  filename = name.split(' - ')
+  self.create(filename[1])
+end
+
 end
