@@ -11,6 +11,8 @@ end
 
 
 def call
+  response = ""
+  while response != "exit"
   puts "Welcome to your music library!"
   puts "To list all of your songs, enter 'list songs'."
   puts "To list all of the artists in your library, enter 'list artists'."
@@ -21,6 +23,19 @@ def call
   puts "To quit, type 'exit'."
   puts "What would you like to do?"
   response = gets.strip
+  case response
+  when "list songs"
+    list_songs
+  end
+  end
+end
+
+def list_songs
+sorted_songs = Song.all.sort{|a,b| a.name <=> b.name}
+sorted_songs.each do |song|
+  counter = 0
+  puts "#{counter += 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+end
 end
 
 
