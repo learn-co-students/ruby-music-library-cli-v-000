@@ -9,9 +9,11 @@ attr_accessor :name, :artist, :genre
 
 def initialize(name, artist = nil, genre = nil)
   @name = name
+  @artist = artist
   if artist != nil
     self.artist = artist
   end
+  @genre = genre
   if genre != nil
     self.genre = genre
   end
@@ -64,7 +66,15 @@ end
 
 def self.new_from_filename(name)
   filename = name.split(' - ')
-  self.create(filename[1])
+  song_artist = filename[0]
+  song_name = filename[1]
+  song_genre = filename[2].chomp(".mp3")
+  song_object = Artist.find_or_create_by_name(song_artist)
+  genre_object = Genre.find_or_create_by_name(song_genre)
+  self.new(song_name,song_object,genre_object)
+end
+
+def self.create_from_filename(name)
 end
 
 end
