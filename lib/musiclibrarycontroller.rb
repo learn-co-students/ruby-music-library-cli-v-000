@@ -60,7 +60,14 @@ end
 
 def list_songs_by_artist
   puts "Please enter the name of an artist:"
-  gets.strip
+  response = gets.strip
+  sorted_artist = Artist.all.sort{|a,b| a.name <=> b.name}
+  counter = 0
+  sorted_artist.each do |artist|
+    if response
+      puts "#{counter += 1}. #{artist.name}"
+    end 
+  end
 end
 
 end
