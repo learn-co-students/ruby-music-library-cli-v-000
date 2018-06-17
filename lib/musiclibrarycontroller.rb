@@ -61,13 +61,14 @@ end
 def list_songs_by_artist
   puts "Please enter the name of an artist:"
   response = gets.strip
-  sorted_artist = Artist.all.sort{|a,b| a.name <=> b.name}
-  counter = 0
-  sorted_artist.each do |artist|
-    if response
-      puts "#{counter += 1}. #{artist.name}"
-    end 
+  located_artist = Artist.all.find do |artist|
+      artist.name == response
+    end
+    if located_artist
+      songs_array = located_artist.songs.sort {|a,b| a <=> b}
+      songs_array.each_with_index do |artist, index|
+      puts "#{index}. #{artist.song.name} - #{artist.genre.name}"
+    end
   end
-end
 
 end
