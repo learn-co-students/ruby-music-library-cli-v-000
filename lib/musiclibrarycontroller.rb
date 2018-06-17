@@ -26,17 +26,41 @@ def call
   case response
   when "list songs"
     list_songs
+  when "list_artists"
+    list_artists
+  when "list_genres"
+    list_genres
   end
   end
 end
 
 def list_songs
 sorted_songs = Song.all.sort{|a,b| a.name <=> b.name}
+counter = 0
 sorted_songs.each do |song|
-  counter = 0
   puts "#{counter += 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
 end
 end
 
+def list_artists
+  sorted_artist = Artist.all.sort{|a,b| a.name <=> b.name}
+  counter = 0
+  sorted_artist.each do |artists|
+     puts "#{counter += 1}. #{artists.name}"
+  end
+end
+
+def list_genres
+  sorted_genres = Genre.all.sort{|a,b| a.name <=> b.name}
+  counter = 0
+  sorted_genres.each do |genres|
+    puts "#{counter += 1}. #{genres.name}"
+  end
+end
+
+def list_songs_by_artist
+  puts "Please enter the name of an artist:"
+  gets.strip
+end
 
 end
