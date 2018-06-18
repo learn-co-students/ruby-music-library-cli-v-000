@@ -11,6 +11,6 @@
    end
 
    def import
-     files.each{|f| Song.create_from_filename(f)}
+     files.sort.each{|f| Song.create_from_filename(f)}
    end
  end
