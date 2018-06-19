@@ -79,7 +79,7 @@ class MusicLibraryController
             end
           end
           genre_songs = genre_songs.sort_by{|song|song.name}
-          genre_songs.each {|song|puts "#{genre_songs.index(song) + 1}. #{song.genre} - #{song.genre.name}"} unless genre_songs == nil
+          genre_songs.each {|song|puts "#{artist_songs.index(song) + 1}. #{song.name} - #{song.genre.name}"} unless artist_songs == nil
     end
   #  def play_song
   #    song = Song.all[gets.to_i - 1]
