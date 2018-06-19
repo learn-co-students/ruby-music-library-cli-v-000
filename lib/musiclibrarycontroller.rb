@@ -85,6 +85,18 @@ class MusicLibraryController
     genre_songs_abc.each_with_index{|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
   end
 
+  # => Alternate solution
+  #def play_song
+  #  puts "Which song number would you like to play?"
+  #  response = gets.strip.to_i
+  #  Song.all.sort{|a,b| a.name <=> b.name}.each_with_index do |song, index|
+  #    #binding.pry
+  #    if response == index + 1
+  #      puts "Playing #{song.name} by #{song.artist.name}"
+  #    end
+  #  end
+  #end
+
   def play_song
     puts "Which song number would you like to play?";
     song_list = Song.all.sort_by {|song| song.name};
