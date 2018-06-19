@@ -9,7 +9,7 @@ class MusicLibraryController
   end
 
   def call
-     puts "Welcome to your music library!";
+     puts "Welcome to your music library!"
 
      inputs = [
        "list songs",
@@ -21,7 +21,7 @@ class MusicLibraryController
        "exit"
      ]
 
-     input = "";
+     input = ""
 
      until input == "exit" do
        puts "To list all of your songs, enter 'list songs'."
@@ -53,18 +53,18 @@ class MusicLibraryController
    end
 
    def list_songs
-     songs = Song.all.sort_by! {|song| song.name};
-     songs.each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"};
+     songs = Song.all.sort_by!{|song| song.name}
+     songs.each_with_index{|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
    end
 
    def list_artists
-     artists = Artist.all.sort_by! {|artist| artist.name};
-     artists.each_with_index {|artist, index| puts "#{index + 1}. #{artist.name}"};
+     artists = Artist.all.sort_by!{|artist| artist.name}
+     artists.each_with_index{|artist, index| puts "#{index + 1}. #{artist.name}"}
    end
 
    def list_genres
-     genres = Genre.all.sort_by! {|genre| genre.name};
-     genres.each_with_index {|genre, index| puts "#{index + 1}. #{genre.name}"};
+     genres = Genre.all.sort_by!{|genre| genre.name}
+     genres.each_with_index{|genre, index| puts "#{index + 1}. #{genre.name}"}
    end
 
    def list_songs_by_artist
@@ -84,6 +84,15 @@ class MusicLibraryController
    end
 
    def play_song
+     puts "Which song number would you like to play?"
+     song_list = Song.all.sort_by!{|song| song.name}
+     input = gets.chomp.to_i
+     song_list.each_with_index do |song, index|
+       if index + 1 == input
+         puts "Playing #{song.name} by #{song.artist.name}"
+       end
+     end
+
    end
 
 end
