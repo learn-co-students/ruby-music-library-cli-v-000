@@ -52,4 +52,38 @@ class MusicLibraryController
      end
    end
 
+   def list_songs
+     songs = Song.all.sort_by! {|song| song.name};
+     songs.each_with_index {|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"};
+   end
+
+   def list_artists
+     artists = Artist.all.sort_by! {|artist| artist.name};
+     artists.each_with_index {|artist, index| puts "#{index + 1}. #{artist.name}"};
+   end
+
+   def list_genres
+     genres = Genre.all.sort_by! {|genre| genre.name};
+     genres.each_with_index {|genre, index| puts "#{index + 1}. #{genre.name}"};
+   end
+
+   def list_songs_by_artist
+     puts "Please enter the name of an artist:"
+     input = gets.chomp.downcase
+     artist_songs = Song.all.select{|song| song.artist.name.downcase == input}
+     artist_songs = artist_songs.sort_by!{|song| song.name}
+     artist_songs.each_with_index{|song, index| puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
+   end
+
+   def list_songs_by_genre
+     puts "Please enter the name of a genre:"
+     input = gets.chomp.downcase
+     genre_songs = Song.all.select{|song| song.genre.name.downcase == input}
+     genre_songs = genre_songs.sort_by!{|song| song.name}
+     genre_songs.each_with_index{|song, index| puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
+   end
+
+   def play_song
+   end
+
 end
