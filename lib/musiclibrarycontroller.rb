@@ -80,7 +80,7 @@ class MusicLibraryController
      input = gets.chomp.downcase
      genre_songs = Song.all.select{|song| song.genre.name.downcase == input}
      genre_songs = genre_songs.sort_by!{|song| song.name}
-     genre_songs.each_with_index{|song, index| puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
+     genre_songs.each_with_index{|song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
    end
 
    def play_song
