@@ -81,28 +81,10 @@ class MusicLibraryController
   end
 
   def play_song
-      puts "Which song number would you like to play?"
-      song = Song.all[gets.to_i - 1]
-      puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
+     puts "Which song number would you like to play?"
+     user_input = gets.chomp
+    #  song = Song.all[gets.to_i - 1]
+    #  puts "Playing #{song.artist.name} - #{song.name} - #{song.genre.name}"
   end
 
-  #  def list_artist
-  #    puts "Enter artist"
-  #    specific_artist = gets.chomp
-  #    if Artist.find_by_name(specific_artist) != nil
-  #      Artist.find_by_name(specific_artist).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-  #    else
-  #      puts "Artist does not exist"
-  #    end
-  #  end
-   #
-  #  def list_genre
-  #    puts "Enter genre"
-  #    specific_genre = gets.chomp
-  #    if Genre.find_by_name(specific_genre) != nil
-  #      Genre.find_by_name(specific_genre).songs.each {|song| puts "#{song.artist.name} - #{song.name} - #{song.genre.name}"}
-  #    else
-  #      puts "Genre does not exist"
-  #    end
-  #  end
- end
+end
