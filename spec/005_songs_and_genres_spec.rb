@@ -11,7 +11,6 @@ describe "Associations — Song and Genre:" do
         expect(genre.instance_variable_get(:@songs)).to eq([])
       end
     end
-
     describe "#songs" do
       it "returns the genre's 'songs' collection (genre has many songs)" do
         expect(genre.songs).to eq([])
