@@ -26,10 +26,16 @@ def call
   case response
   when "list songs"
     list_songs
-  when "list_artists"
+  when "list artists"
     list_artists
-  when "list_genres"
+  when "list genres"
     list_genres
+  when "list artist"
+    list_songs_by_artist
+  when "list genre"
+    list_songs_by_genre
+  when "play song"
+    play_song
   end
   end
 end
@@ -61,14 +67,34 @@ end
 def list_songs_by_artist
   puts "Please enter the name of an artist:"
   response = gets.strip
-  located_artist = Artist.all.find do |artist|
-      artist.name == response
-    end
+  located_artist = Artist.find_by_name(response)
     if located_artist
-      songs_array = located_artist.songs.sort {|a,b| a <=> b}
-      songs_array.each_with_index do |artist, index|
-      puts "#{index}. #{artist.song.name} - #{artist.genre.name}"
+      songs_array = located_artist.songs
+      songs_array.sort {|a,b| a.name <=> b.name}.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+    end
     end
   end
+
+def list_songs_by_genre
+  puts "Please enter the name of a genre:"
+  response = gets.strip
+  located_genre = Genre.find_by_name(response)
+    if located_genre
+      songs_array = located_genre.songs
+      songs_array.sort {|a,b| a.name <=> b.name}.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name}"
+    end
+    end
+  end
+
+def play_song
+  puts "Which song number would you like to play?"
+  response = gets.strip
+  binding.pry
+  list_songs.detect do |song|
+    response == song.name
+  end
+end
 
 end
