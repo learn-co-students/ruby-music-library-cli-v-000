@@ -23,12 +23,6 @@ class Genre
     artist_array
   end
 
-#  def self.find_by_name(genre_name)
-#      self.all.find do |genre_object|
-#        genre_object.name == genre_name
-#      end
-#  end
-
   def save
     self.class.all << self
   end

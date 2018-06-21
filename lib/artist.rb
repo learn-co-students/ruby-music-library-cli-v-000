@@ -23,12 +23,6 @@ class Artist
     genre_array
   end
 
-#  def self.find_by_name(name)
-#    self.all.find do |artist_name|
-#      artist_name.name == name
-#    end
-#  end
-
   def add_song(song_object)
     @songs << song_object if !@songs.include?(song_object)
     song_object.artist = self if song_object.artist != self

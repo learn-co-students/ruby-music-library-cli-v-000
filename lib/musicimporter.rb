@@ -1,3 +1,4 @@
+require 'pry'
 class MusicImporter
   @@files = []
 
@@ -12,11 +13,15 @@ class MusicImporter
     Dir["#{@path}/**/*.mp3"].each do |file_name|
       @@files << file_name.gsub!(/.\/spec\/fixtures\/mp3s\//,"")
     end
+    #binding.pry
+
+    @@files
   end
 
   def import
+    #binding.pry
     @@files.each do |file_name|
-      Song.new(file_name)
+      Song.create_from_filename(file_name)
     end
   end
 
