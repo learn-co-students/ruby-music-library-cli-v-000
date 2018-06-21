@@ -2,7 +2,8 @@ require 'pry'
 
 class Artist
 
-  attr_accessor :name, :song, :genre
+  attr_accessor :name, :song
+
   @@all = []
 
   def initialize(name)
@@ -42,9 +43,7 @@ class Artist
   end
 
   def genres
-    songs.map {|song|song.genre}
-
-
+    songs.map {|song|song.genre}.uniq
   end
 
 end

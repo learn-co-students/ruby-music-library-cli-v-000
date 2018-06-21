@@ -1,7 +1,7 @@
 require 'pry'
 class Genre
 
-  attr_accessor :name
+  attr_accessor :name, :artist
   @@all = []
 
   def initialize(name)
@@ -38,6 +38,10 @@ class Genre
       if @songs.include?(song) == false
         @songs << song
       end
+  end
+
+  def artists
+    songs.map{|song|song.artist}.uniq
   end
 
 end
