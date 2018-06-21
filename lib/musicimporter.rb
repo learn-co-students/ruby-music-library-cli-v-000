@@ -2,11 +2,10 @@ require 'pry'
 class MusicImporter
   @@files = []
 
-  attr_accessor :path
+  attr_accessor :path, :songs
 
   def initialize(file_path)
     @path = file_path
-
   end
 
   def files
@@ -19,7 +18,7 @@ class MusicImporter
   end
 
   def import
-    #binding.pry
+    @@files = @@files.uniq
     @@files.each do |file_name|
       Song.create_from_filename(file_name)
     end
