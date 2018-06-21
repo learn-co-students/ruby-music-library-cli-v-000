@@ -1,3 +1,4 @@
+require 'pry'
 class Genre
 
   attr_accessor :name
@@ -6,6 +7,7 @@ class Genre
   def initialize(name)
     @name = name
     @@all << self
+    @songs = []
   end
 
   def self.all
@@ -22,6 +24,20 @@ class Genre
 
   def self.create(name)
     self.new(name)
+  end
+
+  def songs
+    @songs
+  end
+
+  def add_song(song)
+      if song.genre == nil
+        song.genre = self
+      end
+
+      if @songs.include?(song) == false
+        @songs << song
+      end
   end
 
 end
