@@ -18,21 +18,25 @@ class MusicLibraryController
 
     input = gets.strip
     #https://stackoverflow.com/questions/948135/how-to-write-a-switch-statement-in-ruby
-    #this is a switch statment
+    #this is a switch statment works better than if elses.
     case input
-      when input == 'list songs'
+      when 'list songs'
         list_songs
         'list songs'
-      when input == 'list artists'
+      when 'list artists'
         list_artists
         'list artists'
-      when input == 'list genres'
+      when 'list genres'
         list_genres
         'list genres'
-      when input == 'list genre'
-        list_genre
+      when 'list artist'
+        list_songs_by_artist
+        'list artist'
+      when 'list genre'
+        list_songs_by_genre
         'list genre'
-      when input == 'play song'
+      when
+        'play song'
         play_song
         'play song'
       end
