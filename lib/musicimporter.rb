@@ -10,8 +10,12 @@ class MusicImporter
   def files
         filenames = Dir.chdir(@path) do | path |
             Dir.glob("*.mp3")
-        end
-        filenames
-    end
+      end
+      filenames
+  end
+
+  def import
+    files.each {|file| Song.create_from_filename(file)}
+  end
 
 end
