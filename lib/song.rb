@@ -28,5 +28,20 @@ class Song
     @genre = genre
     genre.songs << self unless genre.songs.any?{|song| song == self}
   end
+  
+  def self.new_from_filename(file)
+    file = file.split(" - ")
+    artist = Artist.find_or_create_by_name(file[0])
+    song = file[1]
+    genre = Genre.find_or_create_by_name(file[2].chomp(".mp3"))
+    song = self.new(song, artist, genre)
+    song
+  end
+  
+  def self.create_from_filename(file)
+    song = self.new_from_filename(file)
+    song.save
+  end
+  
 end
 

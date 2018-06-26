@@ -17,5 +17,10 @@ class Genre
   def self.all 
     @@all
   end
-
+  
+  def artists
+    artist_list = []
+    self.songs.each{|song| artist_list << song.artist unless artist_list.any?{|singer| singer == song.artist}}
+    artist_list
+  end
 end

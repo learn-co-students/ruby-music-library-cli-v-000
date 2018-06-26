@@ -11,7 +11,7 @@ module Concerns
     end
     
     def find_or_create_by_name(name)
-      if self.all.any?{|item| item.name == name}
+      if self.find_by_name(name)#all.any?{|item| item.name == name}
         item = self.find_by_name(name)
       else
         item = self.create(name)
