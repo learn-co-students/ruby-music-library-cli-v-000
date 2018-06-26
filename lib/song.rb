@@ -3,11 +3,11 @@ class Song
 attr_accessor :name
 attr_reader :artist, :genre
 @@all = []
+
 def initialize(name,artist = nil,genre = nil)
   @name = name
   self.artist = artist if artist != nil
   self.genre = genre if genre != nil
-  @@all << self
 end
 
 def self.all
@@ -22,10 +22,10 @@ def save
   @@all << self
 end
 
-def self.create(song)
-  song = self.new(song)
+def self.create(name)
+  song = self.new(name)
   song.save
-  song
+  song       #was already saved.
 end
 
 def artist=(artist)
@@ -38,7 +38,15 @@ def genre=(genre)
   genre.add_song(self)
 end
 
+def self.find_by_name(name)
+    all.detect do |song|
+      song.name == name
+  end
+end
 
+def self.find_or_create_by_name(name)
+  find_by_name(name) || create(name)
+end
 
 
 end

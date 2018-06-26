@@ -1,5 +1,8 @@
-require 'pry'
+require_relative '../lib/concerns/findable'
 class Artist
+
+  extend Concerns::Findable
+
   attr_accessor :name
   @@all = []
   def initialize(name)
