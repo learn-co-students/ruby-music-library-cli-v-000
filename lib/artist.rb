@@ -1,4 +1,4 @@
-require_relative '../lib/concerns/findable'
+
 class Artist
 
   extend Concerns::Findable
@@ -14,11 +14,6 @@ class Artist
   def genres
     songs.collect{|song| song.genre}.uniq
     end
-
-
-
-
-
 
 
 

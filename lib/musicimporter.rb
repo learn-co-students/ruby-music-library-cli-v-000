@@ -10,6 +10,10 @@ def files
 end
 
 def import
-  files.each{|f| Song.new_by_filename(f)}
+  files.each do |filename|
+    Song.create_from_filename(filename)
 end
+end
+
+
 end
