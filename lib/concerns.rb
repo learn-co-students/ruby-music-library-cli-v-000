@@ -42,4 +42,10 @@ module Concerns
     end
   
   end
+  
+  module MLInit
+    def initialize(path)
+      @path = path
+    end
+  end
 end

@@ -2,7 +2,7 @@ require './config/environment.rb'
 require 'pry'
 class Genre 
  
- extend Concerns::Findable
+  extend Concerns::Findable
   include Concerns::Instance
  
   attr_accessor :name, :genre, :songs
