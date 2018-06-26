@@ -24,4 +24,8 @@ class Artist
     self.songs << song unless self.songs.any?{|track| track == song}
   end
 
+  def genres
+    self.songs.each{|song| genre_list << song.genre unless genre_list.any?{|type| type == song.genre}}
+  end
+  
 end
