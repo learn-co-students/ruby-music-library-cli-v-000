@@ -17,9 +17,5 @@ class Genre
   def self.all 
     @@all
   end
-  
-  def songs
-    self.songs
-  end
 
 end
