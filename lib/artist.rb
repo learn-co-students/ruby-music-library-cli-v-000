@@ -10,7 +10,7 @@ class Artist
   @@all = []
   
   def initialize(name)
-    super
+    @name = name
     @songs = []
   end
   
@@ -19,7 +19,6 @@ class Artist
   end
   
   def add_song(song)
-    Song.find_or_create_by_name(song.name)
     song.artist = self if song.artist == nil
     self.songs << song unless self.songs.any?{|track| track == song}
   end

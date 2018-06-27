@@ -1,3 +1,4 @@
+require './config/environment.rb'
 module Concerns
   
   module Findable
@@ -37,15 +38,9 @@ module Concerns
       self.class.all << self
     end
     
-    def initialize(name, attr1 = nil, attr2 = nil)
-      @name = name
-    end
-  
   end
   
   module MLInit
-    def initialize(path)
-      @path = path
-    end
+    
   end
 end
