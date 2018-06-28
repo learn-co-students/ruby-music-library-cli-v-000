@@ -47,9 +47,19 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    gets "Testing for puts"
-    artist = gets.strip
-    find_by_name(artist)
+    input = gets.strip
+
+    artist = Artist.find_by_name(input)
+    if artist
+      sorted_songs = artist.songs.sort do |a, b|
+        a.name <=> b.name
+      end
+
+      sorted_songs.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end
+
+end
 
   end
 
