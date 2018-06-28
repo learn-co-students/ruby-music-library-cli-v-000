@@ -50,6 +50,7 @@ describe "Concerns::Findable" do
     context "works exactly like a generic version of Song.find_or_create_by_name:" do
       it "finds (does not recreate) an existing instance with the provided name if one exists in @@all" do
         expect(Artist.find_or_create_by_name("Slowdive")).to be(artist)
+        # binding.pry
       end
 
       it "isn't hard-coded" do
