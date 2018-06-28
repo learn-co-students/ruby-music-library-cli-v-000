@@ -1,5 +1,4 @@
-require 'pry'
-class Genre
+class Genre 
 
   extend Concerns::Findable
   attr_accessor :name, :artist

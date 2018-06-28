@@ -32,4 +32,21 @@ class MusicLibraryController
     end
   end
 
+  def list_artists
+    Artist.all.sort {|artist1, artist2|artist1.name <=> artist2.name}.each.with_index(1) do |artist, index|
+      puts "#{index}. #{artist.name}"
+    end
+  end
+
+  def list_genres
+    Genre.all.sort {|genre1, genre2|genre1.name <=> genre2.name}.each.with_index(1) do |genre, index|
+      puts "#{index}. #{genre.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    gets "Testing for puts"
+  end
+
 end
