@@ -1,6 +1,7 @@
 require 'pry'
 
 class MusicLibraryController
+  extend Concerns::Findable
 
   attr_accessor :path, :song, :artist, :genre
 
@@ -47,6 +48,9 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     gets "Testing for puts"
+    artist = gets.strip
+    find_by_name(artist)
+
   end
 
 end
