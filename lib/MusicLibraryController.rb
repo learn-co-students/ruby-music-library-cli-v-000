@@ -30,9 +30,9 @@ class MusicLibraryController
       when 'list genres'
         list_genres
       when 'list artist'
-        list_artist
+        list_songs_by_artist
       when 'list genre'
-        list_genre
+        list_songs_by_genre
       when 'play song'
         play_song
       end
@@ -52,20 +52,28 @@ class MusicLibraryController
   end
 
   def list_songs_by_artist
-    "Please enter the name of an artist:"
+    puts "Please enter the name of an artist:"
     artist = gets.chomp
-    artist = Artist.find_by_name(artist)
-    artist.songs.each_with_index{|s, i| puts "#{i+1}. #{s.name} - #{s.genre.name}"}
+    if artist = Artist.find_by_name(artist)
+      sorted_songs = artist.songs.sort_by{|s| s.name}.each_with_index{|s, i| puts "#{i+1}. #{s.name} - #{s.genre.name}"}
+    end
   end
 
   def list_songs_by_genre
-    "Please enter the name of an genre:"
+    puts "Please enter the name of a genre:"
     genre = gets.chomp
-    genre = Genre.find_by_name(genre)
-    genre.songs.each_with_index{|s, i| puts "#{i+1}. #{s.artist.name} - #{s.name}"}
+    if genre = Genre.find_by_name(genre)
+      sorted_songs = genre.songs.sort_by{|s| s.name}.each_with_index{|s, i| puts "#{i+1}. #{s.artist.name} - #{s.name}"}
+    end
   end
 
   def play_song
+    puts "Which song number would you like to play?"
+    song_number = gets.strip.to_i
+    song_list = Song.all.sort_by{|s| s.name}
+    if (1..Song.all.length).include?(song_number)
+      song = song_list[song_number-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
   end
-
 end
