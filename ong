@@ -1,0 +1,29 @@
+
+[1mFrom:[0m /home/yurigurlie207/ruby-music-library-cli-v-000/lib/song.rb @ line 20 Song.new_from_filename:
+
+    [1;34m17[0m: [32mdef[0m [1;36mself[0m.[1;34mnew_from_filename[0m(filename)
+    [1;34m18[0m:   name = filename.split([31m[1;31m'[0m[31m - [1;31m'[0m[31m[0m)[[1;34m1[0m]
+    [1;34m19[0m:   song = [1;36mself[0m.new(name)
+ => [1;34m20[0m:   binding.pry
+    [1;34m21[0m:   artist = [1;34;4mArtist[0m.create(filename.split([31m[1;31m'[0m[31m - [1;31m'[0m[31m[0m)[[1;34m0[0m])
+    [1;34m22[0m:   genre = [1;34;4mGenre[0m.create(filename.split([31m[1;31m'[0m[31m - [1;31m'[0m[31m[0m)[[1;34m2[0m].chomp([31m[1;31m"[0m[31m.mp3[1;31m"[0m[31m[0m))
+    [1;34m23[0m: 
+    [1;34m24[0m:   song.artist = artist
+    [1;34m25[0m:   song.genre = genre
+    [1;34m26[0m:   [1;34m# binding.pry[0m
+    [1;34m27[0m:   [1;34m#[0m
+    [1;34m28[0m:   [1;34m# if find_by_name(name)[0m
+    [1;34m29[0m:   [1;34m#   find_by_name(name)[0m
+    [1;34m30[0m:   [1;34m# else[0m
+    [1;34m31[0m: 
+    [1;34m32[0m:       [1;34m# binding.pry[0m
+    [1;34m33[0m: 
+    [1;34m34[0m:       [1;34m# binding.pry[0m
+    [1;34m35[0m:       [1;34m# artist.add_song(song)[0m
+    [1;34m36[0m:       [1;34m# genre.add_song(song)[0m
+    [1;34m37[0m:   [1;34m#  end[0m
+    [1;34m38[0m: 
+    [1;34m39[0m:   song
+    [1;34m40[0m: 
+    [1;34m41[0m: [32mend[0m
+
