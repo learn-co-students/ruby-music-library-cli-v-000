@@ -1,14 +1,20 @@
 class MusicImporter
-  def initialize
-    # accepts a file path to a directory of MP3 files.
+  attr_accessor :path
+
+  def initialize(path)
+    self.path = path
   end
 
   def files
-    # returns all of the imported filenames.
+    unnormalized_files = Dir[self.path + "/*"]
+    unnormalized_files.collect do |file|
+      File.basename(file)
+    end
   end
 
-  def self.import
-    # mports all of the files from the library,
-    # instantiating a new Song object for each file.
+  def import
+    self.files.each do |file|
+      Song.create_from_filename(file)
+    end
   end
 end

@@ -1,3 +1,4 @@
+require 'pry'
 class Song
   attr_reader :artist
   attr_accessor :name, :genre
@@ -55,16 +56,17 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    # which instantiates a
-    # new Song object based on a provided filename.
+    artist_name, song_title, genre_name =
+    filename.match(/(.+)\s-\s(.+)\s-\s(.+).mp3/).captures
 
-    # musicimporter.import will call this for all
-    # files in its db
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    song = Song.new(song_title, artist, genre)
+    return song
   end
 
-  def self.create_from_filename
-    # which does the same thing as .new_from_filename
-    # but also saves the newly-created song to the
-    # @@all class variable.
+  def self.create_from_filename(filename)
+    song = new_from_filename(filename)
+    song.save
   end
 end
