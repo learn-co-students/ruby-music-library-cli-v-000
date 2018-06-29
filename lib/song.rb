@@ -31,9 +31,15 @@ class Song
   # FINDABLE
 
   def self.find_by_name(name)
+    self.all.find {|song| song.name == name}
   end
 
   def self.find_or_create_by_name(name)
+    if song = self.find_by_name(name)
+      return song
+    else
+      return self.create(name)
+    end
   end
 
   # MEMORABLE
