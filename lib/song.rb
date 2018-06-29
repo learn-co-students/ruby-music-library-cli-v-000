@@ -48,11 +48,12 @@ class Song
  end
 
  def self.new_from_filename(file)
+   #remove .mp3 and split into artist name, name, and genre
    file = file.chomp(".mp3").split(" - ")
    if self.find_by_name(file[1]) == nil
      new_song = self.new(file[1])
-     new_song.artist = Artist.new(file[0])
-     new_song.genre = Genre.new(file[2])
+     new_song.artist = Artist.find_or_create_by_name(file[0])
+     new_song.genre = Genre.find_or_create_by_name(file[2])
      new_song
    else
      find_by_name(file[1])
