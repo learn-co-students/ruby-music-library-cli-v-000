@@ -20,6 +20,10 @@ class Genre
     self.songs << song unless self.songs.include?(song)
   end
 
+  def artists
+    self.songs.collect {|song| song.artist}.uniq
+  end
+
   # MEMORABLE
 
   def self.destroy_all

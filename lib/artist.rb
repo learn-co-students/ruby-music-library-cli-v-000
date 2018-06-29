@@ -23,6 +23,10 @@ class Artist
     self.songs << song unless self.songs.include?(song)
   end
 
+  def genres
+    self.songs.collect {|song| song.genre}.uniq
+  end
+
   # MEMORABLE
   def self.create(name)
     artist = self.new(name)
