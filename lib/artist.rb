@@ -39,7 +39,7 @@ class Artist
 
   def genres
      genres = []
-     songs.each do |song|
+     @songs.each do |song|
         genres << song.genre
      end
      genres.uniq
