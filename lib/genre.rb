@@ -16,6 +16,10 @@ class Genre
     self.class.all << self
   end
 
+  def add_song(song)
+    self.songs << song unless self.songs.include?(song)
+  end
+
   # MEMORABLE
 
   def self.destroy_all
