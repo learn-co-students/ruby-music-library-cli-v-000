@@ -1,8 +1,10 @@
-class Artist 
+class Song 
   extend Findable
   extend Persistable::ClassMethods
+  extend Nameable::ClassMethods
   include Persistable::InstanceMethods
   attr_accessor :name
+  attr_reader :artist, :genre
   
   @@all = []
   
@@ -26,4 +28,9 @@ class Artist
   #   @@all.size
   # end
   
+  # def self.find_by_name
+  #   @@all.detect {|artist| artist.name == name}
+  # end
+  
 end
+  

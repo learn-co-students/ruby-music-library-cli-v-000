@@ -1,8 +1,10 @@
-class Genre 
+class Artist 
   extend Findable
   extend Persistable::ClassMethods
+  extend Nameable::ClassMethods
   include Persistable::InstanceMethods
   attr_accessor :name
+  attr_reader :song, :genre
   
   @@all = []
   
@@ -12,6 +14,10 @@ class Genre
   
   def initialize
     save
+  end
+  
+  def add_song
+    @@all << song 
   end
   
   # def save
