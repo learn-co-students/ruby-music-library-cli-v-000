@@ -1,5 +1,7 @@
 class Genre 
   extend Findable
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
   attr_accessor :name
   
   @@all = []
@@ -12,16 +14,16 @@ class Genre
     save
   end
   
-  def save
-    @@all << self
-  end
+  # def save
+  #   @@all << self
+  # end
   
-  def destroy_all
-    @@all.clear
-  end
+  # def destroy_all
+  #   @@all.clear
+  # end
   
-  def self.count
-    @@all.size
-  end
+  # def self.count
+  #   @@all.size
+  # end
   
 end

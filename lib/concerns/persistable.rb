@@ -1,14 +1,19 @@
 module Persistable
-  def save
-    @@all << self
+  
+  module InstanceMethods
+    def save
+      self.class.all << self
+    end
   end
   
-  def destroy_all
-    @@all.clear
+  module ClassMethods
+    def destroy_all
+      self.all.clear
+    end
+    
+    def count
+      self.all.size
+    end
   end
-  
-  def self.count
-    @@all.size
-  end
-  
+
 end
