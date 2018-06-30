@@ -1,8 +1,8 @@
 class Artist 
-  extend Findable
-  extend Persistable::ClassMethods
-  extend Nameable::ClassMethods
-  include Persistable::InstanceMethods
+  extend Findable::ClassMethods
+  # extend Persistable::ClassMethods
+  # extend Nameable::ClassMethods
+  # include Persistable::InstanceMethods
   attr_accessor :name
   attr_reader :song, :genre
   
@@ -17,20 +17,19 @@ class Artist
     @songs = []
   end
   
-  def add_song
-    @@all << song 
+  def self.create(name)
+    artist = new(name)
+    artist.save
+    artist
   end
-  
-  # def save
-  #   @@all << self
-  # end
-  
-  # def destroy_all
-  #   @@all.clear
-  # end
-  
-  # def self.count
-  #   @@all.size
-  # end
-  
+
+  def add_song(song)
+    song.artist = self unless song.artist
+    songs << song unless songs.include?(song)
+  end
+
+  def genres
+    songs.collect{ |s| s.genre }.uniq
+  end
+
 end
