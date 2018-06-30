@@ -12,8 +12,9 @@ class Artist
     @@all 
   end
   
-  def initialize
-    save
+  def initialize(name)
+    @name = name
+    @songs = []
   end
   
   def add_song

@@ -12,8 +12,10 @@ class Song
     @@all 
   end
   
-  def initialize
-    save
+  def initialize(name, artist=nil, genre=nil)
+    @name = name
+    self.artist = artist 
+    self.genre = genre
   end
   
   # def save
