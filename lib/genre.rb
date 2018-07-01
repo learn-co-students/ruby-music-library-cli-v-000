@@ -1,10 +1,6 @@
 class Genre 
-  extend Findable::ClassMethods
-  # extend Persistable::ClassMethods
-  # extend Nameable::ClassMethods
-  # include Persistable::InstanceMethods
+  extend Concerns::Findable::ClassMethods
   attr_accessor :name, :artists, :songs
-  # attr_reader :songs
   
   @@all = []
   

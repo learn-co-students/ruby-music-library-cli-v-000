@@ -1,5 +1,5 @@
 class Artist 
-  extend Findable::ClassMethods
+  extend Concerns::Findable::ClassMethods
   # extend Persistable::ClassMethods
   # extend Nameable::ClassMethods
   # include Persistable::InstanceMethods

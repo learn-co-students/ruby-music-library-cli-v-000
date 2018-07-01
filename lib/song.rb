@@ -1,5 +1,5 @@
 class Song 
-  extend Findable
+  extend Concerns::Findable::ClassMethods
   # extend Persistable::ClassMethods
   # extend Nameable::ClassMethods
   # include Persistable::InstanceMethods
@@ -37,10 +37,6 @@ class Song
   
   def save
     @@all << self
-  end
-
-  def self.find_or_create_by_name(name)
-    find_by_name(name) || create(name)
   end
 
   def self.new_from_filename(filename)
