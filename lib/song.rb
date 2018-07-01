@@ -1,8 +1,6 @@
 class Song 
   extend Concerns::Findable::ClassMethods
-  # extend Persistable::ClassMethods
-  # extend Nameable::ClassMethods
-  # include Persistable::InstanceMethods
+  
   attr_accessor :name, :artist, :genre
   
   @@all = []
@@ -11,10 +9,10 @@ class Song
     @@all 
   end
   
-  def initialize(name, artist=nil, genre=nil)
+ def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist = artist 
-    self.genre = genre
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
   
   def self.create(name)
@@ -52,6 +50,6 @@ class Song
   def self.create_from_filename(filename)
     new_from_filename(filename).tap{ |s| s.save }
   end
-  
+
 end
   
