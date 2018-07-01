@@ -18,11 +18,11 @@ class Genre
   end
   
   def self.destroy_all
-    all.clear
+    @@all.clear
   end
-
+  
   def save
-    self.class.all << self
+    @@all << self
   end
 
   def self.create(name)
