@@ -3,8 +3,7 @@ class Song
   # extend Persistable::ClassMethods
   # extend Nameable::ClassMethods
   # include Persistable::InstanceMethods
-  attr_accessor :name
-  attr_reader :artist, :genre
+  attr_accessor :name, :artist, :genre
   
   @@all = []
   
@@ -16,6 +15,10 @@ class Song
     @name = name
     self.artist = artist 
     self.genre = genre
+  end
+  
+  def self.create(name)
+    new(name).tap {|artist| artist.save}
   end
   
   def artist=(artist)
