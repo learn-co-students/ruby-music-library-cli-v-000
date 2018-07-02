@@ -1,8 +1,11 @@
 class MusicLibraryController
+  attr_reader :song, :artist, :genre
+  attr_accessor :song_array
 
   def initialize(path = "./db/mp3s")
     importer = MusicImporter.new(path)
     importer.import
+    @song_array = Song.all.sort_by { |song| song.name }
   end
 
   def call
@@ -35,17 +38,10 @@ class MusicLibraryController
     end
   end
 
-  def alphabetize_songs
-    song_array = []
-    song_array = Song.all.sort_by { |song| song.name }
-    song_array.each_with_index do |song, i|
-      song_array[i] = "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    end
-    song_array
-  end
-
   def list_songs
-    alphabetize_songs.each { |index| puts index }
+    song_array.each_with_index do |song, i|
+      puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 
   def list_artists
@@ -89,13 +85,11 @@ class MusicLibraryController
   end
 
   def play_song
-    list_songs
-    puts "Which song number would you like to play?"
-    input = gets.chomp.to_i
-    #until (input > 0) && (input < list_songs.length)
-    #  puts "Which song number would you like to play?"
-    #end
-      puts "Playing #{[input-1]}."
+      puts "Which song number would you like to play?"
+      input = gets.chomp.to_i
+      if input > 0 && input < Song.all.length
+        puts "Playing #{@song_array[input - 1].name} by #{@song_array[input -1].artist.name}"
+      end
   end
 
 end
