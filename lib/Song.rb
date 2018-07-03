@@ -51,12 +51,17 @@ def self.find_or_create_by_name(name)
 end
 
 def self.new_from_filename(filename)
+
    song_name = filename.split(" - ")[1]
    artist_name = filename.split(" - ")[0]
    genre_name = filename.split(" - ")[2].gsub(".mp3","")
-   new_song = self.new(song_name)
-   new_song.artist = artist_name
-   new_song.genre = genre_name
+   x = Artist.new(artist_name)
+   y = Genre.new(genre_name)
+   new_song = self.new(song_name, x, y)
+   new_song
+  #  new_song.artist = x
+  #  new_song.genre = y
+
 end
 
 
