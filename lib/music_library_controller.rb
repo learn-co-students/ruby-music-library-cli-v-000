@@ -57,8 +57,8 @@ class MusicLibraryController
 
   def list_genres
     counter = 1
-    Genre.all.sort{|a, b| a.name <=> b.name}.each do |artist|
-      puts "#{counter}. #{artist.name}"
+    Genre.all.sort{|a, b| a.name <=> b.name}.each do |genre|
+      puts "#{counter}. #{genre.name}"
       counter += 1
     end
   end
@@ -76,11 +76,11 @@ class MusicLibraryController
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    artist_input = gets.strip
-    artist = Genre.find_or_create_by_name(artist_input)
+    genre_input = gets.strip
+    genre = Genre.find_or_create_by_name(genre_input)
     counter = 1
-    artist.songs.sort{|a, b| a.name <=> b.name}.each do |artist|
-      puts "#{counter}. #{artist.artist.name} - #{artist.name}"
+    genre.songs.sort{|a, b| a.name <=> b.name}.each do |genre|
+      puts "#{counter}. #{genre.artist.name} - #{genre.name}"
       counter += 1
     end
   end
