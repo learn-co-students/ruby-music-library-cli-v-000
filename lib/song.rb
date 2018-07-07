@@ -65,6 +65,7 @@ end
   end
 
 def self.new_from_filename(file_name)
+  #if file_name !=nil 
   file_name_parsed = file_name.split(" - ")
   name = file_name_parsed[1]
  new_song = Song.find_or_create_by_name(name)
@@ -74,6 +75,7 @@ def self.new_from_filename(file_name)
   new_found_genre = Genre.find_or_create_by_name(file_name_parsed[2].chomp(".mp3"))
   new_song.genre = new_found_genre 
   new_song 
+#end 
   end 
    
 def self.create_from_filename(file_name)

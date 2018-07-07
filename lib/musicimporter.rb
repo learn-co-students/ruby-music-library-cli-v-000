@@ -12,10 +12,12 @@ class MusicImporter
   end 
 
   def files
-@files = Dir.glob(@path+"/*.mp3").collect do |file|
-      file.gsub!("./spec/fixtures/mp3s/", "")
-    end 
-    @files 
+#@files = Dir.glob(@path+"/*.mp3").collect do |file|
+     # file.gsub!("./spec/fixtures/mp3s/", "")
+   # end 
+   # @files 
+  @files = Dir.glob("#{path}/*.mp3").collect{ |f| f.gsub("#{path}/", "") }
+
   end 
 
   def import
