@@ -14,7 +14,6 @@ class Song
 		@name = name
 		self.artist = artist if artist
 		self.genre = genre if genre
-		save
 	end	
 	
 	def artist=(artist)
@@ -42,14 +41,15 @@ class Song
 	end
 	
 	def self.create_from_filename(name)
-	  self.new_from_filename(name)
+	  song = self.new_from_filename(name)
+	  song.save
 	end
 	
   def self.new_from_filename(filename)
     song_info = filename.chomp(".mp3").split(" - ")
     song = Song.new(song_info[1])
-    song.artist = song_info[0] 
-    song.genre = song_info[2]
+    song.artist = Artist.find_or_create_by_name(song_info[0]) 
+    song.genre = Genre.find_or_create_by_name(song_info[2]) 
     song
   end
 end
