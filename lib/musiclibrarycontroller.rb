@@ -75,7 +75,6 @@ class MusicLibraryController
                 if input > 0 && input <= 5
                     playlist = Song.all.sort!{|i, e| i.name <=> e.name}
                     puts "Playing #{playlist[input-1].name} by #{playlist[input-1].artist.name}"
-                    # "Playing #{list_songs[input-1].split(" - ")[1]} by #{list_songs[input-1].split(" - ")[0]}"
                 end
             end
         end
