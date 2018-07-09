@@ -31,14 +31,7 @@ class MusicLibraryController
 
     def list_songs
         # binding.pry
-        list = MusicImporter.new(path).files.sort {|file1, file2| file1.split(" - ")[1] <=> file2.split(" - ")[1]}.map { |e| e.gsub(".mp3","")}
-        list.each_with_index {|file, index| puts "#{index+1}. #{file}"}
-        list
-
-        # list = Song.all.sort!{|i, e| i.name <=> e.name}
-        # list.each_with_index{|i,e|
-        #     puts "#{e+1}. #{i.artist.name} - #{i.name} - #{i.genre.name}"}
-        # list
+        Song.all.sort!{|i, e| i.name <=> e.name}.each_with_index{|i,e| puts "#{e+1}. #{i.artist.name} - #{i.name} - #{i.genre.name}"}
     end
 
     def list_artists
