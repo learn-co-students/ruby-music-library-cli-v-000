@@ -21,6 +21,12 @@ class MusicLibraryController
         unless input == "exit"
             call
         end
+        list_songs if input == "list songs"
+        list_artists if input == "list artists"
+        list_genres if input == "list genres"
+        list_songs_by_artist if input == "list artist"
+        list_songs_by_genre if input == "list genre"
+        play_song if input == "play song"
     end
 
     def list_songs
@@ -67,11 +73,9 @@ class MusicLibraryController
                 puts "Which song number would you like to play?"
                 input = gets.strip.to_i
                 if input > 0 && input <= 5
-                    puts "Playing #{list_songs[input-1].split(" - ")[1]} by #{list_songs[input-1].split(" - ")[0]}"
-                    # "Playing #{list_songs[input].name} by #{list_songs[input].artist.name}"
+                    playlist = Song.all.sort!{|i, e| i.name <=> e.name}
+                    puts "Playing #{playlist[input-1].name} by #{playlist[input-1].artist.name}"
+                    # "Playing #{list_songs[input-1].split(" - ")[1]} by #{list_songs[input-1].split(" - ")[0]}"
                 end
             end
-
-            def MusicLibraryController - CLI Commands
-
         end
