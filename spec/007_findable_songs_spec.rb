@@ -26,7 +26,8 @@ context "Song" do
 
       expect(Song.all).to include(other_song)
     end
-
+    
+  #Test not passing without re-coding the same functionality.
     it "invokes .create instead of re-coding the same functionality" do
       expect(Song).to receive(:create).with("Kaohsiung Christmas")
 
