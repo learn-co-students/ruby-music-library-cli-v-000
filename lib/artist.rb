@@ -22,12 +22,14 @@ class Artist
   def self.create(name)
     created_artist = Artist.new(name)
     @@all << created_artist
+    created_artist
   end
 
-  def add_song(song_name)
-    song_instance = Song.new(song_name)
+  def add_song(song_instance)
+
     song_instance.artist = self if song_instance.artist != self
     @songs << song_instance unless @songs.include?(song_instance)
+
   end
 
   def songs

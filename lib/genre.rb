@@ -26,6 +26,7 @@ class Genre
   def self.create(name)
     created_genre = Genre.new(name)
     @@all << created_genre unless @@all.include?(created_genre)
+    created_genre
   end
 
 end
