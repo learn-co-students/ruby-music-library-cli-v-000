@@ -23,8 +23,10 @@ describe "Genre" do
 end
 
 describe "Concerns::Findable" do
-  let!(:artist) { Artist.create("Slowdive") }
-  let!(:genre) { Genre.create("shoegaze") }
+  let!(:artist_one) { Artist.create("Madonna") }
+  let!(:artist_two) { Artist.create("Slowdive") }
+  let!(:genre_one) { Genre.create("pop") }
+  let!(:genre_two) { Genre.create("shoegaze") }
 
   describe ".find_by_name" do
     it "is added as a class method to classes that extend the module" do
@@ -33,12 +35,12 @@ describe "Concerns::Findable" do
 
     context "works exactly like a generic version of Song.find_by_name," do
       it "searching the extended class's @@all variable for an instance that matches the provided name" do
-        expect(Artist.find_by_name("Slowdive")).to be(artist)
+        expect(Artist.find_by_name("Slowdive")).to be(artist_two)
       end
     end
 
     it "isn't hard-coded" do
-      expect(Genre.find_by_name("shoegaze")).to be(genre)
+      expect(Genre.find_by_name("shoegaze")).to be(genre_two)
     end
   end
 
@@ -49,11 +51,11 @@ describe "Concerns::Findable" do
 
     context "works exactly like a generic version of Song.find_or_create_by_name:" do
       it "finds (does not recreate) an existing instance with the provided name if one exists in @@all" do
-        expect(Artist.find_or_create_by_name("Slowdive")).to be(artist)
+        expect(Artist.find_or_create_by_name("Slowdive")).to be(artist_two)
       end
 
       it "isn't hard-coded" do
-        expect(Genre.find_or_create_by_name("shoegaze")).to be(genre)
+        expect(Genre.find_or_create_by_name("shoegaze")).to be(genre_two)
       end
 
       it "invokes .find_by_name instead of re-coding the same functionality" do
