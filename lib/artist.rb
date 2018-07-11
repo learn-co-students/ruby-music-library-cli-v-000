@@ -24,10 +24,10 @@ class Artist
     @@all << created_artist
   end
 
-  def add_song(name)
-    song_instance = Song.new(name)
-    song_instance.artist = self
-    @songs << song_instance
+  def add_song(song_name)
+    song_instance = Song.new(song_name)
+    song_instance.artist = self if song_instance.artist != self
+    @songs << song_instance unless @songs.include?(song_instance)
   end
 
   def songs
