@@ -5,8 +5,9 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name, artist = nil)
     @name = name
+    @artist = artist if artist
     @@all = []
   end
 
@@ -20,6 +21,11 @@ class Song
 
   def save
     self.class.all << self
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
   end
 
   def self.create(name)
