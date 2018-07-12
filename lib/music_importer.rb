@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicImporter
 
   attr_reader :path
@@ -11,7 +13,9 @@ class MusicImporter
   end
 
   def import
-    files.each{ |f| Song.create_from_filename(f) }
+    files.each do |f|
+      Song.create_from_filename(f)
+    end
   end
 
 end

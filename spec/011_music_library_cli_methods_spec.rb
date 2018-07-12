@@ -1,3 +1,4 @@
+require 'pry'
 require "spec_helper"
 
 describe "MusicLibraryController - CLI Methods" do
@@ -6,6 +7,7 @@ describe "MusicLibraryController - CLI Methods" do
 
   describe "#list_songs" do
     it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
+      # binding.pry
       expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
       expect($stdout).to receive(:puts).with("2. Real Estate - Green Aisles - country")
       expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
