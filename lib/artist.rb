@@ -1,8 +1,10 @@
 require 'pry' 
 
+include Concerns::Findable
+
 class Artist 
 
-attr_accessor :name, :songs, :genre
+attr_accessor :name, :songs, :genre, :artist 
 
 
 @@all = []
@@ -36,6 +38,10 @@ end
 def genres 
   self.songs.collect{|g| g.genre}.uniq 
 end 
+
+# def songs 
+#   self.songs.collect{|a| a.song}.uniq
+# end 
 
 
  

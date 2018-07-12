@@ -1,0 +1,30 @@
+
+[1mFrom:[0m /home/dvdrumwright/ruby-music-library-cli-v-000/lib/MusicLibraryController.rb @ line 92 MusicLibraryController#list_songs_by_genre:
+
+    [1;34m70[0m: [32mdef[0m [1;34mlist_songs_by_genre[0m
+    [1;34m71[0m:   puts [31m[1;31m"[0m[31mPlease enter the name of a genre:[1;31m"[0m[31m[0m
+    [1;34m72[0m:   user_input = gets.chomp
+    [1;34m73[0m:   [32mif[0m entire_genre = [1;34;4mGenre[0m.all.find {|genre| genre.name == user_input} 
+    [1;34m74[0m:   entire_genre.songs.sort { |song1,song2| song1.name <=> song2.name }.each_with_index{ |song,index| 
+    [1;34m75[0m:   puts [31m[1;31m"[0m[31m#{index+1}[0m[31m. #{song.artist.name}[0m[31m - #{song.name}[0m[31m[1;31m"[0m[31m[0m}
+    [1;34m76[0m: [32mend[0m 
+    [1;34m77[0m: 
+    [1;34m78[0m: 
+    [1;34m79[0m: 
+    [1;34m80[0m: 
+    [1;34m81[0m: 
+    [1;34m82[0m: [32mdef[0m [1;34mplay_song[0m
+    [1;34m83[0m: puts [31m[1;31m"[0m[31mWhich song number would you like to play?[1;31m"[0m[31m[0m
+    [1;34m84[0m: user_input = gets.chomp
+    [1;34m85[0m: song_list = [1;34;4mSong[0m.all[gets.to_i - [1;34m1[0m] 
+    [1;34m86[0m: song_list.songs.sort {|s1,s2| s1.name <=> s2.name}.each_with_index{ |song,index| 
+    [1;34m87[0m:   puts [31m[1;31m"[0m[31m#{index+1}[0m[31m. #{song.artist.name}[0m[31m - #{song.name}[0m[31m[1;31m"[0m[31m[0m}
+    [1;34m88[0m: 
+    [1;34m89[0m: [32mend[0m               
+    [1;34m90[0m:  
+    [1;34m91[0m: 
+ => [1;34m92[0m: binding.pry
+    [1;34m93[0m:  
+    [1;34m94[0m: 
+    [1;34m95[0m:   [32mend[0m 
+
