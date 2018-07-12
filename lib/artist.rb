@@ -26,10 +26,8 @@ class Artist
   end
 
   def add_song(song_instance)
-
     song_instance.artist = self if song_instance.artist != self
     @songs << song_instance unless @songs.include?(song_instance)
-
   end
 
   def songs

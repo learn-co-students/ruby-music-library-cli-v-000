@@ -19,6 +19,11 @@ class Genre
     @songs
   end
 
+  def add_song(song_instance)
+    song_instance.genre = self if song_instance.genre != self
+    @songs << song_instance unless @songs.include?(song_instance)
+  end
+
   def self.destroy_all
     @@all.clear
   end
