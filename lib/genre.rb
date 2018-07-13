@@ -16,8 +16,11 @@ extend Concerns::Findable
     @songs = []
   end
 
-  def self.create(genre)
-    new(name).tap{ |g| g.save }
+  def self.create(name)
+    # new(name).tap{ |g| g.save }
+    genre = Genre.new(name)
+    genre.save
+    genre
   end
 
   def self.destroy_all

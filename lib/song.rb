@@ -53,4 +53,20 @@ extend Concerns::Findable
     find_by_name(name) || create(name)
   end
 
+  def self.new_from_filename(filename)
+    new_song = filename.split(" - ")
+    song_artist = new_song[0]
+    song_name = new_song[1]
+    song_genre = new_song[2].chomp(".mp3")
+    a = Artist.find_or_create_by_name(song_artist)
+    g = Genre.find_or_create_by_name(song_genre)
+    self.new(song_name, a, g)
+  end
+
+  def self.create_from_filename(filename)
+    new_song = self.new_from_filename(filename)
+    new_song.save
+    new_song
+  end
+
 end

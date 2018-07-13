@@ -1,4 +1,0 @@
-module Concerns::Findable
-
-
-end
