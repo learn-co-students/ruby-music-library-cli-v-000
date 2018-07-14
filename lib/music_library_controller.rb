@@ -36,22 +36,22 @@ class MusicLibraryController
 	end 
 
 	def list_songs 
-		Song.all.sort_by { |song| song.name }.each_with_index { |song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"} 
+		Song.all.sort_by { |song| song.name }.each.with_index(1) { |song, index| puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"} 
 	end 
 
 	def list_artists 
-		Artist.all.sort_by { |artist| artist.name }.each_with_index { |artist, index| puts "#{index + 1}. #{artist.name}" }
+		Artist.all.sort_by { |artist| artist.name }.each.with_index(1) { |artist, index| puts "#{index}. #{artist.name}" }
 	end 
 
 	def list_genres 
-		Genre.all.sort_by { |genre| genre.name }.each_with_index { |genre, index| puts "#{index + 1}. #{genre.name}" }
+		Genre.all.sort_by { |genre| genre.name }.each.with_index(1) { |genre, index| puts "#{index}. #{genre.name}" }
 	end 
 
 	def list_songs_by_artist 
 		puts "Please enter the name of an artist:" 
 		input = gets.chomp 
 		if artist = Artist.find_by_name(input) 
-			artist.songs.sort_by { |song| song.name }.each_with_index { |song, index| puts "#{index + 1}. #{song.name} - #{song.genre.name}"} 
+			artist.songs.sort_by { |song| song.name }.each.with_index(1) { |song, index| puts "#{index}. #{song.name} - #{song.genre.name}"} 
 		end
 	end 
 
@@ -59,7 +59,7 @@ class MusicLibraryController
 		puts "Please enter the name of a genre:" 
 		input = gets.chomp 
 		if genre = Genre.find_by_name(input) 
-			genre.songs.sort_by { |song| song.name }.each_with_index { |song, index| puts "#{index + 1}. #{song.artist.name} - #{song.name}"} 
+			genre.songs.sort_by { |song| song.name }.each.with_index(1) { |song, index| puts "#{index}. #{song.artist.name} - #{song.name}"} 
 		end
 	end  
 
