@@ -20,7 +20,6 @@ class MusicLibraryController
 
 			case input 
 			when "list songs" 
-				puts "Hey look, I'm listing songs."
 				list_songs 
 			when "list artists" 
 				list_artists 
