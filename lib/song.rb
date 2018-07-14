@@ -11,11 +11,14 @@ class Song
   
   def initialize(name, artist = nil, genre = nil)
    @name = name
+   @artist = artist
 
   end
   
   def self.create(name)
-
+    song = new(name)
+    song.save
+    song
   end
   
   def artist=(artist)
@@ -31,7 +34,7 @@ class Song
   end
   
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.new_from_filename(filename)
