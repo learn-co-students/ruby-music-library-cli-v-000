@@ -24,15 +24,20 @@ class MusicLibraryController
   end
 
   def list_songs
-    sorted_songs = Song.all.sort_by {|song|
-      song.name}
+    sorted_songs = Song.all.sort_by {|song| song.name}.uniq
+
+
     sorted_songs.each_with_index {|song, index|
+
       puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+
+      #puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
   def list_artists
     sorted_artists = Artist.all.sort_by {|artist|
       artist.name}
+
     sorted_artists.each_with_index{|artist, index|
       puts "#{index + 1}. #{artist.name}"}
   end
@@ -49,33 +54,20 @@ class MusicLibraryController
     artist_name = gets
     selected_artist = Artist.all.detect {|artist| artist.name == artist_name}
     selected_songs = Song.all.select {|song| song.artist == selected_artist}
-    sorted_songs = selected_songs.sort_by {|song| song.name}
-    binding.pry
+    sorted_songs = selected_songs.sort_by {|song| song.name}.uniq
     sorted_songs.each_with_index {|song, index|
-    puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
-
-
-
-
-
-    #sorted_selected_artist = selected_artist.sort_by {|song| song.name}
-    #puts sorted_selected_artist
-
-    #sorted_selected_artist.each_with_index{|song, index|
-      #puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
+      puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
   end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     genre_name = gets
-    selected_genre = Genre.all.select {|genre|
-      genre.name == genre_name}
+    selected_genre = Genre.all.detect {|genre| genre.name == genre_name}
+    selected_songs = Song.all.select {|song| song.genre == selected_genre}
+    sorted_songs = selected_songs.sort_by {|song| song.name}.uniq
+    sorted_songs.each_with_index {|song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name}"}
 
-    selected_genre.sort_by {|song|
-      song.name}
-
-    selected_genre.each_with_index{|song, index|
-      puts "#{index + 1}. #{song.artist} - #{song.name}"}
   end
 
   def play_song
