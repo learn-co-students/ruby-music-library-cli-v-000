@@ -47,13 +47,22 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     artist_name = gets
-    selected_artist = Song.all.select {|song| song.artist.name == artist_name}
+    selected_artist = Artist.all.detect {|artist| artist.name == artist_name}
+    selected_songs = Song.all.select {|song| song.artist == selected_artist}
+    sorted_songs = selected_songs.sort_by {|song| song.name}
+    binding.pry
+    sorted_songs.each_with_index {|song, index|
+    puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
 
-    selected_artist.sort_by {|song| song.name}
 
-    #puts selected_artist
-    selected_artist.each_with_index{|song, index|
-      puts "#{index + 1}. #{song.name} - #{song.genre}"}
+
+
+
+    #sorted_selected_artist = selected_artist.sort_by {|song| song.name}
+    #puts sorted_selected_artist
+
+    #sorted_selected_artist.each_with_index{|song, index|
+      #puts "#{index + 1}. #{song.name} - #{song.genre.name}"}
   end
 
   def list_songs_by_genre
