@@ -1,6 +1,6 @@
 class MusicLibraryController
 
-  attr_accessor :answer, :path, :library
+  attr_accessor :path, :library
 
   def initialize(path = "./db/mp3s")
       self.path = path
@@ -19,12 +19,20 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    @answer = gets.gsub(" ", "-")
+    poss_answer = {'list songs' => "list_songs",
+      'list artists'=> "list_artists",
+      'list genres' => "list_genres",
+      'list artist'=> "list_songs_by_artist",
+      'list genre' => "list_songs_by_genre",
+      'play song'=> "play_song"}
 
-    while @answer != 'exit'
-#    self.send(@answer)
+
+    answer = gets
+
+    while answer != 'exit'
+      self.send(poss_answer[answer])
     puts "What would you like to do?"
-    @answer = gets.gsub(" ", "-")
+    answer = gets
     end
 
   end
