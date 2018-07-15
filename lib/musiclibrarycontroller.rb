@@ -1,3 +1,4 @@
+require 'pry'
 class MusicLibraryController
 
   attr_accessor :path, :library
@@ -24,18 +25,21 @@ class MusicLibraryController
       'list genres' => "list_genres",
       'list artist'=> "list_songs_by_artist",
       'list genre' => "list_songs_by_genre",
-      'play song'=> "play_song"}
-
+      'play song' => "play_song"}
 
     answer = gets
 
-    while answer != 'exit'
-      self.send(poss_answer[answer])
-    puts "What would you like to do?"
-    answer = gets
+      while answer != 'exit'
+        if poss_answer[answer] == nil
+          puts "What would you like to do?"
+          answer = gets
+        else
+          self.send(poss_answer[answer])
+          puts "What would you like to do?"
+          answer = gets
+        end
+      end
     end
-
-  end
 
   def list_songs
     # Song.all.sort_by{|song| song.name}.each_with_index do |song, i|
@@ -80,9 +84,9 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    answer = gets.to_i
-    if answer <= Song.all.length and answer>0
-      play = Song.all.sort_by{|song| song.name}[answer-1]
+    answer1 = gets.to_i
+    if answer1 <= Song.all.length && answer1>0
+      play = Song.all.sort_by{|song| song.name}[answer1-1]
       puts "Playing #{play.name} by #{play.artist.name}"
     end
   end
