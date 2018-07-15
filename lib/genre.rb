@@ -10,6 +10,7 @@ class Genre
   
   def initialize(name)
     @name = name
+    @songs = []
   end
   
   def self.destroy_all
