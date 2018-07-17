@@ -7,10 +7,10 @@ module Memorable
 
       def create(name)
         knew = new(name)
-        knew.save
+      knew.name = name
+      knew.save
         knew
       end
-
   end
 
   module InstanceMethods
@@ -18,10 +18,5 @@ module Memorable
     def save
       self.class.all << self
     end
-
-
-
-
-
   end
 end

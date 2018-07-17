@@ -1,4 +1,3 @@
-
 class Genre
 
   extend Memorable::ClassMethods
@@ -24,5 +23,6 @@ class Genre
     end
     artists.uniq
   end
+
 
 end
