@@ -1,3 +1,5 @@
+require 'pry'
+
 class Artist
   attr_accessor :name
 
@@ -33,12 +35,13 @@ class Artist
   def add_song(song)
     if self != song.artist
       song.artist = self
-    #binding.pry
-    else
-      song
+        @songs << song
     end
-    songs.detect {|song| song != song}
-      @songs << song
-     
+    # songs.detect do |song|
+    #   if self != song
+
+    #
+    #   end
+    # end
   end
 end
