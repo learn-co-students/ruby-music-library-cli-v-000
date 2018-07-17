@@ -1,3 +1,5 @@
+require 'pry'
+
 class Artist
   attr_accessor :name, :songs
   @@all = []
@@ -13,6 +15,7 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.destroy_all
@@ -20,10 +23,13 @@ class Artist
   end
 
   def self.create(name)
-    self.new(name).save
+    artist = self.new(name).save
+    artist
   end
 
-  def add_song
-
+  def add_song(song)
+    #binding.pry
+    song.artist = self
+    song.artist
   end
 end
