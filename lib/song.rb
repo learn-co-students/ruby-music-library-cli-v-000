@@ -4,6 +4,10 @@ class Song
   attr_accessor :name, :artist, :genre
   @@all = []
 
+  def method_name
+
+  end
+
   def initialize(name, artist=nil, genre=nil)
     @name = name
     @artist = artist
