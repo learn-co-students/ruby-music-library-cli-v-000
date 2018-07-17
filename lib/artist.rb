@@ -37,11 +37,5 @@ class Artist
       song.artist = self
         @songs << song
     end
-    # songs.detect do |song|
-    #   if self != song
-
-    #
-    #   end
-    # end
   end
 end
