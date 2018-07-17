@@ -3,3 +3,31 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+class Song
+attr_accessor :name
+
+  @@all = []
+
+  def initialize(name)
+    @name = name
+  end
+
+  def all
+    @@all
+  end
+
+  def save
+    @@all << self
+  end
+
+  def destroy_all
+    @@all = []
+  end
+
+  def self.create(name)
+    self.new(name)
+    self.save
+  end
+
+end
