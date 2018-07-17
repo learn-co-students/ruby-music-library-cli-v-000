@@ -31,12 +31,14 @@ class Artist
   end
 
   def add_song(song)
-    if song != song.artist
+    if self != song.artist
       song.artist = self
     #binding.pry
     else
       song
     end
-
+    songs.detect {|song| song != song}
+      @songs << song
+     
   end
 end
