@@ -27,9 +27,8 @@ class Artist
     artist
   end
 
-  def add_song(song)
+  def add_song
     #binding.pry
     song.artist = self
-    song.artist
   end
 end
