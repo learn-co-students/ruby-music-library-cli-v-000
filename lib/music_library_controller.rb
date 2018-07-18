@@ -39,12 +39,6 @@ class MusicLibraryController
     else
       self.call
     end
-    #
-    # if action == "exit"
-    #   "exit"
-    # else
-    #   self.call
-    # end
   end
 
   def list_songs
