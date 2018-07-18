@@ -1,3 +1,4 @@
+
 class Genre
   attr_accessor :name
 
@@ -31,10 +32,12 @@ class Genre
   end
 
   def add_song(song)
-    #if self != song.genre
     if !self.songs.include?(song)
-      #song.genre = self
-        @songs << song
+      @songs << song
     end
+  end
+
+  def artists
+    self.songs.map {|song| song.artist}.uniq
   end
 end
