@@ -38,4 +38,12 @@ class Artist
         @songs << song
     end
   end
+
+  def genres
+    songs.each do |song|
+      if song.genre != song.genre
+        song.genre
+      end
+    end  
+  end
 end
