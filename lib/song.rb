@@ -20,7 +20,6 @@ class Song
   def genre=(genre)
     @genre = genre
     genre.add_song(self)
-    #@songs << song
   end
 
   def self.all
@@ -48,6 +47,13 @@ class Song
 
   def self.find_or_create_by_name(name)
     find_by_name(name) || create(name)
+  end
 
+  def self.new_from_filename(filename)
+    song_name = filename.split(' - ')[1]
+    song_artist = filename.split('-')[0]
+    song_genre = filename.split('-')[2]
+    song = Song.new(song_name)
+  
   end
 end
