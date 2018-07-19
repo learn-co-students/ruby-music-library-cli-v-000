@@ -9,9 +9,9 @@ class Song
     if artist !=nil
       self.artist = artist
     end
-    #if genre !=nil
+    if genre !=nil
       self.genre = genre
-    #end
+    end
   end
 
   def self.all
@@ -40,6 +40,8 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    genre.add_song(self)
+    if !genre.songs.include?(self)
+      genre.songs << self
+    end
   end
 end

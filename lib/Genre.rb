@@ -30,7 +30,7 @@ class Genre
   end
 
   def artists
-  Song.all.map { |song| song.artist }
+  Song.all.map { |song| song.genre == self}
   end
 
 end
