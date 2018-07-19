@@ -8,14 +8,8 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @genre = genre
-    if artist
-      self.artist = artist
-    end
-    if genre
-      self.genre = genre
-    end
-    save
+      self.artist = artist if artist  #Because artist and genre can be nil or there can be an artist or genre or not.
+      self.genre = genre if genre
   end
 
   def artist=(artist)
@@ -38,16 +32,22 @@ class Song
   end
 
   def self.destroy_all
-    self.all.clear
+    all.clear
   end
 
   def self.create(name)
-    created_song = Song.new(name)
+    created_song = new(name)
       created_song.save
       created_song
   end
 
-  def genre
-    @genre
+  def self.find_by_name(name)
+    all.find {|song| song.name == name}
+    #binding.pry
+  end
+
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
+
   end
 end
