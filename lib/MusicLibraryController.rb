@@ -21,7 +21,7 @@ class MusicLibraryController
     user_input = ""
     while user_input != "exit"
       user_input = gets.chomp
-      #binding.pry
+      binding.pry
       case user_input
       when "list_songs"
         self.list_songs
