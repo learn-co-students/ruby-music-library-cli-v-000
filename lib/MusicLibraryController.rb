@@ -3,9 +3,9 @@ class MusicLibraryController
 
   def initialize(path="./db/mp3s")
     @path = path
-    new_importer = MusicImporter.new(path)
+    @music_importer = MusicImporter.new(path)
     #binding.pry
-    new_importer.import
+    @music_importer.import
   end
 
   def call
@@ -24,4 +24,13 @@ class MusicLibraryController
       user_input = gets
     end
   end
+
+
+    def list_songs
+      list = @music_importer.files
+      list.sort_by!{|song| song.split(" - ")[1]}
+      binding.pry
+      list.inspect
+      list.each_with_index {|val, index| puts "#{index+1}. #{val}"}
+    end
 end
