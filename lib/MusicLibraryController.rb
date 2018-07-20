@@ -29,8 +29,14 @@ class MusicLibraryController
     def list_songs
       list = @music_importer.files
       list.sort_by!{|song| song.split(" - ")[1]}
-      binding.pry
-      list.inspect
-      list.each_with_index {|val, index| puts "#{index+1}. #{val}"}
+      list.each_with_index {|val, index| puts "#{index+1}. #{val.chomp(".mp3")}"}
     end
+
+    def list_artists
+      list = Song.all.map {|song| song.artist.name}
+      binding.pry
+      list.uniq!.sort_by!{|a| a.name}
+      list.each_with_index {|val, index| puts "#{index+1}. #{val.name}"}
+    end
+
 end
