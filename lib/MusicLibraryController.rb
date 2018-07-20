@@ -20,7 +20,23 @@ class MusicLibraryController
 
     user_input = ""
     while user_input != "exit"
-      user_input = gets
+      user_input = gets.chomp
+      #binding.pry
+      case user_input
+      when "list_songs"
+        self.list_songs
+        break
+      when "list_artists"
+        self.list_artists
+      when "list_genres"
+        self.list_genres
+      when "list_artist"
+        self.list_songs_by_artist
+      when "list_genre"
+        self.list_songs_by_genre
+      when "play_song"
+        self.play_song
+      end
     end
   end
 
@@ -76,4 +92,5 @@ class MusicLibraryController
         puts "Playing #{files[index].split(" - ")[1]} by #{files[index].split(" - ")[0]}"
       end
     end
+
 end
