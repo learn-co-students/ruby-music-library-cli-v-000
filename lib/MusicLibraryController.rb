@@ -21,23 +21,30 @@ class MusicLibraryController
     user_input = ""
     while user_input != "exit"
       user_input = gets.chomp
-      binding.pry
+      #binding.pry
       case user_input
       when "list_songs"
         self.list_songs
-        break
+        return
       when "list_artists"
         self.list_artists
+        break
       when "list_genres"
         self.list_genres
+        break
       when "list_artist"
         self.list_songs_by_artist
+        break
       when "list_genre"
         self.list_songs_by_genre
+        break
       when "play_song"
         self.play_song
+        break
       end
+
     end
+    exit(0)
   end
 
 
