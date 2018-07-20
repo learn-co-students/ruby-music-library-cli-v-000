@@ -1,4 +1,3 @@
-require pry
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
@@ -31,7 +30,9 @@ class Song
   end
 
   def save
-    self.class.all << self
+    if !self.class.all.include?(self)
+      self.class.all << self
+    end
   end
 
 
@@ -52,13 +53,11 @@ class Song
   end
 
   def self.find_or_create_by_name(name)
-    binding.pryq
-
-    if self.find_by_name(name) == nil
-      new_song = Song.create(name)
-      new_song
+    findable = self.find_by_name(name)
+    if findable == nil
+      return self.create(name)
     end
-    self.find_by_name(name)
+    findable
   end
 
-end 
+end
