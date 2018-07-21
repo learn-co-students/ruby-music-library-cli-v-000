@@ -1,3 +1,4 @@
+require 'pry'
 class MusicLibraryController
   attr_reader :path
 
@@ -45,4 +46,24 @@ class MusicLibraryController
       puts "#{i + 1}. #{genre.name}"
     end
   end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.chomp
+    artist = Artist.all.detect { |a| a.name == input }
+
+    if !artist.nil?
+      sorted_songs = artist.songs.sort_by { |song| song.name }
+      sorted_songs.each_with_index do |song, i|
+        puts "#{i + 1}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
+  def list_songs_by_genre
+  end
+
 end
+
+test = MusicLibraryController.new("./spec/fixtures/mp3s")
+test.list_songs_by_artist
