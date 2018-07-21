@@ -17,8 +17,16 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.chomp
+    until input == "exit"
+      input = gets.chomp
+    end
+  end
+
+  def list_songs
+    sorted = Song.all.sort_by { |song| song.name }
+
+    sorted.each_with_index do |song, i|
+      puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 end
-
-test = MusicLibraryController.new()
-test.call
