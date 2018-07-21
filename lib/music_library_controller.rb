@@ -1,4 +1,3 @@
-require 'pry'
 class MusicLibraryController
   attr_reader :path
 
@@ -18,31 +17,41 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.chomp
+
+    case input
+    when 'list songs'
+      list_songs
+    when 'list artists'
+      list_artists
+    when 'list genres'
+      list_genres
+    when 'list artist'
+      list_songs_by_artist
+    when 'list genre'
+      list_songs_by_genre
+    when 'play song'
+      play_song
+    end
+
     until input == "exit"
       input = gets.chomp
     end
   end
 
   def list_songs
-    sorted = Song.all.sort_by { |song| song.name }
-
-    sorted.each_with_index do |song, i|
+    sorted(Song.all).each_with_index do |song, i|
       puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    sorted = Artist.all.sort_by { |artist| artist.name }
-
-    sorted.each_with_index do |artist, i|
+    sorted(Artist.all).each_with_index do |artist, i|
       puts "#{i + 1}. #{artist.name}"
     end
   end
 
   def list_genres
-    sorted = Genre.all.sort_by { |genre| genre.name }
-
-    sorted.each_with_index do |genre, i|
+    sorted(Genre.all).each_with_index do |genre, i|
       puts "#{i + 1}. #{genre.name}"
     end
   end
@@ -61,9 +70,30 @@ class MusicLibraryController
   end
 
   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.chomp
+    genre = Genre.all.detect { |g| g.name == input }
+
+    if !genre.nil?
+      sorted_songs = genre.songs.sort_by { |song| song.name }
+      sorted_songs.each_with_index do |song, i|
+        puts "#{i + 1}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+
+  def play_song
+    sorted_songs = sorted(Song.all)
+    puts "Which song number would you like to play?"
+    input = gets.chomp.to_i
+    if input > 0 && input <= sorted_songs.length
+      play_this = sorted_songs[input - 1]
+      puts "Playing #{play_this.name} by #{play_this.artist.name}"
+    end
+  end
+
+  def sorted(array)
+    array.sort_by { |instance| instance.name }
   end
 
 end
-
-test = MusicLibraryController.new("./spec/fixtures/mp3s")
-test.list_songs_by_artist
