@@ -6,8 +6,12 @@ class Song
 
   def initialize(name, artist=nil, genre=nil)
     @name = name
-    @artist = artist
-    @genre = genre
+    if artist != nil
+      self.artist=(artist)
+    end
+    if genre != nil
+      self.genre=(genre)
+    end
   end
 
   def name
@@ -37,12 +41,20 @@ class Song
     @artist
   end
 
-  def artist=(name)
+  def artist=(artist_obj)
     if self.artist.nil?
-      @artist = name
+      @artist = artist_obj
     end
     self.artist.add_song(self)
-    #binding.pry
+  end
+
+  def genre=(genre_obj)
+    if self.genre.nil?
+      @genre = genre_obj
+    end
+    if genre_obj.songs.include?(self) == false
+      genre_obj.songs << self
+    end
   end
 
   def self.find_by_name(name)

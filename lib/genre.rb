@@ -25,4 +25,8 @@ class Genre
     #binding.pry
     self.new(name).save[0]
   end
+
+  def artists
+
+  end
 end
