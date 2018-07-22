@@ -29,11 +29,16 @@ class Artist
 
   def add_song(song)
     #binding.pry
-    if song.artist == nil
+    if song.artist.nil?
       song.artist = self
     end
     if @songs.include?(song) == false
       @songs << song
     end
+    #binding.pry
+  end
+
+  def genres
+
   end
 end

@@ -4,10 +4,6 @@ class Song
   attr_accessor :name, :artist, :genre
   @@all = []
 
-  def method_name
-
-  end
-
   def initialize(name, artist=nil, genre=nil)
     @name = name
     @artist = artist
@@ -39,6 +35,14 @@ class Song
   def artist
     #binding.pry
     @artist
+  end
+
+  def artist=(name)
+    if self.artist.nil?
+      @artist = name
+    end
+    self.artist.add_song(self)
+    #binding.pry
   end
 
   def self.find_by_name(name)
