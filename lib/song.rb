@@ -1,3 +1,4 @@
+require_relative '../lib/concerns/module_name.rb'
 require 'pry'
 
 class Song
@@ -49,12 +50,19 @@ class Song
     find_by_name(name) || create(name)
   end
 
+
   def self.new_from_filename(filename)
+    include Concerns::Findable
     song_name = filename.split(' - ')[1]
     song_artist = filename.split(' -')[0]
     song_genre = filename.split('- ')[2].split('.mp3')[0]
-    artist = Artist.new(song_artist)
-    genre = Genre.new(song_genre)
-    song = Song.new(song_name, artist, genre)  
+    artist = Artist.find_or_create_by_name(song_artist)
+    genre = Genre.find_or_create_by_name(song_genre)
+    song = Song.new(song_name, artist, genre)
   end
+
+  # def self.create_from_filename(filename)
+  #   song = self.new_from_filename(filename)
+  #   #binding.pry
+  # end
 end

@@ -1,6 +1,4 @@
 require_relative '../lib/concerns/module_name.rb'
-
-
 require 'pry'
 
 class Artist
