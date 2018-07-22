@@ -45,6 +45,5 @@ class Artist
       end
     end
     genre_list
-    #binding.pry
   end
 end

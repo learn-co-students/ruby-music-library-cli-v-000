@@ -22,7 +22,6 @@ class Genre
   end
 
   def self.create(name)
-    #binding.pry
     self.new(name).save[0]
   end
 

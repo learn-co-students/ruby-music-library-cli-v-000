@@ -37,7 +37,6 @@ class Song
   end
 
   def artist
-    #binding.pry
     @artist
   end
 
@@ -58,7 +57,11 @@ class Song
   end
 
   def self.find_by_name(name)
-
+    self.all.map do |song|
+      if song.name == name
+        song
+      end
+    end
   end
 
   def self.find_or_create_by_name(name)
