@@ -1,3 +1,4 @@
+require_relative './concerns_module.rb'
 require 'pry'
 
 class Song
@@ -57,15 +58,15 @@ class Song
   end
 
   def self.find_by_name(name)
-    self.all.map do |song|
+    self.all.each do |song|
       if song.name == name
-        song
+        return song
       end
     end
   end
 
   def self.find_or_create_by_name(name)
-
+    find_by_name(name) || Song.create(name)
   end
 
 end
