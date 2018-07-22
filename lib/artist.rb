@@ -40,9 +40,11 @@ class Artist
     genre_list = []
     song_list = self.songs
     song_list.each do |song|
-      genre_list << song.genre
+      if genre_list.include?(song.genre) == false
+        genre_list << song.genre
+      end
     end
     genre_list
-    binding.pry
+    #binding.pry
   end
 end
