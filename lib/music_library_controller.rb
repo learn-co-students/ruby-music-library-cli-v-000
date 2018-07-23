@@ -1,4 +1,6 @@
-require_relative '../lib/music_importer'
+require 'music_importer'
+require 'song'
+
 
 class MusicLibraryController
   attr_reader :path
@@ -23,4 +25,24 @@ class MusicLibraryController
       user_input = gets.chomp
     end
   end 
+  
+  def list_songs
+    Song.all.sort_by {|song| song.name}.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+  
+  
 end
+
+# s_one = Song.create("Love NYC")
+# s_two = Song.create("Las Vegas Heat")
+# s_three = Song.create("I love LA")
+
+# mc = MusicLibraryController.new("../db/mp3s")
+# mc.list_songs
+
+
+
+
+
