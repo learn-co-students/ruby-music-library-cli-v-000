@@ -10,13 +10,8 @@ class MusicImporter
     Dir.chdir(@path) {|path| Dir.glob("*.mp3")}
   end
   
-  def self.import(files)
-    files.each  do |f| 
-      song = Song.new(f.partition(' - ')[0])
-      song.artist = f.partition(' - ')[1]
-      song.genre = f.partition(' - ')[2]
-    end
-      
+  def import
+    self.files.each { |fn| Song.create_from_filename(fn) }
   end
   
 end
