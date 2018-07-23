@@ -1,4 +1,7 @@
+require_relative '../config/environment'
+
 class Genre
+  extend Concerns::Findable
   attr_accessor :name
   attr_reader :songs
   @@all = []
@@ -9,13 +12,26 @@ class Genre
   end
   
   def self.create(name)
-    self.new(name).save
+    new_genre = self.new(name)
+    new_genre.save
+    new_genre
   end
   
-  def add_song(song_name)
-    new_song = Song.new(song_name, options ={})
-    new_song.save
-    @songs << new_song
+  def add_song(song)
+    if song.genre == nil
+      song.genre = self
+    end
+    
+    unless @songs.include?(song)
+      @songs << song
+    end
+    
+  end
+  
+  def artists
+    artists = []
+    @songs.each {|song| artists << song.artist unless artists.include?(song.artist)}
+    artists
   end
   
   def self.all 
