@@ -21,6 +21,10 @@ def self.all
   @@all
 end
 
+def artist=
+self.add_song
+end
+
 
 def self.destroy_all
   @@all.clear
