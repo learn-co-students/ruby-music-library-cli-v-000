@@ -1,14 +1,12 @@
-require 'music_importer'
-require 'song'
-require 'artist'
-require 'genre'
+# require 'song' 
+# require 'artist'
+# require 'music_importer'
 
 class MusicLibraryController
-  extend Concerns::Findable
+  
   attr_reader :path
   
   def initialize(path="./db/mp3s")
-    @path = path
     MusicImporter.new(path).import
   end
   
@@ -34,6 +32,8 @@ class MusicLibraryController
         list_songs_by_artist
       when 'list genre'
         list_songs_by_genre
+      when 'play song'
+        play_song
       when 'exit' 
         return
       else
@@ -43,9 +43,11 @@ class MusicLibraryController
   end 
   
   def list_songs
-    Song.all.uniq.sort_by {|song| song.name}.each.with_index(1) do |song, i|
-      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    # binding.pry
+    Song.all.uniq.sort_by {|song| song.name}.each_with_index do |song, i|
+      puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
+    
   end
   
   def list_artists
@@ -63,7 +65,7 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     a = gets.chomp 
-    Song.all.select {|s| s.artist.name == a}.sort_by {|s| s.name}.each.with_index(1) do |song, i|
+    Song.all.uniq.select {|s| s.artist.name == a}.sort_by {|s| s.name}.each.with_index(1) do |song, i|
       puts "#{i}. #{song.name} - #{song.genre.name}"
     end
   end 
@@ -71,33 +73,39 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     g = gets.chomp 
-    Song.all.select {|s| s.genre.name == g}.sort_by {|s| s.name}.each.with_index(1) do |song, i|
+    Song.all.uniq.select {|s| s.genre.name == g}.sort_by {|s| s.name}.each.with_index(1) do |song, i|
       puts "#{i}. #{song.artist.name} - #{song.name}"
     end
   end 
   
-  def play_songs
-    self.list_songs
+  def play_song
     puts "Which song number would you like to play?"
-    n = Interger(gets.chomp) rescue nil
-    sorted = Song.all.sort_by {|song| song.name}
-    song = sorted[n + 1]
+    
+    n = gets.chomp.to_i 
+    sorted = Song.all.uniq.sort_by {|song| song.name}
+    puts n
+    # binding.pry
     case n 
-      when n.between?(1,Song.all.length)
+      when n.between?(1, sorted.length)
+        i = n - 1
+        song = sorted[i]
         puts "Playing #{song.name} by #{song.artist}"
+      when 'exit'
+        return
       else
-        puts "You entered #{n}, that is not in the song list."
-        play_song
+        puts "You entered #{n}, that is not on the list."
       end 
   end
 end
+
+
 
 # s_one = Song.create("Love NYC")
 # s_two = Song.create("Las Vegas Heat")
 # s_three = Song.create("I love LA")
 
 # mc = MusicLibraryController.new("../db/mp3s")
-# mc.list_songs
+# mc.play_song
 
 
 

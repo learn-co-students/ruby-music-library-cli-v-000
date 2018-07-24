@@ -1,5 +1,5 @@
-require 'artist'
-require 'genre'
+# require 'artist'
+# require 'genre'
 
 class Song 
   
@@ -60,7 +60,7 @@ class Song
   end
  
   def self.all 
-    @@all 
+    @@all.uniq 
   end 
   
   def self.destroy_all 

@@ -1,4 +1,4 @@
-require_relative 'song'
+# require_relative 'song'
 
 class Artist 
   extend Concerns::Findable
