@@ -2,7 +2,7 @@ require 'pry'
 
 class Artist
 
-attr_accessor :name 
+attr_accessor :name
 
 @@all = []
 
@@ -19,11 +19,14 @@ def self.all
   @@all
 end
 
-def songs
-  @songs
+def add_song (song)
+ @songs << song
+ unless @songs.include? song
+end
 end
 
-def add_song
+def songs
+  @songs
 end
 
 
