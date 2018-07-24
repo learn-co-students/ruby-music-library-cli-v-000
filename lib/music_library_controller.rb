@@ -4,6 +4,7 @@ require 'artist'
 require 'genre'
 
 class MusicLibraryController
+  extend Concerns::Findable
   attr_reader :path
   
   def initialize(path="./db/mp3s")
@@ -25,16 +26,24 @@ class MusicLibraryController
     case user_input
       when 'list songs'
         list_songs
+      when 'list artists'
+        list_artists
+      when 'list genres'
+        list_genres
+      when 'list artist'
+        list_songs_by_artist
+      when 'list genre'
+        list_songs_by_genre
       when 'exit' 
         return
       else
-        puts "You entered #{user_input}."
+        puts "You entered #{user_input}, this is not one of the options we have."
         call
     end
   end 
   
   def list_songs
-    Song.all.sort_by {|song| song.name}.each.with_index(1) do |song, i|
+    Song.all.uniq.sort_by {|song| song.name}.each.with_index(1) do |song, i|
       puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
@@ -65,7 +74,22 @@ class MusicLibraryController
     Song.all.select {|s| s.genre.name == g}.sort_by {|s| s.name}.each.with_index(1) do |song, i|
       puts "#{i}. #{song.artist.name} - #{song.name}"
     end
-  end  
+  end 
+  
+  def play_songs
+    self.list_songs
+    puts "Which song number would you like to play?"
+    n = Interger(gets.chomp) rescue nil
+    sorted = Song.all.sort_by {|song| song.name}
+    song = sorted[n + 1]
+    case n 
+      when n.between?(1,Song.all.length)
+        puts "Playing #{song.name} by #{song.artist}"
+      else
+        puts "You entered #{n}, that is not in the song list."
+        play_song
+      end 
+  end
 end
 
 # s_one = Song.create("Love NYC")
