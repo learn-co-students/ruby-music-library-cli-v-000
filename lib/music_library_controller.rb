@@ -1,3 +1,6 @@
+
+require 'pry'
+
 class MusicLibraryController
   attr_accessor :path
 
@@ -21,6 +24,13 @@ class MusicLibraryController
     result = ""
     until result == "exit"
     result = gets.chomp
+    end
   end
+
+  def list_songs
+    list = Song.all.sort {|x,y| x.name <=> y.name }
+      list.each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+   end
   end
 end
