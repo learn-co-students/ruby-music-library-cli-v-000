@@ -39,5 +39,12 @@ attr_reader :songs
     @songs << song unless @songs.include?(song)
   end
 
+#returns a collection of genres for all of the artist's songs
+  def genres
+    self.songs.map do |song|
+      song.genre
+    end
+  end
+
 
 end
