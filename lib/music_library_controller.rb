@@ -80,25 +80,18 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-
-    input = gets.strip.to_i
-		if (1..Song.all.length).include?(input)
-      song = Song.all.sort{ |a, b| a.name <=> b.name }[input - 1]
-    end
-
-    puts "Playing #{song.name} by #{song.artist.name}" if song
-  end      
+    n = gets.strip.to_i 
+    sorted = Song.all.uniq.sort_by {|song| song.name}
+	  if n.between?(1, sorted.length)
+        i = n - 1
+        song = sorted[i]
+        puts "Playing #{song.name} by #{song.artist.name}" if song
+    end 
+	end  
   
 end
 
 
-
-# s_one = Song.create("Love NYC")
-# s_two = Song.create("Las Vegas Heat")
-# s_three = Song.create("I love LA")
-
-# mc = MusicLibraryController.new("../db/mp3s")
-# mc.play_song
 
 
 
