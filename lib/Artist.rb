@@ -1,6 +1,7 @@
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
 
 attr_accessor :name
 
@@ -37,6 +38,10 @@ def self.create(name)
   artist = self.new(name)
   artist.save
   artist
+end
+
+def genres
+  self.songs.map{|song| song.genre}.uniq
 end
 
 
