@@ -10,7 +10,7 @@ attr_reader :artist, :genre #prevent us changing the artist name again once it's
     @name = name
     self.genre= genre if genre
     self.artist= artist if artist #you take away the @ so you must invoke artist= method below, forces us to make the associations in artist= method on initialization. if you just run artist= that is a method, it needs a receiver(self)
-    @@all << self
+    #@@all << self you must delete this line because you are using #save method now. There is no test for this
   end
 
   def self.all
@@ -47,5 +47,17 @@ attr_reader :artist, :genre #prevent us changing the artist name again once it's
     @genre = genre #assigns a genre to the song (whatever is passed in the genre object called genre (indie rock))
     genre.songs << self unless genre.songs.include? self #pushes this song into the indie rock @songs instance which is an array unless it already exists
   end
+
+  def self.find_by_name(name)
+    @@all.detect do |song|
+      song.name == name
+    end
+  end
+
+  def self.find_or_create_by_name(name)
+      find_by_name(name) || create(name)
+  end
+
+
 
 end

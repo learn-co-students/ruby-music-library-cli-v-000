@@ -1,7 +1,7 @@
 class Genre
 
 attr_accessor :name
-attr_reader :songs
+attr_reader :songs #:artist - why wouldn't you need an artist variable? You refer to it #artists - No! that is the artist variable from the song class.
 
 
 @@all = []
@@ -30,5 +30,10 @@ attr_reader :songs
     this_genre
   end
 
+  def artists
+    self.songs.map do |song|
+    song.artist
+    end.uniq
+  end
 
 end
