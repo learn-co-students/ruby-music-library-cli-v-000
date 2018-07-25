@@ -22,4 +22,5 @@ class MusicLibraryController
     until result == "exit"
     result = gets.chomp
   end
+  end
 end
