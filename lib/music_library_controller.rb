@@ -80,22 +80,15 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-    
-    n = gets.chomp.to_i 
-    sorted = Song.all.uniq.sort_by {|song| song.name}
-    puts n
-    # binding.pry
-    case n 
-      when n.between?(1, sorted.length)
-        i = n - 1
-        song = sorted[i]
-        puts "Playing #{song.name} by #{song.artist}"
-      when 'exit'
-        return
-      else
-        puts "You entered #{n}, that is not on the list."
-      end 
-  end
+
+    input = gets.strip.to_i
+		if (1..Song.all.length).include?(input)
+      song = Song.all.sort{ |a, b| a.name <=> b.name }[input - 1]
+    end
+
+    puts "Playing #{song.name} by #{song.artist.name}" if song
+  end      
+  
 end
 
 
