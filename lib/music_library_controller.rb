@@ -28,9 +28,29 @@ class MusicLibraryController
   end
 
   def list_songs
-    list = Song.all.sort {|x,y| x.name <=> y.name }
-      list.each.with_index(1) do |song, index|
+    song_list = Song.all.sort {|x,y| x.name <=> y.name }
+      song_list.each.with_index(1) do |song, index|
         puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
    end
+  end
+
+  def list_artists
+    artist_list = Artist.all.sort {|x,y| x.name <=> y.name}
+      artist_list.each.with_index(1) do |artist, index|
+        puts "#{index}. #{artist.name}"
+      end
+  end
+
+  def list_genres
+    genres_list = Genre.all.sort {|x,y| x.name <=> y.name}
+      genres_list.each.with_index(1) do |genre, index|
+        puts "#{index}. #{genre.name}"
+      end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    result = ""
+    result = gets.chomp
   end
 end
