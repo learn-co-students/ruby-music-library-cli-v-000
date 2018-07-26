@@ -34,11 +34,11 @@ class Artist
     if song.artist == nil
       song.artist = self
       @songs << song unless @songs.include?(song)
+      #binding.pry
     end
   end
   
   def genres 
     songs.collect {|song| song.genre}.uniq
-    #binding.pry
   end
 end
