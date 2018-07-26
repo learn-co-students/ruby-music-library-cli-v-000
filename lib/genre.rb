@@ -1,7 +1,8 @@
 class Genre
+  extend Concerns::Findable
 
 attr_accessor :name
-attr_reader :songs #:artist - why wouldn't you need an artist variable? You refer to it #artists - No! that is the artist variable from the song class.
+attr_reader :songs #:artist - why wouldn't you need an artist variable? Aren't you referring to it #artists method - No! that is the artist variable from the song class.
 
 
 @@all = []
@@ -20,9 +21,11 @@ attr_reader :songs #:artist - why wouldn't you need an artist variable? You refe
     @@all.clear
   end
 
+
   def save
     @@all << self
   end
+
 
   def self.create(name)
     this_genre = Genre.new(name)
@@ -30,10 +33,11 @@ attr_reader :songs #:artist - why wouldn't you need an artist variable? You refe
     this_genre
   end
 
+
   def artists
     self.songs.map do |song|
     song.artist
-    end.uniq
+  end.uniq #works because you are returning an array which uniq can operate on
   end
 
 end

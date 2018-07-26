@@ -1,4 +1,5 @@
 class Artist
+  extend Concerns::Findable
 
 attr_accessor :name
 attr_reader :songs
@@ -19,9 +20,11 @@ attr_reader :songs
     @@all.clear
   end
 
+
   def save
     @@all << self
   end
+
 
   def self.create(name)
     artiste = Artist.new(name)
@@ -29,9 +32,10 @@ attr_reader :songs
     artiste
   end
 
-  def songs
-    @songs
-  end
+
+  #def songs #reader method
+    #@songs
+  #end
 
   #assigns the current artist to the song's 'artist' property (song belongs to artist)
   def add_song(song)
