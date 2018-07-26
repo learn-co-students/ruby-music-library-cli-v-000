@@ -1,8 +1,8 @@
 module Concerns::Findable
 
   def find_by_name(name)
-    self.all.detect do |song|
-      song.name == name
+    self.all.detect do |o|
+      o.name == name
     end
   end
 

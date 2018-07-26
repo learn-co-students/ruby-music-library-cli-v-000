@@ -63,10 +63,11 @@ attr_reader :artist, :genre #prevent us changing the artist name again once it's
       find_by_name(name) || create(name)
   end
 
+
   def self.new_from_filename(file_name) #the reason it is self --> think of the origin, are we trying to impact only one instance? NO! Isn't this something that all instances will experience at birth? YES!
       a, s, g = file_name.split(/\s-\s|\./) #a, s, g are variables that we are using to store the output of the array
-      artist = Artist.find_or_create_by_name(a)
-      genre = Genre.find_or_create_by_name(g)
+      artist = Artist.find_or_create_by_name(a)#looks for existing artist and assigns to artist object if it exists. If not creates it
+      genre = Genre.find_or_create_by_name(g)#this method belongs in Song Clas but can be used all over because of the require link between files 
       name = s
       Song.new(name, artist, genre) # new(song,artist,genre) why and how does this work?
   end

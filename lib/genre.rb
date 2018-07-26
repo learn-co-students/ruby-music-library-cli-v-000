@@ -9,7 +9,7 @@ attr_reader :songs #:artist - why wouldn't you need an artist variable? Aren't y
 
   def initialize(name)
     @name= name
-    @@all << self
+    #@@all << self
     @songs = []
   end
 

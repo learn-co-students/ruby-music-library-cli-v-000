@@ -8,7 +8,7 @@ attr_reader :songs
 
   def initialize(name)
     @name= name
-    @@all << self
+    #@@all << self
     @songs = []
   end
 
@@ -27,10 +27,11 @@ attr_reader :songs
 
 
   def self.create(name)
-    artiste = Artist.new(name)
+    artiste = new(name)
     artiste.save
     artiste
   end
+
 
 
   #def songs #reader method
