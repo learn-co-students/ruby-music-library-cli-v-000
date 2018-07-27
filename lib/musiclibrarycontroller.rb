@@ -29,7 +29,7 @@ class MusicLibraryController
       elsif to_do == 'list genres'
         list_artists
       else to_do == 'list_genre'
-        list_songs_by_genre
+        #list_songs_by_genre
       end
     end
   end
@@ -70,6 +70,13 @@ class MusicLibraryController
       genre.songs.sort_by(&:name).each.with_index(1) do |song, index|
         puts "#{index}. #{song.artist.name} - #{song.name}"
       end
+    end
+  end
+  
+  def play_song
+    puts "Which song number would you like to play?" 
+    answer = gets.strip.to_i
+    if Song.all.length.include?(answer)
     end
   end
 end
