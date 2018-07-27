@@ -19,7 +19,10 @@ class Song
   end
   
   def save 
-    @@all << self
+    if !Song.all.include?(self)
+      @@all << self
+    end
+    self
   end
   
   def self.create(name) 

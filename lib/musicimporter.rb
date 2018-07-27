@@ -9,7 +9,7 @@ class MusicImporter
     all_files = []
     Dir["#{@path}/*"].each do |file_name|
       if file_name.end_with?(".mp3")
-        file_name=file_name.gsub("./spec/fixtures/mp3s/", "")
+        file_name=file_name.gsub("#{path}/", "")
         all_files << file_name
       end
     end
@@ -17,7 +17,7 @@ class MusicImporter
   end
   
   def import 
-    self.files.each do |file|
+    files.each do |file|
       Song.create_from_filename(file)
     end
   end
