@@ -22,6 +22,9 @@ class MusicLibraryController
       
       if to_do == 'play song'
         play_song
+      elsif to_do == 'list artists'
+        list_artists
+      else to_do == 'list_artist'
       end
     end
   end
@@ -31,6 +34,22 @@ class MusicLibraryController
       puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       #binding.pry
     end
-    
+  end
+
+  def list_artists
+    Artist.all.sort_by(&:name).each.with_index(1) do |artist, index|
+      puts "#{index}. #{artist.name}"
+    end
+  end
+  
+  def list_genres
+    Genre.all.sort_by(&:name).each.with_index(1) do |genre, index|
+      puts "#{index}. #{genre.name}"
+    end
+  end
+  
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist = gets.strip
   end
 end
