@@ -24,7 +24,12 @@ class MusicLibraryController
         play_song
       elsif to_do == 'list artists'
         list_artists
-      else to_do == 'list_artist'
+      elsif to_do == 'list_artist'
+        list_songs_by_artist
+      elsif to_do == 'list genres'
+        list_artists
+      else to_do == 'list_genre'
+        list_songs_by_genre
       end
     end
   end
@@ -50,6 +55,21 @@ class MusicLibraryController
   
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist = gets.strip
+    answer = gets.strip
+    if artist = Artist.find_by_name(answer)
+      artist.songs.sort_by(&:name).each.with_index(1) do |song, index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    answer = gets.strip
+    if genre = Genre.find_by_name(answer)
+      genre.songs.sort_by(&:name).each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
+      end
+    end
   end
 end
