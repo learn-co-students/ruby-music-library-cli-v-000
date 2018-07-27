@@ -20,16 +20,19 @@ class MusicLibraryController
       puts "What would you like to do?" 
       to_do = gets.strip
       
-      if to_do == 'play song'
-        play_song
-      elsif to_do == 'list artists'
+      case to_do
+      when "list songs"
+        list_songs
+      when "list artists"
         list_artists
-      elsif to_do == 'list_artist'
+      when "list genres"
+        list_genres
+      when "list artist"
         list_songs_by_artist
-      elsif to_do == 'list genres'
-        list_artists
-      else to_do == 'list_genre'
-        #list_songs_by_genre
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
       end
     end
   end
@@ -76,7 +79,11 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?" 
     answer = gets.strip.to_i
-    if Song.all.length.include?(answer)
+    x = Song.all.length
+    #binding.pry
+    if (1..x).include?(answer)
+      song = Song.all.sort_by(&:name)[answer-1]
+        puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
 end

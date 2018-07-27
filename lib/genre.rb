@@ -34,6 +34,5 @@ class Genre
   
   def artists 
     songs.collect {|song| song.artist}.uniq
-    #binding.pry
   end
 end
