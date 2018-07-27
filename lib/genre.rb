@@ -1,6 +1,8 @@
 require "pry"
 class Genre
-  attr_accessor :name, :song
+  extend Concerns::Findable
+  attr_accessor :name 
+  attr_reader :songs
   @@all = []
   
   def initialize(name)
