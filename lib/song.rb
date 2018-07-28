@@ -13,14 +13,15 @@ class Song
     if genre != nil
       self.genre=(genre)
     end
-    binding.pry
+    #binding.pry
   end
 
   def self.new_from_filename(filename)
-    #binding.pry
-    artist_name = filename.split(" - ")[0]
-    song_name = filename.split(" - ")[1]
-    Song.new(song_name, artist_name)
+    name = filename.split(" - ")[1]
+    artist = filename.split(" - ")[0]
+    song = self.new(name).save
+    song
+    binding.pry
   end
 
   def create_from_filename(filename)
@@ -80,11 +81,4 @@ class Song
     find_by_name(name) || Song.create(name)
   end
 
-  def self.new_from_filename(filename)
-    name = filename.split(" - ")[1]
-    artist = filename.split(" - ")[0]
-    song = self.new(name).save
-    song
-    binding.pry
-  end
 end
