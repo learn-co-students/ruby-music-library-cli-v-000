@@ -19,9 +19,13 @@ class Song
   def self.new_from_filename(filename)
     name = filename.split(" - ")[1]
     artist = filename.split(" - ")[0]
-    song = self.new(name).save
+    genre = filename.split(" - ")[2]
+    genre = genre.split(".")[0]
+    artist = Artist.new(artist)
+    genre = Genre.new(genre)
+    song = self.new(name, artist, genre).save
     song
-    binding.pry
+    #binding.pry
   end
 
   def create_from_filename(filename)
@@ -53,7 +57,7 @@ class Song
   def artist=(artist)
     @artist = artist
     self.artist.add_song(self)
-    binding.pry
+    #binding.pry
   end
 
   def artist
