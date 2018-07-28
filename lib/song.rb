@@ -15,6 +15,17 @@ class Song
     end
   end
 
+  def self.new_from_filename(filename)
+    #binding.pry
+    artist_name = filename.split(" - ")[0]
+    song_name = filename.split(" - ")[1]
+    Song.new(song_name, artist_name)
+  end
+
+  def create_from_filename(filename)
+
+  end
+
   def name
     @name
   end
@@ -37,15 +48,16 @@ class Song
     song
   end
 
-  def artist
-    @artist
+  def artist=(artist)
+    #if self.artist.nil?
+      @artist = artist
+    #end
+    self.artist.add_song(self)
+    binding.pry
   end
 
-  def artist=(artist_obj)
-    if self.artist.nil?
-      @artist = artist_obj
-    end
-    self.artist.add_song(self)
+  def artist
+    @artist
   end
 
   def genre=(genre_obj)
@@ -69,4 +81,11 @@ class Song
     find_by_name(name) || Song.create(name)
   end
 
+  def self.new_from_filename(filename)
+    name = filename.split(" - ")[1]
+    artist = filename.split(" - ")[0]
+    song = self.new(name).save
+    song
+    binding.pry
+  end
 end
