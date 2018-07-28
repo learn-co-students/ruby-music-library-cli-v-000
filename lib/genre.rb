@@ -31,11 +31,11 @@ class Genre
   def artists
     artists = []
     @songs.each {|song| artists << song.artist unless artists.include?(song.artist)}
-    artists
+    artists.uniq
   end
   
   def self.all 
-    @@all 
+    @@all.uniq 
   end 
   
   def self.destroy_all 
@@ -43,6 +43,6 @@ class Genre
   end 
   
   def save 
-    @@all << self
+    @@all << self unless @@all.include?(self)
   end
 end

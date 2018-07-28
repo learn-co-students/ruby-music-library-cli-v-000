@@ -1,6 +1,3 @@
-# require 'artist'
-# require 'genre'
-
 class Song 
   
   attr_accessor :name
@@ -68,11 +65,7 @@ class Song
   end 
   
   def save 
-    @@all << self
+    @@all << self unless @@all.include?(self)
   end
 end
 
-s = Song.create("Love NYC")
-p s 
-puts Song.all.inspect
-    

@@ -1,5 +1,3 @@
-# require_relative 'song'
-
 class Artist 
   extend Concerns::Findable
   
@@ -31,11 +29,11 @@ class Artist
   def genres
     genres = []
     @songs.each {|song| genres << song.genre unless genres.include?(song.genre)}
-    genres
+    genres.uniq
   end
   
   def self.all 
-    @@all 
+    @@all.uniq 
   end 
   
   def self.destroy_all 
@@ -43,14 +41,7 @@ class Artist
   end 
   
   def save 
-    @@all << self
+    @@all << self unless @@all.include?(self)
   end
 end
 
-# a = Artist.create("U2")
-# b = Artist.create('steen')
-# p Artist.find_by_name("U2")
-# p Artist.find_by_name("Steen")
-# p Artist.find_or_create_by_name("Jewel")
-# puts a.songs[0].artist
-# puts Artist.all.inspect
