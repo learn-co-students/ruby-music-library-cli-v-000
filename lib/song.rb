@@ -4,13 +4,10 @@ class Song
 
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = " ")
      @name = name
      @artist = artist
-     artist=
-     @genre = genre
-    #attributes.each {|k, v| self.send(("#{k}="), v)}
-  end
+   end
 
   def artist=(artist)
     @artist = artist
