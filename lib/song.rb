@@ -18,18 +18,24 @@ class Song
 
   def self.new_from_filename(filename)
     name = filename.split(" - ")[1]
-    artist = filename.split(" - ")[0]
+    artist_var = filename.split(" - ")[0]
     genre = filename.split(" - ")[2]
     genre = genre.split(".")[0]
-    artist = Artist.new(artist)
-    genre = Genre.new(genre)
-    song = self.new(name, artist, genre).save
+    artist = Artist.find_or_create_by_name(artist_var)
+    genre = Genre.find_or_create_by_name(genre)
+    song = self.new(name, artist, genre)
     song
-    #binding.pry
   end
 
-  def create_from_filename(filename)
-
+  def self.create_from_filename(filename)
+    name = filename.split(" - ")[1]
+    artist_var = filename.split(" - ")[0]
+    genre = filename.split(" - ")[2]
+    genre = genre.split(".")[0]
+    artist = Artist.find_or_create_by_name(artist_var)
+    genre = Genre.find_or_create_by_name(genre)
+    song = self.new(name, artist, genre).save
+    song
   end
 
   def name
@@ -82,7 +88,7 @@ class Song
   end
 
   def self.find_or_create_by_name(name)
-    find_by_name(name) || Song.create(name)
+    find_by_name(name) || self.create(name)
   end
 
 end
