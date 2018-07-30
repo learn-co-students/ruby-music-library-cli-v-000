@@ -1,11 +1,13 @@
 class Song
 
-  attr_accessor :name
+  attr_accessor :name, :artist
 
   @@all = []
 
-  def initialize(name)
-    @name = name
+  def initialize(name, artist = " ")
+     @name = name
+     @artist = artist
+    #attributes.each {|k, v| self.send(("#{k}="), v)}
   end
 
   def self.all
@@ -23,6 +25,7 @@ class Song
   def self.create(name)
     song = Song.new(name)
     @@all << self
+    self
   end
 
 
