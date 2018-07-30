@@ -19,7 +19,7 @@ class MusicImporter
 
   def import
     @@array.each {|filename|
-      Song.new_from_filename(filename)
+      Song.create_from_filename(filename)
     }
   end
 
