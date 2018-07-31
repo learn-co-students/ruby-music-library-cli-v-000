@@ -33,10 +33,21 @@ class Song
     @@all.clear
   end
 
-  def self.create(name)
-    song = Song.new(name)
+  def self.create(song_name)
+    song = Song.new(song_name)
     @@all << self
     self
+  end
+
+  def self.find_by_name(song_name)
+    @@all.find do |song|
+    song.name == song_name
+    self
+      end
+  end
+
+  def self.find_or_create_by_name(song_name)
+    self.find_by_name(song_name) || self.create(song_name)
   end
 
 
