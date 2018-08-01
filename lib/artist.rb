@@ -1,11 +1,13 @@
+require 'pry'
 class Artist
+  extend Concerns::Findable
    @@all = []
   attr_accessor :name
   attr_reader :songs, :genres
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
+
   end
   def self.create(name)
     artist = Artist.new(name)
@@ -32,6 +34,6 @@ class Artist
           end
     end
   def genres
-      
+        @songs.map { |e| e.genre}.uniq    #the program ask the object not the names
   end
 end
