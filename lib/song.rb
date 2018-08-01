@@ -27,6 +27,7 @@ class Song
 
   def save
     @@all << self
+    self
   end
 
   def self.destroy_all
@@ -35,21 +36,18 @@ class Song
 
   def self.create(song_name)
     song = Song.new(song_name)
-    @@all << self
-    self
+    song.save
   end
 
   def self.find_by_name(song_name)
     @@all.find do |song|
     song.name == song_name
-    self
       end
+
   end
 
   def self.find_or_create_by_name(song_name)
-    self.find_by_name(song_name) || self.create(song_name)
-  end
-
-
+      find_by_name(song_name) || create(song_name)
+    end
 
 end
