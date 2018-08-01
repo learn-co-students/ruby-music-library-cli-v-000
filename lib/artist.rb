@@ -1,6 +1,8 @@
 require 'pry'
 class Artist
 
+  extend Concerns::Findable
+
   attr_accessor :name
   @@all = []
 
@@ -19,10 +21,12 @@ class Artist
 
   def save
     @@all << self
+    self
   end
 
   def self.create(name)
-    artist = Artist.new(name).save
+    artist = Artist.new(name)
+    artist.save
     self
   end
 
