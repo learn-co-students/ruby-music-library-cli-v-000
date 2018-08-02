@@ -1,5 +1,6 @@
+require 'pry'
 class MusicLibraryController
-
+extend Concerns::Findable
   def initialize(path = './db/mp3s')
     # musicimp = MusicImporter.new(path)
     # musicimp.import
@@ -11,42 +12,69 @@ class MusicLibraryController
         #primero ordeno luego acceso sobre el resultado
         Song.all.sort_by{|val| val.name}.each { |e|
            puts "#{j}. #{e.artist.name} - #{e.name} - #{e.genre.name}"
-
+            j = j+1
          }
 
   end
   def list_artists
-        # z = 1
-        # #primero ordeno luego acceso sobre el resultado
-        # Artist.all.sort_by{|val| val.name}.each { |e|
-        #    puts "#{z}. #{e.name}"
-        #    z = z+1
-        #  }
+        z = 1
+        #primero ordeno luego acceso sobre el resultado
+        Artist.all.sort_by{|val| val.name}.each { |e|
+           puts "#{z}. #{e.name}"
+           z = z+1
+         }
   end
   def list_genres
-        # l = 1
-        # #primero ordeno luego acceso sobre el resultado
-        # Genre.all.sort_by{|val| val.name}.each { |e|
-        #    puts "#{j}. #{e.name}"
-        #    l = l+1
-        #  }
+        l = 1
+        #primero ordeno luego acceso sobre el resultado
+        Genre.all.sort_by{|val| val.name}.each { |e|
+           puts "#{l}. #{e.name}"
+           l = l+1
+         }
   end
   def list_songs_by_artist
-    # puts "Please enter the name of an artist:"
-    # input = gets.chomp
-    # p=1
-    # Song.all.sort_by{|val| val.name}.select { |song|
-    #       puts "#{p}. #{song.name} - #{song.genre.name}" if song.artist.name == input
-    #       p = p + 1
-    #     }
-    # Song.all.select {|s| s.artist.name  =  input}.sort_by{|val|
-    #   val.name
-    #   puts "#{j}. #{val.name} - #{val.genre.name}"
-    #     j += 1
-    #  }
+
+          puts "Please enter the name of an artist:"
+          input = gets.chomp
+          p=1
+          if  Artist.find_by_name(input) != nil
+              artist = Artist.find_by_name(input)
+              artist.songs.sort_by {|son| son.name}.each {|i|
+              puts "#{p}. #{i.name} - #{i.genre.name}"
+              p=p+1
+          }
+
+          else
+          end
 
   end
+  def list_songs_by_genre
+         puts "Please enter the name of a genre:"
+         input = gets.chomp
+         z = 1
+        if  Genre.find_by_name(input) != nil
+            genre = Genre.find_by_name(input)
+            genre.songs.sort_by{|son| son.name}.each { |i|
+            puts "#{z}. #{i.artist.name} - #{i.name}"
+            z=z+1
+             }
+        else
+        end
+  end
+  def play_song
+    puts  "Which song number would you like to play?"
+    input = gets.chomp
 
+    totnumber = Song.all.sort_by{|val| val.name}.length
+    if  input.to_i < totnumber && input.to_i > 0
+         song = Song.all.sort_by{|val| val.name}[input.to_i-1].name
+         artist = Song.all.sort_by{|val| val.name}[input.to_i-1].artist.name
+
+         puts "Playing #{song} by #{artist}"
+
+    end
+
+  end
 
 
   def call
@@ -67,7 +95,8 @@ class MusicLibraryController
      end
      case input
      when 'list songs'
-       self.list_songs
+      #  self.list_songs
+       self.send(:list_songs)
      when 'list artists'
        self.list_artist
      when 'list genres'
@@ -75,7 +104,13 @@ class MusicLibraryController
      when 'list artist'
        self.list_songs_by_artist
      when 'list genre'
-     else 'play song'
+       self.list_songs_by_genre
+     when 'play song'
+       play_song
+     when 'exit'
+       return
+     else
+        call
      end
 
 
