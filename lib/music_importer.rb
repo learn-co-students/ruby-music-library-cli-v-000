@@ -6,7 +6,8 @@ class MusicImporter
 
   end
   def files
-    Dir[@path+'/*'].each { |chr| @files << chr.sub!("./spec/fixtures/mp3s/", "")
+    #Dir[@path+'/*'].each { |chr| @files << chr.sub!("./spec/fixtures/mp3s/", "")
+    Dir[@path+'/*'].each { |chr| @files << chr.sub!("#{path}/", "")
       }
   end
   def import
