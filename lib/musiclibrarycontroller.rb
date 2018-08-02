@@ -22,4 +22,8 @@ class MusicLibraryController
     end
   end
 
+  def list_songs
+    Songs.all
+  end
+
 end
