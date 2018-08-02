@@ -11,5 +11,8 @@ class MusicImporter
     Dir.entries(path).reject{|file| file == "." || file == ".."}
   end
 
+  def import
+    files.each {|file| Song.create_from_filename(file)}
+  end
 
 end
