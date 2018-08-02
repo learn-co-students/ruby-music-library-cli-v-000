@@ -23,7 +23,11 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.all
+    Song.all.sort.collect do |num, song|
+      num = 0
+      print "#{num}. #{song}"
+        num + 1
+    end
   end
 
 end
