@@ -17,6 +17,8 @@ class MusicLibraryController
 
      input = gets.chomp
 
+     puts "What would you like to do?" until input == "exit"
+
   end
 
 end
