@@ -45,12 +45,18 @@ class MusicLibraryController
 
     artist_name = gets.strip
 
-     Artist.all.detect do |item|
-       item.name == artist_name
+    # artist = Artist.find_by_name(artist_name)
+    #   sorted_songs = artist.songs.sort_by{|s| s.name}
+    #     sorted_songs.each_with_index{|item, num|}
+    # puts "#{num}. #{item}"
+         end
+
+    #  Artist.all.each do |item|
+    #    item.name == artist_name
+       #puts "#{item.name}"
+
     #  .sort_by{|n| n.name}.each_with_index do |item, num|
     #    puts "#{num}. #{item.name}"
-      end
-    end
 
 
 end
