@@ -38,4 +38,11 @@ class Artist
     self.songs << song unless self.songs.include?(song)
   end
 
+  def genres
+    ary = self.songs.collect do |song|
+      song.genre
+    end
+    ary.uniq
+  end
+
 end
