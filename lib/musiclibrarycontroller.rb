@@ -20,10 +20,23 @@ class MusicLibraryController
     else
       call
     end
+    if input == "list songs"
+      list_songs
+    elsif input == "list artists"
+      list_artists
+    elsif input == "list genres"
+      list_genres
+    elsif input == "list artist"
+      list_songs_by_artist
+    elsif input == "list genre"
+      list_songs_by_genre
+    elsif input == "play song"
+      play_song
+    end
   end
 
   def list_songs
-     Song.all.sort_by{|song| song.name}.each_with_index do |song, num|
+    Song.all.sort_by{|song| song.name}.each_with_index do |song, num|
        puts "#{num + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       end
   end
@@ -66,14 +79,12 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    song_number = gets.strip
-    binding.pry
-      list_songs.each_with_index do |song, num|
-       num + 1 == song_number
-       puts "playing #{song} by #{song.artist}"
-      end
-    end
+    song_number = gets.strip.to_i
+       if (1..Song.all.length).include?(song_number)
+         song = Song.all.sort{|a, b| a.name <=> b.name}[song_number - 1]
+       end
+         puts "Playing #{song.name} by #{song.artist.name}" if song
+       end
   end
-
 
 end
