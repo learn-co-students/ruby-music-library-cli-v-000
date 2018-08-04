@@ -16,10 +16,10 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     input = gets.strip
-    # if input == "exit"
-    # else
-    #   call
-    # end
+    if input == "exit"
+    else
+      call
+    end
     if input == "list songs"
       list_songs
     elsif input == "list artists"

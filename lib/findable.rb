@@ -1,8 +1,7 @@
-module Concerns
-  module Findable
+module Concerns::Findable
 
     def find_by_name(name)
-      self.all.find do |item|
+      all.find do |item|
       item.name == name
         end
     end
@@ -12,4 +11,3 @@ module Concerns
     end
 
   end
-end

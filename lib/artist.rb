@@ -4,6 +4,7 @@ class Artist
   extend Concerns::Findable
 
   attr_accessor :name
+  attr_reader :songs
   @@all = []
 
   def initialize(name)
@@ -33,7 +34,7 @@ class Artist
   end
 
   def add_song(song)
-    song.artist = self unless song.artist == self
+    song.artist = self unless song.artist
     @songs << song unless @songs.include? song
   end
 

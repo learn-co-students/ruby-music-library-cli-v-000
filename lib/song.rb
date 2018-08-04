@@ -8,8 +8,8 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
      @name = name
-     self.artist= artist if artist
-     self.genre= genre if genre != nil
+     self.artist = artist if artist
+     self.genre = genre if genre != nil
    end
 
   def artist=(artist)
@@ -52,12 +52,10 @@ class Song
 
     def self.new_from_filename(file_names)
       ary = file_names.split(" - ")
-      artist_name = ary[0]
+      artist_name, song_name, genre_name = ary[0], ary[1], ary[2].chomp(".mp3")
       artist = Artist.find_or_create_by_name(artist_name)
-      genre_name = ary[2].chomp(".mp3")
       genre = Genre.find_or_create_by_name(genre_name)
-      song_title = ary[1]
-      song = Song.new(song_title, artist, genre)
+      song = Song.new(song_name, artist, genre)
     end
 
     def self.create_from_filename(file_name)
