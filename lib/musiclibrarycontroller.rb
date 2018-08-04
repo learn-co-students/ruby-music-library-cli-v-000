@@ -67,6 +67,7 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     song_number = gets.strip
+    binding.pry
       list_songs.each_with_index do |song, num|
        num + 1 == song_number
        puts "playing #{song} by #{song.artist}"
