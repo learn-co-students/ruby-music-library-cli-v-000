@@ -24,15 +24,6 @@ class MusicLibraryController
     end
   end
 
-  def list_songs
-    ary = Song.all.sort_by {|song| song.name}
-    i = 1
-    ary.each do |song|
-      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      i += 1
-    end
-  end
-
   def list_artists
     ary = Artist.all.sort_by {|artist| artist.name}
     i = 1
@@ -78,6 +69,24 @@ class MusicLibraryController
       end
     else
       nil
+    end
+  end
+
+  def list_songs
+    sorted_songs = Song.all.sort_by {|song| song.name}
+    i = 1
+    sorted_songs.each do |song|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      i += 1
+    end
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    i = gets.to_i - 1
+    sorted_songs = Song.all.sort_by {|song| song.name}
+    if ((i + 1) <= sorted_songs.count) && ((i + 1) > 0)
+      puts "Playing #{sorted_songs[i].name} by #{sorted_songs[i].artist.name}"
     end
   end
 
