@@ -33,4 +33,13 @@ class MusicLibraryController
     end
   end
 
+  def list_artists
+    ary = Artist.all.sort_by {|artist| artist.name}
+    i = 1
+    ary.each do |artist|
+      puts "#{i}. #{artist.name}"
+      i += 1
+    end
+  end
+
 end
