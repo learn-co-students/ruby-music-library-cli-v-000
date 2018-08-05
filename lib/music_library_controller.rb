@@ -69,6 +69,7 @@ class MusicLibraryController
     end
     array.sort!
     array = array.uniq
+    binding.pry
     array.each do |element|
       puts "#{counter}. #{element}"
       counter += 1
