@@ -13,7 +13,6 @@ class Song
     if genre != nil
       self.genre=(genre)
     end
-    #binding.pry
   end
 
   def self.new_from_filename(filename)
@@ -57,7 +56,6 @@ class Song
   def artist=(artist)
     @artist = artist
     self.artist.add_song(self)
-    #binding.pry
   end
 
   def artist
