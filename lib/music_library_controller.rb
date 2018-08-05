@@ -21,6 +21,34 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.strip
+    while input != "exit"
+      puts "What would you like to do?"
+      input = gets.strip
+    end
+  end
+
+  def list_songs
+
+  end
+
+  def list_artists
+
+  end
+
+  def list_genres
+
+  end
+
+  def list_songs_by_artist
+
+  end
+
+  def list_songs_br_genre
+
+  end
+
+  def play_song
+
   end
 
 end
