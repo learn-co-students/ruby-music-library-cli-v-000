@@ -21,23 +21,58 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.strip
-    while input != "exit"
-      puts "What would you like to do?"
-      input = gets.strip
+    case input
+    when "list songs"
+      list_songs
+    when "list artists"
+      list_artists
+    when "list genres"
+      list_genres
+    when "list artist"
+      list_songs_by_artist
+    when "list genre"
+      list_songs_by_genre
+    when "play song"
+      play_song
+    else
+      while input != "exit"
+        puts "What would you like to do?"
+        input = gets.strip
+      end
     end
   end
 
   def list_songs
     counter = 1
-    Song.all.each do |song|
-      binding.pry
-      puts "#{counter}. #{Song.artist} - #{song} - #{genre}"
+    array = Dir.glob("#{@path}/*.mp3")
+    array = array.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file
+    end
+    array.sort_by! do |s|
+     s.split(' - ')[1]
+    end
+    array
+    array.each do |element|
+      puts "#{counter}. #{element}"
       counter += 1
     end
   end
 
   def list_artists
-
+    counter = 1
+    array = Dir.glob("#{@path}/*.mp3")
+    array = array.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file = file.split(" - ")[0]
+      file
+    end
+    array.sort!
+    array = array.uniq
+    array.each do |element|
+      puts "#{counter}. #{element}"
+      counter += 1
+    end
   end
 
   def list_genres
@@ -48,7 +83,7 @@ class MusicLibraryController
 
   end
 
-  def list_songs_br_genre
+  def list_songs_by_genre
 
   end
 
