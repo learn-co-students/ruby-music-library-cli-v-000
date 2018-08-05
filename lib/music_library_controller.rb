@@ -69,27 +69,80 @@ class MusicLibraryController
     end
     array.sort!
     array = array.uniq
-    binding.pry
-    array.each do |element|
-      puts "#{counter}. #{element}"
+    #binding.pry
+    array.each do |el|
+      puts "#{counter}. #{el}"
       counter += 1
     end
   end
 
   def list_genres
-
+    counter = 1
+    array = Dir.glob("#{@path}/*.mp3")
+    array = array.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file = file.split(" - ")[2]
+      file
+    end
+    array.sort!
+    array = array.uniq
+    #binding.pry
+    array.each do |el|
+      puts "#{counter}. #{el}"
+      counter += 1
+    end
   end
 
   def list_songs_by_artist
-
+    counter = 1
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    path = Dir.glob("#{@path}/*.mp3")
+    filename = path.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file = file.split(" - ")
+    end
+    artists = filename.collect do |file|
+      file[0]
+    end
+    #binding.pry
+    if artists.include?(input)
+      songs = filename.collect do |el|
+        if el.include?(input)
+          [el[1], el[2]]
+        end
+      end
+      binding.pry
+      puts "#{counter}. #{songs[1]} - #{songs[2]}"
+    end
   end
 
   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    array = Dir.glob("#{@path}/*.mp3")
+    array = array.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file = file.split(" - ")[2]
+      file
+    end
+    #if array.include?(input)
 
+    #end
   end
 
   def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip
+    array = Dir.glob("#{@path}/*.mp3")
+    array = array.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file = file.split(" - ")[2]
+      file
+    end
+    #if array.include?(input)
 
+    #end
   end
 
 end
