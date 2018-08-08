@@ -22,37 +22,40 @@ class MusicLibraryController
     puts "What would you like to do?"
     input = gets.strip
     case input
-    when "list songs"
+      when "list songs"
       list_songs
-    when "list artists"
+      when "list artists"
       list_artists
-    when "list genres"
+      when "list genres"
       list_genres
-    when "list artist"
+      when "list artist"
       list_songs_by_artist
-    when "list genre"
+      when "list genre"
       list_songs_by_genre
-    when "play song"
+      when "play song"
       play_song
-    else
-      while input != "exit"
-        puts "What would you like to do?"
-        input = gets.strip
-      end
+      else
+        while input != "exit"
+          puts "What would you like to do?"
+          input = gets.strip
+        end
     end
+  end
+
+  def dir_helper
+    file_array = Dir.glob("#{@path}/*.mp3")
+    file_array = file_array.collect do |file|
+      file = file.split(/[\/.]/)[-2]
+      file
+    end
+    file_array
   end
 
   def list_songs
     counter = 1
-    array = Dir.glob("#{@path}/*.mp3")
-    array = array.collect do |file|
-      file = file.split(/[\/.]/)[-2]
-      file
+    array = dir_helper.sort_by! do |s|
+      s.split(' - ')[1]
     end
-    array.sort_by! do |s|
-     s.split(' - ')[1]
-    end
-    array
     array.each do |element|
       puts "#{counter}. #{element}"
       counter += 1
@@ -61,15 +64,12 @@ class MusicLibraryController
 
   def list_artists
     counter = 1
-    array = Dir.glob("#{@path}/*.mp3")
-    array = array.collect do |file|
-      file = file.split(/[\/.]/)[-2]
+    array = dir_helper.collect do |file|
       file = file.split(" - ")[0]
       file
     end
     array.sort!
     array = array.uniq
-    #binding.pry
     array.each do |el|
       puts "#{counter}. #{el}"
       counter += 1
@@ -78,15 +78,12 @@ class MusicLibraryController
 
   def list_genres
     counter = 1
-    array = Dir.glob("#{@path}/*.mp3")
-    array = array.collect do |file|
-      file = file.split(/[\/.]/)[-2]
+    array = dir_helper.collect do |file|
       file = file.split(" - ")[2]
       file
     end
     array.sort!
     array = array.uniq
-    #binding.pry
     array.each do |el|
       puts "#{counter}. #{el}"
       counter += 1
@@ -97,52 +94,44 @@ class MusicLibraryController
     counter = 1
     puts "Please enter the name of an artist:"
     input = gets.strip
-    path = Dir.glob("#{@path}/*.mp3")
-    filename = path.collect do |file|
-      file = file.split(/[\/.]/)[-2]
+    array = dir_helper.sort_by! do |s|
+      s.split(' - ')[1]
+    end
+    array = array.collect do |file|
       file = file.split(" - ")
     end
-    artists = filename.collect do |file|
-      file[0]
-    end
-    #binding.pry
-    if artists.include?(input)
-      songs = filename.collect do |el|
-        if el.include?(input)
-          [el[1], el[2]]
-        end
+    array.each do |set|
+      if set[0] == input
+        puts "#{counter}. #{set[1]} - #{set[2]}"
+        counter +=1
       end
-      binding.pry
-      puts "#{counter}. #{songs[1]} - #{songs[2]}"
     end
   end
 
   def list_songs_by_genre
+    counter = 1
     puts "Please enter the name of a genre:"
     input = gets.strip
-    array = Dir.glob("#{@path}/*.mp3")
-    array = array.collect do |file|
-      file = file.split(/[\/.]/)[-2]
-      file = file.split(" - ")[2]
+    array = dir_helper.collect do |file|
+      file = file.split(" - ")
       file
     end
-    #if array.include?(input)
-
-    #end
+    array.each do |set|
+      if set.include? input
+        puts "#{counter}. #{set[0]} - #{set[1]}"
+        counter +=1
+      end
+    end
   end
 
   def play_song
     puts "Which song number would you like to play?"
     input = gets.strip
-    array = Dir.glob("#{@path}/*.mp3")
-    array = array.collect do |file|
-      file = file.split(/[\/.]/)[-2]
-      file = file.split(" - ")[2]
-      file
-    end
-    #if array.include?(input)
-
-    #end
+    input = input.to_i
+    input -= 1
+    el = list_songs[input]
+    el = el.split(' - ')
+    puts "Playing #{el[1]} by #{el[0]}"
   end
 
 end
