@@ -87,11 +87,11 @@ class MusicLibraryController
     counter = 1
     puts "Please enter the name of an artist:"
     input = gets.strip
-
     array = Artist.all
     array = array.map do |artist|
       if artist.name == input
         artist.each do |song|
+          binding.pry
         end
       end
     end
@@ -103,10 +103,6 @@ class MusicLibraryController
     counter = 1
     puts "Please enter the name of a genre:"
     input = gets.strip
-    array = dir_helper.collect do |file|
-      file = file.split(" - ")
-      file
-    end
     array.each do |set|
       if set.include? input
         puts "#{counter}. #{set[0]} - #{set[1]}"
