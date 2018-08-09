@@ -42,50 +42,43 @@ class MusicLibraryController
     end
   end
 
-  def dir_helper
-    file_array = Dir.glob("#{@path}/*.mp3")
-    file_array = file_array.collect do |file|
-      file = file.split(/[\/.]/)[-2]
-      file
-    end
-    file_array
-  end
-
   def list_songs
     counter = 1
-    array = dir_helper.sort_by! do |s|
-      s.split(' - ')[1]
+    array = Song.all
+    array = array.map do |song|
+      [song.artist.name, song.name, song.genre.name]
     end
-    array.each do |element|
-      puts "#{counter}. #{element}"
+    array = array.sort_by! do |s|
+      s[1]
+    end
+    array.each do |set|
+      puts "#{counter}. #{set[0]} - #{set[1]} - #{set[2]}"
       counter += 1
     end
   end
 
   def list_artists
     counter = 1
-    array = dir_helper.collect do |file|
-      file = file.split(" - ")[0]
-      file
+    array = Artist.all
+    array = array.map do |artist|
+      artist.name
     end
-    array.sort!
-    array = array.uniq
-    array.each do |el|
-      puts "#{counter}. #{el}"
+    array = array.sort!
+    array.each do |set|
+      puts "#{counter}. #{set}"
       counter += 1
     end
   end
 
   def list_genres
     counter = 1
-    array = dir_helper.collect do |file|
-      file = file.split(" - ")[2]
-      file
+    array = Genre.all
+    array = array.map do |genre|
+      genre.name
     end
-    array.sort!
-    array = array.uniq
-    array.each do |el|
-      puts "#{counter}. #{el}"
+    array = array.sort!
+    array.each do |set|
+      puts "#{counter}. #{set}"
       counter += 1
     end
   end
@@ -94,18 +87,16 @@ class MusicLibraryController
     counter = 1
     puts "Please enter the name of an artist:"
     input = gets.strip
-    array = dir_helper.sort_by! do |s|
-      s.split(' - ')[1]
-    end
-    array = array.collect do |file|
-      file = file.split(" - ")
-    end
-    array.each do |set|
-      if set[0] == input
-        puts "#{counter}. #{set[1]} - #{set[2]}"
-        counter +=1
+
+    array = Artist.all
+    array = array.map do |artist|
+      if artist.name == input
+        artist.each do |song|
+        end
       end
     end
+
+
   end
 
   def list_songs_by_genre
