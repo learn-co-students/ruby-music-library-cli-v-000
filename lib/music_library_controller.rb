@@ -85,29 +85,45 @@ class MusicLibraryController
 
   def list_songs_by_artist
     counter = 1
+    songs = []
     puts "Please enter the name of an artist:"
     input = gets.strip
     array = Artist.all
     array = array.map do |artist|
       if artist.name == input
-        artist.each do |song|
-          binding.pry
+        artist.songs.each do |song|
+          songs << [song.name, song.genre.name]
         end
       end
     end
-
-
+    songs.sort_by! do |s|
+      s[0]
+    end
+    songs.each do |song|
+      puts "#{counter}. #{song[0]} - #{song[1]}"
+      counter += 1
+    end
   end
 
   def list_songs_by_genre
     counter = 1
+    genres = []
     puts "Please enter the name of a genre:"
     input = gets.strip
-    array.each do |set|
-      if set.include? input
-        puts "#{counter}. #{set[0]} - #{set[1]}"
-        counter +=1
+    array = Genre.all
+    array = array.map do |genre|
+      if genre.name == input
+        genre.songs.each do |song|
+          genres << [song.name, song.genre.name]
+        end
       end
+    end
+    genres.sort_by! do |s|
+      s[0]
+    end
+    songs.each do |song|
+      puts "#{counter}. #{song[0]} - #{song[1]}"
+      counter += 1
     end
   end
 
