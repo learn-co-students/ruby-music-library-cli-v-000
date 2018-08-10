@@ -15,6 +15,54 @@ class Song
     end
   end
 
+  def name=(name)
+    @name = name
+  end
+
+  def name
+    @name
+  end
+
+  def artist=(artist)
+    @artist = artist
+    self.artist.add_song(self)
+  end
+
+  def artist
+    @artist
+  end
+
+  def genre=(genre)
+    if self.genre.nil?
+      @genre = genre
+    end
+    if genre.songs.include?(self) == false
+      genre.songs << self
+    end
+  end
+
+  def genre
+    @genre
+  end
+
+  def self.all
+    @@all
+  end
+
+  def save
+    @@all << self
+    self
+  end
+
+  def self.create(name)
+    song = self.new(name).save
+    song
+  end
+
+  def self.destroy_all
+    @@all = []
+  end
+
   def self.new_from_filename(filename)
     name = filename.split(" - ")[1]
     artist_var = filename.split(" - ")[0]
@@ -31,45 +79,6 @@ class Song
     song
   end
 
-  def name
-    @name
-  end
-
-  def self.all
-    @@all
-  end
-
-  def save
-    @@all << self
-    self
-  end
-
-  def self.destroy_all
-    @@all = []
-  end
-
-  def self.create(name)
-    song = self.new(name).save
-    song
-  end
-
-  def artist=(artist)
-    @artist = artist
-    self.artist.add_song(self)
-  end
-
-  def artist
-    @artist
-  end
-
-  def genre=(genre_obj)
-    if self.genre.nil?
-      @genre = genre_obj
-    end
-    if genre_obj.songs.include?(self) == false
-      genre_obj.songs << self
-    end
-  end
 
   def self.find_by_name(name)
     self.all.detect do |song|

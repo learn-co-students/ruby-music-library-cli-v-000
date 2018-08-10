@@ -19,6 +19,7 @@ class Genre
 
   def save
     @@all << self
+    self
   end
 
   def self.destroy_all
@@ -26,7 +27,7 @@ class Genre
   end
 
   def self.create(name)
-    self.new(name).save[0]
+    self.new(name).save
   end
 
   def artists

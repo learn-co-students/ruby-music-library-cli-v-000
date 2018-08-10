@@ -105,24 +105,28 @@ class MusicLibraryController
     end
   end
 
+  #<IO:<STDOUT>> received :puts with unexpected arguments
+      #  expected: ("1. Real Estate - It's Real")
+      #       got: ("1. Jurassic 5 - What's Golden")
+
   def list_songs_by_genre
     counter = 1
     genres = []
     puts "Please enter the name of a genre:"
     input = gets.strip
     array = Genre.all
-    array = array.map do |genre|
+    array = array.each do |genre|
       if genre.name == input
         genre.songs.each do |song|
-          genres << [song.name, song.genre.name]
+          genres << [song.artist.name, song.name]
         end
       end
     end
     genres.sort_by! do |s|
       s[0]
     end
-    songs.each do |song|
-      puts "#{counter}. #{song[0]} - #{song[1]}"
+    genres.each do |genre|
+      puts "#{counter}. #{genre[0]} - #{genre[1]}"
       counter += 1
     end
   end
@@ -131,10 +135,17 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     input = gets.strip
     input = input.to_i
-    input -= 1
-    el = list_songs[input]
-    el = el.split(' - ')
-    puts "Playing #{el[1]} by #{el[0]}"
+    array = Song.all
+    number = array.count + 1
+    if input > number
+
+    end
+    #binding.pry
+  #  input = input.to_i
+  #  input -= 1
+  #  el = list_songs[input]
+  #  el = el.split(' - ')
+  #  puts "Playing #{el[1]} by #{el[0]}"
   end
 
 end
