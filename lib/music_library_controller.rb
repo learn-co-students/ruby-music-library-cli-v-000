@@ -5,7 +5,6 @@ class MusicLibraryController
 
   def initialize(path="./db/mp3s")
     @path = path
-    #binding.pry
     files = MusicImporter.new(path)
     files.import
   end
@@ -42,17 +41,14 @@ class MusicLibraryController
     end
   end
 
+  # a.sort { |x,y| y <=> x }
+
   def list_songs
     counter = 1
     array = Song.all
-    array = array.map do |song|
-      [song.artist.name, song.name, song.genre.name]
-    end
-    array = array.sort_by! do |s|
-      s[1]
-    end
-    array.each do |set|
-      puts "#{counter}. #{set[0]} - #{set[1]} - #{set[2]}"
+    array = array.sort_by { |obj| obj.name}
+    array = array.each do |song|
+      puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       counter += 1
     end
   end
@@ -104,10 +100,6 @@ class MusicLibraryController
       counter += 1
     end
   end
-
-  #<IO:<STDOUT>> received :puts with unexpected arguments
-      #  expected: ("1. Real Estate - It's Real")
-      #       got: ("1. Jurassic 5 - What's Golden")
 
   def list_songs_by_genre
     counter = 1
