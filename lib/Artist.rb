@@ -41,7 +41,7 @@ def add_song(song)
 end
 
 def genres 
-  songs.collect { |song| song.genre}.uniq
+  songs.collect { |song| song.genre}
 end
 
 end
