@@ -12,6 +12,12 @@ def initialize(name)
   @songs = []
 end
 
+def self.create(name)
+  genre = new(name)
+  genre.save
+  genre
+end
+
 def self.all
 @@all
 end
@@ -22,12 +28,6 @@ end
 
 def save
   @@all << self
-end
-
-def self.create(name)
-  genre = new(name)
-  genre.save
-  genre
 end
 
 def add_song(song)
