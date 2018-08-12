@@ -30,9 +30,9 @@ class Genre #have many songs
   end
 
   def self.create(name)
-     @name = name
-     @@all << @name
-     @name
+     genre = self.new(name)
+     genre.save
+     genre
    end
 
 end
