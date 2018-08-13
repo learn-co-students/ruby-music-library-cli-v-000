@@ -19,7 +19,7 @@ class Genre
     song
   end
 
-  def initialize(name, artist = nil, genre = nil)
+  def initialize(name)
     @name = name
   end
 
