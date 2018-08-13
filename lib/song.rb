@@ -19,7 +19,6 @@ class Song
     song
   end
 
-
   def initialize(name, artist = nil, genre = nil)
     @name = name
   end
@@ -27,8 +26,5 @@ class Song
   def save
     @@all << self
   end
-
-
-
 
 end
