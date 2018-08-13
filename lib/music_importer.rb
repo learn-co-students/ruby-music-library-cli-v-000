@@ -10,4 +10,8 @@ class MusicImporter
     @files = Dir.glob("#{path}/*.mp3").collect{|file| file.gsub("#{path}/", "")}
   end
   
+  def import
+    files.each {|file_name| Song.create_from_filename(file_name)}
+  end
+  
 end

@@ -32,7 +32,7 @@ class Song #have one genre
   end
 
   def save
-      @@all << self
+      self.class.all << self
   end
 
   def self.create(name)
@@ -50,11 +50,23 @@ class Song #have one genre
   end
   
   def self.new_from_filename(files)
-    artist, song, genre = files.split (" - ")
- 
-    new_genre = Genre.find_or_create_by_name(genre)
-    new_artist = Artist.find_or_create_by_name(artist)
+   
+    file_parts = files.split(" - ")
+    artist_name =file_parts[0]
+    song_name =file_parts[1]
+    genre_name = file_parts[2].gsub(".mp3", "")
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    self.new(song_name, artist, genre)
+  end
+  
+  def self.create_from_filename(filename)
+    
+    new_from_filename(filename).tap {|f| f.save}
     
   end
+  
 
 end
