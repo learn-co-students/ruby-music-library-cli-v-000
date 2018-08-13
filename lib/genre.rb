@@ -2,8 +2,9 @@ require 'pry'
 
 class Genre
   attr_accessor :name
+  attr_reader :songs
 
-  @@all = []
+  @@all = [] #keeps track of all instance of genre that have been created.
 
   def self.all
     @@all
@@ -14,13 +15,14 @@ class Genre
   end
 
   def self.create(genre_name)
-    song = Genre.new(genre_name)
-    song.save
-    song
+    genre = Genre.new(genre_name)
+    genre.save
+    genre
   end
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def save
