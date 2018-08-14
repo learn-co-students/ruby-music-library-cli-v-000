@@ -32,6 +32,24 @@ class Song
     end
   end
 
+  def self.new_from_filename(file_name) #"artist - song - genre.mp3"
+    file_array = file_name.split(" - ")
+    artist_name = file_array[0]
+    artist = Artist.find_or_create_by_name(artist_name)
+    song_name = file_array[1]
+    genre_type = file_array.last.gsub!(".mp3", "")
+    genre = Genre.find_or_create_by_name(genre_type)
+    song = self.find_or_create_by_name(song_name)
+    song.artist = artist
+    song.genre = genre
+    song
+  end
+
+  def self.create_from_filename(file_name)
+    self.new_from_filename(file_name).save
+  end
+
+
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist
