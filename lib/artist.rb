@@ -15,9 +15,9 @@ class Artist
   end
 
   def self.create(artist_name) #initializes an instance then pushes that instance into the @@all array.
-    song = Artist.new(artist_name)
-    song.save
-    song
+    artist = Artist.new(artist_name)
+    artist.save
+    artist
   end
 
   def initialize(name)
@@ -33,6 +33,14 @@ class Artist
     song.artist = self unless song.artist != nil
     song.artist.songs << song unless @songs.include?(song)
   end
+
+  def genres
+    self.songs.collect do |song|
+      song.genre
+    end.uniq
+
+  end
+
 
 
 end
