@@ -1,5 +1,5 @@
 require 'pry'
-require_relative '../lib/concerns.rb'
+# require_relative '../lib/concerns.rb'
 
 class Artist
   extend Concerns::Findable
