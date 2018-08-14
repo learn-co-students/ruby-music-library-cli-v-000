@@ -20,6 +20,18 @@ class Song
     song
   end
 
+  def self.find_by_name(song_name)
+    self.all.find { |song| song.name == song_name}
+  end
+
+  def self.find_or_create_by_name(song_name)
+    if self.find_by_name(song_name) == nil
+      self.create(song_name)
+    else
+      self.find_by_name(song_name)
+    end
+  end
+
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist
@@ -37,7 +49,6 @@ class Song
       self.genre.songs << self
     end
   end
-
 
   def save
     @@all << self
