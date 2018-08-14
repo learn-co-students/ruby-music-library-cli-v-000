@@ -16,13 +16,17 @@ class Genre
   end
 
   def self.create(name)
-    @name = name
-    @songs = []
-    self.save
+    s = self.new(name)
+    @@all << s
+    s
   end
 
   def self.all
     @@all
+  end
+
+  def self.destroy_all
+    @@all = []
   end
 
 end
