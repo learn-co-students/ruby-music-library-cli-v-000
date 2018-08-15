@@ -1,5 +1,6 @@
-class Artist
+class Genre
   attr_accessor :name, :songs
+  # attr_reader :songs
   @@all = []
 
   def initialize(name)
@@ -20,18 +21,10 @@ class Artist
   end
 
   def self.create(name)
-    Artist.new(name).tap do |artist|
-      artist.save
+    Genre.new(name).tap do |genre|
+      genre.save
     end
   end
 
-  def add_song(song)
-    self.songs << song unless self.songs.include?(song)
-    song.artist = self if song.artist.nil?
-  end
-
-  def genres
-    self.songs
-  end
 
 end
