@@ -17,10 +17,28 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    until @input == "exit"
+    # until @input == "exit"
+    #   @input = gets.strip
+    # end
+
+    case @input
+    when 'list songs'
+      list_songs
+    when 'list genres'
+      list_genres
+    when 'list artist'
+      list_songs_by_artist
+    when 'list genre'
+      list_songs_by_genre
+    when 'play_song'
+      play_song
+    else until @input == "exit"
       @input = gets.strip
     end
+
+    end
   end
+
 
 
 
