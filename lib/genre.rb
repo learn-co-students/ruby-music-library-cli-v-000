@@ -29,4 +29,9 @@ class Genre
     @@all = []
   end
 
+  def artists
+    g = @songs.collect {|song| song.artist}
+    return g.uniq
+  end
+
 end
