@@ -22,9 +22,7 @@ class MusicLibraryController
     end
   end
 
-  def sort_all_by_name(o)
-    o.all.sort! {|a, b| a.name <=> b.name}
-  end
+
 
   def list_songs
     Song.sort_all_by_name
@@ -46,5 +44,41 @@ class MusicLibraryController
       puts "#{i}. #{genre.name}"
     end
   end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    inp = gets.strip
+    result = Artist.find_by_name(inp)
+    unless result == nil
+      result.songs.sort! {|a, b| a.name <=> b.name}
+      result.songs.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    inp = gets.strip
+    result = Genre.find_by_name(inp)
+    unless result == nil
+      result.songs.sort! {|a, b| a.name <=> b.name}
+      result.songs.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.artist.name} - #{song.name}"
+      end
+    end
+  end
+
+  def play_song
+    Song.sort_all_by_name
+    puts "Which song number would you like to play?"
+    inp = gets.strip.to_i
+    if inp >= 1 && inp < Song.all.length
+      selection = Song.all[inp - 1]
+      puts "Playing #{selection.name} by #{selection.artist.name}"
+    end
+  end
+
+
 
 end

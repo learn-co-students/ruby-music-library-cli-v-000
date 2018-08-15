@@ -14,4 +14,8 @@ module Concerns::Findable
       return self.find_by_name(name)
     end
   end
+
+  def sort_all_by_name
+    self.all.sort! {|a, b| a.name <=> b.name}
+  end
 end
