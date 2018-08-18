@@ -1,12 +1,9 @@
 require 'pry'
 
 class MusicLibraryController
-  attr_accessor :path
 
   def initialize(path="./db/mp3s")
-    @path = path
-    files = MusicImporter.new(path)
-    files.import
+    MusicImporter.new(path).import
   end
 
   def call
@@ -41,103 +38,60 @@ class MusicLibraryController
     end
   end
 
-  # a.sort { |x,y| y <=> x }
-
   def list_songs
-    counter = 1
-    array = Song.all
-    array = array.sort_by { |obj| obj.name}
-    array = array.each do |song|
-      puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      counter += 1
+    Song.all.sort { |a, b| a.name <=> b.name}.each.with_index(1) do |song, i|
+      puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
-    counter = 1
-    array = Artist.all
-    array = array.map do |artist|
-      artist.name
-    end
-    array = array.sort!
-    array.each do |set|
-      puts "#{counter}. #{set}"
-      counter += 1
+    Artist.all.sort { |a, b| a.name <=> b.name}.each.with_index(1) do |artist, i|
+      puts "#{i}. #{artist.name}"
     end
   end
 
   def list_genres
-    counter = 1
-    array = Genre.all
-    array = array.map do |genre|
-      genre.name
-    end
-    array = array.sort!
-    array.each do |set|
-      puts "#{counter}. #{set}"
-      counter += 1
+    Genre.all.sort { |a, b| a.name <=> b.name}.each.with_index(1) do |genre, i|
+      puts "#{i}. #{genre.name}"
     end
   end
 
   def list_songs_by_artist
-    counter = 1
-    songs = []
     puts "Please enter the name of an artist:"
     input = gets.strip
-    array = Artist.all
-    array = array.map do |artist|
-      if artist.name == input
-        artist.songs.each do |song|
-          songs << [song.name, song.genre.name]
-        end
+    songs = Song.find_by_name(input)
+  #  binding.pry
+    if songs != nil
+      songs.artist.songs.each.with_index(1) do |song, i|
+        puts "#{i}. #{song.name} - #{song.genre.name}"
       end
-    end
-    songs.sort_by! do |s|
-      s[0]
-    end
-    songs.each do |song|
-      puts "#{counter}. #{song[0]} - #{song[1]}"
-      counter += 1
     end
   end
 
+  #find_by_name
+  #check to make sure it's there
+
+  #list_songs_by_genre prints all songs by a particular genre in a numbered list (alphabetized by song name)
+  #puts "#{i}. #{song.artist.name} - #{song.name}
   def list_songs_by_genre
-    counter = 1
-    genres = []
     puts "Please enter the name of a genre:"
-    input = gets.strip
-    array = Genre.all
-    array = array.each do |genre|
-      if genre.name == input
-        genre.songs.each do |song|
-          genres << [song.artist.name, song.name]
+    Song.all.sort { |a, b| a.name <=> b.name}.each.with_index(1) do |songs, i|
+      songs.artist.songs.each do |song|
+        if song.artist.name == gets.strip
+          puts "#{i}. #{song.artist.name} - #{song.name}"
         end
       end
-    end
-    genres.sort_by! do |s|
-      s[0]
-    end
-    genres.each do |genre|
-      puts "#{counter}. #{genre[0]} - #{genre[1]}"
-      counter += 1
     end
   end
 
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.strip
-    input = input.to_i
-    array = Song.all
-    number = array.count + 1
-    if input > number
-
+    input = gets.strip.to_i
+    if input >= 1 && input < Song.all.length
+      song = Song.all.sort { |a, b| a.name <=> b.name}[input-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
     end
-    #binding.pry
-  #  input = input.to_i
-  #  input -= 1
-  #  el = list_songs[input]
-  #  el = el.split(' - ')
-  #  puts "Playing #{el[1]} by #{el[0]}"
   end
 
+#  binding.pry
 end
