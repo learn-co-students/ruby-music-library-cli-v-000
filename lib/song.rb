@@ -4,11 +4,20 @@ class Song
 
   @@all = []
 
-  def initialize(name)
+  def initialize(name, artist = " ")
     @name = name
+    @artist = artist
   end
 
-  def self.all
+  def artist=(artist)
+    @artist = artist
+  end
+
+  def artist
+    @artist
+  end
+
+  def self.all # Class Reader
     @@all
   end
 
