@@ -4,7 +4,7 @@ require 'pry'
 
 class Song 
  
- attr_accessor :name
+ attr_accessor :name, :genre
  
  
  @@all = [] 
@@ -14,6 +14,9 @@ class Song
     if artist != nil
       self.artist = artist
     end
+    if genre != nil 
+      self.genre = genre
+    end
   end
   
   def artist 
@@ -22,6 +25,7 @@ class Song
   
   def artist=(artist)
     @artist = artist 
+    artist.add_song(self)
   end
     
   def self.all 
@@ -41,9 +45,11 @@ class Song
     self
   end
   
-  #def genre
-    #self.genre = genre
-  #end
+  def genre=(genre)
+    @genre = genre 
+    genre.songs << self
+    
+  end
   
   def find_by_name(name) 
     self.all.detect{|song| song.name == name}
