@@ -1,7 +1,4 @@
 require 'pry'
-
-
-
 class Song 
  
  #extend Concerns::Findable 
@@ -62,12 +59,17 @@ class Song
   end
   
   def self.new_from_filename(filename)
-   song_name = filename.split(" - ")[1]
-   artist_name = artistfilename.split(" - ")[0]
-   genre_name = filename.split(" - ")[2]
+   name = filename.split(" - ")[1]
+   artist_name = filename.split(" - ")[0]
+   genre_name = filename.split(" - ")[2].chomp(".mp3")
    artist = Artist.find_or_create_by_name(artist_name)
    genre = Genre.find_or_create_by_name(genre_name)
    song = Song.new(name, artist, genre)
-  end
+   song
+   end
+   
+   def self.create_from_filename(filename)
+     self.new_from_filename(filename).save
+   end
     
 end

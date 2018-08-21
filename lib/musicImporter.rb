@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicImporter 
   
   attr_accessor :path
@@ -6,18 +8,17 @@ class MusicImporter
     @path = path
   end
   
-   def files 
+  def files 
     files_array = Dir[@path + "/*.mp3"]
     files_array.collect do |file|
        file.split("/")[-1]
+       #binding.pry
     end
   end
   
   def import
     new_files = self.files
-    new_files.each do |filename|
-    Song.new_by_filename(filename)
-    end
+    files_array.each{|filename| Song.create_from_filename(filename)}
   end
-  
+  binding.pry
 end
