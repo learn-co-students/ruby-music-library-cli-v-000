@@ -12,13 +12,12 @@ class MusicImporter
     files_array = Dir[@path + "/*.mp3"]
     files_array.collect do |file|
        file.split("/")[-1]
-       #binding.pry
+      # binding.pry
     end
   end
   
   def import
-    new_files = self.files
-    files_array.each{|filename| Song.create_from_filename(filename)}
+    self.files.each{|filename| Song.create_from_filename(filename)}
   end
-  binding.pry
+  #binding.pry
 end
