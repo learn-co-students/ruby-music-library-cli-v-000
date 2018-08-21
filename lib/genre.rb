@@ -1,6 +1,7 @@
 require 'pry' 
 
 class Genre 
+  extend Concerns::Findable
   
    @@all = []
 
@@ -26,15 +27,10 @@ class Genre
   def self.create(name) 
    self.new(name).tap {|genre| genre.save} 
   end
-  
-  #def songs
-    #self.songs << song
-    #song.genre = self
- # end
 
-def artists 
+  def artists 
    self.songs.collect{|s| s.artist}.uniq
- end
+  end
   
   
 end

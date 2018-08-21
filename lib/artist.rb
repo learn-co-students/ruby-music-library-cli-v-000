@@ -1,6 +1,7 @@
 require 'pry'
 
 class Artist 
+  extend Concerns::Findable
 
   @@all = []
 
