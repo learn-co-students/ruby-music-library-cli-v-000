@@ -11,20 +11,19 @@ class Song
  
   def initialize(name, artist = nil, genre = nil) 
     @name = name 
-    self.artist = artist
-  end 
+    if artist != nil
+      self.artist = artist
+    end
+  end
+  
+  def artist 
+    @artist
+  end
   
   def artist=(artist)
-    self.artist = artist 
-    artist.songs << self 
+    @artist = artist 
   end
     
-  
-  def genre=(genre)
-    self.genre = genre 
-  end
-    
-  
   def self.all 
    @@all 
   end 
