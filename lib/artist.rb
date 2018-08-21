@@ -28,13 +28,13 @@ class Artist
   end
   
   def add_song(song)
-    if self.song == nil 
-       song.artist == nil 
+    if song.artist == nil 
        song.artist = self
     end
     
     if !@songs.include?(song)
       self.songs << song
+    end
   end
   
  def genres 
