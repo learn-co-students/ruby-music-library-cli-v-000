@@ -1,0 +1,212 @@
+require 'pry'
+
+class Song
+
+attr_accessor :name
+
+attr_reader :artist, :genre
+
+  @@all=[]
+
+  def initialize(name, artist=nil, genre=nil)
+    @name=name
+    #@artist=artist
+    self.artist = artist if artist
+    self.genre=genre if genre
+    #@@all<<self
+  end
+
+  #def name
+    #@name
+  #end
+
+  def artist=(artist)
+    @artist=artist
+    artist.add_song (self)
+
+  end
+
+  #def name=(name)
+    #@name=name
+  #end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    self.all.clear
+  end
+
+  def save
+    @@all<<self
+  end
+
+  def self.create(name)
+    song=new(name)
+    song.save
+    song
+  end
+
+  def genre=(genre)
+    @genre=genre
+    genre.songs<<self unless genre.songs.include?(self)
+  end
+
+  def self.find_by_name(name)
+    all.detect{ |s| s.name == name }
+  end
+
+  def self.find_or_create_by_name(name)
+    if find_by_name(name)
+      find_by_name(name)
+    else
+      create(name)
+    end
+  end
+
+  def self.new_from_filename(filename)
+
+    ary = filename.split(" - ")
+    self.artist, self.name, self.genre = ary[0], ary[1], ary[2].gsub(".mp3", "")
+
+    #binding.pry
+
+    #artist = Artist.find_or_create_by_name(artist_name)
+    #genre = Genre.find_or_create_by_name(genre_name)
+
+    #new(song_name, artist_name, genre_name)
+  end
+end
+
+
+
+
+
+
+  #def self.new_from_filename(filename)
+    #parts = filename.split(" - ")
+    #artist_name, song_name, genre_name = parts[0], parts[1], parts[2].gsub(".mp3", "")
+
+    #artist = Artist.find_or_create_by_name(artist_name)
+    #genre = Genre.find_or_create_by_name(genre_name)
+
+    #Song.new(song_name, artist=nil, genre=nil)
+  #end
+
+  #def self.new_from_filename(filename)
+    #parts= filename.split("-")
+    #artist_name, song_name, genre_name = parts[0], parts[1], parts[2].gsub(".mp3", "")
+    #self.new(name, artist=nil, genre=nil)
+    #new_song
+    #artist_name=self.artist
+    #song_name=new_song.name
+    #genre_name=new_song.genre
+
+    #artist, song = filename.split(" - ")
+    #new_song = self.new(song)
+    #new_song.artist_name = artist
+    #new_song
+  #end
+
+    #song=Song.new(name, artist=nil, genre=nil)
+    #splits=filename.split(" - ")
+    #artist_name, song_name, genre_name = splits[0], splits[1], splits[2].gsub(".mp3", "")
+    #parts = filename.split(" - ")
+    #song_name=parts[1]
+    #artist_name, song_name, genre_name = parts[0], parts[1], parts[2].gsub(".mp3", "")
+
+    #song=self.new(name, artist=nil, genre=nil)
+
+
+   #Song.new.name = filename.split(" - ")[1]
+   #song
+
+  #def self.create_from_filename(filename)
+    #new_from_filename(filename).tap{ |s| s.save }
+  #end
+
+
+  ##########################
+
+  #rspec spec/001_song_basics_spec.rb
+  class Artist
+
+    extend Concerns::Findable
+
+  attr_reader :songs
+
+    @@all=[]
+
+    def initialize(name)
+      @name=name
+      @songs=[]
+      #@@all<<self
+    end
+
+    def name
+      @name
+    end
+
+    def name=(name)
+      @name=name
+    end
+
+    #def songs
+      #@songs
+    #end
+
+    def self.all
+      @@all
+    end
+
+    def self.destroy_all
+      self.all.clear
+    end
+
+    def save
+      @@all<<self
+    end
+
+    def self.create(name)
+      @@all<<name
+      name
+    end
+
+    def add_song(song)
+      song.artist=self unless song.artist
+      songs<<song unless songs.include?(song)
+    end
+
+    #def genres
+      #songs.map do |song|
+        #song.genre
+      #end
+   #end
+
+   def genres
+      songs.collect{ |s| s.genre }.uniq
+    end
+
+  #rspec spec/004_songs_and_artists_spec.rb
+  end
+
+
+  #######################
+
+  Module Concerns::Findable
+
+    def find_by_name(name)
+      all.detect{|s| s==name}
+    end
+
+    def find_or_create_by_name(name)
+      if find_by_name(name)
+        find_by_name(name)
+      else
+        create(name)
+      end
+    end
+
+    # Module code here
+  end
