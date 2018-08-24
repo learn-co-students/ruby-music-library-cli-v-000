@@ -33,15 +33,12 @@ class Song
     self.class.all << self
   end
 
-<<<<<<< HEAD
   def self.create(name)
     song = self.new(name)
     song.save
     song
   end
 
-=======
->>>>>>> 88c0132065f246fe5cb99042211c8fc95db4523e
   def self.find_by_name(name)
     all.detect {|song| song.name == name}
   end

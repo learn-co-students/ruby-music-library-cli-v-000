@@ -1,5 +1,7 @@
 class MusicLibraryController
 
+  attr_accessor :path
+
   def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
@@ -25,23 +27,20 @@ class MusicLibraryController
       when "list songs"
         list_songs
       when "list artists"
-<<<<<<< HEAD
         list_artists
       when "list genres"
         list_genres
-=======
-        Artist.all.each {|artist| puts "#{artist.name}"}
-      when "list genres"
-        Genre.all.each {|genre| puts "#{genre.name}"}
->>>>>>> 88c0132065f246fe5cb99042211c8fc95db4523e
       when "list artist"
+        list_songs_by_artist
       when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
       end
     end
   end
 
   def list_songs
-<<<<<<< HEAD
     Song.all.sort {|x, y| x.name <=> y.name}.each_with_index do |song, index|
       puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
@@ -56,10 +55,6 @@ class MusicLibraryController
   def list_genres
     Genre.all.sort{|x, y| x.name <=> y.name}.each_with_index do |genre, index|
       puts "#{index+1}. #{genre.name}"
-=======
-    Song.all.sort {|x, y| x.name <=> y.name}.each.with_index(1) do |song, index|
-      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
->>>>>>> 88c0132065f246fe5cb99042211c8fc95db4523e
     end
   end
 
@@ -91,5 +86,4 @@ class MusicLibraryController
     end
     puts "Playing #{song.name} by #{song.artist.name}" if song
   end
-
 end
