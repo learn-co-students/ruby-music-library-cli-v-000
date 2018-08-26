@@ -20,15 +20,15 @@ class MusicLibraryController
       call_input = gets.chomp
       case call_input 
       when "list songs"
-        songs
+        list_songs
       when "list artists"
-        artists   
+        list_artists   
       when "list genres"
-        genres
+        list_genres
       when "list artist"
-        artist
+        list_songs_by_artist
       when "list genre"
-        genre
+        list_songs_by_genre
       when "play song"
         play_song
       end
@@ -76,16 +76,12 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.chomp
-    if list_songs.each {|char| char.first == input}
-      list_songs.split(' - ')
-      binding.pry
-      #list_songs.each do |song|
-        #puts "Playing #{song.name} by #{song.artist.name}"
+    input = gets.chomp.to_i 
+    Song.all.sort_by(&:name).each.with_index(1) do |song, list_num| 
+      if list_num == input
+        puts "Playing #{song.name} by #{song.artist.name}"
         
-      #end
+      end
     end
-    
-    
   end
 end
