@@ -52,7 +52,52 @@ class MusicLibraryController
         counter += 1
       end
     end
-      
+  end
+  
+  def list_artists
+    counter = 1 
+    while counter < @files_array.count do 
+      artist_array = split_files_array.map {|file_array| file_array.first}.uniq.sort
+      artist_array.each do |artist|
+        puts "#{counter}. #{artist}"
+        counter += 1
+      end
+    end
+  end
+  
+  def list_genres
+    counter = 1 
+    while counter < @files_array.count do
+      genre_array = split_files_array.map {|file_array| file_array.last}.uniq.sort
+      genre_array.each do |genre|
+        puts "#{counter}. #{genre}"
+        counter += 1
+      end
+    end
+  end
+  
+  def list_songs_by_artist
+    # artist = ""
+    puts "Please enter the name of an Artist:"
+    artist = gets.chomp 
+    counter = 1 
+    while counter < @files_array.count do
+      split_files_sort_by_song.select do |file_array| 
+        if file_array[0] == artist
+          puts "#{counter}. #{file_array[1]}"
+          counter += 1
+        end
+      end
+    end
+  
+  end
+
+  def list_songs_by_genre
+    
+  end
+  
+  def play_song
+    
   end
   
 end
