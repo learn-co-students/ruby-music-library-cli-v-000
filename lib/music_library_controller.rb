@@ -77,8 +77,8 @@ class MusicLibraryController
   end
   
   def list_songs_by_artist
-    # artist = ""
-    puts "Please enter the name of an Artist:"
+    artist = ""
+    #puts "Please enter the name of an Artist:"
     artist = gets.chomp 
     counter = 1 
     while counter < @files_array.count do
