@@ -36,7 +36,7 @@ class MusicLibraryController
   end
   
   def split_files_array
-    @files_array.map {|file_string| file_string.split(Regexp.union(' - ', '.mp3'))}
+    @files_array.map {|file_string| file_string.split(Regexp.union([' - ', '.mp3']))}
     binding.pry
   end
   
