@@ -44,6 +44,15 @@ class MusicLibraryController
   end
   
   def list_songs
+    counter = 1 
+    while counter < @files_array.count do 
+      split_files_sort_by_song.map do |file_array| 
+        file_string = file_array.join(' - ')
+        puts "#{counter}. #{file_string}"
+        counter += 1
+      end
+    end
+      
   end
   
 end
