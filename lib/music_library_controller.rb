@@ -77,12 +77,14 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     input = gets.chomp
-    binding.pry
+    if list_songs.each {|char| char.first == input}
+      list_songs.split(' - ')
+      binding.pry
       #list_songs.each do |song|
         #puts "Playing #{song.name} by #{song.artist.name}"
         
       #end
-    #end
+    end
     
     
   end
