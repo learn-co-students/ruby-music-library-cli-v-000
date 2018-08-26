@@ -1,4 +1,3 @@
-require 'pry'
 class Artist 
   attr_accessor :name, :song, :songs
   
@@ -49,6 +48,5 @@ class Artist
   def genres
     @songs.collect {|song| song.genre}.uniq
   end
-  
-  
+
 end

@@ -1,4 +1,3 @@
-require 'pry'
 class MusicLibraryController
   
   def initialize(path = './db/mp3s')
@@ -80,7 +79,6 @@ class MusicLibraryController
     Song.all.sort_by(&:name).each.with_index(1) do |song, list_num| 
       if list_num == input
         puts "Playing #{song.name} by #{song.artist.name}"
-        
       end
     end
   end
