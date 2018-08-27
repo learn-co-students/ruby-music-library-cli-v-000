@@ -33,14 +33,6 @@ class Artist
     @songs << song unless @songs.include?(song)
   end
   
-  def artist=(name)
-    @artist = name
-  end
-  
-  def songs 
-    @songs
-  end
-  
   def genre 
     artist.genre = self
   end
