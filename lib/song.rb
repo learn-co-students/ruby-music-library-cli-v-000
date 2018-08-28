@@ -1,7 +1,7 @@
 
 
 class Song 
-  require "pry"
+
   attr_accessor :name
   attr_reader :artist, :genre
   
@@ -46,7 +46,7 @@ class Song
   
   def genre=(genre)
     @genre = genre
-    if genre.songs.detect{|a| a = self} == nil
+    if genre.songs.detect{|a| a == self} == nil
       genre.songs << self
     end
   end
