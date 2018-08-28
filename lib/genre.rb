@@ -1,8 +1,10 @@
 class Genre 
-  attr_accessor :name, :artist 
+  attr_accessor :name, :artist, :songs 
   attr_reader :genre
   
   extend Concerns::Findable
+  extend AllForAll::ClassMethods
+  include AllForAll::InstanceMethods
   
   @@all = []
   
@@ -13,24 +15,6 @@ class Genre
   
   def self.all 
     @@all
-  end
-  
-  def self.destroy_all
-    @@all.clear
-  end
-  
-  def save
-    @@all << self 
-  end
-  
-  def songs
-    @songs
-  end
-  
-  def self.create(name)
-    new_genre = Genre.new(name)
-    new_genre.save
-    new_genre
   end
   
   def artist 

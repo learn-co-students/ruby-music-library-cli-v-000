@@ -2,6 +2,8 @@ class Artist
   attr_accessor :name, :song, :songs
   
   extend Concerns::Findable
+  extend AllForAll::ClassMethods
+  include AllForAll::InstanceMethods
   
   @@all = []
   
@@ -12,20 +14,6 @@ class Artist
   
   def self.all 
     @@all
-  end
-  
-  def save
-    @@all << self 
-  end
-  
-  def self.destroy_all
-    @@all.clear
-  end
-  
-  def self.create(name)
-    new_artist = Artist.new(name)
-    new_artist.save
-    new_artist
   end
     
   def add_song(song)
