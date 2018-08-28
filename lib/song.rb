@@ -1,4 +1,4 @@
-
+#spec 009
 
 class Song 
 
@@ -6,6 +6,18 @@ class Song
   attr_reader :artist, :genre
   
   @@all = []
+  
+  def self.new_from_filename(file_name)
+  
+    array = file_name.gsub(".mp3","").split(" - ")
+    
+    new_artist = Artist.find_or_create_by_name(array[0])
+    new_song = self.find_or_create_by_name(array[1])
+    new_song.artist = new_artist
+    new_song
+  
+  end
+    
   
   def artist=(artist)
     @artist = artist
@@ -59,6 +71,9 @@ class Song
   def genre=(genre)
     @genre = genre
     if genre.songs.detect{|a| a == self} == nil
+      genre.songs << self
+    end
+    if genre.songs.detect{|a| a = self} == nil
       genre.songs << self
     end
   end

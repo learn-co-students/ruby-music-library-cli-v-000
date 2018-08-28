@@ -6,7 +6,7 @@ class MusicImporter
     @path = path
   end 
   
-  def files(path)
+  def files
     Dir.entries(@path).select {|f| !File.directory? f}
   end 
   

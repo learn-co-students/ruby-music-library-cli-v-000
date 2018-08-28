@@ -2,6 +2,7 @@ class Artist
   
   extend Concerns::Findable
   
+
   attr_accessor :name, :songs
   
   @@all = []
@@ -22,8 +23,6 @@ class Artist
     genres.uniq
   end 
 
-
-  
   def add_song(song)
     if @songs.find{|a| a.name == song.name}
     else
