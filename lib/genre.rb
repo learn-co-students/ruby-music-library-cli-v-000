@@ -12,7 +12,7 @@ class Genre
     @name = name
     @songs = []
     @artists = []
-    self.save
+    save
   end
   
   def save
@@ -24,9 +24,9 @@ class Genre
   end
   
   def self.create(name)
-    song = Song.new(name)
-    song.save
-    song
+    genre = Genre.new(name)
+    genre.save
+    genre
   end
   
 end
