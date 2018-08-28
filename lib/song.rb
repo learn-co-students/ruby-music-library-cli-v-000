@@ -1,5 +1,5 @@
 #spec 009
-
+require "pry"
 class Song 
 
   attr_accessor :name
@@ -10,12 +10,18 @@ class Song
   def self.new_from_filename(file_name)
   
     array = file_name.gsub(".mp3","").split(" - ")
-    
-    new_artist = Artist.find_or_create_by_name(array[0])
-    new_song = self.find_or_create_by_name(array[1])
-    new_song.artist = new_artist
+    if self.find_by_name(array[1]) == nil
+      new_song = Song.new(array[1], Artist.find_or_create_by_name(array[0]), Genre.find_or_create_by_name(array[2]))
+    end 
     new_song
+  end
   
+  def self.create_from_filename(file_name)
+    array = file_name.gsub(".mp3","").split(" - ")
+    song = self.new_from_filename(file_name)
+    if song != nil
+      song.save
+    end 
   end
     
   
