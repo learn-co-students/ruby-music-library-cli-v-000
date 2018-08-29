@@ -86,11 +86,9 @@ class MusicLibraryController
     user_input= gets.chomp
     all_songs = Song.all.sort_by!{ |m| m.name }
     final_list = all_songs.collect {|song| song}
-    if user_input > 0 && user_input <= final_list
-      
-      
-    
-    puts "Playing #{song.name} by #{song.artist.name}"
+    if user_input > 0 && user_input < final_list
+      puts "Playing #{final_list[user_input].name} by #{final_list[user_input].artist.name}"
+    end 
   end
   
   
