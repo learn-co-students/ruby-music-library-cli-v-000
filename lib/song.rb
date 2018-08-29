@@ -1,4 +1,4 @@
-#spec 009
+#spec 010
 require "pry"
 class Song 
 

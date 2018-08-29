@@ -1,3 +1,4 @@
+#saved 
 class Artist
   
   extend Concerns::Findable
