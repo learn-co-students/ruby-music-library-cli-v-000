@@ -1,5 +1,6 @@
-require "pry"
+
 class MusicLibraryController
+  require "pry"
   
   def initialize(path='./db/mp3s')
     @path = path
@@ -81,15 +82,18 @@ class MusicLibraryController
     end 
   end 
   
+  
   def play_song
     puts "Which song number would you like to play?"
     user_input= gets.chomp
     all_songs = Song.all.sort_by!{ |m| m.name }
-    final_list = all_songs.collect {|song| song}
-    if user_input > 0 && user_input < final_list
-      puts "Playing #{final_list[user_input].name} by #{final_list[user_input].artist.name}"
+    if user_input.to_i > 0 && user_input.to_i < all_songs.size
+      puts "Playing #{all_songs[user_input.to_i - 1].name} by #{all_songs[user_input.to_i - 1].artist.name}"
+  
     end 
   end
+  
+  def 
   
   
 end 
