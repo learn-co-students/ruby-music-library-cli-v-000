@@ -3,6 +3,8 @@ class Genre
   # attr_reader :songs
   @@all = []
 
+  extend Concerns::Findable
+
   def initialize(name)
     self.name = name
     self.songs = []
