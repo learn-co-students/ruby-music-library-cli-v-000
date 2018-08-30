@@ -1,17 +1,15 @@
 class MusicImporter
   attr_accessor :path
-  attr_reader :artist, :song, :genre
 
   def initialize(path)
     @path = path
   end
 
   def files
-    Dir.entries(path)
+    Dir.entries(path).delete_if {|filename| !filename.include?("mp3")}
   end
 
   def import
-    self.files.each {|file| file.split(/[-\.]/).strip}
+    self.files.map {|filename| Song.create_from_filename(filename)}
   end
-
 end
