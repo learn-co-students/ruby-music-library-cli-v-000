@@ -6,10 +6,10 @@ class Song
   attr_accessor :name, :artist, :genre
   
   def initialize(name, artist=nil, genre=nil)
+    
     @name = name 
     self.artist=(artist) unless artist == nil
     self.genre=(genre) unless genre == nil
-    @@all << self
   end
   
   def self.all 
@@ -60,7 +60,9 @@ class Song
   end
   
   def self.create_from_filename(filename)
-    self.new_from_filename(filename)
+    new_file = new_from_filename(filename)
+    new_file.save
+    new_file
   end
 
   
