@@ -1,8 +1,12 @@
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
+
   @@all = []
+
   extend Concerns::Findable
+  include Concerns::Persistable::InstanceMethods
+  extend Concerns::Persistable::ClassMethods
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -39,15 +43,7 @@ class Song
     genre.add_song(self)
   end
 
-  def save
-    @@all << self
-  end
-
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
   end
 end
