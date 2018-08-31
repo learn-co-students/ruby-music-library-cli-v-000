@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">Song</dt>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_2" class="passed">#initialize</dt>
+    <script type="text/javascript">moveProgressBar('0.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">accepts a name for the new song</span><span class='duration'>0.00074s</span></dd>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_3" class="passed">#name</dt>
+    <script type="text/javascript">moveProgressBar('1.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">retrieves the name of a song</span><span class='duration'>0.00011s</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_4" class="passed">#name=</dt>
+    <script type="text/javascript">moveProgressBar('2.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">can set the name of a song</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_5" class="passed">@@all</dt>
+    <script type="text/javascript">moveProgressBar('3.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">is initialized as an empty array</span><span class='duration'>0.00180s</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_6" class="passed">.all</dt>
+    <script type="text/javascript">moveProgressBar('4.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns the class variable @@all</span><span class='duration'>0.00014s</span></dd>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_7" class="passed">.destroy_all</dt>
+    <script type="text/javascript">moveProgressBar('5.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">resets the @@all class variable to an empty array</span><span class='duration'>0.00012s</span></dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_8" class="passed">#save</dt>
+    <script type="text/javascript">moveProgressBar('6.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">adds the Song instance to the @@all class variable</span><span class='duration'>0.00114s</span></dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_9" class="passed">.create</dt>
+    <script type="text/javascript">moveProgressBar('7.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">initializes, saves, and returns the song</span><span class='duration'>0.00012s</span></dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_10" class="passed">Artist</dt>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_11" class="passed">#initialize</dt>
+    <script type="text/javascript">moveProgressBar('8.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">accepts a name for the new artist</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_12" class="passed">#name</dt>
+    <script type="text/javascript">moveProgressBar('9.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">retrieves the name of an artist</span><span class='duration'>0.00013s</span></dd>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_13" class="passed">#name=</dt>
+    <script type="text/javascript">moveProgressBar('10.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">can set the name of an artist</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_14" class="passed">@@all</dt>
+    <script type="text/javascript">moveProgressBar('11.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">is initialized as an empty array</span><span class='duration'>0.00011s</span></dd>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_15" class="passed">.all</dt>
+    <script type="text/javascript">moveProgressBar('12.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns the class variable @@all</span><span class='duration'>0.00013s</span></dd>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_16" class="passed">.destroy_all</dt>
+    <script type="text/javascript">moveProgressBar('13.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">resets the @@all class variable to an empty array</span><span class='duration'>0.00010s</span></dd>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_17" class="passed">#save</dt>
+    <script type="text/javascript">moveProgressBar('14.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">adds the Artist instance to the @@all class variable</span><span class='duration'>0.00010s</span></dd>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_18" class="passed">.create</dt>
+    <script type="text/javascript">moveProgressBar('15.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">initializes and saves the artist</span><span class='duration'>0.00013s</span></dd>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_19" class="passed">Genre</dt>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_20" class="passed">#initialize</dt>
+    <script type="text/javascript">moveProgressBar('16.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">accepts a name for the new genre</span><span class='duration'>0.00008s</span></dd>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_21" class="passed">#name</dt>
+    <script type="text/javascript">moveProgressBar('16.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">retrieves the name of a genre</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_22" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_22" class="passed">#name=</dt>
+    <script type="text/javascript">moveProgressBar('17.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">can set the name of a genre</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_23" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_23" class="passed">@@all</dt>
+    <script type="text/javascript">moveProgressBar('18.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">is initialized as an empty array</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_24" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_24" class="passed">.all</dt>
+    <script type="text/javascript">moveProgressBar('19.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns the class variable @@all</span><span class='duration'>0.00014s</span></dd>
+  </dl>
+</div>
+<div id="div_group_25" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_25" class="passed">.destroy_all</dt>
+    <script type="text/javascript">moveProgressBar('20.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">resets the @@all class variable to an empty array</span><span class='duration'>0.00010s</span></dd>
+  </dl>
+</div>
+<div id="div_group_26" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_26" class="passed">#save</dt>
+    <script type="text/javascript">moveProgressBar('21.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">adds the Genre instance to the @@all class variable</span><span class='duration'>0.00010s</span></dd>
+  </dl>
+</div>
+<div id="div_group_27" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_27" class="passed">.create</dt>
+    <script type="text/javascript">moveProgressBar('22.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">initializes and saves the genre</span><span class='duration'>0.00008s</span></dd>
+  </dl>
+</div>
+<div id="div_group_28" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_28" class="passed">Associations — Song and Artist:</dt>
+  </dl>
+</div>
+<div id="div_group_29" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_29" class="passed">Artist</dt>
+  </dl>
+</div>
+<div id="div_group_30" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_30" class="passed">#initialize</dt>
+    <script type="text/javascript">moveProgressBar('23.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">creates a &#39;songs&#39; property set to an empty array (artist has many songs)</span><span class='duration'>0.00095s</span></dd>
+  </dl>
+</div>
+<div id="div_group_31" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_31" class="passed">#songs</dt>
+    <script type="text/javascript">moveProgressBar('24.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns the artist&#39;s &#39;songs&#39; collection (artist has many songs)</span><span class='duration'>0.00021s</span></dd>
+  </dl>
+</div>
+<div id="div_group_32" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_32" class="passed">Song</dt>
+  </dl>
+</div>
+<div id="div_group_33" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_33" class="passed">#initialize</dt>
+    <script type="text/javascript">moveProgressBar('25.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">can be invoked with an optional second argument, an Artist object to be assigned to the song&#39;s &#39;artist&#39; property (song belongs to artist)</span><span class='duration'>0.00012s</span></dd>
+  </dl>
+</div>
+<div id="div_group_34" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_34" class="passed">#artist</dt>
+    <script type="text/javascript">moveProgressBar('26.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">returns the artist of the song (song belongs to artist)</span><span class='duration'>0.00010s</span></dd>
+  </dl>
+</div>
+<div id="div_group_35" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_35" class="passed">#artist=</dt>
+    <script type="text/javascript">moveProgressBar('27.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns an artist to the song (song belongs to artist)</span><span class='duration'>0.00009s</span></dd>
+  </dl>
+</div>
+<div id="div_group_36" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_36" class="passed">Artist</dt>
+  </dl>
+</div>
+<div id="div_group_37" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_37" class="passed">#add_song</dt>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_37');</script>
+    <script type="text/javascript">makeRed('example_group_37');</script>
+    <script type="text/javascript">moveProgressBar('28.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">assigns the current artist to the song&#39;s &#39;artist&#39; property (song belongs to artist)</span>
+      <span class="duration">0.01267s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>  Failure/Error: expect(song.artist).to be(artist)
+
+    expected #&lt;Artist:9273180&gt; =&gt; #&lt;Artist:0x000000011afeb8 @name=&quot;Neutral Milk Hotel&quot;, @songs=[#&lt;Song:0x000000011afe40 @name=&quot;In the Aeroplane Over the Sea&quot;, @artist=nil&gt;]&gt;
+         got #&lt;NilClass:8&gt; =&gt; nil
+
+    Compared using equal?, which compares object identity,
+    but expected and actual are not the same object. Use
+    `expect(actual).to eq(expected)` if you don&#39;t care about
+    object identity in this example.
+  # ./spec/004_songs_and_artists_spec.rb:60:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/004_songs_and_artists_spec.rb:60:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">58</span>        artist.add_song(song)
+<span class="linenum">59</span>
+<span class="offending"><span class="linenum">60</span>        <span class="keyword">expect</span>(song.artist).to be(artist)</span>
+<span class="linenum">61</span>      <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('29.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not assign the artist if the song already has an artist</span><span class='duration'>0.00921s</span></dd>
+    <script type="text/javascript">moveProgressBar('30.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">adds the song to the current artist&#39;s &#39;songs&#39; collection</span><span class='duration'>0.00012s</span></dd>
+    <script type="text/javascript">moveProgressBar('31.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not add the song to the current artist&#39;s collection of songs if it already exists therein</span><span class='duration'>0.00015s</span></dd>
+  </dl>
+</div>
+<div id="div_group_38" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_38" class="passed">Song</dt>
+  </dl>
+</div>
+<div id="div_group_39" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_39" class="passed">#artist=</dt>
+    <script type="text/javascript">moveProgressBar('32.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">invokes Artist#add_song to add itself to the artist&#39;s collection of songs (artist has many songs)</span><span class='duration'>0.00029s</span></dd>
+  </dl>
+</div>
+<div id="div_group_40" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_40" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_40');</script>
+    <script type="text/javascript">makeRed('example_group_40');</script>
+    <script type="text/javascript">moveProgressBar('33.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes #artist= instead of simply assigning to an @artist instance variable to ensure that associations are created upon initialization</span>
+      <span class="duration">0.00024s</span>
+      <div class="failure" id="failure_2">
+        <div class="message"><pre>  Failure/Error: DEFAULT_FAILURE_NOTIFIER = lambda { |failure, _opts| raise failure }
+    Exactly one instance should have received the following message(s) but didn&#39;t: artist=
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-support-3.6.0/lib/rspec/support.rb:87:in `block in &lt;module:Support&gt;&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-support-3.6.0/lib/rspec/support.rb:96:in `notify_failure&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/error_generator.rb:327:in `notify&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/error_generator.rb:311:in `__raise&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/any_instance/error_generator.rb:7:in `raise_second_instance_received_message_error&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/any_instance/recorder.rb:95:in `verify&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/space.rb:75:in `block in verify_all&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/space.rb:75:in `each_value&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/space.rb:75:in `verify_all&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks.rb:45:in `verify&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/mocking_adapters/rspec.rb:23:in `verify_mocks_for_rspec&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:514:in `verify_mocks&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:508:in `run_after_example&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:273:in `block in run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:500:in `block in with_around_and_singleton_context_hooks&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:457:in `block in with_around_example_hooks&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/hooks.rb:464:in `block in run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/hooks.rb:602:in `run_around_example_hooks_for&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/hooks.rb:464:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:457:in `with_around_example_hooks&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:500:in `with_around_and_singleton_context_hooks&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:251:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:627:in `block in run_examples&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:623:in `map&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:623:in `run_examples&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:589:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `block in run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `map&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `block in run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `map&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:118:in `block (3 levels) in run_specs&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:118:in `map&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:118:in `block (2 levels) in run_specs&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/configuration.rb:1894:in `with_suite_hooks&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:113:in `block in run_specs&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/reporter.rb:79:in `report&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:112:in `run_specs&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:87:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:71:in `run&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:45:in `invoke&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/exe/rspec:4:in `&lt;top (required)&gt;&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/bin/rspec:23:in `load&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/bin/rspec:23:in `&lt;main&gt;&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval&#39;
+  # /usr/local/rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `&lt;main&gt;&#39;
+  # 
+  #   Showing full backtrace because every line was filtered out.
+  #   See docs for RSpec::Configuration#backtrace_exclusion_patterns and
+  #   RSpec::Configuration#backtrace_inclusion_patterns for more information.</pre></div>
+        <div class="backtrace"><pre>/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-support-3.6.0/lib/rspec/support.rb:87:in `block in &lt;module:Support&gt;&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-support-3.6.0/lib/rspec/support.rb:96:in `notify_failure&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/error_generator.rb:327:in `notify&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/error_generator.rb:311:in `__raise&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/any_instance/error_generator.rb:7:in `raise_second_instance_received_message_error&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/any_instance/recorder.rb:95:in `verify&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/space.rb:75:in `block in verify_all&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/space.rb:75:in `each_value&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks/space.rb:75:in `verify_all&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-mocks-3.6.0/lib/rspec/mocks.rb:45:in `verify&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/mocking_adapters/rspec.rb:23:in `verify_mocks_for_rspec&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:514:in `verify_mocks&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:508:in `run_after_example&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:273:in `block in run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:500:in `block in with_around_and_singleton_context_hooks&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:457:in `block in with_around_example_hooks&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/hooks.rb:464:in `block in run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/hooks.rb:602:in `run_around_example_hooks_for&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/hooks.rb:464:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:457:in `with_around_example_hooks&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:500:in `with_around_and_singleton_context_hooks&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example.rb:251:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:627:in `block in run_examples&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:623:in `map&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:623:in `run_examples&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:589:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `block in run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `map&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `block in run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `map&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/example_group.rb:590:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:118:in `block (3 levels) in run_specs&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:118:in `map&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:118:in `block (2 levels) in run_specs&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/configuration.rb:1894:in `with_suite_hooks&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:113:in `block in run_specs&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/reporter.rb:79:in `report&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:112:in `run_specs&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:87:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:71:in `run&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/lib/rspec/core/runner.rb:45:in `invoke&#39;
+/usr/local/rvm/gems/ruby-2.3.1/gems/rspec-core-3.6.0/exe/rspec:4:in `&lt;top (required)&gt;&#39;
+/usr/local/rvm/gems/ruby-2.3.1/bin/rspec:23:in `load&#39;
+/usr/local/rvm/gems/ruby-2.3.1/bin/rspec:23:in `&lt;main&gt;&#39;
+/usr/local/rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval&#39;
+/usr/local/rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `&lt;main&gt;&#39;
+
+  Showing full backtrace because every line was filtered out.
+  See docs for RSpec::Configuration#backtrace_exclusion_patterns and
+  RSpec::Configuration#backtrace_inclusion_patterns for more information.</pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_41" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_41" class="passed">Associations — Song and Genre:</dt>
+  </dl>
+</div>
+<div id="div_group_42" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_42" class="passed">Genre</dt>
+  </dl>
+</div>
+<div id="div_group_43" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_43" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_43');</script>
+    <script type="text/javascript">makeRed('example_group_43');</script>
+    <script type="text/javascript">moveProgressBar('33.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">creates a &#39;songs&#39; property set to an empty array (genre has many songs)</span>
+      <span class="duration">0.00024s</span>
+      <div class="failure" id="failure_3">
+        <div class="message"><pre>  Failure/Error: expect(genre.instance_variable_defined?(:@songs)).to be(true)
+
+    expected true
+         got false
+  # ./spec/005_songs_and_genres_spec.rb:10:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/005_songs_and_genres_spec.rb:10:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">8</span>    <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#initialize</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">9</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">creates a 'songs' property set to an empty array (genre has many songs)</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">10</span>        <span class="keyword">expect</span>(genre.instance_variable_defined?(<span class="symbol">:@songs</span>)).to be(<span class="predefined-constant">true</span>)</span>
+<span class="linenum">11</span>        <span class="keyword">expect</span>(genre.instance_variable_get(<span class="symbol">:@songs</span>)).to eq([])
+<span class="linenum">12</span>      <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_44" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_44" class="passed">#songs</dt>
+    <script type="text/javascript">makeRed('div_group_44');</script>
+    <script type="text/javascript">makeRed('example_group_44');</script>
+    <script type="text/javascript">moveProgressBar('34.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns the genre&#39;s &#39;songs&#39; collection (genre has many songs)</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_4">
+        <div class="message"><pre>  Failure/Error: expect(genre.songs).to eq([])
+
+  NoMethodError:
+    undefined method `songs&#39; for #&lt;Genre:0x000000023a0438 @name=&quot;indie rock&quot;&gt;
+  # ./spec/005_songs_and_genres_spec.rb:17:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/005_songs_and_genres_spec.rb:17:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">15</span>    <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#songs</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">16</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">returns the genre's 'songs' collection (genre has many songs)</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">17</span>        <span class="keyword">expect</span>(genre.songs).to eq([])</span>
+<span class="linenum">18</span>
+<span class="linenum">19</span>        genre.songs &lt;&lt; song</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_45" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_45" class="passed">Song</dt>
+  </dl>
+</div>
+<div id="div_group_46" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_46" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_46');</script>
+    <script type="text/javascript">makeRed('example_group_46');</script>
+    <script type="text/javascript">moveProgressBar('35.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">can be invoked with an optional third argument, a Genre object to be assigned to the song&#39;s &#39;genre&#39; property (song belongs to genre)</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_5">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/005_songs_and_genres_spec.rb:30:in `new&#39;
+  # ./spec/005_songs_and_genres_spec.rb:30:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/005_songs_and_genres_spec.rb:30:in `new&#39;
+./spec/005_songs_and_genres_spec.rb:30:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_47" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_47" class="passed">#genre</dt>
+    <script type="text/javascript">makeRed('div_group_47');</script>
+    <script type="text/javascript">makeRed('example_group_47');</script>
+    <script type="text/javascript">moveProgressBar('36.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns the genre of the song (song belongs to genre)</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_6">
+        <div class="message"><pre>  Failure/Error: expect(song.genre).to be(genre)
+
+  NoMethodError:
+    undefined method `genre&#39; for #&lt;Song:0x000000024611d8&gt;
+  # ./spec/005_songs_and_genres_spec.rb:41:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/005_songs_and_genres_spec.rb:41:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">39</span>        song.instance_variable_set(<span class="symbol">:@genre</span>, genre)
+<span class="linenum">40</span>
+<span class="offending"><span class="linenum">41</span>        <span class="keyword">expect</span>(song.genre).to be(genre)</span>
+<span class="linenum">42</span>      <span class="keyword">end</span>
+<span class="linenum">43</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_48" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_48" class="passed">#genre=</dt>
+    <script type="text/javascript">makeRed('div_group_48');</script>
+    <script type="text/javascript">makeRed('example_group_48');</script>
+    <script type="text/javascript">moveProgressBar('37.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">assigns a genre to the song (song belongs to genre)</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_7">
+        <div class="message"><pre>  Failure/Error: song.genre = genre
+
+  NoMethodError:
+    undefined method `genre=&#39; for #&lt;Song:0x00000000c55120&gt;
+  # ./spec/005_songs_and_genres_spec.rb:47:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/005_songs_and_genres_spec.rb:47:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">45</span>    <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#genre=</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">46</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">assigns a genre to the song (song belongs to genre)</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">47</span>        song.genre = genre</span>
+<span class="linenum">48</span>
+<span class="linenum">49</span>        <span class="keyword">expect</span>(song.genre).to be(genre)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('38.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">adds the song to the genre&#39;s collection of songs (genre has many songs)</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_8">
+        <div class="message"><pre>  Failure/Error: song.genre = genre
+
+  NoMethodError:
+    undefined method `genre=&#39; for #&lt;Song:0x000000024fbbc0&gt;
+  # ./spec/005_songs_and_genres_spec.rb:53:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/005_songs_and_genres_spec.rb:53:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">51</span>
+<span class="linenum">52</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">adds the song to the genre's collection of songs (genre has many songs)</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">53</span>        song.genre = genre</span>
+<span class="linenum">54</span>
+<span class="linenum">55</span>        <span class="keyword">expect</span>(genre.songs).to include(song)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('39.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not add the song to the genre&#39;s collection of songs if it already exists therein</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_9">
+        <div class="message"><pre>  Failure/Error: 2.times { song.genre = genre }
+
+  NoMethodError:
+    undefined method `genre=&#39; for #&lt;Song:0x00000000b83490&gt;
+  # ./spec/005_songs_and_genres_spec.rb:59:in `block (5 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/005_songs_and_genres_spec.rb:59:in `times&#39;
+  # ./spec/005_songs_and_genres_spec.rb:59:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/005_songs_and_genres_spec.rb:59:in `block (5 levels) in &lt;top (required)&gt;&#39;
+./spec/005_songs_and_genres_spec.rb:59:in `times&#39;
+./spec/005_songs_and_genres_spec.rb:59:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">57</span>
+<span class="linenum">58</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">does not add the song to the genre's collection of songs if it already exists therein</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">59</span>        <span class="integer">2</span>.times { song.genre = genre }</span>
+<span class="linenum">60</span>
+<span class="linenum">61</span>        <span class="keyword">expect</span>(genre.songs).to include(song)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_49" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_49" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_49');</script>
+    <script type="text/javascript">makeRed('example_group_49');</script>
+    <script type="text/javascript">moveProgressBar('40.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes #genre= instead of simply assigning to a @genre instance variable to ensure that associations are created upon initialization</span>
+      <span class="duration">0.00024s</span>
+      <div class="failure" id="failure_10">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/005_songs_and_genres_spec.rb:71:in `new&#39;
+  # ./spec/005_songs_and_genres_spec.rb:71:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/005_songs_and_genres_spec.rb:71:in `new&#39;
+./spec/005_songs_and_genres_spec.rb:71:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_50" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_50" class="passed">Associations — Artist and Genre:</dt>
+  </dl>
+</div>
+<div id="div_group_51" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_51" class="passed">Artist</dt>
+  </dl>
+</div>
+<div id="div_group_52" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_52" class="passed">#genres</dt>
+    <script type="text/javascript">makeRed('div_group_52');</script>
+    <script type="text/javascript">makeRed('example_group_52');</script>
+    <script type="text/javascript">moveProgressBar('41.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns a collection of genres for all of the artist&#39;s songs (artist has many genres through songs)</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_11">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/006_artists_and_genres_spec.rb:12:in `new&#39;
+  # ./spec/006_artists_and_genres_spec.rb:12:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/006_artists_and_genres_spec.rb:12:in `new&#39;
+./spec/006_artists_and_genres_spec.rb:12:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('42.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not return duplicate genres if the artist has more than one song of a particular genre (artist has many genres through songs)</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_12">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/006_artists_and_genres_spec.rb:21:in `new&#39;
+  # ./spec/006_artists_and_genres_spec.rb:21:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/006_artists_and_genres_spec.rb:21:in `new&#39;
+./spec/006_artists_and_genres_spec.rb:21:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('43.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">collects genres through its songs instead of maintaining its own @genres instance variable (artist has many genres through songs)</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_13">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/006_artists_and_genres_spec.rb:29:in `new&#39;
+  # ./spec/006_artists_and_genres_spec.rb:29:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/006_artists_and_genres_spec.rb:29:in `new&#39;
+./spec/006_artists_and_genres_spec.rb:29:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_53" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_53" class="passed">Genre</dt>
+  </dl>
+</div>
+<div id="div_group_54" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_54" class="passed">#artists</dt>
+    <script type="text/javascript">makeRed('div_group_54');</script>
+    <script type="text/javascript">makeRed('example_group_54');</script>
+    <script type="text/javascript">moveProgressBar('44.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns a collection of artists for all of the genre&#39;s songs (genre has many artists through songs)</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_14">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/006_artists_and_genres_spec.rb:39:in `new&#39;
+  # ./spec/006_artists_and_genres_spec.rb:39:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/006_artists_and_genres_spec.rb:39:in `new&#39;
+./spec/006_artists_and_genres_spec.rb:39:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not return duplicate artists if the genre has more than one song by a particular artist (genre has many artists through songs)</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_15">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/006_artists_and_genres_spec.rb:48:in `new&#39;
+  # ./spec/006_artists_and_genres_spec.rb:48:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/006_artists_and_genres_spec.rb:48:in `new&#39;
+./spec/006_artists_and_genres_spec.rb:48:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('46.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">collects artists through its songs instead of maintaining its own @artists instance variable (genre has many artists through songs)</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_16">
+        <div class="message"><pre>  Failure/Error:
+    def initialize(name, artist=nil)
+      @name=name
+      @artist=artist
+      # binding.pry
+    end
+
+  ArgumentError:
+    wrong number of arguments (given 3, expected 1..2)
+  # ./lib/song.rb:7:in `initialize&#39;
+  # ./spec/006_artists_and_genres_spec.rb:56:in `new&#39;
+  # ./spec/006_artists_and_genres_spec.rb:56:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./lib/song.rb:7:in `initialize&#39;
+./spec/006_artists_and_genres_spec.rb:56:in `new&#39;
+./spec/006_artists_and_genres_spec.rb:56:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="class-variable">@@all</span>=[]
+<span class="linenum">6</span>
+<span class="offending"><span class="linenum">7</span>    <span class="keyword">def</span> <span class="function">initialize</span>(name, artist=<span class="predefined-constant">nil</span>)</span>
+<span class="linenum">8</span>      <span class="instance-variable">@name</span>=name
+<span class="linenum">9</span>      <span class="instance-variable">@artist</span>=artist</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_55" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_55" class="passed">Song</dt>
+  </dl>
+</div>
+<div id="div_group_56" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_56" class="passed">.find_by_name</dt>
+    <script type="text/javascript">makeRed('div_group_56');</script>
+    <script type="text/javascript">makeRed('example_group_56');</script>
+    <script type="text/javascript">moveProgressBar('47.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">finds a song instance in @@all by the name property of the song</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_17">
+        <div class="message"><pre>  Failure/Error: expect(Song.find_by_name(&quot;In the Aeroplane Over the Sea&quot;)).to be(song_two)
+
+  NoMethodError:
+    undefined method `find_by_name&#39; for Song:Class
+  # ./spec/007_findable_songs_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/007_findable_songs_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">.find_by_name</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">6</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">finds a song instance in @@all by the name property of the song</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">7</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>.find_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">In the Aeroplane Over the Sea</span><span class="delimiter">&quot;</span></span>)).to be(song_two)</span>
+<span class="linenum">8</span>    <span class="keyword">end</span>
+<span class="linenum">9</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_57" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_57" class="passed">.find_or_create_by_name</dt>
+    <script type="text/javascript">makeRed('div_group_57');</script>
+    <script type="text/javascript">makeRed('example_group_57');</script>
+    <script type="text/javascript">moveProgressBar('48.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns (does not recreate) an existing song with the provided name if one exists in @@all</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_18">
+        <div class="message"><pre>  Failure/Error: same_song = Song.find_or_create_by_name(&quot;In the Aeroplane Over the Sea&quot;)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Song:Class
+  # ./spec/007_findable_songs_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/007_findable_songs_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">11</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">.find_or_create_by_name</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">12</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">returns (does not recreate) an existing song with the provided name if one exists in @@all</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">13</span>      same_song = <span class="constant">Song</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">In the Aeroplane Over the Sea</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">14</span>
+<span class="linenum">15</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>.all.length).to eq(<span class="integer">2</span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('49.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes .find_by_name instead of re-coding the same functionality</span>
+      <span class="duration">0.00044s</span>
+      <div class="failure" id="failure_19">
+        <div class="message"><pre>  Failure/Error: Song.find_or_create_by_name(&quot;Kaohsiung Christmas&quot;)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Song:Class
+  # ./spec/007_findable_songs_spec.rb:22:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/007_findable_songs_spec.rb:22:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">20</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>).to receive(<span class="symbol">:find_by_name</span>).with(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kaohsiung Christmas</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">21</span>
+<span class="offending"><span class="linenum">22</span>      <span class="constant">Song</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kaohsiung Christmas</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">23</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">creates a song if an existing match is not found</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_20">
+        <div class="message"><pre>  Failure/Error: other_song = Song.find_or_create_by_name(&quot;I&#39;d Rather Go Blind&quot;)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Song:Class
+  # ./spec/007_findable_songs_spec.rb:26:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/007_findable_songs_spec.rb:26:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">24</span>
+<span class="linenum">25</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">creates a song if an existing match is not found</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">26</span>      other_song = <span class="constant">Song</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">I'd Rather Go Blind</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">27</span>
+<span class="linenum">28</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>.all).to include(other_song)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('50.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes .create instead of re-coding the same functionality</span>
+      <span class="duration">0.00028s</span>
+      <div class="failure" id="failure_21">
+        <div class="message"><pre>  Failure/Error: Song.find_or_create_by_name(&quot;Kaohsiung Christmas&quot;)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Song:Class
+  # ./spec/007_findable_songs_spec.rb:34:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/007_findable_songs_spec.rb:34:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">32</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>).to receive(<span class="symbol">:create</span>).with(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kaohsiung Christmas</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">33</span>
+<span class="offending"><span class="linenum">34</span>      <span class="constant">Song</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Kaohsiung Christmas</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">35</span>    <span class="keyword">end</span>
+<span class="linenum">36</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_58" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_58" class="passed">Concerns::Findable</dt>
+    <script type="text/javascript">makeRed('div_group_58');</script>
+    <script type="text/javascript">makeRed('example_group_58');</script>
+    <script type="text/javascript">moveProgressBar('51.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">defines a module named Concerns::Findable</span>
+      <span class="duration">0.00171s</span>
+      <div class="failure" id="failure_22">
+        <div class="message"><pre>  Failure/Error: expect(defined?(Concerns::Findable)).to be_truthy
+
+    expected: truthy value
+         got: nil
+  # ./spec/008_findable_module_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Concerns::Findable</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">4</span>  <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">defines a module named Concerns::Findable</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">5</span>    <span class="keyword">expect</span>(<span class="keyword">defined?</span>(<span class="constant">Concerns</span>::<span class="constant">Findable</span>)).to be_truthy</span>
+<span class="linenum">6</span>    <span class="keyword">expect</span>(<span class="constant">Concerns</span>::<span class="constant">Findable</span>).to_not be_a(<span class="constant">Class</span>)
+<span class="linenum">7</span>    <span class="keyword">expect</span>(<span class="constant">Concerns</span>::<span class="constant">Findable</span>).to be_a(<span class="constant">Module</span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_59" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_59" class="passed">Artist</dt>
+    <script type="text/javascript">makeRed('div_group_59');</script>
+    <script type="text/javascript">makeRed('example_group_59');</script>
+    <script type="text/javascript">moveProgressBar('52.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">extends the Concerns::Findable module</span>
+      <span class="duration">0.00010s</span>
+      <div class="failure" id="failure_23">
+        <div class="message"><pre>  Failure/Error: artist_extends_concerns_findable = Artist.singleton_class.ancestors.include?(Concerns::Findable)
+
+  NameError:
+    uninitialized constant Concerns::Findable
+  # ./spec/008_findable_module_spec.rb:13:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:13:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">11</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Artist</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">12</span>  <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">extends the Concerns::Findable module</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">13</span>    artist_extends_concerns_findable = <span class="constant">Artist</span>.singleton_class.ancestors.include?(<span class="constant">Concerns</span>::<span class="constant">Findable</span>)</span>
+<span class="linenum">14</span>    <span class="keyword">expect</span>(artist_extends_concerns_findable).to be(<span class="predefined-constant">true</span>)
+<span class="linenum">15</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_60" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_60" class="passed">Genre</dt>
+    <script type="text/javascript">makeRed('div_group_60');</script>
+    <script type="text/javascript">makeRed('example_group_60');</script>
+    <script type="text/javascript">moveProgressBar('53.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">extends the Concerns::Findable module</span>
+      <span class="duration">0.00010s</span>
+      <div class="failure" id="failure_24">
+        <div class="message"><pre>  Failure/Error: genre_extends_concerns_findable = Genre.singleton_class.ancestors.include?(Concerns::Findable)
+
+  NameError:
+    uninitialized constant Concerns::Findable
+  # ./spec/008_findable_module_spec.rb:20:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:20:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">18</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Genre</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">19</span>  <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">extends the Concerns::Findable module</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">20</span>    genre_extends_concerns_findable = <span class="constant">Genre</span>.singleton_class.ancestors.include?(<span class="constant">Concerns</span>::<span class="constant">Findable</span>)</span>
+<span class="linenum">21</span>    <span class="keyword">expect</span>(genre_extends_concerns_findable).to be(<span class="predefined-constant">true</span>)
+<span class="linenum">22</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_61" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_61" class="passed">Concerns::Findable</dt>
+  </dl>
+</div>
+<div id="div_group_62" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_62" class="passed">.find_by_name</dt>
+    <script type="text/javascript">makeRed('div_group_62');</script>
+    <script type="text/javascript">makeRed('example_group_62');</script>
+    <script type="text/javascript">moveProgressBar('54.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">is added as a class method to classes that extend the module</span>
+      <span class="duration">0.00133s</span>
+      <div class="failure" id="failure_25">
+        <div class="message"><pre>  Failure/Error: expect(Artist).to respond_to(:find_by_name)
+    expected Artist to respond to :find_by_name
+  # ./spec/008_findable_module_spec.rb:33:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:33:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">31</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">.find_by_name</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">32</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">is added as a class method to classes that extend the module</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">33</span>      <span class="keyword">expect</span>(<span class="constant">Artist</span>).to respond_to(<span class="symbol">:find_by_name</span>)</span>
+<span class="linenum">34</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('55.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">isn&#39;t hard-coded</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_26">
+        <div class="message"><pre>  Failure/Error: expect(Genre.find_by_name(&quot;shoegaze&quot;)).to be(genre_two)
+
+  NoMethodError:
+    undefined method `find_by_name&#39; for Genre:Class
+  # ./spec/008_findable_module_spec.rb:43:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:43:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">41</span>
+<span class="linenum">42</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">isn't hard-coded</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">43</span>      <span class="keyword">expect</span>(<span class="constant">Genre</span>.find_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">shoegaze</span><span class="delimiter">&quot;</span></span>)).to be(genre_two)</span>
+<span class="linenum">44</span>    <span class="keyword">end</span>
+<span class="linenum">45</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_63" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_63" class="passed">works exactly like a generic version of Song.find_by_name,</dt>
+    <script type="text/javascript">makeRed('div_group_63');</script>
+    <script type="text/javascript">makeRed('example_group_63');</script>
+    <script type="text/javascript">moveProgressBar('56.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">searching the extended class&#39;s @@all variable for an instance that matches the provided name</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_27">
+        <div class="message"><pre>  Failure/Error: expect(Artist.find_by_name(&quot;Slowdive&quot;)).to be(artist_two)
+
+  NoMethodError:
+    undefined method `find_by_name&#39; for Artist:Class
+  # ./spec/008_findable_module_spec.rb:38:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:38:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">36</span>    <span class="keyword">context</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">works exactly like a generic version of Song.find_by_name,</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">37</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">searching the extended class's @@all variable for an instance that matches the provided name</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">38</span>        <span class="keyword">expect</span>(<span class="constant">Artist</span>.find_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Slowdive</span><span class="delimiter">&quot;</span></span>)).to be(artist_two)</span>
+<span class="linenum">39</span>      <span class="keyword">end</span>
+<span class="linenum">40</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_64" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_64" class="passed">.find_or_create_by_name</dt>
+    <script type="text/javascript">makeRed('div_group_64');</script>
+    <script type="text/javascript">makeRed('example_group_64');</script>
+    <script type="text/javascript">moveProgressBar('57.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">is added as a class method to classes that extend the module</span>
+      <span class="duration">0.00020s</span>
+      <div class="failure" id="failure_28">
+        <div class="message"><pre>  Failure/Error: expect(Artist).to respond_to(:find_or_create_by_name)
+    expected Artist to respond to :find_or_create_by_name
+  # ./spec/008_findable_module_spec.rb:49:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:49:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">47</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">.find_or_create_by_name</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">48</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">is added as a class method to classes that extend the module</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">49</span>      <span class="keyword">expect</span>(<span class="constant">Artist</span>).to respond_to(<span class="symbol">:find_or_create_by_name</span>)</span>
+<span class="linenum">50</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_65" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_65" class="passed">works exactly like a generic version of Song.find_or_create_by_name:</dt>
+    <script type="text/javascript">makeRed('div_group_65');</script>
+    <script type="text/javascript">makeRed('example_group_65');</script>
+    <script type="text/javascript">moveProgressBar('58.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">finds (does not recreate) an existing instance with the provided name if one exists in @@all</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_29">
+        <div class="message"><pre>  Failure/Error: expect(Artist.find_or_create_by_name(&quot;Slowdive&quot;)).to be(artist_two)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Artist:Class
+  # ./spec/008_findable_module_spec.rb:54:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:54:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">52</span>    <span class="keyword">context</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">works exactly like a generic version of Song.find_or_create_by_name:</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">53</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">finds (does not recreate) an existing instance with the provided name if one exists in @@all</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">54</span>        <span class="keyword">expect</span>(<span class="constant">Artist</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Slowdive</span><span class="delimiter">&quot;</span></span>)).to be(artist_two)</span>
+<span class="linenum">55</span>      <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('59.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">isn&#39;t hard-coded</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_30">
+        <div class="message"><pre>  Failure/Error: expect(Genre.find_or_create_by_name(&quot;shoegaze&quot;)).to be(genre_two)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Genre:Class
+  # ./spec/008_findable_module_spec.rb:58:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:58:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">56</span>
+<span class="linenum">57</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">isn't hard-coded</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">58</span>        <span class="keyword">expect</span>(<span class="constant">Genre</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">shoegaze</span><span class="delimiter">&quot;</span></span>)).to be(genre_two)</span>
+<span class="linenum">59</span>      <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('60.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes .find_by_name instead of re-coding the same functionality</span>
+      <span class="duration">0.00044s</span>
+      <div class="failure" id="failure_31">
+        <div class="message"><pre>  Failure/Error: Artist.find_or_create_by_name(&quot;Slowdive&quot;)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Artist:Class
+  # ./spec/008_findable_module_spec.rb:63:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:63:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">61</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">invokes .find_by_name instead of re-coding the same functionality</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">62</span>        <span class="keyword">expect</span>(<span class="constant">Artist</span>).to receive(<span class="symbol">:find_by_name</span>)
+<span class="offending"><span class="linenum">63</span>        <span class="constant">Artist</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">Slowdive</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">64</span>      <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('61.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes the extended class&#39;s .create method, passing in the provided name, if an existing match is not found</span>
+      <span class="duration">0.00032s</span>
+      <div class="failure" id="failure_32">
+        <div class="message"><pre>  Failure/Error: Artist.find_or_create_by_name(&quot;M83&quot;)
+
+  NoMethodError:
+    undefined method `find_or_create_by_name&#39; for Artist:Class
+  # ./spec/008_findable_module_spec.rb:68:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/008_findable_module_spec.rb:68:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">66</span>      <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">invokes the extended class's .create method, passing in the provided name, if an existing match is not found</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">67</span>        <span class="keyword">expect</span>(<span class="constant">Artist</span>).to receive(<span class="symbol">:create</span>)
+<span class="offending"><span class="linenum">68</span>        <span class="constant">Artist</span>.find_or_create_by_name(<span class="string"><span class="delimiter">&quot;</span><span class="content">M83</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">69</span>      <span class="keyword">end</span>
+<span class="linenum">70</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_66" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_66" class="passed">MusicImporter</dt>
+  </dl>
+</div>
+<div id="div_group_67" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_67" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_67');</script>
+    <script type="text/javascript">makeRed('example_group_67');</script>
+    <script type="text/javascript">moveProgressBar('62.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts a file path to parse MP3 files from</span>
+      <span class="duration">0.00010s</span>
+      <div class="failure" id="failure_33">
+        <div class="message"><pre>  Failure/Error: let(:music_importer) { MusicImporter.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/009_music_importer_spec.rb:8:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/009_music_importer_spec.rb:8:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicImporter</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_importer</span>) { <span class="constant">MusicImporter</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#initialize</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_68" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_68" class="passed">#path</dt>
+    <script type="text/javascript">makeRed('div_group_68');</script>
+    <script type="text/javascript">makeRed('example_group_68');</script>
+    <script type="text/javascript">moveProgressBar('63.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">retrieves the path provided to the MusicImporter object</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_34">
+        <div class="message"><pre>  Failure/Error: let(:music_importer) { MusicImporter.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/009_music_importer_spec.rb:15:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/009_music_importer_spec.rb:15:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicImporter</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_importer</span>) { <span class="constant">MusicImporter</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#initialize</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_69" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_69" class="passed">#files</dt>
+    <script type="text/javascript">makeRed('div_group_69');</script>
+    <script type="text/javascript">makeRed('example_group_69');</script>
+    <script type="text/javascript">moveProgressBar('64.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">loads all the MP3 files in the path directory</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_35">
+        <div class="message"><pre>  Failure/Error: let(:music_importer) { MusicImporter.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/009_music_importer_spec.rb:21:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/009_music_importer_spec.rb:21:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicImporter</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_importer</span>) { <span class="constant">MusicImporter</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#initialize</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('65.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">normalizes the filename to just the MP3 filename with no path</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_36">
+        <div class="message"><pre>  Failure/Error: let(:music_importer) { MusicImporter.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/009_music_importer_spec.rb:25:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/009_music_importer_spec.rb:25:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicImporter</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_importer</span>) { <span class="constant">MusicImporter</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#initialize</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_70" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_70" class="passed">Song</dt>
+  </dl>
+</div>
+<div id="div_group_71" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_71" class="passed">.new_from_filename</dt>
+    <script type="text/javascript">makeRed('div_group_71');</script>
+    <script type="text/javascript">makeRed('example_group_71');</script>
+    <script type="text/javascript">moveProgressBar('66.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">initializes a song based on the passed-in filename</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_37">
+        <div class="message"><pre>  Failure/Error: song = Song.new_from_filename(&quot;Thundercat - For Love I Come - dance.mp3&quot;)
+
+  NoMethodError:
+    undefined method `new_from_filename&#39; for Song:Class
+  # ./spec/009_music_importer_spec.rb:36:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:36:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">34</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">.new_from_filename</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">35</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">initializes a song based on the passed-in filename</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">36</span>      song = <span class="constant">Song</span>.new_from_filename(<span class="string"><span class="delimiter">&quot;</span><span class="content">Thundercat - For Love I Come - dance.mp3</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">37</span>
+<span class="linenum">38</span>      <span class="keyword">expect</span>(song.name).to eq(<span class="string"><span class="delimiter">&quot;</span><span class="content">For Love I Come</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('66.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes the appropriate Findable methods so as to avoid duplicating objects</span>
+      <span class="duration">0.00057s</span>
+      <div class="failure" id="failure_38">
+        <div class="message"><pre>  Failure/Error: song = Song.new_from_filename(&quot;Thundercat - For Love I Come - dance.mp3&quot;)
+
+  NoMethodError:
+    undefined method `new_from_filename&#39; for Song:Class
+  # ./spec/009_music_importer_spec.rb:50:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:50:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">48</span>      <span class="keyword">expect</span>(<span class="constant">Genre</span>).to receive(<span class="symbol">:find_or_create_by_name</span>).and_return(genre)
+<span class="linenum">49</span>
+<span class="offending"><span class="linenum">50</span>      song = <span class="constant">Song</span>.new_from_filename(<span class="string"><span class="delimiter">&quot;</span><span class="content">Thundercat - For Love I Come - dance.mp3</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">51</span>
+<span class="linenum">52</span>      <span class="keyword">expect</span>(song.artist).to be(artist)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_72" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_72" class="passed">.create_from_filename</dt>
+    <script type="text/javascript">makeRed('div_group_72');</script>
+    <script type="text/javascript">makeRed('example_group_72');</script>
+    <script type="text/javascript">moveProgressBar('67.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">initializes and saves a song based on the passed-in filename</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_39">
+        <div class="message"><pre>  Failure/Error: song = Song.create_from_filename(&quot;Thundercat - For Love I Come - dance.mp3&quot;)
+
+  NoMethodError:
+    undefined method `create_from_filename&#39; for Song:Class
+  # ./spec/009_music_importer_spec.rb:59:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:59:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">57</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">.create_from_filename</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">58</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">initializes and saves a song based on the passed-in filename</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">59</span>      song = <span class="constant">Song</span>.create_from_filename(<span class="string"><span class="delimiter">&quot;</span><span class="content">Thundercat - For Love I Come - dance.mp3</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">60</span>
+<span class="linenum">61</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>.all.last.genre.name).to eq(<span class="string"><span class="delimiter">&quot;</span><span class="content">dance</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('68.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes .new_from_filename instead of re-coding the same functionality</span>
+      <span class="duration">0.00045s</span>
+      <div class="failure" id="failure_40">
+        <div class="message"><pre>  Failure/Error: Song.create_from_filename(&quot;Thundercat - For Love I Come - dance.mp3&quot;)
+
+  NoMethodError:
+    undefined method `create_from_filename&#39; for Song:Class
+  # ./spec/009_music_importer_spec.rb:67:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:67:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">65</span>      <span class="keyword">expect</span>(<span class="constant">Song</span>).to receive(<span class="symbol">:new_from_filename</span>).and_return(double(<span class="key">save</span>: <span class="predefined-constant">true</span>))
+<span class="linenum">66</span>
+<span class="offending"><span class="linenum">67</span>      <span class="constant">Song</span>.create_from_filename(<span class="string"><span class="delimiter">&quot;</span><span class="content">Thundercat - For Love I Come - dance.mp3</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">68</span>    <span class="keyword">end</span>
+<span class="linenum">69</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_73" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_73" class="passed">MusicImporter</dt>
+  </dl>
+</div>
+<div id="div_group_74" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_74" class="passed">#import</dt>
+    <script type="text/javascript">makeRed('div_group_74');</script>
+    <script type="text/javascript">makeRed('example_group_74');</script>
+    <script type="text/javascript">moveProgressBar('69.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">imports the files into the library by invoking Song.create_from_filename</span>
+      <span class="duration">0.00056s</span>
+      <div class="failure" id="failure_41">
+        <div class="message"><pre>  Failure/Error: let(:music_importer) { MusicImporter.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/009_music_importer_spec.rb:74:in `block (3 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/009_music_importer_spec.rb:83:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/009_music_importer_spec.rb:74:in `block (3 levels) in &lt;top (required)&gt;&#39;
+./spec/009_music_importer_spec.rb:83:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">72</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicImporter</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">73</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#import</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">74</span>    <span class="keyword">let</span>(<span class="symbol">:music_importer</span>) { <span class="constant">MusicImporter</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">75</span>
+<span class="linenum">76</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">imports the files into the library by invoking Song.create_from_filename</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_75" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_75" class="passed">MusicLibraryController</dt>
+  </dl>
+</div>
+<div id="div_group_76" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_76" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_76');</script>
+    <script type="text/javascript">makeRed('example_group_76');</script>
+    <script type="text/javascript">moveProgressBar('70.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts one argument, the path to the MP3 files to be imported</span>
+      <span class="duration">0.00456s</span>
+      <div class="failure" id="failure_42">
+        <div class="message"><pre>  Failure/Error: expect{ MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }.to_not raise_error
+
+    expected no Exception, got #&lt;NameError: uninitialized constant MusicLibraryController&gt; with backtrace:
+      # ./spec/010_music_library_controller_spec.rb:6:in `block (4 levels) in &lt;top (required)&gt;&#39;
+      # ./spec/010_music_library_controller_spec.rb:6:in `block (3 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/010_music_library_controller_spec.rb:6:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:6:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">4</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#initialize</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">5</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">accepts one argument, the path to the MP3 files to be imported</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">6</span>      <span class="keyword">expect</span>{ <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }.to_not raise_error</span>
+<span class="linenum">7</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('71.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">creates a new MusicImporter object, passing in the &#39;path&#39; value</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_43">
+        <div class="message"><pre>  Failure/Error: expect(MusicImporter).to receive(:new).with(&quot;./spec/fixtures/mp3s&quot;).and_return(double(MusicImporter, import: true))
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/010_music_library_controller_spec.rb:10:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:10:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">8</span>
+<span class="linenum">9</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">creates a new MusicImporter object, passing in the 'path' value</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">10</span>      <span class="keyword">expect</span>(<span class="constant">MusicImporter</span>).to receive(<span class="symbol">:new</span>).with(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>).and_return(double(<span class="constant">MusicImporter</span>, <span class="key">import</span>: <span class="predefined-constant">true</span>))</span>
+<span class="linenum">11</span>
+<span class="linenum">12</span>      <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('72.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">the &#39;path&#39; argument defaults to &#39;./db/mp3s&#39;</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_44">
+        <div class="message"><pre>  Failure/Error: expect(MusicImporter).to receive(:new).with(&quot;./db/mp3s&quot;).and_return(double(MusicImporter, import: true))
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/010_music_library_controller_spec.rb:16:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:16:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">14</span>
+<span class="linenum">15</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">the 'path' argument defaults to './db/mp3s'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">16</span>      <span class="keyword">expect</span>(<span class="constant">MusicImporter</span>).to receive(<span class="symbol">:new</span>).with(<span class="string"><span class="delimiter">&quot;</span><span class="content">./db/mp3s</span><span class="delimiter">&quot;</span></span>).and_return(double(<span class="constant">MusicImporter</span>, <span class="key">import</span>: <span class="predefined-constant">true</span>))</span>
+<span class="linenum">17</span>
+<span class="linenum">18</span>      <span class="constant">MusicLibraryController</span>.new</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('73.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">invokes the #import method on the created MusicImporter object</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_45">
+        <div class="message"><pre>  Failure/Error: music_importer = MusicImporter.new(&quot;./spec/fixtures/mp3s&quot;)
+
+  NameError:
+    uninitialized constant MusicImporter
+  # ./spec/010_music_library_controller_spec.rb:22:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:22:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">20</span>
+<span class="linenum">21</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">invokes the #import method on the created MusicImporter object</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">22</span>      music_importer = <span class="constant">MusicImporter</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">23</span>
+<span class="linenum">24</span>      <span class="keyword">expect</span>(<span class="constant">MusicImporter</span>).to receive(<span class="symbol">:new</span>).and_return(music_importer)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_77" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_77" class="passed">#call</dt>
+    <script type="text/javascript">makeRed('div_group_77');</script>
+    <script type="text/javascript">makeRed('example_group_77');</script>
+    <script type="text/javascript">moveProgressBar('74.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">welcomes the user</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_46">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/010_music_library_controller_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/010_music_library_controller_spec.rb:35:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;
+./spec/010_music_library_controller_spec.rb:35:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">30</span>
+<span class="linenum">31</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#call</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">32</span>    <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">33</span>
+<span class="linenum">34</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">welcomes the user</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('75.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">asks the user for input</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_47">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/010_music_library_controller_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/010_music_library_controller_spec.rb:51:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;
+./spec/010_music_library_controller_spec.rb:51:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">30</span>
+<span class="linenum">31</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#call</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">32</span>    <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">33</span>
+<span class="linenum">34</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">welcomes the user</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('76.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">loops and asks for user input until they type in exit</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_48">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/010_music_library_controller_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/010_music_library_controller_spec.rb:59:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/010_music_library_controller_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;
+./spec/010_music_library_controller_spec.rb:59:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">30</span>
+<span class="linenum">31</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#call</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">32</span>    <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">33</span>
+<span class="linenum">34</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">welcomes the user</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_78" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_78" class="passed">MusicLibraryController - CLI Methods</dt>
+  </dl>
+</div>
+<div id="div_group_79" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_79" class="passed">#list_songs</dt>
+    <script type="text/javascript">makeRed('div_group_79');</script>
+    <script type="text/javascript">makeRed('example_group_79');</script>
+    <script type="text/javascript">moveProgressBar('77.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints all songs in the music library in a numbered list (alphabetized by song name)</span>
+      <span class="duration">0.00053s</span>
+      <div class="failure" id="failure_49">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:15:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:15:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('78.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">is not hard-coded</span>
+      <span class="duration">0.00050s</span>
+      <div class="failure" id="failure_50">
+        <div class="message"><pre>  Failure/Error: let(:other_music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/other_mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:24:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:24:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }
+<span class="offending"><span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">6</span>
+<span class="linenum">7</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#list_songs</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_80" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_80" class="passed">#list_artists</dt>
+    <script type="text/javascript">makeRed('div_group_80');</script>
+    <script type="text/javascript">makeRed('example_group_80');</script>
+    <script type="text/javascript">moveProgressBar('79.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints all artists in the music library in a numbered list (alphabetized by artist name)</span>
+      <span class="duration">0.00045s</span>
+      <div class="failure" id="failure_51">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:35:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:35:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('80.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">is not hard-coded</span>
+      <span class="duration">0.00040s</span>
+      <div class="failure" id="failure_52">
+        <div class="message"><pre>  Failure/Error: let(:other_music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/other_mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:46:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:46:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }
+<span class="offending"><span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">6</span>
+<span class="linenum">7</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#list_songs</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_81" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_81" class="passed">#list_genres</dt>
+    <script type="text/javascript">makeRed('div_group_81');</script>
+    <script type="text/javascript">makeRed('example_group_81');</script>
+    <script type="text/javascript">moveProgressBar('81.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints all genres in the music library in a numbered list (alphabetized by genre name)</span>
+      <span class="duration">0.00035s</span>
+      <div class="failure" id="failure_53">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:57:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:57:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('82.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">is not hard-coded</span>
+      <span class="duration">0.00031s</span>
+      <div class="failure" id="failure_54">
+        <div class="message"><pre>  Failure/Error: let(:other_music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/other_mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:65:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:65:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }
+<span class="offending"><span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">6</span>
+<span class="linenum">7</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">#list_songs</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_82" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_82" class="passed">#list_songs_by_artist</dt>
+    <script type="text/javascript">makeRed('div_group_82');</script>
+    <script type="text/javascript">makeRed('example_group_82');</script>
+    <script type="text/javascript">moveProgressBar('83.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prompts the user to enter an artist</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_55">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:71:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:71:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('83.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts user input</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_56">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:79:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:79:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('84.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints all songs by a particular artist in a numbered list (alphabetized by song name)</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_57">
+        <div class="message"><pre>  Failure/Error: Song.create_from_filename(&quot;Real Estate - Wonder Years - dream pop.mp3&quot;)
+
+  NoMethodError:
+    undefined method `create_from_filename&#39; for Song:Class
+  # ./spec/011_music_library_cli_methods_spec.rb:87:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:87:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">85</span>
+<span class="linenum">86</span>    <span class="keyword">it</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">prints all songs by a particular artist in a numbered list (alphabetized by song name)</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">87</span>      <span class="constant">Song</span>.create_from_filename(<span class="string"><span class="delimiter">&quot;</span><span class="content">Real Estate - Wonder Years - dream pop.mp3</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">88</span>
+<span class="linenum">89</span>      <span class="keyword">allow</span>(music_library_controller).to receive(<span class="symbol">:gets</span>).and_return(<span class="string"><span class="delimiter">&quot;</span><span class="content">Real Estate</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('85.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does nothing if no matching artist is found</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_58">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:100:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:100:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_83" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_83" class="passed">#list_songs_by_genre</dt>
+    <script type="text/javascript">makeRed('div_group_83');</script>
+    <script type="text/javascript">makeRed('example_group_83');</script>
+    <script type="text/javascript">moveProgressBar('86.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prompts the user to enter a genre</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_59">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:111:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:111:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('87.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts user input</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_60">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:119:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:119:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('88.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints all songs by a particular genre in a numbered list (alphabetized by song name)</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_61">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:127:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:127:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('89.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does nothing if no matching genre is found</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_62">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:137:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:137:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_84" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_84" class="passed">#play_song</dt>
+    <script type="text/javascript">makeRed('div_group_84');</script>
+    <script type="text/javascript">makeRed('example_group_84');</script>
+    <script type="text/javascript">moveProgressBar('90.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prompts the user to choose a song from the alphabetized list output by #list_songs</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_63">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:148:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:148:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('91.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts user input</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_64">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:158:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:158:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('92.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">upon receiving valid input &#39;plays&#39; the matching song from the alphabetized list output by #list_songs</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_65">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:166:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:166:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('93.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not &#39;puts&#39; anything out if a matching song is not found</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_66">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:175:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:175:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('94.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">checks that the user entered a number between 1 and the total number of songs in the library</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_67">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/011_music_library_cli_methods_spec.rb:184:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/011_music_library_cli_methods_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/011_music_library_cli_methods_spec.rb:184:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Methods</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>  <span class="keyword">let</span>(<span class="symbol">:other_music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/other_mp3s</span><span class="delimiter">&quot;</span></span>) }</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_85" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_85" class="passed">MusicLibraryController - CLI Commands</dt>
+  </dl>
+</div>
+<div id="div_group_86" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_86" class="passed">&#39;list songs&#39;</dt>
+    <script type="text/javascript">makeRed('div_group_86');</script>
+    <script type="text/javascript">makeRed('example_group_86');</script>
+    <script type="text/javascript">moveProgressBar('95.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">triggers #list_songs</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_68">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/012_music_library_cli_spec.rb:8:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/012_music_library_cli_spec.rb:8:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Commands</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">'list songs'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_87" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_87" class="passed">&#39;list artists&#39;</dt>
+    <script type="text/javascript">makeRed('div_group_87');</script>
+    <script type="text/javascript">makeRed('example_group_87');</script>
+    <script type="text/javascript">moveProgressBar('96.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">triggers #list_artists</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_69">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/012_music_library_cli_spec.rb:18:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/012_music_library_cli_spec.rb:18:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Commands</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">'list songs'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_88" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_88" class="passed">&#39;list genres&#39;</dt>
+    <script type="text/javascript">makeRed('div_group_88');</script>
+    <script type="text/javascript">makeRed('example_group_88');</script>
+    <script type="text/javascript">moveProgressBar('97.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">triggers #list_genres</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_70">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/012_music_library_cli_spec.rb:28:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/012_music_library_cli_spec.rb:28:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Commands</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">'list songs'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_89" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_89" class="passed">&#39;list artist&#39;</dt>
+    <script type="text/javascript">makeRed('div_group_89');</script>
+    <script type="text/javascript">makeRed('example_group_89');</script>
+    <script type="text/javascript">moveProgressBar('98.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">triggers #list_songs_by_artist</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_71">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/012_music_library_cli_spec.rb:38:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/012_music_library_cli_spec.rb:38:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Commands</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">'list songs'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_90" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_90" class="passed">&#39;list genre&#39;</dt>
+    <script type="text/javascript">makeRed('div_group_90');</script>
+    <script type="text/javascript">makeRed('example_group_90');</script>
+    <script type="text/javascript">moveProgressBar('99.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">triggers #list_songs_by_genre</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_72">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/012_music_library_cli_spec.rb:48:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/012_music_library_cli_spec.rb:48:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Commands</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">'list songs'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_91" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_91" class="passed">&#39;play song&#39;</dt>
+    <script type="text/javascript">makeRed('div_group_91');</script>
+    <script type="text/javascript">makeRed('example_group_91');</script>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">triggers #play_song</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_73">
+        <div class="message"><pre>  Failure/Error: let(:music_library_controller) { MusicLibraryController.new(&quot;./spec/fixtures/mp3s&quot;) }
+
+  NameError:
+    uninitialized constant MusicLibraryController
+  # ./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+  # ./spec/012_music_library_cli_spec.rb:58:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+        <div class="backtrace"><pre>./spec/012_music_library_cli_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/012_music_library_cli_spec.rb:58:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span><span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">MusicLibraryController - CLI Commands</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  <span class="keyword">let</span>(<span class="symbol">:music_library_controller</span>) { <span class="constant">MusicLibraryController</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">./spec/fixtures/mp3s</span><span class="delimiter">&quot;</span></span>) }</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  <span class="keyword">describe</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">'list songs'</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.55433 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "106 examples, 73 failures";</script>
+</div>
+</div>
+</body>
+</html>
