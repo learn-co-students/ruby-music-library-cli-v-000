@@ -14,17 +14,14 @@ class Song
   end
 
   def self.create(name)
-    song = Song.new(name)
-    song.save
-    song
+    new(name).tap{|song| song.save}
   end
 
   def self.new_from_filename(file)
-    # binding.pry
     file_artist = Artist.find_or_create_by_name(file.split(" - ")[0].strip)
     file_songname = file.split(" - ")[1].strip
     file_genre = Genre.find_or_create_by_name(file.split(" - ")[2].gsub(".mp3", "").strip)
-    song = Song.new(file_songname, file_artist, file_genre)
+    self.new(file_songname, file_artist, file_genre)
   end
 
   def self.create_from_filename(file)

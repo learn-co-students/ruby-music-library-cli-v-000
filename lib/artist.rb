@@ -11,9 +11,7 @@ class Artist
   end
 
   def self.create(name)
-    artist = Artist.new(name)
-    artist.save
-    artist
+    new(name).tap{|artist| artist.save}
   end
 
   def add_song(song)
