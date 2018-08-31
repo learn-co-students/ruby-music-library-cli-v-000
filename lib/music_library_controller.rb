@@ -57,11 +57,11 @@ class MusicLibraryController
   end
 
   def list_genres
-    # genre_list = []
-    # Genre.all.each {|genre_entry| genre_list << genre_entry}
-    # genre_list.sort_by! {|genre| genre.name }
-    # genre_list.each_with_index {|genre, index| puts "#{index + 1}. #{genre.name}" }
-    Genre.all.sort_by {|genre| genre.name}.each_with_index {|a, b| puts "#{b + 1}. #{a.name}"}
+    genre_list = []
+    Genre.all.each {|genre_entry| genre_list << genre_entry}
+    genre_list.sort_by! {|genre| genre.name }
+    genre_list.each_with_index {|genre, index| puts "#{index + 1}. #{genre.name}" }
+    # Genre.all.sort_by {|genre| genre.name}.each_with_index {|a, b| puts "#{b + 1}. #{a.name}"}
   end
 
   def list_songs_by_artist
