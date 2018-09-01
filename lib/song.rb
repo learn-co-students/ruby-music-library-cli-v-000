@@ -39,7 +39,15 @@ class Song
     genre.add_song(self)
   end
   
-  def self.find_by_name
+  def self.find_by_name(name)
+    self.all.detect { |s| s.name == name }
   end
+
+  def self.find_or_create_by_name(name)
+    (song = find_by_name(name)) ? song : self.create(name) 
+  end
+    
+    
+    
 
 end

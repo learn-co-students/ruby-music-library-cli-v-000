@@ -1,4 +1,5 @@
 class Genre 
+  extend Concerns::Findable
 
   @@all = []
 
@@ -34,6 +35,5 @@ class Genre
   def artists 
     @songs.collect { |s| s.artist }.uniq 
   end
-
 
 end
