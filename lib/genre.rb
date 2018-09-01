@@ -30,5 +30,10 @@ class Genre
     @songs << song if !@songs.include?(song)
     song.genre = self if !song.genre
   end
+  
+  def artists 
+    @songs.collect { |s| s.artist }.uniq 
+  end
+
 
 end
