@@ -40,7 +40,7 @@ class MusicLibraryController
   # list_artists prints all artists in the music library in 
   # a numbered list (alphabetized by artist name)
   def list_artists
-    Artist.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{s.artist.name}" }
+    Artist.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{a.name}" }
   end
   
   
