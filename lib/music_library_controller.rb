@@ -15,7 +15,7 @@ class MusicLibraryController
         when "list songs"
           list_songs
         when "list artists"
-          puts 'listing artists'
+          list_artists
         when "list genres"
           puts 'listing genres'
         when "list artist"
@@ -31,11 +31,19 @@ class MusicLibraryController
      end
   end
   
-  #"1. Thundercat - For Love I Come - dance" sort_by(&:length)
+
   def list_songs
     ordered = Song.all.sort_by(&:name)
     ordered.collect.with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}" }
   end
+  
+  # list_artists prints all artists in the music library in 
+  # a numbered list (alphabetized by artist name)
+  def list_artists
+    Artist.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{s.artist.name}" }
+  end
+  
+  
   
   private 
   
