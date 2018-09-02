@@ -69,7 +69,16 @@ class MusicLibraryController
     end
   end
       
+  #"Playing Larry Csonka by Action Bronson")    
   def play_song
+    puts "Which song number would you like to play?"
+    song_num = gets.strip.to_i
+    ordered = Song.all.sort_by(&:name)
+    
+    if !(ordered[song_num-1].nil?) && song_num.between?(1, Song.all.length)
+      song = ordered[song_num-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
   end
   
   private 
