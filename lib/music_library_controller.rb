@@ -33,8 +33,8 @@ class MusicLibraryController
   
   #"1. Thundercat - For Love I Come - dance" sort_by(&:length)
   def list_songs
-    in_alpha_order = Song.all.sort_by(&:name)
-    in_alpha_order.collect.with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}" }
+    ordered = Song.all.sort_by(&:name)
+    ordered.collect.with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}" }
   end
   
   private 
