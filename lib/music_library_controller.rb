@@ -23,7 +23,7 @@ class MusicLibraryController
         when "list genre"
           list_songs_by_genre
         when "play song"
-          puts "playing song"
+          play_song
         when "exit"
           break
         else
@@ -69,6 +69,8 @@ class MusicLibraryController
     end
   end
       
+  def play_song
+  end
   
   private 
   
