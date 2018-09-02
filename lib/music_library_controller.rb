@@ -7,14 +7,13 @@ class MusicLibraryController
   end
   
   def call
-    
     request = ""
     while request != "exit"
       greeting
       request = gets.strip
       case request
         when "list songs"
-          puts 'listing songs'
+          list_songs
         when "list artists"
           puts 'listing artists'
         when "list genres"
@@ -30,8 +29,13 @@ class MusicLibraryController
         else
         end
      end
- end
+  end
   
+  #"1. Thundercat - For Love I Come - dance" sort_by(&:length)
+  def list_songs
+    in_alpha_order = Song.all.sort_by(&:name)
+    in_alpha_order.collect.with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}" }
+  end
   
   private 
   
@@ -46,10 +50,5 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
   end
-  
-  def list_songs
-    
-  end
-  
   
 end
