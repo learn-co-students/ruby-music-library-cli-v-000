@@ -17,19 +17,16 @@ class Song
   end
   
   def self.new_from_filename(name)
-    songname = s_name(name)
-    artistname = a_name(name)
-    genrename = g_name(name)
-    song = self.new(songname)
-    song.artist = Artist.find_or_create_by_name(a_name(name))
-    song.genre = Genre.find_or_create_by_name(g_name(name))
-    song
+    self.new(
+      s_name(name),
+      Artist.find_or_create_by_name(a_name(name)),
+      Genre.find_or_create_by_name(g_name(name)))
   end
+  
 
   def self.create_from_filename(name)
     self.new_from_filename(name).save
   end
-
 
   def self.all
     @@all
