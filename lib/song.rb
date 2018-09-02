@@ -59,16 +59,16 @@ class Song
     (song = find_by_name(name)) ? song : self.create(name) 
   end
     
-  def self.s_name(filename)
-    filename.split(" - ")[1]
+  def self.s_name(fn)
+    fn.split(" - ")[1]
   end
   
-  def self.a_name(filename)
-    filename.split(" - ")[0]
+  def self.a_name(fn)
+    fn.split(" - ")[0]
   end
   
-  def self.g_name(filename)
-    filename.split(" - ")[2].gsub(".mp3", "")
+  def self.g_name(fn)
+    fn.split(" - ")[2].gsub(".mp3", "")
   end
 
 end
