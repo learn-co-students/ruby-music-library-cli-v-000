@@ -17,12 +17,12 @@ class Song
   end
   
   def self.new_from_filename(name)
-    songname = songname(name)
-    artistname = artistname(name)
-    genrename = genrename(name)
+    songname = s_name(name)
+    artistname = a_name(name)
+    genrename = g_name(name)
     song = self.new(songname)
-    song.artist = Artist.find_or_create_by_name(artistname)
-    song.genre = Genre.find_or_create_by_name(genrename)
+    song.artist = Artist.find_or_create_by_name(a_name(name))
+    song.genre = Genre.find_or_create_by_name(g_name(name))
     song
   end
 
@@ -62,15 +62,15 @@ class Song
     (song = find_by_name(name)) ? song : self.create(name) 
   end
     
-  def self.songname(filename)
+  def self.s_name(filename)
     filename.split(" - ")[1]
   end
   
-  def self.artistname(filename)
+  def self.a_name(filename)
     filename.split(" - ")[0]
   end
   
-  def self.genrename(filename)
+  def self.g_name(filename)
     filename.split(" - ")[2].gsub(".mp3", "")
   end
 
