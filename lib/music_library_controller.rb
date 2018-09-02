@@ -36,20 +36,16 @@ class MusicLibraryController
     ordered = Song.all.sort_by(&:name)
     ordered.collect.with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}" }
   end
-  
-  # list_artists prints all artists in the music library in 
-  # a numbered list (alphabetized by artist name)
+ 
   def list_artists
     Artist.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{a.name}" }
   end
   
-  # list_genres prints all genres in the music library in a 
-  # numbered list (alphabetized by genre name)
+  
   def list_genres
     Genre.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{a.name}" }
   end
   
-  #list_songs_by_artist prompts the user to enter an artist
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     name = gets.strip
@@ -59,7 +55,6 @@ class MusicLibraryController
     end
   end
   
-  #list_songs_by_genre prints all songsby a particular genre in a numbered list (alphabetized by song name)
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     name = gets.strip
@@ -69,7 +64,6 @@ class MusicLibraryController
     end
   end
       
-  #"Playing Larry Csonka by Action Bronson")    
   def play_song
     puts "Which song number would you like to play?"
     song_num = gets.strip.to_i
