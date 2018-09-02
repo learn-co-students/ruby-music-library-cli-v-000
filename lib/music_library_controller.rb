@@ -17,11 +17,11 @@ class MusicLibraryController
         when "list artists"
           list_artists
         when "list genres"
-          puts 'listing genres'
+          list_genres
         when "list artist"
-          puts "listing artist"
+          list_songs_by_artist
         when "list genre"
-          puts "listing genre"
+          list_songs_by_genre
         when "play song"
           puts "playing song"
         when "exit"
@@ -43,7 +43,32 @@ class MusicLibraryController
     Artist.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{a.name}" }
   end
   
+  # list_genres prints all genres in the music library in a 
+  # numbered list (alphabetized by genre name)
+  def list_genres
+    Genre.all.sort_by(&:name).map.with_index { |a,i| puts "#{i+1}. #{a.name}" }
+  end
   
+  #list_songs_by_artist prompts the user to enter an artist
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    name = gets.strip
+    if artist = Artist.all.find { |a| a.name == name }
+      sorted_songs = artist.songs.sort_by(&:name)
+      sorted_songs.each_with_index { |s,i| puts "#{i+1}. #{s.name} - #{s.genre.name}" }
+    end
+  end
+  
+  #list_songs_by_genre prints all songsby a particular genre in a numbered list (alphabetized by song name)
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    name = gets.strip
+    if genre = Genre.all.find { |g| g.name == name }
+      sorted = genre.songs.sort_by(&:name)
+      sorted.each_with_index { |s,i| puts "#{i+1}. #{s.artist.name} - #{s.name}" }
+    end
+  end
+      
   
   private 
   
