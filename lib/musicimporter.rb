@@ -1,16 +1,22 @@
 class MusicImporter
-  attr_accessor :path
+  attr_reader :path
   
   def initialize(path)
     @path = path
   end
   
-  def self.files
-    
+  def files
+    @files = Dir[path + "/*"]
+    @files.each_with_index do |file, index|
+      @files[index] = file.split("/")[-1]
+    end
+    @files
   end
   
-  def self.import()
-    
+  def import
+    files.collect do |file|
+      song = Song.create_from_filename(file)
+    end
   end
   
 end
