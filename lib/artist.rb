@@ -32,9 +32,13 @@ attr_accessor :name
   end
   
   def add_song(song)
-    @songs << song
-    song.artist =self unless song.artist.include?(self)
+    @songs << song unless @songs.include?(song) # does not add the song to the current artist's collection of songs if it already exists therein
+    if song.artist == nil # does not assign the artist if the song already has an artist
+    song.artist = self # assigns the current artist (self) to the song's 'artist' property (song belongs to artist)
+    end
   end
+  
+  #  Alternate code below:
   
   #  def add_song(song)
   #    if songs.include?(song) == false
