@@ -1,11 +1,11 @@
-class Artist
+class Genre
 
 attr_accessor :name
 
 @@all = []
 
-  def initialize(artist_name)
-    @name= artist_name
+  def initialize(kind)
+    @name= kind
   end 
   
   def self.all
@@ -20,10 +20,10 @@ attr_accessor :name
     self.class.all << self
   end 
   
-  def self.create(artist_name)
-    artist = Artist.new(artist_name)
-    artist.save
-    artist
+  def self.create(kind)
+    genre = Genre.new(kind)
+    genre.save
+    genre
   end 
 
 end
