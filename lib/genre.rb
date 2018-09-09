@@ -25,10 +25,6 @@ class Genre
 
   #identifies the collection of artists's associated with an genre's song collection
   def artists
-    @artists = []
-    @songs.each do |song|
-      @artists << song.artist if @artists.detect{|g| g == song.artist} == nil
-    end
-    @artists
+    @songs.collect{|song| song.artist}.uniq
   end
 end

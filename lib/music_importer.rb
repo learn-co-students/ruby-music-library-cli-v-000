@@ -1,5 +1,3 @@
-require 'pry'
-
 class MusicImporter
   attr_accessor :path
   def initialize(path)
@@ -7,11 +5,12 @@ class MusicImporter
   end
 
   def files
-    Dir.entries(@path).select {|f| !File.directory? f} #loads all MP3 files in the path directory, but not sub-directories or "." and ".." folders
+    #collects files that aren't sub-directories or "." and ".." folders
+    Dir.entries(@path).select {|f| !File.directory? f}
   end
 
-
+  #imports songs from a file into the library
   def import
-    files.each {|file| Song.create_from_filename(file)} #imports songs from a file into the library
+    files.each {|file| Song.create_from_filename(file)}
   end
 end
