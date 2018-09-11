@@ -7,6 +7,7 @@ class Genre
   def initialize(name)
     @name = name
     @@all << self
+    @songs = []
   end
   
   def self.all
@@ -25,6 +26,10 @@ class Genre
     g = Genre.new(genre)
     g.save
     g
+  end
+  
+   def songs 
+    @songs
   end
   
 end
