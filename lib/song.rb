@@ -1,6 +1,7 @@
 class Song
 
-attr_accessor :name, :artist
+attr_accessor :name
+attr_reader :artist, :genre
 
 @@all = []
 
@@ -26,5 +27,10 @@ attr_accessor :name, :artist
     song.save
     song
   end 
+  
+  def artist=(artist) #setter for artist
+    @artist = artist
+    artist.add_song(self) #assigns an artist to the song (song belongs to artist)
+  end
 
 end 
