@@ -32,7 +32,7 @@ attr_accessor :name
   end
   
   def add_song(song)
-    if !songs.include?(song)
+    if songs.include?(song) == false
       songs << song
     end
     
