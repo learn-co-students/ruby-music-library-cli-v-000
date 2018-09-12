@@ -32,11 +32,21 @@ attr_accessor :name
   end
   
   def add_song(song)
-    if songs.include?(song) == false
+    if !songs.include?(song) # or if songs.include?(song) == false
       songs << song
     end
     
-    song.artist = self unless !song.artist == nil
+    song.artist = self unless (song.artist == nil) == false 
+    
+    # This is also correct:
+    
+    # song.artist = self unless !(song.artist == nil). Without () it will NOT work
+    
+    # or:
+    
+    # if song.artist == nil
+    #   song.artist = self
+    # end
   end
 
 end
