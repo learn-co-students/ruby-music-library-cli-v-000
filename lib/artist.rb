@@ -1,5 +1,7 @@
 class Artist
   
+  extend Findable
+  
   attr_accessor :name
   
   @@all = []
