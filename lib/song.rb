@@ -5,9 +5,17 @@ attr_reader :artist, :genre
 
 @@all = []
 
-  def initialize(title, artist = nil)  # Tip: A commonly used default value for optional parameters is nil
-    @name= title
+  def initialize(name, artist = nil, genre = nil)  # Tip: A commonly used default value for optional parameters is nil
+    @name= name
+    if artist !=nil
+      self.artist = artist #the artist of a song instance would be the artist passed in the parameter if there actually is an artist
+    end
+    
+  end
+  
+  def artist=(artist) #custom setter for artist
     @artist = artist
+    artist.add_song(self) #assigns an artist to the song (song belongs to artist)
   end
 
   def self.all
@@ -26,11 +34,6 @@ attr_reader :artist, :genre
     song = Song.new(title)
     song.save
     song
-  end
-
-  def artist=(artist) #setter for artist
-    @artist = artist
-    artist.add_song(self) #assigns an artist to the song (song belongs to artist)
   end
 
 end
