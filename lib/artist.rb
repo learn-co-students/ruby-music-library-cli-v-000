@@ -38,16 +38,13 @@ attr_accessor :name
     
     song.artist = self unless (song.artist == nil) == false 
     
-    # This is also correct:
-    
-    # song.artist = self unless !(song.artist == nil). Without () it will NOT work
-    
-    # or:
-
-
-    # if song.artist == nil
-    #   song.artist = self
-    # end
+        # This is also correct:
+        # song.artist = self unless !(song.artist == nil). Without () it will NOT work.
+        
+        # or:
+        # if song.artist == nil
+        #   song.artist = self
+        # end
   end
 
 end
