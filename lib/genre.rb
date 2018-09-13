@@ -13,6 +13,15 @@ attr_accessor :name
     @songs
   end
 
+  def add_song(song)
+    if !songs.include?(song) # or if songs.include?(song) == false
+      songs << song
+    end
+    
+    song.genre = self unless (song.genre == nil) == false
+    
+  end
+
   def self.all
     @@all
   end
