@@ -6,24 +6,29 @@ attr_accessor :name
 
   def initialize(kind)
     @name= kind
-  end 
-  
+    @songs = []
+  end
+
+  def songs
+    @songs
+  end
+
   def self.all
     @@all
-  end 
-  
+  end
+
   def self.destroy_all
     self.all.clear
-  end 
-  
+  end
+
   def save
     self.class.all << self
-  end 
-  
+  end
+
   def self.create(kind)
     genre = Genre.new(kind)
     genre.save
     genre
-  end 
+  end
 
 end
