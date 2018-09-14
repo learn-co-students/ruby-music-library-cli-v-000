@@ -12,8 +12,8 @@ class Genre
   end
 
   def artists
-    songs = Song.all.select {|s| s.genre == self}
-    songs.uniq.map {|s| s.artist}
+    artists = songs.collect {|s| s.artist}
+    artists.uniq
   end
 
 # Class methods

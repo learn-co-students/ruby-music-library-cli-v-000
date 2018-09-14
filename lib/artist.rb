@@ -15,9 +15,10 @@ class Artist
     song.artist = self unless song.artist
     self.songs << song unless self.songs.include?(song)
   end
+
   def genres
-    songs = Song.all.select {|s| s.artist == self}
-    songs.uniq.map {|s| s.genre}
+    genres = songs.uniq.collect {|s| s.genre}
+    genres.uniq
   end
 
 # Class methods
