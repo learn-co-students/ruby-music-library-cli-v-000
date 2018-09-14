@@ -6,7 +6,7 @@ class Artist
     @name = name
     @songs = [ ]
   end
-
+ #
   def save
     @@all << self
   end
@@ -14,6 +14,10 @@ class Artist
   def add_song(song)
     song.artist = self unless song.artist
     self.songs << song unless self.songs.include?(song)
+  end
+  def genres
+    songs = Song.all.select {|s| s.artist == self}
+    songs.uniq.map {|s| s.genre}
   end
 
 # Class methods

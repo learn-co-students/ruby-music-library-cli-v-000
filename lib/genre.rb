@@ -11,6 +11,11 @@ class Genre
     @@all << self
   end
 
+  def artists
+    songs = Song.all.select {|s| s.genre == self}
+    songs.uniq.map {|s| s.artist}
+  end
+
 # Class methods
   def self.create(name)
     genre = self.new(name)
