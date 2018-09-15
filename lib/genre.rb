@@ -1,5 +1,5 @@
 class Genre
-  extend Concerns::Findable
+  extend Concerns::Findable #extend for class methods
 
 attr_accessor :name
 
