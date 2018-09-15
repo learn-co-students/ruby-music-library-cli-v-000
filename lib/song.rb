@@ -23,6 +23,7 @@ attr_reader :artist, :genre
     artist.add_song(self) #assigns an artist to the song (song belongs to artist)
   end
 
+
   #if the above custom setter method is incorrect, or if artist.add_song(song) in artist.rb is incorrect, this error is triggered:
   #Song #initialize can be invoked with an optional second argument, an Artist object to be assigned to
   #the song's 'artist' property (song belongs to artist)
