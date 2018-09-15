@@ -7,44 +7,57 @@ attr_accessor :name
   def initialize(artist_name)
     @name= artist_name
     @songs= []
-  end 
-  
+  end
+
   def self.all
     @@all
-  end 
-  
+  end
+
   def self.destroy_all
     self.all.clear
-  end 
-  
+  end
+
   def save
     self.class.all << self
-  end 
-  
+  end
+
   def self.create(artist_name)
     artist = Artist.new(artist_name)
     artist.save
     artist
-  end 
-  
+  end
+
   def songs
     @songs
   end
-  
+
   def add_song(song)
     if !songs.include?(song) # or if songs.include?(song) == false
       songs << song
     end
-    
-    song.artist = self unless (song.artist == nil) == false 
-    
+
+    song.artist = self unless (song.artist == nil) == false
+
         # This is also correct:
         # song.artist = self unless !(song.artist == nil). Without () it will NOT work.
-        
+
         # or:
         # if song.artist == nil
         #   song.artist = self
         # end
   end
+
+  def genres
+    songs.map(&:genre).uniq
+  end
+
+  # This code also works:
+  # def genres
+  #   array = []
+  #   songs.each do |song|
+  #     array << song.genre
+  #   end
+  #   array.uniq
+  # end
 
 end

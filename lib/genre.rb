@@ -42,4 +42,11 @@ attr_accessor :name
     genre
   end
 
+  def artists
+    songs.map(&:artist).uniq ## Associations — Artist and Genre:
+    #Genre #artists returns a collection of artists for all of the
+    #genre's songs (genre has many artists through songs), and
+    #does not return duplicate artists
+  end
+
 end
