@@ -1,4 +1,5 @@
 class Artist
+  extend Concerns::Findable #extend for class methods
 
 attr_accessor :name
 
