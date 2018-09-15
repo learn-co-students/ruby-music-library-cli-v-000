@@ -4,4 +4,8 @@ class MusicLibraryController
     MusicImporter.new(path).import #"invokes the #import method on the created MusicImporter object" do
   end
 
+  def call
+
+  end
+
 end
