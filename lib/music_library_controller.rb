@@ -24,6 +24,40 @@ class MusicLibraryController
         puts "What would you like to do?"
         command = gets.chomp
       end
+    end
 
+    def list_songs
+      songs = Song.all.sort_by{|s| s.name}
+      songs.each_with_index{|s, i| puts "#{i + 1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
+    end
+
+    def list_artists
+      artists = Artist.all.sort_by{|a| a.name}
+      artists.each_with_index{|a, i| puts "#{i + 1}. #{a.name}"}
+    end
+
+    def list_genres
+      genres = Genre.all.sort_by{|g| g.name}
+      genres.each_with_index{|g, i| puts "#{i + 1}. #{g.name}"}
+    end
+
+    def list_songs_by_artist
+        puts "Please enter the name of an artist:"
+        artist = gets.chomp
+        my_artist = Artist.find_by_name(artist)
+      if my_artist != nil
+        songs = my_artist.songs.sort_by{|a| a.name}
+        songs.each_with_index{|s, i| puts "#{i + 1}. #{s.name} - #{s.genre.name}"}
+      end
+    end
+
+    def list_songs_by_genre
+      puts "Please enter the name of a genre:"
+      genre = gets.chomp
+      my_genre = Genre.find_by_name(genre)
+      if my_genre != nil
+        songs = my_genre.songs.sort_by{|a| a.name}
+        songs.each_with_index{|s, i| puts "#{i + 1}. #{s.artist.name} - #{s.name}"}
+      end
     end
 end
