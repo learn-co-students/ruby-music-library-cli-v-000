@@ -1,5 +1,7 @@
 require 'pry'
 class Song
+  extend Concerns::Findable
+
   @@all = [ ]
   attr_reader :artist, :genre
   attr_accessor :name
@@ -8,7 +10,6 @@ class Song
     @name = name
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
-    self.save
   end
 
   def save
@@ -32,19 +33,20 @@ class Song
     song
   end
 
+  def self.new_from_filename(file_name)
+    song_name = file_name.split("-").map(&:strip)
+    song = self.find_or_create_by_name(song_name[1])
+    song.artist = Artist.find_or_create_by_name(song_name[0])
+    song.genre = Genre.find_or_create_by_name(song_name[2].split(".mp3").first)
+    song
+  end
+
+  def self.create_from_filename(file_name)
+    new_from_filename(file_name)
+  end
+
   def self.all
     @@all
-  end
-
-  def self.find_by_name(song_name)
-    self.all.find {|s| s.name == song_name}
-  end
-
-  def self.find_or_create_by_name(song_name)
-    binding.pry
-    song = self.all.find {|s| s.name == song_name}
-    song = self.create(song_name) unless song.name == song_name
-    song
   end
 
   def self.destroy_all
