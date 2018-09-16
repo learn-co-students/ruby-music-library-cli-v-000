@@ -44,7 +44,7 @@ class MusicLibraryController
     if artist = Artist.find_by_name(input) 
       songs_sorted_by_name = artist.songs.sort_by do |song|
         song.name
-      end
+  end
       songs_sorted_by_name.each.with_index(1) do |song,index|
         puts "#{index}. #{song.name} - #{song.genre.name}"
       end
@@ -57,7 +57,7 @@ class MusicLibraryController
     if genre = Genre.find_by_name(input) 
       songs_sorted_by_name = genre.songs.sort_by do |song|
         song.name
-      end
+  end
 
       songs_sorted_by_name.each.with_index(1) do |song,index|
         puts "#{index}. #{song.artist.name} - #{song.name}"
@@ -70,10 +70,10 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     list_of_songs =  Song.all.sort{ |a, b| a.name <=> b.name }
 
-    input = gets.strip.to_i
+    input = gets.strip
   
-    if (1..Song.all.length).include?(input)
-      song = list_of_songs[input+2]
+    if (1..Song.all.length).include?(input.to_i)
+      song = list_of_songs[input.to_i-1]
       puts "Playing #{song.name} by #{song.artist.name}"
     end
   end
