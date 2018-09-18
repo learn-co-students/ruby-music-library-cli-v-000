@@ -1,5 +1,4 @@
 class MusicLibraryController
-attr_accessor :importer
 
 def initialize(path = "./db/mp3s")
   importer = MusicImporter.new(path)
@@ -37,24 +36,41 @@ def call
 end
 
 def list_songs
+Song.all.sort{|a, b| a.name<=>b.name}.each_with_index{|song, number| puts "#{number += 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+
 end
 
 def list_artists
+ Artist.all.sort{|a, b| a.name <=> b.name}.each_with_index{|artist, number| puts "#{number += 1}. #{artist.name}"}
 end
 
 def list_genres
+  Genre.all.sort{|a, b| a.name <=> b.name}.each_with_index{|genre, number| puts "#{number += 1}. #{genre.name}"}
 end
 
+
 def list_songs_by_artist
+  input = ""
+  puts "Please enter the name of an artist:"
+  input = gets.strip
+
 end
 
 def list_songs_by_genre
+  input = ""
+  puts "Please enter the name of a genre:"
+  input = gets.strip
+
 end
 
 def play_song
+  input = ""
+  list_songs
+  puts "Which song number would you like to play?"
+  input = gets.strip
+
+
 end
-
-
 
 
 end
