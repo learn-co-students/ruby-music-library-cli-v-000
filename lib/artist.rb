@@ -1,11 +1,11 @@
 class Artist
 
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   @@all = []
 
-
   def initialize(name)
+    @songs = []
     @name = name
     @@all << self
   end
@@ -24,6 +24,18 @@ class Artist
 
   def self.create(name)
     self.new(name)
+  end
+
+  def add_song(song)
+
+      if !self.songs.include?(song) && song.artist == "nil"
+        song.artist = self
+        self.songs << song
+      elsif !self.songs.include?(song) && song.artist != "nil"
+          self.songs << song
+      else puts "song is already in this artist's songs array"
+      end
+
   end
 
 end
