@@ -1,4 +1,4 @@
-require '../config/environment'
+require '../lib/concerns/findable.rb'
 
 class Artist
 
