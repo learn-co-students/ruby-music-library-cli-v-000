@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# require_relative '../lib/concerns/findable.rb'
+
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
