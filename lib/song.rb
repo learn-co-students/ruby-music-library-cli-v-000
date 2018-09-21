@@ -58,4 +58,21 @@ class Song
     @genre.songs << self unless @genre.songs.include?(self)
   end
 
+  def self.new_from_filename(filename)
+
+    parts = filename.split(" - ")
+    song_name = parts[1]
+    song_artist = parts[0]
+    song_genre = parts[2].gsub(/[.](mp3)/, "")
+
+    song_artist = Artist.find_or_create_by_name(song_artist)
+    song_genre = Genre.find_or_create_by_name(song_genre)
+    Song.new(song_name, song_artist, song_genre)
+
+  end
+
+  def self.create_from_filename(filename)
+    Song.new_from_filename(filename).save
+  end
+
 end
