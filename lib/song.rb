@@ -27,13 +27,8 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @@all << self
-      if artist == nil
-       @artist = artist
-      elsif artist != nil
-       self.artist = artist
-     end
-      self.genre = genre unless genre == nil
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def save
@@ -45,7 +40,9 @@ class Song
   end
 
   def self.create(name)
-    self.new(name)
+    song = self.new(name)
+    song.save
+    song
   end
 
   def artist=(artist)

@@ -15,7 +15,10 @@ class MusicImporter
   # ||= means if the first entry is truthy, return that, or set it equal to what is on the right hand side.
 
   def import
-    # @files.each do |song|
+    self.files.each do |stringthing|
+      Song.create_from_filename(stringthing)
+    end
   end
+
 
 end
