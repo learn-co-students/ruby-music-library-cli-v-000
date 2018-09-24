@@ -87,6 +87,7 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     song_number_entered = gets.chomp
     if song_number_entered.class == Fixnum
+      binding.pry
     puts "Playing " + "#{list_songs[song_number_entered].name}" + " by " + "#{list_songs[song_number_entered].artist.name}"
     else
     puts "please enter a number"
