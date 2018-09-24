@@ -86,8 +86,9 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     song_number_entered = gets.chomp
+    binding.pry
     if song_number_entered.class == Fixnum
-      binding.pry
+      # binding.pry
     puts "Playing " + "#{list_songs[song_number_entered].name}" + " by " + "#{list_songs[song_number_entered].artist.name}"
     else
     puts "please enter a number"
