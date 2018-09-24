@@ -105,6 +105,7 @@ class MusicLibraryController
         sorted_songs = all_songs.sort {|a, b| a.name <=> b.name}
         the_song = sorted_songs[input]
         puts "Playing #{the_song.name} by #{the_song.artist.name}"
+      else 
       end
   end
 
