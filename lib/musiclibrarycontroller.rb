@@ -7,6 +7,8 @@ class MusicLibraryController
   end
 
   def call
+    input = ""
+    while input != "exit"
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -17,11 +19,22 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.strip
-    unless input == "exit"
-      puts "What would you like to do?"
-      self.call
+    case input
+      when "list songs"
+        list_songs
+      when "list artists"
+        list_artists
+      when "list genres"
+        list_genres
+      when "list artist"
+        list_songs_by_artist
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
+      end
     end
-  end
+ end
 
   def list_songs
     songs_sorted_by_name = Song.all.sort {|a, b| a.name <=> b.name}
@@ -85,17 +98,15 @@ class MusicLibraryController
 
   def play_song
     puts "Which song number would you like to play?"
-    song_number_entered = gets.chomp
-    binding.pry
-    if song_number_entered.class == Fixnum
-      # binding.pry
-    puts "Playing " + "#{list_songs[song_number_entered].name}" + " by " + "#{list_songs[song_number_entered].artist.name}"
-    else
-    puts "please enter a number"
+    input = gets.strip.to_i - 1
+      if input.between?(0, Song.all.length)
+        all_songs = Song.all
+        # binding.pry
+        sorted_songs = all_songs.sort {|a, b| a.name <=> b.name}
+        the_song = sorted_songs[input]
+        puts "Playing #{the_song.name} by #{the_song.artist.name}"
+      end
   end
-  end
-
-
 
 
 end
