@@ -1,13 +1,19 @@
 require 'pry'
 
 class Song 
-  attr_accessor :name, :artist 
+  attr_accessor :name
+  attr_reader :artist, :genre
   
   @@all = []
   
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist
+    
+    unless artist.nil?
+      self.artist = artist
+      self.genre = genre unless genre.nil?
+    end
+    # This works unless you call Song.new("Song Name", nil, "Genre Name").
   end 
   
   def self.all 
@@ -27,6 +33,27 @@ class Song
   end 
   
   def artist=(artist)
-    artist.add_song(self)
+    @artist = artist
+    artist.add_song(self) unless artist.songs.include?(self) # This might never be true.
+  end
+  
+  def genre=(genre)
+    @genre = genre 
+    @genre.songs << self unless @genre.songs.include?(self)
+  end
+  
+  def self.find_by_name(name_of_song)
+    self.all.detect{|song| song.name == name_of_song}
+  end
+  
+  def self.find_or_create_by_name(name_of_song)
+    # I tried using #tap, but it returns whatever calls it, including nil.
+    song = self.find_by_name(name_of_song)
+    
+    if song.nil?
+      song = self.create(name_of_song)
+    end 
+    
+    song
   end
 end 

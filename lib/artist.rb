@@ -33,8 +33,11 @@ class Artist
     # But then I wouldn't be checking if @songs already HAS the song!
     
     # Also, the last line of code makes sure that the song isn't added to @songs if @songs already has the song, or the song has a different artist or no artist at all.
-    
     song.artist = self unless song.artist
     self.songs << song if !self.songs.include?(song) && song.artist == self
+  end
+  
+  def genres 
+    self.songs.collect{|song| song.genre}.uniq
   end
 end 
