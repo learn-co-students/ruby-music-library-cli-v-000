@@ -7,10 +7,6 @@ class Artist
   @@all = []
   attr_accessor :name, :songs
 
-  def sorted_songs
-    songs.sort_by { |e| e.name }
-  end
-
   def self.all
     @@all
   end
@@ -39,5 +35,9 @@ class Artist
   def add_song(song)
     song.artist ||= self
     songs << song unless songs.include?(song)
+  end
+
+  def sorted_songs
+    songs.sort_by { |e| e.name }
   end
 end

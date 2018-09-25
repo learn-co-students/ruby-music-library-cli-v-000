@@ -4,19 +4,9 @@ require_relative "./concerns/sortable.rb"
 class Song
   extend Concerns::Findable
   extend Concerns::Sortable
-
   @@all = []
-  
   attr_accessor :name
   attr_reader :artist, :genre
-
-  def artist_name
-    artist.name
-  end
-
-  def genre_name
-    genre.name
-  end
 
   def self.all
     @@all
@@ -48,6 +38,10 @@ class Song
     self.genre = genre unless genre == nil
   end
 
+  def save
+    self.tap { |instance| instance.class.all << self }
+  end
+
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
@@ -58,7 +52,11 @@ class Song
     genre.add_song(self)
   end
 
-  def save
-    self.tap { |instance| instance.class.all << self }
+  def artist_name
+    artist.name
+  end
+
+  def genre_name
+    genre.name
   end
 end
