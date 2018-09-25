@@ -11,9 +11,11 @@ class Song
     
     unless artist.nil?
       self.artist = artist
-      self.genre = genre unless genre.nil?
+      self.genre = genre unless genre.nil? 
+      
+      # genre is the SECOND optional argument, so it's ALWAYS nil when artist is nil.
+      # This logic works unless you call Song.new("Song Name", nil, "Genre Name").
     end
-    # This works unless you call Song.new("Song Name", nil, "Genre Name").
   end 
   
   def self.all 
@@ -50,10 +52,6 @@ class Song
     # I tried using #tap, but it returns whatever calls it, including nil.
     song = self.find_by_name(name_of_song)
     
-    if song.nil?
-      song = self.create(name_of_song)
-    end 
-    
-    song
+    song.nil? ? self.create(name_of_song) : song
   end
 end 
