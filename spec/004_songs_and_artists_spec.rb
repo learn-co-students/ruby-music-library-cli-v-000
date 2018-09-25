@@ -70,7 +70,7 @@ describe "Associations — Song and Artist:" do
 
       it "adds the song to the current artist's 'songs' collection" do
         artist.add_song(song)
-
+		
         expect(artist.songs).to include(song)
       end
 
