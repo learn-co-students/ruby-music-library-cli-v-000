@@ -38,6 +38,7 @@ class MusicLibraryController
     # Remember: the goal is to return the file names sorted by the song names alphabetically.
     # For some reason, #match? doesn't work on Strings. This must be an earlier Ruby version...
     # Maybe use #split on each file, then match the sorted songs with that new collection.
+    # See the process I wrote on notebook paper.
     self.collect_song_names.collect do |song_name| 
       
     end
