@@ -29,19 +29,25 @@ class MusicLibraryController
     # puts "#{i}. #{file}"
     # binding.pry
     #end
-    self.sort_by_song_name
+    i = 0
+    sorted_files = self.sort_by_song_name
+    while i < sorted_files.size
+      puts "#{i + 1}. #{sorted_files[i]}"
+      i += 1
+    end
     binding.pry
+    # I've almost got this. I still need to delete ".mp3" off each genre.
   end
   
   def sort_by_song_name
-    # I've got the song names sorted. Now, how do I compare them with the file names?
-    # Remember: the goal is to return the file names sorted by the song names alphabetically.
-    # For some reason, #match? doesn't work on Strings. This must be an earlier Ruby version...
-    # Maybe use #split on each file, then match the sorted songs with that new collection.
-    # See the process I wrote on notebook paper.
-    self.collect_song_names.collect do |song_name| 
-      
+    # Try to refactor this...
+    split_files = self.music_files.collect {|file| file.split(' - ')}
+    
+    new_collection = self.collect_song_names.collect do |song_name| 
+      split_files.detect{|file| file.include?(song_name)}
     end
+    
+   new_collection.collect {|e| e.join(" - ")}
   end
   
   def collect_song_names
