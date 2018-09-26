@@ -37,6 +37,7 @@ class MusicLibraryController
     end
     binding.pry
     # I've almost got this. I still need to delete ".mp3" off each genre.
+    # Maybe I should refactor this whole thing with #sort_by! if that's possible.
   end
   
   def sort_by_song_name
