@@ -54,4 +54,17 @@ class Song
     
     song.nil? ? self.create(name_of_song) : song
   end
+  
+  def self.new_from_filename(filename)
+    split_file = filename.split(" - ")
+    
+    artist = Artist.find_or_create_by_name(split_file[0])
+    genre = Genre.find_or_create_by_name(split_file[2].gsub(".mp3", ""))
+    
+    self.new(split_file[1], artist, genre)
+  end
+  
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).tap{|song| song.save}
+  end
 end 
