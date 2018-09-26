@@ -1,13 +1,8 @@
-# don't forget to 'extend' modules
-
 class Song
   attr_accessor :name, :artist, :genre
-  
   @@all = []
 
-  def self.all
-    @@all
-  end
+  extend Concerns::Findable
   
   def initialize(name, artist=nil, genre=nil)
     @name = name
@@ -19,6 +14,8 @@ class Song
     end
     self.save
   end
+  
+#Instance Methods
   
   def artist=(artist)
     @artist = artist
@@ -33,10 +30,28 @@ class Song
   def save
     @@all << self
   end
+ 
+#Class Methods
+  
+  def self.all
+    @@all
+  end
+  
+  def self.find_by_name(name)
+    Song.all.detect {|song| song.name.eql?(name)}
+  end
   
   def self.create(name)
-    Song.new(name).save
-    self
+    song = Song.new(name)
+    song
+  end
+  
+  def self.find_or_create_by_name(name)
+    unless Song.find_by_name(name) == nil
+      Song.find_by_name(name)
+    else
+      Song.create(name)
+    end
   end
 
   def self.destroy_all
