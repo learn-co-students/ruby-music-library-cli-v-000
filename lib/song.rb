@@ -30,7 +30,7 @@ class Song
     self.all.clear
   end 
   
-  def self.create(name) # Next time, extend the functionality of #new with optional args.
+  def self.create(name) # Next time, wrap the functionality of #new with optional args.
     self.new(name).tap {|song| song.save}
   end 
   
@@ -48,7 +48,7 @@ class Song
     self.all.detect{|song| song.name == name_of_song}
   end
   
-  def self.find_or_create_by_name(name_of_song)
+  def self.find_or_create_by_name(name_of_song) # This can be refactored with ||
     # I tried using #tap, but it returns whatever calls it, including nil.
     song = self.find_by_name(name_of_song)
     
