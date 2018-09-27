@@ -1,4 +1,6 @@
-rclass Genre
+class Genre
+  extend Concerns::Findable
+  
   attr_accessor :name
   @@all = []
   
@@ -35,9 +37,8 @@ rclass Genre
   end 
   
   def artists
-    songs.map do |song|
-      song.artist
-    end
+    songs.map {|song| song.artist}.uniq
+  end 
 
-  
-end 
+
+end   
