@@ -1,5 +1,5 @@
-class Genre
-  attr_accessor :name, :songs
+rclass Genre
+  attr_accessor :name
   @@all = []
   
   def initialize(name)
@@ -20,17 +20,24 @@ class Genre
   end 
   
   def self.create(name)
-    name = self.new(name)
-    name.save
-    name
+    genre = self.new(name)
+    genre.save
+    genre
   end 
   
-  
-  def add_song(song)
-    if song.genre == nil 
-      @songs << song
-      song.genre = self
-    end 
+   def add_song(song)
+     song.genre if song.genre.nil?
+     self.songs << song unless self.songs.include?(song) 
   end
+  
+  def songs
+    @songs
+  end 
+  
+  def artists
+    songs.map do |song|
+      song.artist
+    end
+
   
 end 
