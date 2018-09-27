@@ -30,7 +30,7 @@ class Song
     self.all.clear
   end 
   
-  def self.create(name)
+  def self.create(name) # Next time, extend the functionality of #new with optional args.
     self.new(name).tap {|song| song.save}
   end 
   
