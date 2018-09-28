@@ -26,6 +26,7 @@ class Song
   def genre=(genre)
     @genre = genre
     @genre.add_song(self)
+    @genre
   end
   
   def save
@@ -68,7 +69,6 @@ class Song
   end
   
   def self.create_from_filename(filename)
-    self.new_from_filename(filename)
-    self.save
+    song = Song.new_from_filename(filename)
   end
 end
