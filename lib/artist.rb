@@ -30,4 +30,8 @@ class Artist
     song.artist = self unless song.artist
     songs << song unless songs.include?(song)
   end
+  
+  def genres 
+    songs.collect(&:genre).uniq
+  end
 end
