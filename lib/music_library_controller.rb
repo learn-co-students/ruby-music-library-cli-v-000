@@ -38,41 +38,35 @@ class MusicLibraryController
   end
 
   def list_songs
-    Song.sorted_by_name.each_with_index do |song, i|
-      puts "#{i + 1}. #{song.artist_name} - #{song.name} - #{song.genre_name}"
-    end
-  end
-
-  def list_songs
-    Song.sorted_by_name.each_with_index { |song, i| puts "#{i + 1}. #{song.artist_name} - #{song.name} - #{song.genre_name}" }
+    Song.sorted_by_name.each.with_index(1) { |song, i| puts "#{i}. #{song.artist_name} - #{song.name} - #{song.genre_name}" }
   end
 
   def list_artists
-    Artist.sorted_by_name.each_with_index { |artist, i| puts "#{i + 1}. #{artist.name}" }
+    Artist.sorted_by_name.each.with_index(1) { |artist, i| puts "#{i}. #{artist.name}" }
   end
 
   def list_genres
-    Genre.sorted_by_name.each_with_index { |genre, i| puts "#{i + 1}. #{genre.name}" }
+    Genre.sorted_by_name.each.with_index(1) { |genre, i| puts "#{i}. #{genre.name}" }
   end
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     name = gets.strip
     artist = Artist.find_by_name(name)
-    artist.sorted_songs.each_with_index { |song, i| puts "#{i + 1}. #{song.name} - #{song.genre_name}" } if artist
+    artist.sorted_songs.each.with_index(1) { |song, i| puts "#{i}. #{song.name} - #{song.genre_name}" } if artist
   end
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     name = gets.strip
     genre = Genre.find_by_name(name)
-    genre.sorted_songs.each_with_index { |song, i| puts "#{i + 1}. #{song.artist_name} - #{song.name}" } if genre
+    genre.sorted_songs.each.with_index(1) { |song, i| puts "#{i}. #{song.artist_name} - #{song.name}" } if genre
   end
 
   def play_song
     puts "Which song number would you like to play?"
     num = gets.strip.to_i
-    if num.is_a?(Integer) && num >= 1 && num < Song.all.size
+    if (1..Song.all.size) === num
       song = Song.sorted_by_name[num - 1]
       puts "Playing #{song.name} by #{song.artist_name}" if song
     end
