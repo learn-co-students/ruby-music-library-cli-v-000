@@ -35,8 +35,12 @@ extend Concerns::Findable
  
   
   def artist=(artist)
-    @artist = artist
-    artist.add_song(self)
+    if artist == nil 
+       @artist = artist
+    elsif artist != nil 
+      @artist = artist
+      artist.add_song(self)
+    end 
   end
 
   def genre=(genre)

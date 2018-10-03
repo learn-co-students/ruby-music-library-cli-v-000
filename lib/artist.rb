@@ -45,9 +45,10 @@ class Artist
     @songs.collect {|song| song.genre }.uniq
    end
    
-   def self.songs
-     @songs 
-   end 
+  
+  def self.songs 
+    @songs 
+  end 
   
 
    

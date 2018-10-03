@@ -1,4 +1,3 @@
- require 'pry'
 class MusicLibraryController
 
   def initialize(path= './db/mp3s')
@@ -31,7 +30,7 @@ class MusicLibraryController
       end 
     end 
   
-  def list_songs 
+  def list_songs
     alphabetize(Song).each_with_index do |song, index|
       puts "#{index + 1}. #{song_formatter(song)}"
     end 
@@ -45,26 +44,54 @@ class MusicLibraryController
   end 
   
   def list_genres
-    
     alphabetize(Genre).each_with_index do |genre, index|
+      "#{index + 1}. #{genre.name}"
       puts "#{index + 1}. #{genre.name}"
     end 
   end 
    
  
   def list_songs_by_artist
-     
     puts "Please enter the name of an artist:"
-      
-    name = gets.chomp
+    artist_name = gets.chomp
+    if Artist.find_by_name(artist_name)
+      artist = Artist.find_by_name(artist_name)
+      artist_songs = artist.songs.sort_by{|song|song.name}
+      artist_songs.collect! {|song| "#{song.name} - #{song.genre.name}"}
+      artist_songs.each_with_index {|song, index| puts "#{index + 1}. " + song}
+    else
+      false
+    end
+  end
+  
+   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    genre_name = gets.chomp
+    if Genre.find_by_name(genre_name)
+      genre = Genre.find_by_name(genre_name)
+      genre_songs = genre.songs.sort_by{|song|song.name}
+      genre_songs.collect! {|song| "#{song.artist.name} - #{song.name}"}
+      genre_songs.each_with_index {|song, index| puts "#{index + 1}. " + song}
+    else
+      false
+    end
+  end
     
-     if name == Artist.find_by_name(name)
-        Artist.songs.each_with_index do |song|
-          puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+    
+  def play_song 
+    puts "Which song number would you like to play?"
+    song_choice = gets.chomp
+    index_choice = song_choice.to_i - 1
+    if index_choice.between?(0, Song.all.length - 1)
+      alphabetize(Song).each_with_index do |song, index|
+        if index == index_choice 
+          puts "Playing #{song.name} by #{song.artist.name}"
         end 
       end 
-  end 
- 
+    end
+  end  
+    
+  
   def alphabetize(input) 
     input.all.sort_by{|sorted|sorted.name}
   end 
@@ -77,7 +104,8 @@ class MusicLibraryController
   def artist_formatter(artist)
     "#{song.name} - #{song.genre.name}" 
   end 
-    
-  end 
+  
+end 
+  
 
 
