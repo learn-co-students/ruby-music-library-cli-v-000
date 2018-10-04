@@ -29,7 +29,10 @@ def self.create(name)
 end 
 
 def add_song(song)
-  song.artist = self  
+  if song.artist != self  
+    song.artist = self 
+    self.songs << song 
+  end 
 end 
 
 
