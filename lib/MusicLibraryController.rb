@@ -53,6 +53,12 @@ class MusicLibraryController
     list_by_formatter(Artist)
   end
 
+ 
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    list_by_formatter(Genre)
+  end
+    
   def play_song 
     puts "Which song number would you like to play?"
     song_choice = gets.chomp
@@ -80,12 +86,6 @@ class MusicLibraryController
       end 
     end 
  end 
- 
- 
-   def list_songs_by_genre
-    puts "Please enter the name of a genre:"
-    list_by_formatter(Genre)
-    end
  
  
   def list_by_formatter(class_name) 
