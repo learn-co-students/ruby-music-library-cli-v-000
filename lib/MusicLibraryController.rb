@@ -50,30 +50,8 @@ class MusicLibraryController
  
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    artist_name = gets.chomp
-    if Artist.find_by_name(artist_name)
-      artist = Artist.find_by_name(artist_name)
-      artist_songs = artist.songs.sort_by{|song|song.name}
-      artist_songs.collect! {|song| "#{song.name} - #{song.genre.name}"}
-      artist_songs.each_with_index {|song, index| puts "#{index + 1}. " + song}
-    else
-      false
-    end
+    list_by_formatter(Artist)
   end
-  
-   def list_songs_by_genre
-    puts "Please enter the name of a genre:"
-    genre_name = gets.chomp
-    if Genre.find_by_name(genre_name)
-      genre = Genre.find_by_name(genre_name)
-      genre_songs = genre.songs.sort_by{|song|song.name}
-      genre_songs.collect! {|song| "#{song.artist.name} - #{song.name}"}
-      genre_songs.each_with_index {|song, index| puts "#{index + 1}. " + song}
-    else
-      false
-    end
-  end
-    
 
   def play_song 
     puts "Which song number would you like to play?"
@@ -104,6 +82,28 @@ class MusicLibraryController
  end 
  
  
+   def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    list_by_formatter(Genre)
+    end
+ 
+ 
+  def list_by_formatter(class_name) 
+    input_name = gets.chomp
+    
+    if class_name.find_by_name(input_name)
+      input = class_name.find_by_name(input_name)
+      input_songs = input.songs.sort_by{|song|song.name}
+      
+      input_songs.map.with_index do |song, index| 
+        if class_name == Genre
+          puts  "#{index + 1}. #{song.artist.name} - #{song.name}"
+        elsif class_name == Artist
+          puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+        end 
+      end
+    end
+  end
 end 
 
   
