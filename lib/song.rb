@@ -3,13 +3,16 @@ class Song
   
   attr_accessor :name
   attr_reader :artist
+  attr_writer 
   
   @@all = []
   
   def initialize(name, artist = nil)
     @name = name
-    @artist = artist
-  end
+    if artist != nil
+      self.artist = artist
+    end
+  end 
   
   def self.all
     @@all
