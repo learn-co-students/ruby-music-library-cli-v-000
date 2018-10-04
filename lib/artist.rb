@@ -1,3 +1,4 @@
+require "pry"
 
 class Artist
   
@@ -32,9 +33,10 @@ class Artist
   end
   
   def add_song(song)
-    if song.artist == nil && @songs.include?(song) == false
-    @songs << song.artist = self
-    @songs << song
+    
+    if song.artist == nil
+      song.artist = self
+      @songs << song
     end 
   end 
     
