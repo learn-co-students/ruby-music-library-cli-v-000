@@ -1,6 +1,7 @@
 require 'pry'
 
 class Artist
+    extend Concerns::Findable
 
     attr_accessor :name, :songs
 
@@ -11,7 +12,6 @@ class Artist
     def initialize(name)
         @name = name
         @songs = []
-        save #invoke #SAVE
     end
 
      # Creates new ARTIST, saves it, and then returns that ARTIST. 

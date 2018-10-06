@@ -1,16 +1,18 @@
 require 'pry'
 
 class Genre
-#Genres have many songs and are initialized with an empty list of songs.
+    extend Concerns::Findable
+
+    #Genres have many songs and are initialized with an empty list of songs.
     attr_accessor :name, :songs
- #Class variable stores all Genres instances via #SAVE.
+
+     #Class variable stores all Genres instances via #SAVE.
     @@all = []
 
     # initialize and accepts a name for the new genre instance
     def initialize(name)
         @name = name
         @songs = []
-        save #invoke #SAVE
     end    
     
     def self.all 
@@ -36,7 +38,7 @@ class Genre
 
     # returns a collection of artists for all of the genre's songs (genre has many artists through songs)
     #   does not return duplicate artists if the genre has more than one song by a particular artist (genre has many artists through songs)
-    #   collects artists through its songs instead of maintaining its own @artists instance variable (genre has many artists through songs)
+    #  collects artists through its songs instead of maintaining its own @artists instance variable (genre has many artists through songs)
     def artists
         songs.collect{ |song| song.artist }.uniq 
     end
