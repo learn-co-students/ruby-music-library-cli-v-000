@@ -1,5 +1,6 @@
 require 'pry'
 
+include Concerns::Findable
 
 class Genre
 

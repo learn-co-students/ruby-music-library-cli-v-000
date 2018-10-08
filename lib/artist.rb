@@ -1,5 +1,8 @@
 require 'pry'
 
+include Concerns::Findable
+
+
 class Artist
 
   attr_accessor :name
