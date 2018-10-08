@@ -3,7 +3,7 @@ class Song
   attr_accessor :name
   @@all = Array.new
 
-  def initialize(name, artist = "")
+  def initialize(name, artist = nil)
     @name = name
     @artist = artist
   end
@@ -18,7 +18,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-  end 
+  end
 
   def self.destroy_all
     @@all.clear
