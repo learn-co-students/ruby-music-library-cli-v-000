@@ -1,5 +1,6 @@
 class Genre
   attr_accessor :name, :songs 
+
   
    @@all = []
    
@@ -25,4 +26,5 @@ class Genre
   def self.destroy_all
     @@all.clear 
   end 
+
 end 

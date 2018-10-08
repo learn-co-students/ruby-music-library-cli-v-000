@@ -1,3 +1,4 @@
+
 class Song
   attr_accessor :name 
   attr_reader :artist 
@@ -9,7 +10,7 @@ class Song
     @artist = artist 
   end 
      
-  end 
+ 
   
   def self.create(name)
    new_song =  Song.new(name)
@@ -29,5 +30,10 @@ class Song
     self.class.all << self 
   end 
   
-  
+  def artist=(artist)
+    @artist = artist 
+    artist.add_song(self)
+  end 
 end 
+  
+  

@@ -1,5 +1,6 @@
 class Artist 
   attr_accessor :name, :songs 
+
   
    @@all = []
    
@@ -8,6 +9,13 @@ class Artist
     @songs = []
   end 
   
+  def add_song(song)
+   @songs << song unless @songs.include? song 
+    if song.artist != self  
+      song.artist = self 
+    end 
+end   
+
   def self.create(name)
     created_artist = Artist.new(name)
     created_artist.save 
@@ -29,4 +37,6 @@ class Artist
   def self.destroy_all
     @@all.clear 
   end 
+  
+  
 end 
