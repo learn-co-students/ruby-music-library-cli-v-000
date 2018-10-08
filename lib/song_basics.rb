@@ -44,6 +44,12 @@ class Song
   end 
   
   def self.new_from_filename(filename)
+    filename_array = filename.split(" - ")
+    
+   artist = Artist.new(filename_array[0]) 
+    name = filename_array[1]
+    genre = Genre.new(filename_array[2].gsub(".mp3", ""))
+   new_song =  Song.new(name, artist, genre)
     
   end 
 end 
