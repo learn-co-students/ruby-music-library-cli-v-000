@@ -3,11 +3,25 @@ class Song
   attr_accessor :name
   @@all = Array.new
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
     if artist != nil
       self.artist = artist
-    end 
+    end
+    if genre != nil
+      self.genre = genre
+    end
+  end
+
+  def genre
+    @genre
+  end
+
+  def genre=(genre)
+    @genre = genre
+    if @genre.songs.include?(self) == false
+      @genre.songs = self
+    end
   end
 
   def self.all

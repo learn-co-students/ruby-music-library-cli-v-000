@@ -5,7 +5,16 @@ class Genre
 
   def initialize(name)
     @name = name
+    @songs = Array.new
   end
+
+  def songs
+    @songs
+  end
+
+  def songs=(song)
+    @songs << song
+  end 
 
   def self.all
     @@all
