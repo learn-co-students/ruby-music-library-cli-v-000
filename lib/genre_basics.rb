@@ -1,35 +1,28 @@
-require 'pry'
-
-class Genre   
+class Genre
+  attr_accessor :name, :songs 
   
-attr_accessor :name, :songs  
-
-@@all = []
-
-def initialize(name)
-  @name = name 
-  @songs = []
-end 
-
-def self.all 
-  @@all 
-end 
-
-def save 
-  @@all << self 
-end 
-
-def self.destroy_all 
-  @@all = []
-end 
-
-def self.create(name)
-  self.new(name).save 
-  @@all[0]
-end 
-
-
-
-
-
+   @@all = []
+   
+  def initialize(name)
+    @name = name 
+    save 
+  end 
+  
+  def self.create(name)
+    created_genre = Genre.new(name)
+    created_genre.save 
+    created_genre 
+  end 
+  
+  def self.all 
+    @@all 
+  end 
+  
+  def save
+    self.class.all << self 
+  end 
+  
+  def self.destroy_all
+    @@all.clear 
+  end 
 end 
