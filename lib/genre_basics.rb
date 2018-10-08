@@ -30,5 +30,13 @@ class Genre
   def self.destroy_all
     @@all.clear 
   end 
+  
+  def artists 
+    artists_array = []
+    songs.collect do |song|
+      artists_array << song.artist 
+    end 
+    artists_array.uniq 
+  end 
 
 end 

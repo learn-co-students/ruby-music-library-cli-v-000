@@ -38,5 +38,14 @@ end
     @@all.clear 
   end 
   
+  def genres 
+  genres_array = []
+ @songs.collect do |song|
+   genres_array << song.genre 
+  end 
+  genres_array.uniq
+end 
+
+  
   
 end 
