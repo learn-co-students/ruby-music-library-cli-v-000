@@ -51,4 +51,19 @@ class Song
     new_song
   end
 
+  def self.find_by_name(song_name)
+    @@all.find do |song|
+      song_name == song.name
+    end
+  end
+
+  def self.find_or_create_by_name(song_name)
+    if self.find_by_name(song_name) == nil
+      return_song = self.create(song_name)
+    else
+      return_song = self.find_by_name(song_name)
+    end
+  end
+
+
 end
