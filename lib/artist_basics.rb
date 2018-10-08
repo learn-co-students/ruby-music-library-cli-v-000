@@ -21,6 +21,7 @@ end
     created_artist = Artist.new(name)
     created_artist.save 
     created_artist 
+    
   end 
   
   
