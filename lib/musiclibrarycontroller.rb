@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicLibraryController
   attr_accessor :path 
   
@@ -21,7 +23,22 @@ class MusicLibraryController
     if input != 'exit'
       call 
     end 
-    
-      
+  end 
+  
+  def list_songs 
+    Song.all.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index +1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+  end 
+  
+  def list_artists 
+    Artist.all.sort {|a, b| a.name <=> b.name}.each_with_index {|artist, index| puts "#{index +1}. #{artist.name}"}
+  end 
+  
+  def list_genres
+     Genre.all.sort {|a, b| a.name <=> b.name}.each_with_index {|genre, index| puts "#{index +1}. #{genre.name}"}
+  end 
+  
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
   end 
 end 
