@@ -8,7 +8,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = Array.new
-    @genres = Array.new
   end
 
   def songs
@@ -18,29 +17,20 @@ class Artist
   def add_song(song)
     if song.artist == nil
       song.artist = self
-      if @songs.include?(song) == false
-        @songs << song
-      end
     end
+    if @songs.include?(song) == false
+        @songs << song
+    end
+    @songs
   end
 
-#  def genres=(genre)
-#    if @genres.include?(genre) == false
-#      @genres << genre
-#    end
-#  end
 
   def genres
-
-    all_songs = self.songs 
-
-    if all_songs.empty? == false
-      all_songs.each do |song|
-        @genres << song.genre
-      end
+    genres = Array.new
+    @songs.each do |song|
+      genres << song.genre
     end
-    @genres
-
+    genres.uniq
   end
 
   def self.all

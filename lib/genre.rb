@@ -1,3 +1,6 @@
+require 'pry'
+
+
 class Genre
 
   attr_accessor :name
@@ -8,13 +11,21 @@ class Genre
     @songs = Array.new
   end
 
+  def artists
+    artists = Array.new
+    @songs.each do |song|
+      artists << song.artist
+    end
+    artists.uniq
+  end
+
   def songs
     @songs
   end
 
   def songs=(song)
     @songs << song
-  end 
+  end
 
   def self.all
     @@all
