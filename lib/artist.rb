@@ -1,3 +1,5 @@
+require 'pry'
+
 class Artist
 
   attr_accessor :name
@@ -6,6 +8,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = Array.new
+    @genres = Array.new
   end
 
   def songs
@@ -21,7 +24,24 @@ class Artist
     end
   end
 
+#  def genres=(genre)
+#    if @genres.include?(genre) == false
+#      @genres << genre
+#    end
+#  end
 
+  def genres
+
+    all_songs = self.songs 
+
+    if all_songs.empty? == false
+      all_songs.each do |song|
+        @genres << song.genre
+      end
+    end
+    @genres
+
+  end
 
   def self.all
     @@all
