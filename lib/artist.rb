@@ -5,7 +5,12 @@ class Artist
 
   def initialize(name)
     @name = name
+    @songs = Array.new
   end
+
+  def songs
+    @songs
+  end 
 
   def self.all
     @@all
@@ -24,5 +29,4 @@ class Artist
     @@all << new_artist
     new_artist
   end
-
 end

@@ -3,13 +3,22 @@ class Song
   attr_accessor :name
   @@all = Array.new
 
-  def initialize(name)
+  def initialize(name, artist = "")
     @name = name
+    @artist = artist
   end
 
   def self.all
     @@all
   end
+
+  def artist
+    @artist
+  end
+
+  def artist=(artist)
+    @artist = artist
+  end 
 
   def self.destroy_all
     @@all.clear
