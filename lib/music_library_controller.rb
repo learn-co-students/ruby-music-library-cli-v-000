@@ -42,23 +42,28 @@ class MusicLibraryController
 
   def list_songs
     # sort songs by name
-    Song.all.sort {|a, b| a.name <=> b.name}.each_with_index do |song, i|
+    sort(Song.all).each_with_index do |song, i|
       puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
   end
 
   def list_artists
     # sort artists by name
-    Artist.all.sort {|a, b| a.name <=> b.name}.each_with_index do |artist, i|
+    sort(Artist.all).each_with_index do |artist, i|
       puts "#{i + 1}. #{artist.name}"
     end
   end
 
   def list_genres
     # sort genres by name
-    Genre.all.sort {|a, b| a.name <=> b.name}.each_with_index do |genre, i|
+    sort(Genre.all).each_with_index do |genre, i|
       puts "#{i + 1}. #{genre.name}"
     end
+  end
+
+  def sort(list)
+    # abstract the #sort method
+    list.sort {|a, b| a.name <=> b.name}
   end
 
   def list_songs_by_artist
@@ -67,7 +72,7 @@ class MusicLibraryController
     artist = gets.strip
     # print list of artist songs, alphabetized by title
     artists = Song.all.select! {|song| song.artist.name == artist}
-    artists.sort {|a, b| a.name <=> b.name}.each_with_index do |song, i|
+    sort(artists).each_with_index do |song, i|
       puts "#{i + 1}. #{song.name} - #{song.genre.name}"
     end
   end
@@ -78,7 +83,7 @@ class MusicLibraryController
     genre = gets.strip
     # print list of genre's songs, alphabetized by title
     genres = Song.all.select! {|song| song.genre.name == genre}
-    genres.sort {|a, b| a.name <=> b.name}.each_with_index do |song, i|
+    sort(genres).each_with_index do |song, i|
       puts "#{i + 1}. #{song.artist.name} - #{song.name}"
     end
   end
@@ -88,7 +93,7 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     number = gets.strip.to_i
     # plays the selected song
-    Song.all.sort {|a, b| a.name <=> b.name}.each_with_index do |song, i|
+    sort(Song.all).each_with_index do |song, i|
       puts "Playing #{song.name} by #{song.artist.name}" if i + 1 == number
     end
   end
