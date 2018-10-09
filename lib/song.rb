@@ -5,12 +5,15 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
+
     if artist != nil
       self.artist = artist
     end
+
     if genre != nil
       self.genre = genre
     end
+
   end
 
   def genre
@@ -63,7 +66,33 @@ class Song
     else
       return_song = self.find_by_name(song_name)
     end
+
   end
+
+
+
+  def self.new_from_filename(file_name)
+
+    parsed_file_name = file_name.split("-")
+    i = 0
+    parsed_file_name.each do |ele|
+      parsed_file_name[i] = ele.strip
+      i += 1
+    end
+
+    name = parsed_file_name[1]
+    artist = Artist.find_or_create_by_name(parsed_file_name[0])
+    genre = Genre.find_or_create_by_name(parsed_file_name[2].delete(".mp3"))
+
+    our_song = self.new(name, artist, genre)
+
+  end
+
+  def self.create_from_filename(file_name)
+    new_song = self.new_from_filename(file_name)
+    @@all << new_song
+  end
+
 
 
 end

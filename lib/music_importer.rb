@@ -1,5 +1,4 @@
 
-
 class MusicImporter
 
   def initialize(path)
@@ -22,7 +21,10 @@ class MusicImporter
     @files
   end
 
-
-
+  def import
+    self.files.each do |file|
+      Song.create_from_filename(file)
+    end
+  end
 
 end
