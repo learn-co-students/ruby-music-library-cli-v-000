@@ -1,5 +1,6 @@
 class Artist
-  attr_accessor :name, :songs
+  attr_accessor :name
+  attr_reader :songs
 
  
 
@@ -33,9 +34,7 @@ class Artist
     self.songs << song unless self.songs.include?(song)
   end
 
-  
-
   def genres
-    @songs.collect { |song| song.genre }.uniq
+    @songs.collect {|song| song.genre}.uniq
   end
 end
