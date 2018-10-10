@@ -17,7 +17,8 @@ class Song
     song
   end
 
- def self.all
+
+  def self.all
     @@all
   end
 
@@ -44,6 +45,7 @@ class Song
   
   def find_or_create_by_name(name)
   end
+
   def self.new_from_filename(filename)
     file = filename.chomp(".mp3").split(" - ")
     song = Song.new(file[1])
@@ -61,5 +63,26 @@ class Song
     song
   end
 
- 
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    @@all.clear
+  end
+
+  def save
+    @@all << self
+  end
+
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
+  end
+
 end
