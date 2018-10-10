@@ -10,7 +10,7 @@ class MusicImporter
   def files
     files = []
     Dir.glob("#{path}/*.mp3").each do |file_name|
-      files << file_name
+      files << file_name.gsub("#{path}/", "")
     end
   end
   
