@@ -20,13 +20,13 @@ class MusicLibraryController
     
     input = gets.chomp
     
-    until input == "exit"
-    
-      input = gets.chomp
+      until input == "exit"
+        input = gets.chomp
       end 
-    end
+    end    
     
     def list_songs
+    end 
       
   end
     
