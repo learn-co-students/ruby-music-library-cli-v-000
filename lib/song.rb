@@ -12,6 +12,25 @@ class Song
     #@@all << self 
   end 
   
+ def self.new_from_filename(filename)
+    first_cut = filename.split(" - ")
+    artist_name = first_cut[0]
+    song_name = first_cut[1]
+    genre_name = first_cut[2].split(".")[0]
+
+   song = Song.find_or_create_by_name(song_name)
+   art = Artist.find_or_create_by_name(artist_name)
+   song.artist = art unless song.artist 
+  gen = Genre.find_or_create_by_name(genre_name)
+   song.genre = gen unless song.genre 
+   song 
+ end 
+ 
+ def self.create_from_filename(filename)
+     song = Song.new_from_filename(filename)
+     self.all << song 
+ end 
+
  
  def self.find_by_name(name_string)
   self.all.detect {|song| song.name == name_string} 
