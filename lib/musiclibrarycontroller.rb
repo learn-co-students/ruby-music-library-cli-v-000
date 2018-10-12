@@ -45,11 +45,11 @@ end
   
   def list_songs 
 
-    Song.all.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index +1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+    Song.all.sort {|a, b| a.name <=> b.name}.each_with_index {|song, index| puts "#{index +1}. #{song.artist.name.gsub("./spec/fixtures/other_mp3s/", "")} - #{song.name} - #{song.genre.name}"}
   end 
  
   def list_artists 
-    Artist.all.sort {|a, b| a.name <=> b.name}.each_with_index {|artist, index| binding.pry puts "#{index +1}. #{artist.name}"}
+    Artist.all.sort {|a, b| a.name <=> b.name}.each_with_index {|artist, index|  puts "#{index +1}. #{artist.name.gsub("./spec/fixtures/other_mp3s/", "")}"}
   end 
   
   def list_genres
