@@ -7,7 +7,6 @@ end
 require_all 'lib'
 
 
-
 class Song
   
   attr_accessor :name, :artist
@@ -36,6 +35,12 @@ class Song
     song_name.save
     song_name
   end
+  
+  def artist=(artist)
+    @artist= artist
+    artist.add_song(self)
+  end
+  
 end
 
 
@@ -67,6 +72,14 @@ class Artist
     art_name.save
     art_name
   end
+  
+  def add_song(song)
+    if song.artist == nil
+     song.artist = self
+     @songs << song
+    end
+  end
+  
 end
 
 
