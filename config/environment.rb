@@ -9,13 +9,18 @@ require_all 'lib'
 
 class Song
   
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
   
   @@all = []
   
-  def initialize(name, artist=nil)
+  def initialize(name, artist=nil, genre=nil)
     @name= name
-    @artist= artist
+    if artist != nil
+      self.artist=(artist)
+    end
+    if genre != nil
+      self.genre=(genre)
+    end
   end
   
   def self.all
@@ -39,6 +44,11 @@ class Song
   def artist=(artist)
     @artist= artist
     artist.add_song(self)
+  end
+  
+  def genre=(genre)
+    @genre= genre
+    genre.add_song(self)
   end
   
 end
@@ -75,8 +85,8 @@ class Artist
   
   def add_song(song)
     if song.artist == nil
-     song.artist = self
-     @songs << song
+      song.artist = self
+      @songs << song
     end
   end
   
@@ -85,12 +95,13 @@ end
 
 class Genre
   
-  attr_accessor :name
+  attr_accessor :name, :songs
   
   @@all = []
   
   def initialize(name)
     @name= name
+    @songs = []
   end
   
   def self.all
@@ -110,4 +121,15 @@ class Genre
     genre_name.save
     genre_name
   end
+  
+   def add_song(song)
+    if song.genre == nil
+      song.genre = self
+      @songs << song
+    end
+  end
+  
 end
+
+
+
