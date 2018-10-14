@@ -5,6 +5,7 @@ class MusicLibraryController
   end
 
   def call
+
     input = ''
     while input != "exit"
     puts "Welcome to your music library!"
@@ -18,10 +19,21 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     input = gets.strip
-  end
     if input == 'list songs'
-      list_songs(input)
+      list_songs
+    elsif input == 'list artists'
+      list_artists
+    elsif input == 'list genres'
+      list_genres
+    elsif input == 'list artist'
+      list_songs_by_artist
+    elsif input == 'list genre'
+      list_songs_by_genre
+    elsif input == 'play song'
+      play_song
     end
+  end
+
   end
 
   def list_songs
