@@ -19,6 +19,7 @@ class MusicLibraryController
       puts "To play a song, enter 'play song'."
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
+      
       input = gets.chomp
       case input
       when "list songs"
@@ -56,7 +57,7 @@ class MusicLibraryController
     end
   end
   
-  def get_song_list
+  def list_songs
     Song.all.each_with_index do |song, index|
       puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
