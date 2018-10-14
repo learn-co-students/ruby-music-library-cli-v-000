@@ -1,0 +1,37 @@
+class Genre
+  
+  attr_accessor :name, :songs
+  
+  @@all = []
+  
+  def initialize(name)
+    @name= name
+    @songs = []
+  end
+  
+  def self.all
+    @@all
+  end
+  
+  def self.destroy_all
+    @@all.clear
+  end
+  
+  def save
+    @@all << self
+  end
+  
+  def self.create(genre_name)
+    genre_name = Genre.new(genre_name)
+    genre_name.save
+    genre_name
+  end
+
+  def add_song(song)
+    if song.genre == nil
+      song.genre = self
+      @songs << song
+    end
+  end
+  
+end
