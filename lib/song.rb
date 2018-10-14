@@ -18,7 +18,6 @@ class Song
     song
   end
 
-
   def self.all
     @@all
   end
@@ -60,18 +59,6 @@ class Song
   def self.create_from_filename(filename)
     self.new_from_filename(filename).save
     
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    @@all.clear
-  end
-
-  def save
-    @@all << self
   end
 
   def artist=(artist)
