@@ -8,7 +8,7 @@ class Artist
   def initialize(name)
     @name= name
     @songs = []
-    # @genres = []
+    @genres = []
   end
   
   def self.all
@@ -37,7 +37,8 @@ class Artist
   end
   
   def genres
-    # @genres = @songs.collect {|song| song.genre}
+    @genres = @songs.collect {|song| song.genre}
+    @genres.uniq
   end
   
 end
