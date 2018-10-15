@@ -42,4 +42,10 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
   
+  def find_by_name(name)
+    @@all.find_index do |song| 
+      song.name == name
+    end
+  end
+  
 end
