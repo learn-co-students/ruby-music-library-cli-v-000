@@ -27,5 +27,9 @@ class Genre
     genre_name
   end
 
+  def artists
+    artists= @songs.collect {|song| song.artist}
+    artists.uniq
+  end
   
 end
