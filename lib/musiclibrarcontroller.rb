@@ -69,11 +69,12 @@ end
   
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.strip.to_i - 2
-    if (1..Song.all.length).include?(input)
-      # binding.pry
-      puts "Playing #{Song.all[input].name} by #{Song.all[input].artist.name}"
-    end
+    # input = gets.strip.to_i - 2
+    # if (1..Song.all.length).include?(input)
+    # song = Song.all.sort!
+    #   # binding.pry
+    #   puts "Playing #{song[input].name} by #{song[input].artist.name}"
+    
   end
   
 end    
