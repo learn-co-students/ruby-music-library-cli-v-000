@@ -41,15 +41,16 @@ class Song
 
   def artist=(artist)
     @artist = artist
+    artist.add_song(self)
     # binding.pry
 
-    if artist.is_a?(String) == true
-      artist = Artist.new(artist)
-      # self.artist = artist
-      # artist.add_song(self)
-    elsif
-      artist.add_song(self)
-    end
+    # if artist.is_a?(String) == true
+    #   artist = Artist.new(artist)
+    #   # self.artist = artist
+    #   # artist.add_song(self)
+    # elsif
+
+    # end
   end
 
   def genre=(genre)
@@ -67,8 +68,13 @@ class Song
     file_artist = filename.split(" - ")[0]
     file_genre = filename.split(" - ")[2].gsub(".mp3", "")
 
-    song = Song.new(file_song, file_artist)
-    song.artist = Artist.new(song.artist)
+    song = Song.new(file_song, file_artist, file_genre)
+
+    a = Artist.find_or_create_by_name(file_artist)
+    g = Genre.find_or_create_by_name(file_genre)
+
+
+    # song.artist = Artist.new(song.artist)
     # binding.pry
   end
 
