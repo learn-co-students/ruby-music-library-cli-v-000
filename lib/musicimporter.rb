@@ -12,9 +12,9 @@ class MusicImporter
   end
 
   def self.import
-    # files.each do |song|
-    #   Song.new_by_filename(song)
-    # end
+    files.each do |song|
+      Song.create_from_filename(filename)
+    end
   end
 
 end
