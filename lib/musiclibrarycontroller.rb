@@ -43,8 +43,11 @@ class MusicLibraryController
   end
 
   def list_songs_by_artist
-    # puts "Please enter the name of an artist:"
-    binding.pry
+    puts "Please enter the name of an artist:"
+    # binding.pry
+    Song.all.sort_by{|s| s.name}.uniq.each.with_index(1) do |song, index|
+      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
     # input = gets
 
 
