@@ -23,4 +23,43 @@ class MusicLibraryController
       break if input.chomp == "exit"
     end
   end
+
+  def list_songs
+    Song.all.sort_by{|s| s.name}.uniq.each.with_index(1) do |song, index|
+      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_artists
+    Artist.all.sort_by{|a| a.name}.uniq.each.with_index(1) do |artist, index|
+      puts "#{index}. #{artist.name}"
+    end
+  end
+
+  def list_genres
+    Genre.all.sort_by{|g| g.name}.uniq.each.with_index(1) do |genre, index|
+      puts "#{index}. #{genre.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    # puts "Please enter the name of an artist:"
+    binding.pry
+    # input = gets
+
+
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets
+
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets
+    # list_songs
+
+  end
 end
