@@ -21,6 +21,8 @@ class MusicLibraryController
       puts "What would you like to do?"
     
       input = gets.strip 
+      
+      
     end
   end
   
@@ -69,13 +71,13 @@ end
   
   def play_song
     puts "Which song number would you like to play?"
-    # input = gets.strip.to_i - 2
-    # if (1..Song.all.length).include?(input)
-    # song = Song.all.sort!
-    #   # binding.pry
-    #   puts "Playing #{song[input].name} by #{song[input].artist.name}"
-    
+    input = gets.strip.to_i - 1
+    if (1..Song.all.length).include?(input)
+      song = Song.all.sort{|a, b| a.name <=> b.name}[input]
+    end
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
   
+
 end    
     
