@@ -70,7 +70,7 @@ end
   def play_song
     puts "Which song number would you like to play?"
     input = gets.strip.to_i - 2
-    if (1..Song.all.length).include?(input) && Song.all.include?(Song.all[input])
+    if (1..Song.all.length).include?(input)
       # binding.pry
       puts "Playing #{Song.all[input].name} by #{Song.all[input].artist.name}"
     end
