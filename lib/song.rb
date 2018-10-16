@@ -26,10 +26,10 @@ class Song
     @@all << self
   end
   
-  def self.create(song_name)
-    song_name = Song.new(song_name)
-    song_name.save
-    song_name
+  def self.create(song)
+    song = Song.new(song)
+    song.save
+    song
   end
   
   def artist=(artist)
@@ -43,19 +43,11 @@ class Song
   end
   
   def self.find_by_name(name)
-    @@all.find do |song| 
-      if song.name == name
-        return song
-      end  
-    end
+    @@all.find {|song| song.name == name}
   end
   
   def self.find_or_create_by_name(song)
-    if @@all.include?(song)
-      self.find_by_name(song)
-    elsif !@@all.include?(song)
-      self.create(song)
-    end
+    self.find_by_name(song) || self.create(song)
   end
   
 end
