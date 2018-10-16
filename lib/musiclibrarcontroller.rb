@@ -38,5 +38,23 @@ end
     end
   end
   
+  def list_genres
+    Genre.all.sort_by(&:name).each.with_index(1) do |genre, index|
+      #binding.pry
+      puts "#{index}. #{genre.name}"
+    end
+  end
+    
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    
+    if artist = Artist.find_by_name(input)
+      Artist.all.sort_by(&:name).each.with_index(1) do |song, index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end 
+    end 
+  end
+  
 end    
     
