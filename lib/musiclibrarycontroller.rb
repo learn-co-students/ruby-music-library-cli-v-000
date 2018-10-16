@@ -20,7 +20,21 @@ class MusicLibraryController
       puts "What would you like to do?"
 
       input = gets
+    if input.chomp == "list songs"
+      list_songs
+    elsif input.chomp == "list artists"
+      list_artists
+    elsif input.chomp == "list genres"
+      list_genres
+    elsif input.chomp == "list artist"
+      list_songs_by_artist
+    elsif input.chomp == "list genre"
+      list_songs_by_genre
+    elsif input.chomp == "play song"
+      play_song
+    end
       break if input.chomp == "exit"
+
     end
   end
 
@@ -45,12 +59,10 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     # binding.pry
-    Song.all.sort_by{|s| s.name}.uniq.each.with_index(1) do |song, index|
-      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-    end
-    # input = gets
-
-
+    input = gets
+    # Artist.all.sort_by{|a| a.name}.uniq.collect.with_index(1) do |artist, index|
+    #   puts "#{index}. #{artist.name}"
+    # end
   end
 
   def list_songs_by_genre
