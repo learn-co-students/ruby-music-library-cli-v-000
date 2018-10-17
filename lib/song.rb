@@ -6,10 +6,17 @@ class Song
 
   @@all = []
 
+# <<<<<<< HEAD
   def initialize(name, artist=nil, genre=nil)
     @name = name
     artist != nil ? self.artist= artist : nil
     genre != nil ? self.genre= genre : nil
+# =======
+  # def initialize(name, artist="", genre="")
+  #   @name = name
+  #   self.artist = artist
+  #   self.genre = genre
+# >>>>>>> b95c934c51cc6b7f64f374b896b04e649fc44df3
     save
   end
 
@@ -39,8 +46,20 @@ class Song
 
   def artist=(artist)
     @artist = artist
+# <<<<<<< HEAD
     artist.add_song(self)
 
+# =======
+    # binding.pry
+
+#     if artist.is_a?(String) == true
+#       artist = Artist.new(artist)
+#       # self.artist = artist
+#       # artist.add_song(self)
+#     elsif
+#       artist.add_song(self)
+#     end
+# >>>>>>> b95c934c51cc6b7f64f374b896b04e649fc44df3
   end
 
   def genre=(genre)
@@ -58,10 +77,14 @@ class Song
     file_artist = filename.split(" - ")[0]
     file_genre = filename.split(" - ")[2].gsub(".mp3", "")
 
+# <<<<<<< HEAD
     a = Artist.find_or_create_by_name(file_artist)
     g = Genre.find_or_create_by_name(file_genre)
 
     song = Song.new(file_song, a, g)
+# =======
+#     song = Song.new(file_song, file_artist)
+# >>>>>>> b95c934c51cc6b7f64f374b896b04e649fc44df3
   end
 
   def self.create_from_filename(filename)
