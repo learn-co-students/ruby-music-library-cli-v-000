@@ -9,7 +9,9 @@ class MusicImporter
   end
 
   def files
-    @path
+   d = Dir.entries(@path)
+   d.delete('..') && d.delete('.')
+   d
   end
 
 end
