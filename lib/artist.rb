@@ -39,15 +39,8 @@ class Artist
   end
 
   def add_song(song)
-# <<<<<<< HEAD
-    # binding.pry
     song.artist.instance_of?(Artist) != true ? song.artist = self : nil
-    # song.artist.name != self.name ? song.artist.name = self : nil
-# =======
-    # binding.pry
-    # song.artist.instance_of?(Artist) != true ? song.artist = self : nil
     song.artist.name != self.name ? song.artist.name = self : nil
-# >>>>>>> b95c934c51cc6b7f64f374b896b04e649fc44df3
     songs << song unless songs.include?(song)
   end
 
