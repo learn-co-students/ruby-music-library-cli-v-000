@@ -1,4 +1,4 @@
-#require_relative './environment.rb'
+require 'pry'
 
 class Song
   extend Concerns::Findable
@@ -46,11 +46,22 @@ class Song
 
   def self.new_from_filename(filename)
     file = filename.chomp(".mp3").split(" - ")
-    song = new(file[1], file[0], file[2])
-    song
+    artist_name, song_name, genre_name = file[0], file[1], file[2]
 
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+    self.new(song_name, artist, genre)
+    #binding.pry
   end
 
+  def self.create_from_filename(filename)
+    #file = filename.chomp(".mp3").split(" - ")
+    #artist_name, song_name, genre_name = file[0], file[1], file[2]
 
+    #artist = Artist.find_or_create_by_name(artist_name)
+    #genre = Genre.find_or_create_by_name(genre_name)
+    #self.new(song_name, artist, genre)
+    new_from_filename(filename)
 
+  end
 end

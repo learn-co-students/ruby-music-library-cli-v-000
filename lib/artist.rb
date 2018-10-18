@@ -1,4 +1,3 @@
-require 'pry'
 
 class Artist
   extend Concerns::Findable
@@ -36,7 +35,7 @@ class Artist
     def add_song(song)
       song.artist = self if song.artist.nil?
       self.songs << song unless self.songs.include?(song)
-      #binding.pry
+
     end
 
     def genres
