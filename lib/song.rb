@@ -3,7 +3,9 @@ class Song
   @@all = []
   
   def initialize(name)
+    @artist = artist
     @name = name
+    @song = song
     @@all << self
   end 
   
@@ -12,7 +14,8 @@ class Song
   end 
   
   def self.create(name)
-    new(name).tap {|s| s.save} 
+    new(name).tap {|s| s.save}
+    #new_song = self.new(name)
   end 
   
   def self.destroy_all

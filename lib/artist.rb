@@ -35,9 +35,9 @@ class Artist
     songs
   end
   
-  def name
-    self.select {|a| a == name}
-  end 
+  # def name
+  #   self.select {|a| a == name}
+  # end 
     
   
   
