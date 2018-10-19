@@ -9,10 +9,12 @@ class Artist
   def initialize(name) 
     @name = name
     @songs = []
+    @@all << self
+    
   end 
   
   def self.destroy_all 
-    @@all.clear  
+    @@all = [] 
   end 
   
   def save 
@@ -24,13 +26,18 @@ class Artist
   end 
   
   def songs
-    artist.songs
+    @songs
+     
   end 
   
-   def add_song(song)
+  def add_song(song)
     @songs << song
     songs
   end
+  
+  def name
+    self.select {|a| a == name}
+  end 
     
   
   
