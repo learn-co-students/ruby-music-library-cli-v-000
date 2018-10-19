@@ -1,3 +1,5 @@
+require "pry"
+
 class Song
   extend Concerns::Findable
    
@@ -34,12 +36,22 @@ class Song
     song 
   end
   
-  def self.new_from_filename
+  def self.new_from_filename(file_name)
+    song_name = file_name.split(" - ")[1]
+    artist_name = file_name.split(" - ")[0]
+    genre_name = file_name.split(" - ")[2].chomp(".mp3")
+    
+    a = Artist.find_or_create_by_name(artist_name)
+    g = Genre.find_or_create_by_name(genre_name)
+    
+    new_song = self.new(song_name, a, g)
     
   end
   
-  def self.create_from_filename 
-    
+  def self.create_from_filename(file_name) 
+    song = self.new_from_filename(file_name)
+    song.save 
+    song 
   end
   
   def self.all

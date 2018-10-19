@@ -2,7 +2,8 @@ require "pry"
 
 class MusicImporter
   
-  attr_accessor :path, :files 
+  attr_accessor :path 
+  attr_reader :files 
   
   def initialize(path)
     @path = path 
@@ -10,13 +11,12 @@ class MusicImporter
   end
   
   def files
-    @files = Dir.glob("#{@path}/*.mp3").collect{|file| file.to_s.slice(21..-1)}
-    binding.pry 
+    @files = Dir.entries(@path).select {|file_name| file_name.include?("mp3")}
   end
   
-  def self.import 
+  def import 
     self.files.each do |file_name| 
-      Song.new_by_filename(file_name)
+      Song.create_from_filename(file_name)
     end
   end
   
