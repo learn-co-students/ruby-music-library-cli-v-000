@@ -7,6 +7,11 @@ def initialize(name, artist = nil)
   @artist = artist
 end
 
+#need to add the has many for artist
+def artist
+  @artist
+end
+
 def self.all
   @@all
 end
@@ -25,5 +30,6 @@ def self.create(name)
   song.save
   song
 end
+
 
 end

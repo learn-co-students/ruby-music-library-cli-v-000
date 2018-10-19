@@ -27,10 +27,12 @@ def self.create(name)
   artist
 end
 
-def self.add_song
-  song.artist = song.artist
-  song
-  
+def add_song(song)
+  if song.artist != self
+  song.artist = self
 end
-  
+if !@songs.include?(song)
+  @songs << song
+end
+ end 
 end
