@@ -28,17 +28,19 @@ class Artist
   end 
   
   def add_song(song)
+    
     song.artist = self unless song.artist 
     songs << song unless songs.include?(song)
-  end 
     
-  #def artist.add_song(song)
-  #   self << song
-  #   self.artist(song)
-  #   artist.add_song(song)
-  #end
-  
-    
-  
+    #song.artist = self
+    # song.artist << song if song.artist("")
+    #artist.add_song(song)
+    #self.new(song_name, artist, genre)
+    #artist << add_song
+    #song << self
+      
+  end
+ 
+ 
   
 end
