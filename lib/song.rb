@@ -52,11 +52,12 @@ class Song
   end
   
   def self.new_from_filename(file_name)
-    #binding.pry
     file = file_name.split('-')
+    artist = Artist.new(file[0].strip)
     song = file[1].strip
-    artist = file[0].strip
-    song = Song.new(song, artist)
+    genre = Genre.new(file[2].strip.delete('.mp3'))
+    # binding.pry
+    song = Song.new(song, artist, genre)
   end
   
 end
