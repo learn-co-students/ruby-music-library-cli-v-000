@@ -2,20 +2,18 @@ class Song
   attr_accessor :artist, :genre, :name 
   @@all = []
   
-  def initialize(name)
-    @artist = artist
-    @name = name
-    @song = song 
-    @@all << self
+  def initialize(name, artist = nil, genre = nil)
+    @name = name 
+    self.artist = artist if artist 
+    self.genre = genre if genre 
   end 
   
   def self.all
     @@all 
   end 
   
-  def self.create(name)
-    new(name).tap {|s| s.save}
-    #new_song = self.new(name)
+  def self.create(name, artist = nil, genre = nil)
+    new(name, artist, genre).tap {|s| s.save}
   end 
   
   def self.destroy_all
