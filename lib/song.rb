@@ -1,4 +1,6 @@
+require_relative './concerns/findable.rb'
 require 'pry'
+
 class Song
   
   attr_accessor :name, :artist, :genre
@@ -53,11 +55,15 @@ class Song
   
   def self.new_from_filename(file_name)
     file = file_name.split('-')
-    artist = Artist.new(file[0].strip)
+    artist = Artist.find_or_create_by_name(file[0].strip)
     song = file[1].strip
-    genre = Genre.new(file[2].strip.delete('.mp3'))
-    # binding.pry
+    genre = Genre.find_or_create_by_name(file[2].strip.delete('.mp3'))
     song = Song.new(song, artist, genre)
+  end
+  
+  def self.create_from_filename(file_name)
+    song = self.new_from_filename(file_name)
+    @@all << song
   end
   
 end

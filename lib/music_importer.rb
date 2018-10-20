@@ -13,5 +13,9 @@ class MusicImporter
    d.delete('..') && d.delete('.')
    d
   end
-
+  
+  def import(file)
+    Song.create_from_filename(file)
+  end
+   
 end
