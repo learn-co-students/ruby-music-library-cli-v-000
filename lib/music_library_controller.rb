@@ -77,7 +77,8 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     play_song = gets.strip
     if list_songs.include?(play_song)
-      puts "Playing #{song.name} by #{song.artist.name}"
+      song = list_songs.find(play_song).split(' - ')
+      puts "Playing #{song[1]} by #{song[0]}"
     end
   end
   
