@@ -4,11 +4,11 @@ require 'pry'
 
 class MusicLibraryController
 
-  attr_accessor :path
+  attr_accessor :path, :importer
 
   def initialize(path = './db/mp3s')
     @path= path
-    importer = MusicImporter.new(path)
+    @importer= MusicImporter.new(path)
     importer.import
   end
 
@@ -29,7 +29,12 @@ class MusicLibraryController
   end
 
   def list_songs
-    
+    x = 1
+    music_files.each do |file|
+      file = file.delete('.mp3')
+      puts "#{x}. #{file}"
+      x += 1
+    end
   end
 
 end
