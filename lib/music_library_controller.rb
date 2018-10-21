@@ -54,9 +54,21 @@ class MusicLibraryController
     art = gets.strip
     artist = Artist.find_by_name(art)
     if artist != nil
-      artist = artist.songs.name.sort
-      artist.songs.each_with_index do |song, index|
+      sorted_songs = artist.songs.sort {|x,y| x.name <=> y.name}
+      sorted_songs.each_with_index do |song, index|
         puts "#{index+1}. #{song.name} - #{song.genre.name}"
+      end
+    end
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    art = gets.strip
+    genre = Genre.find_by_name(art)
+    if genre != nil
+      sorted_songs = genre.songs.sort {|x,y| x.name <=> y.name}
+      sorted_songs.each_with_index do |song, index|
+        puts "#{index+1}. #{song.artist.name} - #{song.name}"
       end
     end
   end
