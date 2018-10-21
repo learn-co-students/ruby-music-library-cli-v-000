@@ -8,9 +8,8 @@ class MusicLibraryController
 
   def initialize(path = './db/mp3s')
     @path= path
-    @importer= MusicImporter.new(path)
-    binding.pry
-    importer.import
+    importer= MusicImporter.new(path)
+    @importer = importer.import
   end
 
   def call
@@ -31,7 +30,7 @@ class MusicLibraryController
 
   def list_songs
     x = 1
-    music_files.each do |file|
+    @importer.each do |file|
       file = file.delete('.mp3')
       puts "#{x}. #{file}"
       x += 1
