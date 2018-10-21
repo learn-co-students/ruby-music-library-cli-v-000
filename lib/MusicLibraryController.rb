@@ -1,3 +1,5 @@
+require "pry"
+
 class MusicLibraryController 
   attr_accessor :path 
   
@@ -48,6 +50,89 @@ class MusicLibraryController
       end
     end
    
+  def list_artists 
+    artists_sorted = Artist.all.sort_by do |artist|
+        artist.name
+      end
+      artists_sorted.each_with_index  do |artist,index|
+        puts "#{index + 1}." + " " +  "#{artist.name}"
+      end
+    end
+    
+    def list_genres
+      genres_sorted = Genre.all.sort_by do |genre|
+        genre.name
+      end
+      genres_sorted.each_with_index  do |genre,index|
+        puts "#{index + 1}." + " " +  "#{genre.name}"
+      end
+    end
+  
+   def list_songs_by_artist 
+    puts "Please enter the name of an artist:"
+    input = gets.chomp
+    
+    if artist = Artist.find_by_name(input)
+       songs_sorted = artist.songs.sort_by do |song|
+        song.name
+      end
+      
+    songs_sorted.each.with_index(1) do |song,index|
+        puts "#{index}. #{song.name} - #{song.genre.name}"
+      end
+    end
+    end
    
+    def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.chomp
+    
+    if genre = Genre.find_by_name(input)
+       genres_sorted = genre.songs.sort_by do |genre|
+        genre.name
+      end
+      
+    genres_sorted.each.with_index(1) do |genre,index|
+        puts "#{index}. #{genre.artist.name} - #{genre.name}"
+      end
+    end
+  end
+ 
+ 
+ def play_song
+    puts "Which song number would you like to play?"
+    songs_sorted = Song.all.uniq.sort_by {|s| s.name} 
+  
+    input = gets.strip
+    #if (input > 0) && (input <= list_of_songs.size)
+    #if (input >= 1) && (input <= list_of_songs.size)
+   
+    if input.to_i.between?(1, Song.all.length)
+      song = songs_sorted[input.to_i - 1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
+  end
+ 
+  
+  #def play_song
+   # puts "Which song number would you like to play?"
+    #input = gets.strip 
+    #songs_sorted = Song.all.uniq.sort_by {|s| s.name} 
+
+#    if input.to_i.between?(1, songs_sorted.length)
+      
+     
+ #       puts "Playing #{song.name} by #{song.artist.name}"
+  #    end 
+    
+#  end 
+
+   
+     # songs_sorted.each do |song|
+        #    if input.to_i == song 
    
 end
+
+
+
+
