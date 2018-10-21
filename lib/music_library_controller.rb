@@ -32,9 +32,9 @@ class MusicLibraryController
     songs = Song.all.sort {|x,y| x.name <=> y.name}
       x = 1
     songs.each do |song|
-  #     puts "#{x}. #{song.name}"
-  #     x += 1
-  #   end
-  # end
+      puts "#{x}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      x += 1
+    end
+  end
 
 end
