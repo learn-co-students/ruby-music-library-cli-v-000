@@ -1,4 +1,5 @@
 class Artist 
+  extend Findable::Class Method 
   attr_accessor :name, :artist  
   @@all = [] 
   
@@ -41,6 +42,11 @@ class Artist
       
   end
  
+   def genres
+    songs.collect{ |s| s.genre }.uniq
+  end
+    
+  # end 
  
   
 end

@@ -1,6 +1,8 @@
 require 'pry'
+
 class Genre 
   attr_accessor :name, :songs 
+  
   @@all = []
   
   def self.all 
@@ -10,16 +12,13 @@ class Genre
   def initialize(name) 
     @name = name
     @songs = []
-    .new 
-    genre << song
   end 
-  
   
   def self.destroy_all 
     @@all.clear
   end 
 
-  def save 
+  def save
     @@all << self 
   end 
 
@@ -27,5 +26,8 @@ class Genre
     new(name).tap {|s| s.save} 
   end 
   
-    
-end
+  def artists 
+    songs.collect{ |s| s. artist}.uniq 
+  end 
+  
+    end
