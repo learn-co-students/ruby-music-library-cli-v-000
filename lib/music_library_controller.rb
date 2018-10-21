@@ -29,7 +29,14 @@ class MusicLibraryController
   end
 
   def list_songs
-    x = 1
+    sorted_songs = @importer.sort do |x,y|
+      x= x.split(' - ')[1]
+      y= y.split(' - ')[1]
+    # binding.pry
+      x <=> y
+    end
+    
+      x = 1
     @importer.each do |file|
       file = file.delete('.mp3')
       puts "#{x}. #{file}"
