@@ -59,8 +59,8 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     art = gets.strip
     # binding.pry
-    # artist = Artist.find_by_name(art)
-    art.songs.each {|song| puts song}
+    artist = Artist.find_by_name(art)
+    # art.songs.each {|song| puts song}
   end
   
 end
