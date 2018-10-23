@@ -3,8 +3,8 @@ class Artist
   attr_reader :songs
 
   extend Concerns::Findable
-
-  @@all = []
+  extend Persistable::ClassMethods
+  include Persistable::InstanceMethods
 
   def initialize(name)
     @name = name
@@ -13,20 +13,6 @@ class Artist
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def self.create(name)
-    artist = Artist.new(name)
-    artist.save
-    artist
-  end
-
-  def save
-    self.class.all << self
   end
 
   def add_song(song)
