@@ -1,5 +1,5 @@
 class MusicLibraryController
-  attr_reader :path
+  #attr_reader :path
   
   def initialize(path = "./db/mp3s") 
     @path = path 
@@ -18,8 +18,30 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+    input = gets.strip
     
-    input = gets.strip 
+    case input 
+      when "list songs" 
+        song 
+      when "list artists" 
+        artists
+      when "list genres" 
+        genres  
+      when "list artist" 
+        list_artist 
+      when "list genre" 
+        list_genre
+      when "play song" 
+        play_song 
+          end
+      end  
+  end
+   
+  def list_songs
+    Songs.all.sort{|a,b| a.name 
   end 
+     
   
-end 
+   
+ end  
+ 
