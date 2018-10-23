@@ -22,6 +22,7 @@ class MusicLibraryController
     
     case input 
       when "list songs" 
+<<<<<<< HEAD
         song 
       when "list artists" 
         artists
@@ -39,9 +40,84 @@ class MusicLibraryController
    
   def list_songs
     Songs.all.sort{|a,b| a.name 
+=======
+        #song
+        list_songs
+      when "list artists" 
+        #artists
+        list_artists
+      when "list genres" 
+        #genres
+        list_genres
+      when "list artist"
+        #list_artist
+        list_songs_by_artist
+      when "list genre" 
+        #list_genre
+        list_songs_by_genre
+      when "play song" 
+        play_song 
+          end
+      end
+  end
+      
+  def list_songs 
+    Song.all.sort{ |a, b| a.name <=> b.name}.each.with_index(1) do |s,i|
+    puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+      end
+  end 
+ 
+  def list_artists 
+    Artist.all.sort{ |a, b| a.name <=> b.name}.each.with_index(1) do |a, i|
+      puts "#{i}. #{a.name}" 
+        end
+  end 
+  
+  def list_genres 
+    Genre.all.sort { |a,b| a.name <=> b.name}.each.with_index(1) do |g,i|
+      puts "#{i}. #{g.name}"
+        end
+  end 
+ 
+ 
+  def list_songs_by_artist 
+    puts "Please enter the name of an artist:"
+    input = gets.strip
+    
+    if artist = Artist.find_by_name(input)
+      artist.songs.sort{ |a,b| a.name <=> b.name}.each.with_index(1) do |s,i|
+        puts "#{i}. #{s.name} - #{s.genre.name}"
+        end
+    end
+>>>>>>> 39c1c46849f6ba03015fb1ac2df2a089c3127fe5
   end 
      
   
+<<<<<<< HEAD
    
  end  
  
+=======
+  
+  def list_songs_by_genre 
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    
+    if genre = Genre.find_by_name(input)
+      genre.songs.sort{ |a, b| a.name <=> b.name}.each.with_index(1) do |s, i|
+        puts "#{i}. #{s.artist.name} - #{s.name}"
+      end
+    end 
+end  
+  
+  def play_song 
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+   if (1..Song.all.length).include?(input)
+      song = Song.all.sort{ |a, b| a.name <=> b.name}[input - 1]
+  end
+  
+  puts "Playing #{song.name} by #{song.artist.name}" if song  
+  end 
+end
+>>>>>>> 39c1c46849f6ba03015fb1ac2df2a089c3127fe5
