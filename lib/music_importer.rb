@@ -1,5 +1,4 @@
 class MusicImporter
-
   attr_accessor :path
 
   def initialize(path)
@@ -7,10 +6,7 @@ class MusicImporter
   end
 
   def files
-    @files = Dir["#{path}/*.mp3"].sort
-    @files.collect do |file|
-      file.gsub("#{path}/", "")
-    end
+    @files ||= Dir["#{path}/*.mp3"].collect {|file| file.gsub("#{path}/", "")}.sort
   end
 
   def import

@@ -1,7 +1,10 @@
 module Concerns::Findable
+
+  @@all = []
+
   def find_by_name(name)
-    self.all.detect do |i|
-      i.name == name
+    self.all.detect do |song|
+      song.name == name
     end
   end
 

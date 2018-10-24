@@ -1,12 +1,13 @@
+
 class Song
   attr_accessor :name, :artist, :genre
 
+  @@all = []
+
   extend Concerns::Findable
 
-  @@all =[]
-
   def initialize(name, artist = nil, genre = nil)
-    @name= name
+    @name = name
     self.artist = artist if artist
     self.genre = genre if genre
   end
@@ -40,26 +41,23 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    song = self.new(filename)
     parts = filename.split(" - ")
+    song = Song.new(parts[1])
     song.artist_name = parts[0]
-    song.name = parts[1]
     song.genre_name = parts[2].gsub(".mp3", "")
     song
   end
 
-  def artist_name=(artist_name)
-    self.artist = Artist.find_or_create_by_name(artist_name)
-    artist.add_song(self)
+  def artist_name=(artist)
+    self.artist = Artist.find_or_create_by_name(artist)
   end
 
-  def genre_name=(genre_name)
-    self.genre = Genre.find_or_create_by_name(genre_name)
-    genre.add_song(self)
+  def genre_name=(genre)
+    self.genre = Genre.find_or_create_by_name(genre)
   end
 
   def self.create_from_filename(filename)
-    song = self.new_from_filename(filename)
+    song = Song.new_from_filename(filename)
     song.save
     song
   end
@@ -67,6 +65,4 @@ class Song
   def to_s
     "#{self.artist.name} - #{self.name} - #{self.genre.name}"
   end
-
-
 end
