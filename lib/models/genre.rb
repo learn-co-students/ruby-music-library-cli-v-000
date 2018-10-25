@@ -1,7 +1,8 @@
 class Genre
-  attr_accessor :name
-  attr_reader :songs
-
+  attr_accessor :name, :songs # has many songs
+  # Builder Pattern
+  # Mixin Pattern
+  # Module Pattern
   extend Concerns::Findable
   extend Persistable::ClassMethods
   include Persistable::InstanceMethods
@@ -20,7 +21,7 @@ class Genre
     self.songs << song unless self.songs.include?(song)
   end
 
-  def artists
+  def artists # creates a has many through
     @songs.collect {|song| song.artist}.uniq
   end
 end
