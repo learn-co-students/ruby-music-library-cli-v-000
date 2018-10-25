@@ -22,9 +22,14 @@ class Song
   end
   
   def genre=(genre)
-    @genre = genre
     genre.add_song(self)
+    # Assign that genre to myself
+    @genre = genre
   end
+  
+  # def genre=(genre) The last definition always takes precedence
+  #   raise "STOP"
+  # end
   
   def self.new_from_filename(filename)
     file = filename.chomp(".mp3").split(" - ")

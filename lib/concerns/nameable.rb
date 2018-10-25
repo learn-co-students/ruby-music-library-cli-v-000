@@ -1,6 +1,6 @@
 module Nameable
   module ClassMethods
-    def create(name)
+    def create_by_name(name)
       self.new.tap do |o| # smaller scope than local variable
         o.name = name
       end
