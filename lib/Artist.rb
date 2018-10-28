@@ -28,14 +28,18 @@ class Artist
     new_artist
   end 
 
-    def add_song(name)
+    def add_song(song)
     if @artist != nil 
       self.artist.name 
     else 
       nil 
     end 
-    self.artist.song
-    @songs << song 
+    if @songs.include?(song)
+      nil 
+    else 
+      @songs << song
+    end 
+    song.artist ||= self
   end 
   
-end 
+end #ends class 
