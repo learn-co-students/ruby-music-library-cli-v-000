@@ -31,9 +31,10 @@ class Genre
   end 
 
    def artists                     
-    songs.map do |song|
+    new_array = songs.map do |song|
       song.artist
     end 
-  end
+    new_array.uniq
+  end 
   
 end 
