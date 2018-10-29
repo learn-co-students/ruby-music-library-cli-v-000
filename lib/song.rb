@@ -1,5 +1,4 @@
 class Song
-  #asldjkhlak
   attr_accessor :name
   @@all = []
 
