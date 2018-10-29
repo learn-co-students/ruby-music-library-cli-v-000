@@ -1,0 +1,28 @@
+
+[1mFrom:[0m /home/kagflores/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 94 MusicLibraryController#list_songs_by_artist:
+
+     [1;34m87[0m: [32mdef[0m [1;34mlist_songs_by_artist[0m()
+     [1;34m88[0m:   [1;34m#use the path to get a listing of all of the songs[0m
+     [1;34m89[0m:   [1;34;4mMusicLibraryController[0m.new
+     [1;34m90[0m:   long_song_list = [1;34;4mDir[0m.glob([31m[1;31m"[0m[31m#{path}[0m[31m/*.mp3[1;31m"[0m[31m[0m).collect{|f| f.gsub([31m[1;31m"[0m[31m#{path}[0m[31m/[1;31m"[0m[31m[0m,[31m[1;31m"[0m[31m[1;31m"[0m[31m[0m)}
+     [1;34m91[0m:   title = long_song_list.map{|title| title.gsub([31m[1;31m"[0m[31m.mp3[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m[1;31m"[0m[31m[0m)}
+     [1;34m92[0m:   puts [31m[1;31m"[0m[31mPlease enter the name of an artist:[1;31m"[0m[31m[0m
+     [1;34m93[0m:   ui = gets.strip
+ =>  [1;34m94[0m:   binding.pry
+     [1;34m95[0m:   [32mcase[0m ui
+     [1;34m96[0m:   [32mwhen[0m [1;34;4mArtist[0m.find_by_name(ui) != [1;36mnil[0m
+     [1;34m97[0m:     [1;34m#ui_alpha = ui.songs.sort[0m
+     [1;34m98[0m:     [1;34m#ui_alpha.map.with_index{ |song, i| puts "#{i+=1}. #{song}"}[0m
+     [1;34m99[0m:     [1;34m#narrow to specific artist[0m
+    [1;34m100[0m:     title.detect {|song| song.name == ui}
+    [1;34m101[0m:     [1;34m#binding.pry[0m
+    [1;34m102[0m:     [1;34m#alphabetize list[0m
+    [1;34m103[0m:     title_alp = title.sort
+    [1;34m104[0m:     [1;34m#add in index and puts it[0m
+    [1;34m105[0m:     songs_by_artist_list = title_alp.map.with_index{ |song, i| puts [31m[1;31m"[0m[31m#{i+=1}[0m[31m. #{song}[0m[31m[1;31m"[0m[31m[0m}
+    [1;34m106[0m:   [32melse[0m
+    [1;34m107[0m:   [32mend[0m
+    [1;34m108[0m:   [1;34m#song_list = Song.all.map{ |song| song.name}[0m
+    [1;34m109[0m:   [1;34m#song_alpha = song_list.sort[0m
+    [1;34m110[0m: [32mend[0m
+
