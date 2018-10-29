@@ -49,19 +49,34 @@ class Song
     new_song 
   end 
 
-  def self.find_by_name(name) 
-    if self.all.detect { |artist| artist.name == name } 
-       self.all.detect { |artist| artist.name == name } 
-    end 
-  end 
+ # def self.find_by_name(name) 
+#    if self.all.detect { |artist| artist.name == name } 
+ #      self.all.detect { |artist| artist.name == name } 
+#    end 
+#  end 
   
-  def self.find_or_create_by_name(name)
-     if self.find_by_name(name) != nil 
+  #def self.find_or_create_by_name(name)
+  #   if self.find_by_name(name) != nil 
+  #     self.find_by_name(name)
+  #  else
+  #    self.create(name)
+  #  end   
+  #end 
+
+  def self.new_from_filename(file)
+      song_info = file.chomp(".mp3").split(" - ")
+      if self.find_by_name(name) != nil 
        self.find_by_name(name)
     else
-      self.create(name)
+      self.create(song_info[1])
     end   
   end 
+
+  def self.create_from_filename(file)
+    self.new_from_filename(file)
+    @@all << self.new_from_filename(file)
+  end 
+  
 
 end #ends class 
 
