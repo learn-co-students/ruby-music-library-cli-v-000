@@ -1,5 +1,6 @@
 class Artist 
-  
+
+  include Concerns::Findable 
   attr_accessor :name, :songs, :genres 
   
   @@all = []
@@ -42,9 +43,9 @@ class Artist
     song 
   end 
   
-  def genres 
-    new_array = songs.map do |song| 
-      song.genre
+  def genres                     
+    new_array = songs.map do |song|
+      song.genres
     end 
     new_array.uniq
   end 

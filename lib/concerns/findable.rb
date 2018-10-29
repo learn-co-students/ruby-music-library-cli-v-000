@@ -1,4 +1,4 @@
-module Concerns::ModuleName
+module Concerns::Findable 
   
     def find_by_name(name) 
     if self.all.detect { |artist| artist.name == name } 
