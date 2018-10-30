@@ -6,8 +6,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-  
-    
   end
   
   def self.all
@@ -30,6 +28,15 @@ class Artist
   def add_song(song)
     song.artist = self unless song.artist
     self.songs << song unless self.songs.include?song
-    #binding.pry
   end
+  
+  def genres
+    self.songs.collect do |song|
+      song.genre
+    end
+      .uniq
+     
+  end
+  
 end
+  

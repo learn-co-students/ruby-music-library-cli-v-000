@@ -26,12 +26,20 @@ class Genre
   end
   
   def add_song(song)
-    @songs << song 
-    
+    @songs << song unless self.songs.include?song
   end
   
-
+  def artists
+    self.songs.collect do |song|
+      song.artist
+    end
+      .uniq
+  end
+      
   
   
-
 end
+  
+
+  
+  
