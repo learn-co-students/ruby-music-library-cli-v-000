@@ -6,11 +6,8 @@ class Genre
   def initialize(name)
     @name = name
     @songs = Array.new
-    #@artists = Array.new
-    @@all << self
   end
 
-  #START OF CLASS METHODS
   def self.all
     @@all
   end
@@ -23,15 +20,10 @@ class Genre
     self.new(name).save
     return self
   end
-  #END OF CLASS METHODS
 
   def save
-    @@all << self
+    @@all << self if !@@all.include?(self)
   end
-
-  # def artists
-  #   @artists.uniq
-  # end
 
   def songs
     @songs
@@ -40,5 +32,4 @@ class Genre
   def artists
     @songs.map { |song| song.artist }.uniq
   end
-
 end
