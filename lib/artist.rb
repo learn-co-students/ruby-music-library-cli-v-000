@@ -1,4 +1,6 @@
 class Artist
+  extend Concerns::Findable
+
   attr_accessor :name
 
   @@all = Array.new
@@ -17,8 +19,8 @@ class Artist
   end
 
   def self.create(name)
-    self.new(name).save
-    return self
+    (name = self.new(name)).save
+    return name
   end
 
   def save

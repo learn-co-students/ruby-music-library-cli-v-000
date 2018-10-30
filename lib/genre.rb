@@ -1,4 +1,6 @@
 class Genre
+  extend Concerns::Findable
+
   attr_accessor :name
 
   @@all = Array.new
@@ -17,8 +19,8 @@ class Genre
   end
 
   def self.create(name)
-    self.new(name).save
-    return self
+    (name = self.new(name)).save
+    return name
   end
 
   def save
