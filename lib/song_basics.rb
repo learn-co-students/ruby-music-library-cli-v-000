@@ -37,6 +37,14 @@ class Song
      self
   end
   
-
+  def self.find_by_name(song_two)
+    @@all.find do |song|
+      
+    end
+  end
+  
+  
 end
+
+
 
