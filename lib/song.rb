@@ -33,6 +33,13 @@ class Song
     self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
   end
 
+  def self.new_from_filename(filename)
+    @artist = filename.split(" - ")[0]
+    @name = filename.split(" - ")[1]
+    @genre = filename.split(" - ")[2].gsub(".mp3", "")
+    self.new(@name, @artist, @genre)
+  end
+
   def save
     @@all << self if !@@all.include?(self)
   end
