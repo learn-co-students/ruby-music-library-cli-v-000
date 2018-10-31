@@ -1,22 +1,22 @@
-class Artist 
-  
+class Artist
+
   attr_accessor :name, :songs
   @@all = []
-  
+
   def initialize(name)
   @name = name
   @songs = []
 
-  end 
+  end
 
   def self.all
     @@all
   end
-  
+
   def self.destroy_all
     all.clear
   end
-  
+
   def save
     @@all << self
   end
@@ -34,5 +34,5 @@ end
 if !@songs.include?(song)
   @songs << song
 end
- end 
+ end
 end
