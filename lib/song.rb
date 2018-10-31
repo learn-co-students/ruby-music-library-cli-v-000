@@ -34,10 +34,10 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    @artist = filename.split(" - ")[0]
-    @name = filename.split(" - ")[1]
-    @genre = filename.split(" - ")[2].gsub(".mp3", "")
-    self.new(@name, @artist, @genre)
+    a = filename.split(" - ")[0]
+    n = filename.split(" - ")[1]
+    g = filename.split(" - ")[2].gsub(".mp3", "")
+    self.new(a, n ,g)
   end
 
   def save
