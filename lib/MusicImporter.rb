@@ -14,9 +14,11 @@ def initialize(path)
     end 
   end
   
-  def self.import
-    files.each {|file| Song.new_by_filename(file)}
+  def import 
+    files.each {|file| Song.create_from_filename(file)}
   end 
+  
+  
   
 end 
 
