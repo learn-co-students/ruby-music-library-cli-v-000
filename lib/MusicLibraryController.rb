@@ -23,15 +23,12 @@ class MusicLibraryController
     puts "What would you like to do?"
     4.times do
       list_songs = gets 
-  
     end 
-    
   end
 
   def self.list_songs
      song_list = MusicImporter(path).files.to_s
     puts song_list
-
   end 
   
   def self.list_artists
@@ -40,5 +37,8 @@ class MusicLibraryController
 
   def self.list_genres
   end 
+
+ 
+
 
 end 
