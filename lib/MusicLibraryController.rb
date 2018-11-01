@@ -32,5 +32,28 @@ class MusicLibraryController
   end 
   end 
 
+def list_artists
+    Artist.all.sort {|x,y| x.name <=> y.name }.each.with_index(1) do |item, index|
+    puts "#{index}. #{item.name}"
+  end 
+  end 
+
+def list_genres
+    Genre.all.sort {|x,y| x.name <=> y.name }.each.with_index(1) do |item, index|
+    puts "#{index}. #{item.name}"
+  end 
+  end
+  
+def list_songs_by_artist
+  puts "Please enter the name of an artist:"
+  user_artist = gets 
+
+  if Artist.find_by_name(user_artist) != nil  
+    puts Artist.find_by_name(user_artist)
+  else 
+    nil 
+  end 
+    
+end 
  
 end #ends class 
