@@ -6,10 +6,10 @@ class MusicLibraryController
   attr_accessor :path 
   
   def initialize(path = "./db/mp3s")
-    #default_path = "./db/mp3s/"
-    #self.path = default_path  if path != nil
     MusicImporter.new(path).import 
   end 
+  
+
 
   def call 
     puts "Welcome to your music library!"
@@ -28,5 +28,17 @@ class MusicLibraryController
     
   end
 
+  def self.list_songs
+     song_list = MusicImporter(path).files.to_s
+    puts song_list
+
+  end 
+  
+  def self.list_artists
+    
+  end 
+
+  def self.list_genres
+  end 
 
 end 
