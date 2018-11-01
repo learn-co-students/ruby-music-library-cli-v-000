@@ -27,8 +27,10 @@ class MusicLibraryController
   end
 
   def self.list_songs
-     song_list = MusicImporter(path).files.to_s
+    song_list = Song.all.sort {|song| }
+
     puts song_list
+
   end 
   
   def self.list_artists
