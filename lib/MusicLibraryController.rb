@@ -22,14 +22,14 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     4.times do
-      list_songs = gets 
+      stef = gets 
     end 
   end
 
   def list_songs
     Song.all.sort {|x,y| x.name <=> y.name }.each.with_index(1) do |item, index|
-    #puts "#{index}. #{item.song.name} - #{item.artist.name} - #{item.genre.name}"
-    puts "#{index}: #{item}"
+    puts "#{index}. #{item.artist.name} - #{item.name} - #{item.genre.name}"
+  end 
   end 
 
  
