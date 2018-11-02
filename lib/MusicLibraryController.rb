@@ -49,11 +49,29 @@ def list_songs_by_artist
   user_artist = gets 
 
   if Artist.find_by_name(user_artist) != nil  
-    puts Artist.find_by_name(user_artist)
+   Artist.find_by_name(user_artist).songs.sort {|x,y| x.name <=> y.name }.each.with_index(1) do |item, index|
+    puts "#{index}. #{item.name} - #{item.genre.name}"
+  end 
   else 
     nil 
   end 
-    
+   
 end 
  
+ 
+ def list_songs_by_genre
+  puts "Please enter the name of a genre:"
+  user_genre = gets 
+
+  if Genre.find_by_name(user_genre) != nil  
+   Genre.find_by_name(user_genre).songs.sort {|x,y| x.name <=> y.name }.each.with_index(1) do |item, index|
+    puts "#{index}. #{item.artist.name} - #{item.name}"
+  end 
+  else 
+    nil 
+  end 
+   
+end 
+
+
 end #ends class 
