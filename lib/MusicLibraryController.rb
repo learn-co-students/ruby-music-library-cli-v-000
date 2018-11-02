@@ -73,5 +73,16 @@ end
    
 end 
 
+def play_song 
+  
+  puts "Which song number would you like to play?"
+  list_songs
+  user_input = gets 
+   song_list = Song.all.each.with_index(1) do |item, index|
+    song_list.select { |index|  index=user_input  } 
+  puts "Playing #{item.name} by #{item.artist.name}"
+end 
+end 
+
 
 end #ends class 
