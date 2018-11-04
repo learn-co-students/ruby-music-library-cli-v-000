@@ -73,18 +73,27 @@ end
    
 end 
 
-def play_song 
+#def play_song 
   
-  puts "Which song number would you like to play?"
+  #puts "Which song number would you like to play?"
   
-  user_input = gets.chomp.to_i
-   #Song.all.each.with_index(1) {|item, index| puts "Playing #{item.name} by #{item.artist.name}" if index == user_input }
-   
-  song_list =  Song.all.sort {|x,y| x.name <=> y.name }
-  song = song_list[user_input+1]
-  puts "Playing #{song.name} by #{song.artist.name}"
+  #user_input = gets.chomp.to_i
+
+  #song_list =  Song.all.sort {|x,y| x.name <=> y.name }
+  #song = song_list[user_input+1]
+ # puts "Playing #{song.name} by #{song.artist.name}"
   
-end 
+#end 
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+    if input > 0 && input <= Song.all.length
+      song_list = Song.all.sort{|a, b| a.name <=> b.name}
+      song = song_list[input-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
+  end
 
 
 end #ends class 
