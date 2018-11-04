@@ -43,12 +43,18 @@ class Artist
     song 
   end 
   
-  def genres                     
-    new_array = songs.map do |song|
-      song.genres
-    end 
-    new_array.uniq
-  end 
 
+
+  def genres
+    @new_array = []
+    @songs.each do |song|
+      if @new_array.include?(song.genre)
+        nil
+      else
+        @new_array << song.genre
+      end
+    end
+    @new_array
+  end
 
 end #ends class 
