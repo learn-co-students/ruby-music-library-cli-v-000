@@ -26,4 +26,8 @@ def self.create(name)
   song
 end
 
+def artist=(artist)
+  @artist = artist
+end
+
 end
