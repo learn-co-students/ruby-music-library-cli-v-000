@@ -33,23 +33,25 @@ class Song
   end
   
   def self.create(song)
-    @@all << self.new(song)
-     self
+   new_song =  self.new(song)
+  	new_song.save
+    new_song
+     
   end
   
   def self.find_by_name(song_two)
-    @@all.find {|song| song.name == name}
-     self
-   end
+    @@all.find {|song| song.name == song_two}
+  end
    
-   def self.find_or_create_by_name(song_two)
-     if self.find_by_name(song_two) != self
+  def self.find_or_create_by_name(song_two)
+     if self.find_by_name(song_two) == self
+       self
+      
+      elsif self.find_by_name(song_two) != self
         self.create(song_two)
-        
-     elsif self.find_by_name(song_two) == self
-        self
-        
+      
       end
+      
    end
  end
-  
+ 
