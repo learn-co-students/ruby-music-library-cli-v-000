@@ -3,9 +3,7 @@ class Artist
   attr_accessor :name, :songs
   @@all = []
   
-   extend Findable::find_by_name(song_name)
-   extend Findable::find_or_create_by_name(song_name)
-  
+   extend Concerns::Findable
   
   def initialize(name)
     @name = name
