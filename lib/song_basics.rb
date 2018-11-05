@@ -38,13 +38,18 @@ class Song
   end
   
   def self.find_by_name(song_two)
-    @@all.find do |song|
-      
-    end
-  end
+    @@all.find {|song| song.name == name}
+     self
+   end
+   
+   def self.find_or_create_by_name(song_two)
+     if self.find_by_name(song_two) != self
+        self.create(song_two)
+        
+     elsif self.find_by_name(song_two) == self
+        self
+        
+      end
+   end
+ end
   
-  
-end
-
-
-

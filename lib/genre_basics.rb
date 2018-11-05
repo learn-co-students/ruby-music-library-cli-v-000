@@ -35,8 +35,6 @@ class Genre
     end
       .uniq
   end
-      
-  
   
 end
   
