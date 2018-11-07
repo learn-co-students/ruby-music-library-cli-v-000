@@ -52,29 +52,27 @@ class Song
    end
    
    def self.new_from_filename(file_path)
-     song = self.new(file_path)
-  
-     song.name = file_path.split(" - ")[0].chomp(".mp3")
-     song.artist = file_path.split(" - ")[1].chomp(".mp3")
-     song.genre = file_path.split(" - ")[2].chomp(".mp3")
+     array = file_path.split(" - ")
      
+     artist_name = array[0]
+     song_name = array[1]
+     genre_name = array[2].chomp(".mp3")
          
-       
+     artist = Artist.find_or_create_by_name(artist_name)
+     genre = Genre.find_or_create_by_name(genre_name)
+      Song.new(song_name, artist, genre) 
+    end
+    
+    def self.create_from_filename(file_path)
+      self.new_from_filename(file_path).save
+    end
+  end
         
   
         
-  #   def self.new_from_filename(name)
-  #   song = self.new 
-  #   song.name = (name.split(" - ")[1].chomp(".mp3"))
-  #   song.artist_name = (name.split(" - ")[0])
-  #   song
-  # end
+ 
+ 
        
-  end
+
   
-  def import
-    files.each { |file| file = Song.new_by_filename}
-  end
-  
-end
  
