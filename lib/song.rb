@@ -52,14 +52,23 @@ class Song
    end
    
    def self.new_from_filename(file_path)
-    array = file_path.split (" - ")
-      
-       song = array[0]   
-       artist = array[1] 
-       genre = array[2] 
-       #mp3 = array[3]
-        #binding.pry
-        @name = song 
+     song = self.new(file_path)
+     self.add_song(song)
+     song.name = file_path.split(" - ")[0].chomp(".mp3")
+     song.artist = file_path.split(" - ")[1].chomp(".mp3")
+     song.genre = file_path.split(" - ")[2].chomp(".mp3")
+     
+         
+       
+        
+  
+        
+  #   def self.new_from_filename(name)
+  #   song = self.new 
+  #   song.name = (name.split(" - ")[1].chomp(".mp3"))
+  #   song.artist_name = (name.split(" - ")[0])
+  #   song
+  # end
        
   end
   
