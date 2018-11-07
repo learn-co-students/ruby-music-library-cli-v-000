@@ -53,7 +53,7 @@ class Song
    
    def self.new_from_filename(file_path)
      song = self.new(file_path)
-     self.add_song(song)
+  
      song.name = file_path.split(" - ")[0].chomp(".mp3")
      song.artist = file_path.split(" - ")[1].chomp(".mp3")
      song.genre = file_path.split(" - ")[2].chomp(".mp3")
