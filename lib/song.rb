@@ -33,10 +33,9 @@ class Song
   end
   
   def self.create(song_name)
-   new_song =  self.new(song_name)
+   new_song = self.new(song_name)
   	new_song.save
     new_song
-     
   end
   
   def self.find_by_name(song_name)
@@ -49,9 +48,24 @@ class Song
        
       else
         self.create(song_name)
-      
       end
-      
    end
- end
+   
+   def self.new_from_filename(file_path)
+    array = file_path.split (" - ")
+      
+       song = array[0]   
+       artist = array[1] 
+       genre = array[2] 
+       #mp3 = array[3]
+        #binding.pry
+        @name = song 
+       
+  end
+  
+  def import
+    files.each { |file| file = Song.new_by_filename}
+  end
+  
+end
  
