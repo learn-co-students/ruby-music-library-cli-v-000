@@ -1,6 +1,6 @@
 require 'bundler'
-Bundler.require
 
+Bundler.require
 module Concerns
 end
 
