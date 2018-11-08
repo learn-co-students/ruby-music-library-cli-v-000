@@ -8,8 +8,7 @@ describe "MusicLibraryController - CLI Methods" do
     it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
       expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
       expect($stdout).to receive(:puts).with("2. Real Estate - Green Aisles - country")
-      expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
-      expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
+      expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip"5. Jurassic 5 - What's Golden - hip-hop" Larry Csonka - indie")
       expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
 
       music_library_controller.list_songs
