@@ -1,0 +1,5 @@
+MODELS
+Song, Artist, and Genre
+
+> name is an attr_accessor
+> 
