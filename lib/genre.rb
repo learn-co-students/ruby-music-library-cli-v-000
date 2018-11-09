@@ -1,4 +1,8 @@
+require_relative './findable.rb'
+
 class Genre 
+  extend Findable::ClassMethods
+  
   attr_accessor :name, :songs, :artist
   
   @@all = []
@@ -25,4 +29,9 @@ class Genre
     new_genre.save 
     new_genre
   end
+  
+  def artists
+    artists_genres = songs.map { |song| song.artist }
+    artists_genres.uniq
+  end 
 end

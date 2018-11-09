@@ -1,6 +1,9 @@
 require 'pry'
+require_relative './findable.rb'
 
 class Artist 
+  extend Findable::ClassMethods
+  
   attr_accessor :name, :songs, :genre
   
   @@all = []
@@ -8,10 +11,6 @@ class Artist
   def initialize(name)
     @name = name 
     @songs = []
-  end 
-  
-  def genres
-    songs.collect { |song| song.genre }
   end 
   
   def self.all 
@@ -39,8 +38,15 @@ class Artist
   def add_song(song)
     if song.artist == nil
       song.artist = self
+    end
+    if !(songs.include?(song))
       @songs << song
     end
+  end 
+  
+  def genres
+    artists_genres = songs.map { |song| song.genre }
+    artists_genres.uniq
   end 
   
 end
