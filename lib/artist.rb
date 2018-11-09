@@ -1,7 +1,7 @@
 require 'pry'
 
 class Artist 
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :genre
   
   @@all = []
   
@@ -10,8 +10,8 @@ class Artist
     @songs = []
   end 
   
-  def genres 
-    Genre.all.select { |g| g.artist == self }
+  def genres
+    songs.collect { |song| song.genre }
   end 
   
   def self.all 
