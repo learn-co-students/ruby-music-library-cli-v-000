@@ -1,11 +1,12 @@
-class Genre 
+class Genre extend Concerns::Findable
   attr_accessor :name
+  attr_reader :songs
 
   @@all = []
   def initialize(name)
     @name = name
     @songs = []
-    @@all << self
+    #@@all << self
   end
 
   def self.all
@@ -26,9 +27,9 @@ class Genre
     song
   end
 
-  def songs
-    @songs
-  end
+  #def songs
+    #@songs
+  #end
 
   def artists
     #binding.pry

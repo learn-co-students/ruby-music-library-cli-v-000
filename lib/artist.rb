@@ -1,12 +1,12 @@
 require 'pry'
-class Artist 
+class Artist extend Concerns::Findable
   attr_accessor :name, :genre
 
   @@all = []
   def initialize(name)
     @name = name
     @songs = []
-    @@all << self
+    #@@all << self
   end
 
   def self.all
