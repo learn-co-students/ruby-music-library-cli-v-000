@@ -1,8 +1,8 @@
 require 'pry'
-require_relative './findable.rb'
+# require_relative './findable.rb'
 
 class Artist 
-  extend Findable::ClassMethods
+  extend Concerns::Findable
   
   attr_accessor :name, :songs, :genre
   
