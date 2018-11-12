@@ -54,7 +54,8 @@ class Song
       artist = new_file[0]
       name = new_file[1]
       genre = new_file[2].gsub(".mp3","")
-    new_song = Song.new(name, artist, genre)
+    new_artist = find_or_create_by_name(artist)
+    new_song = Song.new(name, new_artist)
   end 
 
 end 
