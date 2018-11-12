@@ -1,5 +1,5 @@
 class MusicImporter 
-  attr_accessor :path
+  attr_accessor :path, :file
   
   def initialize(path)
     @path = path
@@ -10,7 +10,9 @@ class MusicImporter
     data.delete_if{ |x| x == "." || x == ".." }
   end 
   
-  def self.import 
-    #instantiates new song object 
+  def import 
+    files.map do |file|
+      Song.create_from_filename(file)
+    end
   end 
 end 

@@ -1,5 +1,3 @@
-require 'pry'
-
 class Song 
   attr_accessor :name, :songs
   attr_reader :artist, :genre
@@ -54,9 +52,13 @@ class Song
       artist = new_file[0]
       name = new_file[1]
       genre = new_file[2].gsub(".mp3","")
-    new_artist = find_or_create_by_name(artist)
-    new_song = Song.new(name, new_artist)
-    binding.pry
+    new_artist = Artist.find_or_create_by_name(artist)
+    new_genre = Genre.find_or_create_by_name(genre)
+    new_song = Song.new(name, new_artist, new_genre)
+  end 
+
+  def self.create_from_filename(file)
+    @@all << new_from_filename(file)
   end 
 
 end 
