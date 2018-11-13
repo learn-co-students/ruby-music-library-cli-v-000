@@ -1,0 +1,55 @@
+nouns and pronouns =
+are objects
+
+1. Identify your objects ( write a story )
+I want to build
+an app that can load
+artists, songs, and
+genres and for each of them
+it can generate a index.html
+that lists all of the
+items in the collection
+and then it can also
+generate a "show.html"
+("kanye-west.html") for each
+individual a collection
+
+2. Identify their(the object's) responsibilities (my object is only responsible for one thing)
+Artist (object)
+(what is an artist responsible for?)
+ - name
+ - songs
+ - genres
+
+Song(object)
+(what is a song responsible for?)
+ - name
+ - genre
+ - artist
+ Genre(object)
+ (what is a genre responsible for?)
+ - name
+ - songs
+ - artists
+ SiteGenerator(object)
+(what is a site generator responsible for?)
+ - template (index.html vs show.html)
+ - items in it's collection
+
+3. Design interface
+
+SiteGenerator.new(Artist.all, "views/artists.index.html", "_site/artists/index.html")
+note: Artist.all is a dependency injection
+
+ArtistIndexGenerator.new("views/artists.index.html", "_site/artists/index.html")
+
+class ArtistIndexGenerator
+  def initialize(template, destination)
+    @artists = Artist.all
+  end
+end
+
+class SiteGenerator
+  def initialize(collection, template, destination)
+  end
+end
