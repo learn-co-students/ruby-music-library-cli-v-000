@@ -30,7 +30,22 @@ class MusicLibraryController
   end
   
   def list_songs
-    Song.all.sort_by {|song.name|.upcase}
-
+    array = Song.all.sort_by {|song| song.name}
+    array.each_with_index do |song, i|
+      array[0] = artist
+      array[1] = song.name
+      array[2] = genre
+      puts "#{song.name}", "#{i}"
+      binding.pry
+    
+    
+       end
+  end
 end
+  
+# nums.each do |num|
+#     puts num
+# end
+
+
   
