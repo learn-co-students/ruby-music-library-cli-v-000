@@ -1,11 +1,17 @@
 class Artist
-   attr_accessor :name
+
+attr_accessor :name, :songs
   
   @@all = []
-
+  
 
   def initialize(name)
-    @name = name 
+    @name = name
+    @songs = []
+  end
+  
+  def songs 
+    @songs 
   end
   
   def self.all 
@@ -22,8 +28,8 @@ class Artist
   end
   
   def self.create(name)
-    artist = self.new(name)
-    artist.save
-    artist
+    instance = self.new(name)
+    instance.save
+    instance
   end 
 end 
