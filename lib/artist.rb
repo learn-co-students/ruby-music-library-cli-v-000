@@ -1,6 +1,6 @@
 class Artist 
   @@all = []
-  attr_accessor :name
+  attr_accessor :name, :songs
   
   
   def initialize(name)
@@ -9,7 +9,9 @@ class Artist
     @songs = []
   end
   
-    def self.all
+
+   def self.all 
+
     @@all.each do |song|
       puts song.name
     end 
@@ -29,7 +31,15 @@ class Artist
       artist
     end
 
-  
+    def add_song(song)
+    @songs << song
+    song.artist = self unless song.artist
+    
+  end
+
+  def add_songs(songs)
+    songs.each { |song| add_song(song) }
+  end
       
     
 end
