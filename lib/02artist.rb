@@ -28,12 +28,18 @@ attr_accessor :name, :songs
   end
 
   def self.create(name)
-    instance = self.new(name)
+    instance = new(name)
     instance.save
     instance
   end
 
   def add_song(song)
-    @songs << Song.new(name, self)
+    if @songs.include?(song)
+    else @songs << song
+    end
+
+    if song.artist = nil
+    song.artist = self
+    end
   end
 end
