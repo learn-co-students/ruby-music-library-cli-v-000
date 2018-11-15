@@ -1,5 +1,5 @@
 class Song 
-  attr_accessor :name, :songs
+  attr_accessor :name
   attr_reader :artist, :genre
   
   @@all = []
@@ -18,7 +18,7 @@ class Song
   
   def genre=(genre)
     @genre = genre
-    if !(genre.songs.include?(self))
+    unless genre.songs.include?(self)
       genre.songs << self
     end
   end
