@@ -7,6 +7,7 @@ class Song
     @name = name
     @@all << self
     @artist = artist 
+    self.artist=(artist) if artist
   end 
   
   def self.all 
@@ -30,6 +31,7 @@ class Song
     def artist=(artist)
       @artist = artist
       artist.add_song(self) 
+     
     end
 end
   
