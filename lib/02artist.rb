@@ -34,12 +34,7 @@ attr_accessor :name, :songs
   end
 
   def add_song(song)
-    if @songs.include?(song)
-    else @songs << song
-    end
-
-    if song.artist = nil
-    song.artist = self
-    end
+    @songs << song unless @songs.include?(song)
+    song.artist = self unless song.artist
   end
 end
