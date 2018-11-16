@@ -32,4 +32,9 @@ attr_accessor :name, :songs
     instance.save
     instance
   end
+
+  def add_genre(song)
+    @songs << song unless @songs.include?(song)
+    song.genre = self unless song.genre
+  end
 end
