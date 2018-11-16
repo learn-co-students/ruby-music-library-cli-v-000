@@ -24,6 +24,10 @@ class Song
 
   def self.create(name)
     song=self.new(name)
+  end
+
+  def self.create(song)
+    song=Song.new(song)
     song.save
     song
   end
@@ -31,7 +35,7 @@ class Song
   def artist=(artist)
    @artist = artist
    artist.add_song(self)
- end
+  end
 
   def genre=(genre)
      @genre = genre

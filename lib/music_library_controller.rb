@@ -1,4 +1,5 @@
 class MusicLibraryController
+
   def initialize(path='./db/mp3s')
     MusicImporter.new(path).import
   end
@@ -22,63 +23,54 @@ class MusicLibraryController
       elsif user_input == "list genres"
         list_genres
       elsif user_input == "play song"
-        puts "Which song number?"
-        user_input = gets
-        play_song(user_input.to_i)
+        play_song
       elsif user_input == "list artist"
-        puts "Which artist?"
-        user_input = gets
-        artist_songs(user_input)
+        list_songs_by_artist
       elsif user_input == "list genre"
-        puts "Which genre?"
-        user_input = gets
-        genre_songs(user_input)
+        list_songs_by_genre
       end
-
       user_input = gets
     end
   end
 
   def list_songs
-    sorted_songs.each_with_index do |song, index|
-      puts "#{index+1}. #{formatted_song(song)}"
-    end
+    sorted_list=Song.all.sort_by {|song| song.name }
+    sorted_list.each_with_index{|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
   end
 
   def list_artists
-    Artist.all.each do |artist|
-      puts artist.name
-    end
+    sorted_list=Artist.all.sort_by {|artist| artist.name }
+    sorted_list.each_with_index{|artist, index| puts "#{index+1}. #{artist.name}"}
   end
 
   def list_genres
-    Genre.all.each do |genre|
-      puts genre.name
+    sorted_list=Genre.all.sort_by {|genre| genre.name }
+    sorted_list.each_with_index{|genre, index| puts "#{index+1}. #{genre.name}"}
+  end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    user_input = gets.to_i
+    if user_input.between?(1, Song.all.length)
+        song=Song.all.sort{|x, y| x.name<=>y.name}[user_input-1]
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    user_input=gets.chomp
+    if artist=Artist.find_by_name(user_input)
+      artist.songs.sort{|x, y| x.name<=>y.name}.each_with_index{|song, index| puts "#{index+1}. #{song.name} - #{song.genre.name}" }
     end
   end
 
-  def play_song(number)
-    puts "Playing #{formatted_song(sorted_songs[number - 1])}"
-  end
-
-  def artist_songs(name)
-    Artist.find_by_name(name).songs.each do |song|
-      puts formatted_song(song)
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    user_input=gets.chomp
+    if genre=Genre.find_by_name(user_input)
+      genre.songs.sort{|x, y| x.name<=> y.name}.each_with_index{|song, index| puts "#{index+1}. #{song.artist.name} - #{song.name}" }
     end
   end
 
-  def genre_songs(name)
-    Genre.find_by_name(name).songs.each do |song|
-      puts formatted_song(song)
-    end
-  end
-
-  private
-  def sorted_songs
-    Song.all.sort_by { |song| song.artist.name }
-  end
-
-  def formatted_song(song)
-    "#{song.artist.name} - #{song.name} - #{song.genre.name}"
-  end
 end
