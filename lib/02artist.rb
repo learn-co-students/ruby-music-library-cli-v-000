@@ -37,4 +37,12 @@ attr_accessor :name, :songs
     @songs << song unless @songs.include?(song)
     song.artist = self unless song.artist
   end
+
+  #def songs
+    #Song.all.select {|song| song.artist == self}
+  #end
+
+  def genres
+    self.songs.map {|song| song.genre}.uniq
+  end
 end
