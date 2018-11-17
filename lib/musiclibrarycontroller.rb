@@ -29,14 +29,10 @@ class MusicLibraryController
         list_genres
       when "list artist"
         list_songs_by_artist
-    #elsif input == "list genre"
-      #{}"Code"
-    #elsif input == "play song"
-      #{}"Play song"
-    #elsif input == "exit"
-      #{}"call"
-    #else
-      #call
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
       end
     end
   end
