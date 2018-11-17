@@ -14,5 +14,25 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+
+    input = gets.strip
+
+    if input == "list songs"
+      "Song.all"
+    elsif input == "list artists"
+      "Artists.all"
+    elsif input == "list genres"
+      "Genres.all"
+    elsif input == "list artist"
+      "Code"
+    elsif input == "list genre"
+      "Code"
+    elsif input == "play song"
+      "Play song"
+    elsif input == "exit"
+      "call"
+    else
+      call
+    end
   end
 end
