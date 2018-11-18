@@ -1,4 +1,8 @@
 require 'pry'
+#require_relative './artist.rb'
+#require_relative './song.rb'
+#require_relative './genre.rb'
+#require_relative './concerns/findable.rb'
 
 class MusicImporter
   attr_reader :path
@@ -13,11 +17,11 @@ class MusicImporter
   end
   
   def import
-    
+    self.files.each {|file| Song.create_from_filename(file)}
   end
   
 end
 
 
-importer = MusicImporter.new('db/mp3s')
-importer.files
+#importer = MusicImporter.new('db/mp3s')
+#importer.files
