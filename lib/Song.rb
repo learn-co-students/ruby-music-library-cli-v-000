@@ -16,6 +16,10 @@ def genre=(genre)
   genre.songs << self if !genre.songs.include?(self)
 end
 
+def self.find_by_name(name)
+  @@all.find(name)
+end
+
 def save
 @@all << self
 end
