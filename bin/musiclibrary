@@ -5,7 +5,7 @@ require_relative '../config/environment'
 #MusicLibraryController.new.call
 
 controller = MusicLibraryController.new
-controller.list_songs_by_artist
+controller.play_song
 
 #importer = MusicImporter.new('db/mp3s')
 #importer.import
