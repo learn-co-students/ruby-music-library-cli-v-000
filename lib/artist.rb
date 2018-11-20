@@ -1,3 +1,4 @@
+
 class Artist 
   @@all = []
   attr_accessor :name, :songs
@@ -32,15 +33,14 @@ class Artist
     end
 
     def add_song(song)
-    @songs << song unless song.artist
-    song.artist = self unless song.artist
-    
-  end
-
-  def add_songs(songs)
-    songs.each { |song| add_song(song) }
-  end
+      @songs << song unless songs.include?(song)
+      if song.artist == nil
+        song.artist = self
+      end
+    end
       
-   
+  def genres
+    self.songs.collect{|song| song.genre}.uniq
+  end
     
 end
