@@ -17,7 +17,17 @@ def genre=(genre)
 end
 
 def self.find_by_name(name)
-  @@all.find(name)
+    if Song.all.find{|song| song.name == name}
+      Song.all.find{|song| song.name == name}
+    end
+  end
+
+def self.find_or_create_by_name(name)
+  if self.find_by_name(name)
+    self.find_by_name(name)
+  else
+    Song.create(name)
+  end
 end
 
 def save
@@ -26,7 +36,6 @@ end
 
 def artist=(artist)
   @artist = artist
-
   artist.add_song(self)
 end
 
