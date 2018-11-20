@@ -1,32 +1,33 @@
-class Song 
+require 'pry'
+class Song
 
-attr_accessor :name, :artist 
+attr_accessor :name
+attr_reader :artist, :genre
 @@all = []
 
-def initialize(name, artist = nil)
-  @name = name
-  if !Artist.all.include?(artist) && artist != nil 
-    Artist.new("#{artist}".capitalize)
-  end 
-  artist=(artist)
-  if artist != nil  
-    @artist = artist
-    @artist.songs << self
-  end 
-end 
+def initialize(name, artist = nil, genre = nil)
+   @name = name
+   self.artist = artist if artist
+   self.genre = genre if genre
+end
 
-def save 
-@@all << self 
-end 
+def genre=(genre)
+  @genre = genre
+  genre.songs << self if !genre.songs.include?(self)
+end
 
-def artist=(artist) 
-  @artist = artist 
-  artist.songs << self
+def save
+@@all << self
+end
+
+def artist=(artist)
+  @artist = artist
+
   artist.add_song(self)
-end 
+end
 
-def self.all 
-@@all 
+def self.all
+@@all
 end
 
 def self.destroy_all
@@ -34,8 +35,8 @@ def self.destroy_all
 end
 
 def self.create(name)
-  x = Song.new(name) 
-  x.save 
+  x = Song.new(name)
+  x.save
   x
-end 
-end 
+end
+end
