@@ -1,10 +1,3 @@
-require 'pry'
-#require_relative './song.rb'
-#require_relative './music_importer.rb'
-#require_relative './genre.rb'
-#require_relative './concerns/findable.rb'
-
-
 class Artist
   extend Concerns::Findable
   
@@ -51,18 +44,3 @@ class Artist
   end
     
 end
-
-
-#tom = Artist.new("Tom")
-#song = Song.new("Hello")
-#tom.add_song(song)
-#folk = Genre.new("Folk")
-#song2 = Song.new("Goodbye")
-#bluegrass = Genre.new("Bluegrass")
-#song3= Song.new("Sup")
-#tom.add_song(song2)
-#tom.add_song(song3)
-#song.genre = folk
-#song2.genre = folk
-#song3.genre = bluegrass
-#tom.genres

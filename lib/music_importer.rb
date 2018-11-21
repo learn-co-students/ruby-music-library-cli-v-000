@@ -1,9 +1,3 @@
-require 'pry'
-#require_relative './artist.rb'
-#require_relative './song.rb'
-#require_relative './genre.rb'
-#require_relative './concerns/findable.rb'
-
 class MusicImporter
   attr_reader :path
   
@@ -21,7 +15,3 @@ class MusicImporter
   end
   
 end
-
-
-#importer = MusicImporter.new('db/mp3s')
-#importer.files

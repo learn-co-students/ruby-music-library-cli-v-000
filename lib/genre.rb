@@ -1,9 +1,3 @@
-require 'pry'
-#require_relative './artist.rb'
-#require_relative './song.rb'
-#require_relative './music_importer.rb'
-#require_relative './concerns/findable.rb'
-
 class Genre
   extend Concerns::Findable
   
@@ -38,6 +32,5 @@ class Genre
   def artists
     self.songs.collect {|song| song.artist}.uniq
   end
-  
 
 end
