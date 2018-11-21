@@ -1,3 +1,4 @@
+require 'pry'
 class MusicLibraryController
   
   attr_accessor :path, :import
@@ -60,6 +61,7 @@ class MusicLibraryController
           puts "#{i+1}. #{song.name} - #{song.genre.name}"
          }
        end
+     end
        
   def  list_songs_by_genre
     puts "Please enter the name of a genre:"
@@ -76,11 +78,13 @@ class MusicLibraryController
      
   def play_song
      puts "Which song number would you like to play?"
-        input = gets.strip
-          list_songs
-           
-        binding.pry
-            puts "Playing #{song.name} by #{song.artist.name}"
+     input = gets.strip
+     input = input.to_i-1 
+     songs = Song.all.sort_by {|s| s.name}
+             #sorting songs by s name and we are saving it as a variable
+      song = songs[input] 
+      if song != nil
+        puts "Playing #{song.name} by #{song.artist.name}"
       end
    end
  end
