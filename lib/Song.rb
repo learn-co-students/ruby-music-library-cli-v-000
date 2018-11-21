@@ -30,6 +30,12 @@ def self.find_or_create_by_name(name)
   end
 end
 
+
+def genre=(genre)
+  @genre = genre
+  genre.add_song(self)
+end
+
 def save
 @@all << self
 end
@@ -49,7 +55,23 @@ end
 
 def self.create(name)
   x = Song.new(name)
-  x.save
+  @@all << x 
   x
 end
-end
+
+def self.new_from_filename(filename)
+  x = filename.split(" - ")
+  x[2] = x[2].chomp(".mp3")
+  a = Artist.find_or_create_by_name(x[0])
+  b = Genre.find_or_create_by_name(x[2])
+  y = Song.new(x[1], a, b)
+end 
+
+def self.create_from_filename(filename)
+  x = new_from_filename(filename)
+  x.save 
+  x 
+end   
+  
+end 
+

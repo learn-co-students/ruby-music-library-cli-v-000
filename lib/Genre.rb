@@ -3,6 +3,8 @@ class Genre
 attr_accessor :name, :songs
 @@all = []
 
+extend Concerns::Findable
+
 def initialize(name)
 @name = name
 @songs = []
@@ -18,6 +20,15 @@ def save
 @@all << self
 end
 
+def add_song(song)
+  if !song.genre
+    song.genre = self
+  end
+  if !@songs.include?(song)
+    @songs << song
+  end
+end
+
 def self.all
 @@all
 end
@@ -31,4 +42,5 @@ def self.create(name)
   x.save
   x
 end
+
 end

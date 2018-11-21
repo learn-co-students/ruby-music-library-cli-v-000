@@ -3,6 +3,8 @@ class Artist
 attr_accessor :name, :songs
 @@all = []
 
+extend Concerns::Findable
+
 def initialize(name)
 @name = name
 @songs = []
