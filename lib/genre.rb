@@ -1,34 +1,23 @@
-class Genre 
-  @@all = []
+class Genre
+  extend Concerns::Findable
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
+
   attr_accessor :name, :songs
-  
+
+  @@all = []
+
   def initialize(name)
     @name = name
-    @@all << self 
     @songs = []
   end
-  
-    def self.all 
-    @@all.each do |song|
-      puts song.name
-    end 
+
+  def self.all
+    @@all
   end
 
-  def self.destroy_all
-    @@all.clear 
-  end 
-  
-    def save 
-      self.class.all << self
-    end 
-    
-    def self.create(name)
-      genre = self.new(name)  
-      self.all << genre 
-      genre 
-    end
-    
-    def artists
-      self.songs.collect {|song| song.artist}.uniq
-    end
+  def artists
+    self.songs.collect {|song| song.artist}.uniq
+  end
+
 end

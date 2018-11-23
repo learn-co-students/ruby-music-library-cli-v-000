@@ -1,45 +1,50 @@
-class Song 
+class Song
+  extend Concerns::Findable
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
+
+  attr_accessor :name
+  attr_reader :artist, :genre
+
   @@all = []
 
-  attr_accessor :name, :artist
-  attr_reader :genre
-  
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @@all << self
-    @artist = artist 
-    @genre = genre
     self.artist=(artist) if artist
     self.genre=(genre) if genre
-  end 
-  
-  def self.all 
+  end
+
+  def self.all
     @@all
   end
 
-  def self.destroy_all
-    @@all.clear 
-  end 
-  
-    def save 
-      self.class.all << self
-    end 
-    
-    def self.create(name)
-      song = self.new(name)  
-      self.all << song
-      song
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    genre.songs << self unless genre.songs.include?(self)
+  end
+
+  def self.new_from_filename(file_name)
+    song = split_filename(file_name)
+    artist = Artist.find_or_create_by_name(song[0])
+    genre = Genre.find_or_create_by_name(song[2])
+
+    new_song = self.new(song[1], artist, genre)
+  end
+
+  def self.create_from_filename(file_name)
+    song = split_filename(file_name)
+    artist = Artist.find_or_create_by_name(song[0])
+    genre = Genre.find_or_create_by_name(song[2])
+
+    self.create(song[1]).tap do |song|
+      song.artist = artist
+      song.genre = genre
     end
-    
-    def artist=(artist)
-      @artist = artist
-      artist.add_song(self) 
-    end
-    
-    def genre=(genre)
-      @genre = genre 
-      genre.songs << self unless genre.songs.include?(self)
-    end
+  end
 
 end
-  
