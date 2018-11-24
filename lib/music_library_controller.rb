@@ -77,32 +77,24 @@ class MusicLibraryController
      end
      
   def play_song
+    input = gets.strip
      puts "Which song number would you like to play?"
-     input = gets.strip
-     input = input.to_i-1 
-     songs = Song.all.sort_by {|s| s.name}
-             #sorting songs by s name and we are saving it as a variable
-      song = songs[input] 
-      if song != nil
-        puts "Playing #{song.name} by #{song.artist.name}"
-      end
+    new_input = input.to_i-1
+    #song = Song.all.sort! {|x,y| y.name <=> x.name }
+    # puts "Playing #{song.name} by #{song.artist.name}"
+ 
+ 
+  # #           #sorting songs by s name and we are saving it as a variable
+  # # #     song = songs[int_input] 
+     
+  # # #     if song != nil 
+  # # #     puts "Playing #{song.name} by #{song.artist.name}"
+  # # #   # binding.pry
+  # # #     end
    end
  end
     
-    
-  
-    
-
-  
-      
-      
-        
-      
-    
-     
-
-
-  
+# hmm, ok so the best way to check this is by walking through each step to see where it might be falling short, lets first see what input returns, then make sure that int_input returns what we think, then make sure that songs is properly alphabetizing, and then finally check to see that song is returning the correct song number
 
 
   
