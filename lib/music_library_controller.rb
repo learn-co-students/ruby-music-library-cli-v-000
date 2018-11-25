@@ -1,20 +1,12 @@
 require 'pry'
 class MusicLibraryController
   
-  attr_accessor :path, :import
-  
   def initialize(path='./db/mp3s')
-    @path = path
-    MusicImporter.new(path).import
-    # self.new(path)
+   importer = MusicImporter.new(path)
+   importer.import
   end
-  
-  def MusicImporter.import(path)
-    MusicImporter.new(path)
-  end
-  
+    
   def call
-    MusicLibraryController.new(path)
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
       puts "To list all of the artists in your library, enter 'list artists'."
@@ -26,8 +18,23 @@ class MusicLibraryController
       puts "What would you like to do?"
       input = nil 
       until input == "exit"
-        input = gets.strip 
-      end
+        input = gets.strip
+        
+        case input
+          when "list songs"
+           list_songs
+         when "list artists"
+           list_artists
+         when "list genres"
+           list_genres
+         when "list artist"
+           list_songs_by_artist
+         when "list genre"
+           list_songs_by_genre
+         when "play song"
+           play_song
+         end
+       end
   end
   
   def list_songs
@@ -69,7 +76,6 @@ class MusicLibraryController
        if genre = Genre.find_by_name(input)
          #binding.pry
          array = genre.songs.sort_by {|genre| genre.name}
-          
            array.each_with_index do |song, i|
              puts "#{i+1}. #{song.artist.name} - #{song.name}"
           end
