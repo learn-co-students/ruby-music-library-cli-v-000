@@ -1,6 +1,7 @@
-module Concerns::Findable
+module Concerns::Findable 
   def find_by_name(object)
     self.all.detect {|o| o.name == object}
+    
   end
 
   def find_or_create_by_name(object)

@@ -56,4 +56,5 @@ attr_reader :artist, :genre
       self.create(title)
     end
   end
+  
 end
