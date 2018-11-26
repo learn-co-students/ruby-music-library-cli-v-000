@@ -1,6 +1,6 @@
 class Song 
   
-attr_accessor :nam
+attr_accessor :name
 attr_reader :artist, :genre 
 @@all = []
 
@@ -38,6 +38,16 @@ attr_reader :artist, :genre
     song
   end
   
-  
+  def self.find_by_name(title)
+    @@all.find{|song| song.name == title}
+  end
     
+    def self.find_or_create_by_name(title)
+       result = self.find_by_name(title)
+    if result
+      result
+    else
+      self.create_by_name(title)
+    end
+  end
 end
