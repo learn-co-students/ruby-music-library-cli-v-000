@@ -57,4 +57,5 @@ attr_reader :artist, :genre
     end
   end
   
+  
 end
