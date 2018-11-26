@@ -26,7 +26,7 @@ attr_reader :artist, :genre
   
   def self.destroy_all
    @@all.clear
- end
+  end
  
   def save 
     self.class.all << self 
@@ -35,6 +35,12 @@ attr_reader :artist, :genre
   def self.create(name)
     song = self.new(name)
     self.all << song
+    song
+  end
+  
+  def self.create_by_name(title) 
+    song = self.create(title)  
+    song.name = name
     song
   end
   
@@ -47,7 +53,7 @@ attr_reader :artist, :genre
     if result
       result
     else
-      self.create_by_name(title)
+      self.create(title)
     end
   end
 end
