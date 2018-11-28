@@ -3,7 +3,7 @@ class Song
   @@all = []
   attr_accessor :name, :artist
   
-  def initialize(name, artist="", genre="")
+  def initialize(name, artist=nil, genre=nil)
     @name = name
     @artist=artist
     @genre=genre
@@ -28,14 +28,11 @@ class Song
   end
   
   def artist=(artist)
-<<<<<<< HEAD
-=======
-  self.artist=artist
-  
->>>>>>> 428ee27f3d42566f0cec110e0ac3d91086260fa1
+    @artist=artist
+    Artist.add_song(self)
   end
   
-  def artist(song)
-    song.artist
+  def artist
+    @artist
   end
 end
