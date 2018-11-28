@@ -28,6 +28,11 @@ class Song
   end
   
   def artist=(artist)
+<<<<<<< HEAD
+=======
+  self.artist=artist
+  
+>>>>>>> 428ee27f3d42566f0cec110e0ac3d91086260fa1
   end
   
   def artist(song)
