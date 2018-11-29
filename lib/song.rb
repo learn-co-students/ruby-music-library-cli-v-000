@@ -1,6 +1,7 @@
 class Song 
+  extend Concerns::Findable
   
-attr_accessor :name
+attr_accessor :name, :filename
 attr_reader :artist, :genre 
 @@all = []
 
@@ -8,6 +9,7 @@ attr_reader :artist, :genre
     @name = name
     self.artist=(artist) if artist 
     self.genre=(genre) if genre 
+    self.filename = filename
   end
 
   def self.all
@@ -49,13 +51,12 @@ attr_reader :artist, :genre
   end
     
     def self.find_or_create_by_name(title)
-       result = self.find_by_name(title)
-    if result
-      result
-    else
-      self.create(title)
+        result = self.find_by_name(title)
+      if result
+        result
+     else
+        self.create(title)
+      end
     end
-  end
-  
   
 end
