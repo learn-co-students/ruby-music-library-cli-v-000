@@ -1,6 +1,7 @@
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
   @@all = []
   attr_accessor :name
   
@@ -39,8 +40,6 @@ class Artist
   end
   
   def genres
-  
    songs.collect {|s| s.genre}.uniq
-   ###  need to iterate over the songs and return the unique genres
   end
 end
