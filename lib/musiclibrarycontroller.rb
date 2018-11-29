@@ -20,9 +20,9 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    user_input = gets.chomp
-    until user_input === "exit"
-      puts "What would you like to do?"
+    user_input = gets.strip
+    if user_input != "exit"
+      call
     end
     command(user_input)
   end
@@ -93,6 +93,16 @@ class MusicLibraryController
   def command(command)
     if command === "list songs"
       list_songs
+    elsif command === "list artists"
+      list_artists
+    elsif command === "list genres"
+      list_genres
+    elsif command === "list artist"
+      list_songs_by_artist
+    elsif command === "list genre"
+      list_songs_by_genre
+    elsif command === "play song"
+      play_song
     end
   end
   
