@@ -2,6 +2,8 @@ class MusicLibraryController
   
   attr_reader :name, :artist, :genre
   
+  @@list_songs = [0]
+  
   def initialize(path="./db/mp3s")
     @path = path
     music_importer_object = MusicImporter.new(path)
@@ -18,19 +20,11 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    gets.chomp
-    gets.chomp
-    gets.chomp
-    gets.chomp
-  end
-  
-  def list_songs
-    x = 0
-    Song.all.sort_by! {|song| song.name}
-    array = Song.all.collect do |song|
-      x+=1
-      puts "#{x}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    user_input = gets.chomp
+    until user_input === "exit"
+      puts "What would you like to do?"
     end
+    command(user_input)
   end
   
   def list_artists
@@ -78,10 +72,28 @@ class MusicLibraryController
     array
   end
   
+  def list_songs
+    x = 0
+    Song.all.sort_by! {|song| song.name}
+    Song.all.each do |song|
+      @@list_songs.push(song)
+      x+=1
+      puts "#{x}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+  
   def play_song
     puts "Which song number would you like to play?"
-    list_songs
     user_selected_number = gets.chomp
+    if user_selected_number.to_i <=5 && user_selected_number.to_i >= 1
+      puts "Playing #{@@list_songs[user_selected_number.to_i].name} by #{@@list_songs[user_selected_number.to_i].artist.name}"
+    end
+  end
+  
+  def command(command)
+    if command === "list songs"
+      list_songs
+    end
   end
   
 end
