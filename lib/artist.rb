@@ -28,7 +28,6 @@ class Artist
   end
   
   def add_song(song)
-  # binding.pry
    unless @songs.include?(song)  
       @songs << song
     end
@@ -40,6 +39,8 @@ class Artist
   end
   
   def genres
+  
+   songs.collect {|s| s.genre}.uniq
    ###  need to iterate over the songs and return the unique genres
   end
 end
