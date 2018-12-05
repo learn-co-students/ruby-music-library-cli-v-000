@@ -1,30 +1,39 @@
 require 'pry'
+
 class Song
-  attr_accessor :name
+  attr_accessor :name, :genre, :artist
+
   @@all = []
 
-
-  def initialize(name)
-    @name = name
+  def initialize(name, artist = nil, genre = nil)
+  @name = name
+  self.artist = artist if artist
+  #binding.pry
+  #song_with_artist = Song.new("Two-Headed Boy", artist)
   end
 
   def self.all
-    @@all
+  @@all
   end
-
 
   def self.destroy_all
-    self.all.clear
+    @@all.clear
   end
-
-  def self.create(name)
-    new(name).tap {|n| n.save}
-  end
-
 
   def save
     @@all << self
   end
+
+  def self.create(name)
+    new(name).tap {|s| s.save}
+  end
+
+  def artist=(artist)
+    @artist = artist
+    @artist.add_song(self)
+  end
+
+
 
 
 end
