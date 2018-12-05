@@ -8,7 +8,8 @@ class Song
   def initialize(name, artist = nil, genre = nil)
   @name = name
   self.artist = artist if artist
-  #binding.pry
+  self.genre = genre if genre
+binding.pry
   #song_with_artist = Song.new("Two-Headed Boy", artist)
   end
 
