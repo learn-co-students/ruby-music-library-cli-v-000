@@ -1,3 +1,4 @@
+require 'pry'
 class Artist
 
 attr_accessor :name
@@ -8,6 +9,12 @@ def initialize(name)
   @name = name
   @@all << self
   @songs = []
+end
+
+def genres
+  @songs.collect do |song|
+    song.genre
+  end
 end
 
 def songs
