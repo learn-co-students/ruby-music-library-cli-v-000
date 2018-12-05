@@ -7,6 +7,18 @@ attr_accessor :name
 def initialize(name)
   @name = name
   @@all << self
+  @songs = []
+end
+
+def songs
+  @songs
+end
+
+def add_song(song)
+  @songs << song if !self.songs.include?(song)
+  if song.artist.nil?
+    song.artist = self
+end
 end
 
 def self.all
