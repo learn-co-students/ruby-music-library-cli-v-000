@@ -1,3 +1,4 @@
+require 'pry'
 class Song
 attr_accessor :name
 attr_reader :artist, :genre
@@ -23,6 +24,19 @@ end
 def artist=(artist)
   @artist = artist
   artist.add_song(self)
+end
+
+def self.find_by_name(song_name)
+  @@all.find{|song| song.name == song_name}
+end
+
+def self.find_or_create_by_name(song_name)
+  result = self.find_by_name(song_name)
+  if result
+    result
+  else
+    self.create(song_name)
+  end
 end
 
 def self.all
