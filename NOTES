@@ -1,0 +1,17 @@
+How objects collaberate?
+
+Our program do the following:
+
+if you have a specs it goes to the spec_helper.rb first
+
+1. loads all of the ob into memory / it
+reads all of the libraries
+
+1a. when all of it is loaded into memory
+
+2. then they can collaberate and interact with
+each other
+
+
+environment.rb file - is a place where we load all of
+our dependencies(gems, data, connection to a database, actual other classes )
