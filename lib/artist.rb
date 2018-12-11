@@ -32,7 +32,7 @@ class Artist
 
     if song.artist == nil
       self.songs << song unless self.songs.include?(song)
-      song.artist_equals(self)
+      song.artist=(self)
     else
       self.songs << song unless self.songs.include?(song)
     end

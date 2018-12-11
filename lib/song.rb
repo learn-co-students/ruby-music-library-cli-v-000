@@ -45,12 +45,8 @@ class Song
     genre.songs << self
   end
 
-  def artist_equals(artist)
-    ##just here to prevent an infinite loop between artist= and add_song
-    @artist = artist
-  end
-
   def artist=(artist)
+    @artist = artist
     artist.add_song(self)
   end
 
