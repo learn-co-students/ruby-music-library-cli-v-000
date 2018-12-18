@@ -26,11 +26,12 @@ class Song
     new_song
   end
   
-  def artist(artist)
-    self.artist.name
-  end
+  #def artist(artist)
+    #self.artist.name
+  #end
     
-  def artist=
-    artist.add_song(song)
-  end
+  #def artist=
+    #@artist = artist.add_song(song)
+    #@artist.songs << self
+  #end
 end 
