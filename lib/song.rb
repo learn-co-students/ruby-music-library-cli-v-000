@@ -77,7 +77,6 @@ attr_reader :artist, :genre
      
     end
 
-    filename = self.new_from_filename(filename)
     end
       
    
