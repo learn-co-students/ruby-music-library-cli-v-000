@@ -9,7 +9,9 @@ attr_reader :artist, :genre
     @name = name
     self.artist=(artist) if artist 
     self.genre=(genre) if genre 
+
     @filename = filename
+
   end
 
   def self.all
@@ -60,6 +62,7 @@ attr_reader :artist, :genre
     end
     
     def self.new_from_filename(filename)
+
       song = filename.split(" - ")
       artist = Artist.find_or_create_by_name(song[0])
       genre = Genre.find_or_create_by_name(song[2].chomp(".mp3"))
@@ -73,6 +76,13 @@ attr_reader :artist, :genre
      song.save
      
     end
+
+    filename = self.new_from_filename(filename)
+    end
+      
+    def self.create_from_filename(filename)
+     self.new_from_filename 
+
     end
   
   
