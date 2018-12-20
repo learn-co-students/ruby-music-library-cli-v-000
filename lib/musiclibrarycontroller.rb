@@ -19,7 +19,7 @@ class MusicLibraryController
     puts "What would you like to do?"
     input = ""
     while input != "exit"
-    puts "What would you like to do?"
+    call
     input = gets.strip
   end
    end
