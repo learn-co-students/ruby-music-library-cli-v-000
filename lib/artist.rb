@@ -1,13 +1,21 @@
+
+#genre = waiter
+#song = meal
+#artist = customer
+
+require "pry"
 class Artist 
-  
+
+  extend Concerns::Findable
   attr_accessor :name, :songs
   
+   @@all = [] 
+
   def initialize(name)
     @name = name
-    @@all = []    
     @songs = []
   end
-  
+
   def self.all 
     @@all 
   end
@@ -19,7 +27,7 @@ class Artist
   def save 
     @@all << self
   end
-
+  
   def self.create(name)
     new_artist = Artist.new(name)
     new_artist.save 
@@ -32,5 +40,10 @@ class Artist
       @songs << song
     end
   end
-  
+
+  def genres #returns an array of genre objects
+		self.songs.collect do |song|
+			song.genre 
+		end.uniq
+	end
 end 
