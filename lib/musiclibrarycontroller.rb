@@ -26,8 +26,7 @@ end
    end
      
     def list_songs
-     Song.all.sort_by! {|a| a.Song.name}
-    puts songs
-    end
+     Song.all.sort_by! {|song| puts song.name}
+    
   
 end
