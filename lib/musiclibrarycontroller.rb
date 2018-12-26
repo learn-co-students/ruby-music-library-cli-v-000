@@ -21,7 +21,13 @@ class MusicLibraryController
     while input != "exit"
     puts "What would you like to do?"
     input = gets.strip
-  end
 
+end 
    end
+     
+    def list_songs
+     Song.all.sort_by! {|a| a.Song.name}
+    puts songs
+    end
+  
 end
