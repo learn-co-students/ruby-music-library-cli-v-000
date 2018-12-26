@@ -22,11 +22,19 @@ class MusicLibraryController
     puts "What would you like to do?"
     input = gets.strip
 
-end 
-   end
+      end 
+    end
      
     def list_songs
-     Song.all.sort_by! {|song| puts song.name}
-    
+     
+     Song.all.sort{|a, b| a.name <=> b.name}.each.with_index(1) do |song, num| 
+     
+       puts "#{num}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+       
+       end
+       
+       def list_artist
+     end
   
+   
 end
