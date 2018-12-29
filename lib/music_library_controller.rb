@@ -63,4 +63,20 @@ class MusicLibraryController
       puts "#{index}. #{value.name}"
     end
   end
+  
+  
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    answer = gets.strip
+  end 
+  
 end 
+
+
+
+
+
+
+
+
+
