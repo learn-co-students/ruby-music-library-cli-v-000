@@ -1,6 +1,4 @@
-#genre = waiter
-#song = meal
-#artist = customer
+
 require "pry"
 class Song 
   
@@ -58,14 +56,16 @@ class Song
   end
   
   def self.new_from_filename(filename)
-    filename = filename.split(/ - /)
-    song_name = filename[1]
-    song = self.new(song_name)
-    
+    filename = filename.split(" - ")
     artist = Artist.find_or_create_by_name(filename[0])
-    song.artist = artist
-    
-  end  
+    genre = Genre.find_or_create_by_name(filename[2].chomp(".mp3"))
+    song = self.new(filename[1], artist, genre)
+  end 
+  
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename)
+    song.save
+  end 
 end 
 
 

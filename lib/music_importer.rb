@@ -1,3 +1,4 @@
+require "pry"
 class MusicImporter 
   
   attr_accessor :path
@@ -9,7 +10,11 @@ class MusicImporter
   def files 
     x = Dir.glob("#{@path}/*.mp3")
     x.collect do |e|
-      e.gsub("./spec/fixtures/mp3s/", "") 
+      e.gsub("#{@path}/", "") 
     end
+  end 
+  
+  def import 
+    files.each {|filename| Song.create_from_filename(filename)}
   end 
 end 
