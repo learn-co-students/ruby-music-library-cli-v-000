@@ -27,4 +27,8 @@ class Song
     song = self.new(song)
   end
   
+  # def artist=(artist)
+  #   # artist.songs << self
+  # end
+  
 end

@@ -16,18 +16,19 @@ class Artist
   def self.all
     @@all
   end
-  
+
   def save
     @@all << self
   end
-    
+
   def new_song(name, genre)
    song = Song.new(name, self, genre)
    song
   end
 
   def songs
-  # Song.all.select { |song| song.artist == self }    
+
+ # Song.all.select { |song| song.artist == self }    
     @songs
   end
   
@@ -48,7 +49,9 @@ class Artist
   end
   
   def add_song(song)
-    song.artist = self
+    if song.artist == nil
+      song.artist = self
+      @songs << song
+    end
   end
-  
 end

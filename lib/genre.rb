@@ -16,7 +16,7 @@ class Genre
   def save
     @@all << self
   end
-  
+
   def songs
     Song.all.select { |song| song.genre == self }
   end
@@ -28,7 +28,7 @@ class Genre
     }
     artists
   end
-  
+
   def self.destroy_all
     @@all = []
   end
