@@ -17,8 +17,10 @@ class Genre
   end
 
   def self.create(name)
-    new(name).save
-    self
+    #self.new.tap {|o| o.name = name}
+    genre = new(name)
+    genre.save
+    genre
   end
   
   def initialize(name)
