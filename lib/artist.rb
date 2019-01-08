@@ -3,13 +3,13 @@ require 'pry'
 class Artist 
   
   attr_accessor :name, :song, :genre
-  
+  attr_reader :songs
+
   @@all = []
   
   
   def initialize(name)
     @name = name
-    @@all << self
     @songs = []
   end
 
@@ -20,38 +20,32 @@ class Artist
   def save
     @@all << self
   end
-
-  def new_song(name, genre)
-   song = Song.new(name, self, genre)
-   song
-  end
-
-  def songs
-
- # Song.all.select { |song| song.artist == self }    
-    @songs
-  end
   
   def genres
-    genres = []
-    self.songs.map { |song| 
-    genres << song.genre
+    # binding.pry
+    # songs.collect{ |s| s.genre }.uniq
+    @genres = []
+     songs.map { |song|
+      @genres << song.genre
     }
-    genres
+    @genres.uniq
   end
   
   def self.destroy_all
     @@all = []
   end
   
-  def self.create(artist)
-    artist = self.new(artist)
+  def self.create(artistName)
+    artist = self.new(artistName)
+    artist.save
+    artist
   end
   
   def add_song(song)
     if song.artist == nil
       song.artist = self
-      @songs << song
     end
+    songs << song unless songs.include?(song)
   end
 end
+
