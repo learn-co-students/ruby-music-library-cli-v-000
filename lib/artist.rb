@@ -1,5 +1,6 @@
 # 1/8/19  MUST UPDATE from artist-song modules lab
-require 'pry'  
+require 'pry'
+
 class Artist
   attr_accessor :name
   attr_reader :songs
