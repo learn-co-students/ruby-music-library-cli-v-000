@@ -28,7 +28,7 @@ class Genre
     self.songs.map { |song| 
     artists << song.artist
     }
-    artists
+    artists.uniq
   end
 
   def self.destroy_all
