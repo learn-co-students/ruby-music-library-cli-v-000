@@ -1,5 +1,6 @@
 class Song
   
+  
   attr_accessor :name, :artist, :genre
   
   @@all = []
@@ -41,24 +42,10 @@ class Song
   def self.find_by_name(songName)
     self.all.find {|song| song.name == songName }
   end
-  
-  # def self.find_or_create_by_name(songName)
-  #   find_by_name(songName)
-  #   # if find_by_name(songName) == nil
-  #   #   self.new(songName)
-  #   # end
-  # end
     
   def self.find_or_create_by_name(songName)
     self.find_by_name(songName) ? self.find_by_name(songName) : self.create(songName)
   end
 
-  def self.create(songName)
-    self.new(songName).tap {|song| song.save}
-  end
-  
-  
-  
-  
 
 end

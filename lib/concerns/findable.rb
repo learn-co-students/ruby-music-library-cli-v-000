@@ -1,0 +1,1 @@
+#findable module in /config/environment.rb
