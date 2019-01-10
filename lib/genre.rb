@@ -8,16 +8,28 @@ class Genre
 
   def initialize(name)
     @name = name
-    @@all << self
   end
+
+  def self.create(name)
+    Genre.new(name).save
+    self
+  end
+
+# @@all array: methods to save, read & delete list of all Song objects
+  @@all = []
 
   def self.all
     @@all
   end
 
-  def name
-    @name
+  def save
+    @@all << self
   end
+
+  def self.destroy_all
+    @@all.clear
+  end
+# end @@all methods
 
   def songs
     Song.all.select {|song| song.genre == self}
