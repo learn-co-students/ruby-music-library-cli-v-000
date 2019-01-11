@@ -16,7 +16,7 @@ class Artist
   end
 
   def self.destroy_all
-    self.all.clear
+    all.clear
   end
 
   def save
@@ -24,18 +24,20 @@ class Artist
   end
 
   def self.create(name)
-    song = Artist.new(name)
-    song.save
-    song
+    artist = new(name)
+    artist.save
+    artist
+
+    # Or, as a one-liner:
+    # new(name).tap{ |a| a.save }
   end
 
   def add_song(song)
-    songs << song if !songs.include?(song)
-    song.artist = self if song.artist.nil?
+    song.artist = self unless song.artist
+    songs << song unless songs.include?(song)
   end
 
   def genres
-    songs.map{|song| song.genre}.uniq
+    songs.collect{ |s| s.genre }.uniq
   end
-
 end

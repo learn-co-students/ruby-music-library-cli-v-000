@@ -1,6 +1,4 @@
 class Song
-  extend Concerns::Findable
-
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -8,28 +6,8 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist
-    @genre = genre
-    artist.add_song(self) if !artist.nil?
-    genre.songs << self if !(genre.nil? || genre.songs.include?(self))
-  end
-
-  def self.all
-    @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
-  def self.create(name)
-    song = Song.new(name)
-    song.save
-    song
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def artist=(artist)
@@ -39,22 +17,52 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    genre.songs << self if !genre.songs.include?(self)
+    genre.songs << self unless genre.songs.include?(self)
   end
 
-  def self.new_from_filename(file)
-    song = Song.find_or_create_by_name(file.split(" - ")[1])
-    song.artist = Artist.find_or_create_by_name(file.split(" - ")[0])
-    song.genre = Genre.find_or_create_by_name(file.split(" - ")[2].gsub(".mp3", ""))
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    all.clear
+  end
+
+  def save
+    self.class.all << self
+  end
+
+  def self.create(name)
+    song = new(name)
+    song.save
     song
+
+    # Or, as a one-liner:
+    # new(name).tap{ |s| s.save }
   end
 
-  def self.create_from_filename(file)
-    self.new_from_filename(file)
+  def self.find_by_name(name)
+    all.detect{ |s| s.name == name }
   end
 
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
+  end
+
+  def self.new_from_filename(filename)
+    parts = filename.split(" - ")
+    artist_name, song_name, genre_name = parts[0], parts[1], parts[2].gsub(".mp3", "")
+
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    new(song_name, artist, genre)
+  end
+
+  def self.create_from_filename(filename)
+    new_from_filename(filename).tap{ |s| s.save }
+  end
 end
-
 
 # class Song
 # 	attr_accessor :name
