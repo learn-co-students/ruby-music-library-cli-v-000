@@ -1,3 +1,5 @@
+
+
 require 'pry'
 
 class Artist 
@@ -42,6 +44,15 @@ class Artist
     artist.save
     artist
   end
+  
+  def self.find_by_name(objectName)
+      self.all.find {|object| object.name == objectName }
+  end
+  
+  
+    def self.find_or_create_by_name(objectName)
+      self.find_by_name(objectName) ? self.find_by_name(objectName) : self.create(objectName)
+    end
   
   def add_song(song)
     if song.artist == nil
