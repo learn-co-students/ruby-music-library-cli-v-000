@@ -9,8 +9,10 @@ class Song
   attr_accessor :name, :artist, :genre
 
 
-  def initialize(attributes)
-    attributes.each{|key, value| self.send(("#{key}="), value)}
+  def initialize(name, artist: "none", genre: "none")
+    @name = name
+
+    #attributes.each{|key, value| self.send(("#{key}="), value)}
   end
 
   def self.create(name)
@@ -20,7 +22,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    Artist.add_song
+    self.artist = Artist.add_song
   end
 
   def genre=(genre)
