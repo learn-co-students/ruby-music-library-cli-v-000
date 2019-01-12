@@ -6,16 +6,25 @@ class Song
   # extend Findable::ClassMethods
   # include Paramable::InstanceMethods
 
-  attr_accessor :name
-  attr_reader :artist
+  attr_accessor :name, :artist, :genre
 
-  def initialize(name)
-    @name = name
+
+  def initialize(attributes)
+    attributes.each{|key, value| self.send(("#{key}="), value)}
   end
 
   def self.create(name)
     Song.new(name).save
     self
+  end
+
+  def artist=(artist)
+    @artist = artist
+    Artist.add_song
+  end
+
+  def genre=(genre)
+    @genre = genre
   end
 
 # @@all array: methods to save, read & delete list of all Song objects
@@ -34,7 +43,4 @@ class Song
   end
 # end @@all methods
 
-  def artist=(artist)
-    @artist = artist
-  end
 end
