@@ -8,10 +8,10 @@ class Song
 
   attr_accessor :name, :artist, :genre
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist= nil)
     @name = name
-    artist=(artist) if artist
-      #genre=(genre) if genre
+    artist=(artist) if artist != nil
+
     #attributes.each{|key, value| self.send(("#{key}="), value)}
   end
 
