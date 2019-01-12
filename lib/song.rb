@@ -1,5 +1,3 @@
-# 1/8/19  MUST UPDATE from artist-song modules lab
-
 require 'pry'
 
 class Song
@@ -8,11 +6,9 @@ class Song
 
   attr_accessor :name, :artist, :genre
 
-  def initialize(name, artist= nil)
+  def initialize(name, artist = nil)
     @name = name
-    artist=(artist) if artist != nil
-
-    #attributes.each{|key, value| self.send(("#{key}="), value)}
+    self.artist = artist if artist
   end
 
   def self.create(name)
@@ -22,14 +18,15 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    Artist.add_song(self)
+    artist.add_song(self)
   end
 
   def genre=(genre)
     @genre = genre
   end
 
-# @@all array: methods to save, read & delete list of all Song objects
+    # @@all array: methods to save,
+    # read & delete list of all Song objects
   @@all = []
 
   def self.all
@@ -43,6 +40,6 @@ class Song
   def self.destroy_all
     @@all.clear
   end
-# end @@all methods
+    # end @@all methods
 
-end
+end # Song class end
