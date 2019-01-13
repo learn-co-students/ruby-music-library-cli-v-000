@@ -1,13 +1,12 @@
-# 1/8/19 MUST UPDATE from has-many-through lab
 require 'pry'
 
 class Genre
-
   attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
   end
 
   def self.create(name)
@@ -32,7 +31,8 @@ class Genre
 # end @@all methods
 
   def songs
-    Song.all.select {|song| song.genre == self}
+    @songs
+    #Song.all.select {|song| song.genre == self}
   end
 
   def artists
