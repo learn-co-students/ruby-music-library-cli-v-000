@@ -9,7 +9,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
   end
 
   def self.create(name)
@@ -39,10 +38,11 @@ class Artist
   end
 
   def genres
-    self.songs.each do |song|
-      @genres << song.genre  if genres.include?(!song.genre)
-    end
+    genres = []
+    @songs.each do |song|
+      genres << song.genre if !genres.include?(song.genre)
     binding.pry
+    end
     genres
   end
 
