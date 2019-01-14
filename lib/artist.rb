@@ -1,10 +1,10 @@
-# 1/8/19  MUST UPDATE from artist-song modules lab
 require 'pry'
 
 class Artist
   attr_accessor :name, :songs
 #  extend Findable::ClassMethods
   @@all = []
+  #@@genres = []
 
   def initialize(name)
     @name = name
@@ -36,7 +36,16 @@ class Artist
     @songs << song if !@songs.include?(song)
     song.artist = self if !song.artist
   end
-#
+
+  def genres
+    genres = []
+    self.songs.each do |song|
+      genres << song.genre  #  if genres.include?(!song.genre)
+    end
+    binding.pry
+    genres
+  end
+
 #  def add_songs(songs)
 #    songs.each { |song| add_song(song) }
 #  end
