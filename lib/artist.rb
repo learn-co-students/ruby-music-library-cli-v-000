@@ -2,13 +2,14 @@ require 'pry'
 
 class Artist
   attr_accessor :name, :songs
-#  extend Findable::ClassMethods
+  attr_reader :genres
   @@all = []
-  #@@genres = []
+
 
   def initialize(name)
     @name = name
     @songs = []
+    @genres = []
   end
 
   def self.create(name)
@@ -38,16 +39,11 @@ class Artist
   end
 
   def genres
-    genres = []
     self.songs.each do |song|
-      genres << song.genre  #  if genres.include?(!song.genre)
+      @genres << song.genre  if genres.include?(!song.genre)
     end
     binding.pry
     genres
   end
-
-#  def add_songs(songs)
-#    songs.each { |song| add_song(song) }
-#  end
 
 end # Artist class end
