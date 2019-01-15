@@ -1,4 +1,5 @@
 require 'pry'
+require_relative './concerns/findable'
 
 class Artist 
   
@@ -36,21 +37,6 @@ class Artist
   def self.destroy_all
     @@all = []
   end
-  
-  def self.create(artistName)
-    artist = self.new(artistName)
-    artist.save
-    artist
-  end
-  
-  def self.find_by_name(objectName)
-      self.all.find {|object| object.name == objectName }
-  end
-  
-  
-    def self.find_or_create_by_name(objectName)
-      self.find_by_name(objectName) ? self.find_by_name(objectName) : self.create(objectName)
-    end
   
   def add_song(song)
     if song.artist == nil

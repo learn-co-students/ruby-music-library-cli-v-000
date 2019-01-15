@@ -1,7 +1,11 @@
+require_relative './concerns/findable'
+
 class Song
-  
+
+  extend Concerns::Findable
   
   attr_accessor :name, :artist, :genre
+  
   
   @@all = []
   
@@ -9,7 +13,6 @@ class Song
     @name = name
     self.artist = artist if artist
     self.genre = genre if genre
-    @@all << self
   end
   
   def artist=(artist)
@@ -34,18 +37,6 @@ class Song
   
   def save
     @@all << self
-  end
-  
-  def self.create(song)
-    song = self.new(song)
-  end
-  
-  def self.find_by_name(songName)
-    self.all.find {|song| song.name == songName }
-  end
-    
-  def self.find_or_create_by_name(songName)
-    self.find_by_name(songName) ? self.find_by_name(songName) : self.create(songName)
   end
   
   def self.new_from_filename(filename)

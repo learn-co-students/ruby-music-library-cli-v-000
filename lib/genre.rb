@@ -1,3 +1,5 @@
+require_relative './concerns/findable'
+
 class Genre
   
   attr_accessor :name, :artist, :song
@@ -34,21 +36,6 @@ class Genre
 
   def self.destroy_all
     @@all = []
-  end
-  
-  def self.create(genreName)
-    genre = self.new(genreName)
-    genre.save
-    genre
-  end
-  
-  def self.find_by_name(objectName)
-      self.all.find {|object| object.name == objectName }
-  end
-  
-  
-  def self.find_or_create_by_name(objectName)
-    self.find_by_name(objectName) ? self.find_by_name(objectName) : self.create(objectName)
   end
 
 end
