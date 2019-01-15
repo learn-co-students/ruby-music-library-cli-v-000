@@ -41,7 +41,7 @@ class Song
   
   def self.new_from_filename(filename)
     file = filename.split(/ - |(.mp3)/)
-    song = self.new(file[1], Artist.new(file[0]), Genre.new(file[2]))
+    song = self.new(file[1], Artist.find_or_create_by_name(file[0]), Genre.find_or_create_by_name(file[2]))
     # => ["Thundercat", "For Love I Come", "dance", ".mp3"]
   end
 
