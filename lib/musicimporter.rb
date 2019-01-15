@@ -13,7 +13,7 @@ attr_accessor :path
   end
   
   def import
-    self.files.map { |f| Song.new_by_filename(f) }
+    self.files.map { |f| Song.create_from_filename(f) }
   end
   
 end

@@ -45,5 +45,10 @@ class Song
     # => ["Thundercat", "For Love I Come", "dance", ".mp3"]
   end
 
+  def self.create_from_filename(filename)
+    song = new_from_filename(filename)
+    # => ["Thundercat", "For Love I Come", "dance", ".mp3"]
+    song.save
+  end
 
 end
