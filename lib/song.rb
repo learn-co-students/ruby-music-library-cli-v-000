@@ -49,13 +49,8 @@ class Song
   end
   
   def self.new_from_filename(filename)
-    song = filename.split(/ - |(.mp3)/)
-    newSong = self.new(song[1])
-    # newSong.artist
-    artist = Artist.new(song[0])
-    newSong.artist = artist
-    # binding.pry
-    # newSong.genre = Genre.new(song[2])
+    file = filename.split(/ - |(.mp3)/)
+    song = self.new(file[1], Artist.new(file[0]), Genre.new(file[2]))
     # => ["Thundercat", "For Love I Come", "dance", ".mp3"]
   end
 
