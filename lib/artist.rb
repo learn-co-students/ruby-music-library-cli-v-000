@@ -17,8 +17,6 @@ class Artist
   end
 
 # @@all array: methods to save, read & delete list of all Song objects
-  @@all = []
-
   def self.all
     @@all
   end
@@ -33,14 +31,14 @@ class Artist
 # end @@all methods
 
   def add_song(song)
-    @songs << song if !@songs.include?(song)
-    song.artist = self if !song.artist
+    @songs << song unless @songs.include?(song)
+    song.artist = self unless song.artist
   end
 
   def genres
     genres = []
     @songs.each do |song|
-      genres << song.genre if !genres.include?(song.genre)
+      genres << song.genre unless genres.include?(song.genre)
     binding.pry
     end
     genres
