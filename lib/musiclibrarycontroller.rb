@@ -56,4 +56,44 @@ class MusicLibraryController
     }
   end
   
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    input = gets.chomp
+    counter = 1
+    Song.all.sort_by(&:name).map {|song|
+      if song.artist.name == input
+        puts "#{counter}. #{song.name} - #{song.genre.name}" 
+        counter+=1
+      end
+    }
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    input = gets.chomp
+    counter = 1
+    Song.all.sort_by(&:name).map {|song|
+      if song.genre.name == input
+        puts "#{counter}. #{song.artist.name} - #{song.name}" 
+        counter+=1
+      end
+    }
+  end
+  
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.chomp.to_i
+    libraryList = []
+    Song.all.sort_by(&:name).map { |song|
+      libraryList << song  
+    }
+    
+    if input > 0 && input <= libraryList.size
+    song = libraryList[input - 1]
+    puts "Playing #{song.name} by #{song.artist.name}"
+    end      
+
+  end
+    
+  
 end
