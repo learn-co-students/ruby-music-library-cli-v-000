@@ -11,8 +11,9 @@ class Genre
   end
 
   def self.create(name)
-    Genre.new(name).save
-    self
+    g = Genre.new(name)
+    g.save
+    g
   end
 
   # @@all array: methods to save, read & delete list of all Song objects

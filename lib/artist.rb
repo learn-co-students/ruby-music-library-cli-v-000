@@ -13,8 +13,9 @@ class Artist
   end
 
   def self.create(name)
-    Artist.new(name).save
-    self
+    a = Artist.new(name)
+    a.save
+    a
   end
 
 # @@all array: methods to save, read & delete list of all Song objects
@@ -24,6 +25,7 @@ class Artist
 
   def save
     @@all << self
+
   end
 
   def self.destroy_all
