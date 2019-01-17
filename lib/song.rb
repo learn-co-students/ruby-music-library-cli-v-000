@@ -1,10 +1,8 @@
 require 'pry'
 
 class Song
-  # extend Findable::ClassMethods
-  # include Paramable::InstanceMethods
-
   attr_accessor :name, :artist, :genre
+    @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -14,7 +12,6 @@ class Song
 
   def self.create(name)
     Song.new(name).save
-    self
   end
 
   def artist=(artist)
@@ -24,24 +21,18 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    genre.songs << self # if !genre.songs.include?(self)
-    genre.songs.uniq!
-  end
-
-  def genre
-    @genre
+    genre.songs << self unless genre.songs.include?(self)
   end
 
     # @@all array: methods to save,
     # read & delete list of all Song objects
-  @@all = []
-
   def self.all
     @@all
   end
 
   def save
     @@all << self
+    self
   end
 
   def self.destroy_all
@@ -49,4 +40,11 @@ class Song
   end
     # end @@all methods
 
+  def self.find_by_name(name)
+    self.all.find {|song| song if song.name == name}
+  end
+
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) || self.create(name)
+  end
 end # Song class end

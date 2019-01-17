@@ -1,6 +1,7 @@
 require 'pry'
 
 class Genre
+  extend Concerns::Findable
   attr_accessor :name, :songs
   @@all = []
 
@@ -14,9 +15,7 @@ class Genre
     self
   end
 
-# @@all array: methods to save, read & delete list of all Song objects
-  @@all = []
-
+  # @@all array: methods to save, read & delete list of all Song objects
   def self.all
     @@all
   end
@@ -28,14 +27,10 @@ class Genre
   def self.destroy_all
     @@all.clear
   end
-# end @@all methods
-
-  def songs
-    @songs
-  end
+  # end @@all methods
 
   def artists
-    self.songs.collect {|song| song.artist}
+    songs.collect{|song| song.artist}.uniq
   end
 
-end  #class end
+end  # Genre class end
