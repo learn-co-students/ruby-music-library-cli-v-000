@@ -4,27 +4,6 @@ describe "MusicLibraryController - CLI Methods" do
   let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
   let(:other_music_library_controller) { MusicLibraryController.new("./spec/fixtures/other_mp3s") }
 
-  describe "#list_songs" do
-    it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
-      expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
-      expect($stdout).to receive(:puts).with("2. Real Estate - Green Aisles - country")
-      expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
-      expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
-      expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
-
-      music_library_controller.list_songs
-    end
-
-    it "is not hard-coded" do
-      expect($stdout).to receive(:puts).with("1. Bob Dylan - Ballad of a Thin Man - folk")
-      expect($stdout).to receive(:puts).with("2. Alpha 9 - Bliss - trance")
-      expect($stdout).to receive(:puts).with("3. Cass McCombs - County Line - indie")
-      expect($stdout).to receive(:puts).with("4. Bob Dylan - Masters of War - folk")
-
-      other_music_library_controller.list_songs
-    end
-  end
-
   describe "#list_artists" do
     it "prints all artists in the music library in a numbered list (alphabetized by artist name)" do
       expect($stdout).to receive(:puts).with("1. Action Bronson")
@@ -167,15 +146,6 @@ describe "MusicLibraryController - CLI Methods" do
 
       expect($stdout).to receive(:puts).with("Which song number would you like to play?")
       expect($stdout).to receive(:puts).with("Playing Larry Csonka by Action Bronson")
-
-      music_library_controller.play_song
-    end
-
-    it "does not 'puts' anything out if a matching song is not found" do
-      allow(music_library_controller).to receive(:gets).and_return("6")
-
-      expect($stdout).to receive(:puts).with("Which song number would you like to play?")
-      expect($stdout).to_not receive(:puts)
 
       music_library_controller.play_song
     end
