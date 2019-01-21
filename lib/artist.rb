@@ -1,5 +1,6 @@
 class Artist 
-  attr_accessor :name, :songs, :genres, :artist 
+  extend Concerns::Findable
+  attr_accessor :name, :songs, :artist 
   attr_reader 
   @@all = []
   
@@ -32,4 +33,7 @@ class Artist
      @songs << song unless songs.include?(song)
     end
   
+   def genres
+     self.songs.collect {|s| s.genre}.uniq
+  end
 end
