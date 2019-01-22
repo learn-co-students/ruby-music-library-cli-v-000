@@ -8,8 +8,8 @@ class MusicLibraryController
   end
   
   def call
-    music_lib_controller = ""
-    until music_lib_controller == "exit"
+    u_input  = ""
+    until u_input == "exit"
     
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
@@ -20,9 +20,28 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    music_lib_controller = gets.strip
+    u_input = gets.strip
+    if u_input == 'list songs'
+      list_songs
     end
+    if u_input == 'list artists'
+      list_artists
+    end  
+    if u_input == 'list genres'
+      list_genres
+    end   
+    if u_input == 'list artist'
+      list_songs_by_artist
+    end   
+    if u_input == 'list genre'
+    list_songs_by_genre
+    end 
+   if u_input == 'play song'
+    play_song
   end
+  end
+  end
+
   
   def list_songs
    arr = Song.all.sort do |a, b|
@@ -98,10 +117,6 @@ class MusicLibraryController
     end
   end
 
-  user_input = gets.strip 
-  if user_input = 'list songs'
-    self.new.list_songs
-  end
 
   
 end
