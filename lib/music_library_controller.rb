@@ -1,5 +1,5 @@
 class MusicLibraryController 
-  
+  extend Concerns::Findable 
   def initialize(path='./db/mp3s')
     @path = path
     mi = MusicImporter.new(path)
@@ -24,27 +24,80 @@ class MusicLibraryController
   end
   
   def list_songs
-    # new_mi = MusicImporter.new(path='./db/mp3s')
-    Song.all.sort do |a, b|
+   arr = Song.all.sort do |a, b|
       a.name <=> b.name
-      
     end
-  # binding.pry
+      counter = 0
+        arr.each do |i|
+          counter += 1 
+            puts "#{counter}. #{i.artist.name} - #{i.name} - #{i.genre.name}"
+        end
+    end
+  
+  def list_artists
+    arr = Artist.all.sort do |a, b|
+      a.name <=> b.name
+    end
+      counter = 0
+        arr.each do |i|
+          counter += 1 
+            puts "#{counter}. #{i.name}"
+        end
+  end
+
+  def list_genres
+    arr = Genre.all.sort do |a, b|
+      a.name <=> b.name
+    end
+    counter = 0 
+    arr.each do |i|
+      counter += 1 
+      puts "#{counter}. #{i.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    u_input = gets.strip
+    artist = Artist.find_by_name(u_input)
+    if artist != nil 
+      counter = 0
+      artist.songs.sort{|a,b| a.name <=> b.name }.each do |i|
+      counter += 1 
+      puts "#{counter}. #{i.name} - #{i.genre.name}" 
+     end   
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    u_input = gets.strip
+    genre = Genre.find_by_name(u_input)
+    if genre != nil 
+      counter = 0 
+      genre.songs.sort{|a,b| a.name <=> b.name}.each do |i|
+        counter += 1 
+        puts "#{counter}. #{i.artist.name} - #{i.name}"
+      end
+    end
+  end
+  
+  
+  def play_song
+    puts "Which song number would you like to play?"
+    self.list_songs
+    u_input = gets.strip.to_i-1
+    if u_input != nil 
+      the_song = list_songs[u_input]
+        puts "Playing #{the_song.name} by #{the_song.artist.name}"
+
+    end
+ 
+ 
   end
   
 end
 
 
- # loop do 
-      #   counter += 1
-        # puts #{counter}. #{r}"
-        # binding.pry
 
- # counter = 0 
-      # loop do
-      # counter += 1
-      # a.name <=> b.name
-      # if a.name < b.name
-      #   puts "#{counter}. #{a.name}"
-      # elsif a.name > b.name
-      #   puts "#{counter}. #{b.name}"
+
