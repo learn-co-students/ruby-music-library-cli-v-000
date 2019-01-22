@@ -1,7 +1,7 @@
 require "pry"
 class MusicLibraryController
   
-  attr_accessor :path, :songs, :artist 
+  attr_accessor :path, :songs, :artist, :genre 
   
   
   def initialize(path = './db/mp3s')
@@ -28,6 +28,10 @@ class MusicLibraryController
         list_artists
       when "list genres"
         list_genres
+      when "list artist"
+        list_songs_by_artist 
+      when "list genre"
+        
       end
     end
   end
@@ -56,7 +60,27 @@ class MusicLibraryController
   def list_songs_by_artist 
     puts "Please enter the name of an artist:"
     input = gets.strip
-    Artist.find_by_name(input)
+    artist = Artist.find_by_name(input)
+    if artist != nil 
+    artist.songs.sort{|a, b| a.name <=> b.name}.each_with_index do |song, i|
+      puts "#{i + 1}. #{song.name} - #{song.genre.name}"
+      i += 1 
+     end
+    end
   end 
+  
+   def list_songs_by_genre 
+    puts "Please enter the name of a genre:"
+    input = gets.strip
+    genre = Genre.find_by_name(input)
+    if genre != nil 
+    genre.songs.sort{|a, b| a.name <=> b.name}.each_with_index do |song, i|
+      puts "#{i + 1}. #{song.artist.name} - #{song.name}"
+      i += 1 
+     end
+   end
+  end 
+  
+  
   
 end
