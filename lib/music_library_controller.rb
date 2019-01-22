@@ -1,5 +1,6 @@
 class MusicLibraryController 
   extend Concerns::Findable 
+  
   def initialize(path='./db/mp3s')
     @path = path
     mi = MusicImporter.new(path)
@@ -32,6 +33,7 @@ class MusicLibraryController
           counter += 1 
             puts "#{counter}. #{i.artist.name} - #{i.name} - #{i.genre.name}"
         end
+
     end
   
   def list_artists
@@ -81,20 +83,26 @@ class MusicLibraryController
       end
     end
   end
-  
-  
+ 
+ 
   def play_song
     puts "Which song number would you like to play?"
-    self.list_songs
-    u_input = gets.strip.to_i-1
-    if u_input != nil 
-      the_song = list_songs[u_input]
-        puts "Playing #{the_song.name} by #{the_song.artist.name}"
-
+    input = gets.strip.to_i - 1
+      if input.between?(0, Song.all.count)
+        songs = Song.all.sort {|a, b| a.name <=> b.name}
+      if songs[input]
+        song_choice = songs[input]
+        puts "Playing #{song_choice.name} by #{song_choice.artist.name}"
+      else nil 
+     end
     end
- 
- 
   end
+
+  user_input = gets.strip 
+  if user_input = 'list songs'
+    self.new.list_songs
+  end
+
   
 end
 
