@@ -1,5 +1,5 @@
-#  1/8/19 must update  from collab objects lab
 require 'pry'
+
 class MusicImporter
 	attr_accessor :path, :files
 
@@ -29,8 +29,7 @@ class MusicImporter
 
 	def import
 		self.files.each do |filename|
-      Song.new_by_filename
+      Song.create_from_filename
   	end
 	end
-#class end below
-end
+end #class end below
