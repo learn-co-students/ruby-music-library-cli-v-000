@@ -61,6 +61,25 @@ class Song
 
 #  def self.create_from_filename(filename)
 
+# Rspec:
+# describe ".new_from_filename" do
+#  it "initializes a song based on the passed-in filename" do
+#    song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
+
+  def self.new_from_filename(filename)
+    song = self.new(filename.split(" - ")[1])
+    artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
+    song.genre = Genre.find_or_create_by_name(filename.split(" - ")[2].gsub(".mp3",""))
+    song
+  end
+
+
+
+#  def self.create_from_filename(filename)
+
+
+
+#    song = self.new_from_filename(filename)
 #  end
 
 end # Song class end
