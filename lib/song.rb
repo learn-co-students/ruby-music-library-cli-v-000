@@ -60,10 +60,10 @@ class Song
    song.artist = Artist.find_or_create_by_name(artist_name)
    song.genre = Genre.find_or_create_by_name(genre_name)
    song
- end
+  end
 
- def self.create_from_filename(name)
+  def self.create_from_filename(name)
     @@all << self.new_from_filename(name)
   end
-  
+
 end
