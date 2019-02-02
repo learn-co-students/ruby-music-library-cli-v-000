@@ -10,7 +10,6 @@ class MusicLibraryController
   end
 
   def call
-
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -21,22 +20,22 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    gets.strip.downcase
+    input = gets.strip.downcase
+#    case input
+#       when "list songs"
+#         self.call
+#       when "list artists"
+#         self.call
+#       when "list genres"
+#         self.call
+#       when "list artist"
+#         self.call
+#       when "list genre"
+#         self.call
 
-
-    #case gets.strip.downcase
-    #  when "list songs"
-    #    self.call
-    #  when "list artists"
-    #    self.call
-    #  when "list genres"
-    #    self.call
-    #  when "list artist"
-    #    self.call
-    #  when "list genre"
-    #    self.call
-    #  when "exit"
-    #end
+    if input != "exit"
+      self.call
+    end
   end
 
 end #class MusicImporter end
