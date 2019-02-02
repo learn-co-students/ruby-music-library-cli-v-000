@@ -3,9 +3,10 @@ require 'pry'
 class MusicLibraryController
   attr_accessor :path
 
-  def initialize(path)
+  def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
+    self
   end
 
   def call
@@ -20,9 +21,22 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
+    gets.strip.downcase
+
+
+    #case gets.strip.downcase
+    #  when "list songs"
+    #    self.call
+    #  when "list artists"
+    #    self.call
+    #  when "list genres"
+    #    self.call
+    #  when "list artist"
+    #    self.call
+    #  when "list genre"
+    #    self.call
+    #  when "exit"
+    #end
   end
-
-
-
 
 end #class MusicImporter end
