@@ -24,6 +24,7 @@ class MusicLibraryController
     if input != "exit"
       self.call
     end
+  end
         #    case input
         #       when "list songs"
         #         self.call
@@ -35,6 +36,37 @@ class MusicLibraryController
         #         self.call
         #       when "list genre"
         #         self.call
+
+def list_songs
+
+    files = Dir.entries(self.path).keep_if { |file| file.match(/(mp3$)/)}
+    binding.pry
+    files.map
+    files.each_with_index do |name, index|
+      puts "#{index + 1}. #{name}"
+
+    end
   end
+
+  def list_artists
+
+  end
+
+  def list_genres
+
+  end
+
+  def list_songs_by_artist
+
+  end
+
+  def list_songs_by_genre
+
+  end
+
+  def play_song
+
+  end
+
 
 end #class MusicImporter end
