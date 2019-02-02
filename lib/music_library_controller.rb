@@ -21,21 +21,20 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     input = gets.strip.downcase
-#    case input
-#       when "list songs"
-#         self.call
-#       when "list artists"
-#         self.call
-#       when "list genres"
-#         self.call
-#       when "list artist"
-#         self.call
-#       when "list genre"
-#         self.call
-
     if input != "exit"
       self.call
     end
+        #    case input
+        #       when "list songs"
+        #         self.call
+        #       when "list artists"
+        #         self.call
+        #       when "list genres"
+        #         self.call
+        #       when "list artist"
+        #         self.call
+        #       when "list genre"
+        #         self.call
   end
 
 end #class MusicImporter end
