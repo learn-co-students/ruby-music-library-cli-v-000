@@ -37,15 +37,17 @@ class MusicLibraryController
         #       when "list genre"
         #         self.call
 
-def list_songs
-
-    files = Dir.entries(self.path).keep_if { |file| file.match(/(mp3$)/)}
-    binding.pry
-    files.map
-    files.each_with_index do |name, index|
-      puts "#{index + 1}. #{name}"
-
-    end
+  def list_songs
+    # new array to hold subarrays of artist, song name, genre strings
+  		Song.all.map do |song|
+  			num << [song.artist.name,song.name,song.genre.name]
+  		end
+      binding.pry
+    #
+    #  alpha = num.map.sort_by { |num| num[ } #sorts Song objects by song name
+  	#	num.each_with_index do |name, index|
+    #    puts "#{index + 1}. #{name.join(" - ")}"
+  	#	end
   end
 
   def list_artists
