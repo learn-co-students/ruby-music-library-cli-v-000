@@ -1,12 +1,14 @@
 require 'pry'
-
 class MusicLibraryController
-  attr_accessor :path
 
-  def initialize(path = "./db/mp3s")
+  # accepts an optional path to the library of MP3 files, defaulting to ./db/mp3s/
+  # instantiate a MusicImporter object
+
+  attr_accessor :path, :files
+
+  def initialize(path="./db/mp3s")
     @path = path
     MusicImporter.new(path).import
-    self
   end
 
   def call
@@ -25,29 +27,15 @@ class MusicLibraryController
       self.call
     end
   end
-        #    case input
-        #       when "list songs"
-        #         self.call
-        #       when "list artists"
-        #         self.call
-        #       when "list genres"
-        #         self.call
-        #       when "list artist"
-        #         self.call
-        #       when "list genre"
-        #         self.call
 
   def list_songs
-    # new array to hold subarrays of artist, song name, genre strings
-  		Song.all.map do |song|
-  			num << [song.artist.name,song.name,song.genre.name]
-  		end
-      binding.pry
-    #
-    #  alpha = num.map.sort_by { |num| num[ } #sorts Song objects by song name
-  	#	num.each_with_index do |name, index|
-    #    puts "#{index + 1}. #{name.join(" - ")}"
-  	#	end
+    alpha = []
+      Song.all.each do |song|
+        alpha << [song.artist.name, song.name, song.genre.name]
+      end
+      alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
+        puts "#{index}. #{song_parts.join(" - ")}"
+      end
   end
 
   def list_artists
@@ -70,5 +58,4 @@ class MusicLibraryController
 
   end
 
-
-end #class MusicImporter end
+end
