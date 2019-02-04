@@ -30,10 +30,12 @@ class MusicLibraryController
 
   def list_songs
     alpha = []
+    list = []
       Song.all.each do |song|
         alpha << [song.artist.name, song.name, song.genre.name]
       end
       alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
+        list << "#{index}. #{song_parts.join(" - ")}"
         puts "#{index}. #{song_parts.join(" - ")}"
       end
   end
