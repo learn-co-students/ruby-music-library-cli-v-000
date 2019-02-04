@@ -28,6 +28,8 @@ class MusicLibraryController
     end
   end
 
+
+
   def list_songs
     alpha = []
     list = []
@@ -41,7 +43,15 @@ class MusicLibraryController
   end
 
   def list_artists
-
+    alpha = []
+    list = []
+      Artist.all.each do |artist|
+        alpha << artist.name
+      end
+      alpha.sort!.each.with_index(1) do |name, index|
+        list << "#{index}. #{name}"
+        puts "#{index}. #{name}"
+      end
   end
 
   def list_genres
