@@ -3,6 +3,7 @@ require 'pry'
   class Song
     attr_accessor :name
     attr_reader :artist, :genre
+  
     
     @@all = []
     
@@ -48,4 +49,18 @@ require 'pry'
   def self.find_or_create_by_name(name)
     self.find_by_name(name) || self.create(name)
   end 
+  
+  def self.new_from_filename(filename)
+    parts = (filename.gsub(".mp3","").split(" - "))
+    song = self.new(parts[1])
+    song.artist = Artist.find_or_create_by_name(parts[0])
+    song.genre = Genre.find_or_create_by_name(parts[2])
+    song.save
+    song
+  end
+  
+  def self.create_from_filename(filename)
+    song = self.new_from_filename(filename).save
+    song
+  end
 end
