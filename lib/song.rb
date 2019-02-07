@@ -24,6 +24,8 @@ require 'pry'
   
   def save
     @@all << self
+    @@all.uniq!
+    self
   end
   
   def self.create(name)
