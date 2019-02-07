@@ -30,26 +30,22 @@ class MusicLibraryController
 
   def list_songs
     alpha = []
-    list = []
       Song.all.each do |song|
         alpha << [song.artist.name, song.name, song.genre.name]
       end
       alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
-        list << "#{index}. #{song_parts.join(" - ")}"
         puts "#{index}. #{song_parts.join(" - ")}"
       end
   end
 
   def list_artists
-    alpha = []
-    list = []
-      Artist.all.each do |artist|
-        alpha << artist.name
-      end
-      alpha.sort!.each.with_index(1) do |name, index|
-        list << "#{index}. #{name}"
-        puts "#{index}. #{name}"
-      end
+   alpha = []
+     Artist.all.each do |artist|
+       alpha << artist.name
+     end
+     alpha.sort!.each.with_index(1) do |name, index|
+       puts "#{index}. #{name}"
+     end
   end
 
   def list_genres
@@ -65,11 +61,41 @@ class MusicLibraryController
   end
 
   def list_songs_by_artist
-
+    puts "Please enter the name of an artist:"
+    input = gets.strip.downcase.split(/ |\_/).map(&:capitalize).join(" ")
+    alpha = []
+    Artist.all.each do |artist|
+      if artist.name == input
+        artist.songs.each do |song|
+        alpha << [song.name, song.genre.name]
+        end
+      else
+        nil
+      end
+    end
+    alpha.sort!{|a,b| a[0] <=> b[0]}.each.with_index(1) do |song_parts, index|
+      list << "#{index}. #{song_parts.join(" - ")}"
+      puts "#{index}. #{song_parts.join(" - ")}"
+    end
   end
 
   def list_songs_by_genre
-
+    puts "Please enter the name of a genre:"
+    input = gets.strip.downcase.split(/ |\_/).map(&:capitalize).join(" ")
+    alpha = []
+    Genre.all.each do |genre|
+      if genre.name == input
+        genre.songs.each do |song|
+        alpha << [song.artist.name, song.name]
+        end
+      else
+        nil
+      end
+    end
+    alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
+      list << "#{index}. #{song_parts.join(" - ")}"
+      puts "#{index}. #{song_parts.join(" - ")}"
+    end
   end
 
   def play_song
