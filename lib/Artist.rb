@@ -36,7 +36,7 @@ class Artist
     @songs << song unless @songs.include?(song)
   end
 
-  def genres # Continue here!
+  def genres 
     self.songs.map {|song| song.genre}.uniq
   end
 end
