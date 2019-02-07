@@ -37,6 +37,6 @@ class Artist
   end
 
   def genres # Continue here!
-    self.songs.map {|song| song.genre} 
+    self.all.songs.find {|song| song.genre} 
   end
 end
