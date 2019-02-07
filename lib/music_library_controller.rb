@@ -4,11 +4,12 @@ class MusicLibraryController
   # accepts an optional path to the library of MP3 files, defaulting to ./db/mp3s/
   # instantiate a MusicImporter object
 
-  attr_accessor :path, :files
+  attr_accessor :path, :files, :library
 
   def initialize(path="./db/mp3s")
     @path = path
     MusicImporter.new(path).import
+    @library = []
   end
 
   def call
@@ -31,9 +32,9 @@ class MusicLibraryController
   def list_songs
     alpha = []
       Song.all.each do |song|
-        alpha << [song.artist.name, song.name, song.genre.name]
+        self.library << [song.artist.name, song.name, song.genre.name]
       end
-      alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
+      self.library.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
         puts "#{index}. #{song_parts.join(" - ")}"
       end
   end
@@ -64,6 +65,7 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     input = gets.strip.downcase.split(/ |\_/).map(&:capitalize).join(" ")
     alpha = []
+    list = []
     Artist.all.each do |artist|
       if artist.name == input
         artist.songs.each do |song|
@@ -83,6 +85,7 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
     input = gets.strip.downcase.split(/ |\_/).map(&:capitalize).join(" ")
     alpha = []
+    list = []
     Genre.all.each do |genre|
       if genre.name == input
         genre.songs.each do |song|
@@ -99,7 +102,13 @@ class MusicLibraryController
   end
 
   def play_song
-
+    puts "Which song number would you like to play?"
+    input = gets.strip
+    binding.pry
+    if input.between?(1, Song.all.length).to_s
+      self.play_song =
+      puts "Playing #{self.list_songssong.name} by #{song.artist.name}"
+    end
   end
 
-end
+end # class end
