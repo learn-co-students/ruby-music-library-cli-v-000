@@ -28,5 +28,7 @@ class Genre
     new_genre
   end
 
-
+  def artists
+    self.songs.map {|song| song.artist}.uniq
+  end
 end
