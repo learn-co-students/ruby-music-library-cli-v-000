@@ -22,7 +22,7 @@ class Genre
 
   def self.create(name)
     new_genre = Genre.new(name)
-    @@all << new_genre
+    new_genre.save
     new_genre
   end
 end
