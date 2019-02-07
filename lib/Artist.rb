@@ -35,4 +35,8 @@ class Artist
     song.artist = self if !song.artist
     @songs << song unless @songs.include?(song)
   end
+
+  def genres # Continue here!
+    self.songs.map {|song| song.genre} 
+  end
 end
