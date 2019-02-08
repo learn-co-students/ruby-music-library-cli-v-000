@@ -100,12 +100,25 @@ class MusicLibraryController
 
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
+<<<<<<< HEAD
     input = gets.strip.downcase
   #  alpha = []
   #  list = []
     if genre = Genre.find_by_name(input)
       genre.songs.sort_by(&:name).each.with_index(1) do |song, index|
         puts "#{index}. #{song.artist.name} - #{song.name}"
+=======
+    input = gets.strip.downcase.split(/ |\_/).map(&:capitalize).join(" ")
+    alpha = []
+    list = []
+    Genre.all.each do |genre|
+      if genre.name == input
+        genre.songs.each do |song|
+        alpha << [song.artist.name, song.name]
+        end
+      else
+        nil
+>>>>>>> c2ede2f042c34289fe7bbaacee2a933036877c96
       end
     end
   end
