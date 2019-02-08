@@ -2,6 +2,8 @@ require 'pry'
 
 class Song
 
+  # extend Concenrs::Findable
+
   attr_accessor :name
   attr_reader :artist, :genre
   @@all = []
@@ -10,12 +12,11 @@ class Song
     @name = name
     self.artist = artist if artist
     self.genre = genre if genre
-    @@all << self
   end
 
   def artist=(artist)
     @artist = artist
-    artist.add_song(self).uniq
+    artist.add_song(self)
   end
 
   def genre=(genre)
@@ -36,9 +37,9 @@ class Song
   end
 
   def self.create(song)
-    new_song = Song.new(song)
-    new_song.save
-    new_song
+    song = Song.new(song)
+    song.save
+    song
   end
 
   def self.find_by_name(name)
@@ -47,5 +48,17 @@ class Song
 
   def self.find_or_create_by_name(name)
     find_by_name(name) || create(name)
+  end
+
+  def self.new_from_filename(filename)
+    song = Song.new(filename.split(" - ")[1])
+    song.artist = Artist.find_or_create_by_name(filename.split(" - ")[0])
+    song.genre = Genre.find_or_create_by_name(filename.split(" - ")[2].gsub(".mp3",""))
+    song
+  end
+
+  def self.create_from_filename(name)
+    song = Song.new_from_filename(name).save
+    song
   end
 end
