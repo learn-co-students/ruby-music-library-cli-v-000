@@ -12,7 +12,12 @@ class MusicLibraryController
     @library = []
   end
 
+  def library
+    @library
+  end
+
   def call
+    while input != "exit"
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -24,20 +29,22 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     input = gets.strip.downcase
+
     if input != "exit"
       self.call
     end
   end
 
   def list_songs
-    alpha = []
+    #alpha = []
       Song.all.each do |song|
-        self.library << [song.artist.name, song.name, song.genre.name]
+      self.library << [song.artist.name, song.name, song.genre.name]
       end
       self.library.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
         puts "#{index}. #{song_parts.join(" - ")}"
       end
   end
+
 
   def list_artists
    alpha = []
@@ -81,34 +88,49 @@ class MusicLibraryController
     end
   end
 
+  #def list_songs_by_genre
+  #  puts "Please enter the name of a genre:" #prompts user
+  #  input = gets.strip #gets input
+  #  if genre = Genre.find_by_name(input)
+  #    genre.songs.sort_by(&:name).each.with_index(1) do |sn, idx|
+  #      puts "#{idx}. #{sn.artist.name} - #{sn.name}"
+  #    end
+  #  end
+  #end
+
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
-    input = gets.strip.downcase.split(/ |\_/).map(&:capitalize).join(" ")
-    alpha = []
-    list = []
-    Genre.all.each do |genre|
-      if genre.name == input
-        genre.songs.each do |song|
-        alpha << [song.artist.name, song.name]
-        end
-      else
-        nil
+    input = gets.strip.downcase
+  #  alpha = []
+  #  list = []
+    if genre = Genre.find_by_name(input)
+      genre.songs.sort_by(&:name).each.with_index(1) do |song, index|
+        puts "#{index}. #{song.artist.name} - #{song.name}"
       end
     end
-    alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
-      list << "#{index}. #{song_parts.join(" - ")}"
-      puts "#{index}. #{song_parts.join(" - ")}"
+  end
+          #alpha.sort!{|a,b| a[1] <=> b[1]}.each.with_index(1) do |song_parts, index|
+          #  list << "#{index}. #{song_parts.join(" - ")}"
+          #  puts "#{index}. #{song_parts.join(" - ")}"
+          #end
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
+    binding.pry
+    if input.between?(1, Song.all.length)
+      played_song = self.library[input-1]
+      puts "Playing #{played_song.name} by #{played_song.artist.name}"
     end
   end
 
   def play_song
     puts "Which song number would you like to play?"
-    input = gets.strip
-    binding.pry
-    if input.between?(1, Song.all.length).to_s
-      self.play_song =
-      puts "Playing #{self.list_songssong.name} by #{song.artist.name}"
+    input = gets.strip.to_i #gets input, converts to the string to an integer
+    if (1..Song.all.length).include?(input)
+      song = Song.all[input] #matches input by index
     end
+    puts "Playing #{song.name} by #{song.artist.name}" if song #prints the matching song
+    #checks for 1 - all songs
   end
-
 end # class end
