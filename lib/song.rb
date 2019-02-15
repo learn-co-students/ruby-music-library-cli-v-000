@@ -1,6 +1,6 @@
 class Song 
   
-  attr_accessor :name, :artist, :genre 
+  attr_accessor :name, 
   
   @@all =[]             #is initialized as an empty array
   
@@ -18,16 +18,17 @@ class Song
    @@all.clear
   end 
   
-  def  save            #adds the Song instance to the @@all class variable
-  @@all << self  
-  self 
+  def  save       #adds the Song instance to the @@all class variable
+   @@all << self  
+   self 
   end 
   
 
-  def self.create
-    
-  end 
-  
+ def self.create(name)  #initializes, saves, and returns the song
+  song = new(name)
+  song.save 
+  song
+ end 
   
   
 end 
