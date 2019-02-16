@@ -1,6 +1,6 @@
 class Song 
   
-  attr_accessor :name, 
+  attr_accessor :name 
   
   @@all =[]             #is initialized as an empty array
   
