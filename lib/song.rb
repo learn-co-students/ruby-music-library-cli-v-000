@@ -1,12 +1,13 @@
 class Song 
   
-  attr_accessor :name 
+  attr_accessor :name, :artist
+ 
   
   @@all =[]             #is initialized as an empty array
   
-  def initialize(name)
+  def initialize(name, artist = nil)
     @name= name 
-   
+    @artist = artist 
   end 
   
   def self.all          #returns the class variable @@all
@@ -28,6 +29,10 @@ class Song
   song = new(name)
   song.save 
   song
+ end 
+ 
+ def artist
+   @artist
  end 
  
 
