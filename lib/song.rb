@@ -1,13 +1,14 @@
 class Song 
   
-  attr_accessor :name, :artist
- 
+  attr_accessor :name
+  attr_reader :artist, :genre  
   
   @@all =[]             #is initialized as an empty array
   
   def initialize(name, artist = nil)
     @name= name 
-    @artist = artist 
+    self.artist = artist if artist 
+   
   end 
   
   def self.all          #returns the class variable @@all
@@ -34,6 +35,12 @@ class Song
  def artist
    @artist
  end 
+ 
+  def artist=(artist)
+    @artist = artist
+    artist.add_song(self)
+   
+  end 
  
 
   
