@@ -5,10 +5,10 @@ class Song
   
   @@all =[]             #is initialized as an empty array
   
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre = nil )
     @name= name 
     self.artist = artist if artist 
-   
+    self.genre = genre if genre
   end 
   
   def self.all          #returns the class variable @@all
@@ -41,8 +41,11 @@ class Song
     artist.add_song(self)
    
   end 
- 
-
+  
+  def genre=(genre)
+    @genre = genre 
+    genre.songs.push self unless genre.songs.include? self 
+  end 
   
   
 end 
