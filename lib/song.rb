@@ -1,3 +1,4 @@
+ require 'pry'
 class Song 
   
   attr_accessor :name
@@ -20,7 +21,7 @@ class Song
    @@all.clear
   end 
   
-  def  save       #adds the Song instance to the @@all class variable
+  def  save            #adds the Song instance to the @@all class variable
    @@all << self  
    self 
   end 
@@ -39,13 +40,18 @@ class Song
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
-   
   end 
   
   def genre=(genre)
     @genre = genre 
     genre.songs.push self unless genre.songs.include? self 
   end 
+  
+  def self.find_by_name(name)
+    @@all.detect do |song|
+      song.name == name 
+  end 
+ end 
   
   
 end 
