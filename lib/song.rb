@@ -47,11 +47,20 @@ class Song
     genre.songs.push self unless genre.songs.include? self 
   end 
   
-  def self.find_by_name(name)
-    @@all.detect do |song|
-      song.name == name 
-  end 
+  def self.find_by_name(name) #finds a song instance in @@all by the name property of the song
+    #@@all.detect do |song|
+      #song.name == name 
+      all.find { |song| song.name == name }
+  
  end 
-  
-  
+ 
+ def self.find_or_create_by_name(name)
+   self.find_by_name(name) || create(name) #invokes .create instead of re-coding the same functionality
+   
+ end 
+ 
+ def self.create_by_name(name)
+   self.new(name).save
+   
+ end 
 end 
