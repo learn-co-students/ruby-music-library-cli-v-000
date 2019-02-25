@@ -4,8 +4,12 @@ def initialize(path)
   @path = path
 end
 def files
- binding.pry
+  Dir.entries(@path).select {|file| file.include?(".mp3")}
 end
 
-def import
+def import 
+    self.files.each do |file|
+      Song.create_from_filename(file)
+end
+end
 end

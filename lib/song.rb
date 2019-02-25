@@ -50,7 +50,14 @@ def self.create(name)
   song.save
   song
 end
-
+#Working in progress #
+def self.new_from_filename(name)
+  artist, song, genre = name.split(' - ')
+  artist = Artist.find_or_create_by_name(artist)
+  genre = Genre.find_or_create_by_name(genre)
+  song = Song.find_or_create_by_name(song)
+  
+end
 def add_artist(artist)
   if artist.song != self
   artist.song = self
