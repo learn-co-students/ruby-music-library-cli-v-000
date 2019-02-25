@@ -43,4 +43,6 @@ def genres
     end
     genres.uniq
   end
+  
+ 
 end
