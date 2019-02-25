@@ -36,4 +36,11 @@ if !@songs.include?(song)
   @songs << song
 end
  end
+ 
+def genres
+    genres = self.songs.collect do |song|
+      song.genre
+    end
+    genres.uniq
+  end
 end
