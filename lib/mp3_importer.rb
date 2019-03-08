@@ -1,5 +1,5 @@
 # The MP3 Importer will parse all the filenames in the db/mp3s folder and send the filenames to the Song class
-class MP3Importer
+class MusicImporter
 
   attr_accessor :path, :artist, :song
 

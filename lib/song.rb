@@ -12,11 +12,11 @@ class Song
   def initialize(name, artist= Artist.new(artist_name), genre= Genre.new(genre_name))
     @name = name
 
-    if local_variables.include?(artist)
+    if local_variables.include?(:artist)
         self.artist=(artist)
     end
 
-    if local_variables.include?(genre)
+    if local_variables.include?(:genre)
         self.genre=(genre)
     end
 
