@@ -2,7 +2,7 @@
 require 'pry'
 class Song
 
-  #extend Concerns::Findable
+  extend Concerns::Findable
 
   # each songs belongs to relationship
   attr_accessor :name, :artist, :genre, :artist_name, :genre_name
@@ -11,8 +11,7 @@ class Song
 
   def initialize(name, artist= Artist.new(artist_name), genre= Genre.new(genre_name))
     @name = name
-    self.artist=(artist)
-    binding.pry
+
     if local_variables.include?(artist)
         self.artist=(artist)
     end
