@@ -5,15 +5,15 @@ class Song
 #  extend Concerns::Findable
 
   # each songs belongs to relationship
-  attr_accessor :name, :artist, :genre
+  attr_accessor :name
+  attr_reader :artist
 
   @@all = []
 
-  def initialize(name, artist= Artist.new(name), genre= Genre.new(name))
+  def initialize(name, artist= Artist.new(artist), genre= Genre.new(genre))
     @name = name
-    self.artist=(artist)
-    self.genre=(genre)
-    save
+    @artist = self.artist=(artist)
+    @genre = self.genre=(genre)
   end
 
   # assigns an artist to the song (song belongs to artist)
@@ -33,7 +33,7 @@ class Song
     @genre
   end
 
-  def self.all # Cladd reader
+  def self.all # Class reader
     @@all
   end
 
@@ -52,17 +52,16 @@ class Song
    end
 
    def self.find_by_name(name)
-     #binding.pry
      @@all.find{|o| o.name == name}
    end
 
    def self.find_or_create_by_name(name)
      #binding.pry
-     #if self.find_by_name(name) != nil
-      @@all.find_by_name(name)
-  #  else
-  #    self.create(name)
-  #  end
+     if self.find_by_name(name) != nil
+       self.find_by_name(name)
+    else
+      self.create(name)
+    end
    end
 
 end
