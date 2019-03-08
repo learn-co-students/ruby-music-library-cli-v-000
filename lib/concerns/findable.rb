@@ -1,7 +1,7 @@
 module Concerns::Findable #set of behaviors
 
   def find_by_name(name) # class method
-    self.all.detect{|artist| artist.name == name}
+    self.all.detect{|o| o.name == name}
   end
 
   def create(name)
