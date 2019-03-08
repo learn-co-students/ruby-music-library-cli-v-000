@@ -19,7 +19,6 @@ class Song
     if local_variables.include?(:genre)
         self.genre=(genre)
     end
-
   end
 
   # assigns an artist to the song (song belongs to artist)
@@ -52,11 +51,15 @@ class Song
   end
 
 def self.new_from_filename(filename)
-  self.create(filename)
+  @parsed_filename = MusicImporter.new(filename).files
+  #@normal_filename = @parsed_filename.import
+  #binding.pry
+  self.new(@parsed_filename[1], Artist.new(@parsed_filename[0]), Genre.new(@parsed_filename[2]))
 end
 
 def self.create_from_filename(filename)
-  self.new_from_filename(filename).save
+  self.new_from_filename(filename)
+  save
 end
 
 =begin
