@@ -20,8 +20,8 @@ class MusicImporter
   end
 
   # imports the files into the library by creating songs from a filename
-  def self.import
-    self.files.each{ |filename| Song.new_by_filename(filename) }
+  def import
+    self.files.each{ |filename| Song.create_from_filename(filename) }
   end
 
 end
