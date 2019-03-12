@@ -12,8 +12,11 @@ end
 
 def call
   
-  input = ""
-while input != "exit"
+   input = ""
+  
+  while input != "exit"
+
+ 
   puts "Welcome to your music library!"
   puts "To list all of your songs, enter 'list songs'."
   puts "To list all of the artists in your library, enter 'list artists'."
@@ -24,6 +27,7 @@ while input != "exit"
   puts "To quit, type 'exit'."
   puts "What would you like to do?"
   input = gets.strip
+  
   
   case input
     when "list songs"
@@ -38,15 +42,17 @@ while input != "exit"
       list_songs_by_genre
     when "play song"
       play_song
-      binding.pry 
+      #binding.pry 
   end
 end 
 
 def list_songs
-    Song.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i| puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+  Song.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |s, i| puts "#{i}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+    #binding.pry
       end
+#binding.pry
 end
-
+#binding.pry
 def list_artists
     songs_sorted_by_artist = Artist.all.sort_by do |artist| 
       artist.name
@@ -94,16 +100,17 @@ def list_genres
 
   def play_song
     puts "Which song number would you like to play?"
+    #list_songs
     list_of_songs =  Song.all.sort{ |a, b| a.name <=> b.name }
     input = gets.strip.to_i
+    #song = list_songs.song[input+2]
     
     if (input > 0) && (input <= list_of_songs.size)
-      song = list_of_songs[input+2]
-      puts "Playing Larry Csonka by Action Bronson"
+      song = list_of_songs[input-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+      #binding.pry 
     end
   end
-
-
 
 end
 
