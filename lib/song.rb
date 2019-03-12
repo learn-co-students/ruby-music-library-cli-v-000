@@ -12,7 +12,6 @@ class Song
   def initialize(name, artist= Artist.new(artist_name), genre= Genre.new(genre_name))
     @name = name
 
-    #binding.pry
     unless artist.nil?
       self.artist=(artist)
     end
@@ -20,16 +19,6 @@ class Song
     unless genre.nil?
       self.genre=(genre)
     end
-
-=begin
-    if local_variables.include?(:artist)
-        self.artist=(artist)
-    end
-
-    if local_variables.include?(:genre)
-        self.genre=(genre)
-    end
-=end
   end
 
   # assigns an artist to the song (song belongs to artist)
@@ -63,11 +52,11 @@ class Song
 
   def self.new_from_filename(filename)
     filename.chomp!(".mp3")
-    @name = find_by_name(filename.split(" - ")[1])
-    artist_name = find_by_name(filename.split(" - ")[0])
-    genre_name = find_by_name(filename.split(" - ")[2])
+    #self.name = find_by_name(filename.split(" - ")[1])
+    #artist_name = find_by_name(filename.split(" - ")[0])
+    #genre_name = find_by_name(filename.split(" - ")[2])
 
-    self.new(self.name, artist_name, genre_name)
+    self.new(filename.split(" - ")[1], Artist.new(filename.split(" - ")[0]), Genre.new(filename.split(" - ")[2]))
   end
 
 def self.create_from_filename(filename)
