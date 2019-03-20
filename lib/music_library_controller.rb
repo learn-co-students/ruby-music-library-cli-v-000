@@ -1,5 +1,6 @@
 
 class MusicLibraryController
+  attr_reader :files
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
   #the 'path' argument defaults to './db/mp3s'
@@ -30,6 +31,7 @@ class MusicLibraryController
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
-    Song.all.collect {|song| puts song.artist, song.name, song.genre}
+    MusicImporter.files.sort
+    #Song.all.collect {|song| puts song.artist, song.name, song.genre}
   end
 end
