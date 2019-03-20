@@ -1,13 +1,14 @@
+require 'pry'
 
 class MusicLibraryController
-  attr_reader :files
+
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
   #the 'path' argument defaults to './db/mp3s'
   #invokes the #import method on the created MusicImporter object
   def initialize(path= './db/mp3s')
     @path = path
-    MusicImporter.new(@path).import
+    @library = MusicImporter.new(@path).import
   end
 
   #welcomes the user
@@ -31,7 +32,34 @@ class MusicLibraryController
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
-    MusicImporter.files.sort
-    #Song.all.collect {|song| puts song.artist, song.name, song.genre}
+    #@library[counter].split(" - ").sort[1]
+    #binding.pry
+    #nested_library = @library.collect {|filename| filename.split(" - ")}
+    counter = 0
+    while counter <= @library.length
+      puts "#{counter+1}. " + @library[counter]
+      #.split(" - ").sort[1]
+      #@library.each {|filename| puts #{counter+1}. #{filename}"}
+      counter +=1
+    end
+  end
+
+  def lists_artists
+  end
+
+  def list_genres
+  end
+
+  def list_songs_by_artist
+    puts "Enter an artist"
+    gets.strip
+  end
+
+  def list_songs_by_genre
+    puts "Enter a genre"
+    gets.strip
+  end
+
+  def play_song
   end
 end
