@@ -11,7 +11,9 @@ class Song
 
   def initialize(name, artist= Artist.new(artist_name), genre= Genre.new(genre_name))
     @name = name
-
+    #if artist exists, then make self.artist
+    #self.artist = artist if artist
+    #self.genre = genre if genre
     unless artist.nil?
       self.artist=(artist)
     end
