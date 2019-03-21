@@ -31,20 +31,16 @@ class MusicLibraryController
   end
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
-  #@library[counter].split(" - ").sort[1]
-  #sorted_library = @library.sort_by {|filename.split(" - ")|}
   def list_songs
     nested_library = @library.collect {|filename| filename.split(" - ")}
     sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
 
     counter = 0
     sorted_library = []
-    #binding.pry
     while counter < sorted_nested_library.length
       sorted_library << sorted_nested_library[counter].join(" - ")
       counter +=1
     end
-    sorted_library
 
     sorted_library.each do |filename|
       num = sorted_library.index {|x| x == filename} + 1
@@ -52,7 +48,14 @@ class MusicLibraryController
     end
   end
 
-  def lists_artists
+  def list_artists
+    nested_library = @library.collect {|filename| filename.split(" - ")}
+    artist_list = nested_library.collect {|filename| filename[0]}.sort!.uniq!
+
+    artist_list.each do |artist_name|
+      num = artist_list.index {|x| x == artist_name} + 1
+      puts "#{num}. #{artist_name}"
+    end
   end
 
   def list_genres

@@ -44,9 +44,7 @@ class Artist
   def add_song(song)
     # assigns the current artist to the song's 'artist' property (song belongs to artist)
     song.artist = self unless song.artist == self
-
     @songs << song unless @songs.include?(song)
-
   end
 
   # It will probably be useful to create a couple of helper methods to assist with the methods below.
