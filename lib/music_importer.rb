@@ -11,10 +11,8 @@ class MusicImporter
   # normalizes the filename to just the mp3 filename with no path
   def files
     files = Dir["#{path}/*.mp3"].each {|file_name| next if File.directory? file_name}
-    #norm_files = Dir["#{path}/*.mp3"].each {|file_name| File.basename(file_name)}
-    files.each {|filename| filename.gsub!(/\A(.....................)/, "")}
-    #norm_files = files.each {|filename| filename.gsub!(File.basename(filename))}
-    files
+    norm_files = files.collect {|filename| File.basename(filename)}
+    norm_files
   end
 
   def path
