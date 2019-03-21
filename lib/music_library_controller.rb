@@ -39,15 +39,18 @@ class MusicLibraryController
 
     counter = 0
     sorted_library = []
-    binding.pry
-    while counter <= sorted_nested_library.length
+    #binding.pry
+    while counter < sorted_nested_library.length
       sorted_library << sorted_nested_library[counter].join(" - ")
       counter +=1
     end
     sorted_library
+
+    sorted_library.each do |filename|
+      num = sorted_library.index {|x| x == filename} + 1
+      puts "#{num}. #{filename}"
+    end
   end
-  #  @library.each do |filename|
-  #    puts "#{counter+1}. #{filename}"
 
   def lists_artists
   end
