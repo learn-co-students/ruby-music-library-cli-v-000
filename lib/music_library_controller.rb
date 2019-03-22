@@ -51,21 +51,31 @@ class MusicLibraryController
   end
 
   def list_artists
-    binding.pry
+    artist_list = []
 
-
-=begin
-    nested_library = @library.collect {|filename| filename.split(" - ")}
-    artist_list = nested_library.collect {|filename| filename[0]}.sort!.uniq!
+    Artist.all.collect do |artist|
+      artist_list << artist.name
+    end
+    artist_list.uniq!.sort!
 
     artist_list.each do |artist_name|
-      num = artist_list.index {|x| x == artist_name} + 1
+      num = artist_list.index(artist_name) + 1
       puts "#{num}. #{artist_name}"
     end
-=end
   end
 
   def list_genres
+    genre_list = []
+
+    Genre.all.collect do |genre|
+      genre_list << genre.name
+    end
+    genre_list.uniq!.sort!
+
+    genre_list.each do |genre_name|
+      num = genre_list.index(genre_name) + 1
+      puts "#{num}. #{genre_name}"
+    end
   end
 
   def list_songs_by_artist
