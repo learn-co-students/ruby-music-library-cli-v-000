@@ -44,10 +44,13 @@ class MusicLibraryController
       counter +=1
     end
 
+    listed_library = []
     sorted_library.each do |filename|
       num = sorted_library.index {|x| x == filename} + 1
       puts "#{num}. #{filename}"
+      listed_library << "#{num}. #{filename}"
     end
+    listed_library
   end
 
   def list_artists
@@ -78,16 +81,60 @@ class MusicLibraryController
     end
   end
 
+  #prints all songs by a particular artist in a numbered list (alphabetized by song name)
   def list_songs_by_artist
-    puts "Enter an artist"
-    gets.strip
+    puts "Please enter the name of an artist:"
+    artist_name = gets.strip
+
+    song_list = []
+    Song.all.collect do |song|
+      if song.artist.name == artist_name
+        song_list << "#{song.name} - #{song.genre.name}"
+      end
+    end
+    song_list.sort!
+
+    song_list.each do |song|
+      num = song_list.index(song) + 1
+      puts "#{num}. #{song}"
+    end
   end
 
   def list_songs_by_genre
-    puts "Enter a genre"
-    gets.strip
+    puts "Please enter the name of a genre:"
+    genre_name = gets.strip
+
+    genre_list = []
+    Song.all.collect do |song|
+      if song.genre.name == genre_name
+        genre_list << "#{song.artist.name} - #{song.name}"
+      end
+    end
+
+    nested_library = genre_list.collect {|filename| filename.split(" - ")}
+    sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
+
+    counter = 0
+    sorted_library = []
+    while counter < sorted_nested_library.length
+      sorted_library << sorted_nested_library[counter].join(" - ")
+      counter +=1
+    end
+
+    sorted_library.each do |filename|
+      num = sorted_library.index {|x| x == filename} + 1
+      puts "#{num}. #{filename}"
+    end
   end
 
+  #prompts the user to choose a song from the alphabetized list output by #list_songs
   def play_song
+    #list_songs
+    puts "Which song number would you like to play?"
+    song_number = gets.strip
+    binding.pry
+    if list_songs.detect {|song| song.start_with?(song_number)}
+      puts "Playing #{} by #{}"
+    end
   end
 end
