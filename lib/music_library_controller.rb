@@ -2,6 +2,8 @@ require 'pry'
 
 class MusicLibraryController
 
+  attr_accessor :name, :artist, :genre, :artist_name, :genre_name
+
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
   #the 'path' argument defaults to './db/mp3s'
@@ -49,6 +51,10 @@ class MusicLibraryController
   end
 
   def list_artists
+    binding.pry
+
+
+=begin
     nested_library = @library.collect {|filename| filename.split(" - ")}
     artist_list = nested_library.collect {|filename| filename[0]}.sort!.uniq!
 
@@ -56,6 +62,7 @@ class MusicLibraryController
       num = artist_list.index {|x| x == artist_name} + 1
       puts "#{num}. #{artist_name}"
     end
+=end
   end
 
   def list_genres
