@@ -2,7 +2,7 @@ require 'pry'
 
 class MusicLibraryController
 
-  attr_accessor :name, :artist, :genre, :artist_name, :genre_name
+  attr_reader :name, :artist, :genre, :artist_name, :genre_name
 
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
@@ -10,7 +10,9 @@ class MusicLibraryController
   #invokes the #import method on the created MusicImporter object
   def initialize(path= './db/mp3s')
     @path = path
-    @library = MusicImporter.new(@path).import
+    MusicImporter.new(@path).import
+    @artist_list = []
+    @genre_list = []
   end
 
   #welcomes the user
@@ -34,6 +36,23 @@ class MusicLibraryController
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
+    @song_hash = Hash.new
+    @lib = Song.all.collect { |song| song.name }.sort!
+
+    @lib.each do |song_name|
+      num = @lib.index {|x| x == song_name} + 1
+      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
+      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
+      @song_hash[num] = {song_name: song_name, song_artist: song_artist, song_genre: song_genre}
+    end
+
+    #1. Thundercat - For Love I Come - dance
+    @song_hash.each do |song_num, data|
+      puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
+    end
+  end
+
+=begin
     nested_library = @library.collect {|filename| filename.split(" - ")}
     sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
 
@@ -51,32 +70,30 @@ class MusicLibraryController
       listed_library << "#{num}. #{filename}"
     end
     listed_library
-  end
+=end
 
+  #prints all artists in the music library in a numbered list (alphabetized by artist name)
   def list_artists
-    artist_list = []
-
     Artist.all.collect do |artist|
-      artist_list << artist.name
+      @artist_list << artist.name
     end
-    artist_list.uniq!.sort!
+    @artist_list.uniq!.sort!
 
-    artist_list.each do |artist_name|
-      num = artist_list.index(artist_name) + 1
+    @artist_list.each do |artist_name|
+      num = @artist_list.index(artist_name) + 1
       puts "#{num}. #{artist_name}"
     end
   end
 
+  #prints all genres in the music library in a numbered list (alphabetized by genre name)
   def list_genres
-    genre_list = []
-
     Genre.all.collect do |genre|
-      genre_list << genre.name
+      @genre_list << genre.name
     end
-    genre_list.uniq!.sort!
+    @genre_list.uniq!.sort!
 
-    genre_list.each do |genre_name|
-      num = genre_list.index(genre_name) + 1
+    @genre_list.each do |genre_name|
+      num = @genre_list.index(genre_name) + 1
       puts "#{num}. #{genre_name}"
     end
   end
@@ -86,16 +103,16 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     artist_name = gets.strip
 
-    song_list = []
+    artist_song_list = []
     Song.all.collect do |song|
       if song.artist.name == artist_name
-        song_list << "#{song.name} - #{song.genre.name}"
+        artist_song_list << "#{song.name} - #{song.genre.name}"
       end
     end
-    song_list.sort!
+    artist_song_list.sort!
 
-    song_list.each do |song|
-      num = song_list.index(song) + 1
+    artist_song_list.each do |song|
+      num = artist_song_list.index(song) + 1
       puts "#{num}. #{song}"
     end
   end
@@ -103,7 +120,7 @@ class MusicLibraryController
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     genre_name = gets.strip
-
+=begin
     genre_list = []
     Song.all.collect do |song|
       if song.genre.name == genre_name
@@ -125,16 +142,18 @@ class MusicLibraryController
       num = sorted_library.index {|x| x == filename} + 1
       puts "#{num}. #{filename}"
     end
+=end
   end
-
+=begin
   #prompts the user to choose a song from the alphabetized list output by #list_songs
   def play_song
     #list_songs
     puts "Which song number would you like to play?"
     song_number = gets.strip
-    binding.pry
+    #binding.pry
     if list_songs.detect {|song| song.start_with?(song_number)}
       puts "Playing #{} by #{}"
     end
   end
+=end
 end
