@@ -110,10 +110,18 @@ class MusicLibraryController
 
   #prints all songs by a particular genre in a numbered list (alphabetized by song name)q a
   def list_songs_by_genre
+    #collect_genres
     puts "Please enter the name of a genre:"
     genre_name = gets.strip
 
     #binding.pry
+    #search song_hash for matching song_genre
+    # - #{@song_hash.dig(song_num, :song_genre)}
+
+  #  @song_hash.each do |song_num, data|
+  #    puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)}"
+  #  end
+
 =begin
     genre_list = []
     Song.all.collect do |song|
