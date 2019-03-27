@@ -3,6 +3,8 @@ require 'pry'
 class MusicLibraryController
 
   attr_reader :name, :artist, :genre, :artist_name, :genre_name
+  #@@song_hash = {}
+  #@@lib = Song.all.collect { |song| song.name }.sort!
 
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
@@ -11,6 +13,17 @@ class MusicLibraryController
   def initialize(path= './db/mp3s')
     @path = path
     MusicImporter.new(@path).import
+
+    @lib = Song.all.collect { |song| song.name }.sort!
+    @song_hash = {}
+
+    @lib.each do |song_name|
+      num = @lib.index {|x| x == song_name} + 1
+      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
+      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
+      @song_hash[num] = {song_name: song_name, song_artist: song_artist, song_genre: song_genre}
+    end
+
     @artist_list = []
     @genre_list = []
   end
@@ -36,62 +49,40 @@ class MusicLibraryController
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
-    @song_hash = Hash.new
-    @lib = Song.all.collect { |song| song.name }.sort!
-
-    @lib.each do |song_name|
-      num = @lib.index {|x| x == song_name} + 1
-      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
-      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
-      @song_hash[num] = {song_name: song_name, song_artist: song_artist, song_genre: song_genre}
-    end
-
     #1. Thundercat - For Love I Come - dance
     @song_hash.each do |song_num, data|
       puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
     end
+    @song_hash
   end
 
-=begin
-    nested_library = @library.collect {|filename| filename.split(" - ")}
-    sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
-
-    counter = 0
-    sorted_library = []
-    while counter < sorted_nested_library.length
-      sorted_library << sorted_nested_library[counter].join(" - ")
-      counter +=1
-    end
-
-    listed_library = []
-    sorted_library.each do |filename|
-      num = sorted_library.index {|x| x == filename} + 1
-      puts "#{num}. #{filename}"
-      listed_library << "#{num}. #{filename}"
-    end
-    listed_library
-=end
-
-  #prints all artists in the music library in a numbered list (alphabetized by artist name)
-  def list_artists
+  def collect_artists
     Artist.all.collect do |artist|
       @artist_list << artist.name
     end
     @artist_list.uniq!.sort!
+  end
 
+  #prints all artists in the music library in a numbered list (alphabetized by artist name)
+  def list_artists
+    collect_artists
     @artist_list.each do |artist_name|
       num = @artist_list.index(artist_name) + 1
       puts "#{num}. #{artist_name}"
     end
+    @artist_list
   end
 
-  #prints all genres in the music library in a numbered list (alphabetized by genre name)
-  def list_genres
+  def collect_genres
     Genre.all.collect do |genre|
       @genre_list << genre.name
     end
     @genre_list.uniq!.sort!
+  end
 
+  #prints all genres in the music library in a numbered list (alphabetized by genre name)
+  def list_genres
+    collect_genres
     @genre_list.each do |genre_name|
       num = @genre_list.index(genre_name) + 1
       puts "#{num}. #{genre_name}"
@@ -117,9 +108,12 @@ class MusicLibraryController
     end
   end
 
+  #prints all songs by a particular genre in a numbered list (alphabetized by song name)q a
   def list_songs_by_genre
     puts "Please enter the name of a genre:"
     genre_name = gets.strip
+
+    #binding.pry
 =begin
     genre_list = []
     Song.all.collect do |song|
@@ -157,3 +151,24 @@ class MusicLibraryController
   end
 =end
 end
+
+#old
+=begin
+    nested_library = @library.collect {|filename| filename.split(" - ")}
+    sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
+
+    counter = 0
+    sorted_library = []
+    while counter < sorted_nested_library.length
+      sorted_library << sorted_nested_library[counter].join(" - ")
+      counter +=1
+    end
+
+    listed_library = []
+    sorted_library.each do |filename|
+      num = sorted_library.index {|x| x == filename} + 1
+      puts "#{num}. #{filename}"
+      listed_library << "#{num}. #{filename}"
+    end
+    listed_library
+=end
