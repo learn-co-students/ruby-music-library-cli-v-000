@@ -1,10 +1,11 @@
 class Artist
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :genres
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
+    @genres = []
   end
 
   def self.all
@@ -28,6 +29,15 @@ class Artist
   def add_song(song)
     self.songs.include?(song) ? nil : self.songs << song
     song.artist ||= self
+  end
+
+  def genres=(genres) #fix attr_accessor plz ty
+    @genres = genres
+
+    self.songs.each do |each_song|
+      @genres << each_song.genre
+    end
+
   end
 
 end
