@@ -52,22 +52,14 @@ class Song
   end
 
   def self.find_by_name(song_string)
-    found_song = nil
-    self.all.each do |each_song|
-      # if each_song.name == song_string
-      #   found_song = each_song
-      # end
-      found_song = each_song unless each_song.name != song_string
-    end
-    found_song
+    song_found = self.all.detect { |song_object| song_object.name == song_string }
+    # DETECTmethod returns NIL if no matching data is found - eliminating the need for an explicit flag
   end
 
   def self.find_or_create_by_name(song_string)
-    if Song.find_by_name(song_string) == nil
-      Song.create(song_string)
-    else
-      Song.find_by_name(song_string)
-    end
+    found = self.find_by_name(song_string)
+    found != nil ? found : self.create(song_string)
+    # if the FOUND placeholder does not have NIL as its value, return the FOUND song, otherwise call the CREATE method
   end
 
 
