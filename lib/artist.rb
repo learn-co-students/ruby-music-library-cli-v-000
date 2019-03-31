@@ -1,11 +1,14 @@
+
+
 class Artist
-  attr_accessor :name, :songs, :genres
+  attr_accessor :name, :songs
+  attr_reader :genres
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    @genres = []
+
   end
 
   def self.all
@@ -31,13 +34,20 @@ class Artist
     song.artist ||= self
   end
 
-  def genres=(genres) #fix attr_accessor plz ty
+  # def genres=(genres) #fix attr_accessor plz ty
+  #   @genres = genres
+  #
+  #   self.songs.each do |each_song|
+  #     genres << each_song.genre
+  #   end
+  #
+  #   self.genres
+  #
+  # end
+
+  def genres=(genres)
     @genres = genres
-
-    self.songs.each do |each_song|
-      @genres << each_song.genre
-    end
-
+    genres = []
   end
 
 end
