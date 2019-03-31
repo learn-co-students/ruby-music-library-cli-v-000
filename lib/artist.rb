@@ -2,7 +2,6 @@
 
 class Artist
   attr_accessor :name, :songs
-  attr_reader :genres
   @@all = []
 
   def initialize(name)
@@ -34,20 +33,11 @@ class Artist
     song.artist ||= self
   end
 
-  # def genres=(genres) #fix attr_accessor plz ty
-  #   @genres = genres
-  #
-  #   self.songs.each do |each_song|
-  #     genres << each_song.genre
-  #   end
-  #
-  #   self.genres
-  #
-  # end
-
-  def genres=(genres)
-    @genres = genres
-    genres = []
+  def genres
+    self.songs.collect do |each_song|
+      each_song.genre
+    end.uniq
+    #can also assign to a variable and chain off of it
   end
 
 end

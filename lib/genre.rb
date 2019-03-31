@@ -1,11 +1,10 @@
 class Genre
-  attr_accessor :name, :songs, :artists
+  attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-    @artists = []
   end
 
   def self.all
@@ -26,13 +25,12 @@ class Genre
     created_genre
   end
 
-  def artists=(artists)
-    @artists = artists
-
-    self.songs.select do |each_song|
-      @artists << each_song.artist
+  def artists #HAS MANY _ THROUGH _ -----create a place holder, collect the attribute value, ensure only unique objects are collected
+    a = []
+    self.songs.collect do |each_song|
+      a << each_song.artist
     end
-
+    a.uniq
   end
 
 end
