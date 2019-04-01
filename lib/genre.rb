@@ -1,4 +1,8 @@
+require_relative './concerns/findable.rb' #forces loading of the file specified to be used here
+
 class Genre
+  extend Concerns::Findable #I don't understand why the "Concerns" - but this EXTEND grants access to all of the CLASS methods located inside the FINDABLE module file
+
   attr_accessor :name, :songs
   @@all = []
 
