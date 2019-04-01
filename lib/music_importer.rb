@@ -1,4 +1,4 @@
-# require 'pry'
+  #  require 'pry'
 
 class MusicImporter
   attr_accessor :path
@@ -8,7 +8,7 @@ class MusicImporter
   end
 
   def files
-    Dir.glob("*.mp3")
+    Dir.entries(path).select { |file| file.end_with?(".mp3")}
   end
 
   def self.import
