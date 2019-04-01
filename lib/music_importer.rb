@@ -8,6 +8,11 @@ class MusicImporter
   end
 
   def files
+    Dir.glob("*.mp3")
+  end
+
+  def self.import
+
   end
 
 end
