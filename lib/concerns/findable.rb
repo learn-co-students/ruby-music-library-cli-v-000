@@ -1,5 +1,7 @@
 module Concerns::Findable
 
+  #these are CLASSmethods, always being called on the CLASS itself, the SELF keyword in the DEF line does not need to be included
+
   def find_by_name(name_string)
     self.all.detect { |each_object| each_object.name == name_string }
     # DETECTmethod returns NIL if no matching data is found - eliminating the need for an explicit flag
