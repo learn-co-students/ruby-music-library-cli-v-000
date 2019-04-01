@@ -62,5 +62,14 @@ class Song
     # if the FOUND placeholder does not have NIL as its value, return the FOUND song, otherwise call the CREATE method
   end
 
+  def self.new_from_filename(filename)
+    # parse the filename into 3 parts - artist - song - genre
+    filename.select do ||
+  end
+
+  def self.create_from_filename(filename)
+
+  end
+
 
 end
