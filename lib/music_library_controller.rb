@@ -158,7 +158,7 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     gets.strip
-
+    puts "Playing #{} by #{}"
     #name = @song_hash.dig(song_number, :song_name)
     #artist = @song_hash.dig(song_number, :song_artist)
     #binding.pry
