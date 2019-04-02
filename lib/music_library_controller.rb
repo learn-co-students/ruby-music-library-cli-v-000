@@ -5,6 +5,7 @@ class MusicLibraryController
   attr_reader :name, :artist, :genre, :artist_name, :genre_name
   #@@song_hash = {}
   #@@lib = Song.all.collect { |song| song.name }.sort!
+  #@@alphabetized_list = []
 
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
@@ -19,6 +20,7 @@ class MusicLibraryController
     @alphabetized_list = []
     @artist_list = []
     @genre_list = []
+
   end
 
   #welcomes the user
@@ -42,6 +44,12 @@ class MusicLibraryController
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
+    #1. Thundercat - For Love I Come - dance
+=begin
+    @song_hash.each do |song_num, data|
+      puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
+    end
+=end
     @lib.each do |song_name|
       num = @lib.index { |x| x == song_name } + 1
       song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
@@ -49,16 +57,10 @@ class MusicLibraryController
       @song_hash[num] = { song_name: song_name, song_artist: song_artist, song_genre: song_genre }
       @alphabetized_list << "#{num}. #{song_artist} - #{song_name} - #{song_genre}"
     end
-    #1. Thundercat - For Love I Come - dance
-=begin
-    @song_hash.each do |song_num, data|
-      puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
-    end
-=end
     @alphabetized_list.each do |song|
       puts "#{song}"
     end
-
+    #@alphabetized_list
     #@song_hash
     #binding.pry
   end
@@ -157,12 +159,14 @@ class MusicLibraryController
   #upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
   def play_song
     puts "Which song number would you like to play?"
-    gets.strip
-    puts "Playing #{} by #{}"
+    input = gets.strip
+    #binding.pry
+    if list_songs[input.to_i]
+      puts "Playing #{} by #{}"
+    end
     #name = @song_hash.dig(song_number, :song_name)
     #artist = @song_hash.dig(song_number, :song_artist)
     #binding.pry
-#    position = song_number - 1
 #    if list_songs[position]
 #      puts "Playing #{} by #{}"
 #    end
