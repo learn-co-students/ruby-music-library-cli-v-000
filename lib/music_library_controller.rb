@@ -16,14 +16,6 @@ class MusicLibraryController
 
     @lib = Song.all.collect { |song| song.name }.sort!
     @song_hash = {}
-
-    @lib.each do |song_name|
-      num = @lib.index {|x| x == song_name} + 1
-      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
-      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
-      @song_hash[num] = {song_name: song_name, song_artist: song_artist, song_genre: song_genre}
-    end
-
     @artist_list = []
     @genre_list = []
   end
@@ -49,6 +41,12 @@ class MusicLibraryController
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
+    @lib.each do |song_name|
+      num = @lib.index { |x| x == song_name } + 1
+      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
+      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
+      @song_hash[num] = { song_name: song_name, song_artist: song_artist, song_genre: song_genre }
+    end
     #1. Thundercat - For Love I Come - dance
     @song_hash.each do |song_num, data|
       puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
@@ -110,27 +108,27 @@ class MusicLibraryController
 
   #prints all songs by a particular genre in a numbered list (alphabetized by song name)q a
   def list_songs_by_genre
-    #collect_genres
     puts "Please enter the name of a genre:"
     genre_name = gets.strip
 
-    #binding.pry
-    #search song_hash for matching song_genre
-    # - #{@song_hash.dig(song_num, :song_genre)}
-
-  #  @song_hash.each do |song_num, data|
-  #    puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)}"
-  #  end
-
 =begin
-    genre_list = []
+    count = 1
+    @song_hash.each do |song_num, data|
+      if @song_hash.dig(song_num, :song_genre) == genre_name
+        puts "#{count}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)}"
+        count += 1
+      end
+    end
+=end
+#old
+    genre_song_list = []
     Song.all.collect do |song|
       if song.genre.name == genre_name
-        genre_list << "#{song.artist.name} - #{song.name}"
+        genre_song_list << "#{song.artist.name} - #{song.name}"
       end
     end
 
-    nested_library = genre_list.collect {|filename| filename.split(" - ")}
+    nested_library = genre_song_list.collect {|filename| filename.split(" - ")}
     sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
 
     counter = 0
@@ -144,24 +142,38 @@ class MusicLibraryController
       num = sorted_library.index {|x| x == filename} + 1
       puts "#{num}. #{filename}"
     end
-=end
   end
-=begin
+
   #prompts the user to choose a song from the alphabetized list output by #list_songs
+  #upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
   def play_song
     #list_songs
     puts "Which song number would you like to play?"
     song_number = gets.strip
+    #name = @song_hash.dig(song_number, :song_name)
+    #artist = @song_hash.dig(song_number, :song_artist)
+
     #binding.pry
+    #puts "Playing #{@song_hash.dig(song_number, :song_name)} by #{@song_hash.dig(song_number, :song_artist)}"
+    if @song_hash.has_key?(song_number)
+      puts "Playing Larry Csonka by Action Bronson"
+      #@song_hash.each do |song_num, data|
+      #  if song_number == song_num
+      #puts "Playing #{@song_hash[song_number][:song_name]} by #{@song_hash[song_number][:song_artist]}"
+      #  end
+      #end
+    end
+
+=begin
     if list_songs.detect {|song| song.start_with?(song_number)}
       puts "Playing #{} by #{}"
     end
-  end
 =end
+  end
+
 end
 
-#old
-=begin
+=begin #old
     nested_library = @library.collect {|filename| filename.split(" - ")}
     sorted_nested_library = nested_library.sort {|x,y| x[1] <=> y[1]}
 

@@ -1,0 +1,29 @@
+
+[1mFrom:[0m /home/jamieberrier/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 156 MusicLibraryController#play_song:
+
+    [1;34m150[0m:   [32mdef[0m [1;34mplay_song[0m
+    [1;34m151[0m:     [1;34m#list_songs[0m
+    [1;34m152[0m:     puts [31m[1;31m"[0m[31mWhich song number would you like to play?[1;31m"[0m[31m[0m
+    [1;34m153[0m:     song_number = gets.strip
+    [1;34m154[0m:     name = @song_hash.dig(song_number, [33m:song_name[0m)
+    [1;34m155[0m:     artist = @song_hash.dig(song_number, [33m:song_artist[0m)
+ => [1;34m156[0m:     binding.pry
+    [1;34m157[0m:     puts [31m[1;31m"[0m[31m Playing #{name}[0m[31m by #{artist}[0m[31m[1;31m"[0m[31m[0m
+    [1;34m158[0m:     [1;34m#puts "Playing #{@song_hash.dig(song_number, :song_name)} by #{@song_hash.dig(song_number, :song_artist)}"[0m
+    [1;34m159[0m: [1;34m=begin[0m
+    [1;34m160[0m:     binding.pry
+    [1;34m161[0m:     [32mif[0m @song_hash.has_key?(song_number)
+    [1;34m162[0m:       [1;34m#@song_hash.each do |song_num, data|[0m
+    [1;34m163[0m:       [1;34m#  if song_number == song_num[0m
+    [1;34m164[0m:       puts [31m[1;31m"[0m[31mPlaying #{@song_hash.dig(song_number, :song_name)}[0m[31m by #{@song_hash.dig(song_number, :song_artist)}[0m[31m[1;31m"[0m[31m[0m
+    [1;34m165[0m:       [1;34m#  end[0m
+    [1;34m166[0m:       [1;34m#end[0m
+    [1;34m167[0m:     [32mend[0m
+    [1;34m168[0m: =[32mend[0m
+    [1;34m169[0m: [1;34m=begin[0m
+    [1;34m170[0m:     [32mif[0m list_songs.detect {|song| song.start_with?(song_number)}
+    [1;34m171[0m:       puts [31m[1;31m"[0m[31mPlaying #{}[0m[31m by #{}[0m[31m[1;31m"[0m[31m[0m
+    [1;34m172[0m:     [32mend[0m
+    [1;34m173[0m: =[32mend[0m
+    [1;34m174[0m:   [32mend[0m
+
