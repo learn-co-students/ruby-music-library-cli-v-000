@@ -63,8 +63,12 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    # parse the filename into 3 parts - artist - song - genre
-    filename.select do ||
+    # parse the filename into 3 parts - [0]artist - [1]song name - [2]genre - which are put into an array and can be accessed
+    file_split = filename.split(/ - /)
+    self.artist = file_split[0]
+    self.name = file_split[1] # AKA the song name
+    # remove the .MP3 part of the string, & assign it to the GENRE attribute
+    self.genre = file_split[2].sub(/\.mp3/, "")
   end
 
   def self.create_from_filename(filename)
