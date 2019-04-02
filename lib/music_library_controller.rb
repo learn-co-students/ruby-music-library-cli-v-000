@@ -16,6 +16,7 @@ class MusicLibraryController
 
     @lib = Song.all.collect { |song| song.name }.sort!
     @song_hash = {}
+    @alphabetized_list = []
     @artist_list = []
     @genre_list = []
   end
@@ -46,12 +47,20 @@ class MusicLibraryController
       song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
       song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
       @song_hash[num] = { song_name: song_name, song_artist: song_artist, song_genre: song_genre }
+      @alphabetized_list << "#{num}. #{song_artist} - #{song_name} - #{song_genre}"
     end
     #1. Thundercat - For Love I Come - dance
+=begin
     @song_hash.each do |song_num, data|
       puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
     end
-    @song_hash
+=end
+    @alphabetized_list.each do |song|
+      puts "#{song}"
+    end
+
+    #@song_hash
+    #binding.pry
   end
 
   def collect_artists
@@ -147,22 +156,26 @@ class MusicLibraryController
   #prompts the user to choose a song from the alphabetized list output by #list_songs
   #upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
   def play_song
-    #list_songs
     puts "Which song number would you like to play?"
-    song_number = gets.strip
+    gets.strip
+
     #name = @song_hash.dig(song_number, :song_name)
     #artist = @song_hash.dig(song_number, :song_artist)
-
+    #binding.pry
+#    position = song_number - 1
+#    if list_songs[position]
+#      puts "Playing #{} by #{}"
+#    end
     #binding.pry
     #puts "Playing #{@song_hash.dig(song_number, :song_name)} by #{@song_hash.dig(song_number, :song_artist)}"
-    if @song_hash.has_key?(song_number)
-      puts "Playing Larry Csonka by Action Bronson"
+  #  if @song_hash.has_key?(song_number)
+  #    puts "Playing Larry Csonka by Action Bronson"
       #@song_hash.each do |song_num, data|
       #  if song_number == song_num
       #puts "Playing #{@song_hash[song_number][:song_name]} by #{@song_hash[song_number][:song_artist]}"
       #  end
       #end
-    end
+    #end
 
 =begin
     if list_songs.detect {|song| song.start_with?(song_number)}
