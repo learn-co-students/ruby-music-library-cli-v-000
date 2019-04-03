@@ -56,6 +56,12 @@ class MusicLibraryController
     end
   end
 
-
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:" # prompt the user for the artist's name
+    user_response = gets.strip # store the user's response
+    artist_object = Artist.find_by_name(user_response) # search through all existing artists for the user's requested artist
+    all_songs = artist_object.songs # store all the matching artist's songs
+    all_songs.sort! { |a, b| a.name <=> b.name } # sort all the songs alphabetically
+  end
 
 end
