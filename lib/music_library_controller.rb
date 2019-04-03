@@ -9,18 +9,17 @@ class MusicLibraryController
 
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
-  #the 'path' argument defaults to './db/mp3s'
+  #the 'path' argument efaults to './db/mp3s'
   #invokes the #import method on the created MusicImporter object
   def initialize(path= './db/mp3s')
     @path = path
     MusicImporter.new(@path).import
 
-    @lib = Song.all.collect { |song| song.name }.sort!
+    @lib = []
     @song_hash = {}
     @alphabetized_list = []
     @artist_list = []
     @genre_list = []
-
   end
 
   #welcomes the user
@@ -39,6 +38,21 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
       input = gets.strip
+
+      if input == 'list songs'
+        list_songs
+      elsif input == 'list artists'
+        list_artists
+      elsif input == 'list genres'
+        list_genres
+      elsif input == 'list artist'
+        list_songs_by_artist
+      elsif input == 'list genre'
+        list_songs_by_genre
+      elsif input == 'play song'
+        play_song
+      end
+
     end
   end
 
@@ -50,6 +64,7 @@ class MusicLibraryController
       puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
     end
 =end
+    @lib = Song.all.collect { |song| song.name }.sort!
     @lib.each do |song_name|
       num = @lib.index { |x| x == song_name } + 1
       song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
@@ -57,8 +72,13 @@ class MusicLibraryController
       @song_hash[num] = { song_name: song_name, song_artist: song_artist, song_genre: song_genre }
       @alphabetized_list << "#{num}. #{song_artist} - #{song_name} - #{song_genre}"
     end
-    @alphabetized_list.each do |song|
-      puts "#{song}"
+
+#    @alphabetized_list.each do |song|
+#      puts "#{song}"
+#    end
+
+    @song_hash.each do |song_num, data|
+      puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
     end
     #@alphabetized_list
     #@song_hash
@@ -158,12 +178,22 @@ class MusicLibraryController
   #prompts the user to choose a song from the alphabetized list output by #list_songs
   #upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
   def play_song
+    #list_songs
     puts "Which song number would you like to play?"
+
     input = gets.strip
+    position = input.to_i
+
     #binding.pry
+    if position <= list_songs.length
+      puts "Playing #{@song_hash[position][:song_name]} by #{@song_hash[position][:song_artist]}"
+    end
+    #binding.pry
+=begin
     if list_songs[input.to_i]
       puts "Playing #{} by #{}"
     end
+=end
     #name = @song_hash.dig(song_number, :song_name)
     #artist = @song_hash.dig(song_number, :song_artist)
     #binding.pry
