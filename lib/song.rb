@@ -5,15 +5,12 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-
     # if artist
     #   self.artist = artist
     # end
     ####BETTER WRITTEN AS \/
     self.artist = artist unless artist.nil?
-
     self.genre = genre unless genre.nil?
-
   end
 
   def artist=(artist)
@@ -23,14 +20,11 @@ class Song
 
   def genre=(genre)
     @genre = genre
-
     # if !genre.songs.include?(self)
     #   genre.songs << self
     # end
     ###BETTER WRITTEN AS \/
-
     genre.songs << self unless genre.songs.include?(self)
-
   end
 
   def self.all
@@ -63,17 +57,21 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    # parse the filename into 3 parts - [0]artist - [1]song name - [2]genre - which are put into an array and can be accessed
-    file_split = filename.split(/ - /)
-    self.artist = file_split[0]
-    self.name = file_split[1] # AKA the song name
-    # remove the .MP3 part of the string, & assign it to the GENRE attribute
-    self.genre = file_split[2].sub(/\.mp3/, "")
+    file_split = filename.split(/ - /) # parse the filename into 3 parts - [0]artist - [1]song name - [2]genre - which are put into an array and can be accessed
+
+    a = file_split[0]
+    n = file_split[1] # AKA the song name
+    g = file_split[2].sub(/\.mp3/, "") # remove the .MP3 part of the string, & assign it to the GENRE attribute
+
+    artist_object = Artist.find_or_create_by_name(a)
+    genre_object = Genre.find_or_create_by_name(g)
+
+    Song.new(n, artist_object, genre_object)
   end
 
   def self.create_from_filename(filename)
-
+    new_song = Song.new_from_filename(filename)
+    new_song.save
   end
-
 
 end

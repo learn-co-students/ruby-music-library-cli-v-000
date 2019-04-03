@@ -11,9 +11,9 @@ class MusicImporter
     Dir.entries(path).select { |file| file.end_with?(".mp3")}
   end
 
-  def self.import
+  def import
     all_files = self.files
-    all_files.each { |file| }......
+    all_files.each { |file| Song.create_from_filename(file) }
   end
 
 end
