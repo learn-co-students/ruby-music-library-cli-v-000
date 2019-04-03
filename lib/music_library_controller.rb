@@ -21,7 +21,7 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    4.times { response = gets.strip until response == "exit" }
+    4.times { user_response = gets.strip unless user_response == "exit" }
   end
 
 end
