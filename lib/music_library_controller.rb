@@ -1,12 +1,6 @@
 require 'pry'
 
 class MusicLibraryController
-
-  attr_reader :name, :artist, :genre, :artist_name, :genre_name
-  #@@song_hash = {}
-  #@@lib = Song.all.collect { |song| song.name }.sort!
-  #@@alphabetized_list = []
-
   #accepts one argument, the path to the MP3 files to be imported
   #creates a new MusicImporter object, passing in the 'path' value
   #the 'path' argument efaults to './db/mp3s'
@@ -16,17 +10,26 @@ class MusicLibraryController
     MusicImporter.new(@path).import
 
     @lib = []
-    @song_hash = {}
+    #@song_hash = {}
     @alphabetized_list = []
     @artist_list = []
     @genre_list = []
+
+    @lib = Song.all.collect { |song| song.name }.sort!
+    @lib.each do |song_name|
+      num = @lib.index { |x| x == song_name } + 1
+      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
+      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
+      #@song_hash[num] = { song_name: song_name, song_artist: song_artist, song_genre: song_genre }
+      @alphabetized_list << "#{num}. #{song_artist} - #{song_name} - #{song_genre}"
+    end
   end
 
   #welcomes the user
   #asks the user for input
   #loops and asks for user input until they type in exit
   def call
-    input = nil
+    input = ""
     until input == 'exit'
       puts "Welcome to your music library!"
       puts "To list all of your songs, enter 'list songs'."
@@ -52,66 +55,58 @@ class MusicLibraryController
       elsif input == 'play song'
         play_song
       end
-
     end
   end
 
   #prints all songs in the music library in a numbered list (alphabetized by song name)
   def list_songs
     #1. Thundercat - For Love I Come - dance
+    @alphabetized_list.each do |song|
+      puts "#{song}"
+    end
+  end
 =begin
     @song_hash.each do |song_num, data|
       puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
     end
 =end
-    @lib = Song.all.collect { |song| song.name }.sort!
-    @lib.each do |song_name|
-      num = @lib.index { |x| x == song_name } + 1
-      song_artist = Song.all.collect { |song| song.artist.name if song_name == song.name }.join
-      song_genre = Song.all.collect { |song| song.genre.name if song_name == song.name }.join
-      @song_hash[num] = { song_name: song_name, song_artist: song_artist, song_genre: song_genre }
-      @alphabetized_list << "#{num}. #{song_artist} - #{song_name} - #{song_genre}"
-    end
 
-#    @alphabetized_list.each do |song|
-#      puts "#{song}"
-#    end
-
-    @song_hash.each do |song_num, data|
-      puts "#{song_num}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)} - #{@song_hash.dig(song_num, :song_genre)}"
-    end
-    #@alphabetized_list
-    #@song_hash
-    #binding.pry
-  end
-
+=begin
   def collect_artists
     Artist.all.collect do |artist|
       @artist_list << artist.name
     end
     @artist_list.uniq!.sort!
   end
-
+=end
   #prints all artists in the music library in a numbered list (alphabetized by artist name)
   def list_artists
-    collect_artists
+    Artist.all.collect do |artist|
+      @artist_list << artist.name
+    end
+    @artist_list.uniq!.sort!
+
     @artist_list.each do |artist_name|
       num = @artist_list.index(artist_name) + 1
       puts "#{num}. #{artist_name}"
     end
     @artist_list
   end
-
+=begin
   def collect_genres
     Genre.all.collect do |genre|
       @genre_list << genre.name
     end
     @genre_list.uniq!.sort!
   end
-
+=end
   #prints all genres in the music library in a numbered list (alphabetized by genre name)
   def list_genres
-    collect_genres
+    Genre.all.collect do |genre|
+      @genre_list << genre.name
+    end
+    @genre_list.uniq!.sort!
+
     @genre_list.each do |genre_name|
       num = @genre_list.index(genre_name) + 1
       puts "#{num}. #{genre_name}"
@@ -142,16 +137,6 @@ class MusicLibraryController
     puts "Please enter the name of a genre:"
     genre_name = gets.strip
 
-=begin
-    count = 1
-    @song_hash.each do |song_num, data|
-      if @song_hash.dig(song_num, :song_genre) == genre_name
-        puts "#{count}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)}"
-        count += 1
-      end
-    end
-=end
-#old
     genre_song_list = []
     Song.all.collect do |song|
       if song.genre.name == genre_name
@@ -174,22 +159,39 @@ class MusicLibraryController
       puts "#{num}. #{filename}"
     end
   end
-
-  #prompts the user to choose a song from the alphabetized list output by #list_songs
-  #upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
+=begin
+    count = 1
+    @song_hash.each do |song_num, data|
+      if @song_hash.dig(song_num, :song_genre) == genre_name
+        puts "#{count}. #{@song_hash.dig(song_num, :song_artist)} - #{@song_hash.dig(song_num, :song_name)}"
+        count += 1
+      end
+    end
+=end
   def play_song
-    #list_songs
+    #prompts the user to choose a song from the alphabetized list output by #list_songs
     puts "Which song number would you like to play?"
-
     input = gets.strip
-    position = input.to_i
 
+    #upon receiving valid input 'plays' the matching song from the alphabetized list output by #list_songs
+    @alphabetized_list.each do |song|
+      if song.start_with?(input)
+        output = song.split(". ").drop(1).join.split(" - ")
+        name = output[1]
+        artist = output[0]
+        puts "Playing #{name} by #{artist}"
+      end
+    end
+  end
+end
+
+=begin
     #binding.pry
-    if position <= list_songs.length
-      puts "Playing #{@song_hash[position][:song_name]} by #{@song_hash[position][:song_artist]}"
+    if input <= @song_hash.length
+      puts "Playing #{@song_hash[input][:song_name]} by #{@song_hash[input][:song_artist]}"
     end
     #binding.pry
-=begin
+
     if list_songs[input.to_i]
       puts "Playing #{} by #{}"
     end
@@ -216,9 +218,6 @@ class MusicLibraryController
       puts "Playing #{} by #{}"
     end
 =end
-  end
-
-end
 
 =begin #old
     nested_library = @library.collect {|filename| filename.split(" - ")}
