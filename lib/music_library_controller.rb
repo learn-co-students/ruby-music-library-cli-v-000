@@ -24,7 +24,6 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
    4.times { user_response = gets.strip unless user_response == "exit" }
-
   end
 
   def list_songs
@@ -33,8 +32,7 @@ class MusicLibraryController
 
     counter = 0
     all_songs.each do |each_song|
-      counter += 1
-      puts "#{counter}. #{each_song.artist.name} - #{each_song.name} - #{each_song.genre.name}"
+      puts "#{counter += 1}. #{each_song.artist.name} - #{each_song.name} - #{each_song.genre.name}"
     end
   end
 
@@ -44,8 +42,17 @@ class MusicLibraryController
 
     counter = 0
     all_artists.each do |each_artist|
-      counter += 1
-      puts "#{counter}. #{each_artist.name}"
+      puts "#{counter += 1}. #{each_artist.name}"
+    end
+  end
+
+  def list_genres
+    all_genres = Genre.all
+    all_genres.sort! { |a, b| a.name <=> b.name }
+
+    counter = 0
+    all_genres.each do |each_genre|
+      puts "#{counter += 1}. #{each_genre.name}"
     end
   end
 
