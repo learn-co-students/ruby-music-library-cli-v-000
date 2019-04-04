@@ -66,7 +66,7 @@ class MusicLibraryController
        all_songs = artist_object.songs # store all the matching artist's songs
        all_songs.sort! { |a, b| a.name <=> b.name } # sort all the songs alphabetically
        counter = 0
-       all_songs.each { |each_song| puts "#{counter += 1}. #{each_song.name} - #{each_song.genre.name}" }
+       all_songs.each { |each_song| puts "#{counter += 1}. #{each_song.name} - #{each_song.genre.name}" } # iterate through the ALL_SONGS array, each time pulling and outputting with string interpolation
      else
        nil
      end
@@ -98,13 +98,13 @@ class MusicLibraryController
      all_songs.sort! { |a, b| a.name <=> b.name }
      song_count = all_songs.count
 
-     if user_response != nil
+     if user_response != nil && user_response.to_i.between?(1,song_count)
        grabbed_song = all_songs[user_response.to_i - 1]
        puts "Playing #{grabbed_song.name} by #{grabbed_song.artist.name}"
      else
        nil
      end
-     binding.pry
+
    end
 
 end
