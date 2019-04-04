@@ -91,10 +91,15 @@ class MusicLibraryController
    end
 
    def play_song
+     all_songs = Song.all
+     all_songs.sort! { |a, b| a.name <=> b.name }
+
      puts "Which song number would you like to play?"
      user_response = gets.strip
 
-     puts "Playing #{all_songs[user_response.to_i]}"
+     grabbed_song = all_songs[user_response.to_i - 1]
+
+     puts "Playing #{grabbed_song.name} by #{grabbed_song.artist.name}"
    end
 
 end
