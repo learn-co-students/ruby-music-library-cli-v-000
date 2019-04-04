@@ -97,9 +97,13 @@ class MusicLibraryController
      puts "Which song number would you like to play?"
      user_response = gets.strip
 
-     grabbed_song = all_songs[user_response.to_i - 1]
+     if user_response != nil
+       grabbed_song = all_songs[user_response.to_i - 1]
+       puts "Playing #{grabbed_song.name} by #{grabbed_song.artist.name}"
+     else
+       nil
+     end
 
-     puts "Playing #{grabbed_song.name} by #{grabbed_song.artist.name}"
    end
 
 end
