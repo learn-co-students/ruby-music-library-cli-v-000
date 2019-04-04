@@ -1,4 +1,4 @@
-
+require 'pry'
 
 class MusicLibraryController
 
@@ -59,9 +59,42 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:" # prompt the user for the artist's name
     user_response = gets.strip # store the user's response
-    artist_object = Artist.find_by_name(user_response) # search through all existing artists for the user's requested artist
-    all_songs = artist_object.songs # store all the matching artist's songs
-    all_songs.sort! { |a, b| a.name <=> b.name } # sort all the songs alphabetically
-  end
+
+     artist_object = Artist.find_by_name(user_response) # search through all existing artists for the user's requested artist
+
+     if artist_object != nil
+       all_songs = artist_object.songs # store all the matching artist's songs
+       all_songs.sort! { |a, b| a.name <=> b.name } # sort all the songs alphabetically
+       counter = 0
+       all_songs.each { |each_song| puts "#{counter += 1}. #{each_song.name} - #{each_song.genre.name}" }
+     else
+       nil
+     end
+
+   end
+
+   def list_songs_by_genre
+     puts "Please enter the name of a genre:"
+     user_response = gets.strip
+
+      genre_object = Genre.find_by_name(user_response)
+
+      if genre_object != nil
+        all_songs = genre_object.songs
+        all_songs.sort! { |a, b| a.name <=> b.name }
+        counter = 0
+        all_songs.each { |each_song| puts "#{counter += 1}. #{each_song.artist.name} - #{each_song.name}" }
+      else
+        nil
+      end
+
+   end
+
+   def play_song
+     puts "Which song number would you like to play?"
+     user_response = gets.strip
+
+     puts "Playing #{all_songs[user_response.to_i]}"
+   end
 
 end
