@@ -1,5 +1,3 @@
-require 'pry'
-
 class MusicLibraryController
 
   def initialize(path = nil)
@@ -23,7 +21,32 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-   4.times { user_response = gets.strip unless user_response == "exit" }
+  #  4.times { user_response = gets.strip unless user_response == "exit" }
+    user_response = gets.strip
+    counter = 0
+
+    loop do
+        counter += 1
+
+     case user_response # use a CASE statement - <-- checks VARIABLE for its VALUE & responds accordingly - more elegant than IF/ELSE
+      when "list songs" # begin the pattern of VARIABLE checking - same as IF VARIABLE == "VALUE"...etc.
+        list_songs # this is the BLOCK that gets executed if the specific CASE of variable checking evaluates TRUTHY
+      when "list artists"
+        list_artists
+      when "list genres"
+        list_genres
+      when "list artist"
+        list_songs_by_artist
+      when "list genre"
+        list_songs_by_genre
+      when "play song"
+        play_song
+      end
+
+      break if counter == 4 || user_response == "exit"
+
+    end
+
   end
 
   def list_songs
