@@ -8,25 +8,24 @@ class MusicLibraryController
 
     importer_object = MusicImporter.new(path)
     importer_object.import
-
   end
 
   def call
     puts "Welcome to your music library!"
-    puts "To list all of your songs, enter 'list songs'."
-    puts "To list all of the artists in your library, enter 'list artists'."
-    puts "To list all of the genres in your library, enter 'list genres'."
-    puts "To list all of the songs by a particular artist, enter 'list artist'."
-    puts "To list all of the songs of a particular genre, enter 'list genre'."
-    puts "To play a song, enter 'play song'."
-    puts "To quit, type 'exit'."
-    puts "What would you like to do?"
-  #  4.times { user_response = gets.strip unless user_response == "exit" }
-    user_response = gets.strip
-    counter = 0
+    user_response = ""
 
-    loop do
-        counter += 1
+    while user_response != "exit"
+
+      puts "To list all of your songs, enter 'list songs'."
+      puts "To list all of the artists in your library, enter 'list artists'."
+      puts "To list all of the genres in your library, enter 'list genres'."
+      puts "To list all of the songs by a particular artist, enter 'list artist'."
+      puts "To list all of the songs of a particular genre, enter 'list genre'."
+      puts "To play a song, enter 'play song'."
+      puts "To quit, type 'exit'."
+      puts "What would you like to do?"
+
+      user_response = gets.strip
 
      case user_response # use a CASE statement - <-- checks VARIABLE for its VALUE & responds accordingly - more elegant than IF/ELSE
       when "list songs" # begin the pattern of VARIABLE checking - same as IF VARIABLE == "VALUE"...etc.
@@ -41,12 +40,9 @@ class MusicLibraryController
         list_songs_by_genre
       when "play song"
         play_song
-      end
-
-      break if counter == 4 || user_response == "exit"
+     end
 
     end
-
   end
 
   def list_songs
@@ -93,7 +89,6 @@ class MusicLibraryController
      else
        nil
      end
-
    end
 
    def list_songs_by_genre
@@ -110,7 +105,6 @@ class MusicLibraryController
       else
         nil
       end
-
    end
 
    def play_song
@@ -127,7 +121,6 @@ class MusicLibraryController
      else
        nil
      end
-
    end
 
 end
