@@ -4,30 +4,33 @@ class Song
   @@all = []
   
   def initialize(name)
-    name = @name
+    @name = name
+
   end 
   
   def save
     @@all << self
   end
   
-  def all 
+  def self.all 
     @@all
   end 
   
-  def destroy_all
-    @@all.delete_all
+  def self.destroy_all
+    # self.@@all.clear
+    @@all = []
   end 
   
-  def create(new_song) 
-    create = Song.new
-    save = @@all << Song.new
-    Song.new
+  def self.create(new_song) 
+    @new_song = new_song
+    @new_song.initialize
+    @new_song.save
+    return new_song
   end 
   
-  def new 
+  # def new 
     
-  end 
+  # end 
   
 end   
   
