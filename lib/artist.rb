@@ -18,7 +18,7 @@ class Artist
   end 
   
   def self.destroy_all
-    # self.@@all.clear
+    # self.@@all.clear doesn't work because...???
     @@all = []
   end 
   
