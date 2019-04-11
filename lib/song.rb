@@ -1,10 +1,11 @@
 class Song
-  attr_accessor :name 
+  attr_accessor :name, :artist 
   
   @@all = []
   
-  def initialize(name)
+  def initialize(name, *artist_name)
     @name = name
+    @artist = Artist.new(artist_name)
 
   end 
   
@@ -22,15 +23,11 @@ class Song
   end 
   
   def self.create(new_song) 
-    new_song = Song.new(new_song)
+    n_s = Song.new(new_song)
     # new_song.initialize
-    new_song.save
-    new_song
+    n_s.save
+    n_s
   end 
-  
-  # def new 
-    
-  # end 
   
 end   
   

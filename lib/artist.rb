@@ -5,6 +5,7 @@ class Artist
   
   def initialize(name)
     @name = name
+    @songs = []
 
   end 
   
@@ -21,16 +22,19 @@ class Artist
     @@all = []
   end 
   
-  def self.create(new_song) 
-    new_song = Song.new(new_song)
-    # new_song.initialize
-    new_song.save
-    new_song
+  def self.create(new_artist) 
+    n_a = Artist.new(new_artist)
+    n_a.save
+    n_a
   end 
   
-  # def new 
-    
-  # end 
+  def songs
+    @songs  
+  end 
   
+  def add_song(song)
+    song.artist = self
+  end 
+
 end   
   
