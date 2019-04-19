@@ -1,9 +1,9 @@
-require_relative '../lib/concerns/findable.rb'
+require_relative './concerns/findable.rb'
 
 
 class Artist
   extend Concerns::Findable
-  attr_accessor :name
+  attr_accessor :name, :songs
   attr_reader :genre
   @@all = []
   
@@ -12,10 +12,14 @@ class Artist
     @songs = []
 
   end 
-  
-  def save
-    @@all << self
-  end
+
+  def self.create(new_artist_name) 
+    # n_a = Artist.new(new_artist)
+    # n_a.save
+    # n_a
+##### BETTER TO WRITE AS \/
+    new(new_artist_name).tap{|a| a.save}
+  end 
   
   def self.all 
     @@all
@@ -26,20 +30,18 @@ class Artist
     @@all = []
   end 
   
-  def self.create(new_artist) 
-    n_a = Artist.new(new_artist)
-    n_a.save
-    n_a
-  end 
-  
+  def save
+    @@all << self
+  end
+
   def songs
     @songs  
   end 
   
   def add_song(song)
-    unless @songs.include?(song)
-      @songs << song
-    end
+    # song.artist = self unless song.artist == self
+    @songs << song unless @songs.include?(song)
+  end
     
     song.artist ||= self
   end 
