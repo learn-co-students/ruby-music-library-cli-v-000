@@ -1,3 +1,4 @@
+# this is here because artist.rb is loading before Concerns::Findable module
 # require_relative './concerns/findable.rb'
 
 class Artist
@@ -47,6 +48,4 @@ class Artist
     songs.collect{|s| s.genre }.uniq
   end
 
-end 
-
-  
+end
