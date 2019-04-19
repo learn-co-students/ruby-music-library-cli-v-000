@@ -18,7 +18,21 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     
-    # if user enters song name 
+    input = ""
+    until input == 'exit'
+    input = gets.strip
+    end
+  end
+
+  def list_songs
+    look_at_all_songs_in_CLI = Song.all
+    alphabetized_songs = look_at_all_songs_in_CLI.sort{|a,b| a.name <=> b.name }
+    remove_duplicates = alphabetized_songs.uniq
+    
+    list_songs_with_number = remove_duplicates.each_with_index{ |song, i|
+      puts "#{i + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    }
+    print list_songs_with_number
   end
 
 end
