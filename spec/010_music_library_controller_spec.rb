@@ -1,4 +1,6 @@
 require "spec_helper"
+require_relative "../models/music_library_controller.rb"
+require_relative "../models/music_importer.rb"
 
 describe "MusicLibraryController" do
   describe "#initialize" do

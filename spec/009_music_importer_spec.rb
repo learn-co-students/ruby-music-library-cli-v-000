@@ -1,4 +1,10 @@
 require "spec_helper"
+require_relative "../models/music_importer.rb"
+require_relative "../models/artist.rb"
+require_relative "../models/song.rb"
+require_relative "../models/genre.rb"
+
+
 
 describe "MusicImporter" do
   let(:music_importer) { MusicImporter.new("./spec/fixtures/mp3s") }
