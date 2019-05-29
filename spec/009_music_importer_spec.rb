@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'pry'
 
 describe "MusicImporter" do
   let(:music_importer) { MusicImporter.new("./spec/fixtures/mp3s") }
@@ -18,6 +19,7 @@ describe "MusicImporter" do
 
   describe "#files" do
     it "loads all the MP3 files in the path directory" do
+      # binding.pry
       expect(music_importer.files.size).to eq(5)
     end
 
@@ -34,7 +36,7 @@ describe "Song" do
   describe ".new_from_filename" do
     it "initializes a song based on the passed-in filename" do
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-
+      # binding.pry
       expect(song.name).to eq("For Love I Come")
       expect(song.artist.name).to eq("Thundercat")
       expect(song.genre.name).to eq("dance")
@@ -48,7 +50,7 @@ describe "Song" do
       expect(Genre).to receive(:find_or_create_by_name).and_return(genre)
 
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-
+      # binding.pry
       expect(song.artist).to be(artist)
       expect(song.genre).to be(genre)
     end
