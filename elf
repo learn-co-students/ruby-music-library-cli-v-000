@@ -1,0 +1,71 @@
+=> [[32m#<Artist:0x000000033d9e80[0m
+  @name[32m=[0m[31m[1;31m"[0m[31mAction Bronson[1;31m"[0m[31m[0m,
+  @songs[32m=[0m
+   [[32m#<Song:0x000000033d9ef8[0m
+     @artist[32m=[0m[32m#<Artist:0x000000033d9e80[0m ...[32m>[0m,
+     @genre[32m=[0m
+      [32m#<Genre:0x000000033d9de0[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mindie[1;31m"[0m[31m[0m,
+       @songs[32m=[0m[[32m#<Song:0x000000033d9ef8[0m ...[32m>[0m][32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mLarry Csonka[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+ [32m#<Artist:0x000000033d9840[0m
+  @name[32m=[0m[31m[1;31m"[0m[31mJurassic 5[1;31m"[0m[31m[0m,
+  @songs[32m=[0m
+   [[32m#<Song:0x000000033d98b8[0m
+     @artist[32m=[0m[32m#<Artist:0x000000033d9840[0m ...[32m>[0m,
+     @genre[32m=[0m
+      [32m#<Genre:0x000000033da100[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mhip-hop[1;31m"[0m[31m[0m,
+       @songs[32m=[0m
+        [[32m#<Song:0x000000033da268[0m
+          @artist[32m=[0m
+           [32m#<Artist:0x000000033da510[0m
+            @name[32m=[0m[31m[1;31m"[0m[31mReal Estate[1;31m"[0m[31m[0m,
+            @songs[32m=[0m
+             [[32m#<Song:0x000000033da588[0m
+               @artist[32m=[0m[32m#<Artist:0x000000033da510[0m ...[32m>[0m,
+               @genre[32m=[0m
+                [32m#<Genre:0x000000033da470[0m
+                 @name[32m=[0m[31m[1;31m"[0m[31mcountry[1;31m"[0m[31m[0m,
+                 @songs[32m=[0m[[32m#<Song:0x000000033da588[0m ...[32m>[0m][32m>[0m,
+               @name[32m=[0m[31m[1;31m"[0m[31mGreen Aisles[1;31m"[0m[31m[0m[32m>[0m,
+              [32m#<Song:0x000000033da268[0m ...[32m>[0m][32m>[0m,
+          @genre[32m=[0m[32m#<Genre:0x000000033da100[0m ...[32m>[0m,
+          @name[32m=[0m[31m[1;31m"[0m[31mIt's Real[1;31m"[0m[31m[0m[32m>[0m,
+         [32m#<Song:0x000000033d98b8[0m ...[32m>[0m][32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mWhat's Golden[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+ [32m#<Artist:0x000000033da510[0m
+  @name[32m=[0m[31m[1;31m"[0m[31mReal Estate[1;31m"[0m[31m[0m,
+  @songs[32m=[0m
+   [[32m#<Song:0x000000033da588[0m
+     @artist[32m=[0m[32m#<Artist:0x000000033da510[0m ...[32m>[0m,
+     @genre[32m=[0m
+      [32m#<Genre:0x000000033da470[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mcountry[1;31m"[0m[31m[0m,
+       @songs[32m=[0m[[32m#<Song:0x000000033da588[0m ...[32m>[0m][32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mGreen Aisles[1;31m"[0m[31m[0m[32m>[0m,
+    [32m#<Song:0x000000033da268[0m
+     @artist[32m=[0m[32m#<Artist:0x000000033da510[0m ...[32m>[0m,
+     @genre[32m=[0m
+      [32m#<Genre:0x000000033da100[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mhip-hop[1;31m"[0m[31m[0m,
+       @songs[32m=[0m
+        [[32m#<Song:0x000000033da268[0m ...[32m>[0m,
+         [32m#<Song:0x000000033d98b8[0m
+          @artist[32m=[0m
+           [32m#<Artist:0x000000033d9840[0m
+            @name[32m=[0m[31m[1;31m"[0m[31mJurassic 5[1;31m"[0m[31m[0m,
+            @songs[32m=[0m[[32m#<Song:0x000000033d98b8[0m ...[32m>[0m][32m>[0m,
+          @genre[32m=[0m[32m#<Genre:0x000000033da100[0m ...[32m>[0m,
+          @name[32m=[0m[31m[1;31m"[0m[31mWhat's Golden[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mIt's Real[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+ [32m#<Artist:0x000000033d9b60[0m
+  @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+  @songs[32m=[0m
+   [[32m#<Song:0x000000033d9bd8[0m
+     @artist[32m=[0m[32m#<Artist:0x000000033d9b60[0m ...[32m>[0m,
+     @genre[32m=[0m
+      [32m#<Genre:0x000000033d9ac0[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mdance[1;31m"[0m[31m[0m,
+       @songs[32m=[0m[[32m#<Song:0x000000033d9bd8[0m ...[32m>[0m][32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m][32m>[0m]
