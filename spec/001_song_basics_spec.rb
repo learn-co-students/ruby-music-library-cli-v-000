@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Song" do
-  let(:song) { Song.new("In the Aeroplane Over the Sea") }
+  let(:song) { Song.new("In the Aeroplane Over the Sea") } #D
 
   describe "#initialize" do
     it "accepts a name for the new song" do
@@ -11,13 +11,13 @@ describe "Song" do
 
       expect(new_song_name).to eq("Alison")
     end
-  end
+  end #D 
 
   describe "#name" do
     it "retrieves the name of a song" do
       expect(song.name).to eq("In the Aeroplane Over the Sea")
     end
-  end
+  end #D 
 
   describe "#name=" do
     it "can set the name of a song" do
@@ -27,7 +27,7 @@ describe "Song" do
 
       expect(song_name).to eq("Jump Around")
     end
-  end
+  end #D 
 
   describe "@@all" do
     it "is initialized as an empty array" do
@@ -35,7 +35,7 @@ describe "Song" do
 
       expect(all).to match_array([])
     end
-  end
+  end #D 
 
   describe ".all" do
     it "returns the class variable @@all" do
@@ -45,7 +45,7 @@ describe "Song" do
 
       expect(Song.all).to match_array([song])
     end
-  end
+  end #D 
 
   describe ".destroy_all" do
     it "resets the @@all class variable to an empty array" do
@@ -55,7 +55,7 @@ describe "Song" do
 
       expect(Song.all).to match_array([])
     end
-  end
+  end #D 
 
   describe "#save" do
     it "adds the Song instance to the @@all class variable" do
@@ -63,7 +63,7 @@ describe "Song" do
 
       expect(Song.all).to include(song)
     end
-  end
+  end #D 
 
   describe ".create" do
     it "initializes, saves, and returns the song" do
