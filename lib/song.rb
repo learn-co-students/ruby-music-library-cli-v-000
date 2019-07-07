@@ -6,11 +6,11 @@ class Song
 
   @@all = []
 
-  def initialize(name, artist)
+  def initialize(name, artist = Artist)
     @name = name
-    # @artist = artist
-    artist=(artist)
-    binding.pry
+    @artist = artist
+    # artist=(artist)
+    # binding.pry
   end
 
   def self.all
