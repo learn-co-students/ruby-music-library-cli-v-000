@@ -8,8 +8,10 @@ class Song
 
   def initialize(name, artist = Artist)
     @name = name
-    @artist = artist
+    # @artist = artist
+    @artist = artist=(artist)
     # artist=(artist)
+
     # binding.pry
   end
 
