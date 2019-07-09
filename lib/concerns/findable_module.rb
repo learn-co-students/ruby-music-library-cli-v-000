@@ -7,5 +7,7 @@ module Concerns::Findable
     instance = self.find_by_name(name)
     
     instance.nil? ? self.create(name) : instance
+    
+    # Note: That can be refactored with the || operator.
   end
 end
