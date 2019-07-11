@@ -16,7 +16,12 @@ class Song
   end
   
   def save
-    
+    @@all << self
   end 
   
+  def self.create(name)
+    self.new(name).tap do |song|
+      song.save
+    end
+  end 
 end 
