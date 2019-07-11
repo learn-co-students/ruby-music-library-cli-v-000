@@ -5,8 +5,7 @@ module Concerns::Findable
   end
   
   def find_or_create_by_name(name)
-      if self.find_by_name(name).nil?
-        self.create(name)
-      end
+    self.find_by_name(name) || self.create(name)
 end
+
 end
