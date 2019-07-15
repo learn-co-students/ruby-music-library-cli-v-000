@@ -3,9 +3,10 @@ class Song
 
   @@all = []
   
-  def initialize(name, artist=nil)
+  def initialize(name, artist=nil, genre=nil) # can be invoked with optional argument, object to be assigned to property
     @name = name
     self.artist = artist if artist
+    self.genre = genre if genre
   end 
   
   def self.all 
@@ -26,6 +27,7 @@ class Song
     end
   end 
   
+  # invokes Artist#add_song to add itself to the artist's collection of songs(artist has many songs)
   def artist=(artist)
     if @artist == nil
       @artist = artist
@@ -38,4 +40,5 @@ class Song
     @artist
   end
   
+
 end 
