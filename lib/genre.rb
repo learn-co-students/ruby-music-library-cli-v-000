@@ -25,4 +25,8 @@ class Genre
     all << genre
     genre
   end
+
+  def songs
+    @songs
+  end
 end
