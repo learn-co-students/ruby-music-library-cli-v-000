@@ -43,11 +43,4 @@ class Artist
     songs.map { |song| song.genre  }.uniq
     # songs.map(&:genre).uniq
   end
-
-#   # The same as people.collect { |p| p.name }
-# people.collect(&:name)
-
-  # def artists
-  #     songs.map(&:artist)
-  #   end
 end
