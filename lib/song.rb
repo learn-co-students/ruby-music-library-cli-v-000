@@ -1,21 +1,18 @@
 require 'pry'
 
 class Song
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
   # attr_reader :artist
 
   @@all = []
 
-  def initialize(name, artist = '')
+  def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist
-    artist=(artist)
-  end
 
-  # def initialize(options = {})
-  #         self.name = options[:name] || ''
-  #         self.age = options[:age] || 0
-  #     end
+    @genre = genre if genre
+    self.artist = artist if artist
+
+  end
 
   def self.all
     @@all
