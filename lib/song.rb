@@ -53,4 +53,12 @@ class Song
     else self.create(name)
     end
   end
+
+  def self.new_from_filename(name)
+
+      new_instance = self.new(name.scan(/(\w+\s\w+\s\w+\s\w+\s)/).join)
+      # new_instance = self.new(name.scan(/^(\w+ \w+)/).join)
+
+      new_instance
+    end
 end
