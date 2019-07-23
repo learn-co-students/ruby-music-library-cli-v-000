@@ -74,13 +74,13 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    self.new_from_filename
+    # self.new_from_filename(filename)
     # artist, song, genre = filename.split(" - ")
     # new_instance = self.new(song)
     # new_instance.artist_name = artist
     # new_instance.genre_name = genre
     # new_instance
-    @@all << new_instance
+    @@all << self.new_from_filename(filename)
   end
 
 end
