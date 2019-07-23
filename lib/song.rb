@@ -54,11 +54,32 @@ class Song
     end
   end
 
-  def self.new_from_filename(name)
-
-      new_instance = self.new(name.scan(/(\w+\s\w+\s\w+\s\w+\s)/).join)
-      # new_instance = self.new(name.scan(/^(\w+ \w+)/).join)
-
+  def self.new_from_filename(filename)
+      artist, song, genre = filename.split(" - ")
+      new_instance = self.new(song)
+      new_instance.artist_name = artist
+      new_instance.genre_name = genre
       new_instance
-    end
+  end
+
+  def artist_name=(name)
+    self.artist = Artist.find_or_create_by_name(name)
+    artist.add_song(self)
+  end
+
+  def genre_name=(name)
+     self.genre = Genre.find_or_create_by_name(name.gsub(".mp3", ""))
+    #  binding.pry
+     genre.songs
+  end
+
+  def self.create_from_filename(filename)
+    artist, song, genre = filename.split(" - ")
+    new_instance = self.new(song)
+    new_instance.artist_name = artist
+    new_instance.genre_name = genre
+    new_instance
+    @@all << new_instance
+  end
+
 end
