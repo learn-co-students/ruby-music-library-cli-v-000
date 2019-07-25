@@ -20,4 +20,8 @@ class MusicLibraryController
     end
   end
 
+  def list_songs
+    puts 
+  end
+
 end
