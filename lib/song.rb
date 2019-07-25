@@ -60,6 +60,7 @@ class Song
       new_instance.artist_name = artist
       new_instance.genre_name = genre
       new_instance
+      # binding.pry
   end
 
   def artist_name=(name)
@@ -81,6 +82,7 @@ class Song
     # new_instance.genre_name = genre
     # new_instance
     @@all << self.new_from_filename(filename)
+    # binding.pry
   end
 
 end

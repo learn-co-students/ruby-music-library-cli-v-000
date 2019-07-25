@@ -1,8 +1,13 @@
+require 'pry'
+
 class MusicLibraryController
+
+  attr_accessor :path
 
   def initialize(path = "./db/mp3s")
     new_instance = MusicImporter.new(path)
     new_instance.import
+    # binding.pry
   end
 
   def call
@@ -18,10 +23,15 @@ class MusicLibraryController
 
     until gets == ("exit")
     end
+    # binding.pry
   end
 
   def list_songs
-    puts "song"
-  end
+    # new_instance = MusicLibraryController.new("./spec/fixtures/mp3s")
+    # .each {|song| print song}
+    new_instance.import
 
+    # binding.pry
+  end
+    # files.each {|filename| Song.create_from_filename(filename)}
 end
