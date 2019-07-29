@@ -5,8 +5,11 @@ class MusicLibraryController
   attr_accessor :path
 
   def initialize(path = "./db/mp3s")
-    new_instance = MusicImporter.new(path)
-    new_instance.import
+    # @path = path
+
+    @new_instance = MusicImporter.new(path).import
+
+
     # binding.pry
   end
 
@@ -27,11 +30,7 @@ class MusicLibraryController
   end
 
   def list_songs
-    # new_instance = MusicLibraryController.new("./spec/fixtures/mp3s")
-    # .each {|song| print song}
-    new_instance.import
-
-    # binding.pry
+    @new_instance.each_with_index {|song, index| puts "#{index}. #{song}"}
+    binding.pry
   end
-    # files.each {|filename| Song.create_from_filename(filename)}
 end
