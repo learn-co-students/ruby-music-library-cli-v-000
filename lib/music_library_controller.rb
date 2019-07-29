@@ -30,7 +30,7 @@ class MusicLibraryController
   end
 
   def list_songs
-    @new_instance.each_with_index {|song, index| puts "#{index}. #{song}"}
+    @new_instance.each_with_index {|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
     binding.pry
   end
 end
