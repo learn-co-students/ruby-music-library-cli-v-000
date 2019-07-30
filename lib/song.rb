@@ -4,61 +4,56 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist = artist if artist
-    self.genre = genre if genre
+    self.artist = artist if artist != nil
+    self.genre = genre if genre != nil
   end
 
-  def self.create(name, artist = nil, genre = nil)
-    new(name,artist,genre).tap{|s| s.save}
-  end
   def self.all
     @@all
   end
-  def self.find_by_name(name)
-    self.all.detect{|s| s.name == name}
+
+  def save
+    @@all << self
   end
+
+  def self.destroy_all
+    @@all.clear
+  end
+
+  def self.creat(name)
+    new_song = Song.new(name)
+    new_song.save
+    new_song
+  end
+
+  def artist=(artist)
+    @artist = artist
+    @artist.add_song(self)
+  end
+
+  def genre=(genre)
+    @genre = genre
+    @genre.songs << self if @genre.songs.include?(self) == false
+  end
+
   def self.find_or_create_by_name(name)
-    self.find_by_name(name) || self.create(name)
+    if self.find_by_name(name) == nil
+      self.create(name)
+    else
+      self.find_by_name(name)
+    end
   end
 
-def self.new_from_filename(filename)
-  parts = filename.split(" - ")
-  artist_name, song_name, genre_name = parts.first, parts[1],parts[2].gsub(" .mp3", "")
+  def self.new_from_filename(file)
+    file_name = file.chomp(".mp3").split(" - ")
+    song = file_name[1]
+    artist = Artist.find_or_create_by_name(file_name[0])
+    genre = Genre.find_or_create_by_name(file_name[2])
+    new_song = self.new(song, artist, genre)
+  end
 
-  artist = Artist.find_or_create_by_name(artist_name)
-  genre = Genre.find_or_create_by_name(genre_name)
-  self.create(song_name, artist, genre)
-end
-
-def self.destroy_all
-  @@all.clear
-end
-
-def artist=(artist)
-  @artist = artist
-  artist.add_song(self)
-end
-
-def genre=(genre)
-  @genre = genre
-  genre.songs << self unless genre.songs.include?(self)
-end
-def save
-@@all << self
-
-def self.new_from_filename(song)
-  song_parts = song.split(" - ")
-  song_name = song_parts[1]
-  artist = Artist.find_or_create_by_name(song_parts[0])
-  genre = Genre.find_or_create_by_name(song_parts [2].split('.')[0])
-  self.create(song_name, artist,genre)
-end
-
-def to_s
-  "#{self.artist.name} - #{self.name} - #{self.genre.name}"
-end
-
-def self.create_from_filename(song)
-  self.new_from_filename(song)
-end
+  def self.create_from_filename(file)
+    new_song = self.new_from_filename(file)
+    new_song.save
+  end
 end
