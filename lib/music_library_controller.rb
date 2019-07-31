@@ -30,8 +30,13 @@ class MusicLibraryController
   end
 
   def list_songs
-    @new_instance.sort_by { |song| song.scan(/\s\W\s[A-Z]/).first}.each_with_index{|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
+    # @new_instance.sort_by { |song| song.scan(/\s\W\s[A-Z]/)}.each_with_index{|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
 
+    @new_instance.sort_by do |song|
+      song.scan(/\s\W\s[A-Z]/)
+    end.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.gsub(".mp3", "")}"
+    end
 
         # binding.pry
 
