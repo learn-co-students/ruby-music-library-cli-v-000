@@ -47,7 +47,7 @@ class MusicLibraryController
     @new_instance.sort_by do |artist|
       artist.scan(/\d\W\s[A-Z]/)
     end.each_with_index do |artist, index|
-      puts "#{index + 1}. #{artist.gsub(" -", "")}"
+      puts "#{index + 1}. #{artist.gsub(/\W\s\d+\s\W\s/, "")}"
     end
 
   end
