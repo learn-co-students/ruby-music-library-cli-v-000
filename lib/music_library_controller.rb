@@ -37,12 +37,10 @@ class MusicLibraryController
     end.each_with_index do |song, index|
       puts "#{index + 1}. #{song.gsub(".mp3", "")}"
     end
-
+    
+    # @new_instance.each_with_index {|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
         # binding.pry
-
   end
-    # puts "#{song[1]}"
-# arr.sort_by { |s| s.scan(/\d+/).first.to_i }
-    # arr.sort { |a,b| b <=> a}
-      # @new_instance.each_with_index {|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
+
+
 end
