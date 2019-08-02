@@ -5,7 +5,7 @@ class MusicLibraryController
   attr_accessor :path
 
   def initialize(path = "./db/mp3s")
-    # @path = path
+    @path = path
 
     @new_instance = MusicImporter.new(path).import
 
@@ -33,23 +33,15 @@ class MusicLibraryController
     # @new_instance.sort_by { |song| song.scan(/\s\W\s[A-Z]/)}.each_with_index{|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
 
     @new_instance.sort_by do |song|
-      song.scan(/\s\W\s[A-Z]/)
+      song.scan(/\s\W\s[A-Z][a-z]/)
     end.each_with_index do |song, index|
       puts "#{index + 1}. #{song.gsub(".mp3", "")}"
     end
-
+    # binding.pry
     # @new_instance.each_with_index {|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
         # binding.pry
   end
 
-  def list_artists
 
-    @new_instance.sort_by do |artist|
-      artist.scan(/\d\W\s[A-Z]/)
-    end.each_with_index do |artist, index|
-      puts "#{index + 1}. #{artist.gsub(/\W\s\d+\s\W\s/, "")}"
-    end
-
-  end
 
 end
