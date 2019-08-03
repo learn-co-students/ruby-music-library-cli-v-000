@@ -42,6 +42,14 @@ class MusicLibraryController
         # binding.pry
   end
 
+  def list_artists
+    @new_instance.sort_by do |artist|
+      artist.scan(/\w+\s/)
+    end.each_with_index do |artist, index|
+      puts "#{index + 1}. #{artist.gsub(/\W\s.+/, "")}"
+    end
+    # binding.pry
+  end
 
 
 end
