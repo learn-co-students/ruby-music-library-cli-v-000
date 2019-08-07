@@ -46,15 +46,23 @@ class MusicLibraryController
     @new_instance.sort_by do |artist|
       # artist.scan(/\w+\s/)
       # artist.scan(/([A-Z]\w+)\s?([A-Z]?\w+)/)
-        artist.scan(/^[A-Z]\w+\s?(A-Z|0-9)\w+/)
+        # artist.scan(/^[A-Z]\w+\s?(A-Z|0-9)\w+/)
+        # artist.scan(/^(\w+\s?\w+)/)
+        artist.scan(/(\w+\s?)(\w+)/)
       # artist.scan(/\s\W\s[A-Z][a-z]/)
+      # binding.pry
+
+    end.uniq do |artist|
+      artist.gsub(/( ?-\D+\d+)/, "")
+
     end.each_with_index do |artist, index|
       # puts "#{index + 1}. #{artist.gsub(/\W\s.+/, "")}"
       # puts "#{index + 1}. #{artist.gsub(/\s?\W\s[A-Z][a-z].+/, '')}"
-      puts "#{index + 1}. #{artist.gsub(//, "")}"
+
+      # puts "#{index + 1}. #{artist.gsub(/( ?-\D+\d+)/, "")}"
+        puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
+      # binding.pry
     end
-    # binding.pry
+
   end
-
-
 end
