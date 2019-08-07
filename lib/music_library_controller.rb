@@ -44,11 +44,11 @@ class MusicLibraryController
 
   def list_artists
     @new_instance.sort_by do |artist|
-      # artist.scan(/\w+\s/)
+      artist.scan(/\w+\s/)
       # artist.scan(/([A-Z]\w+)\s?([A-Z]?\w+)/)
         # artist.scan(/^[A-Z]\w+\s?(A-Z|0-9)\w+/)
         # artist.scan(/^(\w+\s?\w+)/)
-        artist.scan(/(\w+\s?)(\w+)/)
+        # artist.scan(/(\w+\s?)(\w+)/)
       # artist.scan(/\s\W\s[A-Z][a-z]/)
       # binding.pry
 
