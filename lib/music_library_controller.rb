@@ -50,17 +50,14 @@ class MusicLibraryController
         # artist.scan(/^(\w+\s?\w+)/)
         # artist.scan(/(\w+\s?)(\w+)/) - doesn't work
         # artist.scan(/\s\W\s[A-Z][a-z]/) - doesnt' work
-      # binding.pry
     end.uniq do |artist|
       artist.gsub(/( ?-\D+\d+)/, "")
-
+      
     end.each_with_index do |artist, index|
+      puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
       # puts "#{index + 1}. #{artist.gsub(/\W\s.+/, "")}" - doesn't work
       # puts "#{index + 1}. #{artist.gsub(/\s?\W\s[A-Z][a-z].+/, '')}"
-
       # puts "#{index + 1}. #{artist.gsub(/( ?-\D+\d+)/, "")}"
-      puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
-      # binding.pry
     end
 
   end
