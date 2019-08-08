@@ -46,7 +46,8 @@ class MusicLibraryController
     end.uniq do |artist|
       artist.gsub(/( ?-\D+\d+)/, "")
     end.each_with_index do |artist, index|
-      puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "") || Artist.create(name)}"
+      puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
+      puts "#{index + 1}. #{Artist.create(name)}"
     end
   end
 end
