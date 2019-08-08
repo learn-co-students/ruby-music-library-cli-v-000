@@ -41,6 +41,8 @@ class MusicLibraryController
   end
 
   def list_artists
+    if @new_instance.include?(artist)
+
     @new_instance.sort_by do |artist|
 
       artist.scan(/\w+\s/)
@@ -48,14 +50,13 @@ class MusicLibraryController
 
       artist.gsub(/( ?-\D+\d+)/, "")
     end.each_with_index do |artist, index|
-      if @new_instance.include?(artist)
+
       puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
-    else artist = Artist.create(name)
-      puts "#{index + 1}. #{artist}"
-      end
       # binding.pry
     end
-
+    else artist = Artist.create(name)
+      puts "#{index + 1}. #{artist}"
+    end
   end
 
 end
