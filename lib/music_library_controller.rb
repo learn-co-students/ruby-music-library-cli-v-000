@@ -1,7 +1,7 @@
 require 'pry'
-# require_relative "../lib/concerns/findable.rb"
+require_relative "../lib/concerns/findable.rb"
 class MusicLibraryController
-  # extend Concerns::Findable
+  extend Concerns::Findable
   attr_accessor :path
 
   def initialize(path = "./db/mp3s")
@@ -49,8 +49,13 @@ class MusicLibraryController
       if @new_instance.include?(artist)
         puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
       else
-        artist = @new_instance << Artist.create("ZZ Top")
-        # artist = Artist.create("ZZ Top")
+
+        # artist = @new_instance << Artist.create("ZZ Top")
+        # @new_instance << Artist.create("ZZ Top")
+        artist = Artist.create("ZZ Top")
+        @new_instance << artist
+        @new_instance.join.include?("ZZ Top")
+
         # @new_instance << artist
         # @new_instance
         # puts "#{index + 1}. #{artist}"
