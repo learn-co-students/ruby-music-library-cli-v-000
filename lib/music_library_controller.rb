@@ -61,7 +61,7 @@ class MusicLibraryController
         # puts "#{index + 1}. #{artist}"
         # puts "#{index + 1}. #{artist.find("ZZ Top")}"
       end
-      binding.pry
+      # binding.pry
     end
   end
 
