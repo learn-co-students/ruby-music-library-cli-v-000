@@ -50,10 +50,13 @@ class MusicLibraryController
         puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
       else
         artist = @new_instance << Artist.create("ZZ Top")
+        # artist = Artist.create("ZZ Top")
         # @new_instance << artist
-        puts "#{index + 1}. #{artist.find("ZZ Top")}"
+        # @new_instance
+        # puts "#{index + 1}. #{artist}"
+        # puts "#{index + 1}. #{artist.find("ZZ Top")}"
       end
-      # binding.pry
+      binding.pry
     end
   end
 
