@@ -52,9 +52,9 @@ class MusicLibraryController
 
         # artist = @new_instance << Artist.create("ZZ Top")
         # @new_instance << Artist.create("ZZ Top")
-        artist = Artist.create("ZZ Top")
-        @new_instance << artist
-        @new_instance.join.include?("ZZ Top")
+        Artist.create(name)
+        # @new_instance << artist
+        # @new_instance.join.include?("ZZ Top")
 
         # @new_instance << artist
         # @new_instance
