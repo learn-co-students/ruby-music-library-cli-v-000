@@ -1,3 +1,4 @@
+# require 'pry'
 module Concerns
   module Findable
   # Module code here
@@ -10,8 +11,9 @@ module Concerns
         self.find_by_name(name)
       else self.create(name)
       end
+      # binding.pry
     end
 
   end
-  
+
 end

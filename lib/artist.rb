@@ -1,3 +1,4 @@
+require 'pry'
 require_relative "../lib/concerns/findable.rb"
 class Artist
   extend Concerns::Findable
@@ -26,6 +27,7 @@ class Artist
     artist = self.new(name)
     all << artist
     artist
+    # binding.pry
   end
 
   def songs
