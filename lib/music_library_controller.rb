@@ -54,8 +54,12 @@ class MusicLibraryController
 
         # @new_instance << Artist.create("ZZ Top")
         artist = Artist.create("ZZ Top")
-        artist = artist.name
-        # @new_instance << artist
+        # puts artist.name
+        @new_instance << artist.name
+        @new_instance.sort_by do |artist|
+        puts "#{index + 1}. #{artist.name}"
+      end
+        # puts index + 1. artist.name
         # artist = @new_instance << Artist.create("ZZ Top")
         # @new_instance << Artist.create("ZZ Top")
 
@@ -67,10 +71,10 @@ class MusicLibraryController
 
         # @new_instance << artist
         # @new_instance
-        puts "#{index + 1}. #{artist.name}"
+        # puts "#{index + 1}. #{artist.name}"
         # puts "#{index + 1}. #{artist.find("ZZ Top")}"
       end
-      binding.pry
+      # binding.pry
     end
   end
 
