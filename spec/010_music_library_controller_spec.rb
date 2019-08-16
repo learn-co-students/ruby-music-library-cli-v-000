@@ -56,6 +56,7 @@ describe "MusicLibraryController" do
     end
 
     it "loops and asks for user input until they type in exit" do
+     
       allow(music_library_controller).to receive(:gets).and_return("a", "b", "c", "exit")
 
       expect(music_library_controller).to receive(:gets).exactly(4).times
