@@ -1,0 +1,114 @@
+#  def find_song(song)
+#    self.songs.find{|s| song == song}
+#  end
+
+  ##
+#  def add_song(song)
+#    if song.genre == self
+#      self.find_song(song) ? nil : @songs << song
+#    else
+#      song.genre = self
+#      self.find_song(song) ? nil : @songs << song
+#    end
+#  end
+
+#  def add_song(song)
+#    if song.genre == nil
+#      song.genre = self
+#      self.find_song(song) == nil ? @songs << song : nil
+#    else
+#      self.find_song(song) == nil ? @songs << song : nil
+#    end
+#    song
+#  end
+
+###
+
+#  def artist=(name)
+    #assign an artist instance to a song
+    #add song to artist's collection of many
+#    @artist = artist
+#    @artist = Artist.find_or_create_by_name(name)
+    #puts @artist.name
+    #@artist.add_song(self) # New
+#  end
+
+
+###############
+
+#  def self.find_by_name(name)
+#    Artist.all.detect {|artist| artist.name == "#{name}"}
+#  end
+
+#  def self.find_or_create_by_name(name)
+#    if artist = self.find_by_name(name)
+#      artist.add_song(@song)
+#    else
+#      Artist.create_by_name(name)
+#    end
+#  end
+
+  def songs
+    @songs
+  end
+
+#  def find_song(song)
+#    self.songs.find{|s| song == song}
+#  end
+
+#  def add_song(song) # songs not adding to artist instance collection
+#    if song.artist != self
+#      song.artist = self
+#      self.find_song(song) == nil ? @songs << song : nil
+#    else
+#      self.find_song(song) == nil ? @songs << song : nil
+#    end
+#  end
+
+#  def add_song(song)
+#    self.songs.detect do |s|
+#      if s == song || song.artist == nil
+#        song.artist = self
+#      #self.find_song(song) == nil ? @songs << song : nil
+#      elsif
+#        s != song
+#        song.artist = self
+#        @songs << song
+#      end
+#    end
+#  end
+
+  ##
+  #################
+
+  # prints all songs in the music library in a numbered list (alphabetized by song name) - is not hard-coded
+  def list_songs
+    integer = 0
+    @music_library.collect do |file|
+      integer += 1
+      #file.insert(0, integer.to_s + ". ") # inserts the number, but this needs to happen after alphabetized
+      #@song_list = file.split(" - ").collect do |element| # removes ".mp3", but should happen after alphabetized
+        #element.gsub(".mp3", "")
+      #end
+      @song_list #alpha array by itterate element[1]
+      #=>[["1. Cold Cave", "The Great Pan is Dead", "house"], ["2. Bill Callahan", "Riding for the Feeling", "indie"], ["3. Azealia Banks", "212", "hip-hop"], ["4. Real Estate", "Green Aisles", "country"]]
+    end # ends @music_library.collect => ["1. artist", "title", "genre"]
+  end # ends #list_songs
+
+  ####################
+
+  integer = 1
+  @artists = []
+  @music_library.collect! do |file|
+    @artists << file.split(" - ")
+  end
+  final_list = @artists.sort_by{|x| x.downcase}
+  #=> returns alphabetized ["Artist - Title - genre] but needed to remove array[1] & array[2] prior to this point
+  final_list.each do |e|
+    puts e.insert(0, integer.to_s + ". ")
+    integer += 1
+    #=> 1. Action Bronson - Larry Csonka - indie
+    #=> 2. Adele - Rolling In the Deep - folk
+    #=> 3. Adele - Someone Like You - country
+    #=> 4. AraabMuzik - Streetz Tonight - folk
+  end
