@@ -55,7 +55,7 @@ class MusicLibraryController
         # @new_instance << Artist.create("ZZ Top")
         artist = Artist.create("ZZ Top")
         # puts artist.name
-        @new_instance << artist.name
+        @new_instance.push(artist.name)
         @new_instance.sort_by do |artist|
           artist.scan(/w+\s/)
         end.uniq do |artist|
