@@ -57,6 +57,10 @@ class MusicLibraryController
         # puts artist.name
         @new_instance << artist.name
         @new_instance.sort_by do |artist|
+          artist.scan(/w+\s/)
+        end.uniq do |artist|
+          artist.gsub(/( ?\D+\d+)/, "")
+        end.each_with_index do |artist, index|
         puts "#{index + 1}. #{artist.name}"
       end
         # puts index + 1. artist.name
