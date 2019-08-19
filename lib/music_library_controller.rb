@@ -44,19 +44,25 @@ class MusicLibraryController
   end
 
   def list_artists
-    @new_instance.sort_by do |artist|
-      artist.scan(/\w+\s/)
-    end.uniq do |artist|
-      artist.gsub(/( ?-\D+\d+)/, "")
-    end.each_with_index do |artist, index|
-      if @new_instance.include?(artist)
-        puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
-      elsif !@new_instance.include?(artist)
+      # if @new_instance.include?(artist)
+      if !@new_instance.include?(artist)
+        # @new_instance << artist
         artist = Artist.create("ZZ Top")
-        @new_instance << artist
-        puts "#{index + 1}. #{artist}"
+        @new_instance << artist.name
+        @new_instance.sort_by do |artist|
+          artist.scan(/\w+\s/)
+        end.uniq do |artist|
+          artist.gsub(/( ?-\D+\d+)/, "")
+        end.each_with_index do |artist, index|
+        puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
+      # elsif !@new_instance.include?(artist)
+      #   artist = Artist.create("ZZ Top")
+        # artist = Artist.new(name)
+        # @new_instance << artist
+        # puts "#{index + 1}. #{artist.name}"
+        # binding.pry
       end
-      binding.pry
+      # binding.pry
     end
   end
 
