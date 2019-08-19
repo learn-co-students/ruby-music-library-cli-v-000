@@ -33,6 +33,7 @@ class MusicLibraryController
     # @new_instance.sort_by { |song| song.scan(/\s\W\s[A-Z]/)}.each_with_index{|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
 
     @new_instance.sort_by do |song|
+      # binding.pry
       song.scan(/\s\W\s[A-Z][a-z]/)
     end.each_with_index do |song, index|
       puts "#{index + 1}. #{song.gsub(".mp3", "")}"
@@ -50,33 +51,10 @@ class MusicLibraryController
     end.each_with_index do |artist, index|
       if @new_instance.include?(artist)
         puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
-      else
-
-        # @new_instance << Artist.create("ZZ Top")
+      elsif !@new_instance.include?(artist)
         artist = Artist.create("ZZ Top")
-        # puts artist.name
-        @new_instance.push(artist.name)
-        @new_instance.sort_by do |artist|
-          artist.scan(/w+\s/)
-        end.uniq do |artist|
-          artist.gsub(/( ?\D+\d+)/, "")
-        end.each_with_index do |artist, index|
+        @new_instance << artist.name
         puts "#{index + 1}. #{artist.name}"
-      end
-        # puts index + 1. artist.name
-        # artist = @new_instance << Artist.create("ZZ Top")
-        # @new_instance << Artist.create("ZZ Top")
-
-        # artist = Artist.create(name)
-        # @new_instance << artist
-        # artist = @new_instance.join
-        # artist[35,40]
-        # @new_instance.join.include?("ZZ Top")
-
-        # @new_instance << artist
-        # @new_instance
-        # puts "#{index + 1}. #{artist.name}"
-        # puts "#{index + 1}. #{artist.find("ZZ Top")}"
       end
       # binding.pry
     end
