@@ -2,12 +2,19 @@ require 'pry'
 
 class Artist
 
-  attr_accessor :name, :songs
+  attr_accessor :name, :songs, :genres
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
+
+  end
+
+  def genres
+    @songs.each do |song|
+      song.genre
+    end
   end
 
   def songs
@@ -33,12 +40,10 @@ class Artist
       @@all.clear
     end
 
-    def add_song(song)
+  def add_song(song)
     song.artist = self unless song.artist == self
     @songs.push(song) unless @songs.include?(song)
-
-end
-
+  end
 
 
 end

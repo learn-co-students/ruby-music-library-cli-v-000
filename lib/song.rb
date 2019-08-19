@@ -7,12 +7,13 @@ class Song
       @name = name
       @artist = artist
       @genre = genre
-          self.artist = artist_object unless artist_object = nil
-          self.genre = genre_object unless genre_object = nil
+          self.artist = artist_object unless artist_object == nil
+          self.genre = genre_object unless genre_object == nil
       end
 
       def genre=(genre)
         @genre = genre
+
         genre.songs << self unless genre.songs.include?(self)
       end
 
