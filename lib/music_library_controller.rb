@@ -51,6 +51,7 @@ class MusicLibraryController
         @new_instance << artist.name
         @new_instance.sort_by do |artist|
           artist.scan(/\w+\s/)
+          binding.pry
         end.uniq do |artist|
           artist.gsub(/( ?-\D+\d+)/, "")
         end.each_with_index do |artist, index|
