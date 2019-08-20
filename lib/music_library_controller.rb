@@ -2,15 +2,15 @@ require 'pry'
 require_relative "../lib/concerns/findable.rb"
 # require_relative "../lib/artist.rb"
 class MusicLibraryController
-  extend Concerns::Findable
-  # include Concerns
+  # extend Concerns::Findable
+  include Concerns
   attr_accessor :path, :artist, :name
 
   def initialize(path = "./db/mp3s")
     @path = path
 
     @new_instance = MusicImporter.new(path).import
-    # binding.pry
+    binding.pry
   end
 
   def call
@@ -44,27 +44,19 @@ class MusicLibraryController
   end
 
   def list_artists
-      # if @new_instance.include?(artist)
       if !@new_instance.include?(artist)
-        # @new_instance << artist
         artist = Artist.create("ZZ Top")
         @new_instance << artist.name
-        @new_instance.sort_by do |artist|
-          artist.scan(/\w+\s/)
-          binding.pry
-        end.uniq do |artist|
+        @new_instance.uniq do |artist|
           artist.gsub(/( ?-\D+\d+)/, "")
-        end.each_with_index do |artist, index|
-        puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
-      # elsif !@new_instance.include?(artist)
-      #   artist = Artist.create("ZZ Top")
-        # artist = Artist.new(name)
-        # @new_instance << artist
-        # puts "#{index + 1}. #{artist.name}"
-        # binding.pry
+          end.sort_by do |artist|
+          artist.scan(/\w+\s/)
+          end.each_with_index do |artist, index|
+          puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
+          # puts "#{index + 1}. #{artist}"
+            # binding.pry
+          end
       end
-      # binding.pry
-    end
   end
 
 end
