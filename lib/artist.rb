@@ -8,13 +8,10 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-
   end
 
   def genres
-    @songs.each do |song|
-      song.genre
-    end
+    @songs.map { |song| song.genre }.uniq
   end
 
   def songs

@@ -1,3 +1,4 @@
+require 'pry'
 class Song
 
   attr_accessor :name, :artist, :genre
@@ -5,11 +6,11 @@ class Song
 
   def initialize(name, artist_object = nil, genre_object = nil)
       @name = name
-      @artist = artist
-      @genre = genre
           self.artist = artist_object unless artist_object == nil
           self.genre = genre_object unless genre_object == nil
       end
+
+
 
       def genre=(genre)
         @genre = genre
@@ -50,5 +51,39 @@ class Song
     def self.destroy_all
       @@all.clear
     end
+
+    def self.find_by_name(filename)
+      @@all.each do |song|
+        if song.name == filename
+        return song
+        end
+      end
+    end
+
+    def self.find_or_create_by_name(name)
+      if self.find_by_name(name) != nil
+        self.find_by_name(name)
+      else
+        self.create(name)
+      end
+    end
+
+
+  #   def self.create_from_filename(filename)
+  #   artist_and_song = filename.split(".")
+  #   artist_and_song = artist_and_song.pop(2)
+  #   artist_name = artist_and_song.split(" - ")[0]
+  #   song_name = artist_and_song.split(" - ")[1]
+  #   binding.pry
+  #   song = Song.new(song_name)
+  #   artist = Artist.new(artist_name)
+  #   song.save
+  #   song.artist = artist
+  #   artist.add_song(song)
+  #   song
+  # end
+
+
+
 
 end
