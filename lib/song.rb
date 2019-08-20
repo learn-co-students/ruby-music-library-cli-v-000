@@ -58,15 +58,17 @@ class Song
         return song
         end
       end
+      nil
     end
 
+
     def self.find_or_create_by_name(name)
-      if self.find_by_name(name) != nil
-        self.find_by_name(name)
-      else
+        if self.find_by_name(name) == nil
         self.create(name)
+        else
+          self.find_by_name(name)
+        end
       end
-    end
 
 
   #   def self.create_from_filename(filename)
