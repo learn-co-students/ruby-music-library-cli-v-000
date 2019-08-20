@@ -1,6 +1,9 @@
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
+  include Concerns::Findable
+
 
   attr_accessor :name, :songs, :genres
   @@all = []

@@ -1,5 +1,7 @@
 require 'pry'
 class Song
+extend Concerns::Findable
+include Concerns::Findable
 
   attr_accessor :name, :artist, :genre
   @@all = []
@@ -52,23 +54,23 @@ class Song
       @@all.clear
     end
 
-    def self.find_by_name(filename)
-      @@all.each do |song|
-        if song.name == filename
-        return song
-        end
-      end
-      nil
-    end
-
-
-    def self.find_or_create_by_name(name)
-        if self.find_by_name(name) == nil
-        self.create(name)
-        else
-          self.find_by_name(name)
-        end
-      end
+    # def self.find_by_name(filename)
+    #   @@all.each do |song|
+    #     if song.name == filename
+    #     return song
+    #     end
+    #   end
+    #   nil
+    # end
+    #
+    #
+    # def self.find_or_create_by_name(name)
+    #     if self.find_by_name(name) == nil
+    #     self.create(name)
+    #     else
+    #       self.find_by_name(name)
+    #     end
+    #   end
 
 
   #   def self.create_from_filename(filename)
