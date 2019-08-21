@@ -8,9 +8,8 @@ class MusicLibraryController
 
   def initialize(path = "./db/mp3s")
     @path = path
-
     @new_instance = MusicImporter.new(path).import
-    binding.pry
+    # binding.pry
   end
 
   def call
