@@ -1,9 +1,9 @@
 require 'pry'
-require_relative "../lib/concerns/findable.rb"
+# require_relative "../lib/concerns/findable.rb"
 # require_relative "../lib/artist.rb"
 class MusicLibraryController
   # extend Concerns::Findable
-  include Concerns
+  # include Concerns
   attr_accessor :path, :name
 
   def initialize(path = "./db/mp3s")
@@ -47,5 +47,5 @@ class MusicLibraryController
       puts "#{index + 1}. #{genre.name}"
     end
   end
-  
+
 end
