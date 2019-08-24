@@ -4,12 +4,11 @@ require_relative "../lib/concerns/findable.rb"
 class MusicLibraryController
   # extend Concerns::Findable
   include Concerns
-  attr_accessor :path, :artist, :name
+  attr_accessor :path, :name
 
   def initialize(path = "./db/mp3s")
     @path = path
-    @new_instance = MusicImporter.new(path).import
-    # binding.pry
+    MusicImporter.new(path).import
   end
 
   def call
@@ -29,40 +28,24 @@ class MusicLibraryController
   end
 
   def list_songs
-    # @new_instance.sort_by { |song| song.scan(/\s\W\s[A-Z]/)}.each_with_index{|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
     Song.all.sort { |song1, song2| song1.name <=> song2.name }
     .each_with_index do |song, index|
-      puts "#{index + 1}. #{song.genre}"
-      # puts "#{index + 1}. #{song.gsub(".mp3, "")}"
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
-    # @new_instance.sort_by do |song|
-    #   song.scan(/\s\W\s[A-Z][a-z]/)
-    # end.each_with_index do |song, index|
-    #   puts "#{index + 1}. #{song.gsub(".mp3", "")}"
-    # end
-    # binding.pry
-    # @new_instance.each_with_index {|song, index| puts "#{index + 1}. #{song.gsub(".mp3", "")}"}
-        # binding.pry
   end
 
   def list_artists
-
     Artist.all.sort { |artist1, artist2| artist1.name <=> artist2.name }
     .each_with_index do |artist, index|
       puts "#{index + 1}. #{artist.name}"
     end
-      # if !@new_instance.include?(artist)
-      #   artist = Artist.create("ZZ Top")
-      #   @new_instance << artist.name
-      #   @new_instance.uniq do |artist|
-      #     artist.gsub(/( ?-\D+\d+)/, "")
-      #     end.sort_by do |artist|
-      #     artist.scan(/\w+\s/)
-      #     end.each_with_index do |artist, index|
-      #     puts "#{index + 1}. #{artist.gsub(/( -\D+\d+)/, "")}"
-      #     # binding.pry
-      #     end
-      # end
   end
 
+  def list_genres
+    Genre.all.sort { |genre1, genre2| genre1.name <=> genre2.name }
+    .each_with_index do |genre, index|
+      puts "#{index + 1}. #{genre.name}"
+    end
+  end
+  
 end

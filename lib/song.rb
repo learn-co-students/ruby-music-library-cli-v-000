@@ -5,6 +5,7 @@ class Song
   # attr_reader :artist, :genre
 
   @@all = []
+  # binding.pry
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -14,6 +15,7 @@ class Song
 
   def self.all
     @@all
+    # binding.pry
   end
 
   def self.destroy_all
