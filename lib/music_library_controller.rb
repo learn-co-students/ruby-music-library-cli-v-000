@@ -52,9 +52,9 @@ class MusicLibraryController
     puts "Please enter the name of an artist:"
     tmp = gets.strip
     Song.all.select do |song|
-      # binding.pry
       song.artist.name.eql?(tmp)
-    end.each_with_index do |song, index|
+    end.sort { |song1, song2| song1.name <=> song2.name }
+     .each_with_index do |song, index|
       puts "#{index + 1}. #{song.name} - #{song.genre.name}"
     end
   end
