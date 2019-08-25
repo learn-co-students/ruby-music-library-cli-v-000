@@ -57,18 +57,6 @@ class MusicLibraryController
     end.each_with_index do |song, index|
       puts "#{index + 1}. #{song.name} - #{song.genre.name}"
     end
-    # if gets == Song.all.include?(song.artist.name)
-    # if gets == Artist.name
-    #   Artist.all.each_with_index do |song, index|
-    #     puts "#{index + 1}. #{song.name}"
-    #  end
-    # end
-    #  if gets == Song.all.include?(song.artist.name)
-    #    Song.all.sort { |song1, song2| song1.name <=> song2.name }
-    #    .each_with_index do |song, index|
-    #      puts "#{index + 1}. #{song.name}"
-    #    end
-    #  end
-   end
+  end
 
 end
