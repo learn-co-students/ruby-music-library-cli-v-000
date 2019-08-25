@@ -50,10 +50,10 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    # gets
+    tmp = gets.strip
     Song.all.select do |song|
       # binding.pry
-      song.eql?(song)
+      song.artist.name.eql?(tmp)
     end.each_with_index do |song, index|
       puts "#{index + 1}. #{song.name} - #{song.genre.name}"
     end
