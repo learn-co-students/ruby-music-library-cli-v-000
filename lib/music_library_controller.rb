@@ -55,7 +55,6 @@ class MusicLibraryController
       # binding.pry
       song.eql?(song)
     end.each_with_index do |song, index|
-      gets
       puts "#{index + 1}. #{song.name} - #{song.genre.name}"
     end
     # if gets == Song.all.include?(song.artist.name)
