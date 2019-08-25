@@ -50,12 +50,26 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-     gets
-  #    if Song.all.each_with_index do |artist, index|
-  #     puts "#{index + 1}. #{artist.name}"
-  #    end
-  #  end
-
-  end
+    # gets
+    Song.all.select do |song|
+      # binding.pry
+      song.eql?(song)
+    end.each_with_index do |song, index|
+      gets
+      puts "#{index + 1}. #{song.name} - #{song.genre.name}"
+    end
+    # if gets == Song.all.include?(song.artist.name)
+    # if gets == Artist.name
+    #   Artist.all.each_with_index do |song, index|
+    #     puts "#{index + 1}. #{song.name}"
+    #  end
+    # end
+    #  if gets == Song.all.include?(song.artist.name)
+    #    Song.all.sort { |song1, song2| song1.name <=> song2.name }
+    #    .each_with_index do |song, index|
+    #      puts "#{index + 1}. #{song.name}"
+    #    end
+    #  end
+   end
 
 end
