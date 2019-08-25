@@ -50,9 +50,11 @@ class MusicLibraryController
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
-    if gets.match(artist.name)
-      puts "#{artist.name}"
-    end
+     gets
+  #    if Song.all.each_with_index do |artist, index|
+  #     puts "#{index + 1}. #{artist.name}"
+  #    end
+  #  end
 
   end
 
