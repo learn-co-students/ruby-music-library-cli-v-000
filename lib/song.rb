@@ -1,3 +1,4 @@
+require 'pry'
 class Song 
   attr_accessor :name, :artist, :genre
 
@@ -56,6 +57,10 @@ class Song
    else
       self.create(name)
     end 
+    
+    def self.new_from_filename
+      binding.pry
+    end
     
   end 
 

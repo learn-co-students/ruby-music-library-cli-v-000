@@ -1,3 +1,5 @@
+require 'pry'
+
 class MusicImporter
   attr_accessor :path, :files
   
@@ -5,6 +7,10 @@ class MusicImporter
     @path = path 
   end 
   
+  def files 
+   # binding.pry
+   Dir.glob("#{path}/*").map{ |file| file.gsub("#{path}/", '') }
+  end
   
   
 end 
