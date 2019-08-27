@@ -70,16 +70,25 @@ class MusicLibraryController
      end
   end
 
-  def play_song
-    puts "Which song number would you like to play?"
-    tmp = gets.strip
-      Song.all.sort { |song1, song2| song1.name <=> song2.name }
-      .each_with_index do |song, index|
-        index + 1
-      end.select do |song, index|
-        index.eql?(tmp)
-        puts "Playing #{song.name} by #{song.artist.name}"
-      end
-   end
+  #dont need select
+  # def play_song
+  #   puts "Which song number would you like to play?"
+  #   tmp = gets.strip
+  #     Song.all.sort { |song1, song2| song1.name <=> song2.name }
+  #     .select do |song, index|
+  #       index + 1
+  #       index.eql?(tmp)
+  #       puts "Playing #{song.name} by #{song.artist.name}"
+  #     end
+  #  end
+
+   def play_song
+     puts "Which song number would you like to play?"
+     tmp = gets.strip
+       array = Song.all.sort { |song1, song2| song1.name <=> song2.name }
+      #  binding.pry
+         array[].eql?(tmp)
+         puts "Playing #{song.name} by #{song.artist.name}"
+    end
 
 end
