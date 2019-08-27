@@ -73,33 +73,13 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     tmp = gets.strip
-      # list_songs.eql?(tmp)
       Song.all.sort { |song1, song2| song1.name <=> song2.name }
-      .select do |song|
-         song.eql?(tmp)
-        #  binding.pry
-         puts "Playing #{song.name} by #{song.artist.name}"
-       end
-
-      #  def list_songs
-      #    Song.all.sort { |song1, song2| song1.name <=> song2.name }
-      #    .each_with_index do |song, index|
-      #      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      #    end
-      #  end
-      #  Song.all.select do |song|
-      #  song.name.eql?(tmp)
-      #  end.sort do |song1, song2|
-      #    song1.name <=> song2.name
-      #    puts "Playing #{song.name} by #{artist.name}"
-      #   # .each do |song|
-      #  end
-    # Song.all.select do |song|
-    #   song.eql?(tmp)
-    # end.sort do |song1, song2|
-    #   song1.name <=> song2.name
-    #   puts "Playing #{song.name} by #{song.artist.name}"
-    # end
-  end
+      .each_with_index do |song, index|
+        index + 1
+      end.select do |song, index|
+        index.eql?(tmp)
+        puts "Playing #{song.name} by #{song.artist.name}"
+      end
+   end
 
 end
