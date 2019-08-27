@@ -86,7 +86,7 @@ class MusicLibraryController
      puts "Which song number would you like to play?"
      tmp = gets.strip
        array = Song.all.sort { |song1, song2| song1.name <=> song2.name }
-
+       array.map do ||
        binding.pry
       #  if array.fetch(tmp.to_i) == tmp.to_i
       #    array.map do |song|
