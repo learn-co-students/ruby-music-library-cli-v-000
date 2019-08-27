@@ -5,10 +5,12 @@ class MusicLibraryController
   def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
-    call
+    # call
   end
 
   def call
+    answer = ""
+     while answer != "exit" do
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -20,16 +22,21 @@ class MusicLibraryController
     puts "What would you like to do?"
 
     answer = gets.chomp
-   loop do answer
-     if answer == "list_songs"
-       list_songs
+  #  while answer != "exit" do
+      if answer == "list songs"
+      list_songs
      elsif answer == "list artists"
        list_artists
-  elsif answer == "exit"
-      break
-end
-end
-
+     elsif answer == "list genres"
+       list_genres
+     elsif answer == "list artist"
+       list_songs_by_artist
+     elsif answer == "list genre"
+       list_songs_by_genre
+     elsif answer == "play song"
+       play_song
+      end
+    end
   end
 
 def list_songs
