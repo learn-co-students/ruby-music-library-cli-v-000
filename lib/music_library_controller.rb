@@ -86,11 +86,19 @@ class MusicLibraryController
      puts "Which song number would you like to play?"
      tmp = gets.strip
        array = Song.all.sort { |song1, song2| song1.name <=> song2.name }
-      #  binding.pry
-         array.map do |song|
-           song[].eql?(tmp)
-         puts "Playing #{song.name} by #{song.artist.name}"
-       end
+
+       binding.pry
+      #  if array.fetch(tmp.to_i) == tmp.to_i
+      #    array.map do |song|
+      #    puts "Playing #{song.name} by #{song.artist.name}"
+      #  end
+      #  end
+    #      array.map do |song, index|
+    #       if array[index] == tmp.to_i
+    #   #      index.eql?(tmp)
+    #      puts "Playing #{song.name} by #{song.artist.name}"
+    #    end
+    #  end
     end
 
 end
