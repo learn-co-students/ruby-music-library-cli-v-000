@@ -2,8 +2,6 @@ require 'pry'
 
 class Artist
   extend Concerns::Findable
-  include Concerns::Findable
-
 
   attr_accessor :name, :songs, :genres
   @@all = []
@@ -41,8 +39,10 @@ class Artist
     end
 
   def add_song(song)
-    song.artist = self unless song.artist == self
+
+      song.artist = self unless song.artist == self
     @songs.push(song) unless @songs.include?(song)
+
   end
 
 
