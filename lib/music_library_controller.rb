@@ -87,8 +87,9 @@ class MusicLibraryController
      tmp = gets.strip
         array = Song.all.sort { |song1, song2| song1.name <=> song2.name }
         array.select do |song|
-          array[tmp.to_i].eql?(tmp.to_i)
+          if song == array[tmp.to_i]
           puts "Playing #{song.name} by #{song.artist.name}"
+          end
         end
     end
 
