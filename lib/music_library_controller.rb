@@ -90,7 +90,7 @@ class MusicLibraryController
         end
 
         array.select.with_index do |song, idx|
-          (idx).eql?(tmp.to_i)
+          idx.eql?(tmp.to_i)
           puts " #{song.name} by #{song.artist.name}"
         end
     end
