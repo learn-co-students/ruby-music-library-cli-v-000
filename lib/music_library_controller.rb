@@ -84,7 +84,7 @@ class MusicLibraryController
 
    def play_song
      puts "Which song number would you like to play?"
-    #  tmp = gets.strip
+     tmp = gets.strip
         array = Song.all.sort { |song1, song2| song1.name <=> song2.name }
         array.select do |song|
           array[tmp.to_i].eql?(tmp.to_i)
