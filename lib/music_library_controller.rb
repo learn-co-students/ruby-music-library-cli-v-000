@@ -89,13 +89,20 @@ class MusicLibraryController
         array = Song.all.sort do |song1, song2|
           song1.artist.name <=> song2.artist.name
         end
-        if array[tmp.to_i]
+        # if array[tmp.to_i]
+        # puts "Playing " + array[tmp.to_i].name + " by " + array[tmp.to_i].artist.name
+        # end
+        # array.fetch(tmp.to_i).name
         # binding.pry
-        puts "Playing" + song.name + "by" + song.artist.name
-      end
-        # array.select do |song|
-        #   if array[tmp.to_i]
-        #   puts "Playing #{song.name} by #{song.artist.name}"
+        puts "Playing " + array[tmp.to_i].name + " by " + array[tmp.to_i].artist.name
+
+        # array.select do |index|
+        #   if index == tmp.to_i
+        #     # index.eql?(tmp.to_i)
+        #       # puts "Playing " + array[tmp.to_i].name + " by " + array[tmp.to_i].artist.name
+        #       # puts "Playing " + array.song.name + " by " + array.song.artist.name
+        # #   if array[tmp.to_i]
+        # #   puts "Playing #{song.name} by #{song.artist.name}"
         #   end
         # end
     end
