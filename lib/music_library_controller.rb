@@ -85,12 +85,19 @@ class MusicLibraryController
    def play_song
      puts "Which song number would you like to play?"
      tmp = gets.strip
-        array = Song.all.sort { |song1, song2| song1.name <=> song2.name }
-        array.select do |song|
-          if song == array[tmp.to_i]
-          puts "Playing #{song.name} by #{song.artist.name}"
-          end
+        # array = Song.all.sort { |song1, song2| song1.artist.name <=> song2.artist.name }
+        array = Song.all.sort do |song1, song2|
+          song1.artist.name <=> song2.artist.name
         end
+        if array[tmp.to_i]
+        # binding.pry
+        puts "Playing" + song.name + "by" + song.artist.name
+      end
+        # array.select do |song|
+        #   if array[tmp.to_i]
+        #   puts "Playing #{song.name} by #{song.artist.name}"
+        #   end
+        # end
     end
 
 end
