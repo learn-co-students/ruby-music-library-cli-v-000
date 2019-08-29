@@ -9,7 +9,6 @@ class MusicLibraryController
   def initialize(path = "./db/mp3s")
     @path = path
     MusicImporter.new(path).import
-
   end
 
   def call
@@ -22,10 +21,13 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+    # if gets.strip == ('list songs')
+    #   list_songs
+    # end
 
     until gets == ('exit')
-    end
     # binding.pry
+    end
   end
 
   def list_songs
