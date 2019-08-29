@@ -21,17 +21,22 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
+
     if gets == ('list songs')
       list_songs
-    end
 
-    if gets == ('list artists')
+    elsif gets == ('list artists')
       list_artists
+
+    elsif gets == ('list genres')
+      list_genres
+
+    else gets == ('exit')
     end
 
-    until gets == ('exit')
-    # binding.pry
-    end
+    # until gets == ('exit')
+    # # binding.pry
+    # end
   end
 
   def list_songs
