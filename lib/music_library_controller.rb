@@ -21,9 +21,13 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    # if gets.strip == ('list songs')
-    #   list_songs
-    # end
+    if gets == ('list songs')
+      list_songs
+    end
+
+    if gets == ('list artists')
+      list_artists
+    end
 
     until gets == ('exit')
     # binding.pry
