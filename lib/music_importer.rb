@@ -17,10 +17,3 @@ class MusicImporter
     # binding.pry
   end
 end
-
-
-
-  # def import
-  #   #  4.times {Song.new_by_filename(file_name)} "this works but hardcoded to 4 times"
-  #   files.each {|filename| Song.new_by_filename(filename)}
-  # end
