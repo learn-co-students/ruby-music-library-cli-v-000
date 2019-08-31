@@ -1,9 +1,7 @@
 require 'pry'
-# require_relative "../lib/concerns/findable.rb"
-# require_relative "../lib/artist.rb"
+
 class MusicLibraryController
-  # extend Concerns::Findable
-  # include Concerns
+
   attr_accessor :path, :name
 
   def initialize(path = "./db/mp3s")
@@ -12,9 +10,6 @@ class MusicLibraryController
   end
 
   def call
-    user = gets.chomp
-
-
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -25,7 +20,7 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-
+    user = gets.chomp
 
     case user
 
@@ -37,23 +32,18 @@ class MusicLibraryController
 
     when "list genres"
       list_genres
-    # else gets = "exit"
 
+    when "list artist"
+      list_songs_by_artist
+
+    when "list genre"
+      list_songs_by_genre
+
+    when "play song"
+      play_song
     end
-    # if gets == ('list songs')
-    #   list_songs
-    #
-    # elsif gets == ('list artists')
-    #   list_artists
-    #
-    # elsif gets == ('list genres')
-    #   list_genres
-    #
-    # else gets == ('exit')
-    # end
 
     until gets == ('exit')
-    # binding.pry
     end
   end
 
@@ -100,18 +90,6 @@ class MusicLibraryController
      end
   end
 
-  #dont need select
-  # def play_song
-  #   puts "Which song number would you like to play?"
-  #   tmp = gets.strip
-  #     Song.all.sort { |song1, song2| song1.name <=> song2.name }
-  #     .select do |song, index|
-  #       index + 1
-  #       index.eql?(tmp)
-  #       puts "Playing #{song.name} by #{song.artist.name}"
-  #     end
-  #  end
-
    def play_song
      puts "Which song number would you like to play?"
      tmp = gets.strip
@@ -121,7 +99,6 @@ class MusicLibraryController
         # binding.pry
         puts "Playing #{song.name} by #{song.artist.name}"
         end
-          # puts "Playing #{song.name} by #{song.artist.name}" if song
     end
 
 end
