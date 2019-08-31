@@ -12,6 +12,9 @@ class MusicLibraryController
   end
 
   def call
+    user = gets.chomp
+
+
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -22,15 +25,19 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    user = gets.chomp
+
 
     case user
 
     when "list songs"
       list_songs
 
+    when "list artists"
+      list_artists
 
-    else gets = "exit"
+    when "list genres"
+      list_genres
+    # else gets = "exit"
 
     end
     # if gets == ('list songs')
@@ -45,9 +52,9 @@ class MusicLibraryController
     # else gets == ('exit')
     # end
 
-    # until gets == ('exit')
-    # # binding.pry
-    # end
+    until gets == ('exit')
+    # binding.pry
+    end
   end
 
   def list_songs
