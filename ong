@@ -1,0 +1,30 @@
+
+[1mFrom:[0m /home/arianaberger/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 100 MusicLibraryController#play_song:
+
+     [1;34m80[0m: [32mdef[0m [1;34mplay_song[0m
+     [1;34m81[0m: [1;34m#   puts "Which song number would you like to play?"[0m
+     [1;34m82[0m: [1;34m#   user_input = gets.strip.to_i[0m
+     [1;34m83[0m: [1;34m#   i = user_input - 1[0m
+     [1;34m84[0m: [1;34m#   if (1..Song.all.count).include?(i) #how does 1.. work? Would count work instead of length?[0m
+     [1;34m85[0m: [1;34m#     #alphabetize[0m
+     [1;34m86[0m: [1;34m#     Song.all.sort{ |a, b| a.name <=> b.name }[0m
+     [1;34m87[0m: [1;34m#     binding.pry[0m
+     [1;34m88[0m: [1;34m#   end[0m
+     [1;34m89[0m: [1;34m#     a = Song.all[user_input -1].artist.name #this is not referring to the sorted Song array from above[0m
+     [1;34m90[0m: [1;34m#     s = Song.all[user_input -1].name[0m
+     [1;34m91[0m: [1;34m#     puts "Playing #{s} by #{a}"[0m
+     [1;34m92[0m: 
+     [1;34m93[0m: 
+     [1;34m94[0m:     user_input = gets.strip.to_i
+     [1;34m95[0m:     i = user_input - [1;34m1[0m
+     [1;34m96[0m:     [32mif[0m ([1;34m1[0m..[1;34;4mSong[0m.all.length).include?(i)
+     [1;34m97[0m:       [1;34m#alphabetize[0m
+     [1;34m98[0m:       song = [1;34;4mSong[0m.all.sort{ |a, b| a.name <=> b.name }[i]
+     [1;34m99[0m:     [32mend[0m
+ => [1;34m100[0m:     binding.pry
+    [1;34m101[0m:       puts [31m[1;31m"[0m[31mPlaying #{song.name}[0m[31m by #{song.artist.name}[0m[31m[1;31m"[0m[31m[0m [1;34m#why is "if song" needed?[0m
+    [1;34m102[0m:   [1;34m### this number needs to be converted (-1)[0m
+    [1;34m103[0m:   [1;34m### alphabetize Songs list and check that the number is included within the array count[0m
+    [1;34m104[0m:   [1;34m### then iterate through to find the right one and output as puts[0m
+    [1;34m105[0m: [32mend[0m
+
