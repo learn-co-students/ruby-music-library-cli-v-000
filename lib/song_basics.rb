@@ -7,9 +7,7 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = (artist) if artist != nil
-    #better to say 'if artist'
     self.genre=(genre) if genre != nil
-      #better to say 'if genre'
   end
 
   def self.all
@@ -28,7 +26,6 @@ class Song
     song = Song.new(song)
     song.save
     song
-    #new(name, artist, genre).tap{|s| s.save}
   end
 
   def artist=(artist)
@@ -51,26 +48,17 @@ class Song
     else
       self.find_by_name(name)
     end
-
-    #self.find_by_name(name) || self.create(name)
   end
 
   def self.new_from_filename(filename)
-    mp3_removed = filename.gsub('.mp3', '')
-    artist = mp3_removed.split(" - ")[0]
-    song = mp3_removed.split(" - ")[1]
-    genre = mp3_removed.split(" - ")[1]
-    
-    new_song = Song.new
-    new_song.artist = Artist.new
-    binding.pry
-    new_song.genre = genre
-    new_song.save
-  end
+      mp3_removed = filename.gsub('.mp3', '')
+      artist = mp3_removed.split(" - ")[0]
+      song = mp3_removed.split(" - ")[1]
+      genre = mp3_removed.split(" - ")[1]
 
-  def self.create_from_filename(filename)
-    new_song = self.new_from_filename(filename)
-    new_song.save
-  end
+      song.artist = artist
+      song.genre = genre
+      song.save
+    end
 
 end
