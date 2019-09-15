@@ -3,3 +3,13 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+class Song
+
+  attr_accessor :song
+
+  def initialize(song)
+    @song = song
+  end
+
+end
