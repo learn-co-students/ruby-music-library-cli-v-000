@@ -1,9 +1,6 @@
 class Artist
   extend Concerns::Findable
-  
   attr_accessor :name
-
-  @@all = []
 
   def initialize(name)
     @name = name
@@ -14,30 +11,33 @@ class Artist
     @songs
   end
 
-  def self.all
-    @@all
+  def add_song(song)
+    song.artist = self unless song.artist
+    self.songs << song unless self.songs.include?(song)
   end
 
-  def self.destroy_all
-    @@all.clear
+  @@all = []
+
+  def self.all
+    @@all
   end
 
   def save
     @@all << self
   end
 
-  def self.create(name)
-    artist = Artist.new(name)
-    artist.save
-    artist
+  def self.destroy_all
+    @@all.clear
   end
 
-  def add_song(song)
-      song.artist = self unless song.artist
-      @songs << song unless songs.include?(song)
+  def self.create(name)
+    Artist.new(name).tap do |artist|
+      artist.save
+    end
   end
 
   def genres
-    @songs.collect { |songs| songs.genre}.uniq
+    songs.collect { |s| s.genre }.uniq
   end
+
 end
