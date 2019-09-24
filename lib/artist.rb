@@ -1,6 +1,6 @@
 class Artist  
   attr_reader :name 
-  attr_accessor :song 
+  attr_accessor :song, :title
   
   @@all = []
   
@@ -39,7 +39,18 @@ class Artist
     self
   end
   
-  def add_song
-    @song.artist = self
+   def add_song(song)
+     if song.artist == nil 
+       song.artist = self
+       @songs << song
+     else
+       nil
+    #@@count += 1
   end
+end
+  
+  #def add_song(title)
+    #@name = name
+    #Song.artist.name = name
+  #end
 end
