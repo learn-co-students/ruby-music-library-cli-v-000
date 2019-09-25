@@ -9,7 +9,9 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     @artist = artist
+    @genre = genre 
     self.artist = @artist 
+    self.genre = @genre
   end
   
   def name
@@ -48,4 +50,35 @@ class Song
     self.new(name).save
     self
   end
-end
+  
+  def genre 
+    @genre
+  end
+  
+  def genre=(genre)
+    @genre = genre
+    #genre.songs << self
+    end
+  end
+
+
+
+
+
+
+  #binding.pry
+     #@song = song
+     #if !song.artist
+       #song.artist = self
+       #@songs << song
+     #end
+    #end
+  #end
+
+
+
+
+
+
+
+
