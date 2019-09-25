@@ -1,6 +1,8 @@
+require "pry"
+
 class Artist  
-  attr_reader :name 
-  attr_accessor :song, :title
+  attr_reader :song
+  attr_accessor :name, :title
   
   @@all = []
   
@@ -40,17 +42,11 @@ class Artist
   end
   
    def add_song(song)
-     if song.artist == nil 
+     #binding.pry
+     @song = song
+     if !song.artist
        song.artist = self
        @songs << song
-     else
-       nil
-    #@@count += 1
+     end
+    end
   end
-end
-  
-  #def add_song(title)
-    #@name = name
-    #Song.artist.name = name
-  #end
-end
