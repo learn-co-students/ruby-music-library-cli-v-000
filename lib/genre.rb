@@ -37,4 +37,14 @@ class Genre
   def songs
     @songs
   end
+  
+  def artists
+    genre_artists = []
+    self.songs.each do |item|
+      if !genre_artists.include?(item.artist)
+        genre_artists << item.artist 
+      end
+    end
+    genre_artists
+  end
 end

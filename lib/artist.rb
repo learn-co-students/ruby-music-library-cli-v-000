@@ -46,7 +46,38 @@ class Artist
      @song = song
      if !song.artist
        song.artist = self
-       @songs << song
+       self.songs << song
+       #@songs << song
      end
     end
+    
+  def genres
+    artist_genres = []
+    #binding.pry
+    if self.songs == []
+      artist_genres << self.song.genre
+      elsif self.songs.length > 0
+        self.songs.each do |item|
+          artist_genres << item.genre
+        end
+      end
+      artist_genres
+    end
   end
+
+
+  #def genres
+    artist_genres = []
+    #binding.pry
+    #if self.songs.length == 0 
+      #artist_genres << self.song.genre
+    #else 
+      #self.songs.each do |item|
+      #if !artist_genres.include?(item.genre)
+        #artist_genres << item.genre
+      #end
+    #end
+    #artist_genres
+  #end
+#end
+#end
