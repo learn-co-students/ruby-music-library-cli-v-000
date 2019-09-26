@@ -57,9 +57,32 @@ class Song
   
   def genre=(genre)
     @genre = genre
-    #genre.songs << self
+    if genre != nil
+      if !genre.songs.include?(self)
+        genre.songs << self
+      end
     end
   end
+end
+  
+  
+  
+  
+  
+  #def genre=(genre)
+    #@genre = genre
+    #binding.pry
+    #if genre != nil
+      #genre.songs.each do |item|
+        #if item != self
+          #break
+          #else
+            #genre.songs << self
+          #end
+        #end
+      #end
+    #end
+  #end
 
 
 
@@ -74,11 +97,3 @@ class Song
      #end
     #end
   #end
-
-
-
-
-
-
-
-
