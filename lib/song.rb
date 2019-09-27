@@ -55,6 +55,24 @@ class Song
     @genre
   end
   
+  def self.find_or_create_by_name(name)
+    if !self.find_by_name(name)
+      self.create(name)
+      else 
+        self.find_by_name(name)
+    end
+  end
+    
+  def self.find_by_name(name)
+    thing = []
+    @@all.each do |item|
+      if item.name == name
+        thing << item.class
+      end
+    end
+    thing[0]
+  end
+  
   def genre=(genre)
     @genre = genre
     if genre != nil
@@ -64,36 +82,3 @@ class Song
     end
   end
 end
-  
-  
-  
-  
-  
-  #def genre=(genre)
-    #@genre = genre
-    #binding.pry
-    #if genre != nil
-      #genre.songs.each do |item|
-        #if item != self
-          #break
-          #else
-            #genre.songs << self
-          #end
-        #end
-      #end
-    #end
-  #end
-
-
-
-
-
-
-  #binding.pry
-     #@song = song
-     #if !song.artist
-       #song.artist = self
-       #@songs << song
-     #end
-    #end
-  #end
