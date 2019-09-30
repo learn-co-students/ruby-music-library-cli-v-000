@@ -1,17 +1,14 @@
-require "pry"
 class Song 
-  #attr_reader :artist
   attr_accessor :name, :artist
-  #attr_writer :artist
+  #attr_writer :genre, :artist
+  #attr_accessor :name, :genre
   
   @@all = []
   
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    @artist = artist
-    @genre = genre 
-    self.artist = @artist 
-    self.genre = @genre
+    self.artist = artist 
+    self.genre = genre
   end
   
   def name
@@ -60,6 +57,11 @@ class Song
       self.create(name)
       else 
         self.find_by_name(name)
+    if !self.find_by_name(name)
+      self.create(name)
+      self.find_by_name(name)
+    else
+      self.find_by_name(name)
     end
   end
     
@@ -69,16 +71,18 @@ class Song
       if item.name == name
         thing << item.class
       end
+      thing[0]
     end
-    thing[0]
   end
   
   def genre=(genre)
     @genre = genre
+    #binding.pry
     if genre != nil
       if !genre.songs.include?(self)
         genre.songs << self
       end
     end
   end
+end
 end
