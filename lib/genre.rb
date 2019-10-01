@@ -1,4 +1,7 @@
-class Genre  
+require_relative "../lib/concerns/concerns_findable.rb"
+
+class Genre
+  extend Concerns::Findable
   attr_reader :name 
   
   @@all = []

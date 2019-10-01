@@ -1,6 +1,7 @@
-require "pry"
+require_relative "../lib/concerns/concerns_findable.rb"
 
 class Artist  
+  extend Concerns::Findable
   attr_accessor :name, :title
   
   @@all = []

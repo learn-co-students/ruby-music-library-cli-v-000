@@ -64,6 +64,7 @@ class Song
       self.find_by_name(name)
     end
   end
+end
     
   def self.find_by_name(name)
     thing = []
@@ -71,8 +72,8 @@ class Song
       if item.name == name
         thing << item.class
       end
-      thing[0]
     end
+    thing[0]
   end
   
   def genre=(genre)
@@ -84,5 +85,4 @@ class Song
       end
     end
   end
-end
 end
