@@ -37,8 +37,9 @@ class Artist
   
   def self.create(name)
     @name = name
-    self.new(name).save
-    self
+    new_artist = self.new(name)
+    new_artist.save
+    new_artist
   end
   
    def add_song(song)
@@ -52,8 +53,6 @@ class Artist
     
   def genres
     artist_genres = []
-    #binding.pry
-    #self.songs.each do |item|
     @songs.each do |item|
       if !artist_genres.include?(item.genre)
       artist_genres << item.genre

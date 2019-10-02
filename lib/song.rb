@@ -20,6 +20,7 @@ class Song
   end
   
   def artist=(artist)
+    #binding.pry
     @artist = artist
     if artist != nil
       artist.add_song(self)
@@ -44,8 +45,9 @@ class Song
   
   def self.create(name)
     @name = name
-    self.new(name).save
-    self
+    new_song = self.new(name)
+    new_song.save
+    new_song
   end
   
   def genre 
@@ -70,7 +72,7 @@ end
     thing = []
     @@all.each do |item|
       if item.name == name
-        thing << item.class
+        thing << item
       end
     end
     thing[0]
@@ -86,7 +88,6 @@ end
   end
   
   def self.new_from_filename(name)
-    #binding.pry
     name_final = name.scan(/(?<=-\s).*?(?=\s-)/)[0]
     format_genre_1 = name.split.last
     genre_temp = format_genre_1.gsub(".mp3", "")
@@ -96,3 +97,24 @@ end
     self.new(name_final, artist_final, genre_final)
   end
 end
+    #genre_final = format_genre_1.gsub(".mp3", "")
+    #artist_final = name.split.first
+    #if !Artist.artist_final
+      #Artist.new(artist_final)
+    #end
+    #if !Genre.genre_final
+      #Genre.new(genre_final)
+    #end
+    #self.new(name_final, artist_final, genre_final)
+  #end
+#end
+
+
+#self.create(name_final)
+    #name_final.artist = artist_final
+    #name_final.genre = genre_final
+
+
+
+#self.new(name_final, artist_final, genre_final)
+

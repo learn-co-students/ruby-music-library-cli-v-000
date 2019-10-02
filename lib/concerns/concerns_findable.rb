@@ -3,7 +3,7 @@ module Concerns::Findable
     thing = []
     self.all.each do |item|
       if item.name == name
-        thing << item.class
+        thing << item
       end
     end
     thing[0]
