@@ -21,13 +21,10 @@ class MusicImporter
       Song.new(file)
     end
   end
+  
+  def import
+    files.each do |item|
+      Song.create_from_filename(item)
+    end
+  end
 end
-
-#def files
-    #file_file = []
-    #Dir["#{@path}"+"/*"].each do |item|
-      #File.basename(item)
-    #end
-    #Dir["#{@path}/*"]
-#>>>>>>> 036fab9ffdc1c428d5cf02697973c32c5cfe638e
-  #end

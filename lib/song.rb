@@ -96,25 +96,11 @@ end
     genre_final = Genre.find_or_create_by_name(genre_temp)
     self.new(name_final, artist_final, genre_final)
   end
+  
+  def self.create_from_filename(name)
+    #binding.pry
+    halfway = self.new_from_filename(name)
+    halfway.save
+  end
 end
-    #genre_final = format_genre_1.gsub(".mp3", "")
-    #artist_final = name.split.first
-    #if !Artist.artist_final
-      #Artist.new(artist_final)
-    #end
-    #if !Genre.genre_final
-      #Genre.new(genre_final)
-    #end
-    #self.new(name_final, artist_final, genre_final)
-  #end
-#end
-
-
-#self.create(name_final)
-    #name_final.artist = artist_final
-    #name_final.genre = genre_final
-
-
-
-#self.new(name_final, artist_final, genre_final)
-
+  
