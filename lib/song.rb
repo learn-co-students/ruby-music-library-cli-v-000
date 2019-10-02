@@ -1,5 +1,5 @@
 class Song 
-  attr_accessor :name, :artist
+  attr_accessor :name, :artist, :genre
   #attr_writer :genre, :artist
   #attr_accessor :name, :genre
   
@@ -78,11 +78,21 @@ end
   
   def genre=(genre)
     @genre = genre
-    #binding.pry
     if genre != nil
       if !genre.songs.include?(self)
         genre.songs << self
       end
     end
+  end
+  
+  def self.new_from_filename(name)
+    #binding.pry
+    name_final = name.scan(/(?<=-\s).*?(?=\s-)/)[0]
+    format_genre_1 = name.split.last
+    genre_temp = format_genre_1.gsub(".mp3", "")
+    artist_temp = name.split.first
+    artist_final = Artist.find_or_create_by_name(artist_temp)
+    genre_final = Genre.find_or_create_by_name(genre_temp)
+    self.new(name_final, artist_final, genre_final)
   end
 end

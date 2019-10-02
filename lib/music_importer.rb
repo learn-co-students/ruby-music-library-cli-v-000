@@ -9,9 +9,10 @@ class MusicImporter
   
   def files
     file_file = []
-    Dir["#{@path}"+"/*"].each do |item|
-      File.basename(item)
+    Dir["#{@path}/*"].each do |item|
+      file_file << File.basename(item)
     end
+    file_file
   end
   
   def self.import
@@ -21,3 +22,12 @@ class MusicImporter
     end
   end
 end
+
+#def files
+    #file_file = []
+    #Dir["#{@path}"+"/*"].each do |item|
+      #File.basename(item)
+    #end
+    #Dir["#{@path}/*"]
+#>>>>>>> 036fab9ffdc1c428d5cf02697973c32c5cfe638e
+  #end
