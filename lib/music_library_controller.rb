@@ -1,3 +1,5 @@
+require "pry"
+
 class MusicLibraryController
   attr_accessor :path, :music
   
@@ -49,12 +51,27 @@ class MusicLibraryController
       z += 1
     end
   end
+  
+  def list_artist
+    artist_array = []
+    music.files.each do |item|
+      if !artist_array.include?(item.scan(/(?<=\A).*?(?= -)/)[0])
+        artist_array << item.scan(/(?<=\A).*?(?= -)/)[0]
+      end
+    end
+    x = 1
+    new_array = artist_array.sort
+    new_array.each do |artist|
+      puts "#{x}. #{artist}"
+      x += 1
+    end
+  end
 end
-          
-        #while x <= alpha_file_list.length
-        #puts "#{x}. #{alpha_list[y]}"
-        #x += 1 
-        #y += 1
-      #end
-    #end
-  #end
+
+    
+    
+    
+    
+    
+    
+    
