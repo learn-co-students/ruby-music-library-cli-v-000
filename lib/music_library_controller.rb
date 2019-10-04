@@ -52,26 +52,44 @@ class MusicLibraryController
     end
   end
   
-  def list_artist
+  def list_artists
     artist_array = []
-    music.files.each do |item|
-      if !artist_array.include?(item.scan(/(?<=\A).*?(?= -)/)[0])
-        artist_array << item.scan(/(?<=\A).*?(?= -)/)[0]
-      end
+    Artist.all.each do |item|
+      artist_array << item.name
     end
+    x = 1 
+    artist_array.sort.each do |item|
+      puts "#{x}. #{item}"
+      x += 1 
+    end
+  end
+  
+   def list_genres
+    genre_array = []
+    Genre.all.each do |item|
+      genre_array << item.name
+    end
+    x = 1 
+    genre_array.sort.each do |item|
+      puts "#{x}. #{item}"
+      x += 1 
+    end
+  end
+  
+  def list_songs_by_artist
     x = 1
-    new_array = artist_array.sort
-    new_array.each do |artist|
-      puts "#{x}. #{artist}"
-      x += 1
+    song_array = []
+    genre_array = []
+    ultimate_array = []
+    puts "Please enter the name of an artist:"
+    user_input = gets.strip
+    artist_object = Artist.find_or_create_by_name(user_input)
+    artist_object.songs.each do |object|
+      ultimate_array << "#{object.name} - #{object.genre.name}"
+    end
+    ultimate_array.sort.each do |item|
+      puts "#{x}. #{item}"
+      x += 1 
     end
   end
 end
-
-    
-    
-    
-    
-    
-    
-    
