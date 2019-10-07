@@ -1,12 +1,13 @@
 require "pry"
 
 class MusicLibraryController
-  attr_accessor :path, :music
+  attr_accessor :path, :music, :list_songs_array
   
   def initialize(path = "./db/mp3s", import = true)
     @path = path
     @import = import
     @music = MusicImporter.new(path)
+    @list_songs_array = []
     music.import
   end
   
@@ -43,9 +44,14 @@ class MusicLibraryController
     x = 1
     alpha_file_list.each do |file|
       final_file_list << "#{x}. #{file.gsub(".mp3", "")}"
-      x += 1
+    x += 1
     end
-    z = 0 
+    z = 0
+    final_file_list.each do |item|
+      if !list_songs_array.include?(item)
+        list_songs_array << item
+      end
+    end
     while z <= final_file_list.length - 1
       puts final_file_list[z]
       z += 1
@@ -110,20 +116,24 @@ class MusicLibraryController
       x += 1
     end
   end
+  
+  def play_song
+    @list_songs_array = list_songs_array
+    puts "Which song number would you like to play?"
+    x = gets.strip
+    #binding.pry
+    if x.scan(/(\d)/).length >= 1
+      z = "#{x.scan(/(\d)/)[0]}".to_i
+      if 0 < z < list_songs_array.length
+        puts "Playing #{list_songs_array[z - 1]}"
+      end
+    end
+  end
 end
-      
-      
-      
-    #end
-    #ultimate_array.sort.each do |object|
-      #puts "#{object.artist} - #{object.name}"
-      #end
-    #end
-  #end
-    #ultimate_array.sort.each do |item|
-      #puts "#{x}. #{item}"
-      #x += 1 
-    #end
-  #end
-    
-#end
+
+
+
+
+#new_array = list_songs.split(/(\d. )/)
+      #puts new_array
+      #puts "Now playing #{list_songs.final_file_list[x-1]}"
