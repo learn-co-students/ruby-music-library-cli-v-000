@@ -89,11 +89,10 @@ end
   
   def self.new_from_filename(name)
     name_final = name.scan(/(?<=-\s).*?(?=\s-)/)[0]
-    #format_genre_1 = name.split.last
-    #genre_temp = format_genre_1.gsub(".mp3", "")
     genre_redo_1 = name.scan(/(?<= - ).*?(?=.mp3)/)[0]
-    genre_redo_2 = genre_redo_1.split("-")
-    genre_redo_final = genre_redo_2[1].strip
+    genre_redo_2 = genre_redo_1.gsub(" - ", ",")
+    genre_redo_3 = genre_redo_2.split(",")
+    genre_redo_final = genre_redo_3[1]
     artist_temp = name.scan(/(?<=\A).*?(?= -)/)[0]
     artist_final = Artist.find_or_create_by_name(artist_temp)
     genre_final = Genre.find_or_create_by_name(genre_redo_final)

@@ -92,4 +92,38 @@ class MusicLibraryController
       x += 1 
     end
   end
+  
+  def list_songs_by_genre
+    x = 1
+    genre_array = []
+    song_array = []
+    ultimate_array = []
+    puts "Please enter the name of a genre:"
+    user_input = gets.strip
+    genre_object = Genre.find_or_create_by_name(user_input)
+    genre_object.songs.each do |object|
+      ultimate_array << "#{object.name},#{object.artist.name}"
+    end
+    ultimate_array.sort.each do |item|
+      temp_array = item.split(",")
+      puts "#{x}. #{temp_array[1]} - #{temp_array[0]}"
+      x += 1
+    end
+  end
 end
+      
+      
+      
+    #end
+    #ultimate_array.sort.each do |object|
+      #puts "#{object.artist} - #{object.name}"
+      #end
+    #end
+  #end
+    #ultimate_array.sort.each do |item|
+      #puts "#{x}. #{item}"
+      #x += 1 
+    #end
+  #end
+    
+#end
