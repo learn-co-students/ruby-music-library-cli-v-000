@@ -1,7 +1,7 @@
 require "pry"
 
 class MusicLibraryController
-  attr_accessor :path, :music, :play_song_array
+  attr_accessor :path, :music
   
   
   
@@ -9,7 +9,6 @@ class MusicLibraryController
     @path = path
     @import = import
     @music = MusicImporter.new(path)
-    @play_song_array = []
     music.import
   end
   
@@ -50,11 +49,8 @@ class MusicLibraryController
     end
     z = 0
     while z <= final_file_list.length - 1
-      if !self.play_song_array.include?(final_file_list[z])
-        self.play_song_array << final_file_list[z]
-        puts final_file_list[z]
-        z += 1
-      end
+      puts final_file_list[z]
+      z += 1
     end
   end
   
