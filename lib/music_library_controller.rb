@@ -1,13 +1,15 @@
 require "pry"
 
 class MusicLibraryController
-  attr_accessor :path, :music, :list_songs_array
+  attr_accessor :path, :music, :play_song_array
+  
+  
   
   def initialize(path = "./db/mp3s", import = true)
     @path = path
     @import = import
     @music = MusicImporter.new(path)
-    @list_songs_array = []
+    @play_song_array = []
     music.import
   end
   
@@ -47,14 +49,12 @@ class MusicLibraryController
     x += 1
     end
     z = 0
-    final_file_list.each do |item|
-      if !list_songs_array.include?(item)
-        list_songs_array << item
-      end
-    end
     while z <= final_file_list.length - 1
-      puts final_file_list[z]
-      z += 1
+      if !self.play_song_array.include?(final_file_list[z])
+        self.play_song_array << final_file_list[z]
+        puts final_file_list[z]
+        z += 1
+      end
     end
   end
   
@@ -117,23 +117,24 @@ class MusicLibraryController
     end
   end
   
-  def play_song
-    @list_songs_array = list_songs_array
+  def play_song 
     puts "Which song number would you like to play?"
-    x = gets.strip
-    #binding.pry
-    if x.scan(/(\d)/).length >= 1
-      z = "#{x.scan(/(\d)/)[0]}".to_i
-      if 0 < z < list_songs_array.length
-        puts "Playing #{list_songs_array[z - 1]}"
-      end
+    input = gets.strip.to_i
+    if (1..Song.all.length).include?(input)
+      song = Song.all.sort{ |a, b| a.name <=> b.name }[input - 1]
     end
+    puts "Playing #{song.name} by #{song.artist.name}" if song
   end
 end
-
-
-
-
-#new_array = list_songs.split(/(\d. )/)
-      #puts new_array
-      #puts "Now playing #{list_songs.final_file_list[x-1]}"
+  
+  
+    #def play_song
+    #puts "Which song number would you like to play?"
+    #x = gets.strip.to_i
+    #binding.pry
+    #if x.class == Integer && x > 0 && x <= self.play_song_array.length
+      #song = self.play_song_array[x - 1].scan(/(?<=-\s).*?(?=\s-)/)[0]
+      #artist = self.play_song_array[x - 1].scan(/(?<=\A).*?(?= -)/)[0] 
+      #puts "Playing #{song} by #{artist}"
+    #end
+  #end
