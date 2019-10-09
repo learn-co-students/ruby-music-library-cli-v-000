@@ -25,8 +25,23 @@ class MusicLibraryController
       while user_input_1 != "exit"
         puts "What would you like to do?"
         user_input_1 = gets.strip
+        if user_input_1 == "list songs"
+          list_songs
+          elsif user_input_1 == "list artists"
+          list_artists
+          elsif user_input_1 == "list genres"
+          list_genres
+          elsif user_input_1 == "list artist"
+          list_songs_by_artist
+          elsif user_input_1 == "list genre"
+          list_songs_by_genre
+          elsif user_input_1 == "play song"
+          play_song
+        end
       end
     end
+  #end
+    #end
     
   def list_songs
     song_array = []
