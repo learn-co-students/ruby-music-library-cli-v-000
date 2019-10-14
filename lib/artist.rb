@@ -1,6 +1,7 @@
 class Artist
 
-attr_accessor :name, :songs
+attr_accessor :name
+attr_reader :songs
 
 @@all = []
 
@@ -36,6 +37,10 @@ def add_song(song)
     @songs << song
     song.artist = self
   end
+end
+
+def genres
+  songs.collect {|song| song.genre}.uniq
 end
 
 end
