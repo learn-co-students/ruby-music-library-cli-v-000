@@ -52,7 +52,7 @@ class Song
   end
 
   def self.new_from_filename(name)
-<<<<<<< HEAD
+
     section  = name.split(" - ")
     artist_name = section[0]
     song_name = section[1]
@@ -66,9 +66,7 @@ class Song
 
   def self.create_from_filename(name)
     new_from_filename(name).save
-=======
     self.create_by_filename(name)
->>>>>>> df1079040bc557fbf863c9239a47c6f132ce5396
   end
 
 end
