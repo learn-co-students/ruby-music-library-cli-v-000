@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class MusicLibraryController
   attr_accessor :path
@@ -9,6 +9,7 @@ class MusicLibraryController
   end
 
   def call
+    binding.pry
     input = String.new
     while input != "exit"
       puts "Welcome to your music library!"
@@ -28,7 +29,6 @@ class MusicLibraryController
       input == 'list genre' ? list_songs_by_genre : input
       input == 'play song' ? play_song : input
     end
-    # self.class.send(gets.strip.to_sym)
   end
 
   def list_songs
@@ -77,8 +77,17 @@ class MusicLibraryController
       target = Song.all.sort_by(&:name)[input - 1]
       puts "Playing #{target.name} by #{target.artist.name}" if target
     end
+
+
+    input = String.new
+    while !input.is_a?(Integer)
+      list_songs
+      puts "Which song number would you like to play?"
+      input = gets.strip
+      input.to_i
+    end
+    target = list_songs[input - 1]
+    puts "Playing #{target.name} by #{target.artist.name}"
   end
-
-
 
 end

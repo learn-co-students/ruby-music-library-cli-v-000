@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class Basics
   extend Concerns::Findable
