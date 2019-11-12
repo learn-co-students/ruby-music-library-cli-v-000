@@ -22,5 +22,9 @@ class Genre
     extend Concerns::Findable 
 end
 
+class Song
+    extend Concerns::Findable 
+end
+
 
 
