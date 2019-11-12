@@ -1,4 +1,5 @@
 class Genre
+
     attr_accessor :name
 
     @@all = [ ]
@@ -31,8 +32,7 @@ class Genre
     end
 
     def artists
-        artists = @songs.collect {|song| song.artist}
-        artists.uniq
+        @songs.collect {|song| song.artist}.uniq
     end
     
 end

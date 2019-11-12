@@ -19,12 +19,13 @@ class Artist
 end
 
 class Genre
-    extend Concerns::Findable 
+    extend Concerns::Findable
 end
 
 class Song
-    extend Concerns::Findable 
+    extend Concerns::Findable
 end
+
 
 
 
