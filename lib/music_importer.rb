@@ -1,4 +1,6 @@
 
+require 'pry'
+
 class MusicImporter
   attr_accessor :path
   @@all=[]
@@ -6,7 +8,8 @@ class MusicImporter
     @path=test_music_path
   end
   def files
-    @@all = Dir.entries(path).grep(/[\w\s\d-]*.mp3\z/)
+    @@all = Dir.entries(path).sort.grep(/[\w\s\d-]*.mp3\z/)
+
   end
   def import
     self.files.each do |file|
