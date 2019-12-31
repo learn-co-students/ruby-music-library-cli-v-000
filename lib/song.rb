@@ -14,18 +14,16 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
   def save
     @@all << self
   end
 
+  def self.destroy_all
+    self.all.clear
+  end
+
   def self.create(name)
-    Song.new(name).tap do |song|
-      song.save
-    end
+    Song.new(name).tap { |s| s.save }
   end
 
   def artist=(artist)
@@ -39,11 +37,11 @@ class Song
   end
 
   def self.find_by_name(name)
-    self.all.find {|song| song.name == name}
+    self.all.detect {|s| s.name == name}
   end
 
   def self.find_or_create_by_name(name)
-    find_by_name(name) || create(name)
+    self.find_by_name(name) || self.create(name)
   end
 
   def self.new_from_filename(filename)
@@ -59,9 +57,7 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    new_from_filename(filename).tap do
-      |song| song.save
-    end
+    new_from_filename(filename).tap { |s| s.save }
   end
 
 end
