@@ -2,4 +2,4 @@ source "https://rubygems.org"
 
 gem 'rspec'
 gem 'pry'
-gem 'require_all'
+gem 'require_all',  '~> 1.0'
