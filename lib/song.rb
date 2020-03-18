@@ -1,6 +1,7 @@
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
+  @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
@@ -8,22 +9,20 @@ class Song
     self.genre = genre if genre
   end
 
-  @@all = []
-
   def self.all
     @@all
-  end
-
-  def save
-    @@all << self
   end
 
   def self.destroy_all
     self.all.clear
   end
 
+  def save
+    @@all << self
+  end
+
   def self.create(name)
-    Song.new(name).tap { |s| s.save }
+    Song.new(name).tap {|song| song.save}
   end
 
   def artist=(artist)
@@ -37,7 +36,7 @@ class Song
   end
 
   def self.find_by_name(name)
-    self.all.detect {|s| s.name == name}
+    self.all.find{|song| song.name == name}
   end
 
   def self.find_or_create_by_name(name)
@@ -46,18 +45,17 @@ class Song
 
   def self.new_from_filename(filename)
     file_parts = filename.split(" - ")
-    artist_n = file_parts[0]
-    song_n = file_parts[1]
-    genre_n = file_parts[2].gsub(".mp3","")
+    artist_name = file_parts[0]
+    song_name = file_parts[1]
+    genre = file_parts[2].gsub(".mp3","")
 
-    artist = Artist.find_or_create_by_name(artist_n)
-    genre = Genre.find_or_create_by_name(genre_n)
-
-    Song.new(song_n, artist, genre)
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre)
+    self.new(song_name, artist, genre)
   end
 
   def self.create_from_filename(filename)
-    new_from_filename(filename).tap { |s| s.save }
+    self.new_from_filename(filename).tap {|song| song.save}
   end
 
 end
