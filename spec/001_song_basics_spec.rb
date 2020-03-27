@@ -40,8 +40,7 @@ describe "Song" do
   describe ".all" do
     it "returns the class variable @@all" do
       expect(Song.all).to match_array([])
-
-      Song.class_variable_set(:@@all, [song])
+      Song.all << song
 
       expect(Song.all).to match_array([song])
     end
@@ -49,10 +48,10 @@ describe "Song" do
 
   describe ".destroy_all" do
     it "resets the @@all class variable to an empty array" do
-      Song.class_variable_set(:@@all, [song])
+      expect(Song.all).to match_array([])
+      Song.all << song
 
       Song.destroy_all
-
       expect(Song.all).to match_array([])
     end
   end
@@ -60,7 +59,6 @@ describe "Song" do
   describe "#save" do
     it "adds the Song instance to the @@all class variable" do
       song.save
-
       expect(Song.all).to include(song)
     end
   end
@@ -68,7 +66,6 @@ describe "Song" do
   describe ".create" do
     it "initializes, saves, and returns the song" do
       created_song = Song.create("Kaohsiung Christmas")
-
       expect(Song.all).to include(created_song)
     end
   end
