@@ -47,19 +47,15 @@ class MusicLibraryController
   end
 
   def list_artists
-    @artist_list = []
     Artist.alpha_artists.each_with_index do |artist, index|
       puts "#{index + 1}. #{artist.name}"
-      @artist_list << artist
     end
   end
 
   def list_genres
-    @genre_list = []
     Genre.alpha_genres.each_with_index do |genre, index|
       puts "#{index + 1}. #{genre.name}"
     end
-    @genre_list
   end
 
   def list_songs_by_artist
