@@ -40,7 +40,7 @@ class Genre
   end
 
   def self.alpha_genres
-        @@alpha_genres = @@all.sort {|a, b| a.name <=> b.name}  # sort list of genres alphabetically by song name
+    @@alpha_genres = @@all.sort {|a, b| a.name <=> b.name}
   end
 
 end

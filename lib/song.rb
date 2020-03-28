@@ -69,6 +69,6 @@ class Song
   end
 
   def self.alpha_songs
-        @@alpha_songs = @@all.sort {|a, b| a.name <=> b.name}  # sort list of songs alphabetically by song name
+    @@alpha_songs = @@all.sort {|a, b| a.name <=> b.name} 
   end
 end

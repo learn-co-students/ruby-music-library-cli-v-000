@@ -1,4 +1,4 @@
-require 'pry'
+
 class MusicLibraryController
   attr_reader :music_importer, :song, :music_library_controller
 
@@ -41,9 +41,9 @@ class MusicLibraryController
   end
 
   def list_songs
-      Song.alpha_songs.each_with_index do |song, index|
-        puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      end
+    Song.alpha_songs.each_with_index do |song, index|
+      puts "#{index + 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
   end
 
   def list_artists
@@ -61,7 +61,7 @@ class MusicLibraryController
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
     user_input = gets.chomp
-    Artist.all.select do |artist|   # iterate thru Artist.all array
+    Artist.all.select do |artist|
       if artist.name == user_input
         user_artist_songs = artist.songs.sort {|a, b| a.name <=> b.name}
         user_artist_songs.each_with_index do |song, index|

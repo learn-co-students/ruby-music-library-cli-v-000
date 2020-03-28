@@ -1,5 +1,5 @@
 # lib/artist.rb
-require "pry"
+
 class Artist
   extend Concerns::Findable
   attr_accessor :name
@@ -47,6 +47,6 @@ class Artist
   end
 
   def self.alpha_artists
-        @@alpha_artists = @@all.sort {|a, b| a.name <=> b.name}  # sort list of artists alphabetically by song name
+    @@alpha_artists = @@all.sort {|a, b| a.name <=> b.name}
   end
 end
