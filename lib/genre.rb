@@ -1,7 +1,9 @@
-# lib/genre.rb
 class Genre
   extend Concerns::Findable
+
   attr_accessor :name
+  attr_reader :songs
+
   @@all = []
 
   def initialize(name)
@@ -25,10 +27,6 @@ class Genre
     genre = self.new(name)
     genre.save
     genre
-  end
-
-  def songs
-    @songs
   end
 
   def add_song(song)
