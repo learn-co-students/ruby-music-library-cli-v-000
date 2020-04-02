@@ -13,6 +13,9 @@ class MusicImporter
       end
     end
     @files
+
+    # Could also be done in one line:
+    # @files ||= Dir.glob("#{path}/*.mp3").collect{|f| f.gsub("#{path}/", "")}
   end
 
   def import  #imports all files from the library and instantiates a new Song object for each file

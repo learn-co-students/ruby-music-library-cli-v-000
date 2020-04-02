@@ -1,11 +1,8 @@
 
 class MusicLibraryController
-  attr_reader :music_importer, :song, :music_library_controller
 
   def initialize(path='./db/mp3s')
-    @path = path
-    @music_importer = MusicImporter.new(@path)
-    music_importer.import
+    MusicImporter.new(path).import
   end
 
   def call
@@ -89,7 +86,7 @@ class MusicLibraryController
     user_input = gets.chomp.to_i
 
     if (1..Song.alpha_songs.length).include?(user_input)
-      s =  Song.alpha_songs[user_input - 1]
+      s = Song.alpha_songs[user_input - 1]
       puts "Playing #{s.name} by #{s.artist.name}"
     end
   end
