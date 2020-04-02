@@ -20,7 +20,7 @@ class Genre
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
@@ -34,11 +34,11 @@ class Genre
   end
 
   def artists
-    self.songs.collect {|song| song.artist}.uniq
+    self.songs.collect{|song| song.artist}.uniq
   end
 
   def self.alpha_genres
-    @@alpha_genres = @@all.sort {|a, b| a.name <=> b.name}
+    @@alpha_genres = self.all.sort {|a, b| a.name <=> b.name}
   end
 
 end
