@@ -4,7 +4,7 @@ class Genre
   @@all = []
 
   extend Concerns::Findable
-
+  
   def initialize(name)
     @name = name
     @songs = []
@@ -15,7 +15,7 @@ class Genre
   end
 
   def self.destroy_all
-    @@all.clear
+    self.all.clear
   end
 
   def save
@@ -27,6 +27,7 @@ class Genre
   end
 
   def artists
-    self.songs.map { |s| s.artist }.uniq
+    self.songs.map { |song| song.artist }.uniq
   end
+
 end

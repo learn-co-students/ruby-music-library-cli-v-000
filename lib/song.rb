@@ -36,26 +36,21 @@ class Song
   end
 
   def self.find_by_name(name)
-    self.all.find{|song| song.name == name}
+    self.all.find {|song| song.name == name}
   end
 
   def self.find_or_create_by_name(name)
-    self.find_by_name(name) || self.create(name)
+    find_by_name(name) || create(name)
   end
 
-  def self.new_from_filename(filename)
-    file_parts = filename.split(" - ")
-    artist_name = file_parts[0]
-    song_name = file_parts[1]
-    genre = file_parts[2].gsub(".mp3","")
-
-    artist = Artist.find_or_create_by_name(artist_name)
-    genre = Genre.find_or_create_by_name(genre)
-    self.new(song_name, artist, genre)
+  def self.new_from_filename(file)
+    file_parts = file.split(" - ")
+    song = Song.new(file_parts[1], Artist.find_or_create_by_name(file_parts[0]), Genre.find_or_create_by_name(file_parts[2].gsub(".mp3","")))
+    song
   end
 
-  def self.create_from_filename(filename)
-    self.new_from_filename(filename).tap {|song| song.save}
+  def self.create_from_filename(file)
+    self.new_from_filename(file).tap {|song| song.save}
   end
-
+  
 end
