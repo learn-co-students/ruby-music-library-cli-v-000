@@ -1,17 +1,11 @@
 module Concerns
   module Findable
-
     def find_by_name(name)
-      self.all.detect {|a| a.name == name}
+      self.all.detect{|s| s.name == name}
     end
 
     def find_or_create_by_name(name)
-      if find_by_name(name) != nil
-        find_by_name(name)
-      else self.create(name)
-      end
+      self.find_by_name(name) || self.create(name)
     end
   end
-
-
 end

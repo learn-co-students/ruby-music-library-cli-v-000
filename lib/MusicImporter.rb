@@ -1,3 +1,5 @@
+# can parse a directory of MP3 files and use the extracted filenames to create instances of Song, Artist, and Genre objects
+
 require 'pry'
 class MusicImporter
   attr_accessor :path
@@ -6,19 +8,13 @@ class MusicImporter
     @path = path
   end
 
-
   def files
-    @array = Dir.glob("#{@path}/*.mp3").collect do |songname| #turn path into string
-      File.basename(songname)
-    end
-
+    @files = Dir.glob("#{path}/*.mp3").collect {|fi| fi.gsub("#{path}/", "") } #replaces path with blank
   end
 
   def import
-    self.files.each do |isong|
-      Song.create_from_filename(isong)
+    files.each do |f| Song.create_from_filename(f)
     end
   end
-
 
 end

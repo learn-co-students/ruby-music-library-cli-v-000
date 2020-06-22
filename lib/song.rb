@@ -1,20 +1,15 @@
 require 'pry'
 
 class Song
-  attr_accessor :name
-  attr_reader :artist, :genre
+  attr_accessor :name, :genre
+  attr_reader :artist
 
   @@all = []
 
-  def initialize(name, artist=nil, genre=nil)
+  def initialize(name, artist = nil, genre=nil)
     @name = name
-    if genre != nil
-      self.genre=(genre)
-    end
-    if artist != nil
-      self.artist=(artist)
-    end
-
+    self.artist = artist if artist #instance artist is the one input if it has an artist
+    self.genre = genre if genre
   end
 
   def self.all
@@ -22,58 +17,67 @@ class Song
   end
 
   def self.destroy_all
-    @@all = []
+    self.all.clear
   end
 
   def save
     @@all << self
-    @@all.uniq
-
   end
 
-  def self.create(name)
-    song = self.new(name)
-    self.all << song
-    song
+  def self.create(name, artist=nil, genre=nil)
+    s = Song.new(name, artist)
+    s.save
+    s
   end
+
+
+#  Song and Artist: Song #artist= invokes Artist#add_song to add itself to
+  # the artist's collection of songs (artist has many songs)
 
   def artist=(artist)
-    @artist = artist
-    artist.add_song(self)
-  end
+
+		if artist == nil
+			@artist = artist
+		elsif artist != nil
+			@artist = artist
+			artist.add_song(self)
+		end
+	end
 
   def genre=(genre)
     @genre = genre
-    if !genre.songs.include?(self)
-      genre.songs << self
-    end
-  # binding.pry
+    genre.songs << self unless genre.songs.include?(self)
   end
 
-  def self.find_by_name (name)
-    self.all.detect {|a| a.name == name}
-
+  def self.find_by_name(name)
+    self.all.detect {|s| s.name == name}
   end
 
-  def self.find_or_create_by_name (name)
-    if find_by_name(name) != nil
-      find_by_name(name)
-    else Song.create(name)
-    end
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
   end
 
-  def self.new_from_filename(songname)
-    song2 = songname.chomp(".mp3")
-    arr = song2.split(" - ")
-    artist = Artist.find_or_create_by_name(arr[0])
-    genre = Genre.find_or_create_by_name(arr[2])
-    title = arr[1]
-    new(title, artist, genre)
+  def self.new_from_filename(file)
+    a = file.split(" - ")
+
+    artname, songname, genrename = a[0], a[1], a[2].gsub(".mp3", "")
+
+    artist = Artist.find_or_create_by_name(artname)
+    genre = Genre.find_or_create_by_name(genrename)
+
+    #binding.pry
+
+    self.new(songname, artist, genre)
   end
 
-  def self.create_from_filename(songname)
-    @@all << new_from_filename(songname)
+  def self.create_from_filename(file)
+    s = new_from_filename(file)
+    s.save
   end
+
+
+
+
 
 
 
