@@ -10,7 +10,8 @@ This is an implementing a Music Library domain composed of 3 main models, `Song`
  
  Finally, built a  CLI in `bin/musiclibrary` that is powered by a `MusicLibraryController` to provide a simple CLI that lets a user browse the library of MP3s imported by song, artist, and genre.
 
-.. Isert IPOD MP# player
+
+![](https://media.giphy.com/media/RLzsQo1J1h6QE/giphy.gif)
 
 ## Relationships Between Models
 
@@ -55,26 +56,51 @@ module Concerns::ModuleName
 end
 ```
 Once the basic module structure is good to go, it's time to code our two class methods again:
-  * Implement a generic `#find_by_name` method that uses the `.all` method defined by the class to find an instance of the class by name.
-  * Implement a generic `#find_or_create_by_name` method that uses the `.all` method defined by the class to find an instance of the class by name and to create a new instance if a match is not found.
-  * Add this module to your `Genre` and `Artist` class.
+  * Implemented a generic `#find_by_name` method that uses the `.all` method defined by the class to find an instance of the class by name.
+  * Implemented a generic `#find_or_create_by_name` method that uses the `.all` method defined by the class to find an instance of the class by name and to create a new instance if a match is not found.
+  * Added this module to the `Genre` and `Artist` class.
 
 ## `MusicImporter`
-Create a `MusicImporter` class that works with your `Song`, `Genre`, and `Artist` objects to import a directory of MP3 files. This class will have the following methods:
+Created a `MusicImporter` class that works with the `Song`, `Genre`, and `Artist` objects to import a directory of MP3 files. This class will have the following methods:
   * `#initialize` accepts a file path to a directory of MP3 files.
   * `#files` returns all of the imported filenames.
   * `.import` imports all of the files from the library, instantiating a new `Song` object for each file.
 
-In addition, add the following pair of methods to your `Song` class:
+In addition, added the following pair of methods to the `Song` class:
   * `.new_from_filename`, which instantiates a new `Song` object based on a provided filename.
   * `.create_from_filename`, which does the same thing as `.new_from_filename` but also saves the newly-created song to the `@@all` class variable.
 
-## It's CLI time!
-Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CLI so that users can actually interact with our code.
-  * Upon initialization, the CLI should accept an optional path to the library of MP3 files, defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
-  * Add a `#call` method that starts the CLI and prompts the user for input. Read the tests carefully for specifics.
+  ![](https://media.giphy.com/media/blSTtZehjAZ8I/giphy.gif)
 
-Have fun!
+## It's CLI time!
+Heavy lifting Done. Now I wrap it all up in a simple CLI so that users can actually interact with our code.
+  * Upon initialization, the CLI should accept an optional path to the library of MP3 files, defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
+  * Add a `#call` method that starts the CLI and prompts the user for input. 
+
+
+
+
+**Commiting to Git hub**
+ *If your feeling creative and want to add something Sweet to the app?*
+
+[ ]Open the terminal.
+[ ]Change the current working directory to your local repository to where you want to clone the app.
+
+[ ] Clonet the app from Github, onces your done.
+
+[ ] Make sure to create a branch in the process.
+
+[ ]Commit the file that you've staged in your local repository.
+
+[ ] $ git commit -m "Add existing file" Push the changes in your local repository to GitHub.
+
+[ ]$ git push origin branch-name.
+
+
+Have fun! Lets Dance
+
+![](https://media.giphy.com/media/kVbWMnGg4xTJ6/giphy.gif)
+
 
 ## Resources
 * [QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
