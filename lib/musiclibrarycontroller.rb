@@ -1,4 +1,3 @@
-require 'pry'
 class MusicLibraryController
   
   def initialize(path = './db/mp3s')
@@ -18,7 +17,19 @@ class MusicLibraryController
       puts "To quit, type 'exit'."
       puts "What would you like to do?"
       input = gets.chomp
-      if input == "exit"
+      if input == "list songs"
+        list_songs
+      elsif input == "list artists"
+        list_artists
+      elsif input == "list genres"
+        list_genres
+      elsif input == "list artist"
+        list_songs_by_artist
+      elsif input == "list genre"
+        list_songs_by_genre
+      elsif input == "play song"
+        play_song
+      elsif input == "exit"
         break
       end
     end
@@ -26,7 +37,6 @@ class MusicLibraryController
   
   def list_songs
     @song_array = []
-    #binding.pry => []
     abc_songs = Song.all.sort_by{ |song| song.name}
     
     counter = 1
@@ -79,7 +89,6 @@ class MusicLibraryController
     artist = Artist.find_by_name(input)
     
     if artist != nil
-    
       abc_songs = artist.songs.sort_by{ |song| song.name}
      
       abc_songs.collect do |song|
@@ -118,43 +127,28 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-         input = gets.chomp
-         
+    input = gets.chomp
+    
     song_array = []
-    Song.all.each do |song|
-      song_array << song
-      binding.pry
-    #list_songs.each do |song|
-      #song_parts = song.split(".")
-      #song_number = song_parts[0].to_i
-      
-      if song_number == input
-        song_info = song_parts[1].split("-")
-        song_artist = song_info[0]
-        song_name = song_info[1]
-        puts "Playing #{song_name} by #{song_artist}."
-      end
-      #binding.pry
+    
+    abc_songs = Song.all.sort_by{ |song| song.name}
+    
+    counter = 1
+    abc_songs.collect do |song|
+      song_array << "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      counter += 1
     end
     
-    #binding.pry
+    song_array.each do |song|
+      song_parts = song.split(".")
+      song_number = song_parts[0]
+      
+      if song_number == input
+       song_info = song_parts[1].split(" -")
+       song_artist = song_info[0]
+       song_name = song_info[1]
+       puts "Playing#{song_name} by#{song_artist}"
+      end
+    end
   end
-    
-    #def list_songs
-    #song_array = []
-    
-    #abc_songs = Song.all.sort_by{ |song| song.name}
-    
-    #counter = 1
-    #abc_songs.collect do |song|
-      #song_array << "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-      #counter += 1
-    #end
-    
-    #song_array.each do |song|
-      #puts "#{song}"
-    #end
-  #end
-  
- 
 end

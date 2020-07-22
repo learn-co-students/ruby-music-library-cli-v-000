@@ -1,11 +1,9 @@
-require 'pry'
 require_relative './concerns/findable.rb'
 class Artist
   extend Concerns::Findable
   attr_accessor :name, :songs
   
   @@all = []
-  #@songs = []
   
   def initialize(name)
     @name = name
@@ -46,5 +44,4 @@ class Artist
     g.uniq
     
   end
-  #binding.pry
 end
