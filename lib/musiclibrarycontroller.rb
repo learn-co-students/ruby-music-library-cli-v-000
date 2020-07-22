@@ -120,9 +120,13 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
          input = gets.chomp
          
-    list_songs.each do |song|
-      song_parts = song.split(".")
-      song_number = song_parts[0].to_i
+    song_array = []
+    Song.all.each do |song|
+      song_array << song
+      binding.pry
+    #list_songs.each do |song|
+      #song_parts = song.split(".")
+      #song_number = song_parts[0].to_i
       
       if song_number == input
         song_info = song_parts[1].split("-")
