@@ -11,7 +11,7 @@ class Song
       
       # @genre = genre
       self.genre=(genre) if genre != nil
-      # @@all = []
+      # @@all = [] Never initialize with a class varaible
     end 
     
     def self.all
@@ -60,7 +60,10 @@ class Song
     end
     
     def self.find_by_name(name)
-      @@all.find {|song| song.name == name}
+      # @@all.find {|song| song.name == name} Both are correct
+            
+      self.all.find {|song| song.name == name} # This is one is more abstract
+
     end
     
     def self.find_or_create_by_name(name)

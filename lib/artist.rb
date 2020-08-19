@@ -9,7 +9,7 @@ class Artist
     
     def initialize(name)
       @name = name
-      @@all = []
+      # @@all = []
       @songs = []
     end 
     
@@ -36,19 +36,21 @@ class Artist
      @songs
     end
     
-    
-     # def add_song(song)
-  #     song.artist = self if !song.artist
-  #     songs << song if !songs.include?(song)
-  #   end
+    # ---------------------------------------------------
+      # def add_song(song)
+      # song.artist = self if !song.artist
+      # songs << song if !songs.include?(song)
+      # end
     
     def add_song(song)
       song.artist = self if song.artist != self
       songs << song if songs.include?(song) == false
     end
     
-    # Artist
-    # #genres
+    # ---------------------------------------------------
+    
+    
+    #   Artist#genres
     #   returns a collection of genres for all of the artist's songs (artist has many genres through songs) (FAILED - 1)
     
     #   does not return duplicate genres if the artist has more than one song of a particular genre (artist has many genres through songs) (FAILED - 2)
@@ -59,9 +61,9 @@ class Artist
       songs.map {|song| song.genre}.uniq
     end
     
+    # ---------------------------------------------------
+
     def self.find_or_create_by_name(name)
-      
-      # artist = @@all.find {|a| a.name = name}
       
       artist = self.find_by_name(name)
       return artist if artist 
@@ -69,6 +71,7 @@ class Artist
       
     end
 
-    
+    # ---------------------------------------------------
+
     
 end 
