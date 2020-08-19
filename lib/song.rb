@@ -11,7 +11,7 @@ class Song
       
       # @genre = genre
       self.genre=(genre) if genre != nil
-      @@all = []
+      # @@all = []
     end 
     
     def self.all
