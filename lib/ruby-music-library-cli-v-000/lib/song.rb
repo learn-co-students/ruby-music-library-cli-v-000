@@ -19,7 +19,9 @@ class Song
   end
 
   def self.create(song_title)
-    @@all.include()
+    song= Song.new(song_title)
+    song.save
+    song
 
   end
 end
