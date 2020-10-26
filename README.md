@@ -111,4 +111,4 @@ Have fun!
   - This walk-through traces an error to its source in the code. In addition it covers how to change file permissions and how to create an executable file to initialize a sandbox environment.
 * [Lab Review](https://www.youtube.com/watch?v=iClea2crypU)
 
-<p class='util--hide'>View <a href='https://learn.co/lessons/ruby-music-library-cli'>Music Library CLI</a> on Learn.co and start learning to code for free.</p>
+
