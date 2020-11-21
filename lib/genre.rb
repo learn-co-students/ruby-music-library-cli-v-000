@@ -19,7 +19,7 @@ class Genre
     self.class.all << self
   end
 
-  def self.create(name)
+  def self.create(name) #custom constructor. Allows creation of object from another environment
     genre = Genre.new(name)
     genre.save
     genre
@@ -28,4 +28,11 @@ class Genre
   def self.destroy_all
     @@all = [] #or self.all.clear
   end
+
+  def artists
+      songs.collect do |song|#collects artists through its songs instead of maintaining its own @artists instance variable
+      song.artist# = self unless song.artist == self#returns a collection of artists for all of the genre's songs
+      end
+  end
+
 end

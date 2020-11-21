@@ -5,7 +5,7 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    end
+  end
 
   def self.all
     @@all
@@ -34,5 +34,11 @@ class Artist
     @songs << song unless @songs.include?(song)#.include checks if song in array. Adds song if not in array
   end
 
+##artist has many genres through songs
+  def genres
+      songs.collect do |song|#collects genres through its songs instead of maintaining its own @genres instance variable
+      song.genre#returns a collection of genres for all of the artist's songs
+  end
+  end
 
 end

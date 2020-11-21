@@ -2,13 +2,13 @@ class Song
   attr_accessor :name, :artist, :genre
   @@all = []
 
-  def initialize(name, artist=nil, genre=nil)
+  def initialize(name, artist=nil, genre=nil) #optional arguments set to nil
     @name = name
-    if artist != nil
-      self.artist = artist
+    if artist != nil #conditional that checks for artist value
+      self.artist = artist #assigns artist to instance of song
     end
-    if genre != nil
-      self.genre = genre
+    if genre != nil #conditional that checks for genre value
+      self.genre = genre #assigns genre to instance of song
     end
   end
 
@@ -26,7 +26,7 @@ class Song
     song
   end
 
-  #artist= method sets the artist object to belong to the song
+  #artist= method sets the song object to belong to the artist
   #invokes Artist#add_song to add itself to the artist's collection of songs
   #(artist has many songs)
   def artist= artist#setter is used for overwriting the default code in attr_accessor for custom work
