@@ -30,9 +30,10 @@ class Genre
   end
 
   def artists
-      songs.collect do |song|#collects artists through its songs instead of maintaining its own @artists instance variable
-      song.artist# = self unless song.artist == self#returns a collection of artists for all of the genre's songs
+      artists = songs.collect do |song|#collects artists through its songs instead of maintaining its own @artists instance variable
+      song.artist# = self unless song.artist == self. returns a collection of artists for all of the genre's songs
       end
+      artists.uniq
   end
 
 end

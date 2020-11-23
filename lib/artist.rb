@@ -35,10 +35,15 @@ class Artist
   end
 
 ##artist has many genres through songs
-  def genres
-      songs.collect do |song|#collects genres through its songs instead of maintaining its own @genres instance variable
+##tried some variations none worked. Why are we not using it's own instance variable? How are genres being stored?
+#How do I think of this in larger top down scheme in how things relate?
+  def genres#(genre = nil)
+    #if songs.uniq.length == songs.length // #Songs.indlude?
+      #if @genre.include?(genre)
+      genres = songs.collect do |song| #collects genres through its songs instead of maintaining its own @genres instance variable
       song.genre#returns a collection of genres for all of the artist's songs
-  end
+    end
+    genres.uniq #checks for duplicates
   end
 
 end
