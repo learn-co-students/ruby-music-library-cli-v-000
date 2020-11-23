@@ -39,6 +39,16 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
+#finds a song instance in @@all by the name property of the song
+  def self.find_by_name(name) #accepts a string
+    #iterates over @@all to check for matching song names
+    self.all.find { |song| song.name == name }#checking each song objects name attr in array
+  end                #|song| :give access to each element one at a time in the array
+end                  #song.name :gives access to the name attr of every song object in array
+                    #==name :then compares the accessed info to the name arg passed in
+
+def self.find_or_create_by_name(name)
+#  self.find_by_name(name) || self.create_by_name(name)
 end
 
 #class constructor
