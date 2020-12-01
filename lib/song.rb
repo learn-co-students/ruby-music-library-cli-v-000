@@ -1,4 +1,5 @@
 class Song
+  extend Concerns::Findable
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -46,6 +47,6 @@ class Song
   end                  #song.name :gives access to the name attr of every song object in array
                     #==name :then compares the accessed info to the name arg passed in
 
-  def Song.find_or_create_by_name(name) #Why Song and not self? Does it make the method available outside of Song?
+  def Song.find_or_create_by_name(name)
     self.find_by_name(name) || self.create(name)
   end
