@@ -70,7 +70,7 @@ class MusicLibraryController
     if genre  #if actual object is the same as true and Nil is considered false
       sorted_songs = genre.songs.sort_by { |song| song.name }#sorted array of genres
       sorted_songs.each_with_index do |song, i|
-        puts "#{i+1}. #{song.genre.artists} - #{song.name}"#how do I access the artists method through the genre class
+        puts "#{i+1}. #{song.artist.name} - #{song.name}"#how do I access the artists method through the genre class
       end
     end
   end
