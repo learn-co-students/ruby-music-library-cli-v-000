@@ -1,5 +1,5 @@
 class Song
-  extend Concerns::Findable
+  extend Concerns::Findable #take all of the methods in the Findable module and add them as class methods
   attr_accessor :name, :artist, :genre
   @@all = []
 
@@ -31,7 +31,7 @@ class Song
   #invokes Artist#add_song to add itself to the artist's collection of songs
   #(artist has many songs)
   def artist= artist #setter is used for overwriting the default code in attr_accessor for custom work
-    @artist = artist
+    @artist = artist #
     artist.add_song(self) #this collaborates with Artist class def add song
   end
 
@@ -43,10 +43,22 @@ class Song
                                  #finds a song instance in @@all by the name property of the song
   def self.find_by_name(name)    #iterates over @@all to check for matching song names
     self.all.find { |song| song.name == name }#checking each song objects name attr in array
-    end                #|song| :give access to each element one at a time in the array
-  end                  #song.name :gives access to the name attr of every song object in array
+  end                #|song| :give access to each element one at a time in the array
+                 #song.name :gives access to the name attr of every song object in array
                     #==name :then compares the accessed info to the name arg passed in
 
-  def Song.find_or_create_by_name(name)
-    self.find_by_name(name) || self.create(name)
+  #def self.find_or_create_by_name(name)
+  #  self.find_by_name(name) || self.create(name)
+  #end
+
+  def self.new_from_filename(filename)
+    split_filename = filename.chomp('.mp3').split(" - ") #returns array
+    artist = Artist.find_or_create_by_name(split_filename[0])
+    genre = Genre.find_or_create_by_name(split_filename[2])
+    Song.new(split_filename[1], artist, genre)
   end
+
+  def self.create_from_filename(filename)
+    @@all << Song.new_from_filename(filename)
+  end
+end

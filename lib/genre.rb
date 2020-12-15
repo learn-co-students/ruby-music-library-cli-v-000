@@ -2,9 +2,11 @@ class Genre
   extend Concerns::Findable#adding in the class level methods defined in Findable
                             #assumes that there is name variable, acreate and all method
   attr_accessor :name
+  attr_reader :songs#, :artist
+
   @@all = []
 
-  def initialize(name)
+  def initialize(name)#the name argument refers to the name of the genre
     @name = name
     @songs = []
   end
