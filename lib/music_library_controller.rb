@@ -51,26 +51,26 @@ class MusicLibraryController
     end
   end
 
-  def list_songs_by_artist
+  def list_songs_by_artist # 1.song name - genre
     puts "Please enter the name of an artist:"
     artist_name = gets.chomp
-    artist =  Artist.find_by_name(artist_name)#artist object
+    artist =  Artist.find_by_name(artist_name) #artist object
     if artist #if actual object is the same as true and Nil is considered false
-      sorted_songs = artist.songs.sort_by { |song| song.name }#sorted array of songs
+      sorted_songs = artist.songs.sort_by { |song| song.name } #sorted array of songs
       sorted_songs.each_with_index do |song, i|
-        puts "#{i+1}. #{song.name} - #{song.genre.name}"#song name/genre
+        puts "#{i+1}. #{song.name} - #{song.genre.name}" # 1.song name - genre
       end
     end
   end
 
-  def list_songs_by_genre #artist nam and song name
+  def list_songs_by_genre # 1.artist name - song name
     puts 'Please enter the name of a genre:'
     genre_input = gets.chomp
     genre = Genre.find_by_name(genre_input)
     if genre  #if actual object is the same as true and Nil is considered false
       sorted_songs = genre.songs.sort_by { |song| song.name }#sorted array of genres
       sorted_songs.each_with_index do |song, i|
-        puts "#{i+1}. #{song.artist.name} - #{song.name}"#how do I access the artists method through the genre class
+        puts "#{i+1}. #{song.artist.name} - #{song.name}" # 1.artist name - song name
       end
     end
   end

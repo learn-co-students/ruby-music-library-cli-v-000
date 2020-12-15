@@ -2,7 +2,7 @@ class Genre
   extend Concerns::Findable#adding in the class level methods defined in Findable
                             #assumes that there is name variable, acreate and all method
   attr_accessor :name
-  attr_reader :songs#, :artist
+  attr_reader :songs
 
   @@all = []
 
