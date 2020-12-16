@@ -75,10 +75,25 @@ class MusicLibraryController
     end
   end
 
-
   def play_song
     puts 'Which song number would you like to play?'
-
+    num_input = gets.chomp.to_i
+    if num_input > 0 && num_input <= Song.all.length
+      song_arr = Song.all.sort{|a, b| a.name <=> b.name}
+      song = song_arr[num_input-1]
+      puts "Playing #{song.name} by #{song.artist.name}"
+    end
   end
 
 end
+#*********************************************************
+# => code reference
+    #def play_song
+      # puts "Which song number would you like to play?"
+       #input = gets.strip.to_i
+       # if input > 0 && input <= Song.all.length          * and what is the value returned?
+      # => array = Song.all.sort{|a, b| a.name <=> b.name} * what value for a.name and b.name are being compared
+      # => song = array[input-1]                           * this refers to index of the element?
+         #puts "Playing #{song.name} by #{song.artist.name}"
+       #end
+     #end
