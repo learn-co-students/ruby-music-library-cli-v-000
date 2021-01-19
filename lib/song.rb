@@ -1,3 +1,5 @@
+require "pry"
+
 class Song
   attr_accessor :name
   attr_reader :artist, :genre
@@ -63,3 +65,10 @@ class Song
     new_from_filename(filename).tap{ |s| s.save }
   end
 end
+
+
+
+
+##belongs to -> second to make
+
+## has many -> parent
