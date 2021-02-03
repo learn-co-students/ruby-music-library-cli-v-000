@@ -33,6 +33,15 @@ class Artist
         end
     end
 
+    def genres
+        @genres = []
+        @songs.each do |song|
+            @genres << song.genre
+        end
+        @genres
+    end
+
+
 
 
 end
