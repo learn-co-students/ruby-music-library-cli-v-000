@@ -14,11 +14,11 @@ class Song
     end
 
     def save
-        @@all << self
+        @@all << self 
     end
 
     def self.destroy_all
-        @@all = []
+        all.clear
     end
 
     def self.create(name)
@@ -48,11 +48,12 @@ class Song
     end
 
     def self.find_or_create_by_name(name)
-        if self.find_by_name(name)
-            self.find_by_name(name)
-        else
-            self.create(name)
-        end
+        #if find_by_name(name)
+        #    find_by_name(name)
+        #else
+        #    create(name)
+        #end
+        find_by_name(name) || create(name)
     end
 
 
