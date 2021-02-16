@@ -3,7 +3,7 @@ class Artist
   extend Concerns::Findable
 
   attr_accessor :name, :songs
-  #, :artist I do not need this. why not?
+
   @@all = []
 
   def initialize(name)
@@ -17,24 +17,19 @@ class Artist
 
   def self.destroy_all
     @@all.clear
-
-    # better to do this than to just set to an empty array
   end
 
   def save
     @@all << self
   end
 
-  def self.create(song) #maybe syntactically better to have 'name' argument
-
-    # more concise:
-    #new(name).tap{|a| a.save}
+  def self.create(song)
     artist = Artist.new(song)
     artist.save
     artist
   end
 
-  def songs #this is not in solution file; why?
+  def songs
     @songs
   end
 
