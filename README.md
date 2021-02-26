@@ -100,9 +100,13 @@ In addition, add the following pair of methods to your `Song` class:
 ## It's CLI time!
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CLI so that users can actually interact with our code. Create a `MusicLibraryController` class that:
   * Upon initialization, accepts an optional path to the library of MP3 files, defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
-  * Has a `#call` method that starts the CLI and prompts the user for input. Read the tests carefully for specifics.
+  * Has a `#call` method that starts the CLI and prompts the user for input (try using `gets.chomp`). Read the tests carefully for specifics.
+
+When you've passed all of the tests, you should be able to type `./bin/musiclibrary` into your terminal to play around with your CLI and see how it works.
 
 Have fun!
+
+
 
 ## Resources
 * [QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
@@ -111,4 +115,4 @@ Have fun!
   - This walk-through traces an error to its source in the code. In addition it covers how to change file permissions and how to create an executable file to initialize a sandbox environment.
 * [Lab Review](https://www.youtube.com/watch?v=iClea2crypU)
 
-
+<p class='util--hide'>View <a href='https://learn.co/lessons/ruby-music-library-cli'>Music Library CLI</a> on Learn.co and start learning to code for free.</p>
