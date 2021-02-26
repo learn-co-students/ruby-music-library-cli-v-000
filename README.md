@@ -126,7 +126,7 @@ In addition, add the following pair of methods to your `Song` class:
 
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple CLI so that users can actually interact with our code. Create a `MusicLibraryController` class that:
 
-  * Upon initialization, accepts an optional path to the library of MP3 files, defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
+  * Upon initialization, accepts an optional path to the library of MP3 files, defaulting to `./db/mp3s`. It should then instantiate a `MusicImporter` object, which it will use to import songs from the specified library.
   * Has a `#call` method that starts the CLI and prompts the user for input (try using `gets.chomp`). Read the tests carefully for specifics.
 
 When you've passed all of the tests, you should be able to type `./bin/musiclibrary` into your terminal to play around with your CLI and see how it works.
