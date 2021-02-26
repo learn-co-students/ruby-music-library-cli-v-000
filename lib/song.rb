@@ -17,7 +17,6 @@ class Song
 
   def genre=(genre)
     @genre = genre
-    genre.songs << self unless genre.songs.include?(self)
   end
 
   def self.all
@@ -30,15 +29,11 @@ class Song
 
   def save
     self.class.all << self
+    self
   end
 
   def self.create(name)
-    song = new(name)
-    song.save
-    song
-
-    # Or, as a one-liner:
-    # new(name).tap{ |s| s.save }
+    new(name).save
   end
 
   def self.find_by_name(name)
@@ -60,6 +55,6 @@ class Song
   end
 
   def self.create_from_filename(filename)
-    new_from_filename(filename).tap{ |s| s.save }
+    new_from_filename(filename).save
   end
 end

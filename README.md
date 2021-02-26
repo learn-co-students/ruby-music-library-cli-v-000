@@ -133,6 +133,8 @@ When you've passed all of the tests, you should be able to type `./bin/musiclibr
 
 Have fun!
 
+
+
 ## Resources
 
 * [QA with Students](https://www.youtube.com/watch?v=kgYP9Yj8OE4&feature=youtu.be)
