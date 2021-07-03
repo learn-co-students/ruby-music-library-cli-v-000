@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+# owered by a MusicLibraryController to provide a simple CLI that lets a user browse the library of MP3s imported by song, artist, and genre.
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
