@@ -1,4 +1,4 @@
-require "spec_helper"
+ require "spec_helper"
 
 describe "Song" do
   let(:song) { Song.new("In the Aeroplane Over the Sea") }
