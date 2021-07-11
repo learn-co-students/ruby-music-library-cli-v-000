@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'rspec'
 
 describe "Associations — Song and Artist:" do
   let(:song) { Song.create("In the Aeroplane Over the Sea") }
