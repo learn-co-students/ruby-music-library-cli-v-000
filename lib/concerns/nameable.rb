@@ -1,0 +1,2 @@
+module Concerns::Nameable
+end
