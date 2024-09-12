@@ -3,3 +3,22 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+### NOTE : Need to check/fix the musicimporter "import" split for the specs vs running the program
+
+
+#temp = MusicLibraryController.new("./spec/fixtures/mp3s")
+# temp.list_songs
+# # temp.list_artists
+# # temp.list_genres
+# # temp.list_songs_by_artist
+# # temp.list_songs_by_genre
+# temp.play_song
+
+
+##ISSUES OCCURRING...
+# rspec spec/004_songs_and_artists_spec.rb --> "Artist=" not working
+# rspec spec/006_artists_and_genres_spec.rb --> "#genres" not working (was working before - probably the "Songs class genre= method screwing it up")
+
+## Testing
+# ruby bin/musiclibrary
