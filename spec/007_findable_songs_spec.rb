@@ -1,7 +1,7 @@
+require 'pry'
 context "Song" do
   let!(:song_one) { Song.create("The King of Carrot Flowers, Pt. One") }
   let!(:song_two) { Song.create("In the Aeroplane Over the Sea") }
-
   describe ".find_by_name" do
     it "finds a song instance in @@all by the name property of the song" do
       expect(Song.find_by_name("In the Aeroplane Over the Sea")).to be(song_two)

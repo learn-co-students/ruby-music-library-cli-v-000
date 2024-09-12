@@ -1,5 +1,5 @@
 require "spec_helper"
-
+require 'pry'
 describe "Associations — Song and Artist:" do
   let(:song) { Song.create("In the Aeroplane Over the Sea") }
   let(:artist) { Artist.new("Neutral Milk Hotel") }
