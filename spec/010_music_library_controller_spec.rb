@@ -63,4 +63,5 @@ describe "MusicLibraryController" do
       capture_puts { music_library_controller.call }
     end
   end
+  
 end
