@@ -1,3 +1,13 @@
+<!--
+  summary
+-musicImporter = collaborating object that parses, creates instances of classes
+-bin/musicLibrary = cli interface
+  -powered by musiclibrarycontroller???
+-all modules in config/environ/concerns::findable
+-song, artist, genre classes pretty basic, commonalities below:
+  -@@all=[], .all, name w/init, save method @@all<<self, method destroy_all clears @@all, .create instantiates w/ .new and uses .save, find_by_name uses .all, find_or_create_by_name
+-->
+
 # Ruby Music Library
 
 ## Overview
