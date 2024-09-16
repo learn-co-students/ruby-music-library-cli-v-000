@@ -1,3 +1,11 @@
+# Burd's notes on the project.
+
+We left off on the:
+
+Song Class...   <<song.rb>>
+
+...at the <<find_or_create_by_name>> method at the bottom
+
 # Ruby Music Library
 
 ## Overview
