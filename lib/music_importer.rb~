@@ -1,0 +1,21 @@
+class MusicImporter
+	
+	attr_accessor :path	
+	
+	def initialize(path)
+		@path = path
+	end
+	
+	def files #=> song_files, i.e: 'Action Bronson - Larry Csonka - indie.mp3'
+		Dir.glob("#{@path}/*.mp3").map do |path| 
+			File.basename(path) 
+		end
+# binding.pry
+	end
+	
+	def import  
+		self.files.map do |song_file|
+			Song.create_from_filename(song_file)
+		end
+	end	
+end
