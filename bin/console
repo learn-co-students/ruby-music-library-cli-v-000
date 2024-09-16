@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+require_relative '../config/environment.rb'
+
+puts "...loading our CLI environment"
+
+Pry.start
