@@ -1,3 +1,4 @@
+require 'pry'
 require "spec_helper"
 
 describe "MusicImporter" do
