@@ -1,0 +1,32 @@
+
+[1mFrom:[0m /home/vitivey/ruby-music-library-cli-v-000/lib/music_library_controller.rb @ line 73 MusicLibraryController#list_songs_by_artist:
+
+    [1;34m67[0m: [32mdef[0m [1;34mlist_songs_by_artist[0m
+    [1;34m68[0m:   puts [31m[1;31m"[0m[31mPlease enter the name of an artist:[1;31m"[0m[31m[0m
+    [1;34m69[0m:   name = gets
+    [1;34m70[0m:   files =[]
+    [1;34m71[0m:   x=[1;34m0[0m
+    [1;34m72[0m:   [1;34;4mSong[0m.all.each [32mdo[0m |file|
+ => [1;34m73[0m:     binding.pry
+    [1;34m74[0m:     [32mif[0m file.artist.name == name
+    [1;34m75[0m: 
+    [1;34m76[0m:       [1;34m# while x < file.artist.songs.length[0m
+    [1;34m77[0m:       [1;34m#   files << "#{file.artist.songs[x]} - #{files.artist.songs[x].genre}"[0m
+    [1;34m78[0m:       [1;34m#   x+=1[0m
+    [1;34m79[0m:       [1;34m# end[0m
+    [1;34m80[0m: 
+    [1;34m81[0m: 
+    [1;34m82[0m:     [32mend[0m
+    [1;34m83[0m:   [32mend[0m
+    [1;34m84[0m: 
+    [1;34m85[0m:   files.sort_by! [32mdo[0m |file|
+    [1;34m86[0m:     file.split([31m[1;31m"[0m[31m - [1;31m"[0m[31m[0m)[[1;34m0[0m]
+    [1;34m87[0m:   [32mend[0m
+    [1;34m88[0m: 
+    [1;34m89[0m:   files.each_with_index [32mdo[0m |song, index|
+    [1;34m90[0m:     song= [31m[1;31m"[0m[31m#{index + 1}[0m[31m. #{song}[0m[31m[1;31m"[0m[31m[0m
+    [1;34m91[0m:     puts song
+    [1;34m92[0m: 
+    [1;34m93[0m:   [32mend[0m
+    [1;34m94[0m: [32mend[0m
+
