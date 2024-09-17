@@ -1,4 +1,5 @@
 require "spec_helper"
+require_relative "../lib/MusicImporter"
 
 describe "MusicImporter" do
   let(:music_importer) { MusicImporter.new("./spec/fixtures/mp3s") }
