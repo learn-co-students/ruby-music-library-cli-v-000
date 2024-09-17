@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'pry'
 
 describe "Associations — Artist and Genre:" do
   let(:genre) { Genre.new("indie rock") }
