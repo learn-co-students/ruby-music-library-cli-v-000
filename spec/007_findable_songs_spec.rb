@@ -14,6 +14,7 @@ context "Song" do
 
       expect(Song.all.length).to eq(2)
       expect(same_song).to be(song_two)
+  
     end
 
     it "invokes .find_by_name instead of re-coding the same functionality" do
