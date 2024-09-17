@@ -1,7 +1,14 @@
 require 'bundler'
-Bundler.require
+require_relative '../lib/models/song.rb'
+require_relative '../lib/models/artist.rb'
+require_relative '../lib/models/genre.rb'
+require_relative '../lib/models/music_importer.rb'
+require_relative '../lib/models/music_library_controller.rb'
+require_relative '../lib/concerns/concerns.rb'
 
-module Concerns
-end
+# Bundler.require
 
-require_all 'lib'
+# module Concerns
+# end
+
+# require_all 'lib'
