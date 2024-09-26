@@ -1,0 +1,29 @@
+=> [[32m#<Song:0x0000000310fd30[0m
+  @artist[32m=[0m
+   [32m#<Artist:0x0000000310fcb8[0m
+    @name[32m=[0m[31m[1;31m"[0m[31mThundercat[1;31m"[0m[31m[0m,
+    @songs[32m=[0m[[32m#<Song:0x0000000310fd30[0m ...[32m>[0m][32m>[0m,
+  @genre[32m=[0m
+   [32m#<Genre:0x0000000310fbc8[0m
+    @name[32m=[0m[31m[1;31m"[0m[31mdance[1;31m"[0m[31m[0m,
+    @songs[32m=[0m[[32m#<Song:0x0000000310fd30[0m ...[32m>[0m][32m>[0m,
+  @name[32m=[0m[31m[1;31m"[0m[31mFor Love I Come[1;31m"[0m[31m[0m[32m>[0m,
+ [32m#<Song:0x0000000310f4e8[0m
+  @artist[32m=[0m
+   [32m#<Artist:0x0000000310f9e8[0m
+    @name[32m=[0m[31m[1;31m"[0m[31mReal Estate[1;31m"[0m[31m[0m,
+    @songs[32m=[0m
+     [[32m#<Song:0x0000000310fa60[0m
+       @artist[32m=[0m[32m#<Artist:0x0000000310f9e8[0m ...[32m>[0m,
+       @genre[32m=[0m
+        [32m#<Genre:0x0000000310f8f8[0m
+         @name[32m=[0m[31m[1;31m"[0m[31mhip-hop[1;31m"[0m[31m[0m,
+         @songs[32m=[0m
+          [[32m#<Song:0x0000000310fa60[0m ...[32m>[0m,
+           [32m#<Song:0x0000000310f790[0m
+            @artist[32m=[0m
+             [32m#<Artist:0x0000000310f718[0m
+              @name[32m=[0m[31m[1;31m"[0m[31mJurassic 5[1;31m"[0m[31m[0m,
+              @songs[32m=[0m[[32m#<Song:0x0000000310f790[0m ...[32m>[0m][32m>[0m,
+            @genre[32m=[0m[32m#<Genre:0x0000000310f8f8[0m ...[32m>[0m,
+            @name[32m=[0m
