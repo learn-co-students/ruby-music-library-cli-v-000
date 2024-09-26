@@ -1,0 +1,48 @@
+How objects collaberate?
+
+Our program do the following:
+
+if you have a specs it goes to the spec_helper.rb first
+
+1. loads all of the ob into memory / it
+reads all of the libraries
+
+1a. when all of it is loaded into memory
+
+2. then they can collaberate and interact with
+each other
+
+
+environment.rb file - is a place where we load all of
+our dependencies(gems, data, connection to a database, actual other classes )
+
+============================================================================
+============================================================================
+
+
+CLI Notes:
+
+I want to change the permission of this file - chmod
+By adding the +x permission - executive to this file
+With the following command:  chmod +x bin/console
+
+
+CLI Debugging tips:
+When we raise we are bringing this value to the top of the
+call stack as an error
+Do the following to debug +++> raise self.find_by_name(name).inspect
+
+When their is no match it returns an empty array
+ you map you return an empty array their is no match
+
+Never Never Never return in a loop!!!
+
+The last line in ruby is always the last line of code executed
+
+Looping over a collection of objects iterators /enumerators
+# each
+# map / collect
+
+
+============================================================================
+============================================================================
