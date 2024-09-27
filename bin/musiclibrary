@@ -2,4 +2,8 @@
 
 require_relative '../config/environment'
 
-MusicLibraryController.new.call
+new_library_controller = MusicLibraryController.new
+new_libary_controller.call
+
+i.cli_commands(gets.strip)
+
