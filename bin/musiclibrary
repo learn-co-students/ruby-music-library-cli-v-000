@@ -1,5 +1,15 @@
+
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/concerns/findable'
+require_relative '../lib/concerns/nameable'
+require_relative '../lib/concerns/persistable'
 
-MusicLibraryController.new.call
+require_relative '../lib/artist.rb'
+require_relative '../lib/song.rb'
+require_relative '../lib/genre.rb'
+require_relative '../lib/music_importer.rb'
+require_relative '../lib/music_library_controller.rb'
+require_relative '../lib/music_library_cli_methods_spec.rb'
+require_relative '../lib/music_library_cli_spec.rb'
