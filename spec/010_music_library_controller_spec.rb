@@ -1,66 +1,192 @@
 require "spec_helper"
+require "pry"
 
-describe "MusicLibraryController" do
-  describe "#initialize" do
-    it "accepts one argument, the path to the MP3 files to be imported" do
-      expect{ MusicLibraryController.new("./spec/fixtures/mp3s") }.to_not raise_error
+describe "CLI Methods" do
+  let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
+  let(:other_music_library_controller) { MusicLibraryController.new("./spec/fixtures/other_mp3s") }
+
+  describe "#list_songs" do
+    it "prints all songs in the music library in a numbered list (alphabetized by song name)" do
+      expect($stdout).to receive(:puts).with("1. Thundercat - For Love I Come - dance")
+      expect($stdout).to receive(:puts).with("2. Real Estate - Green Aisles - country")
+      expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
+      expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
+      expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
+      music_library_controller.list_songs
     end
 
-    it "creates a new MusicImporter object, passing in the 'path' value" do
-      expect(MusicImporter).to receive(:new).with("./spec/fixtures/mp3s").and_return(double(MusicImporter, import: true))
+    it "is not hard-coded" do
+      expect($stdout).to receive(:puts).with("1. Bob Dylan - Ballad of a Thin Man - folk")
+      expect($stdout).to receive(:puts).with("2. Alpha 9 - Bliss - trance")
+      expect($stdout).to receive(:puts).with("3. Cass McCombs - County Line - indie")
+      expect($stdout).to receive(:puts).with("4. Bob Dylan - Masters of War - folk")
 
-      MusicLibraryController.new("./spec/fixtures/mp3s")
-    end
-
-    it "the 'path' argument defaults to './db/mp3s'" do
-      expect(MusicImporter).to receive(:new).with("./db/mp3s").and_return(double(MusicImporter, import: true))
-
-      MusicLibraryController.new
-    end
-
-    it "invokes the #import method on the created MusicImporter object" do
-      music_importer = MusicImporter.new("./spec/fixtures/mp3s")
-
-      expect(MusicImporter).to receive(:new).and_return(music_importer)
-      expect(music_importer).to receive(:import)
-
-      MusicLibraryController.new
+      other_music_library_controller.list_songs
     end
   end
 
-  describe "#call" do
-    let(:music_library_controller) { MusicLibraryController.new("./spec/fixtures/mp3s") }
+  describe "#list_artists" do
+    it "prints all artists in the music library in a numbered list (alphabetized by artist name)" do
+      expect($stdout).to receive(:puts).with("1. Action Bronson")
+      expect($stdout).to receive(:puts).with("2. Jurassic 5")
+      expect($stdout).to receive(:puts).with("3. Real Estate")
+      expect($stdout).to receive(:puts).with("4. Thundercat")
 
-    it "welcomes the user" do
-      allow(music_library_controller).to receive(:gets).and_return("exit")
-
-      expect($stdout).to receive(:puts).with("Welcome to your music library!")
-      expect($stdout).to receive(:puts).with("To list all of your songs, enter 'list songs'.")
-      expect($stdout).to receive(:puts).with("To list all of the artists in your library, enter 'list artists'.")
-      expect($stdout).to receive(:puts).with("To list all of the genres in your library, enter 'list genres'.")
-      expect($stdout).to receive(:puts).with("To list all of the songs by a particular artist, enter 'list artist'.")
-      expect($stdout).to receive(:puts).with("To list all of the songs of a particular genre, enter 'list genre'.")
-      expect($stdout).to receive(:puts).with("To play a song, enter 'play song'.")
-      expect($stdout).to receive(:puts).with("To quit, type 'exit'.")
-      expect($stdout).to receive(:puts).with("What would you like to do?")
-
-      music_library_controller.call
+      music_library_controller.list_artists
     end
 
-    it "asks the user for input" do
-      allow(music_library_controller).to receive(:gets).and_return("exit")
+    it "is not hard-coded" do
+      Artist.create("ZZ Top")
+
+      expect($stdout).to receive(:puts).with("1. Alpha 9")
+      expect($stdout).to receive(:puts).with("2. Bob Dylan")
+      expect($stdout).to receive(:puts).with("3. Cass McCombs")
+      expect($stdout).to receive(:puts).with("4. ZZ Top")
+
+      other_music_library_controller.list_artists
+    end
+  end
+
+  describe "#list_genres" do
+    it "prints all genres in the music library in a numbered list (alphabetized by genre name)" do
+      expect($stdout).to receive(:puts).with("1. country")
+      expect($stdout).to receive(:puts).with("2. dance")
+      expect($stdout).to receive(:puts).with("3. hip-hop")
+      expect($stdout).to receive(:puts).with("4. indie")
+
+      music_library_controller.list_genres
+    end
+
+    it "is not hard-coded" do
+      expect($stdout).to receive(:puts).with("1. folk")
+      expect($stdout).to receive(:puts).with("2. indie")
+      expect($stdout).to receive(:puts).with("3. trance")
+
+      other_music_library_controller.list_genres
+    end
+  end
+
+  describe "#list_songs_by_artist" do
+    it "prompts the user to enter an artist" do
+      allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
+
+      expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
+
+      music_library_controller.list_songs_by_artist
+    end
+
+    it "accepts user input" do
+      allow(music_library_controller).to receive(:gets).and_return("Testing for #gets")
 
       expect(music_library_controller).to receive(:gets)
 
-      capture_puts { music_library_controller.call }
+      music_library_controller.list_songs_by_artist
     end
 
-    it "loops and asks for user input until they type in exit" do
-      allow(music_library_controller).to receive(:gets).and_return("a", "b", "c", "exit")
+    it "prints all songs by a particular artist in a numbered list (alphabetized by song name)" do
+      Song.create_from_filename("Real Estate - Wonder Years - dream pop.mp3")
 
-      expect(music_library_controller).to receive(:gets).exactly(4).times
+      allow(music_library_controller).to receive(:gets).and_return("Real Estate")
 
-      capture_puts { music_library_controller.call }
+      expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
+      expect($stdout).to receive(:puts).with("1. Green Aisles - country")
+      expect($stdout).to receive(:puts).with("2. It's Real - hip-hop")
+      expect($stdout).to receive(:puts).with("3. Wonder Years - dream pop")
+
+      music_library_controller.list_songs_by_artist
+    end
+
+    it "does nothing if no matching artist is found" do
+      allow(music_library_controller).to receive(:gets).and_return("Eel Restate")
+
+      expect($stdout).to receive(:puts).with("Please enter the name of an artist:")
+      expect($stdout).to_not receive(:puts)
+
+      music_library_controller.list_songs_by_artist
+    end
+  end
+
+  describe "#list_songs_by_genre" do
+    it "prompts the user to enter a genre" do
+      allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
+
+      expect($stdout).to receive(:puts).with("Please enter the name of a genre:")
+
+      music_library_controller.list_songs_by_genre
+    end
+
+    it "accepts user input" do
+      allow(music_library_controller).to receive(:gets).and_return("Testing for #gets")
+
+      expect(music_library_controller).to receive(:gets)
+
+      music_library_controller.list_songs_by_genre
+    end
+
+    it "prints all songs by a particular genre in a numbered list (alphabetized by song name)" do
+      allow(music_library_controller).to receive(:gets).and_return("hip-hop")
+
+      expect($stdout).to receive(:puts).with("Please enter the name of a genre:")
+      expect($stdout).to receive(:puts).with("1. Real Estate - It's Real")
+      expect($stdout).to receive(:puts).with("2. Jurassic 5 - What's Golden")
+
+      music_library_controller.list_songs_by_genre
+    end
+
+    it "does nothing if no matching genre is found" do
+      allow(music_library_controller).to receive(:gets).and_return("post-jazz")
+
+      expect($stdout).to receive(:puts).with("Please enter the name of a genre:")
+      expect($stdout).to_not receive(:puts)
+
+      music_library_controller.list_songs_by_genre
+    end
+  end
+
+  describe "#play_song" do
+    it "prompts the user to choose a song" do
+      allow(music_library_controller).to receive(:gets).and_return("Testing for #puts")
+
+      expect($stdout).to receive(:puts).with("Which song number would you like to play?")
+
+      allow($stdout).to receive(:puts)
+
+      music_library_controller.play_song
+    end
+
+    it "accepts user input" do
+      allow(music_library_controller).to receive(:gets).and_return("Testing for #gets")
+
+      expect(music_library_controller).to receive(:gets)
+
+      music_library_controller.play_song
+    end
+
+    it "'plays' a song" do
+      allow(music_library_controller).to receive(:gets).and_return("4")
+
+      expect($stdout).to receive(:puts).with("Which song number would you like to play?")
+      expect($stdout).to receive(:puts).with("Playing Larry Csonka by Action Bronson")
+
+      music_library_controller.play_song
+    end
+
+    it "does not 'puts' anything out if a matching song is not found" do
+      allow(music_library_controller).to receive(:gets).and_return("6")
+
+      expect($stdout).to receive(:puts).with("Which song number would you like to play?")
+      expect($stdout).to_not receive(:puts)
+
+      music_library_controller.play_song
+    end
+
+    it "checks that the user entered a number between 1 and the total number of songs in the library" do
+      allow(music_library_controller).to receive(:gets).and_return("0")
+
+      expect($stdout).to receive(:puts).with("Which song number would you like to play?")
+      expect($stdout).to_not receive(:puts)
+
+      music_library_controller.play_song
     end
   end
 end
