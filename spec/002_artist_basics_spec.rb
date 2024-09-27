@@ -1,5 +1,6 @@
 require "spec_helper"
 
+
 describe "Artist" do
   let(:artist) { Artist.new("Neutral Milk Hotel") }
 

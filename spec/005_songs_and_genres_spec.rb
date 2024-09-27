@@ -1,4 +1,10 @@
 require "spec_helper"
+require "song"
+require "genre"
+require "artist"
+
+
+
 
 describe "Associations — Song and Genre:" do
   let(:song) { Song.create("In the Aeroplane Over the Sea") }
