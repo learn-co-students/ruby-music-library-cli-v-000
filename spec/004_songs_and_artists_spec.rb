@@ -17,7 +17,7 @@ describe "Associations — Song and Artist:" do
     end
   end
 
-  context "Song" do
+   context "Song" do
     describe "#initialize" do
       it "can be invoked with an optional second argument, an Artist object to be assigned to the song's 'artist' property (song belongs to artist)" do
         song_with_artist = Song.new("Two-Headed Boy", artist)
