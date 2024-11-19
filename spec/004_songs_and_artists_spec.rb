@@ -1,4 +1,6 @@
 require "spec_helper"
+require_relative "../models/artist.rb"
+require_relative "../models/song.rb"
 
 describe "Associations — Song and Artist:" do
   let(:song) { Song.create("In the Aeroplane Over the Sea") }

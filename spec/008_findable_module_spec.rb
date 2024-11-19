@@ -1,4 +1,8 @@
 require "spec_helper"
+require_relative "../concerns/findable.rb"
+require_relative "../models/artist.rb"
+require_relative "../models/song.rb"
+require_relative "../models/genre.rb"
 
 describe "Concerns::Findable" do
   it "defines a module named Concerns::Findable" do

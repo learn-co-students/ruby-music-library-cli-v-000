@@ -1,4 +1,7 @@
 require "spec_helper"
+require_relative "../models/artist.rb"
+require_relative "../models/song.rb"
+require_relative "../models/genre.rb"
 
 describe "Associations — Artist and Genre:" do
   let(:genre) { Genre.new("indie rock") }
