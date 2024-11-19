@@ -14,7 +14,7 @@ describe "MusicLibraryController" do
 
     it "the 'path' argument defaults to './db/mp3s'" do
       expect(MusicImporter).to receive(:new).with("./db/mp3s").and_return(double(MusicImporter, import: true))
-
+      # binding.pry
       MusicLibraryController.new
     end
 
@@ -33,7 +33,7 @@ describe "MusicLibraryController" do
 
     it "welcomes the user" do
       allow(music_library_controller).to receive(:gets).and_return("exit")
-
+      # binding.pry
       expect($stdout).to receive(:puts).with("Welcome to your music library!")
       expect($stdout).to receive(:puts).with("To list all of your songs, enter 'list songs'.")
       expect($stdout).to receive(:puts).with("To list all of the artists in your library, enter 'list artists'.")
