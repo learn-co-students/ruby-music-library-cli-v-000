@@ -1,0 +1,36 @@
+=> [[32m#<Genre:0x000000027cca20[0m
+  @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m,
+  @songs[32m=[0m
+   [[32m#<Song:0x000000027cc9d0[0m
+     @artist[32m=[0m
+      [32m#<Artist:0x000000027ccac0[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mThe Magnetic Fields[1;31m"[0m[31m[0m,
+       @songs[32m=[0m
+        [[32m#<Song:0x000000027cc9d0[0m ...[32m>[0m,
+         [32m#<Song:0x000000027cc8e0[0m
+          @artist[32m=[0m[32m#<Artist:0x000000027ccac0[0m ...[32m>[0m,
+          @genre[32m=[0m
+           [32m#<Genre:0x000000027cc930[0m
+            @name[32m=[0m[31m[1;31m"[0m[31melectro pop[1;31m"[0m[31m[0m,
+            @songs[32m=[0m[[32m#<Song:0x000000027cc8e0[0m ...[32m>[0m][32m>[0m,
+          @name[32m=[0m[31m[1;31m"[0m[31mLong-Forgotten Fairytale[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+     @genre[32m=[0m[32m#<Genre:0x000000027cca20[0m ...[32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mThe Luckiest Guy on the Lower East Side[1;31m"[0m[31m[0m[32m>[0m][32m>[0m,
+ [32m#<Genre:0x000000027cc930[0m
+  @name[32m=[0m[31m[1;31m"[0m[31melectro pop[1;31m"[0m[31m[0m,
+  @songs[32m=[0m
+   [[32m#<Song:0x000000027cc8e0[0m
+     @artist[32m=[0m
+      [32m#<Artist:0x000000027ccac0[0m
+       @name[32m=[0m[31m[1;31m"[0m[31mThe Magnetic Fields[1;31m"[0m[31m[0m,
+       @songs[32m=[0m
+        [[32m#<Song:0x000000027cc9d0[0m
+          @artist[32m=[0m[32m#<Artist:0x000000027ccac0[0m ...[32m>[0m,
+          @genre[32m=[0m
+           [32m#<Genre:0x000000027cca20[0m
+            @name[32m=[0m[31m[1;31m"[0m[31mindie rock[1;31m"[0m[31m[0m,
+            @songs[32m=[0m[[32m#<Song:0x000000027cc9d0[0m ...[32m>[0m][32m>[0m,
+          @name[32m=[0m[31m[1;31m"[0m[31mThe Luckiest Guy on the Lower East Side[1;31m"[0m[31m[0m[32m>[0m,
+         [32m#<Song:0x000000027cc8e0[0m ...[32m>[0m][32m>[0m,
+     @genre[32m=[0m[32m#<Genre:0x000000027cc930[0m ...[32m>[0m,
+     @name[32m=[0m[31m[1;31m"[0m[31mLong-Forgotten Fairytale[1;31m"[0m[31m[0m[32m>[0m][32m>[0m]
