@@ -156,6 +156,7 @@ describe "MusicLibraryController - CLI Methods" do
 
     it "accepts user input" do
       allow(music_library_controller).to receive(:gets).and_return("Testing for #gets")
+    
 
       expect(music_library_controller).to receive(:gets)
 
