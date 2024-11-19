@@ -3,3 +3,6 @@
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+music_importer = MusicImporter.new('../db/mp3s')
+music_importer.import
