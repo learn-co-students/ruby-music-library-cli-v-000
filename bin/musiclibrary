@@ -1,5 +1,8 @@
-#!/usr/bin/env ruby
+!/usr/bin/env ruby
 
 require_relative '../config/environment'
 
 MusicLibraryController.new.call
+
+
+list_songs if input == 1
